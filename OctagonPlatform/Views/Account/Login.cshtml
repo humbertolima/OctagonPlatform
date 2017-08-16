@@ -38,8 +38,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <a class="btn btn-primary btn-block" role="button">Login</a>
-            </div> 
+                @Html.ActionLink("Login", "Login", "Account", routeValues:null, htmlAttributes: new{@class = "btn btn-primary btn-block", role = "button",  style = "background-color: rgb(33, 128, 117)"} )
+            </div>
             <div class="form-group">
                 @Html.ActionLink("Home", "Index", "Home", routeValues:null, htmlAttributes: new{@class = "btn btn-primary btn-block", role = "button",  style = "background-color: rgb(33, 128, 117)"} )
             </div>
