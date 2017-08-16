@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+   
+    @Html.Partial("Sections/Header")
+</head>
+<body>
+<div id="wrapper">
+    <!-- Navigation -->
+    @Html.Partial("Sections/NavBar")
+    <div id="page-wrapper">
+        @RenderBody()
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+    
+    
+  
+@Html.Partial("Sections/Scripts")
+ 
+@* @RenderSection("scripts", required: false)*@
+</body>
+</html>
