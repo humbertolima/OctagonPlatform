@@ -4,5 +4,6 @@ namespace OctagonPlatform.Repositories.Logos
 {
     public class LogoRepository:GenericRepository<Logo>, ILogoRepository
     {
+        //Implementation
     }
 }
