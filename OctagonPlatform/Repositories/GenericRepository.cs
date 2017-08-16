@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace OctagonPlatform.Repositories
 {
-    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
 
         private readonly ApplicationDbContext _context;
@@ -43,8 +43,8 @@ namespace OctagonPlatform.Repositories
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
                 var userName = user.Identity.GetUserName();
-                (obj as IAuditEntity).CreatedAt = date;
-                (obj as IAuditEntity).CreatedBy = _context.Users.Single(u => u.UserName == userName);
+                ((IAuditEntity) obj).CreatedAt = date;
+                ((IAuditEntity) obj).CreatedBy = _context.Users.Single(u => u.UserName == userName);
 
             }
             Save();
@@ -58,8 +58,8 @@ namespace OctagonPlatform.Repositories
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
                 var userName = user.Identity.GetUserName();
-                (obj as IAuditEntity).CreatedAt = date;
-                (obj as IAuditEntity).CreatedBy = _context.Users.Single(u => u.UserName == userName);
+                ((IAuditEntity) obj).CreatedAt = date;
+                ((IAuditEntity) obj).CreatedBy = _context.Users.Single(u => u.UserName == userName);
 
             }
             Save();
@@ -75,8 +75,8 @@ namespace OctagonPlatform.Repositories
                     var date = DateTime.Now;
                     var user = HttpContext.Current.User;
                     var userName = user.Identity.GetUserName();
-                    (existing as IAuditEntity).DeletedAt= date;
-                    (existing as IAuditEntity).DeletedBy = _context.Users.Single(u => u.UserName == userName);
+                    ((IAuditEntity) existing).DeletedAt= date;
+                    ((IAuditEntity) existing).DeletedBy = _context.Users.Single(u => u.UserName == userName);
 
                 }
 
