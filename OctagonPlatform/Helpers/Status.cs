@@ -6,7 +6,7 @@
         {
             Active,
             Inactive,
-            InactiveActive,
+            CompleteActive,
             IncompleteInactive
         };
     }

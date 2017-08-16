@@ -7,5 +7,6 @@ namespace OctagonPlatform.Models.ViewModels
 {
     public class PartnerViewModel
     {
+
     }
 }
