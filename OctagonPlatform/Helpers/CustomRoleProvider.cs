@@ -17,7 +17,7 @@ namespace OctagonPlatform.Helpers
         {
             throw new NotImplementedException();
         }
-
+       
         public override string[] GetRolesForUser(string username)
         {
 
