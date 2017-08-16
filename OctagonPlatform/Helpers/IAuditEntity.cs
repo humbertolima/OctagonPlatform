@@ -7,14 +7,14 @@ namespace OctagonPlatform.Helpers
     {
         DateTime? CreatedAt { get; set; }
 
-        User CreatedBy { get; set; }
+        int CreatedBy { get; set; }
 
         DateTime? DeletedAt { get; set; }
 
-        User DeletedBy { get; set; }
+        int DeletedBy { get; set; }
 
         DateTime? UpdatedAt { get; set; }
 
-        User UpdatedBy { get; set; }
+        int UpdatedBy { get; set; }
     }
 }
