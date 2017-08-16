@@ -9,7 +9,8 @@ namespace OctagonPlatform.Models.EntityConfigurations
             Property(p => p.CountryId)
               .IsRequired();
               
-            
+           
+
         }
     }
 }
