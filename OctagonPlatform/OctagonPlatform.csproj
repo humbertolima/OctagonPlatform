@@ -210,9 +210,14 @@
     <Compile Include="Migrations\201708160909049_ModelsUpdated.Designer.cs">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.cs" />
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.Designer.cs">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\EntityConfigurations\CountryConfiguration.cs" />
     <Compile Include="Models\EntityConfigurations\PartnerContactConfiguration.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
@@ -506,6 +511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708160909049_ModelsUpdated.resx">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708162239290_AddedCountryConfiguration.resx">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
