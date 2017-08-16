@@ -1,5 +1,4 @@
-﻿using OctagonPlatform.Models;
-using System;
+﻿using System;
 
 namespace OctagonPlatform.Helpers
 {
