@@ -1,8 +1,8 @@
 ﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.ViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using OctagonPlatform.Models.DetailsViewModels;
 
 namespace OctagonPlatform.Controllers
 {
@@ -24,7 +24,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserViewModel viewModel)
+        public ActionResult Login(UserLoginViewModel viewModel)
         {
             var user = _context.Users.Any(u => u.UserName == viewModel.UserName && u.Password == viewModel.Password);
             if (!user)

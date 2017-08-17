@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OctagonPlatform.Models.ViewModels
+namespace OctagonPlatform.Models.DetailsViewModels
 {
-    public class UserViewModel
+    public class UserLoginViewModel
     {
         [Display(Name = "")]
         [Required(ErrorMessage = "User name is required")]

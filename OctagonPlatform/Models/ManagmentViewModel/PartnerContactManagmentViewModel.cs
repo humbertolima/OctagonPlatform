@@ -1,17 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace OctagonPlatform.Models.ViewModels
+namespace OctagonPlatform.Models.ManagmentViewModel
 {
-    public class PartnerContactViewModel
+    public class PartnerContactManagmentViewModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
-        public Partner Partner { get; set; }
+        public IEnumerable<Partner> Partners { get; set; }
 
         [Required(ErrorMessage = "The name is required")]
         [StringLength(20)]
@@ -32,7 +32,7 @@ namespace OctagonPlatform.Models.ViewModels
         [Display(Name = "Contact type")]
         public int ContactTypeId { get; set; }
 
-        public ContactType ContactType { get; set; }
+        public IEnumerable<ContactType> ContactTypes { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
@@ -53,19 +53,19 @@ namespace OctagonPlatform.Models.ViewModels
         [Display(Name = "Country")]
         public int CountryId { get; set; }
 
-        public Country Country { get; set; }
+        public IEnumerable<Country> Countries { get; set; }
 
         [Required(ErrorMessage = "The state is required")]
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public IEnumerable<State> States { get; set; }
 
         [Required(ErrorMessage = "The city is required")]
         [Display(Name = "City")]
         public int CityId { get; set; }
 
-        public City City { get; set; }
+        public IEnumerable<City> Cities { get; set; }
 
     }
 }
