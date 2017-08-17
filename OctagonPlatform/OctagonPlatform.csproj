@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.Designer.cs">
       <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.cs" />
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.Designer.cs">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -519,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708170237248_DataAnnotationsAdded.resx">
       <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170249524_UpdatedDataNotations.resx">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
