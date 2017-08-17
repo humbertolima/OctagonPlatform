@@ -7,7 +7,7 @@ namespace OctagonPlatform.Models
 {
     public class State:ISoftDeleted
     {
-        //Prueba2
+        //Prueba4
         [Key]
         public int Id { get; set; }
 
