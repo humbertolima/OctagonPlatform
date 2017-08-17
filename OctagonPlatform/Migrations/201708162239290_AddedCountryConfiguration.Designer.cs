@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddCountryDefault : IMigrationMetadata
+    public sealed partial class AddedCountryConfiguration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCountryDefault));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedCountryConfiguration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708161816565_AddCountryDefault"; }
+            get { return "201708162239290_AddedCountryConfiguration"; }
         }
         
         string IMigrationMetadata.Source

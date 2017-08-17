@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddCitiesDefault : IMigrationMetadata
+    public sealed partial class DataAnnotationsAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCitiesDefault));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DataAnnotationsAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708162303188_AddCitiesDefault"; }
+            get { return "201708170237248_DataAnnotationsAdded"; }
         }
         
         string IMigrationMetadata.Source

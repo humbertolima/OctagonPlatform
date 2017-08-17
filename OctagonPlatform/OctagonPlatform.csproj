@@ -210,36 +210,35 @@
     <Compile Include="Migrations\201708160909049_ModelsUpdated.Designer.cs">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708161812197_ModelsUpdatedByHumberto.cs" />
-    <Compile Include="Migrations\201708161812197_ModelsUpdatedByHumberto.Designer.cs">
-      <DependentUpon>201708161812197_ModelsUpdatedByHumberto.cs</DependentUpon>
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.cs" />
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.Designer.cs">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708161816565_AddCountryDefault.cs" />
-    <Compile Include="Migrations\201708161816565_AddCountryDefault.Designer.cs">
-      <DependentUpon>201708161816565_AddCountryDefault.cs</DependentUpon>
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.cs" />
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.Designer.cs">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708162139180_AddStateDefault.cs" />
-    <Compile Include="Migrations\201708162139180_AddStateDefault.Designer.cs">
-      <DependentUpon>201708162139180_AddStateDefault.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708162303188_AddCitiesDefault.cs" />
-    <Compile Include="Migrations\201708162303188_AddCitiesDefault.Designer.cs">
-      <DependentUpon>201708162303188_AddCitiesDefault.cs</DependentUpon>
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.cs" />
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.Designer.cs">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\EntityConfigurations\PartnerContactConfiguration.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Logo.cs" />
+    <Compile Include="Models\ManagmentViewModel\LogoManagmentViewModel.cs" />
+    <Compile Include="Models\ManagmentViewModel\PartnerContactManagmentViewModel.cs" />
+    <Compile Include="Models\ManagmentViewModel\PartnerManagmentViewModel.cs" />
+    <Compile Include="Models\ManagmentViewModel\UserManagmentViewModel.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\ViewModels\PartnerContactViewModel.cs" />
-    <Compile Include="Models\ViewModels\PartnerViewModel.cs" />
-    <Compile Include="Models\ViewModels\UserViewModel.cs" />
+    <Compile Include="Models\DetailsViewModels\PartnerContactViewModel.cs" />
+    <Compile Include="Models\DetailsViewModels\PartnerViewModel.cs" />
+    <Compile Include="Models\DetailsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
@@ -386,6 +385,7 @@
     <Content Include="Content\assets\img\star-sky.jpg" />
     <Content Include="Content\assets\js\jquery.min.js" />
     <Content Include="Content\assets\js\script.min.js" />
+    <Content Include="Content\bootstrap-cosmo.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -496,13 +496,12 @@
     <Content Include="Views\Shared\Sections\SideBar.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\CustomValidations\" />
-    <Folder Include="Models\DTOs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -523,17 +522,14 @@
     <EmbeddedResource Include="Migrations\201708160909049_ModelsUpdated.resx">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708161812197_ModelsUpdatedByHumberto.resx">
-      <DependentUpon>201708161812197_ModelsUpdatedByHumberto.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708162239290_AddedCountryConfiguration.resx">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708161816565_AddCountryDefault.resx">
-      <DependentUpon>201708161816565_AddCountryDefault.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708170237248_DataAnnotationsAdded.resx">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708162139180_AddStateDefault.resx">
-      <DependentUpon>201708162139180_AddStateDefault.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708162303188_AddCitiesDefault.resx">
-      <DependentUpon>201708162303188_AddCitiesDefault.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708170249524_UpdatedDataNotations.resx">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
