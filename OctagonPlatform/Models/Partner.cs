@@ -50,20 +50,19 @@ namespace OctagonPlatform.Models
 
         public City City { get; set; }
 
-        [Required(ErrorMessage = "The email is required")]
+        [Required(ErrorMessage = "Email is required")]
+        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
+        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
         public ulong? WorkPhone { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
-        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        public string Mobile { get; set; }
+        [Display(Name = "Mobile Phone")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
+        public ulong Mobile { get; set; }
 
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Fax number is not valid")]

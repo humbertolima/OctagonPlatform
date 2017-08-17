@@ -24,9 +24,10 @@ namespace OctagonPlatform.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "The email is required")]
+        [Required(ErrorMessage = "Email is required")]
+        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
+        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "The contact type is required")]
