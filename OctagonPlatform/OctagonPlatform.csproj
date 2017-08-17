@@ -214,11 +214,13 @@
     <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.Designer.cs">
       <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.cs" />
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.Designer.cs">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
-    <Compile Include="Models\EntityConfigurations\CountryConfiguration.cs" />
-    <Compile Include="Models\EntityConfigurations\PartnerContactConfiguration.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Logo.cs" />
@@ -514,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708162239290_AddedCountryConfiguration.resx">
       <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170237248_DataAnnotationsAdded.resx">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
