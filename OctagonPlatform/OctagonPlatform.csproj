@@ -210,6 +210,22 @@
     <Compile Include="Migrations\201708160909049_ModelsUpdated.Designer.cs">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708161812197_ModelsUpdatedByHumberto.cs" />
+    <Compile Include="Migrations\201708161812197_ModelsUpdatedByHumberto.Designer.cs">
+      <DependentUpon>201708161812197_ModelsUpdatedByHumberto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708161816565_AddCountryDefault.cs" />
+    <Compile Include="Migrations\201708161816565_AddCountryDefault.Designer.cs">
+      <DependentUpon>201708161816565_AddCountryDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708162139180_AddStateDefault.cs" />
+    <Compile Include="Migrations\201708162139180_AddStateDefault.Designer.cs">
+      <DependentUpon>201708162139180_AddStateDefault.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708162303188_AddCitiesDefault.cs" />
+    <Compile Include="Migrations\201708162303188_AddCitiesDefault.Designer.cs">
+      <DependentUpon>201708162303188_AddCitiesDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -506,6 +522,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708160909049_ModelsUpdated.resx">
       <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161812197_ModelsUpdatedByHumberto.resx">
+      <DependentUpon>201708161812197_ModelsUpdatedByHumberto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708161816565_AddCountryDefault.resx">
+      <DependentUpon>201708161816565_AddCountryDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708162139180_AddStateDefault.resx">
+      <DependentUpon>201708162139180_AddStateDefault.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708162303188_AddCitiesDefault.resx">
+      <DependentUpon>201708162303188_AddCitiesDefault.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
