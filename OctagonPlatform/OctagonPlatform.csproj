@@ -228,6 +228,7 @@
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Logo.cs" />
+    <Compile Include="Models\ManagmentViewModel\LogoManagmentViewModel.cs" />
     <Compile Include="Models\ManagmentViewModel\PartnerContactManagmentViewModel.cs" />
     <Compile Include="Models\ManagmentViewModel\PartnerManagmentViewModel.cs" />
     <Compile Include="Models\ManagmentViewModel\UserManagmentViewModel.cs" />
@@ -495,8 +496,8 @@
     <Content Include="Views\Shared\Sections\SideBar.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

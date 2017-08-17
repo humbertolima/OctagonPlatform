@@ -1,8 +1,8 @@
 ﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.DetailsViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using OctagonPlatform.Models.DetailsViewModels;
 
 namespace OctagonPlatform.Controllers
 {
@@ -33,16 +33,17 @@ namespace OctagonPlatform.Controllers
                 viewModel.TriesToLogin++;
                 if (viewModel.TriesToLogin >= 3)
                 {
-                    var userTrie = _context.Users.SingleOrDefault(u => u.UserName == viewModel.UserName);
-                    if (userTrie != null)
+                    var userTrying = _context.Users.SingleOrDefault(u => u.UserName == viewModel.UserName);
+                    if (userTrying != null)
                     {
-                        userTrie.IsLocked = true;
+                        userTrying.IsLocked = true;
                         _context.SaveChanges();
                         ViewBag.Message = "User Locked, please contact the Administrator";
                     }
                 }
                 else
                 {
+                    ViewBag.Message = "Invalid User";
                     return View(viewModel);
                 }
             }
