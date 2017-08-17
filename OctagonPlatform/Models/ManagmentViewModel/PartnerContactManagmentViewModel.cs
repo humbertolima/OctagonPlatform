@@ -1,19 +1,17 @@
-﻿using OctagonPlatform.Helpers;
-using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace OctagonPlatform.Models
+namespace OctagonPlatform.Models.ManagmentViewModel
 {
-    public class PartnerContact:IAuditEntity,ISoftDeleted
+    public class PartnerContactManagmentViewModel
     {
-        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
-        public Partner Partner { get; set; }
+        public IEnumerable<Partner> Partners { get; set; }
 
         [Required(ErrorMessage = "The name is required")]
         [StringLength(20)]
@@ -34,11 +32,11 @@ namespace OctagonPlatform.Models
         [Display(Name = "Contact type")]
         public int ContactTypeId { get; set; }
 
-        public ContactType ContactType { get; set; }
+        public IEnumerable<ContactType> ContactTypes { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
-        public ulong Phone  { get; set; }
+        public ulong Phone { get; set; }
 
         [Required(ErrorMessage = "The address1 is required")]
         [StringLength(50)]
@@ -55,32 +53,19 @@ namespace OctagonPlatform.Models
         [Display(Name = "Country")]
         public int CountryId { get; set; }
 
-        public Country Country { get; set; }
+        public IEnumerable<Country> Countries { get; set; }
 
         [Required(ErrorMessage = "The state is required")]
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public IEnumerable<State> States { get; set; }
 
         [Required(ErrorMessage = "The city is required")]
         [Display(Name = "City")]
         public int CityId { get; set; }
 
-        public City City { get; set; }
+        public IEnumerable<City> Cities { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-
-        public int? CreatedBy { get; set; }
-
-        public DateTime? DeletedAt { get; set; }
-
-        public int? DeletedBy { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public int? UpdatedBy { get; set; }
-
-        public bool? Deleted { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.ViewModels;
+using OctagonPlatform.Models.DetailsViewModels;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -24,7 +24,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserViewModel viewModel)
+        public ActionResult Login(UserLoginViewModel viewModel)
         {
             var user = _context.Users.Any(u => u.UserName == viewModel.UserName && u.Password == viewModel.Password);
             if (!user)
@@ -33,16 +33,17 @@ namespace OctagonPlatform.Controllers
                 viewModel.TriesToLogin++;
                 if (viewModel.TriesToLogin >= 3)
                 {
-                    var userTrie = _context.Users.SingleOrDefault(u => u.UserName == viewModel.UserName);
-                    if (userTrie != null)
+                    var userTrying = _context.Users.SingleOrDefault(u => u.UserName == viewModel.UserName);
+                    if (userTrying != null)
                     {
-                        userTrie.IsLocked = true;
+                        userTrying.IsLocked = true;
                         _context.SaveChanges();
                         ViewBag.Message = "User Locked, please contact the Administrator";
                     }
                 }
                 else
                 {
+                    ViewBag.Message = "Invalid User";
                     return View(viewModel);
                 }
             }
