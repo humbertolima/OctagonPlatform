@@ -1,21 +1,21 @@
-﻿@*  Created By: Humberto Lima
-    Modified & Updated By: Luis R Gamez
-    Date: 08/15/2017
-*@
+﻿@model OctagonPlatform.Models.DetailsViewModels.UserLoginViewModel
 
-@model OctagonPlatform.Models.ViewModels.UserViewModel
 @{
-    ViewBag.Title = "Login";
+
+    ViewBag.Title = "Octagon Login";
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
-<h1>@ViewBag.Message</h1>
+
+
+
 <div data-aos="zoom-in" data-aos-duration="750" data-aos-delay="250" class="login-dark">
 
-    @using (Html.BeginForm("Login","Account",FormMethod.Post)) 
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
+        <h2 class="text-warning text-center" >@ViewBag.Message</h2>
         @Html.AntiForgeryToken()
-        <div class="form-horizontal">   
-        
+        <div class="form-horizontal">
+
             <h5>@ViewBag.Msg</h5>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -24,24 +24,22 @@
                 <div class="illustration">
                     <i class="icon ion-ios-locked-outline"></i>
                 </div>
-                @Html.LabelFor(model => model.UserName, new { @class = "form-group" })
                 <div>
-                    @Html.TextBoxFor(model => model.UserName, new {@class="form-control", placeholder="Username"})
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", placeholder = "Username" })
                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Password, new {@class = "form-group"})
                 <div>
-                    @Html.PasswordFor(model => model.Password, new {@class = "form-control" , placeholder="Password"})
-                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Password"})
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.ActionLink("Login", "Login", "Account", routeValues:null, htmlAttributes: new{@class = "btn btn-primary btn-block", role = "button"} )
+                <input type="submit" value="Login" class="btn btn-primary btn-block" />
             </div>
             <div class="form-group">
-                @Html.ActionLink("Home", "Index", "Home", routeValues:null, htmlAttributes: new{@class = "btn btn-primary btn-block", role = "button",  style = "background-color: rgb(33, 128, 117)"} )
+                @Html.ActionLink("Home", "Index", "Home","",  new { @class = "btn btn-primary btn-block", role = "button", style = "background-color: rgb(33, 128, 117)" })
             </div>
         </div>
         <a class="forgot">Powered by Xyncro Networks</a>
@@ -51,4 +49,7 @@
 <script src="~/Content/assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
 <script src="~/Content/assets/js/script.min.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

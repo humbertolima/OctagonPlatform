@@ -1,5 +1,4 @@
-﻿using OctagonPlatform.Models.EntityConfigurations;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 
 namespace OctagonPlatform.Models
 {
@@ -27,7 +26,7 @@ namespace OctagonPlatform.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new PartnerContactConfiguration());
+            
         }
     }
 }
