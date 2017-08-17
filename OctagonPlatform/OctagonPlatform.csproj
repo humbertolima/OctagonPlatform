@@ -381,6 +381,7 @@
     <Content Include="Content\assets\img\star-sky.jpg" />
     <Content Include="Content\assets\js\jquery.min.js" />
     <Content Include="Content\assets\js\script.min.js" />
+    <Content Include="Content\bootstrap-cosmo.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
