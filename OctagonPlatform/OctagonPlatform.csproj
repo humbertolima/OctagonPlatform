@@ -226,6 +226,18 @@
     <Compile Include="Migrations\201708172118297_testing.Designer.cs">
       <DependentUpon>201708172118297_testing.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708172211410_AddCountryScript.cs" />
+    <Compile Include="Migrations\201708172211410_AddCountryScript.Designer.cs">
+      <DependentUpon>201708172211410_AddCountryScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172223546_AddStatesScript.cs" />
+    <Compile Include="Migrations\201708172223546_AddStatesScript.Designer.cs">
+      <DependentUpon>201708172223546_AddStatesScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172230006_AddCitiesScript.cs" />
+    <Compile Include="Migrations\201708172230006_AddCitiesScript.Designer.cs">
+      <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -537,6 +549,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708172118297_testing.resx">
       <DependentUpon>201708172118297_testing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172211410_AddCountryScript.resx">
+      <DependentUpon>201708172211410_AddCountryScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172223546_AddStatesScript.resx">
+      <DependentUpon>201708172223546_AddStatesScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172230006_AddCitiesScript.resx">
+      <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
