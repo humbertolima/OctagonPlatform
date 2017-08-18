@@ -4,5 +4,6 @@ namespace OctagonPlatform.Repositories.Partners
 {
     public interface IPartnerRepository: IGenericRepository<Partner>
     {
+
     }
 }

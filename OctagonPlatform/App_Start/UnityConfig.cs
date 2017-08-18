@@ -19,12 +19,15 @@ namespace OctagonPlatform
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
+            
+            
+
+            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
             container.RegisterType<IPartnerRepository, PartnerRepository>();
             container.RegisterType<ILogoRepository, LogoRepository>();
             container.RegisterType<IPartnerContactRepository, PartnerContactRepository>();
             container.RegisterType<IUserRepository, UserRepository>();
-
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
 }
