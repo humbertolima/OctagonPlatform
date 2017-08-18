@@ -35,6 +35,6 @@ namespace OctagonPlatform.Models
         //        .WillCascadeOnDelete(false);
         }
 
-        
+        public System.Data.Entity.DbSet<OctagonPlatform.Models.CreateViewModel.PartnerContactCreateViewModel> PartnerContactCreateViewModels { get; set; }
     }
 }

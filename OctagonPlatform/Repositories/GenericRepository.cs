@@ -41,9 +41,8 @@ namespace OctagonPlatform.Repositories
             {
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
-                var userName = user.Identity.GetUserName();
                 ((IAuditEntity) obj).CreatedAt = date;
-                ((IAuditEntity) obj).CreatedBy = _context.Users.Single(u => u.UserName == userName).Id;
+                ((IAuditEntity) obj).CreatedBy = user.Identity.GetUserName(); 
 
             }
             Save();
@@ -56,9 +55,8 @@ namespace OctagonPlatform.Repositories
             {
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
-                var userName = user.Identity.GetUserName();
                 ((IAuditEntity) obj).CreatedAt = date;
-                ((IAuditEntity) obj).CreatedBy = _context.Users.Single(u => u.UserName == userName).Id;
+                ((IAuditEntity) obj).CreatedBy = user.Identity.GetUserName();
 
             }
             Save();
@@ -73,9 +71,8 @@ namespace OctagonPlatform.Repositories
                 {
                     var date = DateTime.Now;
                     var user = HttpContext.Current.User;
-                    var userName = user.Identity.GetUserName();
                     ((IAuditEntity) existing).DeletedAt= date;
-                    ((IAuditEntity) existing).DeletedBy = _context.Users.Single(u => u.UserName == userName).Id;
+                    ((IAuditEntity) existing).DeletedBy = user.Identity.GetUserName();
 
                 }
 

@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace OctagonPlatform.Models.CreateViewModel
 {
-    [NotMapped]
     public class PartnerContactCreateViewModel
     {
+
+        private readonly ApplicationDbContext _context;
+
+        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
@@ -72,18 +74,41 @@ namespace OctagonPlatform.Models.CreateViewModel
 
         public PartnerContactCreateViewModel()
         {
-            var context = new ApplicationDbContext();
-            Partners = context.Partners.ToList();
-            ContactTypes = context.ContactTypes.ToList();
-            Countries = context.Countries.ToList();
-            States = context.States.ToList();
-            Cities = context.Cities.ToList();
+            _context = new ApplicationDbContext();
+            Partners = _context.Partners.ToList();
+            ContactTypes = _context.ContactTypes.ToList();
+            Countries = _context.Countries.ToList();
+            States = _context.States.ToList();
+            Cities = _context.Cities.ToList();
         }
 
-        public void Create(PartnerContactCreateViewModel model)
+        public void Create()
         {
-            
+            //var user = HttpContext.Current.User;
+            var partnerContact = new PartnerContact()
+            {
+                PartnerId = PartnerId,
+                Name = Name,
+                LastName = LastName,
+                Email = Email,
+                ContactTypeId = ContactTypeId,
+                Phone = Phone,
+                Address1 = Address1,
+                Address2 = Address2,
+                Zip = Zip,
+                CountryId = CountryId,
+                StateId = StateId,
+                CityId = CityId,
+                //CreatedAt = DateTime.Now,
+                //CreatedBy = user.Identity.GetUserName()
+
+            };
+
+            _context.PartnerContacts.Add(partnerContact);
+            _context.SaveChanges();
+
         }
+       
 
     }
 }

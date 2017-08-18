@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
@@ -51,11 +50,25 @@ namespace OctagonPlatform.Models
 
         public bool? Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
+
+        string IAuditEntity.CreatedBy
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         public int? CreatedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
+
+        string IAuditEntity.DeletedBy
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         public int? DeletedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
 
         public User()
         {
