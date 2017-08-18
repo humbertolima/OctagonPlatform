@@ -18,25 +18,6 @@ namespace OctagonPlatform.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.PartnerContactManagmentViewModels",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        PartnerId = c.Int(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 20),
-                        LastName = c.String(nullable: false, maxLength: 20),
-                        Email = c.String(nullable: false, maxLength: 16),
-                        ContactTypeId = c.Int(nullable: false),
-                        Address1 = c.String(nullable: false, maxLength: 50),
-                        Address2 = c.String(maxLength: 50),
-                        Zip = c.Int(nullable: false),
-                        CountryId = c.Int(nullable: false),
-                        StateId = c.Int(nullable: false),
-                        CityId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.PermissionUsers",
                 c => new
                     {
@@ -58,7 +39,6 @@ namespace OctagonPlatform.Migrations
             DropIndex("dbo.PermissionUsers", new[] { "User_Id" });
             DropIndex("dbo.PermissionUsers", new[] { "Permission_Id" });
             DropTable("dbo.PermissionUsers");
-            DropTable("dbo.PartnerContactManagmentViewModels");
             DropTable("dbo.Permissions");
         }
     }

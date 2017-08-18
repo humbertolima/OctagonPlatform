@@ -195,7 +195,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PartnerContactController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +241,10 @@
     <Compile Include="Migrations\201708181605364_AddedPermissions.cs" />
     <Compile Include="Migrations\201708181605364_AddedPermissions.Designer.cs">
       <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708181648395_AddedSetOfPermissions.cs" />
+    <Compile Include="Migrations\201708181648395_AddedSetOfPermissions.Designer.cs">
+      <DependentUpon>201708181648395_AddedSetOfPermissions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -523,11 +526,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\PartnerContact\Create.cshtml" />
-    <Content Include="Views\PartnerContact\Delete.cshtml" />
-    <Content Include="Views\PartnerContact\Details.cshtml" />
-    <Content Include="Views\PartnerContact\Edit.cshtml" />
-    <Content Include="Views\PartnerContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -575,6 +573,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708181605364_AddedPermissions.resx">
       <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708181648395_AddedSetOfPermissions.resx">
+      <DependentUpon>201708181648395_AddedSetOfPermissions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
