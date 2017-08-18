@@ -1,5 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
@@ -26,6 +28,8 @@ namespace OctagonPlatform.Models
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
 
+        public ICollection<Permission> Permissions { get; set; }
+
         public bool? Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
@@ -33,6 +37,11 @@ namespace OctagonPlatform.Models
         public int? DeletedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
+
+        public User()
+        {
+            Permissions = new Collection<Permission>();
+        }
 
         //Resto de la Implementacion de User
     }

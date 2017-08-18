@@ -12,6 +12,7 @@ namespace OctagonPlatform.Models
         public DbSet<PartnerContact> PartnerContacts { get; set; }
         public DbSet<Partner> Partners { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
@@ -28,5 +29,7 @@ namespace OctagonPlatform.Models
         {
             
         }
+
+        public System.Data.Entity.DbSet<OctagonPlatform.Models.ManagmentViewModel.PartnerContactManagmentViewModel> PartnerContactManagmentViewModels { get; set; }
     }
 }

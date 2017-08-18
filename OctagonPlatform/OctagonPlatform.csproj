@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartnerContactController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -250,6 +251,8 @@
     <Compile Include="Models\ManagmentViewModel\UserManagmentViewModel.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\DetailsViewModels\PartnerContactViewModel.cs" />
@@ -264,6 +267,8 @@
     <Compile Include="Repositories\PartnerContacts\PartnerContactRepository.cs" />
     <Compile Include="Repositories\Partners\IPartnerRepository.cs" />
     <Compile Include="Repositories\Partners\PartnerRepository.cs" />
+    <Compile Include="Repositories\Users\IUserRepository.cs" />
+    <Compile Include="Repositories\Users\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminsb\.gitignore" />
@@ -514,6 +519,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\PartnerContact\Create.cshtml" />
+    <Content Include="Views\PartnerContact\Delete.cshtml" />
+    <Content Include="Views\PartnerContact\Details.cshtml" />
+    <Content Include="Views\PartnerContact\Edit.cshtml" />
+    <Content Include="Views\PartnerContact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

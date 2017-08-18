@@ -1,5 +1,6 @@
 ﻿using OctagonPlatform.Models;
 using System;
+using System.Linq;
 using System.Web.Security;
 
 namespace OctagonPlatform.Helpers
@@ -17,13 +18,22 @@ namespace OctagonPlatform.Helpers
         {
             throw new NotImplementedException();
         }
-       
         public override string[] GetRolesForUser(string username)
         {
+            var user = _context.Users.Single(x => x.UserName == username);
 
-            //Logica de la implementacion de obtener los permisos de un usuario (Ver roles como permisos)
+            var permissions = user.Permissions;
 
-            throw new NotImplementedException();
+            var result = new string[permissions.Count];
+
+            var index = 0;
+            foreach (var permission in permissions)
+            {
+                result[index] = permission.Name;
+                index++;
+            }
+
+            return result;
         }
 
         public override void CreateRole(string roleName)
