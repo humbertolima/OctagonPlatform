@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201708172230006_AddCitiesScript.Designer.cs">
       <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708181605364_AddedPermissions.cs" />
+    <Compile Include="Migrations\201708181605364_AddedPermissions.Designer.cs">
+      <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -568,6 +572,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708172230006_AddCitiesScript.resx">
       <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708181605364_AddedPermissions.resx">
+      <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
