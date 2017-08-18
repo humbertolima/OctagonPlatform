@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using OctagonPlatform.Helpers;
 
 namespace OctagonPlatform
 {
@@ -10,7 +9,7 @@ namespace OctagonPlatform
     {
         protected void Application_Start()
         {
-            GlobalFilters.Filters.Add(new System.Web.Mvc.AuthorizeAttribute());
+            GlobalFilters.Filters.Add(new AuthorizeAttribute());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
