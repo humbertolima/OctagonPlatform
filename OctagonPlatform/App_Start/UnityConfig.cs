@@ -1,8 +1,4 @@
 using Microsoft.Practices.Unity;
-using OctagonPlatform.Repositories.Logos;
-using OctagonPlatform.Repositories.PartnerContacts;
-using OctagonPlatform.Repositories.Partners;
-using OctagonPlatform.Repositories.Users;
 using System.Web.Mvc;
 using Unity.Mvc5;
 
@@ -23,11 +19,7 @@ namespace OctagonPlatform
             
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
-            container.RegisterType<IPartnerRepository, PartnerRepository>();
-            container.RegisterType<ILogoRepository, LogoRepository>();
-            container.RegisterType<IPartnerContactRepository, PartnerContactRepository>();
-            container.RegisterType<IUserRepository, UserRepository>();
+            
         }
     }
 }

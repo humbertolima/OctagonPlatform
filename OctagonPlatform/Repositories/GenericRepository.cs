@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using System.Web.UI.WebControls;
 
 namespace OctagonPlatform.Repositories
 {
@@ -18,13 +17,13 @@ namespace OctagonPlatform.Repositories
 
         protected GenericRepository()
         {
-            this._context = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
             Table = _context.Set<T>();
         }
 
         protected GenericRepository(ApplicationDbContext db)
         {
-            this._context = db;
+            _context = db;
             Table = db.Set<T>();
         }
         public IEnumerable<T> All()
