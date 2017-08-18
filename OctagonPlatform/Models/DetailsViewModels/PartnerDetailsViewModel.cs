@@ -3,8 +3,7 @@
 namespace OctagonPlatform.Models.DetailsViewModels
 {
     [NotMapped]
-    public class PartnerContactViewModel
+    public class PartnerDetailsViewModel
     {
-
     }
 }

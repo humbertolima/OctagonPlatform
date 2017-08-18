@@ -11,7 +11,7 @@ namespace OctagonPlatform.Repositories.PartnerContacts
             throw new System.NotImplementedException();
         }
 
-        public PartnerViewModel PartnerContactDetails()
+        public PartnerDetailsViewModel PartnerContactDetails()
         {
             throw new System.NotImplementedException();
         }

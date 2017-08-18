@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OctagonPlatform.Models.CreateViewModel
 {
     [NotMapped]
-    public class PartnerContactManagmentViewModel
+    public class PartnerContactCreateViewModel
     {
         public int Id { get; set; }
 

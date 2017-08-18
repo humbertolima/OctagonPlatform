@@ -8,7 +8,7 @@ namespace OctagonPlatform.Repositories.PartnerContacts
     {
         IEnumerable<PartnerContact> GetPartnerContactses();
 
-        PartnerViewModel PartnerContactDetails();
+        PartnerDetailsViewModel PartnerContactDetails();
 
 
     }
