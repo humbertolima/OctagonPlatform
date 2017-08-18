@@ -28,7 +28,11 @@ namespace OctagonPlatform.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
+        //    modelBuilder.Entity<Partner>()
+        //        .HasMany(c=> c.Users)
+        //        .WithRequired(c=>c.Partner)
+        //        .HasForeignKey(c=>c.PartnerId)
+        //        .WillCascadeOnDelete(false);
         }
 
         

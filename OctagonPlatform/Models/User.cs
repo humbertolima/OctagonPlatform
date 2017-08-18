@@ -24,10 +24,14 @@ namespace OctagonPlatform.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Required(ErrorMessage ="Phone number is required")]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         public string Status { get; set; }
-        
+
+        [Required(ErrorMessage ="Partner is required")]
+        [Display(Name="Partner")]
         public int PartnerId { get; set; }
         public Partner Partner { get; set; }
 
