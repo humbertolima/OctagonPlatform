@@ -5,5 +5,6 @@ namespace OctagonPlatform.Models.DetailsViewModels
     [NotMapped]
     public class PartnerContactViewModel
     {
+
     }
 }

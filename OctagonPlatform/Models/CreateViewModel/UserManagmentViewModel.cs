@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OctagonPlatform.Models.ManagmentViewModel
+namespace OctagonPlatform.Models.CreateViewModel
 {
     [NotMapped]
     public class UserManagmentViewModel

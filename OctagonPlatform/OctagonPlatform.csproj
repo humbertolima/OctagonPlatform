@@ -252,10 +252,10 @@
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Logo.cs" />
-    <Compile Include="Models\ManagmentViewModel\LogoManagmentViewModel.cs" />
-    <Compile Include="Models\ManagmentViewModel\PartnerContactManagmentViewModel.cs" />
-    <Compile Include="Models\ManagmentViewModel\PartnerManagmentViewModel.cs" />
-    <Compile Include="Models\ManagmentViewModel\UserManagmentViewModel.cs" />
+    <Compile Include="Models\CreateViewModel\LogoManagmentViewModel.cs" />
+    <Compile Include="Models\CreateViewModel\PartnerContactManagmentViewModel.cs" />
+    <Compile Include="Models\CreateViewModel\PartnerManagmentViewModel.cs" />
+    <Compile Include="Models\CreateViewModel\UserManagmentViewModel.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
@@ -530,6 +530,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\CustomValidations\" />
+    <Folder Include="Models\IndexViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
