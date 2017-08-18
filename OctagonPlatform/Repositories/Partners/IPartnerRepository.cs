@@ -1,6 +1,8 @@
-﻿namespace OctagonPlatform.Repositories.Partners
+﻿using OctagonPlatform.Models;
+
+namespace OctagonPlatform.Repositories.Partners
 {
-    internal interface IPartnerRepository
+    public interface IPartnerRepository: IGenericRepository<Partner>
     {
     }
 }

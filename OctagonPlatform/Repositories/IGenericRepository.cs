@@ -2,7 +2,7 @@
 
 namespace OctagonPlatform.Repositories
 {
-    internal interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         IEnumerable<T> All();
         T FindBy(object id);
