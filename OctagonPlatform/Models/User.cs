@@ -51,22 +51,10 @@ namespace OctagonPlatform.Models
         public bool? Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
 
-        string IAuditEntity.CreatedBy
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public int? CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        string IAuditEntity.DeletedBy
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
-        }
-
-        public int? DeletedBy { get; set; }
+        public string DeletedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string UpdatedBy { get; set; }
 
@@ -75,6 +63,6 @@ namespace OctagonPlatform.Models
             Permissions = new Collection<Permission>();
         }
 
-        //Resto de la Implementacion de User
+        
     }
 }

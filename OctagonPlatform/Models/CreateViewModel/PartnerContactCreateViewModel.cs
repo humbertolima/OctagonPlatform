@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web;
 
 namespace OctagonPlatform.Models.CreateViewModel
 {
@@ -8,9 +11,6 @@ namespace OctagonPlatform.Models.CreateViewModel
     {
 
         private readonly ApplicationDbContext _context;
-
-        [Key]
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
@@ -84,7 +84,7 @@ namespace OctagonPlatform.Models.CreateViewModel
 
         public void Create()
         {
-            //var user = HttpContext.Current.User;
+            var user = HttpContext.Current.User;
             var partnerContact = new PartnerContact()
             {
                 PartnerId = PartnerId,
@@ -99,8 +99,8 @@ namespace OctagonPlatform.Models.CreateViewModel
                 CountryId = CountryId,
                 StateId = StateId,
                 CityId = CityId,
-                //CreatedAt = DateTime.Now,
-                //CreatedBy = user.Identity.GetUserName()
+                CreatedAt = DateTime.Now,
+                CreatedBy = user.Identity.GetUserName()
 
             };
 

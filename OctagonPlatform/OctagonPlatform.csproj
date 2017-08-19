@@ -250,6 +250,10 @@
     <Compile Include="Migrations\201708181939342_AddFieldUserModel.Designer.cs">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708190225074_Updated.cs" />
+    <Compile Include="Migrations\201708190225074_Updated.Designer.cs">
+      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -577,6 +581,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708181939342_AddFieldUserModel.resx">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708190225074_Updated.resx">
+      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
