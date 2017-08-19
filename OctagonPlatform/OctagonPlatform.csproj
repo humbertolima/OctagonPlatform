@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201708190225074_Updated.Designer.cs">
       <DependentUpon>201708190225074_Updated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708190230422_Updated2.cs" />
+    <Compile Include="Migrations\201708190230422_Updated2.Designer.cs">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -584,6 +588,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708190225074_Updated.resx">
       <DependentUpon>201708190225074_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708190230422_Updated2.resx">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
