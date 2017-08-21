@@ -54,6 +54,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Grid.Mvc.Ajax, Version=2.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.Ajax.IdeaMatrix.1.0.2\lib\net40\Grid.Mvc.Ajax.dll</HintPath>
+    </Reference>
+    <Reference Include="GridMvc, Version=2.0.12.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.Redux.IdeaMatrix.1.0.1\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -195,6 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -250,17 +257,56 @@
     <Compile Include="Migrations\201708181939342_AddFieldUserModel.Designer.cs">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708190225074_Updated.cs" />
+    <Compile Include="Migrations\201708190225074_Updated.Designer.cs">
+      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708190230422_Updated2.cs" />
+    <Compile Include="Migrations\201708190230422_Updated2.Designer.cs">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191620206_AddNewPartner.cs" />
+    <Compile Include="Migrations\201708191620206_AddNewPartner.Designer.cs">
+      <DependentUpon>201708191620206_AddNewPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191633395_UpdateulongToLong.cs" />
+    <Compile Include="Migrations\201708191633395_UpdateulongToLong.Designer.cs">
+      <DependentUpon>201708191633395_UpdateulongToLong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191639108_TestToCreateANewPartner.cs" />
+    <Compile Include="Migrations\201708191639108_TestToCreateANewPartner.Designer.cs">
+      <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191641022_CreateNewPartner.cs" />
+    <Compile Include="Migrations\201708191641022_CreateNewPartner.Designer.cs">
+      <DependentUpon>201708191641022_CreateNewPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191649073_UpdatePartnerId.cs" />
+    <Compile Include="Migrations\201708191649073_UpdatePartnerId.Designer.cs">
+      <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708192125217_ChangeIsLocked.cs" />
+    <Compile Include="Migrations\201708192125217_ChangeIsLocked.Designer.cs">
+      <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708210353405_UpdatingIAudit.cs" />
+    <Compile Include="Migrations\201708210353405_UpdatingIAudit.Designer.cs">
+      <DependentUpon>201708210353405_UpdatingIAudit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\IndexViewModel\PartnerContactIndexViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
+    <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
     <Compile Include="Models\Logo.cs" />
-    <Compile Include="Models\CreateViewModel\LogoCreateViewModel.cs" />
-    <Compile Include="Models\CreateViewModel\PartnerContactCreateViewModel.cs" />
-    <Compile Include="Models\CreateViewModel\PartnerCreateViewModel.cs" />
-    <Compile Include="Models\CreateViewModel\UserCreateViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\LogoFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\PartnerContactFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\PartnerFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserFormViewModel.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
@@ -269,11 +315,10 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\DetailsViewModels\PartnerContactDetailsViewModel.cs" />
     <Compile Include="Models\DetailsViewModels\PartnerDetailsViewModel.cs" />
-    <Compile Include="Models\DetailsViewModels\UserLoginViewModel.cs" />
+    <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\GenericRepository.cs" />
+    <Compile Include="PersistanceRepository\PartnerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IGenericRepository.cs" />
-    <Compile Include="Repositories\User\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\adminsb\.gitignore" />
@@ -414,7 +459,11 @@
     <Content Include="Content\bootstrap-cosmo.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -489,7 +538,20 @@
     <Content Include="Content\assets\fonts\ionicons.eot" />
     <Content Include="Content\assets\fonts\ionicons.ttf" />
     <Content Include="Content\assets\fonts\ionicons.woff" />
+    <Content Include="Grid.mvc.readme" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Grid.Mvc.Ajax.readme" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\gridmvc-ext.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.fr.js" />
+    <Content Include="Scripts\gridmvc.lang.pt.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -506,6 +568,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\URI.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -524,6 +587,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Partners\Index.cshtml" />
+    <Content Include="Views\Partners\Edit.cshtml" />
+    <Content Include="Views\Partners\Create.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Shared\_AjaxGridPager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -577,6 +646,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708181939342_AddFieldUserModel.resx">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708190225074_Updated.resx">
+      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708190230422_Updated2.resx">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191620206_AddNewPartner.resx">
+      <DependentUpon>201708191620206_AddNewPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191633395_UpdateulongToLong.resx">
+      <DependentUpon>201708191633395_UpdateulongToLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191639108_TestToCreateANewPartner.resx">
+      <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191641022_CreateNewPartner.resx">
+      <DependentUpon>201708191641022_CreateNewPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191649073_UpdatePartnerId.resx">
+      <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708192125217_ChangeIsLocked.resx">
+      <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708210353405_UpdatingIAudit.resx">
+      <DependentUpon>201708210353405_UpdatingIAudit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
