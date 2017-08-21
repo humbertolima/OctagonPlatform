@@ -33,6 +33,7 @@ namespace OctagonPlatform.Models
         //        .WithRequired(c=>c.Partner)
         //        .HasForeignKey(c=>c.PartnerId)
         //        .WillCascadeOnDelete(false);
+        modelBuilder.Entity<>
         }
 
         
