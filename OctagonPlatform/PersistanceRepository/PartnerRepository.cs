@@ -1,4 +1,5 @@
 ﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.DetailsViewModels;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
@@ -93,7 +94,12 @@ namespace OctagonPlatform.PersistanceRepository
             }
             return RenderPartnerFormViewModel();
         }
-       
+
+        public PartnerDetailsViewModel PartnerDetails(int id)
+        {
+           return new PartnerDetailsViewModel();
+        }
+
         public void DeletePartner(int id)
         {
             Delete(id);
