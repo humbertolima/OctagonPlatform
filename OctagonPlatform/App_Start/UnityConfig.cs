@@ -26,7 +26,10 @@ namespace OctagonPlatform
 
             container.RegisterType<IPartnerRepository, PartnerRepository>();
 
-            
+            // quitar comentarios cuando se cree class
+
+            container.RegisterType<IUserRepository, UserRepository>();
+
         }
     }
 }
