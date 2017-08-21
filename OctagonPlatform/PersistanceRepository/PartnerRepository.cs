@@ -14,10 +14,7 @@ namespace OctagonPlatform.PersistanceRepository
         public IEnumerable<Partner> GetAllPartners()
         {
             
-            return Table.Include(x => x.Country)
-                    .Include(x => x.State)
-                    .Include(x => x.City)
-                    .Include(x => x.Parent)
+            return Table.Include(x => x.Parent)
                     .ToList();
         }
 
