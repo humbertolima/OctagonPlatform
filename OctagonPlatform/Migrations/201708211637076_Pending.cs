@@ -2,7 +2,7 @@ namespace OctagonPlatform.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    public partial class UpdatingIAudit : DbMigration
+    public partial class Pending : DbMigration
     {
         public override void Up()
         {

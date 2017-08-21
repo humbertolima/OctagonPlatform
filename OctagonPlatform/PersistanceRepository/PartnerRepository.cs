@@ -14,10 +14,7 @@ namespace OctagonPlatform.PersistanceRepository
         public IEnumerable<Partner> GetAllPartners()
         {
             
-            return Table.Include(x => x.Country)
-                    .Include(x => x.State)
-                    .Include(x => x.City)
-                    .Include(x => x.Parent)
+            return Table.Include(x => x.Parent)
                     .ToList();
         }
 
@@ -38,11 +35,21 @@ namespace OctagonPlatform.PersistanceRepository
             if (action == "Edit")
             {
                 var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id);
-                if (partnerToEdit != null)
-                {
-                    Edit(partnerToEdit);
-                }
-
+                if (partnerToEdit == null) return;
+                partnerToEdit.ParentId = viewModel.ParentId;
+                partnerToEdit.BusinessName = viewModel.BusinessName;
+                partnerToEdit.Address1 = viewModel.Address1;
+                partnerToEdit.Address2 = viewModel.Address2;
+                partnerToEdit.CountryId = viewModel.CountryId;
+                partnerToEdit.StateId = viewModel.StateId;
+                partnerToEdit.CityId = viewModel.CityId;
+                partnerToEdit.Status = viewModel.Status;
+                partnerToEdit.Email = viewModel.Email;
+                partnerToEdit.WorkPhone = viewModel.WorkPhone;
+                partnerToEdit.Mobile = viewModel.Mobile;
+                partnerToEdit.Fax = viewModel.Fax;
+                partnerToEdit.WebSite = viewModel.WebSite;
+                Edit(partnerToEdit);
             }
             else
             {
@@ -76,13 +83,13 @@ namespace OctagonPlatform.PersistanceRepository
                 return new PartnerFormViewModel()
                 {
                     Id = partner.Id,
-                    ParentId = partner.ParentId,
+                    Parents = Table.ToList(),
                     BusinessName = partner.BusinessName,
                     Address1 = partner.Address1,
                     Address2 = partner.Address2,
-                    CountryId = partner.CountryId,
-                    StateId = partner.StateId,
-                    CityId = partner.CityId,
+                    Countries = Context.Countries,
+                    States = Context.States,
+                    Cities = Context.Cities,
                     Status = partner.Status,
                     Email = partner.Email,
                     WorkPhone = partner.WorkPhone,

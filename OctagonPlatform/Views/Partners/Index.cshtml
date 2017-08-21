@@ -9,20 +9,56 @@
 <div class="page-header">
     <h3 class="panel-title">List Partners</h3>
 </div>
-<div class="panel-body">
     <p>
-        @Html.ActionLink("Add Partner", "Create", "Partners", routeValues:null, htmlAttributes: new{@class = "btn btn-default" })
+        @Html.ActionLink("Add Partner", "Create", "Partners", routeValues:null, htmlAttributes: new{@class = "fa fa-plus fa-fw" })
     </p>
-    
-    @Html.Grid(Model).AutoGenerateColumns().Columns(columns =>
-{
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
-        .RenderValueAs(m => Html.ActionLink("", "Edit", new {id = m.Id}, new {@clas = "btn btn-edit"}));
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
-        .RenderValueAs(m => Html.ActionLink("", "Delete", new { id = m.Id }, new { @clas = "btn btn-delete" }));
-    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
-        .RenderValueAs(m => Html.ActionLink("", "Details", new {id = m.Id}, new {@clas = "btn btn-details"}));
-}
-).WithPaging(20)
+    @Html.Grid(Model).Columns(columns =>
+    {
 
-</div>
+       
+
+        columns.Add(m => m.Parent.BusinessName)
+            .Titled("Parent Name")
+            .SetWidth(100);
+
+        columns.Add(m => m.BusinessName, "Bussines Name")
+            .Titled("Company Name")
+            .SetWidth(100);
+
+        columns.Add(m => m.Address1, "Address")
+            .Titled("Address")
+            .SetWidth(100);
+
+        columns.Add(m => m.Email, "Email Address")
+            .Titled("Email")
+            .SetWidth(100);
+
+        columns.Add(m => m.WorkPhone, "Work Phone")
+            .Titled("Work Phone")
+            .SetWidth(100);
+
+        columns.Add(m => m.Status, "Statuses")
+            .Titled("Status")
+            .SetWidth(100);
+
+
+        columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+            .RenderValueAs(m =>
+                @<b>
+                    @Html.ActionLink("Edit","Edit", new {id = m.Id}, new {@class = "fa fa-pencil fa-fw" })
+                </b>);
+
+        columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+            .RenderValueAs(m =>
+                @<b>
+                    @Html.ActionLink("Delete", "Delete", new {id = m.Id}, new {@class = "fa fa-trash" })
+                </b>);
+
+        columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+            .RenderValueAs(m =>
+                @<b>
+                    @Html.ActionLink("Details", "Details", new {id = m.Id})
+                </b>);
+    }
+        ).WithPaging(50)
+

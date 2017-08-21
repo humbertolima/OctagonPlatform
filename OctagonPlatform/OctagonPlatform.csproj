@@ -258,10 +258,6 @@
     <Compile Include="Migrations\201708181939342_AddFieldUserModel.Designer.cs">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708190225074_Updated.cs" />
-    <Compile Include="Migrations\201708190225074_Updated.Designer.cs">
-      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201708190230422_Updated2.cs" />
     <Compile Include="Migrations\201708190230422_Updated2.Designer.cs">
       <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
@@ -278,10 +274,6 @@
     <Compile Include="Migrations\201708191639108_TestToCreateANewPartner.Designer.cs">
       <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708191641022_CreateNewPartner.cs" />
-    <Compile Include="Migrations\201708191641022_CreateNewPartner.Designer.cs">
-      <DependentUpon>201708191641022_CreateNewPartner.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201708191649073_UpdatePartnerId.cs" />
     <Compile Include="Migrations\201708191649073_UpdatePartnerId.Designer.cs">
       <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
@@ -290,9 +282,9 @@
     <Compile Include="Migrations\201708192125217_ChangeIsLocked.Designer.cs">
       <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708210353405_UpdatingIAudit.cs" />
-    <Compile Include="Migrations\201708210353405_UpdatingIAudit.Designer.cs">
-      <DependentUpon>201708210353405_UpdatingIAudit.cs</DependentUpon>
+    <Compile Include="Migrations\201708211637076_Pending.cs" />
+    <Compile Include="Migrations\201708211637076_Pending.Designer.cs">
+      <DependentUpon>201708211637076_Pending.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -652,9 +644,6 @@
     <EmbeddedResource Include="Migrations\201708181939342_AddFieldUserModel.resx">
       <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708190225074_Updated.resx">
-      <DependentUpon>201708190225074_Updated.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708190230422_Updated2.resx">
       <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
     </EmbeddedResource>
@@ -667,17 +656,14 @@
     <EmbeddedResource Include="Migrations\201708191639108_TestToCreateANewPartner.resx">
       <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708191641022_CreateNewPartner.resx">
-      <DependentUpon>201708191641022_CreateNewPartner.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708191649073_UpdatePartnerId.resx">
       <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708192125217_ChangeIsLocked.resx">
       <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708210353405_UpdatingIAudit.resx">
-      <DependentUpon>201708210353405_UpdatingIAudit.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708211637076_Pending.resx">
+      <DependentUpon>201708211637076_Pending.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
