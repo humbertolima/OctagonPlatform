@@ -1,4 +1,6 @@
 using Microsoft.Practices.Unity;
+using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.PersistanceRepository;
 using System.Web.Mvc;
 using Unity.Mvc5;
 
@@ -19,6 +21,11 @@ namespace OctagonPlatform
             
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+
+            container.RegisterType<IAccountRepository, AccountRepository>();
+
+            container.RegisterType<IPartnerRepository, PartnerRepository>();
+
             
         }
     }

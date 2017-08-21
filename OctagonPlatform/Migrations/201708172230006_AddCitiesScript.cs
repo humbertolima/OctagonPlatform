@@ -1,7 +1,7 @@
-﻿namespace OctagonPlatform.Migrations
-{
-    using System.Data.Entity.Migrations;
+﻿using System.Data.Entity.Migrations;
 
+namespace OctagonPlatform.Migrations
+{
     public partial class AddCitiesScript : DbMigration
     {
         public override void Up()

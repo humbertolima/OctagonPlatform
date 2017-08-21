@@ -1,4 +1,4 @@
-﻿@model OctagonPlatform.Models.DetailsViewModels.UserLoginViewModel
+﻿@model OctagonPlatform.Models.FormsViewModels.UserLoginViewModel
 
 @{
 
@@ -17,7 +17,7 @@
         <div class="form-horizontal">
 
             <h5>@ViewBag.Msg</h5>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-warning" })
 
             <div class="form-group">
                 <h1 class="text-center" style="font-family: Bitter, serif;">Login</h1>

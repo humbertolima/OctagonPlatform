@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
-namespace OctagonPlatform.Models.CreateViewModel
+namespace OctagonPlatform.Models.FormsViewModels
 {
-    [NotMapped]
-    public class PartnerContactCreateViewModel
+    public class PartnerContactFormViewModel
     {
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
@@ -69,21 +65,6 @@ namespace OctagonPlatform.Models.CreateViewModel
         public int CityId { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
-
-        public PartnerContactCreateViewModel()
-        {
-            var context = new ApplicationDbContext();
-            Partners = context.Partners.ToList();
-            ContactTypes = context.ContactTypes.ToList();
-            Countries = context.Countries.ToList();
-            States = context.States.ToList();
-            Cities = context.Cities.ToList();
-        }
-
-        public void Create(PartnerContactCreateViewModel model)
-        {
-            
-        }
 
     }
 }

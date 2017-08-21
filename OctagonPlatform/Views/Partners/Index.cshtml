@@ -1,0 +1,28 @@
+﻿@using GridMvc.Html
+@model IEnumerable<OctagonPlatform.Models.Partner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="panel-title">List Partners</h3>
+</div>
+<div class="panel-body">
+    <p>
+        @Html.ActionLink("Add Partner", "Create", "Partners", routeValues:null, htmlAttributes: new{@class = "btn btn-default" })
+    </p>
+    
+    @Html.Grid(Model).AutoGenerateColumns().Columns(columns =>
+{
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+        .RenderValueAs(m => Html.ActionLink("", "Edit", new {id = m.Id}, new {@clas = "btn btn-edit"}));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+        .RenderValueAs(m => Html.ActionLink("", "Delete", new { id = m.Id }, new { @clas = "btn btn-delete" }));
+    columns.Add().Encoded(false).Sanitized(false).SetWidth(10).Titled("Edit")
+        .RenderValueAs(m => Html.ActionLink("", "Details", new {id = m.Id}, new {@clas = "btn btn-details"}));
+}
+).WithPaging(20)
+
+</div>

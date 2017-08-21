@@ -2,7 +2,7 @@
 
 namespace OctagonPlatform.Models
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
@@ -22,18 +22,14 @@ namespace OctagonPlatform.Models
 
         public static ApplicationDbContext Create()
         {
+            
             return new ApplicationDbContext();
         }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-        //    modelBuilder.Entity<Partner>()
-        //        .HasMany(c=> c.Users)
-        //        .WithRequired(c=>c.Partner)
-        //        .HasForeignKey(c=>c.PartnerId)
-        //        .WillCascadeOnDelete(false);
-        modelBuilder.Entity<>
+            
         }
 
         

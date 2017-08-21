@@ -4,10 +4,10 @@
     {
         public enum Status
         {
-            Active,
-            Inactive,
-            CompleteActive,
-            IncompleteInactive
-        };
+            Active = 1,
+            Inactive = 2,
+            CompleteActive = 3,
+            IncompleteInactive = 4
+        }
     }
 }
