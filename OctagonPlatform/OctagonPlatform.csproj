@@ -286,6 +286,10 @@
     <Compile Include="Migrations\201708211637076_Pending.Designer.cs">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708212240546_InsertUserAdmin.cs" />
+    <Compile Include="Migrations\201708212240546_InsertUserAdmin.Designer.cs">
+      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -664,6 +668,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708211637076_Pending.resx">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708212240546_InsertUserAdmin.resx">
+      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
