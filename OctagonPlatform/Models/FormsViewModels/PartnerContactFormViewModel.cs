@@ -1,16 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
-namespace OctagonPlatform.Models.CreateViewModel
+namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class PartnerContactCreateViewModel
+    public class PartnerContactFormViewModel
     {
-
-        private readonly ApplicationDbContext _context;
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
@@ -71,44 +65,6 @@ namespace OctagonPlatform.Models.CreateViewModel
         public int CityId { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
-
-        public PartnerContactCreateViewModel()
-        {
-            _context = new ApplicationDbContext();
-            Partners = _context.Partners.ToList();
-            ContactTypes = _context.ContactTypes.ToList();
-            Countries = _context.Countries.ToList();
-            States = _context.States.ToList();
-            Cities = _context.Cities.ToList();
-        }
-
-        public void Create()
-        {
-            var user = HttpContext.Current.User;
-            var partnerContact = new PartnerContact()
-            {
-                PartnerId = PartnerId,
-                Name = Name,
-                LastName = LastName,
-                Email = Email,
-                ContactTypeId = ContactTypeId,
-                Phone = Phone,
-                Address1 = Address1,
-                Address2 = Address2,
-                Zip = Zip,
-                CountryId = CountryId,
-                StateId = StateId,
-                CityId = CityId,
-                CreatedAt = DateTime.Now,
-                CreatedBy = user.Identity.GetUserName()
-
-            };
-
-            _context.PartnerContacts.Add(partnerContact);
-            _context.SaveChanges();
-
-        }
-       
 
     }
 }

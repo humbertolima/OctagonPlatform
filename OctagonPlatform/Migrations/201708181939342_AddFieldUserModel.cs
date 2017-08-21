@@ -1,8 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace OctagonPlatform.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class AddFieldUserModel : DbMigration
     {
         public override void Up()

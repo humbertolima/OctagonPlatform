@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace OctagonPlatform.Repositories
+namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IGenericRepository<T> where T : class
     {
+
         IEnumerable<T> All();
         T FindBy(object id);
         void Add(T obj);

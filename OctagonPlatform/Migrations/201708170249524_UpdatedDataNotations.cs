@@ -1,7 +1,7 @@
+using System.Data.Entity.Migrations;
+
 namespace OctagonPlatform.Migrations
 {
-    using System.Data.Entity.Migrations;
-
     public partial class UpdatedDataNotations : DbMigration
     {
         public override void Up()

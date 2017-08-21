@@ -10,20 +10,20 @@ namespace OctagonPlatform.Helpers
         DateTime? CreatedAt { get; set; }
 
         [Display(Name = "Created By")]
-        string CreatedBy { get; set; }
+        int? CreatedBy { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "Created date is not valid")]
         [Display(Name = "Deleted At")]
         DateTime? DeletedAt { get; set; }
 
         [Display(Name = "Deleted By")]
-        string DeletedBy { get; set; }
+        int? DeletedBy { get; set; }
 
         [DataType(DataType.DateTime, ErrorMessage = "Updated date is not valid")]
         [Display(Name = "Updated At")]
         DateTime? UpdatedAt { get; set; }
 
         [Display(Name = "Updated By")]
-        string UpdatedBy { get; set; }
+        int? UpdatedBy { get; set; }
     }
 }

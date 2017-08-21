@@ -22,6 +22,7 @@ namespace OctagonPlatform.Models
 
         public static ApplicationDbContext Create()
         {
+            
             return new ApplicationDbContext();
         }
 
@@ -31,5 +32,6 @@ namespace OctagonPlatform.Models
             
         }
 
+        
     }
 }

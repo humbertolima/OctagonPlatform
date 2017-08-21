@@ -1,19 +1,17 @@
-﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.DetailsViewModels;
-using System.Linq;
+﻿using OctagonPlatform.Models.FormsViewModels;
+using OctagonPlatform.Models.InterfacesRepository;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace OctagonPlatform.Controllers
 {
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAccountRepository _accountRepository;
 
-        public AccountController()
+        public AccountController(IAccountRepository accountRepository)
         {
-            _context = new ApplicationDbContext();
+            _accountRepository = accountRepository;
         }
 
         [HttpGet]
@@ -26,36 +24,22 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginViewModel viewModel)
         {
-            var user = _context.Users.Any(u => u.UserName == viewModel.UserName && u.Password == viewModel.Password);
-            if (!user)
+            var userToLogin = _accountRepository.Login(viewModel);
+
+            if (userToLogin == null)
             {
-                
-                viewModel.TriesToLogin++;
-                if (viewModel.TriesToLogin >= 3)
-                {
-                    var userTrying = _context.Users.SingleOrDefault(u => u.UserName == viewModel.UserName);
-                    if (userTrying != null)
-                    {
-                        userTrying.IsLocked = true;
-                        _context.SaveChanges();
-                        ViewBag.Message = "User Locked, please contact the Administrator";
-                    }
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid User";
-                    return View(viewModel);
-                }
+                ViewBag.Message = "Invalid User";
+                return View(viewModel);
             }
-            FormsAuthentication.SetAuthCookie(viewModel.UserName, false);
-            return RedirectToAction("Index", "Dashboard");
+            if (!userToLogin.IsLocked) return RedirectToAction("Index", "Dashboard");
+            ViewBag.Message = "User Locked, please call the Administrator";
+            return View(viewModel);
         }
 
         [HttpGet]
         public ActionResult Logout()
         {
-           
-            FormsAuthentication.SignOut();
+            _accountRepository.Logout();
             return RedirectToAction("Index", "Home");
         }
 

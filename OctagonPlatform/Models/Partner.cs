@@ -23,7 +23,7 @@ namespace OctagonPlatform.Models
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
-        public StatusType.Status Status { get; set; }
+        public StatusType.Status Status { get; set; } 
 
         [Required(ErrorMessage = "The address1 is required")]
         [StringLength(50)]
@@ -58,15 +58,15 @@ namespace OctagonPlatform.Models
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
-        public ulong? WorkPhone { get; set; }
+        public long? WorkPhone { get; set; }
 
         [Display(Name = "Mobile Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
-        public ulong Mobile { get; set; }
+        public long Mobile { get; set; }
 
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Fax number is not valid")]
-        public ulong? Fax { get; set; }
+        public long? Fax { get; set; }
 
         public string WebSite { get; set; }
 
@@ -98,15 +98,15 @@ namespace OctagonPlatform.Models
         
         public DateTime? CreatedAt { get; set; }
 
-        public string CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 
-        public string DeletedBy { get; set; }
+        public int? DeletedBy { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
 
-        public string UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
 
         public bool? Deleted { get; set; }
     }

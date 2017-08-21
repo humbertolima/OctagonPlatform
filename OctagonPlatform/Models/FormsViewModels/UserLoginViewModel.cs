@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace OctagonPlatform.Models.DetailsViewModels
+namespace OctagonPlatform.Models.FormsViewModels
 {
     public class UserLoginViewModel
     {

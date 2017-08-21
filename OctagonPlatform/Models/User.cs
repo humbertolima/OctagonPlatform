@@ -38,7 +38,7 @@ namespace OctagonPlatform.Models
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
 
-        public bool? IsLocked { get; set; }
+        public bool IsLocked { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
@@ -51,12 +51,12 @@ namespace OctagonPlatform.Models
         public bool? Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
 
-        public string CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
 
-        public string DeletedBy { get; set; }
+        public int? DeletedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
-        public string UpdatedBy { get; set; }
+        public int? UpdatedBy { get; set; }
 
         public User()
         {
