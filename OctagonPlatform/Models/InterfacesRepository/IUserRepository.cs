@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         void SaveUser(UserFormViewModel viewModel, string action);
 
-        User UserDetails();
+        User UserDetails(int id);
 
         void DeleteUser(int id);
     }

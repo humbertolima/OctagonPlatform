@@ -1,4 +1,3 @@
-using Microsoft.AspNet.Identity;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -46,7 +45,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
-                var userName = user.Identity.GetUserId();
+                var userName = user.Identity.Name;
                 (obj as IAuditEntity).CreatedAt = date;
                 (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName).Id;
 
@@ -62,7 +61,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
-                var userName = user.Identity.GetUserId();
+                var userName = user.Identity.Name;
                 (obj as IAuditEntity).UpdatedAt = date;
                 (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName).Id;
 
@@ -80,7 +79,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     var date = DateTime.Now;
                     var user = HttpContext.Current.User;
-                    var userName = user.Identity.GetUserId();
+                    var userName = user.Identity.Name;
                     (existing as IAuditEntity).DeletedAt = date;
                     (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName).Id;
 

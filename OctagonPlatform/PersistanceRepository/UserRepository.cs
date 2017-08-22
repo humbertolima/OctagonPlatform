@@ -85,7 +85,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public User UserDetails()
+        public User UserDetails(int id)
         {
             return new User();
         }
