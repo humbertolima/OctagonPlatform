@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models.DetailsViewModels;
+using OctagonPlatform.Models.FormsViewModels;
 using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
@@ -7,11 +8,13 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<Partner> GetAllPartners();
 
-        PartnerFormViewModel PartnerToEdit(int id);
+        PartnerFormViewModel RenderPartnerFormViewModel();
 
         void SavePartner(PartnerFormViewModel viewModel, string action);
 
-        Partner PartnerDetails(int id);
+        PartnerFormViewModel PartnerToEdit(int id);
+
+        PartnerDetailsViewModel PartnerDetails(int id);
 
         void DeletePartner(int id);
 

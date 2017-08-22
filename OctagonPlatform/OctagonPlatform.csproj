@@ -289,6 +289,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\DetailsViewModels\UserDetailsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
@@ -305,6 +306,8 @@
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\DetailsViewModels\PartnerContactDetailsViewModel.cs" />
+    <Compile Include="Models\DetailsViewModels\PartnerDetailsViewModel.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
