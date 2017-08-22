@@ -196,6 +196,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -279,14 +280,20 @@
     <Compile Include="Migrations\201708211637076_Pending.Designer.cs">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708212240546_InsertUserAdmin.cs" />
+    <Compile Include="Migrations\201708212240546_InsertUserAdmin.Designer.cs">
+      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\DetailsViewModels\UserDetailsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
     <Compile Include="Models\Logo.cs" />
     <Compile Include="Models\FormsViewModels\LogoFormViewModel.cs" />
@@ -304,6 +311,7 @@
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
+    <Compile Include="PersistanceRepository\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -570,6 +578,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\CustomValidations\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -640,6 +649,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708211637076_Pending.resx">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708212240546_InsertUserAdmin.resx">
+      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
