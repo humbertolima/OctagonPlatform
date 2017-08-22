@@ -1,5 +1,4 @@
 ﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.DetailsViewModels;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
@@ -20,14 +19,8 @@ namespace OctagonPlatform.PersistanceRepository
 
         public PartnerFormViewModel RenderPartnerFormViewModel()
         {
-            var formViewModel = new PartnerFormViewModel()
-            {
-                Parents = Table.ToList(),
-                Countries = Context.Countries.ToList(),
-                States = Context.States.ToList(),
-                Cities = Context.Cities.ToList()
-            };
-            return formViewModel;
+        
+            return new PartnerFormViewModel();
         }
         
         public void SavePartner(PartnerFormViewModel viewModel, string action)
@@ -102,9 +95,9 @@ namespace OctagonPlatform.PersistanceRepository
             return RenderPartnerFormViewModel();
         }
 
-        public PartnerDetailsViewModel PartnerDetails(int id)
+        public Partner PartnerDetails(int id)
         {
-           return new PartnerDetailsViewModel();
+           return new Partner();
         }
 
         public void DeletePartner(int id)
