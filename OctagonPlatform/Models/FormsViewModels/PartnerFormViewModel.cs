@@ -1,6 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
@@ -66,6 +67,16 @@ namespace OctagonPlatform.Models.FormsViewModels
         public long? Fax { get; set; }
 
         public string WebSite { get; set; }
+
+
+        public PartnerFormViewModel()
+        {
+            var context = new ApplicationDbContext();
+            Parents = context.Partners.ToList();
+            Countries = context.Countries.ToList();
+            States = context.States.ToList();
+            Cities = context.Cities.ToList();
+        }
 
     }
 }

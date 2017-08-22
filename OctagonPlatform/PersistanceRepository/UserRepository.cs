@@ -1,22 +1,14 @@
 ﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using OctagonPlatform.Models.DetailsViewModels;
-using OctagonPlatform.Models.FormsViewModels;
-using System.Threading.Tasks;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public void DeleteUser(int id)
-        {
-            Delete(id);
-        }
-
+       
         public IEnumerable<User> GetAllUsers()
         {
             var result = Table
@@ -29,13 +21,30 @@ namespace OctagonPlatform.PersistanceRepository
             return result;
         }
 
-        public UserFormViewModel RenderUserFormViewModel()
+        public UserFormViewModel UserToEdit(int id)
         {
-            //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
-            // reportes y grupos.
-            //alertas y notificaciones.
+            var result = Table.SingleOrDefault(c => c.Id == id);
 
-            return null;
+            if (result != null)
+            {
+                var userForm = new UserFormViewModel()
+                {
+                    Email = result.Email,
+                    Id = result.Id,
+                    IsLocked = result.IsLocked,
+                    LastName = result.LastName,
+                    Name = result.Name,
+                    Partner = result.Partner,
+                    PartnerId = result.PartnerId,
+                    Permissions = result.Permissions,
+                    Phone = result.Phone,
+                    Status = result.Status,
+                    UserName = result.UserName
+                };
+
+                return userForm;
+            }
+            return RenderUserFormViewModel();
         }
 
         public void SaveUser(UserFormViewModel viewModel, string action)
@@ -43,7 +52,7 @@ namespace OctagonPlatform.PersistanceRepository
             if (action == "Edit")
             {
 
-                User result = Table.SingleOrDefault(c => c.Id == viewModel.Id);
+                var result = Table.SingleOrDefault(c => c.Id == viewModel.Id);
 
                 if (result != null)
                 {
@@ -60,7 +69,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             else if (action == "Create")
             {
-                User user = new User()
+                var user = new User()
                 {
                     PartnerId = viewModel.PartnerId,
                     Email = viewModel.Email,
@@ -69,50 +78,33 @@ namespace OctagonPlatform.PersistanceRepository
                     Password = viewModel.Password, // crear metodo privado que haga hash de la BD
                     Phone = viewModel.Phone,
                     Status = viewModel.Status,
-                    UserName = viewModel.UserName, 
+                    UserName = viewModel.UserName,
                 };
 
                 Add(user);
             }
         }
 
-        public UserDetailsViewModel UserDetails(int id)
+        public User UserDetails()
         {
-            User result = Table.SingleOrDefault(c => c.Id == id);
-
-            UserDetailsViewModel userDetails = new UserDetailsViewModel()
-            {
-                Id =result.Id,
-                LastName = result.LastName,
-                Name = result.Name,
-                Phone = result.Phone,
-                UserName = result.UserName
-            };
-
-            return userDetails;
+            return new User();
         }
 
-        public UserFormViewModel UserToEdit(int id)
+        public void DeleteUser(int id)
         {
-            User result = Table.SingleOrDefault(c => c.Id == id);
-
-            UserFormViewModel userForm = new UserFormViewModel()
-            {
-                Email = result.Email,
-                Id = result.Id,
-                IsLocked = result.IsLocked,
-                LastName = result.LastName,
-                Name = result.Name,
-                Partner = result.Partner,
-                PartnerId = result.PartnerId,
-                Permissions = result.Permissions,
-                Phone = result.Phone,
-                Status = result.Status,
-                UserName = result.UserName
-            };
-
-            return userForm;
+            Delete(id);
         }
+
+        public UserFormViewModel RenderUserFormViewModel()
+        {
+            //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
+            // reportes y grupos.
+            //alertas y notificaciones.
+
+            return new UserFormViewModel();
+        }
+
+        
 
     }
 }
