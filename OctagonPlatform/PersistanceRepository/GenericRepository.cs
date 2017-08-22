@@ -45,7 +45,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var date = DateTime.Now;
                 var user = HttpContext.Current.User;
-                var userName = user.Identity.GetUserId();
+                var userName = user.Identity.Name;
                 (obj as IAuditEntity).CreatedAt = date;
                 (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName).Id;
 

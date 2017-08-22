@@ -571,6 +571,8 @@
     <Content Include="Views\Partners\Index.cshtml" />
     <Content Include="Views\Partners\Edit.cshtml" />
     <Content Include="Views\Partners\Create.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
