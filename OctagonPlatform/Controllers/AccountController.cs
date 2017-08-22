@@ -38,6 +38,8 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index", "Dashboard");
             }
             ViewBag.Message = "User Locked, please call the Administrator";
+
+            
             return View(viewModel);
         }
 

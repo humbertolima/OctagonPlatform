@@ -6,11 +6,11 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [AllowAnonymous]
-    public class UserController : Controller
+    public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
 
-        public UserController(IUserRepository userRepository)
+        public UsersController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
