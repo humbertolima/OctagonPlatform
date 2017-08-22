@@ -1,11 +1,6 @@
-﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.DetailsViewModels;
-using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -24,15 +19,15 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            IEnumerable<User> result = _userRepository.GetAllUsers();
+            var result = _userRepository.GetAllUsers();
             return View(result);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            UserFormViewModel userRender = _userRepository.RenderUserFormViewModel();
-            return View(userRender);
+            
+            return View(new UserFormViewModel());
         }
 
         [HttpPost]
@@ -57,7 +52,7 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            UserFormViewModel userEdit = _userRepository.UserToEdit(id);
+            var userEdit = _userRepository.UserToEdit(id);
             return View(userEdit);
         }
 
@@ -85,15 +80,7 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            try
-            {
-                UserDetailsViewModel result = _userRepository.UserDetails(id);
-                return View(result);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error Show User Details. " + ex.Message, ex);
-            }
+            return View(_userRepository.UserDetails(id));
         }
 
         [HttpGet]

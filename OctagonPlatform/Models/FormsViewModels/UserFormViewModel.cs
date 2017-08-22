@@ -10,7 +10,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         public UserFormViewModel()
         {
             Permissions = new Collection<Permission>();
-
         }
 
         public int Id { get; set; }
@@ -36,7 +35,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Partner is required")]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
-        public IEnumerable<Partner> Partner { get; set; }
+        public Partner Partner { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]

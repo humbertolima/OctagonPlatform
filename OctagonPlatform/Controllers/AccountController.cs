@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Web.Mvc;
-using System.Web.Security;
 
 namespace OctagonPlatform.Controllers
 {
@@ -32,14 +31,8 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Message = "Invalid User";
                 return View(viewModel);
             }
-            if (!userToLogin.IsLocked)
-            {
-                FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
-                return RedirectToAction("Index", "Dashboard");
-            }
+            if (!userToLogin.IsLocked) return RedirectToAction("Index", "Dashboard");
             ViewBag.Message = "User Locked, please call the Administrator";
-
-            
             return View(viewModel);
         }
 
