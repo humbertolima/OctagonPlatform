@@ -22,8 +22,9 @@ namespace OctagonPlatform.PersistanceRepository
             var result = Table
                 //.Include("ReportsGroups")
                 //.Include("Reports")
+                .Include("Partner")
                 .Select(c => c)
-                .Where(c => c.Deleted == false)
+                .Where(c => c.Deleted != true)
                 .ToList();
 
             return result;
@@ -32,10 +33,16 @@ namespace OctagonPlatform.PersistanceRepository
         public UserFormViewModel RenderUserFormViewModel()
         {
             //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
+            //partner
             // reportes y grupos.
             //alertas y notificaciones.
 
-            return null;
+            UserFormViewModel userForm = new UserFormViewModel()
+            {
+                Partner = Context.Partners.Select(c => c).Where(c => c.Deleted != true).ToList()
+            };
+                
+            return userForm;
         }
 
         public void SaveUser(UserFormViewModel viewModel, string action)
@@ -103,7 +110,7 @@ namespace OctagonPlatform.PersistanceRepository
                 IsLocked = result.IsLocked,
                 LastName = result.LastName,
                 Name = result.Name,
-                Partner = result.Partner,
+                Partner = Context.Partners.ToList(),
                 PartnerId = result.PartnerId,
                 Permissions = result.Permissions,
                 Phone = result.Phone,
