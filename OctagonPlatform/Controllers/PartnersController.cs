@@ -24,7 +24,7 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(_partnerRepository.RenderPartnerFormViewModel());
+            return View(new PartnerFormViewModel());
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(_partnerRepository.RenderPartnerFormViewModel());
+                return View(new PartnerFormViewModel());
             }
             _partnerRepository.SavePartner(viewModel, "Create");
             return RedirectToAction("Index");
