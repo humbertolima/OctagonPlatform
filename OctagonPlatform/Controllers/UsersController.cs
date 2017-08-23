@@ -27,7 +27,7 @@ namespace OctagonPlatform.Controllers
         public ActionResult Create()
         {
             
-            return View(_userRepository.RenderUserFormViewModel());
+            return View(new UserFormViewModel());
         }
 
         [HttpPost]

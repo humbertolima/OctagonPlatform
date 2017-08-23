@@ -1,5 +1,6 @@
 ﻿using OctagonPlatform.Helpers;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
@@ -7,6 +8,10 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class UserFormViewModel
     {
+        public UserFormViewModel()
+        {
+            Permissions = new Collection<Permission>();
+        }
 
         public int Id { get; set; }
 
