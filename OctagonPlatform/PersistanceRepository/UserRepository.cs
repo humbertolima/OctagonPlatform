@@ -25,7 +25,11 @@ namespace OctagonPlatform.PersistanceRepository
             // reportes y grupos.
             //alertas y notificaciones.
 
-            return new UserFormViewModel();
+            return new UserFormViewModel()
+            {
+                Partners = Context.Partners.ToList(),
+                Permissions = new List<Permission>()
+            };
         }
 
         public UserFormViewModel UserToEdit(int id)
