@@ -7,6 +7,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<Partner> GetAllPartners();
 
+        PartnerFormViewModel RenderPartnerFormViewModel();
+
         PartnerFormViewModel PartnerToEdit(int id);
 
         void SavePartner(PartnerFormViewModel viewModel, string action);

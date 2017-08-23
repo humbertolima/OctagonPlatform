@@ -12,15 +12,22 @@ namespace OctagonPlatform.PersistanceRepository
        
         public IEnumerable<Partner> GetAllPartners()
         {
-            
-            return Table.Include(x => x.Parent)
-                    .ToList();
+
+            return Table.Where(c => c.Deleted == false)
+                .Include(x => x.Parent)
+                .ToList();
         }
 
         public PartnerFormViewModel RenderPartnerFormViewModel()
         {
-        
-            return new PartnerFormViewModel();
+            
+            return new PartnerFormViewModel()
+            {
+                Parents = Table.ToList(),
+                Countries = Context.Countries.ToList(),
+                States = Context.States.ToList(),
+                Cities = Context.Cities.ToList()
+            };
         }
         
         public void SavePartner(PartnerFormViewModel viewModel, string action)
