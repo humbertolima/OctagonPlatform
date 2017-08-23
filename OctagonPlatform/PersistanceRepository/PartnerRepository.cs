@@ -83,12 +83,16 @@ namespace OctagonPlatform.PersistanceRepository
                 return new PartnerFormViewModel()
                 {
                     Id = partner.Id,
+                    ParentId = partner.ParentId,
                     Parents = Table.ToList(),
                     BusinessName = partner.BusinessName,
                     Address1 = partner.Address1,
                     Address2 = partner.Address2,
+                    CountryId = partner.CountryId,
                     Countries = Context.Countries,
+                    StateId = partner.StateId,
                     States = Context.States,
+                    CityId = partner.CityId,
                     Cities = Context.Cities,
                     Status = partner.Status,
                     Email = partner.Email,

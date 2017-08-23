@@ -77,11 +77,11 @@ namespace OctagonPlatform.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult Details(int id)
-        {
-            return View(_userRepository.UserDetails(id));
-        }
+        //[HttpGet]
+        //public ActionResult Details(int id)
+        //{
+        //    return View(_userRepository.UserDetails(id));
+        //}
 
         [HttpGet]
         public ActionResult Delete(int id)

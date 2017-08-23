@@ -1,9 +1,8 @@
-﻿using OctagonPlatform.Helpers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class City:ISoftDeleted
+    public class City
     {
         [Key]
         public int Id { get; set; }
@@ -17,6 +16,5 @@ namespace OctagonPlatform.Models
 
         public State State { get; set; }
 
-        public bool? Deleted { get; set; }
     }
 }

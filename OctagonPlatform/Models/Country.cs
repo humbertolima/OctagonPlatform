@@ -1,11 +1,10 @@
-﻿using OctagonPlatform.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class Country:ISoftDeleted
+    public class Country
     {
         //prueba5
         [Key]
@@ -22,6 +21,6 @@ namespace OctagonPlatform.Models
             Stateses = new Collection<State>();
         }
 
-        public bool? Deleted { get; set; }
+
     }
 }

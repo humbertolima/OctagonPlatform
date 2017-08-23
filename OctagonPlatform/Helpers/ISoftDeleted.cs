@@ -2,7 +2,7 @@
 {
     internal interface ISoftDeleted
     {
-        bool? Deleted { get; set; }
+        bool Deleted { get; set; }
     }
 }
 

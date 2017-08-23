@@ -27,7 +27,8 @@ namespace OctagonPlatform.Models
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        public string Status { get; set; }
+        [Required(ErrorMessage = "The partner's status is required")]
+        public StatusType.Status Status { get; set; }
 
         [Required(ErrorMessage ="Partner is required")]
         [Display(Name="Partner")]
@@ -48,7 +49,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Permission> Permissions { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
 
         public int? CreatedBy { get; set; }

@@ -1,11 +1,10 @@
-using OctagonPlatform.Helpers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class ContactType:ISoftDeleted
+    public class ContactType
     {
         [Key]
         public int Id { get; set; }
@@ -24,6 +23,5 @@ namespace OctagonPlatform.Models
             //TerminalContacts = new Collection<TerminalContact>();
         }
 
-        public bool? Deleted { get; set; }
     }
 }

@@ -16,6 +16,6 @@ namespace OctagonPlatform.Models
         [Display(Name = "Logo")]
         public string Picture { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
     }
 }

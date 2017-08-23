@@ -108,6 +108,6 @@ namespace OctagonPlatform.Models
 
         public int? UpdatedBy { get; set; }
 
-        public bool? Deleted { get; set; }
+        public bool Deleted { get; set; }
     }
 }

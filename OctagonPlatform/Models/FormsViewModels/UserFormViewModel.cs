@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OctagonPlatform.Helpers;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -30,12 +31,14 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
-        public string Status { get; set; }
+        [Required(ErrorMessage = "The partner's status is required")]
+        public StatusType.Status Status { get; set; }
 
         [Required(ErrorMessage = "Partner is required")]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
-        public Partner Partner { get; set; }
+
+        public IEnumerable<Partner> Partners { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]

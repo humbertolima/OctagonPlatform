@@ -2,6 +2,7 @@
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
@@ -11,14 +12,20 @@ namespace OctagonPlatform.PersistanceRepository
        
         public IEnumerable<User> GetAllUsers()
         {
-            var result = Table
-                //.Include("ReportsGroups")
-                //.Include("Reports")
-                .Select(c => c)
-                .Where(c => c.Deleted == false)
+            return Table.Where(u => u.Deleted == false && u.IsLocked == false)
+                //.Include(x => x.Alerts)
+                //.Include(x => x.Reports)
+                .Include(x => x.Partner)
                 .ToList();
+        }
 
-            return result;
+        public UserFormViewModel RenderUserFormViewModel()
+        {
+            //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
+            // reportes y grupos.
+            //alertas y notificaciones.
+
+            return new UserFormViewModel();
         }
 
         public UserFormViewModel UserToEdit(int id)
@@ -27,22 +34,21 @@ namespace OctagonPlatform.PersistanceRepository
 
             if (result != null)
             {
-                var userForm = new UserFormViewModel()
+                return new UserFormViewModel()
                 {
                     Email = result.Email,
                     Id = result.Id,
                     IsLocked = result.IsLocked,
                     LastName = result.LastName,
                     Name = result.Name,
-                    Partner = result.Partner,
                     PartnerId = result.PartnerId,
+                    Partners = Context.Partners,
                     Permissions = result.Permissions,
                     Phone = result.Phone,
                     Status = result.Status,
                     UserName = result.UserName
                 };
 
-                return userForm;
             }
             return RenderUserFormViewModel();
         }
@@ -95,14 +101,7 @@ namespace OctagonPlatform.PersistanceRepository
             Delete(id);
         }
 
-        public UserFormViewModel RenderUserFormViewModel()
-        {
-            //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
-            // reportes y grupos.
-            //alertas y notificaciones.
-
-            return new UserFormViewModel();
-        }
+        
 
         
 
