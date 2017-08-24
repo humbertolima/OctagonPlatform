@@ -22,7 +22,17 @@ namespace OctagonPlatform.Controllers
                 .Select(c => new SelectListItem { Text = c.Name, Value= c.Id.ToString() });
             
                 return Json(result, JsonRequestBehavior.AllowGet);
-            
+        }
+
+        public ActionResult GetAllCities(int? StateID)
+        {
+            Context = new ApplicationDbContext();
+
+            IEnumerable<SelectListItem> result = Context.Cities
+                .Where(c => c.StateId == StateID)
+                .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
