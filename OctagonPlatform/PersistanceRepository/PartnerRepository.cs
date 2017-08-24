@@ -23,10 +23,11 @@ namespace OctagonPlatform.PersistanceRepository
             
             return new PartnerFormViewModel()
             {
+                // Comentado porque lo llenare en ajax en dependencia de lo que se necesite.
                 Parents = Table.ToList(),
                 Countries = Context.Countries.ToList(),
-                States = Context.States.ToList(),
-                Cities = Context.Cities.ToList()
+                //States = Context.States.ToList(),
+                //Cities = Context.Cities.ToList()
             };
         }
         
