@@ -296,6 +296,10 @@
     <Compile Include="Migrations\201708231817015_Last.Designer.cs">
       <DependentUpon>201708231817015_Last.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708241518186_despuesDeClone.cs" />
+    <Compile Include="Migrations\201708241518186_despuesDeClone.Designer.cs">
+      <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -672,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708231817015_Last.resx">
       <DependentUpon>201708231817015_Last.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708241518186_despuesDeClone.resx">
+      <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
