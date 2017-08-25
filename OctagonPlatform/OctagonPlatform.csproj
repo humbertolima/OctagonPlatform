@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartnersContactController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -309,6 +310,7 @@
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
     <Compile Include="Models\Logo.cs" />
@@ -324,6 +326,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
+    <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -591,11 +594,14 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\PartnerContacts\Index.cshtml" />
+    <Content Include="Views\PartnerContacts\Create.cshtml" />
+    <Content Include="Views\PartnerContacts\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\CustomValidations\" />
-    <Folder Include="Views\Populate\" />
+    <Folder Include="Views\PartnerContact\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

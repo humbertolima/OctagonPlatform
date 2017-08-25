@@ -1,0 +1,146 @@
+﻿@using OctagonPlatform.Models
+@model OctagonPlatform.Models.FormsViewModels.PartnerContactFormViewModel
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "PartnerContacts"))
+{
+    <p class="alert alert-danger">All fields are <strong>required.</strong>
+    </p>
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", autofocus = "autofocus"})
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PartnerId)
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.PartnerId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.EnumDropDownListFor(m => m.Email, "", new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address1)
+        @Html.TextBoxFor(m => m.Address1, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Address1)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address2)
+        @Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus"})
+        @Html.ValidationMessageFor(m => m.Address2)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.CountryId)
+        @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.CountryId)
+    </div>
+    <div class="form-group">
+        <div id="States">
+            <label for="States">States</label>
+            <select id="StatesId" name="States"></select>
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" /></div>
+    </div>
+    <div class="form-group">
+        <div id="Cities"></div>
+        <label for="Cities">Cities</label>
+        <select id="CitiesId" name="Cities"></select>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zip)
+        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Zip)
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#CountryId').change(function () {
+            var CountriesId = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetAllStates", "Populate")',
+                data: { CountryID: CountriesId },
+                datatype: "json",
+                beforeSend: loadStart,
+                complete: loadStop,
+                success: function (data) {
+                    var ddlState = $('#StatesId');
+                    var ddlCities = $('#CitiesId');
+
+                    ddlState.empty();
+                    ddlState.append($('<option></option>').val("").html("Select..."));
+                    ddlCities.empty();
+
+                    $.each(data, function (val, text) {
+
+                        ddlState.append(
+                            $('<option></option>').val(text.Value).html(text.Text)
+                        );
+                    });
+
+                },
+            })
+        });
+
+        $('#StatesId').change(function () {
+            var StateId = $(this).val();
+            $.ajax({
+                url: '@Url.Action("GetAllCities", "Populate")',
+                data: { StateID: StateId },
+                datatype: "json",
+                beforeSend: loadStart,
+                complete: loadStop,
+                success: function (data) {
+                    console.log(data);
+
+                    var ddlCities = $('#CitiesId');
+                    ddlCities.empty();
+
+                    if (!$.isEmptyObject(data)) {
+                        ddlCities.append($('<option></option>').val("").html("Select..."));
+                    }
+
+                    $.each(data, function (val, text) {
+
+                        ddlCities.append(
+                            $('<option></option>').val(text.Value).html(text.Text)
+                        );
+                    });
+
+                },
+            })
+        });
+
+        function loadStart() {
+            $('#loading').show();
+        }
+        function loadStop() {
+            $('#loading').hide();
+        }
+    </script>
+}

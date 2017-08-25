@@ -5,6 +5,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class PartnerContactFormViewModel
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "The partner is required")]
         [Display(Name = "Partner")]
