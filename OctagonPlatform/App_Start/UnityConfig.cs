@@ -30,6 +30,8 @@ namespace OctagonPlatform
 
             container.RegisterType<IUserRepository, UserRepository>();
 
+            container.RegisterType<IPartnerContactRepository, PartnerContactRepository>();
+
         }
     }
 }
