@@ -1,11 +1,13 @@
 ﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
 {
-    public class UserFormViewModel
+    public class UserFormViewModel : IError
     {
 
         public int Id { get; set; }
@@ -47,6 +49,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Email { get; set; }
         
         public ICollection<Permission> Permissions { get; set; }
-
+        public string Error { get; set; }
     }
 }

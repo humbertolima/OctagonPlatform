@@ -82,13 +82,13 @@ namespace OctagonPlatform.PersistanceRepository
                 var user = new User()
                 {
                     PartnerId = viewModel.PartnerId,
-                    Email = viewModel.Email,
-                    LastName = viewModel.LastName,
-                    Name = viewModel.Name,
+                    Email = viewModel.Email.Trim(),
+                    LastName = viewModel.LastName.Trim(),
+                    Name = viewModel.Name.Trim(),
                     Password = viewModel.Password, // crear metodo privado que haga hash de la BD
-                    Phone = viewModel.Phone,
+                    Phone = viewModel.Phone.Trim(),
                     Status = viewModel.Status,
-                    UserName = viewModel.UserName,
+                    UserName = viewModel.UserName.Trim(),
                 };
 
                 Add(user);

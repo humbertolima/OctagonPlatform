@@ -310,6 +310,7 @@
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IError.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />

@@ -1,6 +1,8 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -25,8 +27,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpGet]
         public ActionResult Create()
-        {
-            
+        {  
             return View(_userRepository.RenderUserFormViewModel());
         }
 
@@ -43,9 +44,17 @@ namespace OctagonPlatform.Controllers
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Index");
             }
+            catch (DbEntityValidationException exDB)
+            {
+                viewModel.Error = "Validation error in database. " + exDB.Message.ToString();
+                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
+                return View(viewModel);
+            }
             catch (Exception ex)
             {
-                throw new Exception("Error add User. " + ex.Message, ex);
+                viewModel.Error = "Error createing user " + ex.Message.ToString();
+                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
+                return View(viewModel);
             }
         }
 
