@@ -6,17 +6,18 @@ using System.Data.Entity;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-       
+
         public IEnumerable<User> GetAllUsers()
         {
-            return Table.Where(u => u.Deleted == false && u.IsLocked == false)
-                //.Include(x => x.Alerts)
-                //.Include(x => x.Reports)
+            return Table.Where(u => u.Deleted == false)  //Seleccionar los que no esten borrados. Bloqueados sis
+                                                         //.Include(x => x.Alerts)
+                                                         //.Include(x => x.Reports)
                 .Include(x => x.Partner)
                 .ToList();
         }
@@ -61,36 +62,42 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void SaveUser(UserFormViewModel viewModel, string action)
         {
+
             if (action == "Edit")
             {
+                var user = Table.SingleOrDefault(c => c.Id == viewModel.Id);
 
-                var result = Table.SingleOrDefault(c => c.Id == viewModel.Id);
-
-                if (result != null)
+                if (user != null)
                 {
-
-                    result.Email = viewModel.Email;
-                    result.LastName = viewModel.LastName;
-                    result.Name = viewModel.Name;
-                    result.Phone = viewModel.Phone;
-                    result.Status = viewModel.Status;
-                    result.UserName = viewModel.UserName;
-
-                    Edit(result);
+                    user.Email = viewModel.Email.Trim();
+                    user.LastName = viewModel.LastName.Trim();
+                    user.Name = viewModel.Name.Trim();
+                    user.Phone = viewModel.Phone.Trim();
+                    user.Status = viewModel.Status;
+                    user.UserName = viewModel.UserName.Trim();
+                    user.IsLocked = viewModel.IsLocked;
+                    user.PartnerId = viewModel.PartnerId;
+                    user.Password = viewModel.Password.Trim();
+                    
+                    Edit(user);
                 }
             }
             else if (action == "Create")
             {
+                //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
+
                 var user = new User()
                 {
                     PartnerId = viewModel.PartnerId,
                     Email = viewModel.Email.Trim(),
                     LastName = viewModel.LastName.Trim(),
                     Name = viewModel.Name.Trim(),
-                    Password = viewModel.Password, // crear metodo privado que haga hash de la BD
+                    Password = viewModel.Password.Trim(), // crear metodo privado que haga hash de la BD
                     Phone = viewModel.Phone.Trim(),
                     Status = viewModel.Status,
                     UserName = viewModel.UserName.Trim(),
+                    IsLocked = viewModel.IsLocked,
+                    
                 };
 
                 Add(user);

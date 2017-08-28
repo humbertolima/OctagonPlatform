@@ -44,10 +44,10 @@ namespace OctagonPlatform.PersistanceRepository
             if (obj is IAuditEntity)
             {
                 var date = DateTime.Now;
-                var user = HttpContext.Current.User;
-                var userName = user.Identity.Name;
+                var userName = HttpContext.Current.User.Identity.Name;
+             
                 (obj as IAuditEntity).CreatedAt = date;
-                (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName).Id;
+                (obj as IAuditEntity).CreatedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
 
             }
             Save();
