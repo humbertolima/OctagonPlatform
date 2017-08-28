@@ -59,11 +59,11 @@ namespace OctagonPlatform.PersistanceRepository
             Context.Entry(obj).State = EntityState.Modified;
             if (obj is IAuditEntity)
             {
-                //var date = DateTime.Now;
-                //var user = HttpContext.Current.User;
-                //var userName = user.Identity.Name;
-                //(obj as IAuditEntity).UpdatedAt = date;
-                //(obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName).Id;
+                var date = DateTime.Now;
+                var user = HttpContext.Current.User;
+                var userName = user.Identity.Name;
+                (obj as IAuditEntity).UpdatedAt = date;
+                (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
 
             }
             Save();
@@ -81,7 +81,7 @@ namespace OctagonPlatform.PersistanceRepository
                     var user = HttpContext.Current.User;
                     var userName = user.Identity.Name;
                     (existing as IAuditEntity).DeletedAt = date;
-                    (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName).Id;
+                    (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
 
                 }
 

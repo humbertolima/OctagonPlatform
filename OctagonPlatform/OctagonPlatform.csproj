@@ -303,6 +303,14 @@
     <Compile Include="Migrations\201708241518186_despuesDeClone.Designer.cs">
       <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708282046298_ChangedCityNotRequired.cs" />
+    <Compile Include="Migrations\201708282046298_ChangedCityNotRequired.Designer.cs">
+      <DependentUpon>201708282046298_ChangedCityNotRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.cs" />
+    <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.Designer.cs">
+      <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -688,6 +696,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708241518186_despuesDeClone.resx">
       <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282046298_ChangedCityNotRequired.resx">
+      <DependentUpon>201708282046298_ChangedCityNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282054263_ChangedCityNotRequired2.resx">
+      <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

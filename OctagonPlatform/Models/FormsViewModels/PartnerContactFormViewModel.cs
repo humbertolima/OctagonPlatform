@@ -63,7 +63,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
 
         [Display(Name = "City")]
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
 

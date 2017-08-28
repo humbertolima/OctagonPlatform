@@ -46,7 +46,7 @@ namespace OctagonPlatform.Models
 
 
         [Display(Name = "City")]
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         public City City { get; set; }
 

@@ -42,7 +42,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public IEnumerable<State> States { get; set; }
         
         [Display(Name = "City")]
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
 
