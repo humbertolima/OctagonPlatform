@@ -25,6 +25,12 @@ namespace OctagonPlatform.Controllers
             return View(result);
         }
 
+        public ActionResult Details(int Id)
+        {
+            var result = _userRepository.UserDetails(Id);
+            return View(result);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {  
@@ -44,6 +50,9 @@ namespace OctagonPlatform.Controllers
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Index");
             }
+            #region Catch
+
+           
             catch (DbEntityValidationException exDB)
             {
                 viewModel.Error = "Validation error in database. " + exDB.Message.ToString();
@@ -52,10 +61,11 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                viewModel.Error = "Error createing user " + ex.Message.ToString();
-                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
+                viewModel.Error = "Error creating user. " + ex.Message.ToString();
+                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(viewModel);
             }
+            #endregion
         }
 
         [HttpGet]
@@ -82,8 +92,7 @@ namespace OctagonPlatform.Controllers
             {
                 throw new Exception("Error Edit User. " + ex.Message, ex);
             }
-
-
+            
         }
 
         //[HttpGet]

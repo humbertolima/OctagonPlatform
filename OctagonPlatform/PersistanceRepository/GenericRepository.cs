@@ -37,7 +37,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Find(id);
         }
-
+        
         public void Add(T obj)
         {
             Table.Add(obj);

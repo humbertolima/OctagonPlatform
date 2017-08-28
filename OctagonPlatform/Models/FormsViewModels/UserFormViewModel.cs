@@ -3,6 +3,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
@@ -15,6 +16,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Username is required")]
         [StringLength(16, ErrorMessage = "Must be between 3 and 16 characters", MinimumLength = 3)]
         [Display(Name = "User Name")]
+        [Index(IsUnique = true)]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
@@ -40,6 +42,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Password is required")]
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
+
+        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        public string ConfirmPassword { get; set; }
 
         public bool IsLocked { get; set; }
 

@@ -4,6 +4,8 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -105,9 +107,10 @@ namespace OctagonPlatform.PersistanceRepository
             Delete(id);
         }
 
-        
-
-        
-
+        public async Task<User> Validate(User user)
+        {
+            var result = await Context.Users.SingleAsync(c => c.UserName == user.UserName);
+            return result;
+        }
     }
 }
