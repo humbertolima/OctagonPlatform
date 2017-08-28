@@ -11,7 +11,7 @@
         All fields are <strong>required.</strong>
     </p>
 
-    if (!String.IsNullOrEmpty(Model.Error))
+    if (!string.IsNullOrEmpty(Model.Error))
     {
         <div class="alert alert-danger">
             @Model.Error.ToString()

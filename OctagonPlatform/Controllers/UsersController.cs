@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
 

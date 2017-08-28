@@ -1,9 +1,8 @@
 ﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Helpers.CustomValidations;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
@@ -16,7 +15,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Username is required")]
         [StringLength(16, ErrorMessage = "Must be between 3 and 16 characters", MinimumLength = 3)]
         [Display(Name = "User Name")]
-        [Index(IsUnique = true)]
+        [ValidUserName(ErrorMessage = "User name is not unique")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Name is required")]

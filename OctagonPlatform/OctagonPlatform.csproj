@@ -203,6 +203,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomRoleProvider.cs" />
+    <Compile Include="Helpers\CustomValidations\ValidUserName.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\Status.cs" />
@@ -601,7 +602,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\CustomValidations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
