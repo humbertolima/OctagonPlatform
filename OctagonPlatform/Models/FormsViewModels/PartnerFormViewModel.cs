@@ -40,8 +40,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public int StateId { get; set; }
 
         public IEnumerable<State> States { get; set; }
-
-        [Required(ErrorMessage = "The partner's city is required")]
+        
         [Display(Name = "City")]
         public int CityId { get; set; }
 

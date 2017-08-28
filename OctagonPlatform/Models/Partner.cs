@@ -44,7 +44,7 @@ namespace OctagonPlatform.Models
 
         public State State { get; set; }
 
-        [Required(ErrorMessage = "The partner's city is required")]
+
         [Display(Name = "City")]
         public int CityId { get; set; }
 
