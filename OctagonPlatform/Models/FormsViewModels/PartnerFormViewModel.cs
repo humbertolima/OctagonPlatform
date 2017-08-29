@@ -1,4 +1,5 @@
 ﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Helpers.CustomValidations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,6 +18,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
+        [ValidBusinessName(ErrorMessage = "Business name already in use")]
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
@@ -49,19 +51,23 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [ValidEmail(ErrorMessage = "Email already in use")]
         public string Email { get; set; }
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
-        public long? WorkPhone { get; set; }
+        [ValidPhone(ErrorMessage = "Phone number already in use")]
+        public string WorkPhone { get; set; }
 
         [Display(Name = "Mobile Phone")]
+        [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
-        public long Mobile { get; set; }
+        [ValidPhone(ErrorMessage = "Phone number already in use")]
+        public string Mobile { get; set; }
 
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Fax number is not valid")]
-        public long? Fax { get; set; }
+        public string Fax { get; set; }
 
         public string WebSite { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OctagonPlatform.Helpers.CustomValidations;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
@@ -26,6 +27,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [ValidEmail(ErrorMessage = "Email already in use")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "The contact type is required")]
@@ -36,7 +38,8 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
-        public ulong Phone { get; set; }
+        [ValidPhone(ErrorMessage = "Phone number already in use")]
+        public string Phone { get; set; }
 
         [Required(ErrorMessage = "The address1 is required")]
         [StringLength(50)]

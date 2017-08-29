@@ -1,8 +1,6 @@
 ﻿using OctagonPlatform.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -13,23 +11,23 @@ namespace OctagonPlatform.Controllers
         public ApplicationDbContext Context;
 
 
-        public ActionResult GetAllStates(int? CountryID)
+        public ActionResult GetAllStates(int? countryId)
         {
             Context = new ApplicationDbContext();
 
             IEnumerable<SelectListItem> result = Context.States
-                .Where(c => c.CountryId == CountryID)
+                .Where(c => c.CountryId == countryId)
                 .Select(c => new SelectListItem { Text = c.Name, Value= c.Id.ToString() });
             
                 return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetAllCities(int? StateID)
+        public ActionResult GetAllCities(int? stateId)
         {
             Context = new ApplicationDbContext();
 
             IEnumerable<SelectListItem> result = Context.Cities
-                .Where(c => c.StateId == StateID)
+                .Where(c => c.StateId == stateId)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
 
             return Json(result, JsonRequestBehavior.AllowGet);

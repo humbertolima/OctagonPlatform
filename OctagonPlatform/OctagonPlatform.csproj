@@ -203,6 +203,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomRoleProvider.cs" />
+    <Compile Include="Helpers\CustomValidations\ValidBusinessName.cs" />
+    <Compile Include="Helpers\CustomValidations\ValidEmail.cs" />
+    <Compile Include="Helpers\CustomValidations\ValidPhone.cs" />
     <Compile Include="Helpers\CustomValidations\ValidUserName.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
@@ -310,6 +313,14 @@
     <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.cs" />
     <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.Designer.cs">
       <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282213412_ChangedPhoneFromLongToString.cs" />
+    <Compile Include="Migrations\201708282213412_ChangedPhoneFromLongToString.Designer.cs">
+      <DependentUpon>201708282213412_ChangedPhoneFromLongToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.cs" />
+    <Compile Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.Designer.cs">
+      <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -702,6 +713,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708282054263_ChangedCityNotRequired2.resx">
       <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282213412_ChangedPhoneFromLongToString.resx">
+      <DependentUpon>201708282213412_ChangedPhoneFromLongToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.resx">
+      <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

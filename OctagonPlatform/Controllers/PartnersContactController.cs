@@ -31,7 +31,8 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(new PartnerFormViewModel());
+                
+                return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
             }
             _partnerContactRepository.SavePartner(viewModel, "Create");
             return RedirectToAction("Index");

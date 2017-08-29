@@ -5,23 +5,22 @@ using System.Linq;
 
 namespace OctagonPlatform.Helpers.CustomValidations
 {
-    public class ValidUserName: ValidationAttribute
+    public class ValidBusinessName: ValidationAttribute
     {
         private readonly ApplicationDbContext _context;
 
-        public ValidUserName()
+        public ValidBusinessName()
         {
             _context = new ApplicationDbContext();
         }
         public override bool IsValid(object value)
         {
-            var userName = Convert.ToString(value).Trim();
+            var businessName = Convert.ToString(value).Trim();
 
-            var user = _context.Users.FirstOrDefault(x => x.UserName == userName && !x.Deleted);
+            var user = _context.Partners.FirstOrDefault(x => x.BusinessName == businessName && !x.Deleted);
 
             return (user == null);
 
         }
-
     }
 }

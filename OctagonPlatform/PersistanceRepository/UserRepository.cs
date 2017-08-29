@@ -10,7 +10,7 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-
+       
         public IEnumerable<User> GetAllUsers()
         {
             return Table.Where(u => u.Deleted == false)  //Seleccionar los que no esten borrados. Bloqueados sis
@@ -110,6 +110,24 @@ namespace OctagonPlatform.PersistanceRepository
         public void DeleteUser(int id)
         {
             Delete(id);
+        }
+
+        public UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel)
+        {
+            return new UserFormViewModel()
+            {
+                Email = viewModel.Email,
+                Id = viewModel.Id,
+                IsLocked = viewModel.IsLocked,
+                LastName = viewModel.LastName,
+                Name = viewModel.Name,
+                PartnerId = viewModel.PartnerId,
+                Partners = Context.Partners,
+                Permissions = viewModel.Permissions,
+                Phone = viewModel.Phone,
+                Status = viewModel.Status,
+                UserName = viewModel.UserName
+            };
         }
 
         public async Task<User> Validate(User user)

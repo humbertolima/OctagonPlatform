@@ -10,15 +10,18 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public User Login(UserLoginViewModel userLogin)
         {
-            var user = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password);
+            var user = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password && !u.Deleted);
             if (user != null) return user;
             {
-                var userTrying = Table.SingleOrDefault(u => u.UserName == userLogin.UserName);
-                if (userTrying == null) return null;
-                userLogin.TriesToLogin++;
-                if (userLogin.TriesToLogin < 3) return null;
-                userTrying.IsLocked = true;
+                var userTrying = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && !u.Deleted);
+                if (userTrying != null)
+                {
+                    userLogin.TriesToLogin++;
+                    if (userLogin.TriesToLogin >= 3)
+                        userTrying.IsLocked = true;
+                }
                 Save();
+
                 return userTrying;
             }
         }

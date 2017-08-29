@@ -16,5 +16,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         PartnerContact PartnerContactDetails(int id);
 
         void DeletePartner(int id);
+
+        PartnerContactFormViewModel InitializeNewFormViewModel(PartnerContactFormViewModel viewModel);
     }
 }

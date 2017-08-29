@@ -19,5 +19,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Task<User> Validate(User user);
 
         void DeleteUser(int id);
+
+        UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel);
     }
 }

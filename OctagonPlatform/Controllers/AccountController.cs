@@ -32,13 +32,15 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Message = "Invalid User";
                 return View(viewModel);
             }
-            if (!userToLogin.IsLocked)
+            if (userToLogin.IsLocked)
             {
-                FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
-                return RedirectToAction("Index", "Dashboard");
+                ViewBag.Message = "User Locked, please call the Administrator";
+                return View(viewModel);
+                
             }
-            ViewBag.Message = "User Locked, please call the Administrator";
-            return View(viewModel);
+            FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
+            return RedirectToAction("Index", "Dashboard");
+
         }
 
         [HttpGet]

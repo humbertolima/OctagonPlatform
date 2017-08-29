@@ -58,15 +58,16 @@ namespace OctagonPlatform.Models
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
-        public long? WorkPhone { get; set; }
+        public string WorkPhone { get; set; }
 
         [Display(Name = "Mobile Phone")]
+        [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
-        public long Mobile { get; set; }
+        public string Mobile { get; set; }
 
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Fax number is not valid")]
-        public long? Fax { get; set; }
+        public string Fax { get; set; }
 
         public string WebSite { get; set; }
 

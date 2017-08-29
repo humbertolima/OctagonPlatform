@@ -11,6 +11,7 @@ namespace OctagonPlatform.Controllers
     {
         private readonly IUserRepository _userRepository;
 
+
         public UsersController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -24,11 +25,11 @@ namespace OctagonPlatform.Controllers
             return View(result);
         }
 
-        public ActionResult Details(int Id)
-        {
-            var result = _userRepository.UserDetails(Id);
-            return View(result);
-        }
+        //public ActionResult Details(int id)
+        //{
+        //    var result = _userRepository.UserDetails(id);
+        //    return View(result);
+        //}
 
         [HttpGet]
         public ActionResult Create()
@@ -42,7 +43,8 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                
+                return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             try
             {
@@ -52,9 +54,9 @@ namespace OctagonPlatform.Controllers
             #region Catch
 
            
-            catch (DbEntityValidationException exDB)
+            catch (DbEntityValidationException exDb)
             {
-                viewModel.Error = "Validation error in database. " + exDB.Message.ToString();
+                viewModel.Error = "Validation error in database. " + exDb.Message.ToString();
                 viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
                 return View(viewModel);
             }
@@ -80,6 +82,7 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
+                var userEdit = _userRepository.UserToEdit(viewModel.Id);
                 return View(viewModel);
             }
             try

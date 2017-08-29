@@ -108,5 +108,31 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Delete(id);
         }
+
+        public PartnerContactFormViewModel InitializeNewFormViewModel(PartnerContactFormViewModel viewModel)
+        {
+            return new PartnerContactFormViewModel()
+            {
+                Id = viewModel.Id,
+                PartnerId = viewModel.PartnerId,
+                Name = viewModel.Name,
+                LastName = viewModel.LastName,
+                Email = viewModel.Email,
+                ContactTypeId = viewModel.ContactTypeId,
+                ContactTypes = Context.ContactTypes.ToList(),
+                Phone = viewModel.Phone,
+                Address1 = viewModel.Address1,
+                Address2 = viewModel.Address2,
+                Zip = viewModel.Zip,
+                CountryId = viewModel.CountryId,
+                Countries = Context.Countries.ToList(),
+                StateId = viewModel.StateId,
+                States = Context.States.ToList(),
+                CityId = viewModel.CityId,
+                Cities = Context.Cities.ToList()
+
+
+            };
+        }
     }
 }

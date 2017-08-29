@@ -38,7 +38,7 @@ namespace OctagonPlatform.Models
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
-        public ulong Phone  { get; set; }
+        public string Phone  { get; set; }
 
         [Required(ErrorMessage = "The address1 is required")]
         [StringLength(50)]
