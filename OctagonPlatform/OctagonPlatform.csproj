@@ -302,14 +302,6 @@
     <Compile Include="Migrations\201708231817015_Last.Designer.cs">
       <DependentUpon>201708231817015_Last.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708241518186_despuesDeClone.cs" />
-    <Compile Include="Migrations\201708241518186_despuesDeClone.Designer.cs">
-      <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708282046298_ChangedCityNotRequired.cs" />
-    <Compile Include="Migrations\201708282046298_ChangedCityNotRequired.Designer.cs">
-      <DependentUpon>201708282046298_ChangedCityNotRequired.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.cs" />
     <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.Designer.cs">
       <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
@@ -704,12 +696,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708231817015_Last.resx">
       <DependentUpon>201708231817015_Last.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708241518186_despuesDeClone.resx">
-      <DependentUpon>201708241518186_despuesDeClone.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708282046298_ChangedCityNotRequired.resx">
-      <DependentUpon>201708282046298_ChangedCityNotRequired.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708282054263_ChangedCityNotRequired2.resx">
       <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>

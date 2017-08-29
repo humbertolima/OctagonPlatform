@@ -9,7 +9,7 @@ namespace OctagonPlatform.Migrations
             Sql("SET IDENTITY_INSERT Users ON");
 
             Sql("INSERT INTO Users (Id, [UserName], [Password], [PartnerId], [IsLocked], [Email], [Name], [LastName], [Phone], [Status], [Deleted])" +
-                " VALUES (1, 'admin', 'admin01', 1, 'false', 'admin@xyncro.net', 'Administrator', 'Admin','7867921520', 1, 'false')");
+                " VALUES (1, 'admin01', 'admin01', 1, 'false', 'admin@xyncro.net', 'Administrator', 'Admin','7867921520', 1, 'false')");
 
             Sql("SET IDENTITY_INSERT Users OFF");
         }
