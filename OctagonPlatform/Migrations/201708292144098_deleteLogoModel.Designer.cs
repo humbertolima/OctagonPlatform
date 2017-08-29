@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangedCityNotRequired : IMigrationMetadata
+    public sealed partial class deleteLogoModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedCityNotRequired));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(deleteLogoModel));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708282046298_ChangedCityNotRequired"; }
+            get { return "201708292144098_deleteLogoModel"; }
         }
         
         string IMigrationMetadata.Source
