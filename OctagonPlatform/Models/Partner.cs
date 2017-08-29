@@ -70,11 +70,8 @@ namespace OctagonPlatform.Models
         public string Fax { get; set; }
 
         public string WebSite { get; set; }
-
-        [Display(Name = "Logo")]
-        public int? LogoId { get; set; }
-
-        public Logo Logo { get; set; }
+        
+        public string Logo { get; set; }
 
         public ICollection<User> Users { get; set; }
 

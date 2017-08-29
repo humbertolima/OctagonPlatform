@@ -7,7 +7,6 @@ namespace OctagonPlatform.Models
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<Logo> Logos { get; set; }
         public DbSet<ContactType> ContactTypes { get; set; }
         public DbSet<PartnerContact> PartnerContacts { get; set; }
         public DbSet<Partner> Partners { get; set; }
