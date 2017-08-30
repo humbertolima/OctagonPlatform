@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnersContactController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
@@ -314,9 +315,9 @@
     <Compile Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.Designer.cs">
       <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708292144098_deleteLogoModel.cs" />
-    <Compile Include="Migrations\201708292144098_deleteLogoModel.Designer.cs">
-      <DependentUpon>201708292144098_deleteLogoModel.cs</DependentUpon>
+    <Compile Include="Migrations\DeleteLogoModel.cs" />
+    <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
+      <DependentUpon>DeleteLogoModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -616,6 +617,15 @@
     <Content Include="Views\PartnerContacts\Index.cshtml" />
     <Content Include="Views\PartnerContacts\Create.cshtml" />
     <Content Include="Views\PartnerContacts\Edit.cshtml" />
+    <Content Include="Views\Partners\Details.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Partners\Sections\Info.cshtml" />
+    <Content Include="Views\Partners\Sections\Contacts.cshtml" />
+    <Content Include="Views\Partners\Sections\Users.cshtml" />
+    <Content Include="Views\Partners\Sections\Partners.cshtml" />
+    <Content Include="Views\Partners\Sections\BankAccounts.cshtml" />
+    <Content Include="Views\Partners\Sections\Terminals.cshtml" />
+    <Content Include="Views\Partners\Sections\Logo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -713,8 +723,8 @@
     <EmbeddedResource Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.resx">
       <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708292144098_deleteLogoModel.resx">
-      <DependentUpon>201708292144098_deleteLogoModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
+      <DependentUpon>DeleteLogoModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

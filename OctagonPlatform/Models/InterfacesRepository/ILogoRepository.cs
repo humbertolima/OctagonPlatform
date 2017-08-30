@@ -4,10 +4,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ILogoRepository
     {
-        void UploadLogo(HttpPostedFileBase file);
+        string ShowLogo(int partnerId);
 
-        void EditLogo(HttpPostedFileBase file, string filePath);
+        bool UploadLogo(HttpPostedFileBase file);
 
-        void DeleteLogo(string filePath);
+        bool DeleteLogo(string path);
     }
 }

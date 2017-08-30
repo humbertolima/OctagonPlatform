@@ -17,6 +17,8 @@ namespace OctagonPlatform.Models
 
         public Partner Parent { get; set; }
 
+        public ICollection<Partner> Partners { get; set; }
+
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
@@ -87,6 +89,9 @@ namespace OctagonPlatform.Models
         {
             Users = new Collection<User>();
             PartnerContacts = new Collection<PartnerContact>();
+
+            Partners = new Collection<Partner>();
+
             /*
             Terminals = new Collection<Terminals>();
             BankAccounts = new Collection<BankAccounts>();

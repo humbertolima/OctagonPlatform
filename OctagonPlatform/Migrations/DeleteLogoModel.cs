@@ -1,9 +1,8 @@
 namespace OctagonPlatform.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class deleteLogoModel : DbMigration
+
+    public partial class DeleteLogoModel : DbMigration
     {
         public override void Up()
         {

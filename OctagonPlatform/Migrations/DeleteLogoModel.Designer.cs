@@ -7,9 +7,9 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class deleteLogoModel : IMigrationMetadata
+    public sealed partial class DeleteLogoModel : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(deleteLogoModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DeleteLogoModel));
         
         string IMigrationMetadata.Id
         {

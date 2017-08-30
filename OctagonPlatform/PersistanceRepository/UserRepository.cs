@@ -104,7 +104,12 @@ namespace OctagonPlatform.PersistanceRepository
 
         public User UserDetails(int id)
         {
-            return new User();
+            return Table.Where(x => x.Id == id)
+                .Include(x => x.Partner)
+                .Include(x => x.Permissions)
+                //.Include(x => x.Partner.BankAccounts)
+                //.Include(x => x.Partner.Terminals)
+                .FirstOrDefault();
         }
 
         public void DeleteUser(int id)

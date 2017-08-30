@@ -58,10 +58,10 @@ namespace OctagonPlatform.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult Details(int id)
-        //{
-        //    return View(_partnerRepository.PartnerDetails(id));
-        //}
+        public ActionResult Details(int id)
+        {
+            return View(_partnerRepository.PartnerDetails(id));
+        }
 
         [HttpGet]
         public ActionResult Delete(int id)
