@@ -319,6 +319,10 @@
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708301536055_ScriptSetOfPermisson.cs" />
+    <Compile Include="Migrations\201708301536055_ScriptSetOfPermisson.Designer.cs">
+      <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\City.cs" />
@@ -725,6 +729,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708301536055_ScriptSetOfPermisson.resx">
+      <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
