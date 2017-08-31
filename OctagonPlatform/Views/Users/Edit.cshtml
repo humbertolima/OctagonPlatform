@@ -50,7 +50,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.PartnerId)
-         @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.PartnerId)
     </div>
     <div class="form-group">
@@ -66,8 +66,41 @@
         @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.IsLocked)
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Save</button>
+
+    #region Table of permissions
+
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>SetOf</th>
+                <th>All</th>
+                <th>Create</th>
+                <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Permissions)
+            {
+                <tr>
+                    <td>@Html.CheckBox(item.Name);</td>
+                    <td>@Html.CheckBox(item.Name);</td>
+                    <td>@Html.CheckBox(item.Name);</td>
+                    <td>@Html.CheckBox(item.Name);</td>
+                    <td>@Html.CheckBox(item.Name);</td>
+
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</td>
+                    <td>@Html.ActionLink("Details", "", new { id = item.Id })</td>
+                </tr>
+            }
+
+    </table>
+
+    #endregion
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

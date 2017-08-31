@@ -10,7 +10,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserEditFormViewModel UserToEdit(int id);
 
-        UserEditFormViewModel RenderUserFormViewModel();
+        UserFormViewModel RenderUserFormViewModel();
 
         void SaveUser(UserFormViewModel viewModel, string action);
 

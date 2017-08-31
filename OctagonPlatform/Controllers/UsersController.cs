@@ -74,8 +74,19 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var userEdit = _userRepository.UserToEdit(id);
-            return View(userEdit);
+            var userEdit = default(UserEditFormViewModel);
+            try
+            {
+                userEdit = _userRepository.UserToEdit(id);
+                return View(userEdit);
+            }
+            catch (Exception ex)
+            {
+                userEdit = new UserEditFormViewModel();
+                userEdit.Error = "Error edit user. " + ex.Message.ToString();
+                userEdit.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
+                return View(userEdit);
+            }
         }
 
         [HttpPost]
