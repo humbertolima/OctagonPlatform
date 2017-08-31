@@ -4,7 +4,24 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Details</h2>
+<h1>User Details</h1>
 
+<h2>Partner: @Model.Partner.BusinessName</h2>
 
+<div id="logo">
+    <img src="@Model.Partner.Logo" width="150" height="150" alt="Partner Logo" />
+</div>
+
+<div id="generalInfo">
+    @Html.Partial("Sections/GenralInfo")
+</div>
+<div id="bankAccounts">
+    @Html.Partial("Sections/BankAccounts")
+</div>
+<div id="terminals">
+    @Html.Partial("Sections/Terminals")
+</div>
+<div id="reports">
+    @Html.Partial("Sections/Reports")
+</div>
 

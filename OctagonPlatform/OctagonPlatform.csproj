@@ -623,13 +623,17 @@
     <Content Include="Views\PartnerContacts\Edit.cshtml" />
     <Content Include="Views\Partners\Details.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Partners\Sections\Info.cshtml" />
+    <Content Include="Views\Logos\Upload.cshtml" />
+    <Content Include="Views\Partners\Sections\GeneralInfo.cshtml" />
     <Content Include="Views\Partners\Sections\Contacts.cshtml" />
     <Content Include="Views\Partners\Sections\Users.cshtml" />
     <Content Include="Views\Partners\Sections\Partners.cshtml" />
     <Content Include="Views\Partners\Sections\BankAccounts.cshtml" />
     <Content Include="Views\Partners\Sections\Terminals.cshtml" />
-    <Content Include="Views\Partners\Sections\Logo.cshtml" />
+    <Content Include="Views\Users\Sections\GenralInfo.cshtml" />
+    <Content Include="Views\Users\Sections\BankAccounts.cshtml" />
+    <Content Include="Views\Users\Sections\Terminals.cshtml" />
+    <Content Include="Views\Users\Sections\Reports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

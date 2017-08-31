@@ -1,33 +1,32 @@
 ﻿using OctagonPlatform.Models;
 using OctagonPlatform.Models.InterfacesRepository;
-using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class LogoRepository: ILogoRepository
-    {
-        private readonly ApplicationDbContext _context;
-
-        public LogoRepository()
+    public class LogoRepository: GenericRepository<Partner>,ILogoRepository
+    { 
+        public void UploadLogo(HttpPostedFileBase file, int partnerId)
         {
-            _context = new ApplicationDbContext();
-        }
-        public string ShowLogo(int partnerId)
-        {
-            var partnerLogo = _context.Partners.FirstOrDefault(x => x.Id == partnerId && !x.Deleted)?.Logo;
-            return partnerLogo + "/logo.jpg";
-        }
-
-        public bool UploadLogo(HttpPostedFileBase file)
-        {
-            throw new NotImplementedException();
+            if (file == null) return;
+            var partner = Table.SingleOrDefault(x => x.Id == partnerId);
+            if (partner == null) return;
+            var path = "~/Conten/Uploads/PartnerLogos/" + partner.BusinessName + ".jpg";
+            DeleteLogo(path);
+            file.SaveAs(path);
+            partner.Logo = path;
+            Save();
         }
 
-        public bool DeleteLogo(string path)
+        public void DeleteLogo(string path)
         {
-            throw new NotImplementedException();
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
     }
 }
