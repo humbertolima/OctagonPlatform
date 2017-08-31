@@ -334,7 +334,6 @@
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
-    <Compile Include="Models\InterfacesRepository\ILogoRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
@@ -350,7 +349,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
-    <Compile Include="PersistanceRepository\LogoRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
