@@ -20,16 +20,17 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
-        public UserEditFormViewModel RenderUserFormViewModel()
+        public UserFormViewModel RenderUserFormViewModel()
         {
             //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
             // reportes y grupos.
             //alertas y notificaciones.
 
-            return new UserEditFormViewModel()
-            {   
+            return new UserFormViewModel()
+            {
                 Partners = Context.Partners.ToList(),
-                Permissions = new List<Permission>()
+                Permissions = Context.Permissions.ToList(),
+                SetOfPermissions = Context.SetOfPermissions.ToList()
             };
         }
 
@@ -55,7 +56,7 @@ namespace OctagonPlatform.PersistanceRepository
                 };
 
             }
-            return RenderUserFormViewModel();
+            throw new System.Exception("User don't exist. ");
         }
 
         public void SaveUser(UserFormViewModel viewModel, string action)

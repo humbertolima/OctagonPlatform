@@ -13,6 +13,9 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
 
         [Required]
+        public string Type { get; set; }
+
+        [Required]
         public int SetOfPermissionId { get; set; }
 
         public ICollection<User> Users { get; set; }
