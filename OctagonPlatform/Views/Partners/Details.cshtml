@@ -6,5 +6,26 @@
 
 <h1>@Model.BusinessName Overview</h1>
 <div id="logo">
-    @*@Html.RenderAction("Index", "Logos")*@
+    <img src="@Model.Logo" width="150" height="150" alt="Partner Logo"/>
+</div>
+<div>
+    @Html.ActionLink("Upload logo", "Upload", "Logos")
+</div>
+<div id="generalInfo">
+    @Html.Partial("Sections/GeneralInfo")
+</div>
+<div id="contacts">
+    @Html.Partial("Sections/Contacts")
+</div>
+<div id="users">
+    @Html.Partial("Sections/Users")
+</div>
+<div id="partners">
+    @Html.Partial("Sections/Partners")
+</div>
+<div id="bankAccounts">
+    @Html.Partial("Sections/BankAccounts")
+</div>
+<div id="terminals">
+    @Html.Partial("Sections/Terminals")
 </div>
