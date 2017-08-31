@@ -20,26 +20,26 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
-        public UserFormViewModel RenderUserFormViewModel()
+        public UserEditFormViewModel RenderUserFormViewModel()
         {
             //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
             // reportes y grupos.
             //alertas y notificaciones.
 
-            return new UserFormViewModel()
-            {
+            return new UserEditFormViewModel()
+            {   
                 Partners = Context.Partners.ToList(),
                 Permissions = new List<Permission>()
             };
         }
 
-        public UserFormViewModel UserToEdit(int id)
+        public UserEditFormViewModel UserToEdit(int id)
         {
             var result = Table.SingleOrDefault(c => c.Id == id);
 
             if (result != null)
             {
-                return new UserFormViewModel()
+                return new UserEditFormViewModel()
                 {
                     Email = result.Email,
                     Id = result.Id,
@@ -75,7 +75,8 @@ namespace OctagonPlatform.PersistanceRepository
                     user.UserName = viewModel.UserName.Trim();
                     user.IsLocked = viewModel.IsLocked;
                     user.PartnerId = viewModel.PartnerId;
-                    user.Password = viewModel.Password.Trim();
+                    if(!string.IsNullOrEmpty(viewModel.Password))
+                         user.Password = viewModel.Password.Trim();
                     
                     Edit(user);
                 }

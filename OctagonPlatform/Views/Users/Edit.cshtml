@@ -1,7 +1,7 @@
-﻿@model OctagonPlatform.Models.FormsViewModels.UserFormViewModel
+﻿@model OctagonPlatform.Models.FormsViewModels.UserEditFormViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit User";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
@@ -12,6 +12,12 @@
     </p>
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
+    if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alert alert-danger">
+            @Model.Error.ToString()
+        </div>
+    }
     <div class="form-group">
         @Html.LabelFor(m => m.UserName)
         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "autofocus" })
@@ -44,19 +50,23 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.PartnerId)
-        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+         @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.PartnerId)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password)
-        @Html.TextBoxFor(m => m.Password, Model.Password, new { @class = "form-control", autofocus = "autofocus" })
-        @Html.ValidationMessageFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.IsLocked)
-        @Html.TextBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.IsLocked)
     </div>
+    
     <button type="submit" class="btn btn-primary">Save</button>
 }
 @section Scripts {

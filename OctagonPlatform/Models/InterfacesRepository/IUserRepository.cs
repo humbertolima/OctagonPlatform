@@ -8,9 +8,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<User> GetAllUsers();
 
-        UserFormViewModel UserToEdit(int id);
+        UserEditFormViewModel UserToEdit(int id);
 
-        UserFormViewModel RenderUserFormViewModel();
+        UserEditFormViewModel RenderUserFormViewModel();
 
         void SaveUser(UserFormViewModel viewModel, string action);
 

@@ -210,6 +210,7 @@
     <Compile Include="Helpers\CustomValidations\ValidUserName.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
+    <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Migrations\201708160653179_Initial.cs" />
     <Compile Include="Migrations\201708160653179_Initial.Designer.cs">
@@ -328,6 +329,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />

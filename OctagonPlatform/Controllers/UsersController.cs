@@ -1,4 +1,6 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using AutoMapper;
+using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Data.Entity.Validation;
@@ -78,23 +80,38 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserFormViewModel viewModel)
+        public ActionResult Edit(UserEditFormViewModel editViewModel)
         {
+            var viewModel = default(UserFormViewModel);
+
             if (!ModelState.IsValid)
             {
-                var userEdit = _userRepository.UserToEdit(viewModel.Id);
-                return View(viewModel);
+                var userEdit = _userRepository.UserToEdit(editViewModel.Id);
+                return View(userEdit);
             }
             try
             {
+
+                //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
+
+              viewModel =  Mapper.Map<UserEditFormViewModel,UserFormViewModel>(editViewModel);
+
                 _userRepository.SaveUser(viewModel, "Edit");
                 return RedirectToAction("Index");
             }
+            catch (DbEntityValidationException exDb)
+            {
+                editViewModel.Error = "Validation error in database. " + exDb.Message.ToString();
+                editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
+                return View(editViewModel);
+            }
             catch (Exception ex)
             {
-                throw new Exception("Error Edit User. " + ex.Message, ex);
+                editViewModel.Error = "Error creating user. " + ex.Message.ToString();
+                editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
+                return View(editViewModel);
             }
-            
+
         }
 
         [HttpGet]
