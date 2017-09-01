@@ -64,6 +64,11 @@
         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.ConfirmPassword)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsLocked)
+        @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.IsLocked)
+    </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
     #region Table of permissions
@@ -85,11 +90,10 @@
                 <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td>@Html.CheckBox(" ")</td>
-                    <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id).Name)</td>
-                    <td>@Html.CheckBox(item.Name)</td>
-                    <td>@Html.CheckBox(item.Name)</td>
-                    <td>@Html.CheckBox(item.Name)</td>
-
+                    <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Name,true)</td>
+                    <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "View").Name)</td>
+                    <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Edit").Name)</td>
+                    <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Delete").Name)</td>
                 </tr>
             }
 

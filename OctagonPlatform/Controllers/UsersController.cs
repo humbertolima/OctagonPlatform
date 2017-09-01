@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -35,8 +39,31 @@ namespace OctagonPlatform.Controllers
 
         [HttpGet]
         public ActionResult Create()
-        {  
-            return View(_userRepository.RenderUserFormViewModel());
+        {
+            try
+            {
+                return View(_userRepository.RenderUserFormViewModel());
+            }
+            #region Exception
+            catch (SqlException ex)
+            {
+                return View(new UserFormViewModel
+                {
+                    Error = "Error rendering UserFormModel. " + ex.Message.ToString(),
+                    Partners = new List<Partner>(),
+                    SetOfPermissions = new List<SetOfPermission>()
+                });
+            }
+            catch (Exception ex)
+            {
+                return View(new UserFormViewModel
+                {
+                    Error = "Error rendering UserFormModel. " + ex.Message.ToString(),
+                    Partners = new List<Partner>(),
+                    SetOfPermissions = new List<SetOfPermission>()
+                });
+            }
+            #endregion
         }
 
         [HttpPost]
@@ -45,7 +72,6 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             try
@@ -53,9 +79,9 @@ namespace OctagonPlatform.Controllers
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Index");
             }
-            #region Catch
+            #region Exception
 
-           
+
             catch (DbEntityValidationException exDb)
             {
                 viewModel.Error = "Validation error in database. " + exDb.Message.ToString();
@@ -80,6 +106,7 @@ namespace OctagonPlatform.Controllers
                 userEdit = _userRepository.UserToEdit(id);
                 return View(userEdit);
             }
+            #region Exception
             catch (Exception ex)
             {
                 userEdit = new UserEditFormViewModel();
@@ -87,6 +114,7 @@ namespace OctagonPlatform.Controllers
                 userEdit.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(userEdit);
             }
+#endregion
         }
 
         [HttpPost]
@@ -102,14 +130,13 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
-
                 //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
-
-              viewModel =  Mapper.Map<UserEditFormViewModel,UserFormViewModel>(editViewModel);
+                viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
                 return RedirectToAction("Index");
             }
+            #region Exception
             catch (DbEntityValidationException exDb)
             {
                 editViewModel.Error = "Validation error in database. " + exDb.Message.ToString();
@@ -122,7 +149,7 @@ namespace OctagonPlatform.Controllers
                 editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(editViewModel);
             }
-
+#endregion
         }
 
         [HttpGet]
