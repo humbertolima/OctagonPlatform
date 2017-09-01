@@ -68,7 +68,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserFormViewModel viewModel, string[] Permissions)
+        public ActionResult Create(UserFormViewModel viewModel, string[] permissions1)
         {
             if (!ModelState.IsValid)
             {
@@ -76,6 +76,8 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
+                viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
+                
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Index");
             }

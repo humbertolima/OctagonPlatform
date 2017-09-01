@@ -12,6 +12,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserFormViewModel RenderUserFormViewModel();
 
+        ICollection<Permission> AddPermissionToUser(string[] permissions);
+
         void SaveUser(UserFormViewModel viewModel, string action);
 
         User UserDetails(int id);

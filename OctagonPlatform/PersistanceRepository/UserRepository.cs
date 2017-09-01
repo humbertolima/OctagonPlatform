@@ -1,6 +1,7 @@
 ﻿using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-       
+
         public IEnumerable<User> GetAllUsers()
         {
             return Table.Where(u => u.Deleted == false)  //Seleccionar los que no esten borrados. Bloqueados sis
@@ -30,9 +31,9 @@ namespace OctagonPlatform.PersistanceRepository
             var viewModel = new UserFormViewModel()
             {
                 Partners = Context.Partners.ToList(),
-                Permissions = Context.Permissions.Select(p => new SelectListItem
+                PermissionsAvilable = Context.Permissions.Select(p => new SelectListItem
                 {
-                    Group = new SelectListGroup {Name = p.Type },
+                    Group = new SelectListGroup { Name = p.Type },
                     Text = p.Name,
                     Value = p.Id.ToString()
                 }).ToList(),
@@ -40,6 +41,18 @@ namespace OctagonPlatform.PersistanceRepository
             };
 
             return viewModel;
+        }
+
+        public ICollection<Permission> AddPermissionToUser(string[] permissions)
+        {
+            var permissionList = new List<Permission>();
+            for (int i = 0; i < permissions.Length; i++)
+            {
+                var convertId = Convert.ToInt32(permissions[i]);
+                permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
+            }
+
+            return permissionList;
         }
 
         public UserEditFormViewModel UserToEdit(int id)
@@ -84,9 +97,9 @@ namespace OctagonPlatform.PersistanceRepository
                     user.UserName = viewModel.UserName.Trim();
                     user.IsLocked = viewModel.IsLocked;
                     user.PartnerId = viewModel.PartnerId;
-                    if(!string.IsNullOrEmpty(viewModel.Password))
-                         user.Password = viewModel.Password.Trim();
-                    
+                    if (!string.IsNullOrEmpty(viewModel.Password))
+                        user.Password = viewModel.Password.Trim();
+
                     Edit(user);
                 }
             }
@@ -105,7 +118,7 @@ namespace OctagonPlatform.PersistanceRepository
                     Status = viewModel.Status,
                     UserName = viewModel.UserName.Trim(),
                     IsLocked = viewModel.IsLocked,
-                    
+                    Permissions = viewModel.Permissions,
                 };
 
                 Add(user);
@@ -138,10 +151,11 @@ namespace OctagonPlatform.PersistanceRepository
                 Name = viewModel.Name,
                 PartnerId = viewModel.PartnerId,
                 Partners = Context.Partners,
-                Permissions = viewModel.Permissions,
+                PermissionsAvilable = viewModel.PermissionsAvilable,
                 Phone = viewModel.Phone,
                 Status = viewModel.Status,
-                UserName = viewModel.UserName
+                UserName = viewModel.UserName,
+                SetOfPermissions = viewModel.SetOfPermissions
             };
         }
 
