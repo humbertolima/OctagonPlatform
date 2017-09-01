@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -26,12 +27,19 @@ namespace OctagonPlatform.PersistanceRepository
             // reportes y grupos.
             //alertas y notificaciones.
 
-            return new UserFormViewModel()
+            var viewModel = new UserFormViewModel()
             {
                 Partners = Context.Partners.ToList(),
-                Permissions = Context.Permissions.ToList(),
-                SetOfPermissions = Context.SetOfPermissions.ToList()
+                Permissions = Context.Permissions.Select(p => new SelectListItem
+                {
+                    Group = new SelectListGroup {Name = p.Type },
+                    Text = p.Name,
+                    Value = p.Id.ToString()
+                }).ToList(),
+                SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
             };
+
+            return viewModel;
         }
 
         public UserEditFormViewModel UserToEdit(int id)

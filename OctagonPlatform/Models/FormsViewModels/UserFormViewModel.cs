@@ -3,12 +3,17 @@ using OctagonPlatform.Helpers.CustomValidations;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
 {
     public class UserFormViewModel : IError
     {
+        public UserFormViewModel()
+        {
+            Permissions = new List<SelectListItem>();
+        }
 
         public int Id { get; set; }
 
@@ -43,7 +48,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        //puesto el namespace completo por ambiguedad con el System.Web.MVC
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         public string ConfirmPassword { get; set; }
 
         public bool IsLocked { get; set; }
@@ -54,7 +60,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [ValidEmail(ErrorMessage = "Email already in use")]
         public string Email { get; set; }
         
-        public ICollection<Permission> Permissions { get; set; }
+        public IList<SelectListItem> Permissions { get; set; }
 
         public ICollection<SetOfPermission> SetOfPermissions { get; set; }
 
