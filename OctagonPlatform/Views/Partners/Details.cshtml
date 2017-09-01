@@ -9,7 +9,7 @@
     <img src="@Model.Logo" width="150" height="150" alt="Partner Logo"/>
 </div>
 <div>
-    @Html.ActionLink("Upload logo", "Upload", "Logos")
+    @Html.ActionLink("Upload logo", "Upload", "Logos", new { partnerId = @Model.Id}, "")
 </div>
 <div id="generalInfo">
     @Html.Partial("Sections/GeneralInfo")

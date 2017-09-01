@@ -1,16 +1,11 @@
-﻿@model OctagonPlatform.Models.Partner
+﻿
 
 <h1>Upload Logo</h1>
-
-@{
-    using (Html.BeginForm("Upload", "Logos", FormMethod.Post, new {enctype = "multipart/form-data"}))
-
+@using (Html.BeginForm("Upload", "Logos", new {partnerId = @ViewBag.PartnerId}, FormMethod.Post,new {enctype = "multipart/form-data"}))
+{
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Id)
-    <label for="file">Select Logo</label>
+    <label for="file">SElect logo</label>
     <input type="file" name="file" id="file"/>
     <br/>
-    <label> Upload Logo: </label>
-    <input type="submit" value="Upload" class="btn btn-primary"/>
-
+    <label>Upload Logo: </label><input type="submit" class="submit-button" value="Upload"/>
 }
