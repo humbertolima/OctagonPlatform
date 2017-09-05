@@ -206,10 +206,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CustomRoleProvider.cs" />
-    <Compile Include="Helpers\CustomValidations\ValidBusinessName.cs" />
-    <Compile Include="Helpers\CustomValidations\ValidEmail.cs" />
-    <Compile Include="Helpers\CustomValidations\ValidPhone.cs" />
-    <Compile Include="Helpers\CustomValidations\ValidUserName.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
