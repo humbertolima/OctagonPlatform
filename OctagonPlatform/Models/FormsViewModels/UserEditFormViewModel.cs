@@ -1,5 +1,4 @@
 ﻿using OctagonPlatform.Helpers;
-using OctagonPlatform.Helpers.CustomValidations;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
