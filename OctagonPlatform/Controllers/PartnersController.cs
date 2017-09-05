@@ -1,5 +1,7 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using System;
+using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -36,8 +38,22 @@ namespace OctagonPlatform.Controllers
 
                 return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
             }
-            _partnerRepository.SavePartner(viewModel, "Create");
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerRepository.SavePartner(viewModel, "Create");
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base creating Partner " + exDb.Message;
+                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error in Data Base creating Partner " + ex.Message;
+                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+            }
+           
         }
 
         [HttpGet]
@@ -54,20 +70,46 @@ namespace OctagonPlatform.Controllers
             {
                 return View(_partnerRepository.PartnerToEdit(viewModel.Id));
             }
-            _partnerRepository.SavePartner(viewModel, "Edit");
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerRepository.SavePartner(viewModel, "Edit");
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base edditing Partner " + exDb.Message;
+                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error edditing Partner " + ex.Message;
+                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+            }
         }
 
         public ActionResult Details(int id)
         {
             return View(_partnerRepository.PartnerDetails(id));
         }
-
+        
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            _partnerRepository.DeletePartner(id);
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerRepository.DeletePartner(id);
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base edditing Partner" + exDb.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error edditing Partner" + ex.Message;
+                return RedirectToAction("Index");
+            }
         }
 
     }

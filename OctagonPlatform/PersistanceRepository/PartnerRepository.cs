@@ -24,10 +24,11 @@ namespace OctagonPlatform.PersistanceRepository
             return new PartnerFormViewModel()
             {
                 // Comentado porque lo llenare en ajax en dependencia de lo que se necesite.
-                Parents = Table.ToList(),
+                Parents = Table.Where(x => !x.Deleted).ToList(),
                 Countries = Context.Countries.ToList(),
-                //States = Context.States.ToList(),
-                //Cities = Context.Cities.ToList()
+                States = Context.States.Where(x => x.CountryId == 231).ToList(),
+                Cities = Context.Cities.Where(x => x.StateId == 3930).ToList()
+                
             };
         }
         
@@ -78,23 +79,30 @@ namespace OctagonPlatform.PersistanceRepository
 
         public PartnerFormViewModel PartnerToEdit(int id)
         {
-            var partner = Table.SingleOrDefault(x => x.Id == id);
+            var partner = Table.Where(x => x.Id == id)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .SingleOrDefault();
             if (partner != null)
             {
                 return new PartnerFormViewModel()
                 {
                     Id = partner.Id,
                     ParentId = partner.ParentId,
-                    Parents = Table.ToList(),
+                    Parents = Table.Where(x => !x.Deleted).ToList(),
                     BusinessName = partner.BusinessName,
                     Address1 = partner.Address1,
                     Address2 = partner.Address2,
                     CountryId = partner.CountryId,
-                    Countries = Context.Countries,
+                    Country = partner.Country,
+                    Countries = Context.Countries.ToList(),
                     StateId = partner.StateId,
-                    States = Context.States,
+                    State = partner.State,
+                    States = Context.States.Where(x => x.CountryId == partner.CountryId).ToList(),
                     CityId = partner.CityId,
-                    Cities = Context.Cities,
+                    City = partner.City,
+                    Cities = Context.Cities.Where(x => x.StateId == partner.StateId).ToList(),
                     Status = partner.Status,
                     Email = partner.Email,
                     WorkPhone = partner.WorkPhone,
@@ -131,16 +139,16 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Id = viewModel.Id,
                 ParentId = viewModel.ParentId,
-                Parents = Table.ToList(),
+                Parents = Table.Where(x => !x.Deleted).ToList(),
                 BusinessName = viewModel.BusinessName,
                 Address1 = viewModel.Address1,
                 Address2 = viewModel.Address2,
                 CountryId = viewModel.CountryId,
-                Countries = Context.Countries,
+                Countries = Context.Countries.ToList(),
                 StateId = viewModel.StateId,
-                States = Context.States,
+                States = Context.States.Where(x => x.CountryId == viewModel.CountryId).ToList(),
                 CityId = viewModel.CityId,
-                Cities = Context.Cities,
+                Cities = Context.Cities.Where(x => x.StateId == viewModel.StateId).ToList(),
                 Status = viewModel.Status,
                 Email = viewModel.Email,
                 WorkPhone = viewModel.WorkPhone,

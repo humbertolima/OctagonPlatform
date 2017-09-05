@@ -1,7 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
-using OctagonPlatform.Helpers.CustomValidations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
@@ -18,7 +18,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
-        [ValidBusinessName(ErrorMessage = "Business name already in use")]
+        [Index(IsUnique = true)]
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
@@ -35,34 +35,39 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Country")]
         public int CountryId { get; set; }
 
+        public Country Country { get; set; }
+
         public IEnumerable<Country> Countries { get; set; }
 
         [Required(ErrorMessage = "The partner's state is required")]
         [Display(Name = "State")]
         public int StateId { get; set; }
 
+        public State State { get; set; }
+
         public IEnumerable<State> States { get; set; }
         
         [Display(Name = "City")]
         public int? CityId { get; set; }
+
+        public City City { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [ValidEmail(ErrorMessage = "Email already in use")]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
-        [ValidPhone(ErrorMessage = "Phone number already in use")]
         public string WorkPhone { get; set; }
 
         [Display(Name = "Mobile Phone")]
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
-        [ValidPhone(ErrorMessage = "Phone number already in use")]
+        [Index(IsUnique = true)]
         public string Mobile { get; set; }
 
         [Display(Name = "Fax Number")]

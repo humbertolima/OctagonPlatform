@@ -29,7 +29,7 @@ namespace OctagonPlatform
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-cosmo.css",
+                      "~/Content/bootstrap-superhero.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/xpopulate").Include(

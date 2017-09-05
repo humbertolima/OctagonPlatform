@@ -56,17 +56,23 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Country")]
         public int CountryId { get; set; }
 
+        public Country Country { get; set; }
+
         public IEnumerable<Country> Countries { get; set; }
 
         [Required(ErrorMessage = "The state is required")]
         [Display(Name = "State")]
         public int StateId { get; set; }
 
+        public State State { get; set; }
+
         public IEnumerable<State> States { get; set; }
 
 
         [Display(Name = "City")]
         public int? CityId { get; set; }
+
+        public City City { get; set; }
 
         public IEnumerable<City> Cities { get; set; }
 

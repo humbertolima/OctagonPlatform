@@ -9,7 +9,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         PartnerContactFormViewModel RenderPartnerContactFormViewModel();
 
-        PartnerContactFormViewModel PartnerToEdit(int id);
+        PartnerContactFormViewModel PartnerContactToEdit(int id);
 
         void SavePartner(PartnerContactFormViewModel viewModel, string action);
 

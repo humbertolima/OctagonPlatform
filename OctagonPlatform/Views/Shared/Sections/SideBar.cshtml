@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-table fa-fw"></i> Dashboard</a>
+                <a href="@Url.Action("Index", "Dashboard", new { logo = ViewBag.Logo, businessName = ViewBag.BusinessName })"><i class="fa fa-table fa-fw"></i> Dashboard</a>
             </li>
             <li>
                 <a href="@Url.Action("", "")"><i class="fa fa-table fa-fw"></i> Terminals</a>

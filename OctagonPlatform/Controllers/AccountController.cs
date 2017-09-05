@@ -25,22 +25,32 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginViewModel viewModel)
         {
-            var userToLogin = _accountRepository.Login(viewModel);
-
-            if (userToLogin == null)
+            if (Session["tries"] != null)
             {
-                ViewBag.Message = "Invalid User";
-                return View(viewModel);
+                viewModel.TriesToLogin = int.Parse(Session["tries"].ToString());
             }
+            var userToLogin = _accountRepository.Login(viewModel);
             if (userToLogin.IsLocked)
             {
+
+                if (Session["tries"] != null) Session["tries"] = 0;
                 ViewBag.Message = "User Locked, please call the Administrator";
-                return View(viewModel);
+                return View(userToLogin);
                 
             }
+            
+            if (userToLogin.Partner == null)
+            {
+                ViewBag.Message = "Invalid User";
+                Session["tries"] = userToLogin.TriesToLogin;
+                return View(userToLogin);
+            }
             FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
+            Session["logo"] = userToLogin.Partner.Logo;
+            Session["partnerId"] = userToLogin.Partner.Id;
+            Session["businessName"] = userToLogin.Partner.BusinessName;
+            if (Session["tries"] != null) Session["tries"] = 0;
             return RedirectToAction("Index", "Dashboard");
-
         }
 
         [HttpGet]

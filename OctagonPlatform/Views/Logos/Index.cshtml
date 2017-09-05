@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h1>Upload Logo</h1>
+<h2>@ViewBag.Error</h2>
+@using (Html.BeginForm("Upload", "Logos", new { partnerId = @ViewBag.PartnerId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    
+    <input type="file" name="file" /> 
+    <br/>
+    <button type="submit" class="btn btn-primary">Upload File</button>
+}

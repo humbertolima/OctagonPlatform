@@ -1,8 +1,10 @@
-﻿    $("#CountryId").change(function () {
-        var countriesId = $(this).val();
+﻿
+
+$("#CountryId").change(function () {
+        var countrieId = $(this).val();
         $.ajax({
             url: "/populate/GetallStates",
-            data: { 'CountryID': countriesId },
+            data: { 'countryID': countrieId },
             
                     datatype: "json",
                     beforeSend: loadStart,
@@ -24,35 +26,42 @@
 
                     }
         });
-    });
+});
 
-    $("#StatesId").change(function () {
-                var stateId = $(this).val();
-                $.ajax({
-                    url: "/Populate/GetallCities",
-                    data: {'StateID': stateId },
-                    datatype: "json",
-                    beforeSend: loadStart,
-                    complete: loadStop,
-                    success: function (data) {
 
-        var ddlCities = $("#CitiesId");
-                        ddlCities.empty();
 
-        if (!$.isEmptyObject(data)) {
-        ddlCities.append($("<option></option>").val("").html("Select..."));
-    }
 
-        $.each(data, function (val, text) {
+ $("#StatesId").change(function() {
+     var stateId = $(this).val();
+     $.ajax({
+         url: "/Populate/GetallCities",
+         data: { 'stateID': stateId },
+         datatype: "json",
+         beforeSend: loadStart,
+         complete: loadStop,
+         success: function(data) {
 
-        ddlCities.append(
-            $("<option></option>").val(text.Value).html(text.Text)
-        );
-    });
+             var ddlCities = $("#CitiesId");
+             ddlCities.empty();
 
-                    }
-                });
-    });
+             if (!$.isEmptyObject(data)) {
+                 ddlCities.append($("<option></option>").val("").html("Select..."));
+             }
+
+             $.each(data,
+                 function(val, text) {
+
+                     ddlCities.append(
+                         $("<option></option>").val(text.Value).html(text.Text)
+                     );
+                 });
+
+         }
+     });
+ });
+
+
+
 
     function loadStart() {
         $("#loading").show();

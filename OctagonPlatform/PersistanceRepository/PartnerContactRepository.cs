@@ -20,21 +20,29 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return new PartnerContactFormViewModel()
             {
-                Partners =  Context.Partners.ToList(),
+                Partners =  Context.Partners.Where(x => !x.Deleted).ToList(),
                 Countries = Context.Countries.ToList(),
+                States = Context.States.Where(x => x.CountryId == 231).ToList(),
+                Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
                 ContactTypes = Context.ContactTypes.ToList()
             };
         }
 
-        public PartnerContactFormViewModel PartnerToEdit(int id)
+        public PartnerContactFormViewModel PartnerContactToEdit(int id)
         {
-            var partnerContact = Table.SingleOrDefault(x => x.Id == id);
+            var partnerContact = Table.Where(x => x.Id == id)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .SingleOrDefault();
+
             if (partnerContact != null)
             {
                 return new PartnerContactFormViewModel()
                 {
                     Id = partnerContact.Id,
                     PartnerId = partnerContact.PartnerId,
+                    Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
                     Name = partnerContact.Name,
                     LastName = partnerContact.LastName,
                     Email = partnerContact.Email,
@@ -45,12 +53,15 @@ namespace OctagonPlatform.PersistanceRepository
                     Address2 = partnerContact.Address2,
                     Zip = partnerContact.Zip,
                     CountryId = partnerContact.CountryId,
+                    Country = partnerContact.Country,
                     Countries = Context.Countries.ToList(),
                     StateId = partnerContact.StateId,
-                    States = Context.States.ToList(),
+                    State = partnerContact.State,
+                    States = Context.States.Where(x => x.CountryId == partnerContact.CountryId).ToList(),
                     CityId = partnerContact.CityId,
-                    Cities = Context.Cities.ToList()
-                   
+                    City = partnerContact.City,
+                    Cities = Context.Cities.Where(x => x.StateId == partnerContact.StateId).ToList(),
+
 
                 };
             }
@@ -115,6 +126,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Id = viewModel.Id,
                 PartnerId = viewModel.PartnerId,
+                Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
                 Name = viewModel.Name,
                 LastName = viewModel.LastName,
                 Email = viewModel.Email,
@@ -127,9 +139,9 @@ namespace OctagonPlatform.PersistanceRepository
                 CountryId = viewModel.CountryId,
                 Countries = Context.Countries.ToList(),
                 StateId = viewModel.StateId,
-                States = Context.States.ToList(),
+                States = Context.States.Where(x => x.CountryId == viewModel.CountryId).ToList(),
                 CityId = viewModel.CityId,
-                Cities = Context.Cities.ToList()
+                Cities = Context.Cities.Where(x => x.StateId == viewModel.StateId).ToList(),
 
 
             };

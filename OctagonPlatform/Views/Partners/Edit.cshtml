@@ -6,11 +6,13 @@
 }
 <h2>Edit</h2>
 
-@using (Html.BeginForm("Edit", "Partners"))
+@using (Html.BeginForm("Edit", "Partners", new { @class="form-group"}))
 {
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
     </p>
+    @Html.ValidationSummary()
+    <h3>@ViewBag.Error</h3>
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
@@ -39,19 +41,58 @@
         @Html.ValidationMessageFor(m => m.Address2)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CountryId)
-        @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name"), "United States", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CountryId)
+        <div id="Countries">
+            <label for="Countries">Country</label>
+            <select required id="CountryId" name="CountryId" class="form-control">
+                <option value="@Model.CountryId">@Model.Country.Name</option>
+                @foreach (var item in Model.Countries)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.CountryId)
+
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.StateId)
-        @Html.DropDownListFor(m => m.StateId, new SelectList(Model.States, "Id", "Name"), "Florida", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.StateId)
+        <div id="States">
+            <label for="States">State</label>
+            <select required id="StatesId" name="StateId" class="form-control">
+                <option value="@Model.StateId">@Model.State.Name</option>
+                @foreach (var item in Model.States)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.StateId)
+           
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt=""/></div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CityId)
-        @Html.DropDownListFor(m => m.CityId, new SelectList(Model.Cities, "Id", "Name"), "Miami", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CityId)
+        <div id="Cities">
+            <label for="Cities">City</label>
+            @if (Model.City != null)
+            {
+                <select id="CitiesId" name="CityId" class="form-control">
+                    <option value="@Model.CityId">@Model.City.Name</option>
+                    @foreach (var item in Model.Cities)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.CityId)
+            }
+            else
+            {
+
+                <select id="CitiesId" name="CityId" class="form-control"></select>
+                @Html.ValidationMessageFor(m => m.CityId)
+            }
+        
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
@@ -78,8 +119,14 @@
         @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.WebSite)
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="submit" onclick="history.back();" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/xpopulate")
 }

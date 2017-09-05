@@ -1,5 +1,7 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using System;
+using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -34,14 +36,27 @@ namespace OctagonPlatform.Controllers
                 
                 return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
             }
-            _partnerContactRepository.SavePartner(viewModel, "Create");
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerContactRepository.SavePartner(viewModel, "Create");
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base creating Partner " + exDb.Message;
+                return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error in Data Base creating Partner " + ex.Message;
+                return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
+            }
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(_partnerContactRepository.PartnerToEdit(id));
+            return View(_partnerContactRepository.PartnerContactToEdit(id));
         }
 
         [HttpPost]
@@ -50,10 +65,23 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(_partnerContactRepository.PartnerToEdit(viewModel.Id));
+                return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
             }
-            _partnerContactRepository.SavePartner(viewModel, "Edit");
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerContactRepository.SavePartner(viewModel, "Edit");
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base edditing Partner " + exDb.Message;
+                return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error edditing Partner " + ex.Message;
+                return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
+            }
         }
 
         //public ActionResult Details(int id)
@@ -64,8 +92,21 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            _partnerContactRepository.DeletePartner(id);
-            return RedirectToAction("Index");
+            try
+            {
+                _partnerContactRepository.DeletePartner(id);
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error in Data Base edditing Partner" + exDb.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error edditing Partner" + ex.Message;
+                return RedirectToAction("Index");
+            }
         }
     }
 }

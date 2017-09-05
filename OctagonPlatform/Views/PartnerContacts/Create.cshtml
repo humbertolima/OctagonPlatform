@@ -1,5 +1,4 @@
-﻿@using OctagonPlatform.Models
-@model OctagonPlatform.Models.FormsViewModels.PartnerContactFormViewModel
+﻿@model OctagonPlatform.Models.FormsViewModels.PartnerContactFormViewModel
 
 
 @{
@@ -12,6 +11,8 @@
 {
     <p class="alert alert-danger">All fields are <strong>required.</strong>
     </p>
+    @Html.ValidationSummary()
+    <h3>@ViewBag.Error</h3>
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
@@ -40,21 +41,48 @@
         @Html.ValidationMessageFor(m => m.Address2)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.CountryId)
-        @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.Countries, "Id", "Name"), "", new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CountryId)
+        <div id="Countries">
+            <label for="Countries">Country</label>
+            <select required id="CountryId" name="CountryId" class="form-control">
+                <option value="231">United States</option>
+                @foreach (var item in Model.Countries)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.CountryId)
+
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>
     <div class="form-group">
         <div id="States">
-            <label for="States">States</label>
-            <select id="StatesId" name="States"></select>
+            <label for="States">State</label>
+            <select required id="StatesId" name="StateId" class="form-control">
+                <option value="3930">Florida</option>
+                @foreach (var item in Model.States)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.StateId)
+
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" /></div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>
     <div class="form-group">
-        <div id="Cities"></div>
-        <label for="Cities">Cities</label>
-        <select id="CitiesId" name="Cities"></select>
+        <div id="Cities">
+            <label for="Cities">City</label>
+            <select id="CitiesId" name="CityId" class="form-control">
+                <option value="43769">Miami</option>
+                @foreach (var item in Model.Cities)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.CityId)
+        </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
@@ -71,8 +99,12 @@
         @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.Zip)
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
-}
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="submit" onclick="history.back();" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/xpopulate")

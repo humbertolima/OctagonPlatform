@@ -8,14 +8,18 @@ namespace OctagonPlatform.Controllers
     [AllowAnonymous]
     public class PopulateController : Controller
     {
-        public ApplicationDbContext Context;
+        private readonly ApplicationDbContext _context;
 
+        public PopulateController()
+        {
+            _context = new ApplicationDbContext();
+        }
 
         public ActionResult GetAllStates(int? countryId)
         {
-            Context = new ApplicationDbContext();
+            
 
-            IEnumerable<SelectListItem> result = Context.States
+            IEnumerable<SelectListItem> result = _context.States
                 .Where(c => c.CountryId == countryId)
                 .Select(c => new SelectListItem { Text = c.Name, Value= c.Id.ToString() });
             
@@ -24,9 +28,8 @@ namespace OctagonPlatform.Controllers
 
         public ActionResult GetAllCities(int? stateId)
         {
-            Context = new ApplicationDbContext();
 
-            IEnumerable<SelectListItem> result = Context.Cities
+            IEnumerable<SelectListItem> result = _context.Cities
                 .Where(c => c.StateId == stateId)
                 .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
 

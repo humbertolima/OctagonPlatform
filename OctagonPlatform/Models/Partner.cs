@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
@@ -22,6 +23,7 @@ namespace OctagonPlatform.Models
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
+        [Index(IsUnique = true)]
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
@@ -56,6 +58,7 @@ namespace OctagonPlatform.Models
         [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         [Display(Name = "Work Phone")]
@@ -73,7 +76,7 @@ namespace OctagonPlatform.Models
 
         public string WebSite { get; set; }
         
-        public string Logo { get; set; }
+        public string  Logo { get; set; }
 
         public ICollection<User> Users { get; set; }
 

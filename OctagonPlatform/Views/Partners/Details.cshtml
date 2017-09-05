@@ -5,11 +5,13 @@
 }
 
 <h1>@Model.BusinessName Overview</h1>
-<div id="logo">
-    <img src="@Model.Logo" width="150" height="150" alt="Partner Logo"/>
-</div>
+
+
+   <img src="~/Uploads/@Model.Logo" width="200" height="100" alt="" class="img-responsive img-rounded">
+
+<br/>
 <div>
-    @Html.ActionLink("Upload logo", "Upload", "Logos", new { partnerId = @Model.Id}, "")
+    @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, "")
 </div>
 <div id="generalInfo">
     @Html.Partial("Sections/GeneralInfo")

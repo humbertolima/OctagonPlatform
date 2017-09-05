@@ -9,8 +9,9 @@
     <h3 class="panel-title">List Partners</h3>
 </div>
 <p>
-    @Html.ActionLink("Add PartnerContact", "Create", "PartnerContacts", routeValues:null, htmlAttributes: new{@class = "glyphicon glyphicon-plus-sign" })
+    @Html.ActionLink("Add PartnerContact", "Create", "PartnerContacts", routeValues:null, htmlAttributes: new{ @class = "btn btn-info" })
 </p>
+<h3>@ViewBag.Error</h3>
 <table class="table table-striped table-hover ">
     <thead>
     <tr>

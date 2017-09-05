@@ -15,6 +15,13 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Password { get; set; }
 
         public int TriesToLogin { get; set; }
-  
+
+        public bool IsLocked { get; set; }
+
+        public Partner  Partner { get; set; }
+
+        public string BusinessName { get; set; }
+
+        public string Logo { get; set; }
     }
 }
