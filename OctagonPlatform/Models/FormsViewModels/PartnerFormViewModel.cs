@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
@@ -18,7 +17,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
-        [Index(IsUnique = true)]
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
@@ -57,7 +55,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         [Display(Name = "Work Phone")]
@@ -67,7 +64,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Mobile Phone")]
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
-        [Index(IsUnique = true)]
         public string Mobile { get; set; }
 
         [Display(Name = "Fax Number")]

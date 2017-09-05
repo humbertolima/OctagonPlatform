@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
-    public sealed class Partner:IAuditEntity, ISoftDeleted
+    public sealed class Partner: IAuditEntity, ISoftDeleted
     {
         [Key]
         public int Id { get; set; }
