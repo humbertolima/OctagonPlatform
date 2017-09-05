@@ -89,13 +89,14 @@
                 var valueDelete = @item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Delete").Id;
 
                 var temp = Model.Permissions.FirstOrDefault().Id;
-                <tr>
+                var cheq = "checked";
+                 <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td><input type="checkbox" name="Permissions1" value=" " /></td>
-                    <td><input type="checkbox" checked="@(valueCreate == temp)):checked" name="Permissions1" value="@valueCreate" /></td>
-                    <td><input type="checkbox" name="Permissions1" value="@valueView" /></td>
-                    <td><input type="checkbox" name="Permissions1" value="@valueEdit" /></td>
-                    <td><input type="checkbox" name="Permissions1" value="@valueDelete" /></td>
+                    <td><input type="checkbox" @if (valueCreate == temp) { @cheq; }  name="Permissions1" value="@valueCreate" /></td>
+                    <td><input type="checkbox" @if (valueView == temp) { @cheq; } name="Permissions1" value="@valueView" /></td>
+                    <td><input type="checkbox" @if (valueEdit == temp) { @cheq; } name="Permissions1" value="@valueEdit" /></td>
+                    <td><input type="checkbox" @if (valueDelete == temp) { @cheq; } name="Permissions1" value="@valueDelete" /></td>
 
                     @*<td>@Html.CheckBox(item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Name,true)</td>
                         <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "View").Name)</td>
