@@ -12,7 +12,7 @@ namespace OctagonPlatform.Models.FormsViewModels
     {
         public UserFormViewModel()
         {
-            Permissions = new List<SelectListItem>();
+            PermissionsAvilable = new List<SelectListItem>();
         }
 
         public int Id { get; set; }
@@ -59,8 +59,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         [ValidEmail(ErrorMessage = "Email already in use")]
         public string Email { get; set; }
-        
-        public IList<SelectListItem> Permissions { get; set; }
+
+        public ICollection<Permission> Permissions { get; set; }
+
+        public IList<SelectListItem> PermissionsAvilable { get; set; }
 
         public ICollection<SetOfPermission> SetOfPermissions { get; set; }
 
