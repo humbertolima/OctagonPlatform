@@ -322,6 +322,10 @@
     <Compile Include="Migrations\201709030056438_UniqueCollumnsInPartnersEmail.Designer.cs">
       <DependentUpon>201709030056438_UniqueCollumnsInPartnersEmail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709052040597_UniquePartnerContactEmail.cs" />
+    <Compile Include="Migrations\201709052040597_UniquePartnerContactEmail.Designer.cs">
+      <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -743,6 +747,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709030056438_UniqueCollumnsInPartnersEmail.resx">
       <DependentUpon>201709030056438_UniqueCollumnsInPartnersEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709052040597_UniquePartnerContactEmail.resx">
+      <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
