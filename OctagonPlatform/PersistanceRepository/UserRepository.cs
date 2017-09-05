@@ -36,7 +36,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     Group = new SelectListGroup { Name = p.Type },
                     Text = p.Name,
-                    Value = p.Id.ToString()
+                    Value = p.Id.ToString(),
                 }).ToList(),
                 SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
             };
@@ -58,11 +58,13 @@ namespace OctagonPlatform.PersistanceRepository
 
         public UserEditFormViewModel UserToEdit(int id)
         {
-            var result = Table.SingleOrDefault(c => c.Id == id);
+            var result = Table
+                .Include("Permissions")
+                .SingleOrDefault(c => c.Id == id);
 
             if (result != null)
             {
-                return new UserEditFormViewModel()
+                var userEdit = new UserEditFormViewModel()
                 {
                     Email = result.Email,
                     Id = result.Id,
@@ -74,8 +76,12 @@ namespace OctagonPlatform.PersistanceRepository
                     Permissions = result.Permissions,
                     Phone = result.Phone,
                     Status = result.Status,
-                    UserName = result.UserName
+                    UserName = result.UserName,
+                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
                 };
+
+                
+                return userEdit;
 
             }
             throw new System.Exception("User don't exist. ");

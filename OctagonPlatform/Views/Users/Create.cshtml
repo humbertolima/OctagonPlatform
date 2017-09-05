@@ -89,7 +89,7 @@
                 <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td><input type="checkbox" name="Permissions1" value=" " /></td>
-                    <td><input type="checkbox" name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
+                    <td><input type="checkbox" name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id"  /></td>
                     <td><input type="checkbox" name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
                     <td><input type="checkbox" name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
                     <td><input type="checkbox" name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>

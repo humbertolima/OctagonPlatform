@@ -100,14 +100,14 @@ namespace OctagonPlatform.Controllers
 
             catch (DbEntityValidationException exDb)
             {
+                viewModel = _userRepository.RenderUserFormViewModel();
                 viewModel.Error = "Validation error in database. " + exDb.Message.ToString();
-                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
                 return View(viewModel);
             }
             catch (Exception ex)
             {
                 viewModel.Error = "Error creating user. " + ex.Message.ToString();
-                viewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
+                viewModel = _userRepository.RenderUserFormViewModel();    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(viewModel);
             }
             #endregion

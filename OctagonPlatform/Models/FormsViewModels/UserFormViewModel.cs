@@ -1,5 +1,4 @@
 ﻿using OctagonPlatform.Helpers;
-using OctagonPlatform.Helpers.CustomValidations;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +19,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Username is required")]
         [StringLength(16, ErrorMessage = "Must be between 3 and 16 characters", MinimumLength = 3)]
         [Display(Name = "User Name")]
-        [ValidUserName(ErrorMessage = "Username already in use")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
@@ -32,7 +30,6 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required(ErrorMessage = "Phone number is required")]
         [DataType(DataType.PhoneNumber)]
-        [ValidPhone(ErrorMessage = "Phone number already in use")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
@@ -57,7 +54,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Email is required")]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [ValidEmail(ErrorMessage = "Email already in use")]
         public string Email { get; set; }
 
         public ICollection<Permission> Permissions { get; set; }

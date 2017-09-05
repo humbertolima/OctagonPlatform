@@ -52,6 +52,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         
         public ICollection<Permission> Permissions { get; set; }
 
+        public ICollection<SetOfPermission> SetOfPermissions { get; set; }
+
         public string Error { get; set; }
     }
 }
