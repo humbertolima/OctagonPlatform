@@ -72,12 +72,26 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
+                //Create error en helper
+                #region Create error messages       
+                viewModel.Error = "Validation Error. ";
+                foreach (var item in ModelState.Values)
+                {
+                    if (item.Errors.Count > 0)
+                    {
+                        for (int i = 0; i < item.Errors.Count; i++)
+                        {
+                            viewModel.Error += item.Errors[i].ErrorMessage.ToString() + ". ";
+                        }
+                    }
+                }
+                #endregion  
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             try
             {
                 viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
-                
+
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Index");
             }
@@ -116,7 +130,7 @@ namespace OctagonPlatform.Controllers
                 userEdit.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(userEdit);
             }
-#endregion
+            #endregion
         }
 
         [HttpPost]
@@ -151,7 +165,7 @@ namespace OctagonPlatform.Controllers
                 editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(editViewModel);
             }
-#endregion
+            #endregion
         }
 
         [HttpGet]

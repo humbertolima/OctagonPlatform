@@ -3,6 +3,7 @@ using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -142,6 +143,10 @@ namespace OctagonPlatform.PersistanceRepository
 
         public UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel)
         {
+            if (viewModel.SetOfPermissions == null)
+            {
+                viewModel.SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList();
+            }
             return new UserFormViewModel()
             {
                 Email = viewModel.Email,
@@ -155,7 +160,9 @@ namespace OctagonPlatform.PersistanceRepository
                 Phone = viewModel.Phone,
                 Status = viewModel.Status,
                 UserName = viewModel.UserName,
-                SetOfPermissions = viewModel.SetOfPermissions
+                SetOfPermissions = viewModel.SetOfPermissions,
+                Error = viewModel.Error,
+                
             };
         }
 
