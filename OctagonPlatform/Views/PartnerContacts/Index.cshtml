@@ -4,13 +4,28 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
 
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Add Contact", "Create", "PartnerContacts")</li>
+
+
+            </ul>
+            <form class="navbar-form navbar-left form-group">
+                <div>
+                    <input type="text" class="form-control" placeholder="Search" name="search">
+                </div>
+                <input type="submit" class="btn btn-adn" value="Search">
+            </form>
+
+        </div>
+    </div>
+</nav>
 <div class="page-header">
-    <h3 class="panel-title">List Partners</h3>
+    <h3 class="panel-title">List Contacts</h3>
 </div>
-<p>
-    @Html.ActionLink("Add PartnerContact", "Create", "PartnerContacts", routeValues:null, htmlAttributes: new{ @class = "btn btn-info" })
-</p>
 <p class="alert alert-danger">
     <strong>@ViewBag.Error</strong>
 </p>

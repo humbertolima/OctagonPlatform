@@ -95,8 +95,8 @@ namespace OctagonPlatform.Controllers
         {
             return View(_partnerRepository.PartnerDetails(id));
         }
-        
-        [HttpGet]
+
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             try
@@ -114,6 +114,12 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = "Validation error deleting Partner" + ex.Message;
                 return RedirectToAction("Index");
             }
+        }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_partnerRepository.Search(search));
         }
 
     }

@@ -18,6 +18,13 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
+        public IEnumerable<Partner> Search(string search)
+        {
+            return Table.Where(c => !c.Deleted && (c.BusinessName.Contains(search) || c.Parent.BusinessName.Contains(search)))
+                .Include(x => x.Parent)
+                .ToList();
+        }
+
         public PartnerFormViewModel RenderPartnerFormViewModel()
         {
             
