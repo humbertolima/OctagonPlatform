@@ -43,12 +43,14 @@ namespace OctagonPlatform.Controllers
             }
             catch (DbEntityValidationException exDb)
             {
-                ViewBag.Error = "Validation error in Data Base creating Partner " + exDb.Message;
+                ViewBag.Error = "Validation error creating Contact " + exDb.Message +
+                                " The email must be unique, make sure that is not already in use";
                 return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error in Data Base creating Partner " + ex.Message;
+                ViewBag.Error = "Validation error creating Contact " + ex.Message +
+                                " The email must be unique, make sure that is not already in use";
                 return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
             }
         }
@@ -74,12 +76,14 @@ namespace OctagonPlatform.Controllers
             }
             catch (DbEntityValidationException exDb)
             {
-                ViewBag.Error = "Validation error in Data Base edditing Partner " + exDb.Message;
+                ViewBag.Error = "Validation error editing Contact " + exDb.Message +
+                                " The email phone must be unique, make sure that is not already in use";
                 return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error edditing Partner " + ex.Message;
+                ViewBag.Error = "Validation error editing Contact " + ex.Message +
+                                " The email must be unique, make sure that is not already in use";
                 return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
             }
         }
@@ -99,12 +103,12 @@ namespace OctagonPlatform.Controllers
             }
             catch (DbEntityValidationException exDb)
             {
-                ViewBag.Error = "Validation error in Data Base edditing Partner" + exDb.Message;
+                ViewBag.Error = "Validation error deleting Partner" + exDb.Message;
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error edditing Partner" + ex.Message;
+                ViewBag.Error = "Validation error deleiting Partner" + ex.Message;
                 return RedirectToAction("Index");
             }
         }

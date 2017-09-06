@@ -10,10 +10,13 @@
 
 @using (Html.BeginForm("Create", "Partners", new { @class = "form-horizontal" }))
 {
-    <p class="alert alert-danger">All fields are <strong>required.</strong>
+    <p class="alert alert-danger">
+        All fields are <strong>required.</strong>
     </p>
-    @Html.ValidationSummary()
-    <h3>@ViewBag.Error</h3>
+    <p class="alert alert-danger">
+        <strong>@ViewBag.Error</strong>
+    </p>
+    <p>@Html.ValidationSummary()</p>
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(m => m.BusinessName)

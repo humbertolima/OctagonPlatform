@@ -11,8 +11,10 @@
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
     </p>
-    @Html.ValidationSummary()
-    <h3>@ViewBag.Error</h3>
+    <p class="alert alert-danger">
+        <strong>@ViewBag.Error</strong>
+    </p>
+    <p>@Html.ValidationSummary()</p>
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
     <div class="form-group">
