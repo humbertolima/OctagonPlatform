@@ -130,7 +130,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Users)
                 .Include(x => x.Partners)
                 //.Include(x => x.BankAccounts)
-                //.Include(x => x.Terminals)
+                .Include(x => x.Terminal)
                 .FirstOrDefault();
         }
 

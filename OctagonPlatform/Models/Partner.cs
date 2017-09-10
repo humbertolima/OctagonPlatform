@@ -82,22 +82,23 @@ namespace OctagonPlatform.Models
 
         public ICollection<PartnerContact> PartnerContacts { get; set; }
 
+        
+         public ICollection<Terminal> Terminal { get; set; }
         /*
-         public ICollection<Terminal> Terminals { get; set; }
-
          public ICollection<BankAccount> BankAccounts { get; set; }
              */
 
         public Partner()
         {
             Users = new Collection<User>();
+
             PartnerContacts = new Collection<PartnerContact>();
 
             Partners = new Collection<Partner>();
 
-            /*
-            Terminals = new Collection<Terminals>();
-            BankAccounts = new Collection<BankAccounts>();
+            Terminal = new Collection<Terminal>();
+
+            /*BankAccounts = new Collection<BankAccounts>();
             */
         }
 
