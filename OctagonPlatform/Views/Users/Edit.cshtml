@@ -81,22 +81,35 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.SetOfPermissions)
+            @foreach (var item in Model.SetOfPermissions)       //Recorro cada uno de los grupos de permisos.
             {
-                var valueCreate = @item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Create").Id;
-                var valueView = @item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "View").Id;
-                var valueEdit = @item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Edit").Id;
-                var valueDelete = @item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Delete").Id;
+                var temp = false;
+                var type = "";
+                var cheq = "";
 
-                var temp = Model.Permissions.FirstOrDefault().Id;
-                var cheq = "checked";
-                 <tr>
+                foreach (var toCheck in Model.Permissions)      //recorro cada uno de los permisos que tiene el usuario.
+                {
+                    temp = item.Permissions.Contains(toCheck);  //true si el recorrido de todos los permisos se encuentra slguno de los permisos que tiene el usuario.
+                    type = toCheck.Type;
+                    if (temp)
+                    {
+                        cheq = "checked";
+                        break;
+                    }
+                }
+                <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td><input type="checkbox" name="Permissions1" value=" " /></td>
-                    <td><input type="checkbox" @if (valueCreate == temp) { @cheq; }  name="Permissions1" value="@valueCreate" /></td>
-                    <td><input type="checkbox" @if (valueView == temp) { @cheq; } name="Permissions1" value="@valueView" /></td>
-                    <td><input type="checkbox" @if (valueEdit == temp) { @cheq; } name="Permissions1" value="@valueEdit" /></td>
-                    <td><input type="checkbox" @if (valueDelete == temp) { @cheq; } name="Permissions1" value="@valueDelete" /></td>
+                    <td><input type="checkbox" @if ((type=="Create") & (temp)) { @cheq; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
+                    <td><input type="checkbox" @if ((type=="View") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
+                    <td><input type="checkbox" @if ((type=="Edit") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
+                    <td><input type="checkbox" @if ((type=="Delete") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
+
+                    @*<td><input type="checkbox" name="Permissions1" value=" " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Create") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "View") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Edit") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Delete") { item.Value.ToString(); } " /></td>*@
 
                     @*<td>@Html.CheckBox(item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Name,true)</td>
                         <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "View").Name)</td>
