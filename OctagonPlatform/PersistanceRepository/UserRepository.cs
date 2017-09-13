@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
@@ -31,12 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
             var viewModel = new UserFormViewModel()
             {
                 Partners = Context.Partners.ToList(),
-                PermissionsAvilable = Context.Permissions.Select(p => new SelectListItem
-                {
-                    Group = new SelectListGroup { Name = p.Type },
-                    Text = p.Name,
-                    Value = p.Id.ToString(),
-                }).ToList(),
+
                 SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
             };
 
@@ -57,13 +53,19 @@ namespace OctagonPlatform.PersistanceRepository
 
         public UserEditFormViewModel UserToEdit(int id)
         {
-            var result = Table
+            User result = Table
                 .Include("Permissions")
-                .SingleOrDefault(c => c.Id == id);
+                .Single(c => c.Id == id);
+
+            var mapping = new MappingProfile();
+
+            var userEdit = new UserEditFormViewModel();
+
+            //mapping.CreateMap(result, userEdit);
 
             if (result != null)
             {
-                var userEdit = new UserEditFormViewModel()
+                userEdit = new UserEditFormViewModel()
                 {
                     Email = result.Email,
                     Id = result.Id,
@@ -76,10 +78,30 @@ namespace OctagonPlatform.PersistanceRepository
                     Phone = result.Phone,
                     Status = result.Status,
                     UserName = result.UserName,
-                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
+                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").Select(c=>c).ToList(),
+                    PermissionsAssigned = new List<PermissionAssigned>()
                 };
 
                 
+
+                //foreach (var setPerm in userEdit.PermissionsAll)
+                //{
+                //    PermissionAssigned permissionA = new PermissionAssigned();
+              
+                //    permissionA.Selected = false;
+                //    permissionA.Type = setPerm.Type;
+                //    permissionA.Text = setPerm.Name;
+                //    permissionA.Value = setPerm.Id.ToString();
+
+                //    Permission permiso = userEdit.Permissions.FirstOrDefault(c => c.Id == setPerm.Id);
+
+                //    if (permiso != null) { permissionA.Selected = true; }
+
+                //    permissionA.Group = new SelectListGroup { Name = setPerm.SetOfPermissionId.ToString()}; //el setOf permiso seria las filas en el view de permisos
+
+                //    userEdit.PermissionsAssigned.Add(permissionA);
+                //};
+
                 return userEdit;
 
             }
@@ -91,7 +113,7 @@ namespace OctagonPlatform.PersistanceRepository
 
             if (action == "Edit")
             {
-                var user = Table.SingleOrDefault(c => c.Id == viewModel.Id);
+                var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id);
 
                 if (user != null)
                 {
@@ -103,8 +125,11 @@ namespace OctagonPlatform.PersistanceRepository
                     user.UserName = viewModel.UserName.Trim();
                     user.IsLocked = viewModel.IsLocked;
                     user.PartnerId = viewModel.PartnerId;
+
                     if (!string.IsNullOrEmpty(viewModel.Password))
                         user.Password = viewModel.Password.Trim();
+
+                    user.Permissions = viewModel.Permissions;
 
                     Edit(user);
                 }
@@ -133,12 +158,14 @@ namespace OctagonPlatform.PersistanceRepository
 
         public User UserDetails(int id)
         {
-            return Table.Where(x => x.Id == id)
+            var userDetails = Table.Where(x => x.Id == id)
                 .Include(x => x.Partner)
                 .Include(x => x.Permissions)
                 //.Include(x => x.Partner.BankAccounts)
                 .Include(x => x.Partner.Terminals)
                 .FirstOrDefault();
+           
+            return userDetails;
         }
 
         public void DeleteUser(int id)
@@ -161,13 +188,12 @@ namespace OctagonPlatform.PersistanceRepository
                 Name = viewModel.Name,
                 PartnerId = viewModel.PartnerId,
                 Partners = Context.Partners,
-                PermissionsAvilable = viewModel.PermissionsAvilable,
                 Phone = viewModel.Phone,
                 Status = viewModel.Status,
                 UserName = viewModel.UserName,
                 SetOfPermissions = viewModel.SetOfPermissions,
                 Error = viewModel.Error,
-                
+
             };
         }
 

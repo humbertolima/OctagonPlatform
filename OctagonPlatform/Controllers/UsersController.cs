@@ -17,7 +17,6 @@ namespace OctagonPlatform.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-
         public UsersController(IUserRepository userRepository)
         {
             _userRepository = userRepository;
@@ -135,7 +134,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserEditFormViewModel editViewModel)
+        public ActionResult Edit(UserEditFormViewModel editViewModel, string[] permissions1)
         {
             var viewModel = default(UserFormViewModel);
 
@@ -146,6 +145,8 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
+                editViewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
+
                 //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
                 viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 

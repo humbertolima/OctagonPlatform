@@ -2,6 +2,7 @@
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
@@ -39,7 +40,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         public string ConfirmPassword { get; set; }
 
         public bool IsLocked { get; set; }
@@ -51,7 +52,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         
         public ICollection<Permission> Permissions { get; set; }
 
-        public ICollection<SetOfPermission> SetOfPermissions { get; set; }
+        public IList<PermissionAssigned> PermissionsAssigned { get; set; }
+
+        public IList<SetOfPermission> SetOfPermissions { get; set; }
+
+        public ICollection<Permission> PermissionsAll { get; set; }
 
         public string Error { get; set; }
     }
