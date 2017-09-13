@@ -336,7 +336,9 @@
       <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
