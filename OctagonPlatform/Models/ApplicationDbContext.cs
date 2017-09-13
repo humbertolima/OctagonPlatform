@@ -13,6 +13,12 @@ namespace OctagonPlatform.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<SetOfPermission> SetOfPermissions { get; set; }
+        public DbSet<Terminal> Terminals { get; set; }
+        public DbSet<TerminalContact> TerminalContacts { get; set; }
+        public DbSet<LocationType> LocationTypes { get; set; }
+        public DbSet<Make> Makes { get; set; }
+        public DbSet<Model> Models { get; set; }
+
 
         public ApplicationDbContext()
             : base("LocalConection")

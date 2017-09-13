@@ -22,9 +22,9 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int partnerId)
         {
-            return View(_partnerContactRepository.RenderPartnerContactFormViewModel());
+            return View(_partnerContactRepository.RenderPartnerContactFormViewModel(partnerId));
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _partnerContactRepository.SavePartner(viewModel, "Create");
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
             catch (DbEntityValidationException exDb)
             {
@@ -72,7 +72,7 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _partnerContactRepository.SavePartner(viewModel, "Edit");
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new {id = viewModel.PartnerId});
             }
             catch (DbEntityValidationException exDb)
             {
@@ -88,28 +88,23 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        //public ActionResult Details(int id)
-        //{
-        //    return View(_partnerContactRepository.PartnerContactDetails(id));
-        //}
-
         [HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id, int partnerId)
         {
             try
             {
                 _partnerContactRepository.DeletePartner(id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
             catch (DbEntityValidationException exDb)
             {
                 ViewBag.Error = "Validation error deleting Partner" + exDb.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleiting Partner" + ex.Message;
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
         }
     }

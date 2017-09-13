@@ -1,11 +1,9 @@
-﻿using OctagonPlatform.Helpers;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OctagonPlatform.Models
+namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class TerminalContact: IAuditEntity, ISoftDeleted
+    public class TerminalContactFormViewModel
     {
         [Key]
         public int Id { get; set; }
@@ -20,7 +18,7 @@ namespace OctagonPlatform.Models
 
         [Required]
         [Display(Name = "Terminal")]
-        public int TerminalId { get; set; } 
+        public int TerminalId { get; set; }
 
         public Terminal Terminal { get; set; }
 
@@ -65,16 +63,5 @@ namespace OctagonPlatform.Models
         [Required(ErrorMessage = "The zip code is required")]
         [Display(Name = "Zip Code")]
         public int Zip { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public int? DeletedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
-        public string UpdatedByName { get; set; }
-        public string CreatedByName { get; set; }
-        public string DeletedByName { get; set; }
-        public bool Deleted { get; set; }
     }
 }

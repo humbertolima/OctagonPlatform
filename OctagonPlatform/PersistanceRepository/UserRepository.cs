@@ -3,7 +3,6 @@ using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -138,7 +137,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Partner)
                 .Include(x => x.Permissions)
                 //.Include(x => x.Partner.BankAccounts)
-                //.Include(x => x.Partner.Terminals)
+                .Include(x => x.Partner.Terminals)
                 .FirstOrDefault();
         }
 

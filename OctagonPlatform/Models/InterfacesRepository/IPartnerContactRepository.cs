@@ -7,13 +7,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<PartnerContact> GetAllPartners();
 
-        PartnerContactFormViewModel RenderPartnerContactFormViewModel();
+        PartnerContactFormViewModel RenderPartnerContactFormViewModel(int partnerId);
 
         PartnerContactFormViewModel PartnerContactToEdit(int id);
 
         void SavePartner(PartnerContactFormViewModel viewModel, string action);
-
-        PartnerContact PartnerContactDetails(int id);
 
         void DeletePartner(int id);
 

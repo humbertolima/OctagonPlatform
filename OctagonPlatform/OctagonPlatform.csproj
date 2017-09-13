@@ -198,7 +198,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogosController.cs" />
-    <Compile Include="Controllers\PartnersContactController.cs" />
+    <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -343,6 +343,22 @@
     <Compile Include="Migrations\201709100303426_PopulateLocationTypes.Designer.cs">
       <DependentUpon>201709100303426_PopulateLocationTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709120144204_UpdateTerminalContact.cs" />
+    <Compile Include="Migrations\201709120144204_UpdateTerminalContact.Designer.cs">
+      <DependentUpon>201709120144204_UpdateTerminalContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.cs" />
+    <Compile Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.Designer.cs">
+      <DependentUpon>201709120153398_AddedCollectionTerminalsToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.cs" />
+    <Compile Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.Designer.cs">
+      <DependentUpon>201709120349215_AddedUpdateByCreatedByDeletedByNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709130313049_EmailMoreThat16.cs" />
+    <Compile Include="Migrations\201709130313049_EmailMoreThat16.Designer.cs">
+      <DependentUpon>201709130313049_EmailMoreThat16.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -356,15 +372,18 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalContactRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
-    <Compile Include="Models\FormsViewModels\LogoFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\PartnerContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\PartnerFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserFormViewModel.cs" />
@@ -383,6 +402,8 @@
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -654,12 +675,10 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
-    <Content Include="Views\PartnerContacts\Index.cshtml" />
     <Content Include="Views\PartnerContacts\Create.cshtml" />
     <Content Include="Views\PartnerContacts\Edit.cshtml" />
     <Content Include="Views\Partners\Details.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
-    <Content Include="Views\Partners\Sections\Contacts.cshtml" />
     <Content Include="Views\Partners\Sections\Users.cshtml" />
     <Content Include="Views\Partners\Sections\Partners.cshtml" />
     <Content Include="Views\Partners\Sections\BankAccounts.cshtml" />
@@ -671,6 +690,8 @@
     <Content Include="Views\Partners\Sections\GeneralInfo.cshtml" />
     <Content Include="Views\Logos\Index.cshtml" />
     <Content Include="Views\Partners\Search.cshtml" />
+    <Content Include="Views\PartnerContacts\Index.cshtml" />
+    <Content Include="Views\Partners\Sections\Contacts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -787,6 +808,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709100303426_PopulateLocationTypes.resx">
       <DependentUpon>201709100303426_PopulateLocationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709120144204_UpdateTerminalContact.resx">
+      <DependentUpon>201709120144204_UpdateTerminalContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.resx">
+      <DependentUpon>201709120153398_AddedCollectionTerminalsToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.resx">
+      <DependentUpon>201709120349215_AddedUpdateByCreatedByDeletedByNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709130313049_EmailMoreThat16.resx">
+      <DependentUpon>201709130313049_EmailMoreThat16.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

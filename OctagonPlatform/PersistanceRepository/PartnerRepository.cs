@@ -90,6 +90,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.Parent)
                 .SingleOrDefault();
             if (partner != null)
             {
@@ -124,14 +125,18 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Partner PartnerDetails(int id)
         {
-            return Table.Where(x => x.Id == id)
+           return Table.Where(x => x.Id == id)
                 .Include(x => x.Parent)
                 .Include(x => x.PartnerContacts)
                 .Include(x => x.Users)
                 .Include(x => x.Partners)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
                 //.Include(x => x.BankAccounts)
-                .Include(x => x.Terminal)
+                .Include(x => x.Terminals)
                 .FirstOrDefault();
+           
         }
 
         public void DeletePartner(int id)

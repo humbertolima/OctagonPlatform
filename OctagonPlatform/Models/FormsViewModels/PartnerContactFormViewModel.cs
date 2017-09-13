@@ -12,8 +12,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
-        public IEnumerable<Partner> Partners { get; set; }
-
         [Required(ErrorMessage = "The name is required")]
         [StringLength(20)]
         public string Name { get; set; }
@@ -24,7 +22,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
+        [StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }

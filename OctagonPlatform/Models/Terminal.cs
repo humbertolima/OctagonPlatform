@@ -82,6 +82,8 @@ namespace OctagonPlatform.Models
         [Display(Name = "Zip Code")]
         public int Zip { get; set; }
 
+        public ICollection<User> Users { get; set; }    
+
 
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
@@ -89,11 +91,16 @@ namespace OctagonPlatform.Models
         public int? DeletedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int? UpdatedBy { get; set; }
+        public string UpdatedByName { get; set; }
+        public string CreatedByName { get; set; }
+        public string DeletedByName { get; set; }
         public bool Deleted { get; set; }
 
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();
+
+            Users = new Collection<User>();
         }
     }
 }

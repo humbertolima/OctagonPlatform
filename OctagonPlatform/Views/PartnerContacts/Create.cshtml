@@ -5,7 +5,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-<h2>Create</h2>
+<h2>Create Contact</h2>
 
 @using (Html.BeginForm("Create", "PartnerContacts"))
 {
@@ -16,7 +16,9 @@
         <strong>@ViewBag.Error</strong>
     </p>
     <p>@Html.ValidationSummary()</p>
+    
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.PartnerId)
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
         @Html.TextBoxFor(m => m.Name, new {@class = "form-control", autofocus = "autofocus"})
@@ -24,15 +26,14 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", autofocus = "autofocus"})
         @Html.ValidationMessageFor(m => m.LastName)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.PartnerId)
-        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.PartnerId)
+        @Html.LabelFor(m => m.ContactTypeId)
+        @Html.DropDownListFor(m => m.ContactTypeId, new SelectList(Model.ContactTypes, "Id", "Name"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ContactTypeId)
     </div>
-    
     <div class="form-group">
         @Html.LabelFor(m => m.Address1)
         @Html.TextBoxFor(m => m.Address1, new {@class = "form-control"})
@@ -56,7 +57,8 @@
             @Html.ValidationMessageFor(m => m.CountryId)
 
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        </div>
     </div>
     <div class="form-group">
         <div id="States">
@@ -71,7 +73,8 @@
             @Html.ValidationMessageFor(m => m.StateId)
 
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        </div>
     </div>
     <div class="form-group">
         <div id="Cities">
@@ -85,21 +88,22 @@
             </select>
             @Html.ValidationMessageFor(m => m.CityId)
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Email, new {@class = "form-control", autofocus = "autofocus"})
         @Html.ValidationMessageFor(m => m.Email)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Phone)
-        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Phone, new {@class = "form-control", autofocus = "autofocus"})
         @Html.ValidationMessageFor(m => m.Phone)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Zip)
-        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Zip, new {@class = "form-control", autofocus = "autofocus", @placeholder = "33181"})
         @Html.ValidationMessageFor(m => m.Zip)
     </div>
     <div class="form-group">
@@ -108,6 +112,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/xpopulate")
