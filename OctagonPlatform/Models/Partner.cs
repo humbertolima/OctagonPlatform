@@ -84,9 +84,9 @@ namespace OctagonPlatform.Models
 
         
          public ICollection<Terminal> Terminals { get; set; }
-        /*
+        
          public ICollection<BankAccount> BankAccounts { get; set; }
-             */
+             
 
         public Partner()
         {
@@ -98,8 +98,8 @@ namespace OctagonPlatform.Models
 
             Terminals = new Collection<Terminal>();
 
-            /*BankAccounts = new Collection<BankAccounts>();
-            */
+            BankAccounts = new Collection<BankAccount>();
+            
         }
 
         

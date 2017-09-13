@@ -67,23 +67,28 @@ namespace OctagonPlatform.Models
 
         public string Address2 { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
-        [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [Index(IsUnique = true)]
-        public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
-        public string Phone { get; set; }
-
         [Required(ErrorMessage = "The zip code is required")]
         [Display(Name = "Zip Code")]
         public int Zip { get; set; }
 
-        public ICollection<User> Users { get; set; }    
+        public ICollection<User> Users { get; set; }
 
+        [Required]
+        [Display(Name = "Emv is Ready")]
+        public bool EmvReady { get; set; }
+
+        [Required]
+        [Display(Name = "Machine serial number")]
+        [Index(IsUnique = true)]
+        [StringLength(50)]
+        public string MachineSerialNumber { get; set; }
+
+        [Display(Name = "Veep Serial number")]
+        public string VeppSerailNumber { get; set; }
+
+        public string SoftwareVersion { get; set; }
+
+        public string FimwareVersion { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }

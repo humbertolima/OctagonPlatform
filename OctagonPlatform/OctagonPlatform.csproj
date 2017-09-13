@@ -205,6 +205,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountType.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
@@ -328,37 +329,9 @@
     <Compile Include="Migrations\201709052040597_UniquePartnerContactEmail.Designer.cs">
       <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709092221415_TerminalTerminalContactModelMake.cs" />
-    <Compile Include="Migrations\201709092221415_TerminalTerminalContactModelMake.Designer.cs">
-      <DependentUpon>201709092221415_TerminalTerminalContactModelMake.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709100144052_PopulateMake.cs" />
-    <Compile Include="Migrations\201709100144052_PopulateMake.Designer.cs">
-      <DependentUpon>201709100144052_PopulateMake.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709100236401_PopulateModels.cs" />
-    <Compile Include="Migrations\201709100236401_PopulateModels.Designer.cs">
-      <DependentUpon>201709100236401_PopulateModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709100303426_PopulateLocationTypes.cs" />
-    <Compile Include="Migrations\201709100303426_PopulateLocationTypes.Designer.cs">
-      <DependentUpon>201709100303426_PopulateLocationTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709120144204_UpdateTerminalContact.cs" />
-    <Compile Include="Migrations\201709120144204_UpdateTerminalContact.Designer.cs">
-      <DependentUpon>201709120144204_UpdateTerminalContact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.cs" />
-    <Compile Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.Designer.cs">
-      <DependentUpon>201709120153398_AddedCollectionTerminalsToUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.cs" />
-    <Compile Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.Designer.cs">
-      <DependentUpon>201709120349215_AddedUpdateByCreatedByDeletedByNames.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709130313049_EmailMoreThat16.cs" />
-    <Compile Include="Migrations\201709130313049_EmailMoreThat16.Designer.cs">
-      <DependentUpon>201709130313049_EmailMoreThat16.cs</DependentUpon>
+    <Compile Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs" />
+    <Compile Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.Designer.cs">
+      <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -369,7 +342,6 @@
       <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\City.cs" />
@@ -800,29 +772,8 @@
     <EmbeddedResource Include="Migrations\201709052040597_UniquePartnerContactEmail.resx">
       <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709092221415_TerminalTerminalContactModelMake.resx">
-      <DependentUpon>201709092221415_TerminalTerminalContactModelMake.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709100144052_PopulateMake.resx">
-      <DependentUpon>201709100144052_PopulateMake.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709100236401_PopulateModels.resx">
-      <DependentUpon>201709100236401_PopulateModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709100303426_PopulateLocationTypes.resx">
-      <DependentUpon>201709100303426_PopulateLocationTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709120144204_UpdateTerminalContact.resx">
-      <DependentUpon>201709120144204_UpdateTerminalContact.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709120153398_AddedCollectionTerminalsToUsers.resx">
-      <DependentUpon>201709120153398_AddedCollectionTerminalsToUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709120349215_AddedUpdateByCreatedByDeletedByNames.resx">
-      <DependentUpon>201709120349215_AddedUpdateByCreatedByDeletedByNames.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709130313049_EmailMoreThat16.resx">
-      <DependentUpon>201709130313049_EmailMoreThat16.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.resx">
+      <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -14,6 +14,7 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
 
         [Required]
+        [Display(Name = "Make")]
         public int MakeId { get; set; }
 
         public Make Make { get; set; }

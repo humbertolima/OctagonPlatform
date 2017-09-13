@@ -46,6 +46,8 @@ namespace OctagonPlatform.Models
         [Display(Name = "State")]
         public int StateId { get; set; }
 
+        public State State { get; set; }
+
         [Display(Name = "City")]
         public int CityId { get; set; }
 
@@ -60,6 +62,8 @@ namespace OctagonPlatform.Models
 
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
+        [Index(IsUnique = true)]
+        [StringLength(50)]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "The zip code is required")]

@@ -18,7 +18,7 @@ namespace OctagonPlatform.Models
         public DbSet<LocationType> LocationTypes { get; set; }
         public DbSet<Make> Makes { get; set; }
         public DbSet<Model> Models { get; set; }
-
+        public DbSet<BankAccount> BankAccounts { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
