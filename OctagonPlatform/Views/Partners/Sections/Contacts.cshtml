@@ -1,1 +1,73 @@
-﻿<h1>Contacts</h1>
+﻿@model OctagonPlatform.Models.Partner
+
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink(
+                                       linkText: "Add Contact",
+                                       actionName: "Create",
+                                       controllerName: "PartnerContacts",
+                                       routeValues: new {
+                                           partnerId = Model.Id
+                                       },
+                                       htmlAttributes: null
+                                       )</li>
+
+
+            </ul>
+            
+        </div>
+    </div>
+</nav>
+<div class="page-header">
+    <h2 class="panel-title">List Contacts</h2>
+</div>
+<p class="alert alert-danger">
+    <strong>@ViewBag.Error</strong>
+</p>
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>Partner</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Addres</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.PartnerContacts)
+    {
+        if (!item.Deleted)
+        {
+            <tr class="info">
+                <td>@item.Partner.BusinessName</td>
+                <td>@item.Name</td>
+                <td>@item.LastName</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>@item.Address1</td>
+                <td>@Html.ActionLink(
+                        linkText: "Edit",
+                        actionName: "Edit",
+                        controllerName: "PartnerContacts",
+                        routeValues: new
+                        {
+                            id = item.Id
+                        },
+                        htmlAttributes: null
+                        )</td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "PartnerContacts", new {id = item.Id, partnerId = Model.Id}, new {onclick = "return confirm('Are sure wants to delete?');"})
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+

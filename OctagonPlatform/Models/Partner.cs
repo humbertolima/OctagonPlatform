@@ -27,7 +27,7 @@ namespace OctagonPlatform.Models
         public string BusinessName { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
-        public StatusType.Status Status { get; set; } 
+        public StatusType.Status Status { get; set; }   
 
         [Required(ErrorMessage = "The address1 is required")]
         [StringLength(50)]
@@ -55,7 +55,7 @@ namespace OctagonPlatform.Models
         public City City { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
+        [StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         [Index(IsUnique = true)]
@@ -82,22 +82,23 @@ namespace OctagonPlatform.Models
 
         public ICollection<PartnerContact> PartnerContacts { get; set; }
 
-        /*
+        
          public ICollection<Terminal> Terminals { get; set; }
-
+        /*
          public ICollection<BankAccount> BankAccounts { get; set; }
              */
 
         public Partner()
         {
             Users = new Collection<User>();
+
             PartnerContacts = new Collection<PartnerContact>();
 
             Partners = new Collection<Partner>();
 
-            /*
-            Terminals = new Collection<Terminals>();
-            BankAccounts = new Collection<BankAccounts>();
+            Terminals = new Collection<Terminal>();
+
+            /*BankAccounts = new Collection<BankAccounts>();
             */
         }
 
@@ -113,6 +114,9 @@ namespace OctagonPlatform.Models
         public DateTime? UpdatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
+        public string UpdatedByName { get; set; }
+        public string CreatedByName { get; set; }
+        public string DeletedByName { get; set; }
 
         public bool Deleted { get; set; }
     }

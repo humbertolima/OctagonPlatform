@@ -34,6 +34,9 @@ namespace OctagonPlatform
 
             bundles.Add(new ScriptBundle("~/bundles/xpopulate").Include(
                         "~/Scripts/xpopulate.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/search").Include(
+                "~/Scripts/Search.js"));
         }
     }
 }

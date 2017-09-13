@@ -1,0 +1,18 @@
+﻿@model IEnumerable<OctagonPlatform.Models.Partner>
+
+   @foreach (var item in Model)
+   {
+       <tr class="active">
+           <td>@item.Parent.BusinessName</td>
+           <td>@item.BusinessName</td>
+           <td>@item.Address1</td>
+           <td>@item.Mobile</td>
+           <td>@item.Email</td>
+           <td>@item.Status</td>
+           <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+           <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id},
+                                                            new {onclick = "return confirm('Are sure wants to delete?');"})</td>
+           <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
+       </tr>
+   }
+

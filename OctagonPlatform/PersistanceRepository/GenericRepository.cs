@@ -48,7 +48,7 @@ namespace OctagonPlatform.PersistanceRepository
              
                 (obj as IAuditEntity).CreatedAt = date;
                 (obj as IAuditEntity).CreatedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
-
+                (obj as IAuditEntity).CreatedByName = userName;
             }
             Save();
         }
@@ -64,7 +64,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var userName = user.Identity.Name;
                 (obj as IAuditEntity).UpdatedAt = date;
                 (obj as IAuditEntity).UpdatedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
-
+                (obj as IAuditEntity).UpdatedByName = userName;
             }
             Save();
         }
@@ -82,7 +82,7 @@ namespace OctagonPlatform.PersistanceRepository
                     var userName = user.Identity.Name;
                     (existing as IAuditEntity).DeletedAt = date;
                     (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
-
+                    (existing as IAuditEntity).DeletedByName = userName;
                 }
 
             }

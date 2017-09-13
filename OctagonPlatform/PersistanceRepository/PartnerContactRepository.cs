@@ -11,19 +11,21 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public IEnumerable<PartnerContact> GetAllPartners()
         {
-            return Table.Where(c => c.Deleted == false)
-                .Include(x => x.Partner)
+            return Table.Where(c => !c.Deleted)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
                 .ToList();
         }
 
-        public PartnerContactFormViewModel RenderPartnerContactFormViewModel()
+        public PartnerContactFormViewModel RenderPartnerContactFormViewModel(int partnerId)
         {
             return new PartnerContactFormViewModel()
             {
-                Partners =  Context.Partners.Where(x => !x.Deleted).ToList(),
                 Countries = Context.Countries.ToList(),
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
+                PartnerId = partnerId,
                 ContactTypes = Context.ContactTypes.ToList()
             };
         }
@@ -42,7 +44,6 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     Id = partnerContact.Id,
                     PartnerId = partnerContact.PartnerId,
-                    Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
                     Name = partnerContact.Name,
                     LastName = partnerContact.LastName,
                     Email = partnerContact.Email,
@@ -65,7 +66,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 };
             }
-            return RenderPartnerContactFormViewModel();
+            return RenderPartnerContactFormViewModel(id);
         }
 
         public void SavePartner(PartnerContactFormViewModel viewModel, string action)
@@ -110,11 +111,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public PartnerContact PartnerContactDetails(int id)
-        {
-            return new PartnerContact();
-        }
-
+        
         public void DeletePartner(int id)
         {
             Delete(id);
@@ -126,7 +123,6 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Id = viewModel.Id,
                 PartnerId = viewModel.PartnerId,
-                Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
                 Name = viewModel.Name,
                 LastName = viewModel.LastName,
                 Email = viewModel.Email,

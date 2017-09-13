@@ -1,6 +1,4 @@
-﻿
-@using System.IdentityModel.Tokens
-@model IEnumerable<OctagonPlatform.Models.Partner>
+﻿@model IEnumerable<OctagonPlatform.Models.Partner>
 
 @{
     ViewBag.Title = "Index";
@@ -8,9 +6,20 @@
 }
 
 <h2>List of Partners</h2>
-<p>
-    @Html.ActionLink("Add Partner", "Create", "Partners", routeValues:null, htmlAttributes: new{@class = "btn btn-info" })
-</p>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink("Add Partner", "Create", "Partners")</li>
+            </ul>
+            <div class="form-group">
+            <input type="text" class="form-control" id="search" placeholder="Search" name="search" />
+            </div> 
+        </div>
+    </div>
+</nav>
+
 <p class="alert alert-danger">
     <strong>@ViewBag.Error</strong>
 </p>
@@ -26,23 +35,25 @@
         <th>Status</th>
     </tr>
     </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr class="active">
-            <td>@item.Parent.BusinessName</td>
-            <td>@item.BusinessName</td>
-            <td>@item.Address1</td>
-            <td>@item.Mobile</td>
-            <td>@item.Email</td>
-            <td>@item.Status</td>
-            <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
-            <td>@Html.ActionLink("Delete", "Delete", new { id = item.Id},
-                    new { onclick = "return confirm('Are sure wants to delete?');"})</td>
-            <td>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
-        </tr>
-    }
-
+    <tbody id ="listOfPartners">
+        @foreach (var item in Model)
+        {
+            <tr class="active">
+                <td>@item.Parent.BusinessName</td>
+                <td>@item.BusinessName</td>
+                <td>@item.Address1</td>
+                <td>@item.Mobile</td>
+                <td>@item.Email</td>
+                <td>@item.Status</td>
+                <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id},
+                                                                 new {onclick = "return confirm('Are sure wants to delete?');"})</td>
+                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
+            </tr>
+        }
+    </tbody>
 </table> 
         
-
+@section Scripts {
+    @Scripts.Render("~/bundles/search")
+}

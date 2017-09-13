@@ -15,12 +15,12 @@ namespace OctagonPlatform.Models
 
         public ICollection<PartnerContact> PartnerContacts { get; set; }
 
-        //public ICollection<TerminalContact> TerminalContacts { get; set; }
+        public ICollection<TerminalContact> TerminalContacts { get; set; }
 
         public ContactType()
         {
             PartnerContacts = new Collection<PartnerContact>();
-            //TerminalContacts = new Collection<TerminalContact>();
+            TerminalContacts = new Collection<TerminalContact>();
         }
 
     }

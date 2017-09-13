@@ -14,20 +14,20 @@
     @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, "")
 </div>
 <div id="generalInfo">
-    @Html.Partial("Sections/GeneralInfo")
+    @Html.Partial("Sections/GeneralInfo", Model)
 </div>
 <div id="contacts">
-    @Html.Partial("Sections/Contacts")
+    @Html.Partial("Sections/Contacts", Model)
 </div>
 <div id="users">
-    @Html.Partial("Sections/Users")
+    @Html.Partial("Sections/Users", Model)
 </div>
 <div id="partners">
-    @Html.Partial("Sections/Partners")
+    @Html.Partial("Sections/Partners", Model)
 </div>
 <div id="bankAccounts">
-    @Html.Partial("Sections/BankAccounts")
+    @Html.Partial("Sections/BankAccounts", Model)
 </div>
 <div id="terminals">
-    @Html.Partial("Sections/Terminals")
+    @Html.Partial("Sections/Terminals", Model)
 </div>

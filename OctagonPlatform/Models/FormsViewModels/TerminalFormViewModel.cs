@@ -1,6 +1,7 @@
 ﻿namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class LogoFormViewModel
+    public class TerminalFormViewModel
     {
+
     }
 }

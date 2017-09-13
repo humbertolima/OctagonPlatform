@@ -26,7 +26,7 @@ namespace OctagonPlatform.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
-        [StringLength(16, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
+        [StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         [Index(IsUnique = true)]
@@ -82,6 +82,9 @@ namespace OctagonPlatform.Models
         public DateTime? UpdatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
+        public string UpdatedByName { get; set; }
+        public string CreatedByName { get; set; }
+        public string DeletedByName { get; set; }
 
         public bool Deleted { get; set; }
     }

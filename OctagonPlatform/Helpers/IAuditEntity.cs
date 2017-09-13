@@ -25,5 +25,11 @@ namespace OctagonPlatform.Helpers
 
         [Display(Name = "Updated By")]
         int? UpdatedBy { get; set; }
+
+        string UpdatedByName { get; set; }
+
+        string CreatedByName { get; set; }
+
+        string DeletedByName { get; set; }
     }
 }
