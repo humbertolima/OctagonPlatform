@@ -30,8 +30,9 @@ namespace OctagonPlatform.PersistanceRepository
             
             return new PartnerFormViewModel()
             {
-                // Comentado porque lo llenare en ajax en dependencia de lo que se necesite.
+                
                 Parents = Table.Where(x => !x.Deleted).ToList(),
+                
                 Countries = Context.Countries.ToList(),
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList()
