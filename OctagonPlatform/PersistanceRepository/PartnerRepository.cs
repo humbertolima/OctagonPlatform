@@ -13,7 +13,7 @@ namespace OctagonPlatform.PersistanceRepository
         public IEnumerable<Partner> GetAllPartners()
         {
 
-            return Table.Where(c => c.Deleted == false)
+            return Table.Where(c => !c.Deleted)
                 .Include(x => x.Parent)
                 .ToList();
         }

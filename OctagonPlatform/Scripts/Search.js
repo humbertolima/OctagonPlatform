@@ -1,8 +1,8 @@
 ﻿
 
-    $("#search").keydown( function() {
+    $("#searchPartner").keydown( function() {
 
-        var searchText = $("#search").val();
+        var searchText = $("#searchPartner").val();
         $.ajax({
             type: "Post",
             url: "Partners/Search?search=" + searchText,
@@ -12,4 +12,18 @@
                 $("#listOfPartners").html(data);
             }
     });
+    });
+
+    $("#searchPartnerContact").keydown(function () {
+
+        var searchText = $("#searchPartnerContact").val();
+        $.ajax({
+            type: "Post",
+            url: "PartnerContacts/Search?search=" + searchText,
+            datatype: "html",
+            success: function (data) {
+
+                $("#listOfPartnersContact").html(data);
+            }
+        });
     });

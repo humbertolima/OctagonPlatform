@@ -107,5 +107,11 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
         }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_partnerContactRepository.Search(search));
+        }
     }
 }

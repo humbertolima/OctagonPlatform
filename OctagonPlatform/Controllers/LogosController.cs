@@ -45,10 +45,11 @@ namespace OctagonPlatform.Controllers
             var userLogged = _context.Users.SingleOrDefault(x => x.UserName == User.Identity.Name);
 
             if (userLogged == null || userLogged.PartnerId != partner.Id)
-                return RedirectToAction("Details", "Partners", new {id = partnerId});
-
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             Session["logo"] = partner.Logo;
             Session["businessName"] = partner.BusinessName;
+            
+
             return RedirectToAction("Details", "Partners", new {id = partnerId});
         }
     }

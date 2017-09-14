@@ -15,6 +15,17 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.Partner)
+                .ToList();
+        }
+
+        public IEnumerable<PartnerContact> Search(string search)
+        {
+            return Table.Where(c => !c.Deleted && (c.Name.Contains(search) || c.Partner.BusinessName.Contains(search)))
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .Include(x => x.Partner)
                 .ToList();
         }
 
@@ -36,6 +47,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.Partner)
                 .SingleOrDefault();
 
             if (partnerContact != null)

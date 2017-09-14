@@ -38,7 +38,6 @@ namespace OctagonPlatform.Models
         [Required]
         public string FedTax { get; set; }
 
-        [Required]
         [Display(Name = "Social Security Number")]
         public string Ssn { get; set; }
 

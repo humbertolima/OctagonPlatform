@@ -397,6 +397,22 @@
     <Compile Include="Migrations\201709141906082_BankAccountActualizado.Designer.cs">
       <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709142127198_PopulateLocationTypes.cs" />
+    <Compile Include="Migrations\201709142127198_PopulateLocationTypes.Designer.cs">
+      <DependentUpon>201709142127198_PopulateLocationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142134115_PopulateMakes.cs" />
+    <Compile Include="Migrations\201709142134115_PopulateMakes.Designer.cs">
+      <DependentUpon>201709142134115_PopulateMakes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142136084_PopulateModels.cs" />
+    <Compile Include="Migrations\201709142136084_PopulateModels.Designer.cs">
+      <DependentUpon>201709142136084_PopulateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142154436_UpdateTerminalTable.cs" />
+    <Compile Include="Migrations\201709142154436_UpdateTerminalTable.Designer.cs">
+      <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -743,6 +759,7 @@
     <Content Include="Views\Partners\Search.cshtml" />
     <Content Include="Views\PartnerContacts\Index.cshtml" />
     <Content Include="Views\Partners\Sections\Contacts.cshtml" />
+    <Content Include="Views\PartnerContacts\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -895,6 +912,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709141906082_BankAccountActualizado.resx">
       <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142127198_PopulateLocationTypes.resx">
+      <DependentUpon>201709142127198_PopulateLocationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142134115_PopulateMakes.resx">
+      <DependentUpon>201709142134115_PopulateMakes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142136084_PopulateModels.resx">
+      <DependentUpon>201709142136084_PopulateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142154436_UpdateTerminalTable.resx">
+      <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

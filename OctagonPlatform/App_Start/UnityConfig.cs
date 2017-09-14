@@ -32,7 +32,9 @@ namespace OctagonPlatform
 
             container.RegisterType<IPartnerContactRepository, PartnerContactRepository>();
 
-            
+            container.RegisterType<ITerminalRepository, TerminalRepository>();
+
+            container.RegisterType<ITerminalContactRepository, TerminalContactRepository>();
         }
     }
 }
