@@ -206,13 +206,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccountType.cs" />
+    <Compile Include="Helpers\Cassette.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
+    <Compile Include="Helpers\GreaterOrLessAmmount.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\PermissionsAssigned.cs" />
+    <Compile Include="Helpers\Settled.cs" />
     <Compile Include="Helpers\Status.cs" />
+    <Compile Include="Helpers\Surcharge.cs" />
     <Compile Include="Migrations\201708160653179_Initial.cs" />
     <Compile Include="Migrations\201708160653179_Initial.Designer.cs">
       <DependentUpon>201708160653179_Initial.cs</DependentUpon>
@@ -333,6 +337,62 @@
     <Compile Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.Designer.cs">
       <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709132110567_ActualizacionTerminal.cs" />
+    <Compile Include="Migrations\201709132110567_ActualizacionTerminal.Designer.cs">
+      <DependentUpon>201709132110567_ActualizacionTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132119208_TerminalPictures.cs" />
+    <Compile Include="Migrations\201709132119208_TerminalPictures.Designer.cs">
+      <DependentUpon>201709132119208_TerminalPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132130326_Notes.cs" />
+    <Compile Include="Migrations\201709132130326_Notes.Designer.cs">
+      <DependentUpon>201709132130326_Notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132136470_Event.cs" />
+    <Compile Include="Migrations\201709132136470_Event.Designer.cs">
+      <DependentUpon>201709132136470_Event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132141168_Documents.cs" />
+    <Compile Include="Migrations\201709132141168_Documents.Designer.cs">
+      <DependentUpon>201709132141168_Documents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs" />
+    <Compile Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.Designer.cs">
+      <DependentUpon>201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132201470_Transactions.cs" />
+    <Compile Include="Migrations\201709132201470_Transactions.Designer.cs">
+      <DependentUpon>201709132201470_Transactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132207182_Contracts.cs" />
+    <Compile Include="Migrations\201709132207182_Contracts.Designer.cs">
+      <DependentUpon>201709132207182_Contracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132231438_ActualizaciondeTerminals.cs" />
+    <Compile Include="Migrations\201709132231438_ActualizaciondeTerminals.Designer.cs">
+      <DependentUpon>201709132231438_ActualizaciondeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs" />
+    <Compile Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.Designer.cs">
+      <DependentUpon>201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.cs" />
+    <Compile Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.Designer.cs">
+      <DependentUpon>201709140051236_ActualizacionStartDateEnContracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140143264_VaultCash.cs" />
+    <Compile Include="Migrations\201709140143264_VaultCash.Designer.cs">
+      <DependentUpon>201709140143264_VaultCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140220105_Surcharges.cs" />
+    <Compile Include="Migrations\201709140220105_Surcharges.Designer.cs">
+      <DependentUpon>201709140220105_Surcharges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140234360_InterChange.cs" />
+    <Compile Include="Migrations\201709140234360_InterChange.Designer.cs">
+      <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -346,11 +406,15 @@
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
+    <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
+    <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
@@ -362,17 +426,23 @@
     <Compile Include="Models\FormsViewModels\PartnerContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\PartnerFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserFormViewModel.cs" />
+    <Compile Include="Models\LoadCash.cs" />
     <Compile Include="Models\LocationType.cs" />
     <Compile Include="Models\Make.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
+    <Compile Include="Models\Surcharge.cs" />
     <Compile Include="Models\Terminal.cs" />
     <Compile Include="Models\TerminalContact.cs" />
+    <Compile Include="Models\TerminalPicture.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
@@ -776,6 +846,48 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.resx">
       <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132110567_ActualizacionTerminal.resx">
+      <DependentUpon>201709132110567_ActualizacionTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132119208_TerminalPictures.resx">
+      <DependentUpon>201709132119208_TerminalPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132130326_Notes.resx">
+      <DependentUpon>201709132130326_Notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132136470_Event.resx">
+      <DependentUpon>201709132136470_Event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132141168_Documents.resx">
+      <DependentUpon>201709132141168_Documents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.resx">
+      <DependentUpon>201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132201470_Transactions.resx">
+      <DependentUpon>201709132201470_Transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132207182_Contracts.resx">
+      <DependentUpon>201709132207182_Contracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132231438_ActualizaciondeTerminals.resx">
+      <DependentUpon>201709132231438_ActualizaciondeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.resx">
+      <DependentUpon>201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.resx">
+      <DependentUpon>201709140051236_ActualizacionStartDateEnContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140143264_VaultCash.resx">
+      <DependentUpon>201709140143264_VaultCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140220105_Surcharges.resx">
+      <DependentUpon>201709140220105_Surcharges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140234360_InterChange.resx">
+      <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

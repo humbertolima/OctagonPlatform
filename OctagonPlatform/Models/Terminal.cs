@@ -59,7 +59,7 @@ namespace OctagonPlatform.Models
         public StatusType.Status Status { get; set; }
 
         [Required]
-        public CommunicationType.Type CommunicationType { get; set; }
+        public CommunicationType.Communication CommunicationType { get; set; }
 
         [Required]
         [Display(Name = "Address")]
@@ -101,11 +101,93 @@ namespace OctagonPlatform.Models
         public string DeletedByName { get; set; }
         public bool Deleted { get; set; }
 
+        [DataType(DataType.DateTime)]
+        public DateTime? InstalledDate { get; set; }
+
+        public string ChargedBy { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? LastCommunicationDate { get; set; }
+
+        public int? Balance { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? LastTransactionDate { get; set; }
+
+        [DataType(DataType.Currency)]
+        public int? MinAmmountCash { get; set; }
+
+        public bool Offline { get; set; }
+
+        public string Key1 { get; set; }
+
+        public string Key2 { get; set; }
+
+        public string EncryptionType { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? DateKeyBounded { get; set; }
+
+        [Required]
+        [Display(Name = "Default bank account")]
+        public int BankAccountId { get; set; }
+
+        public BankAccount DefaultBankAccount { get; set; }
+
+        public ICollection<TerminalPicture> TerminalPictures { get; set; }
+
+        public ICollection<Note> Notes { get; set; }
+
+        public ICollection<Event> Events { get; set; }
+
+        public ICollection<Document> Documents { get; set; }
+
+        public ICollection<LoadCash> LoadCashs { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
+
+        public ICollection<Contract> Contracts { get; set; }
+
+        public ICollection<Cassette.Denomination> Cassettes { get; set; }
+
+        public VaultCash VaultCash { get; set; }
+
+        [Required]
+        public Helpers.Surcharge.SurchargeType SurchargeType { get; set; }
+
+        [Required]
+        public double SurchargeAmmount { get; set; }
+
+        [Required]
+        public double Percent { get; set; }
+
+        [Required]
+        public GreaterOrLessAmmount.GreaterOrLesser GreaterOrLesser { get; set; }
+
+        [Required]
+        public Settled.SettledType SettledType { get; set; }
+
+        public ICollection<Surcharge> Surcharges { get; set; }
+
+        [Required]
+        public double InterChangeAmmount { get; set; }
+
+        public ICollection<InterChange> InterChanges { get; set; }
+
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();
-
+            TerminalPictures = new Collection<TerminalPicture>();
             Users = new Collection<User>();
+            Notes = new Collection<Note>();
+            Events = new Collection<Event>();
+            Documents = new Collection<Document>();
+            LoadCashs = new Collection<LoadCash>();
+            Transactions = new Collection<Transaction>();
+            Contracts = new Collection<Contract>();
+            Cassettes = new Collection<Cassette.Denomination>();
+            Surcharges = new Collection<Surcharge>();
+            InterChanges = new Collection<InterChange>();
         }
     }
 }

@@ -76,6 +76,7 @@ namespace OctagonPlatform.Models
 
         public string WebSite { get; set; }
         
+        [DataType(DataType.ImageUrl)]
         public string  Logo { get; set; }
 
         public ICollection<User> Users { get; set; }

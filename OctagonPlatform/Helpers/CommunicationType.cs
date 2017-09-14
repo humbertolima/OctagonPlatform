@@ -2,7 +2,7 @@
 {
     public class CommunicationType
     {
-        public enum Type
+        public enum Communication
         {
             PhoneLine = 1,
             TcpIp = 2,

@@ -75,6 +75,7 @@ namespace OctagonPlatform.Models
         [Required]
         [Index(IsUnique = true)]
         [StringLength(50)]
+        [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
@@ -109,9 +110,12 @@ namespace OctagonPlatform.Models
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
 
+        public ICollection<Terminal> Terminals { get; set; }    
+
         public BankAccount()
         {
             Users = new Collection<User>();
+            Terminals = new Collection<Terminal>();
         }
     }
     

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -161,7 +160,7 @@ namespace OctagonPlatform.PersistanceRepository
             var userDetails = Table.Where(x => x.Id == id)
                 .Include(x => x.Partner)
                 .Include(x => x.Permissions)
-                //.Include(x => x.Partner.BankAccounts)
+                .Include(x => x.BankAccounts)
                 .Include(x => x.Partner.Terminals)
                 .FirstOrDefault();
            

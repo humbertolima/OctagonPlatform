@@ -19,6 +19,16 @@ namespace OctagonPlatform.Models
         public DbSet<Make> Makes { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<TerminalPicture> TerminalPictures { get; set; }
+        public DbSet<Note> Notes { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<LoadCash> LoadCashs { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<VaultCash> VaultCashs { get; set; }
+        public DbSet<InterChange> InterChanges { get; set; }
+        public DbSet<Surcharge> Surcharges { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
