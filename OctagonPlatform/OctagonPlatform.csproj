@@ -393,6 +393,10 @@
     <Compile Include="Migrations\201709140234360_InterChange.Designer.cs">
       <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709141906082_BankAccountActualizado.cs" />
+    <Compile Include="Migrations\201709141906082_BankAccountActualizado.Designer.cs">
+      <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -888,6 +892,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709140234360_InterChange.resx">
       <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709141906082_BankAccountActualizado.resx">
+      <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

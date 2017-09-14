@@ -41,9 +41,9 @@ namespace OctagonPlatform.PersistanceRepository
         public ICollection<Permission> AddPermissionToUser(string[] permissions)
         {
             var permissionList = new List<Permission>();
-            for (int i = 0; i < permissions.Length; i++)
+            foreach (var t in permissions)
             {
-                var convertId = Convert.ToInt32(permissions[i]);
+                var convertId = Convert.ToInt32(t);
                 permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
             }
 
@@ -52,19 +52,17 @@ namespace OctagonPlatform.PersistanceRepository
 
         public UserEditFormViewModel UserToEdit(int id)
         {
-            User result = Table
+            var result = Table
                 .Include("Permissions")
                 .Single(c => c.Id == id);
 
             var mapping = new MappingProfile();
 
-            var userEdit = new UserEditFormViewModel();
-
             //mapping.CreateMap(result, userEdit);
 
-            if (result != null)
+            if (result == null) throw new System.Exception("User don't exist. ");
             {
-                userEdit = new UserEditFormViewModel()
+                var userEdit = new UserEditFormViewModel()
                 {
                     Email = result.Email,
                     Id = result.Id,
@@ -81,7 +79,6 @@ namespace OctagonPlatform.PersistanceRepository
                     PermissionsAssigned = new List<PermissionAssigned>()
                 };
 
-                
 
                 //foreach (var setPerm in userEdit.PermissionsAll)
                 //{
@@ -102,9 +99,7 @@ namespace OctagonPlatform.PersistanceRepository
                 //};
 
                 return userEdit;
-
             }
-            throw new System.Exception("User don't exist. ");
         }
 
         public void SaveUser(UserFormViewModel viewModel, string action)
@@ -161,7 +156,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Partner)
                 .Include(x => x.Permissions)
                 .Include(x => x.BankAccounts)
-                .Include(x => x.Partner.Terminals)
+                .Include(x => x.Terminals)
                 .FirstOrDefault();
            
             return userDetails;

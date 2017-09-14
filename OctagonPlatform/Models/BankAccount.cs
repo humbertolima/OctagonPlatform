@@ -36,14 +36,10 @@ namespace OctagonPlatform.Models
         public string NameOnCheck { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
-        [StringLength(50)]
         public string FedTax { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         [Display(Name = "Social Security Number")]
-        [StringLength(50)]
         public string Ssn { get; set; }
 
         [Required]
@@ -73,8 +69,6 @@ namespace OctagonPlatform.Models
         public int Zip { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
-        [StringLength(50)]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
 
@@ -82,7 +76,6 @@ namespace OctagonPlatform.Models
         [StringLength(50, ErrorMessage = "Must be between 5 and 50 characters", MinimumLength = 5)]
         [RegularExpression("^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$", ErrorMessage = "Must be a valid email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
-        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Partner is required")]
