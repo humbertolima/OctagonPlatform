@@ -2,6 +2,8 @@
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -9,12 +11,22 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public IEnumerable<Terminal> GetAllTerminals()
         {
-            throw new System.NotImplementedException();
+            return Table.Where(x => !x.Deleted)
+                .Include(x => x.Partner)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .ToList();
         }
 
         public IEnumerable<Terminal> Search(string search)
         {
-            throw new System.NotImplementedException();
+            return Table.Where(x => !x.Deleted)
+                .Include(x => x.Partner)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .ToList();
         }
 
         public TerminalFormViewModel RenderTerminalFormViewModel()

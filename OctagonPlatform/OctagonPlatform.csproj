@@ -211,6 +211,7 @@
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\GreaterOrLessAmmount.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
+    <Compile Include="Helpers\Initiate.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\PermissionsAssigned.cs" />
@@ -412,6 +413,14 @@
     <Compile Include="Migrations\201709142154436_UpdateTerminalTable.cs" />
     <Compile Include="Migrations\201709142154436_UpdateTerminalTable.Designer.cs">
       <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709151514522_ActualizarTerminal.cs" />
+    <Compile Include="Migrations\201709151514522_ActualizarTerminal.Designer.cs">
+      <DependentUpon>201709151514522_ActualizarTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709151552531_ActualizarTerminal2.cs" />
+    <Compile Include="Migrations\201709151552531_ActualizarTerminal2.Designer.cs">
+      <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -924,6 +933,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709142154436_UpdateTerminalTable.resx">
       <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709151514522_ActualizarTerminal.resx">
+      <DependentUpon>201709151514522_ActualizarTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709151552531_ActualizarTerminal2.resx">
+      <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -134,7 +134,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
-                //.Include(x => x.BankAccounts)
+                .Include(x => x.BankAccounts)
                 .Include(x => x.Terminals)
                 .FirstOrDefault();
            

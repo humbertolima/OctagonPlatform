@@ -128,9 +128,8 @@ namespace OctagonPlatform.Models
         [DataType(DataType.DateTime)]
         public DateTime? DateKeyBounded { get; set; }
 
-        [Required]
         [Display(Name = "Default bank account")]
-        public int BankAccountId { get; set; }
+        public int? BankAccountId { get; set; }
 
         public BankAccount DefaultBankAccount { get; set; }
 
@@ -149,6 +148,9 @@ namespace OctagonPlatform.Models
         public ICollection<Contract> Contracts { get; set; }
 
         public ICollection<Cassette.Denomination> Cassettes { get; set; }
+
+        [Display(Name = "Who Initiates day closed")]
+        public Initiate.Who WhoInitiates { get; set; }
 
         public VaultCash VaultCash { get; set; }
 
@@ -173,6 +175,8 @@ namespace OctagonPlatform.Models
         public double InterChangeAmmount { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
+
+      
 
         public Terminal()
         {
