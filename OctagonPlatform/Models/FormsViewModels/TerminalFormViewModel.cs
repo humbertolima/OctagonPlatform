@@ -70,6 +70,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public StatusType.Status Status { get; set; }
 
         [Required]
+        [Display(Name = "Communication Type")]
         public CommunicationType.Communication CommunicationType { get; set; }
 
         [Required]
@@ -95,35 +96,51 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Veep Serial number")]
         public string VeppSerailNumber { get; set; }
 
+        [Display(Name = "Software Version")]
         public string SoftwareVersion { get; set; }
 
+        [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime? DateKeyBounded { get; set; }
 
         [Required]
+        [Display(Name = "Surcharged type, chraged by total ammount or percent")]
         public Helpers.Surcharge.SurchargeType SurchargeType { get; set; }
 
         [Required]
+        [Display(Name = "Surcharge ammount per transaction")]
         public double SurchargeAmmount { get; set; }
 
         [Required]
+        [Display(Name = "Surcharged ammount if percent")]
         public double Percent { get; set; }
 
         [Required]
+        [Display(Name = "Surcharge by ammount or percent")]
         public GreaterOrLessAmmount.GreaterOrLesser GreaterOrLesser { get; set; }
 
         [Required]
+        [Display(Name = "Settled the recolection by?")]
         public Settled.SettledType SettledType { get; set; }
 
         [Required]
+        [Display(Name = "Interchange ammount, aproved by sponsor bank")]
         public double InterChangeAmmount { get; set; }
 
         [Display(Name = "Who Initiates day closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
+        [Display(Name = "Number of cassettes")]
+        public NumberOfCassettes.Number NumberOfCassettes { get; set; }
+
+        [Required]
         public ICollection<Cassette> Cassettes { get; set; }
+
+        [Required]
+        [Display(Name = "Chrage by Cryptocurrency Trnasactions")]
+        public int CryptoChargeAmmount { get; set; }
 
     }
 }
