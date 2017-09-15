@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class CryptoChargeAccount    
+    public class CryptoChargeAccount: ISoftDeleted, IAuditEntity   
     {
         public int Id { get; set; }
 
@@ -33,5 +33,16 @@ namespace OctagonPlatform.Models
 
         [Required]
         public Settled.SettledType SettledType { get; set; }
+
+        public bool Deleted { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? DeletedAt { get; set; }
+        public int? DeletedBy { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public int? UpdatedBy { get; set; }
+        public string UpdatedByName { get; set; }
+        public string CreatedByName { get; set; }
+        public string DeletedByName { get; set; }
     }
 }

@@ -1,8 +1,7 @@
 namespace OctagonPlatform.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class TerminalAddedCryptoTransactions : DbMigration
     {
         public override void Up()
@@ -20,8 +19,8 @@ namespace OctagonPlatform.Migrations
                         SettledType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BankAccounts", t => t.BankAccountId, cascadeDelete: true)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.BankAccounts", t => t.BankAccountId)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId)
                 .Index(t => t.TerminalId)
                 .Index(t => t.BankAccountId);
             

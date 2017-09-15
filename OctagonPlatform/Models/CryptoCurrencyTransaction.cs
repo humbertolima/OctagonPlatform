@@ -9,6 +9,12 @@ namespace OctagonPlatform.Models
         [Key]
         public int Id { get; set; }
 
+        [Required]
+        [Display(Name = "Terminal Associated")]
+        public int TerminalId { get; set; }
+
+        public Terminal Terminal { get; set; }
+
         public bool Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }

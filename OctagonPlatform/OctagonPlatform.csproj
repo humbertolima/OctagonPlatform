@@ -427,6 +427,10 @@
     <Compile Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.Designer.cs">
       <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.cs" />
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.Designer.cs">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -949,6 +953,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.resx">
       <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152220553_ActualizacionCrytoModel.resx">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
