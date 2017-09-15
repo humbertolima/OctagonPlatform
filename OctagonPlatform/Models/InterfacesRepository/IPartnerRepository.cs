@@ -9,7 +9,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         IEnumerable<Partner> Search(string search);
 
-        PartnerFormViewModel RenderPartnerFormViewModel();
+        PartnerFormViewModel RenderPartnerFormViewModel(int parentId);
 
         PartnerFormViewModel PartnerToEdit(int id);
 

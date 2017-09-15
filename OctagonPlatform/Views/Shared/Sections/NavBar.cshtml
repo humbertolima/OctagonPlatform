@@ -1,15 +1,17 @@
 ﻿
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+@if (Request.IsAuthenticated)
+{
     <div>
         <img src="~/Uploads/@Session["logo"]" width="200" height="100" alt="" class="img-responsive img-rounded">
     </div>
     <div class="navbar-header">
 
 
-        @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard","", htmlAttributes: new { @class = "navbar-brand" })
+        @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard", "", htmlAttributes: new {@class = "navbar-brand"})
 
     </div>
-
+}
     <ul class="nav navbar-top-links navbar-right">
       
         <li class="dropdown">

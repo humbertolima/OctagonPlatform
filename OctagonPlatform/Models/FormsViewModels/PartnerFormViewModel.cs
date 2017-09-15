@@ -12,6 +12,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Parent")]
         public int ParentId { get; set; }
 
+        public Partner Parent { get; set; }
+
         public IEnumerable<Partner> Parents { get; set; }
 
         [Required(ErrorMessage = "The partner business's name is required")]
