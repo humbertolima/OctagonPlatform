@@ -20,6 +20,10 @@ namespace OctagonPlatform.Models
 
         public ICollection<TerminalContact> TerminalContacts { get; set; }
 
+        [Required(ErrorMessage = "The phone is required")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
+        public string Phone { get; set; }
+
         [Required]
         [Display(Name = "Country")]
         public int CountryId { get; set; }

@@ -4,7 +4,7 @@
     {
         public enum Who
         {
-            Terinal = 1,
+            Terminal = 1,
             Host = 2
         }
     }

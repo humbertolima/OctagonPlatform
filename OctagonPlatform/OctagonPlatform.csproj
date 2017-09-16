@@ -431,6 +431,10 @@
     <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.Designer.cs">
       <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.cs" />
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.Designer.cs">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -956,6 +960,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709152220553_ActualizacionCrytoModel.resx">
       <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.resx">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -1,5 +1,4 @@
 ﻿using OctagonPlatform.Helpers;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -49,6 +48,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         public LocationType LocationType { get; set; }
 
         public ICollection<LocationType> LocationTypes { get; set; }
+
+        [Required(ErrorMessage = "The phone is required")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
+        public string Phone { get; set; }
 
         [Required]
         [Display(Name = "Make")]
@@ -102,8 +105,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
-        [DataType(DataType.DateTime)]
-        public DateTime? DateKeyBounded { get; set; }
 
         [Required]
         [Display(Name = "Surcharged type, chraged by total ammount or percent")]
@@ -114,8 +115,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         public double SurchargeAmmount { get; set; }
 
         [Required]
-        [Display(Name = "Surcharged ammount if percent")]
-        public double Percent { get; set; }
+        [Display(Name = "Percent by Surcharge Ammount")]
+        public double SurchargeByPercent { get; set; }
 
         [Required]
         [Display(Name = "Surcharge by ammount or percent")]

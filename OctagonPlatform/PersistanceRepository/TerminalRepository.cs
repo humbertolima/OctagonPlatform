@@ -29,7 +29,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
-        public TerminalFormViewModel RenderTerminalFormViewModel()
+        public TerminalFormViewModel RenderTerminalFormViewModel(int partnerId)
         {
             return new TerminalFormViewModel()
             {
@@ -37,7 +37,8 @@ namespace OctagonPlatform.PersistanceRepository
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
                 Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
-                
+                PartnerId = partnerId,
+                Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId)
             };
         }
 
