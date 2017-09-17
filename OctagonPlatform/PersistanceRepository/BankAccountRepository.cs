@@ -5,6 +5,7 @@ using System.Linq;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using System.Data.Entity;
+using AutoMapper;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -27,7 +28,7 @@ namespace OctagonPlatform.PersistanceRepository
             BankAccount bankAccount = new BankAccount();
             try
             {
-                bankAccount  = Table
+                bankAccount = Table
                 .Include(c => c.Partner)
                 .Include(c => c.City)
                 .Include(c => c.Country)
@@ -44,12 +45,24 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception("Error, invalid operation. ", Iex);
             }
-#endregion
+            #endregion
 
             return bankAccount;
         }
 
-        public UserEditFormViewModel BankAccountToEdit(int id)
+        public BAEditFVModel RenderBAFormViewModel()
+        {
+            BAEditFVModel viewModel = new BAEditFVModel();
+
+            viewModel.Partners = Context.Partners.ToList();
+            viewModel.Countries = Context.Countries.ToList();
+            viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
+            viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+
+            return viewModel;
+        }
+
+        public BAEditFVModel BankAccountToEdit(int id)
         {
             throw new NotImplementedException();
         }
@@ -60,14 +73,21 @@ namespace OctagonPlatform.PersistanceRepository
         }
 
 
-        public UserFormViewModel RenderBAFormViewModel()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void SaveBankAccount(BAccountFVModel viewModel, string action)
+
+        public void SaveBankAccount(BAEditFVModel editViewModel, string action)
         {
-            throw new NotImplementedException();
+            if (action == "Create")
+            {
+                var result = FindBy(editViewModel.Id);
+
+                if (result == null)
+                {
+                    BankAccount model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
+
+                    Add(model);
+                }
+            }
         }
     }
 }

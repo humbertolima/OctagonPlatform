@@ -61,11 +61,12 @@ namespace OctagonPlatform.Controllers
         // GET: BankAccount/Create
         public ActionResult Create()
         {
+
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name");
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName");
             //ViewBag.StateId = new SelectList(db.States, "Id", "Name");
-            return View();
+            return View(_BAccountRepository.RenderBAFormViewModel());
         }
 
         // POST: BankAccount/Create
@@ -73,20 +74,20 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BankAccount bankAccount)
+        public ActionResult Create(BAEditFVModel editBankAccount)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.BankAccounts.Add(bankAccount);
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Index");
-            //}
+            if (ModelState.IsValid)
+            {
+                _BAccountRepository.SaveBankAccount(editBankAccount, "Create");
+
+                return RedirectToAction("Index");
+            }
 
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
             //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
-            return View(bankAccount);
+            return View(editBankAccount);
         }
 
         // GET: BankAccount/Edit/5
@@ -161,6 +162,7 @@ namespace OctagonPlatform.Controllers
         {
             if (disposing)
             {
+                
                 //_BAccountRepository.Dispose();
             }
             base.Dispose(disposing);

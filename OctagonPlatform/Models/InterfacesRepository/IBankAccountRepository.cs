@@ -11,11 +11,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<BankAccount> GetAllBankAccount();
 
-        UserEditFormViewModel BankAccountToEdit(int id);
+        BAEditFVModel BankAccountToEdit(int id);
 
-        UserFormViewModel RenderBAFormViewModel();
+        BAEditFVModel RenderBAFormViewModel();
         
-        void SaveBankAccount(BAccountFVModel viewModel, string action);
+        void SaveBankAccount(BAEditFVModel viewModel, string action);
 
         BankAccount BAccountDetails(int id);
         
