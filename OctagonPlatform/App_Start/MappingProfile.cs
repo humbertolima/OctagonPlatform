@@ -1,6 +1,7 @@
 using AutoMapper;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
+using System.Collections.Generic;
 
 namespace OctagonPlatform
 {
@@ -18,6 +19,8 @@ namespace OctagonPlatform
             //Dto to Domain
             CreateMap<UserEditFormViewModel, UserFormViewModel>().ForMember(c => c.Password, opt => opt.AllowNull());
 
+            // Domain to Dto
+            CreateMap<BankAccount, BAccountFVModel>();
         }
 
     }

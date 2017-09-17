@@ -8,32 +8,47 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OctagonPlatform.Models;
+using OctagonPlatform.Models.InterfacesRepository;
+using AutoMapper;
+using OctagonPlatform.Models.FormsViewModels;
+using System.Collections;
 
 namespace OctagonPlatform.Controllers
 {
     public class BankAccountController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IBankAccountRepository _BAccountRepository;
+
+        public BankAccountController(IBankAccountRepository BAccountRepository)
+        {
+            _BAccountRepository = BAccountRepository;
+        }
 
         // GET: BankAccount
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var bankAccounts = db.BankAccounts
-                .Include(b => b.City)
-                .Include(b => b.Country)
-                .Include(b => b.Partner)
-                .Include(b => b.State);
-            return View(await bankAccounts.ToListAsync());
+            var bankAccounts = _BAccountRepository.GetAllBankAccount();
+
+            IList viewModel = new List<BAccountFVModel>();
+
+            foreach (var item in bankAccounts)
+            {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
+                viewModel.Add( Mapper.Map<BankAccount, BAccountFVModel>(item));
+            }
+            
+            return View(viewModel);
         }
 
         // GET: BankAccount/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+
+            BankAccount bankAccount = _BAccountRepository.BAccountDetails((int)id);
+
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -44,10 +59,10 @@ namespace OctagonPlatform.Controllers
         // GET: BankAccount/Create
         public ActionResult Create()
         {
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "Name");
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
-            ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName");
-            ViewBag.StateId = new SelectList(db.States, "Id", "Name");
+            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name");
+            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
+            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName");
+            //ViewBag.StateId = new SelectList(db.States, "Id", "Name");
             return View();
         }
 
@@ -58,36 +73,37 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BankAccount bankAccount)
         {
-            if (ModelState.IsValid)
-            {
-                db.BankAccounts.Add(bankAccount);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    db.BankAccounts.Add(bankAccount);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
 
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
-            ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
-            ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
+            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
+            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
+            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
+            //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
             return View(bankAccount);
         }
 
         // GET: BankAccount/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            if (bankAccount == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
-            ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
-            ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
+            BankAccount bankAccount = default(BankAccount);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            //if (bankAccount == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
+            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
+            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
+            //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
             return View(bankAccount);
         }
 
@@ -98,31 +114,33 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BankAccount bankAccount)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(bankAccount).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
-            ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
-            ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
+            //if (ModelState.IsValid)
+            //{
+            //    db.Entry(bankAccount).State = EntityState.Modified;
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
+            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
+            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
+            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
+            //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
             return View(bankAccount);
         }
 
         // GET: BankAccount/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            if (bankAccount == null)
-            {
-                return HttpNotFound();
-            }
+            BankAccount bankAccount = default(BankAccount);
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            //if (bankAccount == null)
+            //{
+            //    return HttpNotFound();
+            //}
             return View(bankAccount);
         }
 
@@ -131,9 +149,9 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            db.BankAccounts.Remove(bankAccount);
-            await db.SaveChangesAsync();
+            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
+            //db.BankAccounts.Remove(bankAccount);
+            //await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -141,7 +159,7 @@ namespace OctagonPlatform.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                //_BAccountRepository.Dispose();
             }
             base.Dispose(disposing);
         }
