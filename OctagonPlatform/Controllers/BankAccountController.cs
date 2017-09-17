@@ -33,9 +33,9 @@ namespace OctagonPlatform.Controllers
 
             foreach (var item in bankAccounts)
             {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
-                viewModel.Add( Mapper.Map<BankAccount, BAccountFVModel>(item));
+                viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
             }
-            
+
             return View(viewModel);
         }
 
@@ -53,7 +53,9 @@ namespace OctagonPlatform.Controllers
             {
                 return HttpNotFound();
             }
-            return View(bankAccount);
+            BAccountFVModel viewModel = Mapper.Map<BankAccount, BAccountFVModel>(bankAccount);
+
+            return View(viewModel);
         }
 
         // GET: BankAccount/Create
