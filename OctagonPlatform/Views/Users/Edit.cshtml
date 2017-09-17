@@ -85,25 +85,46 @@
             {
                 var temp = false;
                 var type = "";
-                var cheq = "";
-
+                var cheqCreate = "";
+                var cheqView = "";
+                var cheqEdit = "";
+                var cheqDelete = "";
                 foreach (var toCheck in Model.Permissions)      //recorro cada uno de los permisos que tiene el usuario.
                 {
+                    if (toCheck.Id == 7)
+                    { 
+
+                    }
                     temp = item.Permissions.Contains(toCheck);  //true si el recorrido de todos los permisos se encuentra slguno de los permisos que tiene el usuario.
                     type = toCheck.Type;
                     if (temp)
                     {
-                        cheq = "checked";
-                        break;
+                        if (type == "Create")
+                        {
+                            cheqCreate= "checked";
+                        }
+                        if (type == "View")
+                        {
+                            cheqView= "checked";
+                        }
+                        if (type == "Edit")
+                        {
+                            cheqEdit= "checked";
+                        }
+                        if (type == "Delete")
+                        {
+                            cheqDelete= "checked";
+                        }
+                        //break;
                     }
                 }
                 <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td><input type="checkbox" name="Permissions1" value=" " /></td>
-                    <td><input type="checkbox" @if ((type=="Create") & (temp)) { @cheq; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
-                    <td><input type="checkbox" @if ((type=="View") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
-                    <td><input type="checkbox" @if ((type=="Edit") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
-                    <td><input type="checkbox" @if ((type=="Delete") & (temp)) {@cheq} name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
+                    <td><input type="checkbox" @if ((type == "Create") & (temp)) { @cheqCreate ; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
+                    <td><input type="checkbox" @if ((type == "View") & (temp)) { @cheqView } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
+                    <td><input type="checkbox" @if ((type == "Edit") & (temp)) { @cheqEdit } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
+                    <td><input type="checkbox" @if ((type == "Delete") & (temp)) { @cheqDelete } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
 
                     @*<td><input type="checkbox" name="Permissions1" value=" " /></td>
                         <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Create") { item.Value.ToString(); } " /></td>

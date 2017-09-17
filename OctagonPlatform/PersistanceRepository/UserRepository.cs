@@ -41,12 +41,15 @@ namespace OctagonPlatform.PersistanceRepository
         public ICollection<Permission> AddPermissionToUser(string[] permissions)
         {
             var permissionList = new List<Permission>();
-            foreach (var t in permissions)
+            if (permissions != null) 
             {
-                var convertId = Convert.ToInt32(t);
-                permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
+                foreach (var t in permissions)
+                {
+                    var convertId = Convert.ToInt32(t);
+                    permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
+                }
             }
-
+            //si viene null se envia la instancia vacia.
             return permissionList;
         }
 
@@ -75,7 +78,7 @@ namespace OctagonPlatform.PersistanceRepository
                     Phone = result.Phone,
                     Status = result.Status,
                     UserName = result.UserName,
-                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").Select(c=>c).ToList(),
+                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").Select(c => c).ToList(),
                     PermissionsAssigned = new List<PermissionAssigned>()
                 };
 
@@ -83,7 +86,7 @@ namespace OctagonPlatform.PersistanceRepository
                 //foreach (var setPerm in userEdit.PermissionsAll)
                 //{
                 //    PermissionAssigned permissionA = new PermissionAssigned();
-              
+
                 //    permissionA.Selected = false;
                 //    permissionA.Type = setPerm.Type;
                 //    permissionA.Text = setPerm.Name;
@@ -158,7 +161,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.BankAccounts)
                 .Include(x => x.Terminals)
                 .FirstOrDefault();
-           
+
             return userDetails;
         }
 
