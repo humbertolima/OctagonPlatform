@@ -64,7 +64,20 @@ namespace OctagonPlatform.PersistanceRepository
 
         public BAEditFVModel BankAccountToEdit(int id)
         {
-            throw new NotImplementedException();
+            var model = Table
+                .Include(c => c.Partner)
+                .Include(c => c.Country)
+                .Include(c => c.State)
+                .Include(c => c.City)
+                .Single(c => c.Id == id)
+                ;
+            var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
+            editViewModel.Partners = Context.Partners.ToList();
+            editViewModel.Countries = Context.Countries.ToList();
+            editViewModel.Cities = Context.Cities.ToList();
+            editViewModel.States = Context.States.ToList();
+
+            return editViewModel;
         }
 
         public void DeleteBankAccount(int id)
@@ -72,21 +85,23 @@ namespace OctagonPlatform.PersistanceRepository
             throw new NotImplementedException();
         }
 
-
-
-
         public void SaveBankAccount(BAEditFVModel editViewModel, string action)
         {
             if (action == "Create")
             {
-                var result = FindBy(editViewModel.Id);
-
-                if (result == null)
+                var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id);
+                if (model == null)
                 {
-                    BankAccount model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-
+                    model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
                     Add(model);
                 }
+            }
+            else
+            {
+                var model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
+                //Revisar este codigo para que no salve si no se le hizo modificacion al entity.
+                //db.Entry(bankAccount).State = EntityState.Modified;
+                Edit(model);
             }
         }
     }

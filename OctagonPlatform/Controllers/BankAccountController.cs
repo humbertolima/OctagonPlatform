@@ -114,14 +114,13 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BankAccount bankAccount)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BAEditFVModel bankAccount)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(bankAccount).State = EntityState.Modified;
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Index");
-            //}
+            if (ModelState.IsValid)
+            {
+                _BAccountRepository.SaveBankAccount(bankAccount, "Edit");
+                return RedirectToAction("Index");
+            }
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);

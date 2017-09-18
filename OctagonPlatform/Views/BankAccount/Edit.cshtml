@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>BankAccount</h4>
         <hr />
@@ -76,27 +76,60 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryId, "CountryId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CountryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            <div id="Countries">
+                <label for="Countries">Country</label>
+                <select required id="CountryId" name="CountryId" class="form-control">
+                    <option value="@Model.CountryId">@Model.Country.Name</option>
+                    @foreach (var item in Model.Countries)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.CountryId)
+
             </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StateId, "StateId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("StateId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+            <div id="States">
+                <label for="States">State</label>
+                <select required id="StatesId" name="StateId" class="form-control">
+                    <option value="@Model.StateId">@Model.State.Name</option>
+                    @foreach (var item in Model.States)
+                {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.StateId)
+
             </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CityId, "CityId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
+            <div id="Cities">
+                <label for="Cities">City</label>
+                @if (Model.City != null)
+                {
+                    <select id="CitiesId" name="CityId" class="form-control">
+                        <option value="@Model.CityId">@Model.City.Name</option>
+                        @foreach (var item in Model.Cities)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(m => m.CityId)
+                }
+                else
+                {
+                    <select id="CitiesId" name="CityId" class="form-control"></select>
+                    @Html.ValidationMessageFor(m => m.CityId)
+                }
+
             </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+
         </div>
 
         <div class="form-group">
@@ -142,8 +175,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PartnerId, "PartnerId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("PartnerId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PartnerId, "", new { @class = "text-danger" })
+                @Html.LabelFor(m => m.PartnerId)
+                @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PartnerId)
             </div>
         </div>
 
