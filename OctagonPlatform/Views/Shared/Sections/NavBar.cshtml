@@ -1,52 +1,50 @@
 ﻿
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+@if (Request.IsAuthenticated)
+{
     <div>
         <img src="~/Uploads/@Session["logo"]" width="200" height="100" alt="" class="img-responsive img-rounded">
     </div>
     <div class="navbar-header">
 
-        @if (Session["businessName"] == null)
-        {
-            Response.Redirect("~/Account/LogIn");
-                }
-        @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard", "", htmlAttributes: new { @class = "navbar-brand" })
+
+        @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard", "", htmlAttributes: new {@class = "navbar-brand"})
 
     </div>
-
+}
     <ul class="nav navbar-top-links navbar-right">
-
+      
         <li class="dropdown">
             @if (Request.IsAuthenticated)
             {
-
+                          
                 @Html.AntiForgeryToken()
-                <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Dashboard")">
-                    Hello @User.Identity.Name
-
+                <a class="dropdown-toggle" data-toggle="dropdown" href="@Url.Action("Index", "Dashboard")">Hello @User.Identity.Name
+                        
                     <i class="fa fa-user fa-fw"></i><i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-
+        
                     <li class="divider"></li>
                     <li>
                         @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @class = "navbar-right" }))
                         {  @Html.AntiForgeryToken()
                             @Html.ActionLink("Logout", "Logout", "Account")}
-                    </li>
-                    <li>
-                        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "navbar-right" }))
-                        {  @Html.AntiForgeryToken()
-                            @Html.ActionLink("Profile", "Details", "Partners", new { id = @Session["partnerId"] }, "")}
-                    </li>
+                            </li>
+                            <li>
+                                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "navbar-right" }))
+                                {  @Html.AntiForgeryToken()
+                                    @Html.ActionLink("Profile", "Details", "Partners", new {id = @Session["partnerId"]}, "")}
+                                    </li>
                 </ul>
-
+                
             }
-
+            
             <!-- /.dropdown-user -->
         </li>
         <!-- /.dropdown -->
     </ul>
-
+   
     @Html.Partial("Sections/Sidebar")
     <!-- /.navbar-static-side -->
 </nav>

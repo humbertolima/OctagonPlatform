@@ -9,7 +9,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         IEnumerable<Terminal> Search(string search);
 
-        TerminalFormViewModel RenderTerminalFormViewModel();
+        TerminalFormViewModel RenderTerminalFormViewModel(int partnerId);
 
         TerminalFormViewModel TerminalToEdit(int id);
 

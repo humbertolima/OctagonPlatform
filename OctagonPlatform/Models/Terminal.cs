@@ -20,6 +20,10 @@ namespace OctagonPlatform.Models
 
         public ICollection<TerminalContact> TerminalContacts { get; set; }
 
+        [Required(ErrorMessage = "The phone is required")]
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
+        public string Phone { get; set; }
+
         [Required]
         [Display(Name = "Country")]
         public int CountryId { get; set; }
@@ -86,8 +90,10 @@ namespace OctagonPlatform.Models
         [Display(Name = "Veep Serial number")]
         public string VeppSerailNumber { get; set; }
 
+        [Display(Name = "Sorftware version")]
         public string SoftwareVersion { get; set; }
 
+        [Display(Name = "Fimware version")]
         public string FimwareVersion { get; set; }
 
         public DateTime? CreatedAt { get; set; }
@@ -102,19 +108,25 @@ namespace OctagonPlatform.Models
         public bool Deleted { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Display(Name = "Date of installation")]
         public DateTime? InstalledDate { get; set; }
 
+        [Display(Name = "The terminal was charged by?")]
         public string ChargedBy { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Display(Name = "The last terminal communication date")]
         public DateTime? LastCommunicationDate { get; set; }
 
+        [Display(Name = "Terminal Balance")]
         public int? Balance { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Display(Name = "Last terminal transaction Date")]
         public DateTime? LastTransactionDate { get; set; }
 
         [DataType(DataType.Currency)]
+        [Display(Name = "Minimun ammount chash that must have the terminal")]
         public int? MinAmmountCash { get; set; }
 
         public bool Offline { get; set; }
@@ -126,6 +138,7 @@ namespace OctagonPlatform.Models
         public string EncryptionType { get; set; }
 
         [DataType(DataType.DateTime)]
+        [Display(Name = "Keys bounded date")]
         public DateTime? DateKeyBounded { get; set; }
 
         [Display(Name = "Default bank account")]
@@ -158,23 +171,36 @@ namespace OctagonPlatform.Models
         public Helpers.Surcharge.SurchargeType SurchargeType { get; set; }
 
         [Required]
+        [Display(Name = "Surcharge ammount by transaction")]
         public double SurchargeAmmount { get; set; }
 
         [Required]
-        public double Percent { get; set; }
+        [Display(Name = "Percent by Surcharge Ammount")]
+        public double SurchargeByPercent { get; set; }
 
         [Required]
+        [Display(Name = "Take the greater or lesser between Surcharge Ammout or Surcharge by Percent")]
         public GreaterOrLessAmmount.GreaterOrLesser GreaterOrLesser { get; set; }
 
         [Required]
+        [Display(Name = "Recolect type")]
         public Settled.SettledType SettledType { get; set; }
 
         public ICollection<Surcharge> Surcharges { get; set; }
 
         [Required]
+        [Display(Name = "Inter changes ammount by sponsor bank")]
         public double InterChangeAmmount { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
+
+        [Required]
+        [Display(Name = "Chrage by Cryptocurrency Trnasactions")]
+        public int CryptoChargeAmmount { get; set; }
+
+        public ICollection<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
+
+        public ICollection<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
 
       
 
@@ -192,6 +218,8 @@ namespace OctagonPlatform.Models
             Cassettes = new Collection<Cassette.Denomination>();
             Surcharges = new Collection<Surcharge>();
             InterChanges = new Collection<InterChange>();
+            CryptoChargeAccounts = new Collection<CryptoChargeAccount>();
+            CryptoCurrencyTransactions = new Collection<CryptoCurrencyTransaction>();
         }
     }
 }

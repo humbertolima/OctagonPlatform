@@ -215,6 +215,7 @@
     <Compile Include="Helpers\Initiate.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
+    <Compile Include="Helpers\NumberOfCassettes.cs" />
     <Compile Include="Helpers\PermissionsAssigned.cs" />
     <Compile Include="Helpers\Settled.cs" />
     <Compile Include="Helpers\Status.cs" />
@@ -423,6 +424,18 @@
     <Compile Include="Migrations\201709151552531_ActualizarTerminal2.Designer.cs">
       <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.cs" />
+    <Compile Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.Designer.cs">
+      <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.cs" />
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.Designer.cs">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.cs" />
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.Designer.cs">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -438,6 +451,8 @@
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\CryptoChargeAccount.cs" />
+    <Compile Include="Models\CryptoCurrencyTransaction.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
@@ -949,6 +964,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709151552531_ActualizarTerminal2.resx">
       <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.resx">
+      <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152220553_ActualizacionCrytoModel.resx">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.resx">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

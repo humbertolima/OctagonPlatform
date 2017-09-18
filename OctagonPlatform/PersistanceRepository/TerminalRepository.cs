@@ -29,9 +29,17 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
-        public TerminalFormViewModel RenderTerminalFormViewModel()
+        public TerminalFormViewModel RenderTerminalFormViewModel(int partnerId)
         {
-            throw new System.NotImplementedException();
+            return new TerminalFormViewModel()
+            {
+                Countries = Context.Countries.ToList(),
+                States = Context.States.Where(x => x.CountryId == 231).ToList(),
+                Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
+                Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
+                PartnerId = partnerId,
+                Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId)
+            };
         }
 
         public TerminalFormViewModel TerminalToEdit(int id)
@@ -46,12 +54,33 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Terminal TerminalDetails(int id)
         {
-            throw new System.NotImplementedException();
+            return Table.Where(x => x.Id == id)
+                .Include(x => x.Cassettes)
+                .Include(x => x.DefaultBankAccount)
+                .Include(x => x.Partner)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .Include(x => x.Contracts)
+                .Include(x => x.Documents)
+                .Include(x => x.Events)
+                .Include(x => x.InterChanges)
+                .Include(x => x.LoadCashs)
+                .Include(x => x.Make)
+                .Include(x => x.Model)
+                .Include(x => x.Users)
+                .Include(x => x.VaultCash)
+                .Include(x => x.Surcharges)
+                .Include(x => x.Notes)
+                .Include(x => x.TerminalContacts)
+                .Include(x => x.TerminalPictures)
+                .Include(x => x.Transactions)
+                .FirstOrDefault();
         }
 
         public void DeleteTerminal(int id)
         {
-            throw new System.NotImplementedException();
+           Delete(id);
         }
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)

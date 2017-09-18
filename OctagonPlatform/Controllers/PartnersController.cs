@@ -24,9 +24,9 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int partnerId)
         {
-            return View(_partnerRepository.RenderPartnerFormViewModel());
+            return View(_partnerRepository.RenderPartnerFormViewModel(partnerId));
         }
 
         [HttpPost]

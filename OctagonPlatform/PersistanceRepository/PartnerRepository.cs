@@ -25,14 +25,13 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
-        public PartnerFormViewModel RenderPartnerFormViewModel()
+        public PartnerFormViewModel RenderPartnerFormViewModel(int parentId)
         {
-            
             return new PartnerFormViewModel()
             {
-                
                 Parents = Table.Where(x => !x.Deleted).ToList(),
-                
+                ParentId = parentId,
+                Parent = Context.Partners.SingleOrDefault(x => x.Id == parentId),
                 Countries = Context.Countries.ToList(),
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList()
@@ -99,6 +98,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     Id = partner.Id,
                     ParentId = partner.ParentId,
+                    Parent = Context.Partners.SingleOrDefault(x => x.Id == id),
                     Parents = Table.Where(x => !x.Deleted).ToList(),
                     BusinessName = partner.BusinessName,
                     Address1 = partner.Address1,
@@ -121,7 +121,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 };
             }
-            return RenderPartnerFormViewModel();
+            return RenderPartnerFormViewModel(1);
         }
 
         public Partner PartnerDetails(int id)
@@ -152,6 +152,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Id = viewModel.Id,
                 ParentId = viewModel.ParentId,
+                Parent = Context.Partners.SingleOrDefault(x => x.Id == viewModel.ParentId),
                 Parents = Table.Where(x => !x.Deleted).ToList(),
                 BusinessName = viewModel.BusinessName,
                 Address1 = viewModel.Address1,

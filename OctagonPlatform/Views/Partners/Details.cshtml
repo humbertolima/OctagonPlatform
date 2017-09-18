@@ -5,29 +5,53 @@
 }
 
 <h1>@Model.BusinessName Overview</h1>
-
+<br />
+<hr />
+<br />
 
    <img src="~/Uploads/@Model.Logo" width="200" height="100" alt="" class="img-responsive img-rounded">
 
-<br/>
 <div>
     @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, "")
 </div>
+<br/>
+<hr />
+<br />
 <div id="generalInfo">
     @Html.Partial("Sections/GeneralInfo", Model)
 </div>
+<br/>
+<hr />
+<br />
 <div id="contacts">
     @Html.Partial("Sections/Contacts", Model)
 </div>
+<br/>
+<hr />
+<br />
 <div id="users">
     @Html.Partial("Sections/Users", Model)
 </div>
+<br/>
+<hr />
+<br />
 <div id="partners">
     @Html.Partial("Sections/Partners", Model)
 </div>
+<hr />
+<br />
 <div id="bankAccounts">
     @Html.Partial("Sections/BankAccounts", Model)
 </div>
+<br/>
+<hr />
+<br />
 <div id="terminals">
     @Html.Partial("Sections/Terminals", Model)
 </div>
+<br />
+<hr />
+<br />
+@section Scripts {
+    @Scripts.Render("~/bundles/search")
+}

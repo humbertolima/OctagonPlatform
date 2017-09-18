@@ -1,8 +1,7 @@
 namespace OctagonPlatform.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Transactions : DbMigration
     {
         public override void Up()
@@ -38,7 +37,7 @@ namespace OctagonPlatform.Migrations
                         DeletedByName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId)
                 .Index(t => t.TerminalId);
             
         }

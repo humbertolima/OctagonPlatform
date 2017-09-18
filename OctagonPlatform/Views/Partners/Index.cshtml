@@ -11,7 +11,16 @@
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active">@Html.ActionLink("Add Partner", "Create", "Partners")</li>
+                <li class="active">@Html.ActionLink(
+                                       linkText: "Add Partner",
+                                       actionName: "Create",
+                                       controllerName: "Partners",
+                                       routeValues: new
+                                       {
+                                           partnerId = 1
+                                       },
+                                       htmlAttributes: null
+                                       )</li>
             </ul>
             <div class="form-group">
             <input type="text" class="form-control" id="searchPartner" placeholder="Search" name="search" />
