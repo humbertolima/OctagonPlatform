@@ -4,7 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-
+<div class="form-group">
+    <input type="text" class="form-control" id="searchUser" placeholder="Search" name="search" />
+</div>
 <div class="page-header">
     <h3 class="panel-title">List Users</h3>
 </div>
@@ -22,7 +24,7 @@
         <th>Status</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="listOfUsers">
     @foreach (var item in Model)
     {
         <tr class="info">
@@ -40,3 +42,6 @@
     }
     
 </table> 
+@section Scripts {
+    @Scripts.Render("~/bundles/search")
+}

@@ -192,5 +192,11 @@ namespace OctagonPlatform.Controllers
                 throw new Exception("Error Show User Details. " + ex.Message, ex);
             }
         }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_userRepository.Search(search));
+        }
     }
 }

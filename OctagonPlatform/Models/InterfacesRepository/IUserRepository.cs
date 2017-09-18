@@ -8,6 +8,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<User> GetAllUsers();
 
+        IEnumerable<User> Search(string search);
+
         UserEditFormViewModel UserToEdit(int id);
 
         UserFormViewModel RenderUserFormViewModel();
@@ -18,7 +20,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         User UserDetails(int id);
 
-        Task<User> Validate(User user);
+        //Task<User> Validate(User user);
 
         void DeleteUser(int id);
 
