@@ -82,7 +82,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void DeleteBankAccount(int id)
         {
-            throw new NotImplementedException();
+            Delete(id);
         }
 
         public void SaveBankAccount(BAEditFVModel editViewModel, string action)

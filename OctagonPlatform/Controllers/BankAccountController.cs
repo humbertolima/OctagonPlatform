@@ -131,31 +131,16 @@ namespace OctagonPlatform.Controllers
         // GET: BankAccount/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            BankAccount bankAccount = default(BankAccount);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            _BAccountRepository.DeleteBankAccount(Convert.ToInt32(id));
 
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            //if (bankAccount == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View(bankAccount);
-        }
-
-        // POST: BankAccount/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            //db.BankAccounts.Remove(bankAccount);
-            //await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

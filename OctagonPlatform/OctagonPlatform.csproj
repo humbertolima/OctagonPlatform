@@ -790,7 +790,6 @@
     <Content Include="Views\Partners\Sections\Contacts.cshtml" />
     <Content Include="Views\PartnerContacts\Search.cshtml" />
     <Content Include="Views\BankAccount\Create.cshtml" />
-    <Content Include="Views\BankAccount\Delete.cshtml" />
     <Content Include="Views\BankAccount\Details.cshtml" />
     <Content Include="Views\BankAccount\Edit.cshtml" />
     <Content Include="Views\BankAccount\Index.cshtml" />
