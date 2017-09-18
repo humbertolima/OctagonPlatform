@@ -150,5 +150,11 @@ namespace OctagonPlatform.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_BAccountRepository.Search(search));
+        }
     }
 }

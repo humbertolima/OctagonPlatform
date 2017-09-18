@@ -6,6 +6,7 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using System.Data.Entity;
 using AutoMapper;
+using System.Collections;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -103,6 +104,22 @@ namespace OctagonPlatform.PersistanceRepository
                 //db.Entry(bankAccount).State = EntityState.Modified;
                 Edit(model);
             }
+        }
+
+        public IEnumerable<BAccountFVModel> Search(string search)
+        {
+            var bankAccounts = Table.Where(c => !c.Deleted && (c.NickName.Contains(search) || c.Partner.BusinessName.Contains(search)))
+                .Include(x => x.Partner)
+                .ToList();
+
+            List<BAccountFVModel> viewModel = new List<BAccountFVModel>();
+
+            foreach (var item in bankAccounts)
+            {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
+                viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
+            }
+
+            return viewModel;
         }
     }
 }

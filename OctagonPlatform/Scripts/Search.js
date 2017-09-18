@@ -26,4 +26,17 @@
                 $("#listOfPartnersContact").html(data);
             }
         });
+});
+$("#searchBA").keydown(function () {
+
+    var searchText = $("#searchBA").val();
+    $.ajax({
+        type: "Post",
+        url: "BankAccount/Search?search=" + searchText,
+        datatype: "html",
+        success: function (data) {
+
+            $("#listOfBA").html(data);
+        }
     });
+});
