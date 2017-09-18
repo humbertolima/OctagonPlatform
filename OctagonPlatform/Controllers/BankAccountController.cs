@@ -91,18 +91,17 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
-            BankAccount bankAccount = default(BankAccount);
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            //if (bankAccount == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BAEditFVModel bankAccount = _BAccountRepository.BankAccountToEdit((int)id);
+            if (bankAccount == null)
+            {
+                return HttpNotFound();
+            }
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);

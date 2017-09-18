@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.Net;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -113,12 +114,17 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest,"Parameter required in Edit.");
+            }
+
             var userEdit = default(UserEditFormViewModel);
             try
             {
-                userEdit = _userRepository.UserToEdit(id);
+                userEdit = _userRepository.UserToEdit(Convert.ToInt32(id));
                 return View(userEdit);
             }
             #region Exception

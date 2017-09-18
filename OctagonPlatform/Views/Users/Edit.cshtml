@@ -121,10 +121,10 @@
                 <tr>
                     <td>@Html.Label(item.Name)</td>
                     <td><input type="checkbox" name="Permissions1" value=" " /></td>
-                    <td><input type="checkbox" @if ((type == "Create") & (temp)) { @cheqCreate ; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
-                    <td><input type="checkbox" @if ((type == "View") & (temp)) { @cheqView } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
-                    <td><input type="checkbox" @if ((type == "Edit") & (temp)) { @cheqEdit } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
-                    <td><input type="checkbox" @if ((type == "Delete") & (temp)) { @cheqDelete } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
+                    <td><input type="checkbox" { @cheqCreate ; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
+                    <td><input type="checkbox" { @cheqView } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
+                    <td><input type="checkbox" { @cheqEdit } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
+                    <td><input type="checkbox" { @cheqDelete } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
 
                     @*<td><input type="checkbox" name="Permissions1" value=" " /></td>
                         <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Create") { item.Value.ToString(); } " /></td>
