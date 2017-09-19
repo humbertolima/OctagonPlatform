@@ -804,6 +804,7 @@
     <Content Include="Views\Terminals\Details.cshtml" />
     <Content Include="Views\Terminals\Edit.cshtml" />
     <Content Include="Views\Terminals\Index.cshtml" />
+    <Content Include="Views\BankAccount\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

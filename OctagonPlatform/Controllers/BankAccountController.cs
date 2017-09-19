@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
+﻿using AutoMapper;
 using OctagonPlatform.Models;
-using OctagonPlatform.Models.InterfacesRepository;
-using AutoMapper;
 using OctagonPlatform.Models.FormsViewModels;
-using System.Collections;
+using OctagonPlatform.Models.InterfacesRepository;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
@@ -29,7 +24,9 @@ namespace OctagonPlatform.Controllers
         {
             var bankAccounts = _BAccountRepository.GetAllBankAccount();
 
-            IList viewModel = new List<BAccountFVModel>();
+            var viewModel = new List<BAccountFVModel>();
+
+            //var viewModel = bankAccounts.Select(item => Mapper.Map<BankAccount, BAccountFVModel>(item)).ToList();
 
             foreach (var item in bankAccounts)
             {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
