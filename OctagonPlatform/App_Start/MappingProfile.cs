@@ -1,7 +1,6 @@
 using AutoMapper;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
-using System.Collections.Generic;
 
 namespace OctagonPlatform
 {
@@ -28,6 +27,55 @@ namespace OctagonPlatform
 
             CreateMap<BAEditFVModel, BankAccount>();
             #endregion
+
+
+
+            #region Partner Mapping
+
+            CreateMap<Partner, PartnerFormViewModel>();
+
+            CreateMap<PartnerFormViewModel, PartnerFormViewModel>();
+            //Dto to Domain
+            CreateMap<PartnerFormViewModel, Partner>();
+
+            #endregion
+
+
+
+            #region PartnerContact Mapping
+
+            CreateMap<PartnerContact, PartnerFormViewModel>();
+
+            CreateMap<PartnerContactFormViewModel, PartnerFormViewModel>();
+            //Dto to Domain
+            CreateMap<PartnerFormViewModel, PartnerContact>();
+
+            #endregion
+
+
+
+            #region Terminal Mapping
+
+            CreateMap<Terminal, TerminalFormViewModel>();
+
+            CreateMap<TerminalFormViewModel, TerminalFormViewModel>();
+            //Dto to Domain
+            CreateMap<TerminalFormViewModel, Terminal>();
+
+            #endregion
+
+
+
+            #region TerminalContact Mapping
+
+            CreateMap<TerminalContact, TerminalContactFormViewModel>();
+
+            CreateMap<TerminalContactFormViewModel, TerminalContactFormViewModel>();
+            //Dto to Domain
+            CreateMap<TerminalContactFormViewModel, TerminalContact>();
+
+            #endregion
+
         }
 
     }

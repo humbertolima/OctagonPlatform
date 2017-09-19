@@ -1,0 +1,184 @@
+﻿@model IEnumerable<OctagonPlatform.Models.Terminal>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocationType.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Make.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Partner.BusinessName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommunicationType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmvReady)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MachineSerialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VeppSerailNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoftwareVersion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FimwareVersion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SurchargeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SurchargeAmmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SurchargeByPercent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GreaterOrLesser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SettledType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InterChangeAmmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WhoInitiates)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CryptoChargeAmmount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.City.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocationType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Make.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Partner.BusinessName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommunicationType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmvReady)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MachineSerialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VeppSerailNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoftwareVersion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FimwareVersion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurchargeType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurchargeAmmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SurchargeByPercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GreaterOrLesser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SettledType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InterChangeAmmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WhoInitiates)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CryptoChargeAmmount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

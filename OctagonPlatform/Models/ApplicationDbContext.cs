@@ -29,6 +29,7 @@ namespace OctagonPlatform.Models
         public DbSet<VaultCash> VaultCashs { get; set; }
         public DbSet<InterChange> InterChanges { get; set; }
         public DbSet<Surcharge> Surcharges { get; set; }
+        public DbSet<Cassette> Cassettes { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")

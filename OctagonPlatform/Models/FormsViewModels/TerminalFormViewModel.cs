@@ -133,12 +133,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Who Initiates day closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
-        [Display(Name = "Number of cassettes")]
-        public NumberOfCassettes.Number NumberOfCassettes { get; set; }
-
-        [Required]
-        public ICollection<Cassette> Cassettes { get; set; }
-
         [Required]
         [Display(Name = "Chrage by Cryptocurrency Trnasactions")]
         public int CryptoChargeAmmount { get; set; }

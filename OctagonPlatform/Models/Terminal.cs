@@ -160,7 +160,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Contract> Contracts { get; set; }
 
-        public ICollection<Cassette.Denomination> Cassettes { get; set; }
+        public ICollection<Cassette> Cassettes { get; set; }
 
         [Display(Name = "Who Initiates day closed")]
         public Initiate.Who WhoInitiates { get; set; }
@@ -215,7 +215,7 @@ namespace OctagonPlatform.Models
             LoadCashs = new Collection<LoadCash>();
             Transactions = new Collection<Transaction>();
             Contracts = new Collection<Contract>();
-            Cassettes = new Collection<Cassette.Denomination>();
+            Cassettes = new Collection<Cassette>();
             Surcharges = new Collection<Surcharge>();
             InterChanges = new Collection<InterChange>();
             CryptoChargeAccounts = new Collection<CryptoChargeAccount>();

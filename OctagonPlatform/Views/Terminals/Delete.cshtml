@@ -1,0 +1,233 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalFormViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TerminalFormViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.City.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LocationType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocationType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Make.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Partner.BusinessName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Partner.BusinessName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommunicationType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommunicationType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmvReady)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmvReady)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MachineSerialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MachineSerialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VeppSerailNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VeppSerailNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoftwareVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoftwareVersion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FimwareVersion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FimwareVersion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurchargeType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurchargeType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurchargeAmmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurchargeAmmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SurchargeByPercent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SurchargeByPercent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GreaterOrLesser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GreaterOrLesser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SettledType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SettledType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterChangeAmmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterChangeAmmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhoInitiates)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhoInitiates)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CryptoChargeAmmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CryptoChargeAmmount)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

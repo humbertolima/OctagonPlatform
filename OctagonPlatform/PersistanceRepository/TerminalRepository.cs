@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models;
+﻿using AutoMapper;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
@@ -44,12 +45,33 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalFormViewModel TerminalToEdit(int id)
         {
-            throw new System.NotImplementedException();
+            var terminal = Table.Where(x => x.Id == id)
+                .Include(x => x.Partner)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .Include(x => x.City)
+                .Include(x => x.Make)
+                .Include(x => x.Model)
+                .Include(x => x.LocationType)
+                .SingleOrDefault();
+            return terminal != null ? Mapper.Map<Terminal, TerminalFormViewModel>(terminal) : RenderTerminalFormViewModel(1);
         }
 
         public void SaveTerminal(TerminalFormViewModel viewModel, string action)
         {
-            throw new System.NotImplementedException();
+            if (action == "Edit")
+            {
+                var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                if (terminalToEdit == null) return;
+                {
+                    terminalToEdit = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
+                    Edit(terminalToEdit);
+                }
+            }
+            else
+            {
+                Add(Mapper.Map<TerminalFormViewModel, Terminal>(viewModel));
+            }
         }
 
         public Terminal TerminalDetails(int id)
@@ -75,6 +97,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.TerminalContacts)
                 .Include(x => x.TerminalPictures)
                 .Include(x => x.Transactions)
+                .Include(x => x.Cassettes)
                 .FirstOrDefault();
         }
 
@@ -85,7 +108,8 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {
-            throw new System.NotImplementedException();
+            
+            return Mapper.Map<TerminalFormViewModel, TerminalFormViewModel>(viewModel);
         }
     }
 }
