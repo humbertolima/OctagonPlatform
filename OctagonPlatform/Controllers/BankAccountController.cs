@@ -5,7 +5,6 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -111,7 +110,7 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BAEditFVModel bankAccount)
+        public ActionResult Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BAEditFVModel bankAccount)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +125,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -137,7 +136,7 @@ namespace OctagonPlatform.Controllers
             return RedirectToAction("Index");
         }
 
-      
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
