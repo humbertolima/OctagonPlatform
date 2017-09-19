@@ -6,6 +6,7 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using System.Data.Entity;
 using AutoMapper;
+using System.Collections;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -64,30 +65,61 @@ namespace OctagonPlatform.PersistanceRepository
 
         public BAEditFVModel BankAccountToEdit(int id)
         {
-            throw new NotImplementedException();
+            var model = Table
+                .Include(c => c.Partner)
+                .Include(c => c.Country)
+                .Include(c => c.State)
+                .Include(c => c.City)
+                .Single(c => c.Id == id)
+                ;
+            var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
+            editViewModel.Partners = Context.Partners.ToList();
+            editViewModel.Countries = Context.Countries.ToList();
+            editViewModel.Cities = Context.Cities.ToList();
+            editViewModel.States = Context.States.ToList();
+
+            return editViewModel;
         }
 
         public void DeleteBankAccount(int id)
         {
-            throw new NotImplementedException();
+            Delete(id);
         }
-
-
-
 
         public void SaveBankAccount(BAEditFVModel editViewModel, string action)
         {
             if (action == "Create")
             {
-                var result = FindBy(editViewModel.Id);
-
-                if (result == null)
+                var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id);
+                if (model == null)
                 {
-                    BankAccount model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-
+                    model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
                     Add(model);
                 }
             }
+            else
+            {
+                var model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
+                //Revisar este codigo para que no salve si no se le hizo modificacion al entity.
+                //db.Entry(bankAccount).State = EntityState.Modified;
+                Edit(model);
+            }
+        }
+
+        public IEnumerable<BAccountFVModel> Search(string search)
+        {
+            var bankAccounts = Table.Where(c => !c.Deleted && (c.NickName.Contains(search) || c.Partner.BusinessName.Contains(search)))
+                .Include(x => x.Partner)
+                .ToList();
+
+            List<BAccountFVModel> viewModel = new List<BAccountFVModel>();
+
+            foreach (var item in bankAccounts)
+            {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
+                viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
+            }
+
+            return viewModel;
         }
     }
 }

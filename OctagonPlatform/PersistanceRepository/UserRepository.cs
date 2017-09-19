@@ -190,14 +190,28 @@ namespace OctagonPlatform.PersistanceRepository
                 UserName = viewModel.UserName,
                 SetOfPermissions = viewModel.SetOfPermissions,
                 Error = viewModel.Error,
-
             };
         }
 
-        public async Task<User> Validate(User user)
+        public IEnumerable<User> Search(string search)
         {
-            var result = await Context.Users.SingleAsync(c => c.UserName == user.UserName);
-            return result;
+            var users = Table.Where(c => !c.Deleted && (c.Name.Contains(search) || c.Partner.BusinessName.Contains(search)))
+                .Include(x => x.Partner)
+                .ToList();
+
+            //List<BAccountFVModel> viewModel = new List<BAccountFVModel>();
+
+            //foreach (var item in bankAccounts)
+            //{   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
+            //    viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
+            //}
+
+            return users;
         }
-    }
+            //public async Task<User> Validate(User user)
+            //{
+            //    var result = await Context.Users.SingleAsync(c => c.UserName == user.UserName);
+            //    return result;
+            //}
+        }
 }

@@ -114,14 +114,13 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BankAccount bankAccount)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BAEditFVModel bankAccount)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.Entry(bankAccount).State = EntityState.Modified;
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Index");
-            //}
+            if (ModelState.IsValid)
+            {
+                _BAccountRepository.SaveBankAccount(bankAccount, "Edit");
+                return RedirectToAction("Index");
+            }
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
@@ -132,31 +131,16 @@ namespace OctagonPlatform.Controllers
         // GET: BankAccount/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            BankAccount bankAccount = default(BankAccount);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            _BAccountRepository.DeleteBankAccount(Convert.ToInt32(id));
 
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            //if (bankAccount == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View(bankAccount);
-        }
-
-        // POST: BankAccount/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            //BankAccount bankAccount = await db.BankAccounts.FindAsync(id);
-            //db.BankAccounts.Remove(bankAccount);
-            //await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -165,6 +149,12 @@ namespace OctagonPlatform.Controllers
                 //_BAccountRepository.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_BAccountRepository.Search(search));
         }
     }
 }
