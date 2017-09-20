@@ -12,8 +12,15 @@
     <img src="@Model.Partner.Logo" width="150" height="150" alt="Partner Logo" />
 </div>
 
+
 <div id="generalInfo">
     @Html.Partial("Sections/GenralInfo")
+</div>
+<div id="addBankAccounts">
+    @{
+     var userBAViewModel = new OctagonPlatform.Models.FormsViewModels.UserBAViewModel();  
+    }
+    @Html.Partial("Sections/GetAllBankAccount", userBAViewModel)
 </div>
 <div id="bankAccounts">
     @Html.Partial("Sections/BankAccounts")
@@ -25,3 +32,6 @@
     @Html.Partial("Sections/Reports")
 </div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/user")
+}

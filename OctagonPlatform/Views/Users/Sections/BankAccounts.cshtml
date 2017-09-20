@@ -1,1 +1,123 @@
-﻿<h1>Banks Accounts</h1>
+﻿@model OctagonPlatform.Models.User
+
+<table class="table">
+    <tr>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            BusinessName
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            NickName
+        </th>
+        <th>
+            RoutingNumber
+        </th>
+        <th>
+            AccountNumber
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            NameOnCheck
+        </th>
+        <th>
+            FedTax
+        </th>
+        <th>
+            Ssn
+        </th>
+        <th>
+            Address1
+        </th>
+        <th>
+            Address2
+        </th>
+        <th>
+            Zip
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            AccountType
+        </th>
+        <th></th>
+    </tr>
+    <tbody id="listOfBA">
+        @foreach (var item in Model.BankAccounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Partner.BusinessName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.State.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NickName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoutingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOnCheck)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FedTax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ssn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Zip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountType)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id },
+                                                                 new { onclick = "return confirm('Are sure wants to delete?');" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -15,6 +15,9 @@ namespace OctagonPlatform.Controllers
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IBankAccountRepository _bankAccountRepository;
+
+        private IBankAccountRepository BankAccountRepository => _bankAccountRepository;
 
         public UsersController(IUserRepository userRepository)
         {
@@ -116,7 +119,7 @@ namespace OctagonPlatform.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest,"Parameter required in Edit.");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Parameter required in Edit.");
             }
 
             var userEdit = default(UserEditFormViewModel);
@@ -174,9 +177,13 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View(_userRepository.UserDetails(id));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            return View(_userRepository.UserDetails(Convert.ToInt32(id)));
         }
 
         [HttpGet]
@@ -198,5 +205,28 @@ namespace OctagonPlatform.Controllers
         {
             return PartialView(_userRepository.Search(search));
         }
+        #region Get BankAccount Of User
+
+        [HttpPost]
+        public ActionResult GetAllBankAccount()
+        {
+            ////UserBAViewModel viewModel = new UserBAViewModel();
+            ////viewModel.BankAccounts = _userRepository.GetAllBankAccount();
+
+            ////return PartialView("Sections/GetAllBankAccount", viewModel);
+            //////return View(_userRepository.GetBAOfUser(Convert.ToInt32(userId)));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddBA(UserBAViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View("Details");
+        }
+        #endregion
     }
 }

@@ -25,5 +25,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteUser(int id);
 
         UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel);
+
+        IEnumerable<BankAccount> GetAllBankAccount();
     }
 }

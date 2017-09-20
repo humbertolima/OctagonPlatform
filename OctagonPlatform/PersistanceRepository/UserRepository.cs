@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Helpers;
+﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -7,12 +8,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-
+       
         public IEnumerable<User> GetAllUsers()
         {
             return Table.Where(u => u.Deleted == false)  //Seleccionar los que no esten borrados. Bloqueados sis
@@ -21,6 +23,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Partner)
                 .ToList();
         }
+
 
         public UserFormViewModel RenderUserFormViewModel()
         {
@@ -208,10 +211,28 @@ namespace OctagonPlatform.PersistanceRepository
 
             return users;
         }
-            //public async Task<User> Validate(User user)
-            //{
-            //    var result = await Context.Users.SingleAsync(c => c.UserName == user.UserName);
-            //    return result;
-            //}
+
+        public IEnumerable<BankAccount> GetAllBankAccount()
+        {
+            IEnumerable<SelectListItem> result = _context.Cities
+              .Where(c => c.StateId == stateId)
+              .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        //public List<UserBAViewModel> GetBAOfUser()
+        //{
+        //    var bankAccounts = Context.BankAccounts.ToList();
+        //    //Sugerido por RSHARPER
+        //    var viewModel = bankAccounts.Select(item => Mapper.Map<BankAccount, UserBAViewModel>(item)).ToList();
+
+        //    return viewModel;
+        //}
+        //public async Task<User> Validate(User user)
+        //{
+        //    var result = await Context.Users.SingleAsync(c => c.UserName == user.UserName);
+        //    return result;
+        //}
+    }
 }

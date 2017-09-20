@@ -1,0 +1,30 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.UserBAViewModel
+
+@using (Html.BeginForm("AddBA", "Users", new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    if (Model.BankAccounts == null)
+    {
+        Model.BankAccounts = new List<OctagonPlatform.Models.BankAccount>();
+    }
+        <div class="form-horizontal">
+            <div id="BankAccounts">
+                <label>Bank</label>
+                <select id="BankAccounts" name="BankAccounts" class="form-control">
+                   
+                    @foreach (var item in Model.BankAccounts)
+                    {
+                        <option value="@item.Id">@item.AccountNumber</option>
+                    }
+                </select>
+            </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+
+            <div>
+                <div>
+                    <input type="submit" value="Add" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+

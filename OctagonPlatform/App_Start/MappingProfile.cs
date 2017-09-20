@@ -28,6 +28,8 @@ namespace OctagonPlatform
             CreateMap<BAEditFVModel, BankAccount>();
 
             CreateMap<BankAccount, BAEditFVModel>();
+
+            CreateMap<BankAccount, UserBAViewModel>();
             #endregion
 
 
