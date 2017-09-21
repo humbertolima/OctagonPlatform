@@ -214,11 +214,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public IEnumerable<BankAccount> GetAllBankAccount()
         {
-            IEnumerable<SelectListItem> result = _context.Cities
-              .Where(c => c.StateId == stateId)
-              .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
-
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return null;
         }
 
         //public List<UserBAViewModel> GetBAOfUser()

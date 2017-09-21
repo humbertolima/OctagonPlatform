@@ -207,15 +207,20 @@ namespace OctagonPlatform.Controllers
         }
         #region Get BankAccount Of User
 
-        [HttpPost]
-        public ActionResult GetAllBankAccount()
-        {
-            ////UserBAViewModel viewModel = new UserBAViewModel();
-            ////viewModel.BankAccounts = _userRepository.GetAllBankAccount();
+        //[HttpPost]
+        //public ActionResult GetAllBankAccount()
+        //{
+        //    IEnumerable<SelectListItem> result = _context.Cities
+        //      .Where(c => c.StateId == stateId)
+        //      .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
 
-            ////return PartialView("Sections/GetAllBankAccount", viewModel);
-            //////return View(_userRepository.GetBAOfUser(Convert.ToInt32(userId)));
-        }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //    ////UserBAViewModel viewModel = new UserBAViewModel();
+        //    ////viewModel.BankAccounts = _userRepository.GetAllBankAccount();
+
+        //    ////return PartialView("Sections/GetAllBankAccount", viewModel);
+        //    //////return View(_userRepository.GetBAOfUser(Convert.ToInt32(userId)));
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]

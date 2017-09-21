@@ -1,32 +1,14 @@
-﻿$("#BankAccounts").click(function () {
-    
-    $.ajax({
-        type: "Post",
-        url: "/Users/GetAllBankAccount",
-        datatype: "html",
-        success: function (data) {
-            var ddlBankAccount = $("#BankAccounts");
-            console.log(data);
-            $.each(data, function (val, text) {
-                
-                ddlBankAccount.append(
-                    $("<option></option>").val(text.Value).html(text.Text)
-                );
-            });
-        }
-    });
-});
-
+﻿
 $("#BankAccounts").click(function () {
 
     $.ajax({
-        url: "/Users/GetAllBankAccount",
+        url: "/Populate/GetAllBankAccount",
         datatype: "json",
         beforeSend: loadStart,
         complete: loadStop,
         success: function (data) {
             var ddlBankAccounts = $("#BankAccounts");
-            
+            ddlBankAccounts.empty();
             $.each(data, function (val, text) {
 
                 ddlBankAccounts.append(

@@ -32,10 +32,13 @@ namespace OctagonPlatform.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult GetAllBankAccount(int? stateId)
+        //pendiente poner restriccion para qeu no se acceda de fofrma anonima.
+        public ActionResult GetAllBankAccount()
         {
-            return null;
+            IEnumerable<SelectListItem> result = _context.BankAccounts
+                 .Select(c => new SelectListItem { Text = c.AccountNumber, Value = c.Id.ToString() });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
