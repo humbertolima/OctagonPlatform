@@ -14,7 +14,7 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-       
+
         public IEnumerable<User> GetAllUsers()
         {
             return Table.Where(u => u.Deleted == false)  //Seleccionar los que no esten borrados. Bloqueados sis
@@ -44,7 +44,7 @@ namespace OctagonPlatform.PersistanceRepository
         public ICollection<Permission> AddPermissionToUser(string[] permissions)
         {
             var permissionList = new List<Permission>();
-            if (permissions != null) 
+            if (permissions != null)
             {
                 foreach (var t in permissions)
                 {
@@ -212,9 +212,31 @@ namespace OctagonPlatform.PersistanceRepository
             return users;
         }
 
-        public IEnumerable<BankAccount> GetAllBankAccount()
+        private ICollection<BankAccount> CreateListBankAccount(string[] bankAccounts)
         {
-            return null;
+            List<BankAccount> bankAccountList = new List<BankAccount>();
+            if (bankAccounts != null)
+            {
+                foreach (var t in bankAccounts)
+                {
+                    var convertId = Convert.ToInt32(t);
+                    bankAccountList.Add(Context.BankAccounts.FirstOrDefault(c => c.Id == convertId));
+                }
+            }
+            return bankAccountList;
+        }
+
+        public void AddBankAccountToUser(int userId, string[] bankAccounts)
+        {
+            List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
+
+            if (bankAccounts.Count() > 0)
+            {
+                User user = Table.Single(c => c.Id == userId);
+
+                user.BankAccounts = bankAccountsList;
+                Edit(user);
+            }
         }
 
         //public List<UserBAViewModel> GetBAOfUser()

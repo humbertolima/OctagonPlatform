@@ -3,6 +3,7 @@
 @using (Html.BeginForm("AddBA", "Users", new { @class = "form-horizontal" }))
 {   //pendiente controlar el refresh. hacer delay de la busqueda en base datos cuando se le da click. Siempre que se le da click a al Combo, hace un select a la BD y puede atentar contra la disponibilidad.
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
     if (Model.BankAccounts == null)
     {
         Model.BankAccounts = new List<OctagonPlatform.Models.BankAccount>();

@@ -15,9 +15,6 @@ namespace OctagonPlatform.Controllers
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
-        private readonly IBankAccountRepository _bankAccountRepository;
-
-        private IBankAccountRepository BankAccountRepository => _bankAccountRepository;
 
         public UsersController(IUserRepository userRepository)
         {
@@ -224,13 +221,14 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddBA(UserBAViewModel viewModel)
+        public ActionResult AddBA(UserBAViewModel viewModel, string[] bankAccounts)
         {
-            if (ModelState.IsValid)
-            {
-
-            }
-            return View("Details");
+            //if (ModelState.IsValid)
+            //{
+                _userRepository.AddBankAccountToUser(viewModel.Id, bankAccounts);
+            //}
+            //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
+            return PartialView("Sections/BankAccounts");
         }
         #endregion
     }

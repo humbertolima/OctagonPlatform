@@ -16,6 +16,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         ICollection<Permission> AddPermissionToUser(string[] permissions);
 
+        void AddBankAccountToUser(int userId, string[] bankAccounts);
+
         void SaveUser(UserFormViewModel viewModel, string action);
 
         User UserDetails(int id);
@@ -25,7 +27,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteUser(int id);
 
         UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel);
-
-        IEnumerable<BankAccount> GetAllBankAccount();
+        
     }
 }

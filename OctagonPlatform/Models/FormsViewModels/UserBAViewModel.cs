@@ -11,11 +11,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int Id { get; set; }
         
-        [Required(ErrorMessage = "Partner is required")]
-        [Display(Name = "Partner")]
-        public int PartnerId { get; set; }
-        public IEnumerable<Partner> Partners { get; set; }
-
         public bool IsLocked { get; set; }
 
         public IEnumerable<BankAccount> BankAccounts { get; set; }

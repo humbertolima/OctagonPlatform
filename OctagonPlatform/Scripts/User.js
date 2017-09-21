@@ -1,5 +1,5 @@
 ﻿
-$("#BankAccounts").click(function () {
+$("#BankAccounts").ready(function () {
 
     $.ajax({
         url: "/Populate/GetAllBankAccount",
