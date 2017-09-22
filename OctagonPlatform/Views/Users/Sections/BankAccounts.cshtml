@@ -111,13 +111,16 @@
                     @Html.DisplayFor(modelItem => item.AccountType)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id },
-                                                                 new { onclick = "return confirm('Are sure wants to delete?');" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    <div>
+                        <input type="button" id="deattachBA" value="deattach" class="btn btn-default" />
+                    </div>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/user")
+}
 

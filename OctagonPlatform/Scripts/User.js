@@ -19,6 +19,27 @@ $("#BankAccounts").ready(function () {
         }
     });
 });
+$(function () {
+ 
+    $("#deattachBA").click(function () {
+
+    $.ajax({
+        url: "/Users/DeattachBankAccount",
+        datatype: "json",
+        beforeSend: loadStart,
+        complete: loadStop,
+        success: function (data) {
+            $.each(data, function (val, text) {
+
+                ddlBankAccounts.append(
+                    $("<option></option>").val(text.Value).html(text.Text)
+                );
+            });
+
+        }
+    });
+});
+});
 
 function loadStart() {
     $("#loading").show();

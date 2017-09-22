@@ -230,6 +230,7 @@ namespace OctagonPlatform.Controllers
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
             return PartialView("Sections/BankAccounts");
         }
+       
         #endregion
     }
 }
