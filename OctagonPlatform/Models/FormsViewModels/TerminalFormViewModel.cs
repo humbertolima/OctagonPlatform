@@ -7,7 +7,6 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class TerminalFormViewModel
     {
-  
         public int Id { get; set; }
 
         [Required]
@@ -87,17 +86,17 @@ namespace OctagonPlatform.Models.FormsViewModels
         public int Zip { get; set; }
 
         [Required]
-        [Display(Name = "Emv is Ready")]
+        [Display(Name = "Emv")]
         public bool EmvReady { get; set; }
 
         [Required]
-        [Display(Name = "Machine serial number")]
+        [Display(Name = "Serial Number")]
         [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
         [Display(Name = "Veep Serial number")]
-        public string VeppSerailNumber { get; set; }
+        public string VeppSerialNumber { get; set; }
 
         [Display(Name = "Software Version")]
         public string SoftwareVersion { get; set; }
@@ -105,37 +104,32 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
+        [Required]
+        [Display(Name = "Surcharged Type")]
+        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
         [Required]
-        [Display(Name = "Surcharged type, chraged by total ammount or percent")]
-        public Helpers.Surcharge.SurchargeType SurchargeType { get; set; }
-
-        [Required]
-        [Display(Name = "Surcharge ammount per transaction")]
+        [Display(Name = "Surcharge Ammount")]
         public double SurchargeAmmount { get; set; }
 
         [Required]
-        [Display(Name = "Percent by Surcharge Ammount")]
+        [Display(Name = "Percent Surcharge Ammount")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge by ammount or percent")]
-        public GreaterOrLessAmmount.GreaterOrLesser GreaterOrLesser { get; set; }
-
-        [Required]
-        [Display(Name = "Settled the recolection by?")]
+        [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
 
         [Required]
-        [Display(Name = "Interchange ammount, aproved by sponsor bank")]
+        [Display(Name = "Interchange Ammount")]
         public double InterChangeAmmount { get; set; }
 
-        [Display(Name = "Who Initiates day closed")]
+        [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Chrage by Cryptocurrency Trnasactions")]
-        public int CryptoChargeAmmount { get; set; }
+        [Display(Name = "Charge by Cryptocurrency Trnasaction")]
+        public int CryptoPercentChargeAmmount { get; set; }
 
     }
 }

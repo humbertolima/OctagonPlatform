@@ -49,6 +49,7 @@ namespace OctagonPlatform.Models
         [StringLength(50)]
         public string Address2 { get; set; }
 
+        
         [Required(ErrorMessage = "The zip code is required")]
         [Display(Name = "Zip Code")]
         public int Zip { get; set; }

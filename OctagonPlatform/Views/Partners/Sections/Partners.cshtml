@@ -50,8 +50,8 @@
             <td>@item.Email</td>
             <td>@item.Status</td>
             <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
-            <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id},
-                                                             new {onclick = "return confirm('Are sure wants to delete?');"})</td>
+            <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                                                             </td>
             
         </tr>
     }

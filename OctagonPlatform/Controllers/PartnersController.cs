@@ -95,9 +95,15 @@ namespace OctagonPlatform.Controllers
         {
             return View(_partnerRepository.PartnerDetails(id));
         }
-
-        [HttpPost]
         public ActionResult Delete(int id)
+        {
+
+            return View(_partnerRepository.PartnerToEdit(id));
+        }
+        
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
