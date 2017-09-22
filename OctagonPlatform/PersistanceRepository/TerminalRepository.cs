@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -17,16 +18,21 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.Transactions)
+                .Include(x => x.LastTransaction)
+                .Include(x => x.LocationType)
                 .ToList();
         }
 
         public IEnumerable<Terminal> Search(string search)
         {
-            return Table.Where(x => !x.Deleted)
+            return Table.Where(x => !x.Deleted && (x.LocationType.Name == search || x.Model.Name == search || x.Make.Name == search || x.Id == int.Parse(search)))
                 .Include(x => x.Partner)
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.Transactions)
+                .Include(x => x.LastTransaction)
                 .ToList();
         }
 
@@ -36,10 +42,24 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Countries = Context.Countries.ToList(),
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
+                Status = StatusType.Status.Active,
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
                 Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
                 PartnerId = partnerId,
-                Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId)
+                Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId),
+                LocationTypes = Context.LocationTypes.ToList(),
+                Makes = Context.Makes.ToList(),
+                Models = Context.Models.ToList(),
+                LocationTypeId = 5,
+                MakeId = 1,
+                ModelId = 1,
+                CommunicationType = CommunicationType.Communication.TcpIp,
+                EmvReady = true,
+                SurchargeType = SurchargeType.SurchargeTypes.Ammount,
+                SettledType = Settled.SettledType.Daily,
+                WhoInitiates = Initiate.Who.Host
+
+                
             };
         }
 
@@ -54,7 +74,20 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Model)
                 .Include(x => x.LocationType)
                 .SingleOrDefault();
-            return terminal != null ? Mapper.Map<Terminal, TerminalFormViewModel>(terminal) : RenderTerminalFormViewModel(1);
+            if (terminal == null) return RenderTerminalFormViewModel(1);
+            {
+                var terminalViewModel = Mapper.Map<Terminal, TerminalFormViewModel>(terminal);
+                terminalViewModel.Countries = Context.Countries.ToList();
+                terminalViewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
+                terminalViewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+                terminalViewModel.Partners = Context.Partners.Where(x => !x.Deleted).ToList();
+                terminalViewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == terminal.PartnerId);
+                terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
+                terminalViewModel.Makes = Context.Makes.ToList();
+                terminalViewModel.Models = Context.Models.ToList();
+
+                return terminalViewModel;
+            }
         }
 
         public void SaveTerminal(TerminalFormViewModel viewModel, string action)
@@ -70,19 +103,22 @@ namespace OctagonPlatform.PersistanceRepository
             }
             else
             {
-                Add(Mapper.Map<TerminalFormViewModel, Terminal>(viewModel));
+                var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
+                Add(terminal);
             }
         }
 
         public Terminal TerminalDetails(int id)
         {
             return Table.Where(x => x.Id == id)
-                .Include(x => x.Cassettes)
-                .Include(x => x.DefaultBankAccount)
                 .Include(x => x.Partner)
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.LastTransaction)
+                .Include(x => x.LocationType)
+                .Include(x => x.Cassettes)
+                .Include(x => x.DefaultBankAccount)
                 .Include(x => x.Contracts)
                 .Include(x => x.Documents)
                 .Include(x => x.Events)
@@ -108,8 +144,27 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {
-            
-            return Mapper.Map<TerminalFormViewModel, TerminalFormViewModel>(viewModel);
+
+            viewModel.Countries = Context.Countries.ToList();
+            viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
+            viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+            viewModel.Partners = Context.Partners.Where(x => !x.Deleted).ToList();
+            viewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == viewModel.PartnerId);
+            viewModel.LocationTypes = Context.LocationTypes.ToList();
+            viewModel.Makes = Context.Makes.ToList();
+            viewModel.Models = Context.Models.ToList();
+            viewModel.LocationTypeId = 5;
+            viewModel.MakeId = 1;
+            viewModel.ModelId = 1;
+            viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
+            viewModel.EmvReady = true;
+            viewModel.SurchargeType = SurchargeType.SurchargeTypes.Ammount;
+            viewModel.SettledType = Settled.SettledType.Daily;
+            viewModel.WhoInitiates = Initiate.Who.Host;
+
+            return viewModel;
+
+
         }
     }
 }

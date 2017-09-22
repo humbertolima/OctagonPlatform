@@ -54,3 +54,18 @@ $("#searchUser").keydown(function () {
         }
     });
 });
+
+$("#searchTerminal").keydown(function () {
+
+    var searchText = $("#searchTerminal").val();
+    $.ajax({
+        type: "Post",
+        url: "Partners/Search?search=" + searchText,
+        datatype: "html",
+        success: function (data) {
+
+            $("#listOfTerminals").html(data);
+        }
+    });
+});
+

@@ -118,10 +118,29 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _repository.DeleteTerminal(id);
-            return RedirectToAction("Index");
+            try
+            {
+                _repository.DeleteTerminal(id);
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+
+            {
+                ViewBag.Error = "Validation error deleting Terminal" + exDb.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
+                return RedirectToAction("Index");
+            }
         }
 
-       
+        [HttpPost]
+        public ActionResult Search(string search)
+        {
+            return PartialView(_repository.Search(search));
+        }
+
     }
 }

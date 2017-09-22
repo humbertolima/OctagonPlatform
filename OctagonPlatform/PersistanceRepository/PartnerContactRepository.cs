@@ -37,7 +37,8 @@ namespace OctagonPlatform.PersistanceRepository
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
                 Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
                 PartnerId = partnerId,
-                ContactTypes = Context.ContactTypes.ToList()
+                ContactTypes = Context.ContactTypes.ToList(),
+                ContactTypeId = 4
             };
         }
 

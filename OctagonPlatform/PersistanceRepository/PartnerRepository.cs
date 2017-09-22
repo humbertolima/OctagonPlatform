@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 Parents = Table.Where(x => !x.Deleted).ToList(),
                 ParentId = parentId,
+                Status = StatusType.Status.Active,
                 Parent = Context.Partners.SingleOrDefault(x => x.Id == parentId),
                 Countries = Context.Countries.ToList(),
                 States = Context.States.Where(x => x.CountryId == 231).ToList(),
@@ -163,7 +165,7 @@ namespace OctagonPlatform.PersistanceRepository
                 States = Context.States.Where(x => x.CountryId == viewModel.CountryId).ToList(),
                 CityId = viewModel.CityId,
                 Cities = Context.Cities.Where(x => x.StateId == viewModel.StateId).ToList(),
-                Status = viewModel.Status,
+                Status = StatusType.Status.Active,
                 Email = viewModel.Email,
                 WorkPhone = viewModel.WorkPhone,
                 Mobile = viewModel.Mobile,

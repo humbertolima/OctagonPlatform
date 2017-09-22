@@ -82,18 +82,18 @@ namespace OctagonPlatform.Models
         public bool EmvReady { get; set; }
 
         [Required]
-        [Display(Name = "Machine serial number")]
+        [Display(Name = "Machine Serial Number")]
         [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
-        [Display(Name = "Veep Serial number")]
-        public string VeppSerailNumber { get; set; }
+        [Display(Name = "Veep Serial Number")]
+        public string VeppSerialNumber { get; set; }
 
-        [Display(Name = "Sorftware version")]
+        [Display(Name = "Sorftware Version")]
         public string SoftwareVersion { get; set; }
 
-        [Display(Name = "Fimware version")]
+        [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
         public DateTime? CreatedAt { get; set; }
@@ -108,25 +108,25 @@ namespace OctagonPlatform.Models
         public bool Deleted { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "Date of installation")]
+        [Display(Name = "Date of Installation")]
         public DateTime? InstalledDate { get; set; }
 
-        [Display(Name = "The terminal was charged by?")]
+        [Display(Name = "Charged By?")]
         public string ChargedBy { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "The last terminal communication date")]
+        [Display(Name = "The Communication Date")]
         public DateTime? LastCommunicationDate { get; set; }
 
         [Display(Name = "Terminal Balance")]
         public int? Balance { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "Last terminal transaction Date")]
+        [Display(Name = "Last Transaction Date")]
         public DateTime? LastTransactionDate { get; set; }
 
         [DataType(DataType.Currency)]
-        [Display(Name = "Minimun ammount chash that must have the terminal")]
+        [Display(Name = "Minimun Chash Balance")]
         public int? MinAmmountCash { get; set; }
 
         public bool Offline { get; set; }
@@ -138,10 +138,10 @@ namespace OctagonPlatform.Models
         public string EncryptionType { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "Keys bounded date")]
+        [Display(Name = "Keys Dounded Date")]
         public DateTime? DateKeyBounded { get; set; }
 
-        [Display(Name = "Default bank account")]
+        [Display(Name = "Default Bank Account")]
         public int? BankAccountId { get; set; }
 
         public BankAccount DefaultBankAccount { get; set; }
@@ -158,45 +158,45 @@ namespace OctagonPlatform.Models
 
         public ICollection<Transaction> Transactions { get; set; }
 
+        public int? LastTransactionId { get; set; }  
+
+        public Transaction LastTransaction { get; set; }
+
         public ICollection<Contract> Contracts { get; set; }
 
         public ICollection<Cassette> Cassettes { get; set; }
 
-        [Display(Name = "Who Initiates day closed")]
+        [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         public VaultCash VaultCash { get; set; }
 
         [Required]
-        public Helpers.Surcharge.SurchargeType SurchargeType { get; set; }
+        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge ammount by transaction")]
+        [Display(Name = "Surcharge Ammount")]
         public double SurchargeAmmount { get; set; }
 
         [Required]
-        [Display(Name = "Percent by Surcharge Ammount")]
+        [Display(Name = "Percent Surcharge Ammount")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
-        [Display(Name = "Take the greater or lesser between Surcharge Ammout or Surcharge by Percent")]
-        public GreaterOrLessAmmount.GreaterOrLesser GreaterOrLesser { get; set; }
-
-        [Required]
-        [Display(Name = "Recolect type")]
+        [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
 
         public ICollection<Surcharge> Surcharges { get; set; }
 
         [Required]
-        [Display(Name = "Inter changes ammount by sponsor bank")]
+        [Display(Name = "Interchange Ammount")]
         public double InterChangeAmmount { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
 
         [Required]
-        [Display(Name = "Chrage by Cryptocurrency Trnasactions")]
-        public int CryptoChargeAmmount { get; set; }
+        [Display(Name = "Percent Charge By Transaction")]
+        public double CryptoPercentChargeAmmount { get; set; }
 
         public ICollection<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
 

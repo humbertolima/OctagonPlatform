@@ -14,18 +14,18 @@
     <p class="alert alert-danger">
         <strong>@ViewBag.Error</strong>
     </p>
-    <p>@Html.ValidationSummary()</p>
+    <p>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</p>
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.PartnerId)
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus", placeholder = "Jhon" })
         @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Smith" })
         @Html.ValidationMessageFor(m => m.LastName)
     </div>
     <div class="form-group">
@@ -35,12 +35,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Address1)
-        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
         @Html.ValidationMessageFor(m => m.Address1)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Address2)
-        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
         @Html.ValidationMessageFor(m => m.Address2)
     </div>
     <div class="form-group">
@@ -99,17 +99,17 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com" })
         @Html.ValidationMessageFor(m => m.Email)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Phone)
-        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
         @Html.ValidationMessageFor(m => m.Phone)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Zip)
-        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
         @Html.ValidationMessageFor(m => m.Zip)
     </div>
     <div class="form-group">
