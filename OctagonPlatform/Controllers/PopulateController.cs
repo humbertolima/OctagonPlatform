@@ -36,6 +36,7 @@ namespace OctagonPlatform.Controllers
         public ActionResult GetAllBankAccount()
         {
             IEnumerable<SelectListItem> result = _context.BankAccounts
+                .Where(c => c.Deleted == false)
                  .Select(c => new SelectListItem { Text = c.AccountNumber, Value = c.Id.ToString() });
 
             return Json(result, JsonRequestBehavior.AllowGet);

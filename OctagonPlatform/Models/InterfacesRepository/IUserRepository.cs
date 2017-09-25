@@ -18,6 +18,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         void AddBankAccountToUser(int userId, string[] bankAccounts);
 
+        User DeattachBankAccountToUser(int userId, int bankAccountID, string[] bankAccounts);
+
         void SaveUser(UserFormViewModel viewModel, string action);
 
         User UserDetails(int id);

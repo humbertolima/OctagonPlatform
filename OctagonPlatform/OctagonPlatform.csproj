@@ -484,6 +484,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
@@ -769,6 +770,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
+    <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -839,6 +841,7 @@
     <Content Include="Views\Terminals\Sections\CashManagment.cshtml" />
     <Content Include="Views\Terminals\Sections\Transactions.cshtml" />
     <Content Include="Views\Terminals\Sections\TerminalUsers.cshtml" />
+    <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

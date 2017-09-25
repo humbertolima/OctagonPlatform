@@ -238,7 +238,23 @@ namespace OctagonPlatform.PersistanceRepository
                 Edit(user);
             }
         }
+        public User DeattachBankAccountToUser(int userId, int bankAccountId, string[] bankAccounts)
+        {
+            //pendiente por si se decide quitar mas de una cuenta de banco en una sola accion. por el momento voene vacio.
+            //List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
 
+            User user = Table
+                .Include(c => c.BankAccounts)
+                .Single(c => c.Id == userId);
+
+            var bankToRemove = user.BankAccounts.FirstOrDefault(c => c.Id == bankAccountId);
+            if (bankToRemove != null)  
+            {
+                user.BankAccounts.Remove(bankToRemove);
+                Edit(user);
+            }
+            return user;
+        }
         //public List<UserBAViewModel> GetBAOfUser()
         //{
         //    var bankAccounts = Context.BankAccounts.ToList();

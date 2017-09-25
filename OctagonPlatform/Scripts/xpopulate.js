@@ -5,7 +5,6 @@ $("#CountryId").change(function () {
     $.ajax({
         url: "/populate/GetallStates",
         data: { 'countryID': countrieId },
-
         datatype: "json",
         beforeSend: loadStart,
         complete: loadStop,

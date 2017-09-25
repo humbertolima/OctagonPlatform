@@ -223,14 +223,31 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddBA(UserBAViewModel viewModel, string[] bankAccounts)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 _userRepository.AddBankAccountToUser(viewModel.Id, bankAccounts);
-            //}
+            }
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
             return PartialView("Sections/BankAccounts");
         }
-       
+
+        public ActionResult DeattachBankAccount(string ID, string bankAccountID, string[] bankAccounts)
+        {
+            User user = new Models.User();
+            if (ModelState.IsValid)
+            {
+                if (!string.IsNullOrEmpty(bankAccountID) && (!string.IsNullOrEmpty(ID)))
+                {
+                    var userId = Convert.ToInt32(ID);
+                    var bAId = Convert.ToInt32(bankAccountID);
+                    user = _userRepository.DeattachBankAccountToUser(userId, bAId, bankAccounts);
+                }
+            }
+           
+
+            //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
+            return PartialView("Sections/BankAccounts", user);
+        }
         #endregion
     }
 }
