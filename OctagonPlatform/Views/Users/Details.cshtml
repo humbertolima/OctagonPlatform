@@ -18,14 +18,33 @@
 </div>
 BANKACCOUNT
 
-@Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "btn btn-primary", data_toggle = "collapse", data_target = "#addBankAccounts" })
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Assigned</h4>
+            @Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users",new { userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
+            <div id="addBankAccounts" class="panel-collapse collapse">
 
-<div id="addBankAccounts" class="panel-collapse collapse">
-   
+            </div>
+        </div>
+    </div>
 </div>
-<div id="bankAccounts">
-    
+
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                All Bank Account to asign
+            </h4>
+            @Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
+
+            <div id="bankAccounts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
+
 <div id="terminals">
     @Html.Partial("Sections/Terminals")
 </div>

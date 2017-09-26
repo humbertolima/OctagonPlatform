@@ -239,15 +239,18 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public List<BankAccount> GetAllBankAccount(int? userId)
+        public List<BankAccount> GetAllBankAccount(string userId)
         {
             List<BankAccount> bankAccountsList = new List<BankAccount>();
 
-            if (userId != null)     //selecciono cuentas de bancos para usuarios
+            if (!string.IsNullOrEmpty(userId))     //selecciono cuentas de bancos para usuarios
             {
-                User user = Table.Single(c => c.Id == userId);
-                bankAccountsList = Context.BankAccounts
-                .Where(c => c.Deleted == false && c.Users.Contains(user)).ToList();
+                int userIdConverted = Convert.ToInt32(userId);
+                User user = Table
+                    .Include(c => c.BankAccounts)
+                    .Single(c => c.Id == userIdConverted);
+
+                bankAccountsList = user.BankAccounts.Select(c => c).ToList();
             }
             else                    //selecciono todas las cuentas de usuario.
             {

@@ -247,9 +247,9 @@ namespace OctagonPlatform.Controllers
             return PartialView("Sections/BankAccounts", user);
         }
 
-        public PartialViewResult GetAllBankAccount(string param)
+        public PartialViewResult GetAllBankAccount(string userId)
         {
-            List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(null);
+            List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(userId);
 
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
