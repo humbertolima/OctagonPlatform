@@ -204,9 +204,9 @@ namespace OctagonPlatform.Controllers
         }
 
         #region Get BankAccount Of User
-        
+
         [HttpPost]
-       // [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public ActionResult AddBA(string userId, string[] bankAccounts)
         {
             _userRepository.AddBankAccountToUser(userId, bankAccounts);
@@ -233,17 +233,16 @@ namespace OctagonPlatform.Controllers
             return PartialView("Sections/BankAccounts", user);
         }
 
-        public PartialViewResult GetAllBankAccount(string userId)
+        public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
-            List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(userId);
-            if (string.IsNullOrEmpty(userId))
-            {
-                ViewBag.assigned = false;
-            }
-            else
-            {
-                ViewBag.assigned = true;
-            }
+            UserBAViewModel userBAViewModel = new UserBAViewModel();
+
+            List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(userId, toAttach);
+
+            ViewBag.assigned = toAttach;
+            userBAViewModel.Id = Convert.ToInt32(userId);
+
+            userBAViewModel =bankAccounts.Select Mapper.Map<BankAccount, UserBAViewModel>(bankAccounts);
 
             return PartialView("Sections/BankAccounts", bankAccounts);
         }

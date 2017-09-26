@@ -13,7 +13,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         
         public bool IsLocked { get; set; }
 
-        public IEnumerable<BankAccount> BankAccounts { get; set; }
+        public List<BankAccount> BankAccounts { get; set; }
 
         public string Error { get; set; }
     }

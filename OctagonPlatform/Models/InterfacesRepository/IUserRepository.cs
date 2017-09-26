@@ -16,7 +16,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         ICollection<Permission> AddPermissionToUser(string[] permissions);
 
-        List<BankAccount> GetAllBankAccount(string userId);
+        List<BankAccount> GetAllBankAccount(string userId, bool toAttach);
 
         void AddBankAccountToUser(string userId, string[] bankAccounts);
 

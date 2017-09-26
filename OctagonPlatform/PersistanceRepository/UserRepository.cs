@@ -244,11 +244,11 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public List<BankAccount> GetAllBankAccount(string userId)
+        public List<BankAccount> GetAllBankAccount(string userId, bool toAttach)
         {
             List<BankAccount> bankAccountsList = new List<BankAccount>();
 
-            if (!string.IsNullOrEmpty(userId))          //selecciono cuentas de bancos para usuarios
+            if (toAttach)                               //selecciono cuentas de bancos para usuarios
             {
                 int userIdConverted = Convert.ToInt32(userId);
                 User user = Table
