@@ -40,9 +40,20 @@
                     @Html.DisplayFor(modelItem => item.AccountType)
                 </td>
                 <td>
-                    <div>
-                        @Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new { userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
-                    </div>
+                    @{
+                        if (ViewBag.assigned == false)
+                        {
+                            <div>
+                                @Ajax.ActionLink("attach", "AddBA", "Users", new {bankAccountId = item.Id }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "btn", data_target = "#BankAccounts" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Ajax.ActionLink("de-attach", "AddBA", "Users", new { bankAccountId = item.Id }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
+                            </div>
+                        }
+                    }
 
                 </td>
 

@@ -18,7 +18,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         List<BankAccount> GetAllBankAccount(string userId);
 
-        void AddBankAccountToUser(int userId, string[] bankAccounts);
+        void AddBankAccountToUser(string userId, string[] bankAccounts);
 
         User DeattachBankAccountToUser(int userId, int bankAccountID, string[] bankAccounts);
 

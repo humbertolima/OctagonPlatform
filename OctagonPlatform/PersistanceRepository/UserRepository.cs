@@ -226,16 +226,21 @@ namespace OctagonPlatform.PersistanceRepository
             return bankAccountList;
         }
 
-        public void AddBankAccountToUser(int userId, string[] bankAccounts)
+        public void AddBankAccountToUser(string userId, string[] bankAccounts)
         {
-            List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
 
-            if (bankAccounts.Count() > 0)
+            if (!string.IsNullOrEmpty(userId))          //VALIDO QUE NO ESTE VACIO  
             {
-                User user = Table.Single(c => c.Id == userId);
+              var  userIdConvert = Convert.ToInt32(userId);
+                List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
+                
+                if (bankAccounts.Count() > 0)           //SI VIENEN BANKACCOUNTS, SE LAS AGREGO AL USUARIO.
+                {
+                    User user = Table.Single(c => c.Id == userIdConvert);
+                    user.BankAccounts = bankAccountsList;
 
-                user.BankAccounts = bankAccountsList;
-                Edit(user);
+                    Edit(user);
+                }
             }
         }
 
@@ -243,7 +248,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             List<BankAccount> bankAccountsList = new List<BankAccount>();
 
-            if (!string.IsNullOrEmpty(userId))     //selecciono cuentas de bancos para usuarios
+            if (!string.IsNullOrEmpty(userId))          //selecciono cuentas de bancos para usuarios
             {
                 int userIdConverted = Convert.ToInt32(userId);
                 User user = Table
@@ -252,7 +257,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 bankAccountsList = user.BankAccounts.Select(c => c).ToList();
             }
-            else                    //selecciono todas las cuentas de usuario.
+            else                                        //SINO, selecciono todas las cuentas de usuario.
             {
                 bankAccountsList = Context.BankAccounts
                 .Where(c => c.Deleted == false).ToList();

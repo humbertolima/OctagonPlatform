@@ -202,28 +202,14 @@ namespace OctagonPlatform.Controllers
         {
             return PartialView(_userRepository.Search(search));
         }
+
         #region Get BankAccount Of User
-
-        //[HttpPost]
-        //public ActionResult GetAllBankAccount()
-        //{
-        //    IEnumerable<SelectListItem> result = _context.Cities
-        //      .Where(c => c.StateId == stateId)
-        //      .Select(c => new SelectListItem { Text = c.Name, Value = c.Id.ToString() });
-
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //    ////UserBAViewModel viewModel = new UserBAViewModel();
-        //    ////viewModel.BankAccounts = _userRepository.GetAllBankAccount();
-
-        //    ////return PartialView("Sections/GetAllBankAccount", viewModel);
-        //    //////return View(_userRepository.GetBAOfUser(Convert.ToInt32(userId)));
-        //}
-
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddBA(UserBAViewModel viewModel, string[] bankAccounts)
+       // [ValidateAntiForgeryToken]
+        public ActionResult AddBA(string userId, string[] bankAccounts)
         {
-            _userRepository.AddBankAccountToUser(viewModel.Id, bankAccounts);
+            _userRepository.AddBankAccountToUser(userId, bankAccounts);
 
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
             return PartialView("Sections/BankAccounts");
@@ -250,6 +236,14 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult GetAllBankAccount(string userId)
         {
             List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(userId);
+            if (string.IsNullOrEmpty(userId))
+            {
+                ViewBag.assigned = false;
+            }
+            else
+            {
+                ViewBag.assigned = true;
+            }
 
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
