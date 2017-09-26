@@ -16,14 +16,15 @@
 <div id="generalInfo">
     @Html.Partial("Sections/GenralInfo")
 </div>
-<div id="addBankAccounts">
-    @{
-     var userBAViewModel = new OctagonPlatform.Models.FormsViewModels.UserBAViewModel();  
-    }
-    @Html.Partial("Sections/GetAllBankAccount", userBAViewModel)
+BANKACCOUNT
+
+@Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "btn btn-primary", data_toggle = "collapse", data_target = "#addBankAccounts" })
+
+<div id="addBankAccounts" class="panel-collapse collapse">
+   
 </div>
 <div id="bankAccounts">
-    @Html.Partial("Sections/BankAccounts")
+    
 </div>
 <div id="terminals">
     @Html.Partial("Sections/Terminals")
@@ -34,4 +35,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/user")
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 }
