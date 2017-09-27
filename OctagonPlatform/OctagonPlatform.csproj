@@ -500,6 +500,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
@@ -1074,6 +1075,9 @@
     <EmbeddedResource Include="Migrations\201708301536055_ScriptSetOfPermisson.resx">
       <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
