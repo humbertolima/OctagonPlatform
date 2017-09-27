@@ -30,6 +30,8 @@ namespace OctagonPlatform.Models
         public DbSet<InterChange> InterChanges { get; set; }
         public DbSet<Surcharge> Surcharges { get; set; }
         public DbSet<Cassette> Cassettes { get; set; }
+        public DbSet<BindedKey> BindedKeys { get; set; }
+        public DbSet<Dispute> Disputes { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
@@ -48,5 +50,5 @@ namespace OctagonPlatform.Models
 
         }
 
-    }
+        }
 }

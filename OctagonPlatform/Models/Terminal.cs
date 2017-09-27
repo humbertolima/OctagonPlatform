@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -107,8 +108,10 @@ namespace OctagonPlatform.Models
         public string DeletedByName { get; set; }
         public bool Deleted { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Date of Installation")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayName("Installation Date")]
+        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
         public DateTime? InstalledDate { get; set; }
 
         [Display(Name = "Charged By?")]
@@ -119,7 +122,7 @@ namespace OctagonPlatform.Models
         public DateTime? LastCommunicationDate { get; set; }
 
         [Display(Name = "Terminal Balance")]
-        public int? Balance { get; set; }
+        public double? Balance { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Last Transaction Date")]
@@ -127,19 +130,13 @@ namespace OctagonPlatform.Models
 
         [DataType(DataType.Currency)]
         [Display(Name = "Minimun Chash Balance")]
-        public int? MinAmmountCash { get; set; }
+        public double? MinAmmountCash { get; set; }
 
         public bool Offline { get; set; }
 
-        public string Key1 { get; set; }
+        public bool BindedKeys { get; set; }
 
-        public string Key2 { get; set; }
-
-        public string EncryptionType { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Keys Dounded Date")]
-        public DateTime? DateKeyBounded { get; set; }
+        public BindedKey BindedKey { get; set; }
 
         [Display(Name = "Default Bank Account")]
         public int? BankAccountId { get; set; }
@@ -202,7 +199,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
 
-      
+        public ICollection<Dispute> Disputes { get; set; }  
 
         public Terminal()
         {
@@ -220,6 +217,7 @@ namespace OctagonPlatform.Models
             InterChanges = new Collection<InterChange>();
             CryptoChargeAccounts = new Collection<CryptoChargeAccount>();
             CryptoCurrencyTransactions = new Collection<CryptoCurrencyTransaction>();
+            Disputes = new Collection<Dispute>();
         }
     }
 }

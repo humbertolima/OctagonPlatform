@@ -1,5 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
@@ -53,5 +55,12 @@ namespace OctagonPlatform.Models
         public string UpdatedByName { get; set; }
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
+
+        public ICollection<Dispute> Disputes { get; set; }
+
+        public Transaction()
+        {
+            Disputes = new Collection<Dispute>();
+        }
     }
 }

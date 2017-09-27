@@ -13,11 +13,9 @@
     <div class="form-group">
         <p class="alert alert-danger">
             All fields are <strong>required.</strong>
+            @ViewBag.Error
+            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
         </p>
-        <p class="alert alert-danger">
-            <strong>@ViewBag.Error</strong>
-        </p>
-        <p>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</p>
     
         <div class="form-group">
             @Html.LabelFor(m => m.PartnerId)
@@ -172,6 +170,26 @@
             @Html.LabelFor(m => m.CryptoPercentChargeAmmount)
             @Html.TextBoxFor(m => m.CryptoPercentChargeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99"})
             @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmmount)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.InstalledDate)
+            @Html.TextBoxFor(m => m.InstalledDate, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date"})
+            @Html.ValidationMessageFor(m => m.InstalledDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ChargedBy)
+            @Html.TextBoxFor(m => m.ChargedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
+            @Html.ValidationMessageFor(m => m.ChargedBy)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Balance)
+            @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.Balance)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MinAmmountCash)
+            @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.MinAmmountCash)
         </div>
     </div>
     <div class="form-group">

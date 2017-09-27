@@ -113,5 +113,10 @@ namespace OctagonPlatform.Controllers
         {
             return PartialView(_partnerContactRepository.Search(search));
         }
+
+        public ActionResult Details(int id)
+        {
+            return View(_partnerContactRepository.Details(id));
+        }
     }
 }

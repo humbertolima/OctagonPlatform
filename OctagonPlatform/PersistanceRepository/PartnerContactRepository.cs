@@ -19,6 +19,18 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
         }
 
+        public PartnerContact Details(int id)
+        {
+
+            return Table.Where(x => x.Id == id && !x.Deleted)
+                .Include(x => x.Partner)
+                .Include(x => x.ContactType)
+                .Include(x => x.City)
+                .Include(x => x.Country)
+                .Include(x => x.State)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<PartnerContact> Search(string search)
         {
             return Table.Where(c => !c.Deleted && (c.Name.Contains(search) || c.Partner.BusinessName.Contains(search)))
@@ -79,7 +91,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 };
             }
-            return RenderPartnerContactFormViewModel(id);
+            return null;
         }
 
         public void SavePartner(PartnerContactFormViewModel viewModel, string action)

@@ -1,1 +1,138 @@
-﻿<h2>Bank Accounts</h2>
+﻿@model OctagonPlatform.Models.Partner
+<h2>Bank Accounts</h2>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    @Html.ActionLink(
+                        linkText: "Add BankAccount",
+                        actionName: "Create",
+                        controllerName: "BankAccount",
+                        routeValues: new
+                        {
+                            partnerId = Model.Id
+                        },
+                        htmlAttributes: null
+                        )
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<p class="alert alert-danger">
+    <strong>@ViewBag.Error</strong>
+</p>
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>
+            City
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            Partner
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            NickName
+        </th>
+        <th>
+            Routing Number
+        </th>
+        <th>
+            Account Number
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Name on Check
+        </th>
+        <th>
+            Fed Tax
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Zip
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Account Type
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="listOfBA">
+    @foreach (var item in Model.BankAccounts)
+    {
+        <tr   class="active">
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Partner.BusinessName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoutingNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOnCheck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FedTax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountType)
+            </td>
+            <td>
+                <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -26,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public IEnumerable<Terminal> Search(string search)
         {
-            return Table.Where(x => !x.Deleted && (x.LocationType.Name == search || x.Model.Name == search || x.Make.Name == search || x.Id == int.Parse(search)))
+            return Table.Where(x => !x.Deleted && (x.LocationType.Name.Contains(search) || x.Model.Name.Contains(search) || x.Make.Name.Contains(search)))
                 .Include(x => x.Partner)
                 .Include(x => x.Country)
                 .Include(x => x.State)
@@ -78,10 +78,10 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var terminalViewModel = Mapper.Map<Terminal, TerminalFormViewModel>(terminal);
                 terminalViewModel.Countries = Context.Countries.ToList();
-                terminalViewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
-                terminalViewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+                terminalViewModel.States = Context.States.Where(x => x.CountryId == terminal.CountryId).ToList();
+                terminalViewModel.Cities = Context.Cities.Where(x => x.StateId == terminal.StateId).ToList();
                 terminalViewModel.Partners = Context.Partners.Where(x => !x.Deleted).ToList();
-                terminalViewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == terminal.PartnerId);
+                terminalViewModel.Partner = terminal.Partner;
                 terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
                 terminalViewModel.Makes = Context.Makes.ToList();
                 terminalViewModel.Models = Context.Models.ToList();
@@ -97,7 +97,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id);
                 if (terminalToEdit == null) return;
                 {
-                    terminalToEdit = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
+                    Mapper.Map(viewModel, terminalToEdit);
                     Edit(terminalToEdit);
                 }
             }
@@ -110,7 +110,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Terminal TerminalDetails(int id)
         {
-            return Table.Where(x => x.Id == id)
+            return Table.Where(x => x.Id == id && !x.Deleted)
                 .Include(x => x.Partner)
                 .Include(x => x.Country)
                 .Include(x => x.State)
@@ -134,6 +134,8 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.TerminalPictures)
                 .Include(x => x.Transactions)
                 .Include(x => x.Cassettes)
+                .Include(x => x.BindedKey)
+                .Include(x => x.Disputes)
                 .FirstOrDefault();
         }
 
