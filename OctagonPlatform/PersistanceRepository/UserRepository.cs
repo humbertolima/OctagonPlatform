@@ -245,8 +245,8 @@ namespace OctagonPlatform.PersistanceRepository
                     Edit(user);
                 }
             }
-            userBAViewModel.UserId = userIdConvert;
             userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
+            userBAViewModel.UserId = userIdConvert;
             return userBAViewModel;
         }
 

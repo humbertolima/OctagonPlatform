@@ -211,10 +211,10 @@ namespace OctagonPlatform.Controllers
         {
             UserBAViewModel userBAViewModel = new UserBAViewModel();
 
-            var bankAccounts = _userRepository.AddBankAccountToUser(userId, bankAccountId);
+            userBAViewModel = _userRepository.AddBankAccountToUser(userId, bankAccountId);
 
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
-            return PartialView("Sections/BankAccounts", bankAccounts);
+            return PartialView("Sections/BankAccounts", userBAViewModel);
         }
 
         public ActionResult DeAttach(string userId, string bankAccountID)
