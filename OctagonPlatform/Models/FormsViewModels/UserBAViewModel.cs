@@ -9,7 +9,7 @@ namespace OctagonPlatform.Models.FormsViewModels
     public class UserBAViewModel
     {
         [Required]
-        public int Id { get; set; }
+        public int UserId { get; set; }
         
         public bool IsLocked { get; set; }
 

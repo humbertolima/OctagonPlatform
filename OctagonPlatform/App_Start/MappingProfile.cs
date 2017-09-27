@@ -18,6 +18,8 @@ namespace OctagonPlatform
             //Dto to Domain
             CreateMap<UserEditFormViewModel, UserFormViewModel>().ForMember(c => c.Password, opt => opt.AllowNull());
 
+            CreateMap<User, UserBAViewModel>();
+
             #region BankAccount Mapping
 
             // Domain to Dto

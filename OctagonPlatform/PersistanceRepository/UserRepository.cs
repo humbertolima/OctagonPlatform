@@ -226,27 +226,39 @@ namespace OctagonPlatform.PersistanceRepository
             return bankAccountList;
         }
 
-        public void AddBankAccountToUser(string userId, string[] bankAccounts)
+        public UserBAViewModel AddBankAccountToUser(string userId, string bankAccountId)
         {
+            UserBAViewModel userBAViewModel = new UserBAViewModel();
+            User user = new User();
+            var userIdConvert = Convert.ToInt32(userId);
+            var bankAccountIdConvert = Convert.ToInt32(bankAccountId);
 
-            if (!string.IsNullOrEmpty(userId))          //VALIDO QUE NO ESTE VACIO  
+            if (!string.IsNullOrEmpty(userId) && (userIdConvert > 0) && (!string.IsNullOrEmpty(bankAccountId)))    //VALIDO QUE NO ESTE VACIO  
             {
-              var  userIdConvert = Convert.ToInt32(userId);
-                List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
-                
-                if (bankAccounts.Count() > 0)           //SI VIENEN BANKACCOUNTS, SE LAS AGREGO AL USUARIO.
+                user = Table
+                    .Include(c => c.BankAccounts)
+                    .Single(c => c.Id == userIdConvert);
+                BankAccount bankAccount = GetBankAccountById(bankAccountIdConvert);
+                if (!user.BankAccounts.Contains(bankAccount))           //si el usario no contiene esa cuenta de banco se la add.
                 {
-                    User user = Table.Single(c => c.Id == userIdConvert);
-                    user.BankAccounts = bankAccountsList;
-
+                    user.BankAccounts.Add(bankAccount);
                     Edit(user);
                 }
             }
+            userBAViewModel.UserId = userIdConvert;
+            userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
+            return userBAViewModel;
         }
 
-        public List<BankAccount> GetAllBankAccount(string userId, bool toAttach)
+        private BankAccount GetBankAccountById(int bankAccountId)
         {
-            List<BankAccount> bankAccountsList = new List<BankAccount>();
+            return Context.BankAccounts.Single(c => c.Id == bankAccountId);
+        }
+
+        public UserBAViewModel GetAllBankAccount(string userId, bool toAttach)
+        {
+            List<BankAccount> bankAccounts = new List<BankAccount>();
+            UserBAViewModel userBAViewModel = new UserBAViewModel();
 
             if (toAttach)                               //selecciono cuentas de bancos para usuarios
             {
@@ -255,17 +267,21 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(c => c.BankAccounts)
                     .Single(c => c.Id == userIdConverted);
 
-                bankAccountsList = user.BankAccounts.Select(c => c).ToList();
+                bankAccounts = user.BankAccounts.Select(c => c).ToList();
             }
             else                                        //SINO, selecciono todas las cuentas de usuario.
             {
-                bankAccountsList = Context.BankAccounts
+                bankAccounts = Context.BankAccounts
                 .Where(c => c.Deleted == false).ToList();
             }
-            return bankAccountsList;
+            //Mapeo que se le hace a los dos casos.
+            userBAViewModel.UserId = Convert.ToInt32(userId);
+            userBAViewModel.BankAccounts = bankAccounts;
+
+            return userBAViewModel;
         }
 
-        public User DeattachBankAccountToUser(int userId, int bankAccountId, string[] bankAccounts)
+        public UserBAViewModel DeAttachBankAccountToUser(int userId, int bankAccountId)
         {
             //pendiente por si se decide quitar mas de una cuenta de banco en una sola accion. por el momento voene vacio.
             //List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
@@ -280,7 +296,11 @@ namespace OctagonPlatform.PersistanceRepository
                 user.BankAccounts.Remove(bankToRemove);
                 Edit(user);
             }
-            return user;
+            
+            UserBAViewModel userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
+            userBAViewModel.UserId = userId;
+
+            return userBAViewModel;
         }
         //public List<UserBAViewModel> GetBAOfUser()
         //{

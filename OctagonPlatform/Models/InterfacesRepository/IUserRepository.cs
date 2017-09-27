@@ -16,11 +16,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         ICollection<Permission> AddPermissionToUser(string[] permissions);
 
-        List<BankAccount> GetAllBankAccount(string userId, bool toAttach);
+        UserBAViewModel GetAllBankAccount(string userId, bool toAttach);
 
-        void AddBankAccountToUser(string userId, string[] bankAccounts);
+        UserBAViewModel AddBankAccountToUser(string userId, string bankAccountId);
 
-        User DeattachBankAccountToUser(int userId, int bankAccountID, string[] bankAccounts);
+        UserBAViewModel DeAttachBankAccountToUser(int userId, int bankAccountID);
 
         void SaveUser(UserFormViewModel viewModel, string action);
 

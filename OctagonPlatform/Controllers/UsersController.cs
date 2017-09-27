@@ -206,44 +206,41 @@ namespace OctagonPlatform.Controllers
         #region Get BankAccount Of User
 
         [HttpPost]
-        // [ValidateAntiForgeryToken]
-        public ActionResult AddBA(string userId, string[] bankAccounts)
+        // [ValidateAntiForgeryToken]       //pendiente probar los validatetoken
+        public ActionResult Attach(string userId, string bankAccountId)
         {
-            _userRepository.AddBankAccountToUser(userId, bankAccounts);
+            UserBAViewModel userBAViewModel = new UserBAViewModel();
+
+            var bankAccounts = _userRepository.AddBankAccountToUser(userId, bankAccountId);
 
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
-            return PartialView("Sections/BankAccounts");
+            return PartialView("Sections/BankAccounts", bankAccounts);
         }
 
-        public ActionResult DeattachBankAccount(string ID, string bankAccountID, string[] bankAccounts)
+        public ActionResult DeAttach(string userId, string bankAccountID)
         {
-            User user = new Models.User();
+            UserBAViewModel userBAViewModel = new UserBAViewModel();
+
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(bankAccountID) && (!string.IsNullOrEmpty(ID)))
+                if (!string.IsNullOrEmpty(bankAccountID) && (!string.IsNullOrEmpty(userId)))
                 {
-                    var userId = Convert.ToInt32(ID);
+                    var userIdConvert = Convert.ToInt32(userId);
                     var bAId = Convert.ToInt32(bankAccountID);
-                    user = _userRepository.DeattachBankAccountToUser(userId, bAId, bankAccounts);
+                    userBAViewModel = _userRepository.DeAttachBankAccountToUser(userIdConvert, bAId);
                 }
             }
-
-
-            //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
-            return PartialView("Sections/BankAccounts", user);
+            return PartialView("Sections/BankAccounts", userBAViewModel);
         }
 
         public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
             UserBAViewModel userBAViewModel = new UserBAViewModel();
 
-            List<BankAccount> bankAccounts = _userRepository.GetAllBankAccount(userId, toAttach);
-
             ViewBag.assigned = toAttach;
-            userBAViewModel.Id = Convert.ToInt32(userId);
 
-            userBAViewModel =bankAccounts.Select Mapper.Map<BankAccount, UserBAViewModel>(bankAccounts);
-
+            var bankAccounts = _userRepository.GetAllBankAccount(userId, toAttach);
+            
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
     }
