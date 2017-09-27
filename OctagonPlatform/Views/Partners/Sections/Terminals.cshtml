@@ -1,4 +1,5 @@
-﻿@model OctagonPlatform.Models.Partner
+﻿
+@model OctagonPlatform.Models.Partner
 
 <h2>Terminals</h2>
 <nav class="navbar navbar-default"> 
@@ -17,6 +18,9 @@
                                        htmlAttributes: null
                                        )</li>
             </ul>
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchTerminal" placeholder="Search" name="search" />
+            </div> 
         </div>
     </div>
 </nav>
@@ -29,12 +33,9 @@
     <tr class="danger">
         <th>Terminal ID</th>
         <th>Partner</th>
-        <th>Location Name</th>
         <th>Address</th>
+        <th>Zip</th>
         <th>Phone</th>
-        <th>Country</th>
-        <th>City</th>
-        <th>State</th>
         <th>Status</th>
         <th>Cash Balance</th>
         <th>Last Transaction</th>
@@ -49,12 +50,9 @@
         <tr class="active">
             <td>@item.Id</td>
             <td>@item.Partner.BusinessName</td>
-            <td>@item.LocationType.Name</td>
             <td>@item.Address1</td>
+            <td>@item.Zip</td>
             <td>@item.Phone</td>
-            <td>@item.Country.Name</td>
-            <td>@item.City.Name</td>
-            <td>@item.State.Name</td>
             <td>@item.Status</td>
             <td>@item.Balance</td>
             @if (item.LastTransactionId != null)
@@ -68,12 +66,38 @@
                 </td>
                 <td></td>
             }
-            <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+            <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                             linkText: "Edit",
+                                                             actionName: "Edit",
+                                                             controllerName: "Terminals",
+                                                             routeValues: new
+                                                             {
+                                                                 id = item.Id
+                                                             },
+                                                             htmlAttributes: null
+                                                             )</td>
             <td>
-                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                                                                 
+                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                              linkText: "Delete",
+                                                              actionName: "Delete",
+                                                              controllerName: "Terminals",
+                                                              routeValues: new
+                                                              {
+                                                                  id = item.Id
+                                                              },
+                                                              htmlAttributes: null
+                                                              )
             </td>
-          
+            <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                 linkText: "Details",
+                                                                 actionName: "Details",
+                                                                 controllerName: "Terminals",
+                                                                 routeValues: new
+                                                                 {
+                                                                     id = item.Id
+                                                                 },
+                                                                 htmlAttributes: null
+                                                                 )</td>
         </tr>
     }
     </tbody>

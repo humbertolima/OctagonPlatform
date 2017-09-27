@@ -12,6 +12,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
+        public Partner Partner { get; set; }
+
         [Required(ErrorMessage = "The name is required")]
         [StringLength(20)]
         public string Name { get; set; }

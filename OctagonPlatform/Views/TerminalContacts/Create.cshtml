@@ -1,5 +1,4 @@
-﻿@model OctagonPlatform.Models.FormsViewModels.PartnerContactFormViewModel
-
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalContactFormViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -7,23 +6,24 @@
 }
 <h2>Create Contact</h2>
 
-@using (Html.BeginForm("Create", "PartnerContacts"))
+@using (Html.BeginForm("Create", "TerminalContacts"))
 {
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
         @ViewBag.Error
         @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
     </p>
+
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.PartnerId)
+    @Html.HiddenFor(m => m.TerminalId)
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new {@class = "form-control", autofocus = "autofocus", placeholder = "Jhon"})
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus", placeholder = "Jhon" })
         @Html.ValidationMessageFor(m => m.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", autofocus = "autofocus", placeholder = "Smith"})
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Smith" })
         @Html.ValidationMessageFor(m => m.LastName)
     </div>
     <div class="form-group">
@@ -33,12 +33,12 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Address1)
-        @Html.TextBoxFor(m => m.Address1, new {@class = "form-control", placeholder = "124 SW 105 Ave" })
+        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
         @Html.ValidationMessageFor(m => m.Address1)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Address2)
-        @Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
+        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
         @Html.ValidationMessageFor(m => m.Address2)
     </div>
     <div class="form-group">
@@ -54,7 +54,8 @@
             @Html.ValidationMessageFor(m => m.CountryId)
 
         </div>
-        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        <div>
+            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt="" />
         </div>
     </div>
     <div class="form-group">
@@ -70,7 +71,8 @@
             @Html.ValidationMessageFor(m => m.StateId)
 
         </div>
-        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        <div>
+            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt="" />
         </div>
     </div>
     <div class="form-group">
@@ -85,22 +87,23 @@
             </select>
             @Html.ValidationMessageFor(m => m.CityId)
         </div>
-        <div><img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+        <div>
+            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt="" />
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new {@class = "form-control", autofocus = "autofocus", placeholder = "test@email.com"})
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com" })
         @Html.ValidationMessageFor(m => m.Email)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Phone)
-        @Html.TextBoxFor(m => m.Phone, new {@class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
         @Html.ValidationMessageFor(m => m.Phone)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Zip)
-        @Html.TextBoxFor(m => m.Zip, new {@class = "form-control", autofocus = "autofocus", placeholder = "33181"})
+        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
         @Html.ValidationMessageFor(m => m.Zip)
     </div>
     <div class="form-group">

@@ -88,7 +88,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public PartnerFormViewModel PartnerToEdit(int id)
         {
-            var partner = Table.Where(x => x.Id == id)
+            var partner = Table.Where(x => x.Id == id && !x.Deleted)
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
@@ -100,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     Id = partner.Id,
                     ParentId = partner.ParentId,
-                    Parent = Context.Partners.SingleOrDefault(x => x.Id == id),
+                    Parent = partner.Parent,
                     Parents = Table.Where(x => !x.Deleted).ToList(),
                     BusinessName = partner.BusinessName,
                     Address1 = partner.Address1,
@@ -128,7 +128,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Partner PartnerDetails(int id)
         {
-           return Table.Where(x => x.Id == id)
+           return Table.Where(x => x.Id == id && !x.Deleted)
                 .Include(x => x.Parent)
                 .Include(x => x.PartnerContacts)
                 .Include(x => x.Users)

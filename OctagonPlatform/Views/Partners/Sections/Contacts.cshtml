@@ -42,14 +42,14 @@
     {
         if (!item.Deleted)
         {
-            <tr class="info">
+            <tr  class="active">
                 <td>@item.Partner.BusinessName</td>
                 <td>@item.Name</td>
                 <td>@item.LastName</td>
                 <td>@item.Phone</td>
                 <td>@item.Email</td>
                 <td>@item.Address1</td>
-                <td>@Html.ActionLink(
+                <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                         linkText: "Edit",
                         actionName: "Edit",
                         controllerName: "PartnerContacts",
@@ -60,8 +60,18 @@
                         htmlAttributes: null
                         )</td>
                 <td>
-                    @Html.ActionLink("Delete", "Delete", "PartnerContacts", new {id = item.Id, partnerId = Model.Id}, new {onclick = "return confirm('Are sure wants to delete?');"})
+                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", "PartnerContacts", new { id = item.Id, partnerId = Model.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
                 </td>
+                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                     linkText: "Details",
+                                                                     actionName: "Details",
+                                                                     controllerName: "PartnerContacts",
+                                                                     routeValues: new
+                                                                     {
+                                                                         id = item.Id
+                                                                     },
+                                                                     htmlAttributes: null
+                                                                     )</td>
             </tr>
         }
     }

@@ -202,6 +202,7 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Compile Include="Helpers\AccountType.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
+    <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\GreaterOrLessAmmount.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\Initiate.cs" />
@@ -460,6 +462,18 @@
     <Compile Include="Migrations\201709211620330_UpdatedTerminalCrypto.Designer.cs">
       <DependentUpon>201709211620330_UpdatedTerminalCrypto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251458056_BindedKeys.cs" />
+    <Compile Include="Migrations\201709251458056_BindedKeys.Designer.cs">
+      <DependentUpon>201709251458056_BindedKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251515371_Disputes.cs" />
+    <Compile Include="Migrations\201709251515371_Disputes.Designer.cs">
+      <DependentUpon>201709251515371_Disputes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.cs" />
+    <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.Designer.cs">
+      <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -471,6 +485,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BindedKey.cs" />
     <Compile Include="Models\Cassette.cs" />
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
@@ -478,13 +493,13 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\CryptoChargeAccount.cs" />
     <Compile Include="Models\CryptoCurrencyTransaction.cs" />
+    <Compile Include="Models\Dispute.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
@@ -770,7 +785,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
-    <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -828,7 +842,6 @@
     <Content Include="Views\Terminals\Index.cshtml" />
     <Content Include="Views\BankAccount\Search.cshtml" />
     <Content Include="Views\Terminals\Search.cshtml" />
-    <Content Include="Views\Partners\Delete.cshtml" />
     <Content Include="Views\Terminals\Sections\GeneralInfo.cshtml" />
     <Content Include="Views\Terminals\Sections\TerminalStatistics.cshtml" />
     <Content Include="Views\Terminals\Sections\Documents.cshtml" />
@@ -840,8 +853,14 @@
     <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagment.cshtml" />
     <Content Include="Views\Terminals\Sections\Transactions.cshtml" />
-    <Content Include="Views\Terminals\Sections\TerminalUsers.cshtml" />
-    <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
+    <Content Include="Views\TerminalContacts\Create.cshtml" />
+    <Content Include="Views\TerminalContacts\Delete.cshtml" />
+    <Content Include="Views\TerminalContacts\Details.cshtml" />
+    <Content Include="Views\TerminalContacts\Index.cshtml" />
+    <Content Include="Views\PartnerContacts\Details.cshtml" />
+    <Content Include="Views\TerminalContacts\Search.cshtml" />
+    <Content Include="Views\Partners\Delete.cshtml" />
+    <Content Include="Views\TerminalContacts\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1039,6 +1058,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709211620330_UpdatedTerminalCrypto.resx">
       <DependentUpon>201709211620330_UpdatedTerminalCrypto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251458056_BindedKeys.resx">
+      <DependentUpon>201709251458056_BindedKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251515371_Disputes.resx">
+      <DependentUpon>201709251515371_Disputes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709271928089_AddedBoolBindedKeys.resx">
+      <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -95,6 +95,8 @@ namespace OctagonPlatform.Controllers
         {
             return View(_partnerRepository.PartnerDetails(id));
         }
+
+
         public ActionResult Delete(int id)
         {
 

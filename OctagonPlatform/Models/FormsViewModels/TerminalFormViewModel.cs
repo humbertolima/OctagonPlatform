@@ -1,5 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -131,5 +133,22 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Charge by Cryptocurrency Trnasaction")]
         public int CryptoPercentChargeAmmount { get; set; }
 
+        public DateTime Now => DateTime.Now;
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayName("Installation Date")]
+        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
+        public DateTime? InstalledDate { get; set; }
+
+        [Display(Name = "Charged By?")]
+        public string ChargedBy { get; set; }
+
+        [Display(Name = "Terminal Balance")]
+        public double? Balance { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Display(Name = "Minimun Chash Balance")]
+        public double? MinAmmountCash { get; set; }
     }
 }

@@ -7,9 +7,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<TerminalContact> GetAllTerminalContacts();
 
+        TerminalContact Details(int id);
+
         IEnumerable<TerminalContact> Search(string search);
 
-        TerminalContactFormViewModel RenderTerminalContactFormViewModel();
+        TerminalContactFormViewModel RenderTerminalContactFormViewModel(int terminalId);
 
         TerminalContactFormViewModel TerminalContactToEdit(int id);
 

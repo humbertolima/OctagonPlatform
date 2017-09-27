@@ -60,7 +60,7 @@ $("#searchTerminal").keydown(function () {
     var searchText = $("#searchTerminal").val();
     $.ajax({
         type: "Post",
-        url: "Partners/Search?search=" + searchText,
+        url: "Terminals/Search?search=" + searchText,
         datatype: "html",
         success: function (data) {
 
@@ -68,4 +68,19 @@ $("#searchTerminal").keydown(function () {
         }
     });
 });
+
+$("#searchTerminalContact").keydown(function () {
+
+    var searchText = $("#searchTerminalContact").val();
+    $.ajax({
+        type: "Post",
+        url: "TerminalContacts/Search?search=" + searchText,
+        datatype: "html",
+        success: function (data) {
+
+            $("#listOfTerminalContacts").html(data);
+        }
+    });
+});
+
 
