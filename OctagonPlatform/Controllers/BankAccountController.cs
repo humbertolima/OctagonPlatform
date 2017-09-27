@@ -11,17 +11,17 @@ namespace OctagonPlatform.Controllers
 {
     public class BankAccountController : Controller
     {
-        private readonly IBankAccountRepository _BAccountRepository;
+        private readonly IBankAccountRepository _bAccountRepository;
 
-        public BankAccountController(IBankAccountRepository BAccountRepository)
+        public BankAccountController(IBankAccountRepository bAccountRepository)
         {
-            _BAccountRepository = BAccountRepository;
+            _bAccountRepository = bAccountRepository;
         }
 
         // GET: BankAccount
         public ActionResult Index()
         {
-            var bankAccounts = _BAccountRepository.GetAllBankAccount();
+            var bankAccounts = _bAccountRepository.GetAllBankAccount();
 
             var viewModel = new List<BAccountFVModel>();
 
@@ -43,7 +43,7 @@ namespace OctagonPlatform.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            BankAccount bankAccount = _BAccountRepository.BAccountDetails((int)id);
+            BankAccount bankAccount = _bAccountRepository.BAccountDetails((int)id);
 
             if (bankAccount == null)
             {
@@ -62,7 +62,7 @@ namespace OctagonPlatform.Controllers
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName");
             //ViewBag.StateId = new SelectList(db.States, "Id", "Name");
-            return View(_BAccountRepository.RenderBAFormViewModel());
+            return View(_bAccountRepository.RenderBAFormViewModel());
         }
 
         // POST: BankAccount/Create
@@ -74,7 +74,7 @@ namespace OctagonPlatform.Controllers
         {
             if (ModelState.IsValid)
             {
-                _BAccountRepository.SaveBankAccount(editBankAccount, "Create");
+                _bAccountRepository.SaveBankAccount(editBankAccount, "Create");
 
                 return RedirectToAction("Index");
             }
@@ -93,7 +93,7 @@ namespace OctagonPlatform.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BAEditFVModel bankAccount = _BAccountRepository.BankAccountToEdit((int)id);
+            BAEditFVModel bankAccount = _bAccountRepository.BankAccountToEdit((int)id);
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -114,7 +114,7 @@ namespace OctagonPlatform.Controllers
         {
             if (ModelState.IsValid)
             {
-                _BAccountRepository.SaveBankAccount(bankAccount, "Edit");
+                _bAccountRepository.SaveBankAccount(bankAccount, "Edit");
                 return RedirectToAction("Index");
             }
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
@@ -131,7 +131,7 @@ namespace OctagonPlatform.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            _BAccountRepository.DeleteBankAccount(Convert.ToInt32(id));
+            _bAccountRepository.DeleteBankAccount(Convert.ToInt32(id));
 
             return RedirectToAction("Index");
         }
@@ -150,7 +150,7 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_BAccountRepository.Search(search));
+            return PartialView(_bAccountRepository.Search(search));
         }
     }
 }

@@ -863,6 +863,7 @@
     <Content Include="Views\Partners\Delete.cshtml" />
     <Content Include="Views\TerminalContacts\Edit.cshtml" />
     <Content Include="Views\Terminals\Sections\Disputes.cshtml" />
+    <Content Include="Views\Users\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

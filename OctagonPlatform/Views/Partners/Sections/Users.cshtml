@@ -65,9 +65,21 @@
                         htmlAttributes: null
                         )
                 </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", "Users", new { id = item.Id, partnerId = Model.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
-                </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Users", new { id = item.Id, partnerId = Model.Id }, new { onclick = "return confirm('Are sure wants to delete?');" })
+                    </td>
+                    <td>
+                        @Html.ActionLink(
+                            linkText: "Details",
+                            actionName: "Details",
+                            controllerName: "Users",
+                            routeValues: new
+                            {
+                                id = item.Id
+                            },
+                            htmlAttributes: null
+                            )
+                    </td>
             </tr>
             }
         }

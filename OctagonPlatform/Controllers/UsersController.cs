@@ -140,8 +140,6 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserEditFormViewModel editViewModel, string[] permissions1)
         {
-            var viewModel = default(UserFormViewModel);
-
             if (!ModelState.IsValid)
             {
                 var userEdit = _userRepository.UserToEdit(editViewModel.Id);
@@ -152,7 +150,7 @@ namespace OctagonPlatform.Controllers
                 editViewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
 
                 //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
-                viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
+                var viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
                 return RedirectToAction("Index");
@@ -209,33 +207,31 @@ namespace OctagonPlatform.Controllers
         // [ValidateAntiForgeryToken]       //pendiente probar los validatetoken
         public ActionResult Attach(string userId, string bankAccountId)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
-
-            userBAViewModel = _userRepository.AddBankAccountToUser(userId, bankAccountId);
+            var userBaViewModel = _userRepository.AddBankAccountToUser(userId, bankAccountId);
 
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
-            return PartialView("Sections/BankAccounts", userBAViewModel);
+            return PartialView("Sections/BankAccounts", userBaViewModel);
         }
 
-        public ActionResult DeAttach(string userId, string bankAccountID)
+        public ActionResult DeAttach(string userId, string bankAccountId)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
+            UserBAViewModel userBaViewModel = new UserBAViewModel();
 
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(bankAccountID) && (!string.IsNullOrEmpty(userId)))
+                if (!string.IsNullOrEmpty(bankAccountId) && (!string.IsNullOrEmpty(userId)))
                 {
                     var userIdConvert = Convert.ToInt32(userId);
-                    var bAId = Convert.ToInt32(bankAccountID);
-                    userBAViewModel = _userRepository.DeAttachBankAccountToUser(userIdConvert, bAId);
+                    var bAId = Convert.ToInt32(bankAccountId);
+                    userBaViewModel = _userRepository.DeAttachBankAccountToUser(userIdConvert, bAId);
                 }
             }
-            return PartialView("Sections/BankAccounts", userBAViewModel);
+            return PartialView("Sections/BankAccounts", userBaViewModel);
         }
 
         public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
+   
 
             ViewBag.assigned = toAttach;
 
