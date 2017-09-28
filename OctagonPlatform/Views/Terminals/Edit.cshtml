@@ -142,9 +142,9 @@
             @Html.ValidationMessageFor(m => m.SurchargeType)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeAmmount)
-            @Html.TextBoxFor(m => m.SurchargeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.99" })
-            @Html.ValidationMessageFor(m => m.SurchargeAmmount)
+            @Html.LabelFor(m => m.SurchargeAmount)
+            @Html.TextBoxFor(m => m.SurchargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.99" })
+            @Html.ValidationMessageFor(m => m.SurchargeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.SurchargeByPercent)
@@ -152,14 +152,19 @@
             @Html.ValidationMessageFor(m => m.SurchargeByPercent)
         </div>
         <div class="form-group">
+            @Html.LabelFor(m => m.FixSurcharge)
+            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "After this ammount will be charged by percent" })
+            @Html.ValidationMessageFor(m => m.FixSurcharge)
+        </div>
+        <div class="form-group">
             @Html.LabelFor(m => m.SettledType)
             @Html.EnumDropDownListFor(m => m.SettledType, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.SettledType)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.InterChangeAmmount)
-            @Html.TextBoxFor(m => m.InterChangeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "0.15" })
-            @Html.ValidationMessageFor(m => m.InterChangeAmmount)
+            @Html.LabelFor(m => m.InterChangeAmount)
+            @Html.TextBoxFor(m => m.InterChangeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "0.15" })
+            @Html.ValidationMessageFor(m => m.InterChangeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)
@@ -167,9 +172,9 @@
             @Html.ValidationMessageFor(m => m.WhoInitiates)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.CryptoPercentChargeAmmount)
-            @Html.TextBoxFor(m => m.CryptoPercentChargeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
-            @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmmount)
+            @Html.LabelFor(m => m.CryptoPercentChargeAmount)
+            @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
+            @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.InstalledDate)

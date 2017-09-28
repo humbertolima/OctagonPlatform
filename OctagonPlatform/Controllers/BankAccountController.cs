@@ -71,20 +71,31 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BAEditFVModel editBankAccount)
+        public ActionResult Create(BAEditFVModel bankAccount)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _bAccountRepository.SaveBankAccount(editBankAccount, "Create");
 
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+            try
+            {
+                _bAccountRepository.SaveBankAccount(bankAccount, "Create");
                 return RedirectToAction("Index");
             }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error creating BankAccount " + exDb.Message;
 
-            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
-            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
-            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
-            //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
-            return View(editBankAccount);
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error creating BankAccount "
+                                + ex.Message;
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+
         }
 
         // GET: BankAccount/Edit/5
@@ -111,18 +122,31 @@ namespace OctagonPlatform.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,NickName,RoutingNumber,AccountNumber,Status,NameOnCheck,FedTax,Ssn,CountryId,StateId,CityId,Address1,Address2,Zip,Phone,Email,PartnerId,AccountType,Deleted,CreatedAt,CreatedBy,DeletedAt,DeletedBy,UpdatedAt,UpdatedBy,UpdatedByName,CreatedByName,DeletedByName")] BAEditFVModel bankAccount)
+        public ActionResult Edit(BAEditFVModel bankAccount)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+            try
             {
                 _bAccountRepository.SaveBankAccount(bankAccount, "Edit");
                 return RedirectToAction("Index");
             }
-            //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name", bankAccount.CityId);
-            //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name", bankAccount.CountryId);
-            //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName", bankAccount.PartnerId);
-            //ViewBag.StateId = new SelectList(db.States, "Id", "Name", bankAccount.StateId);
-            return View(bankAccount);
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error editing BankAccount " + exDb.Message;
+
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error editing BankAccount "
+                                + ex.Message;
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+            }
+
         }
 
         // GET: BankAccount/Delete/5

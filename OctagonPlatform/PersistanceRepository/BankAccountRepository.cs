@@ -67,7 +67,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public BAEditFVModel BankAccountToEdit(int id)
         {
-            var model = Table
+            var model = Table.Where(x => x.Id == id)
                 .Include(c => c.Partner)
                 .Include(c => c.Country)
                 .Include(c => c.State)
@@ -76,9 +76,10 @@ namespace OctagonPlatform.PersistanceRepository
                 ;
             var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
             editViewModel.Partners = Context.Partners.ToList();
+            editViewModel.Partner = model.Partner;
             editViewModel.Countries = Context.Countries.ToList();
-            editViewModel.Cities = Context.Cities.ToList();
-            editViewModel.States = Context.States.ToList();
+            editViewModel.States = Context.States.Where(x => x.CountryId == model.CountryId).ToList();
+            editViewModel.Cities = Context.Cities.Where(x => x.StateId == model.StateId).ToList();
 
             return editViewModel;
         }
@@ -90,13 +91,13 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void SaveBankAccount(BAEditFVModel editViewModel, string action)
         {
-            if (action == "Create")
+            if (action == "Edit")
             {
                 var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id);
-                if (model == null)
+                if (model == null) return;
                 {
-                    model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-                    Add(model);
+                    Mapper.Map(editViewModel, model);
+                    Edit(model);
                 }
             }
             else
@@ -104,7 +105,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
                 //Revisar este codigo para que no salve si no se le hizo modificacion al entity.
                 //db.Entry(bankAccount).State = EntityState.Modified;
-                Edit(model);
+                Add(model);
             }
         }
 

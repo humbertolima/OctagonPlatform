@@ -99,7 +99,7 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating Terminal "
+                ViewBag.Error = "Validation error editing Terminal "
                                 + ex.Message;
                 return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
             }

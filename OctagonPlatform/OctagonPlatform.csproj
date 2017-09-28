@@ -478,6 +478,18 @@
     <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.Designer.cs">
       <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.cs" />
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.Designer.cs">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.cs" />
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.Designer.cs">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs" />
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.Designer.cs">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -534,7 +546,7 @@
     <Compile Include="Models\Terminal.cs" />
     <Compile Include="Models\TerminalContact.cs" />
     <Compile Include="Models\TerminalPicture.cs" />
-    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionStatistic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
@@ -1078,6 +1090,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.resx">
       <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.resx">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.resx">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.resx">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -7,7 +7,7 @@
 
 <h3 class="alert-info">Edit BankAccount</h3>
 
-@using (Html.BeginForm("Create", "BankAccount"))
+@using (Html.BeginForm("Edit", "BankAccount"))
 {
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Id)
@@ -53,7 +53,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.PartnerId)
-        @Html.DropDownListFor(m => m, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.PartnerId)
     </div>
     <div class="form-group">
@@ -65,7 +65,7 @@
         <div id="Countries">
             <label for="Countries">Country</label>
             <select required id="CountryId" name="CountryId" class="form-control">
-                <option value="231">United States</option>
+                <option value="@Model.CountryId">@Model.Country.Name</option>
                 @foreach (var item in Model.Countries)
                 {
                     <option value="@item.Id">@item.Name</option>
@@ -80,7 +80,7 @@
         <div id="States">
             <label for="States">State</label>
             <select required id="StatesId" name="StateId" class="form-control">
-                <option value="3930">Florida</option>
+                <option value="@Model.StateId">@Model.State.Name</option>
                 @foreach (var item in Model.States)
                 {
                     <option value="@item.Id">@item.Name</option>
@@ -94,14 +94,24 @@
     <div class="form-group">
         <div id="Cities">
             <label for="Cities">City</label>
-            <select id="CitiesId" name="CityId" class="form-control">
-                <option value="43769">Miami</option>
-                @foreach (var item in Model.Cities)
-                {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            </select>
-            @Html.ValidationMessageFor(m => m.CityId)
+            @if (Model.City != null)
+            {
+                <select id="CitiesId" name="CityId" class="form-control">
+                    <option value="@Model.CityId">@Model.City.Name</option>
+                    @foreach (var item in Model.Cities)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(m => m.CityId)
+            }
+            else
+            {
+
+                <select id="CitiesId" name="CityId" class="form-control"></select>
+                @Html.ValidationMessageFor(m => m.CityId)
+            }
+
         </div>
         <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
     </div>

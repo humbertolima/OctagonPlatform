@@ -17,7 +17,7 @@ namespace OctagonPlatform.Models
         [Required]
         public int TransactionId { get; set; }
 
-        public Transaction Transaction { get; set; }
+        public TransactionStatistic Transaction { get; set; }
 
         public string Message { get; set; } 
 

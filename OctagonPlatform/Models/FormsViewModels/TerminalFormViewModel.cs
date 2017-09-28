@@ -111,11 +111,14 @@ namespace OctagonPlatform.Models.FormsViewModels
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Ammount")]
-        public double SurchargeAmmount { get; set; }
+        [Display(Name = "Surcharge Amount")]
+        public double SurchargeAmount { get; set; }
+
+        [Display(Name = "Fix Surcharge")]
+        public double FixSurcharge { get; set; }
 
         [Required]
-        [Display(Name = "Percent Surcharge Ammount")]
+        [Display(Name = "Percent Surcharge Amount")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
@@ -123,15 +126,15 @@ namespace OctagonPlatform.Models.FormsViewModels
         public Settled.SettledType SettledType { get; set; }
 
         [Required]
-        [Display(Name = "Interchange Ammount")]
-        public double InterChangeAmmount { get; set; }
+        [Display(Name = "Interchange Amount")]
+        public double InterChangeAmount { get; set; }
 
         [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         [Required]
         [Display(Name = "Charge by Cryptocurrency Trnasaction")]
-        public int CryptoPercentChargeAmmount { get; set; }
+        public int CryptoPercentChargeAmount { get; set; }
 
         public DateTime Now => DateTime.Now;
 

@@ -153,11 +153,11 @@ namespace OctagonPlatform.Models
 
         public ICollection<LoadCash> LoadCashs { get; set; }
 
-        public ICollection<Transaction> Transactions { get; set; }
+        public ICollection<TransactionStatistic> TransactionStatistics { get; set; }
 
         public int? LastTransactionId { get; set; }  
 
-        public Transaction LastTransaction { get; set; }
+        public TransactionStatistic LastTransaction { get; set; }
 
         public ICollection<Contract> Contracts { get; set; }
 
@@ -169,15 +169,18 @@ namespace OctagonPlatform.Models
         public VaultCash VaultCash { get; set; }
 
         [Required]
+        [Display(Name = "Surcharge Amount")]
+        public double SurchargeAmount { get; set; }
+
+        [Required]
+        [Display(Name = "Surcharge by Percent")]
+        public double SurchargeByPercent { get; set; }
+
+        [Required]
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
-        [Required]
-        [Display(Name = "Surcharge Ammount")]
-        public double SurchargeAmmount { get; set; }
-
-        [Required]
-        [Display(Name = "Percent Surcharge Ammount")]
-        public double SurchargeByPercent { get; set; }
+        [Display(Name = "Fix Surcharge")]
+        public double FixSurcharge { get; set; }
 
         [Required]
         [Display(Name = "Recolection Type")]
@@ -186,14 +189,14 @@ namespace OctagonPlatform.Models
         public ICollection<Surcharge> Surcharges { get; set; }
 
         [Required]
-        [Display(Name = "Interchange Ammount")]
-        public double InterChangeAmmount { get; set; }
+        [Display(Name = "Interchange Amount")]
+        public double InterChangeAmount { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
 
         [Required]
         [Display(Name = "Percent Charge By Transaction")]
-        public double CryptoPercentChargeAmmount { get; set; }
+        public double CryptoPercentChargeAmount { get; set; }
 
         public ICollection<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
 
@@ -210,7 +213,7 @@ namespace OctagonPlatform.Models
             Events = new Collection<Event>();
             Documents = new Collection<Document>();
             LoadCashs = new Collection<LoadCash>();
-            Transactions = new Collection<Transaction>();
+            TransactionStatistics = new Collection<TransactionStatistic>();
             Contracts = new Collection<Contract>();
             Cassettes = new Collection<Cassette>();
             Surcharges = new Collection<Surcharge>();

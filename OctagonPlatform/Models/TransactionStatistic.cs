@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class Transaction: ISoftDeleted, IAuditEntity
+    public class TransactionStatistic: ISoftDeleted, IAuditEntity
     {
         [Key]
         public int Id { get; set; }
@@ -58,7 +58,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Dispute> Disputes { get; set; }
 
-        public Transaction()
+        public TransactionStatistic()
         {
             Disputes = new Collection<Dispute>();
         }

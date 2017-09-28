@@ -27,7 +27,7 @@ namespace OctagonPlatform
             //Dto to Domain
             CreateMap<BAccountFVModel, BankAccount>();
 
-            CreateMap<BAEditFVModel, BankAccount>();
+            CreateMap<BAEditFVModel, BankAccount>().ForMember(x => x.Id, opt => opt.Ignore());
 
             CreateMap<BankAccount, BAEditFVModel>();
 
