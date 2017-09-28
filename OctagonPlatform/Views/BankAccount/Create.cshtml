@@ -4,191 +4,137 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
+<h3 class="alert-info">Create BankAccount</h3>
 
-<h2>Create</h2>
-
-
-@using (Html.BeginForm("Create", "BankAccount", new { @class = "form-horizontal" }))
+@using (Html.BeginForm("Create", "BankAccount"))
 {
     @Html.AntiForgeryToken()
+    <p class="alert alert-danger">
+        All fields are <strong>required.</strong>
+        @ViewBag.Error
+        @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+    </p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NickName)
+        @Html.TextBoxFor(m => m.NickName, new {@class = "form-control", autofocus = "autofocus", placeholder = "Nick Name"})
+        @Html.ValidationMessageFor(m => m.NickName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoutingNumber)
+        @Html.TextBoxFor(m => m.RoutingNumber, new { @class = "form-control", autofocus = "autofocus"})
+        @Html.ValidationMessageFor(m => m.RoutingNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AccountNumber)
+        @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.AccountNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NameOnCheck)
+        @Html.TextBoxFor(m => m.NameOnCheck, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.NameOnCheck)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AccountType)
+        @Html.EnumDropDownListFor(m => m.AccountType, "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.AccountType)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FedTax)
+        @Html.TextBoxFor(m => m.FedTax, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.FedTax)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ssn)
+        @Html.TextBoxFor(m => m.Ssn, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Ssn)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PartnerId)
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.PartnerId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.EnumDropDownListFor(m => m.Status, "", new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Status)
+    </div>
+    <div class="form-group">
+        <div id="Countries">
+            <label for="Countries">Country</label>
+            <select required id="CountryId" name="CountryId" class="form-control">
+                <option value="231">United States</option>
+                @foreach (var item in Model.Countries)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.CountryId)
 
-    <div class="form-horizontal">
-        <h4>BankAccount</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.NickName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoutingNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RoutingNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RoutingNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AccountNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.NameOnCheck, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NameOnCheck, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NameOnCheck, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FedTax, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FedTax, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FedTax, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ssn, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ssn, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ssn, "", new { @class = "text-danger" })
-            </div>
         </div>
         <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-
-        <div class="form-group">
-            <div id="Countries">
-                <label for="Countries">Country</label>
-                <select required id="CountryId" name="CountryId" class="form-control">
-                    <option value="231">United States</option>
-                    @foreach (var item in Model.Countries)
+    </div>
+    <div class="form-group">
+        <div id="States">
+            <label for="States">State</label>
+            <select required id="StatesId" name="StateId" class="form-control">
+                <option value="3930">Florida</option>
+                @foreach (var item in Model.States)
                 {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.CountryId)
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.StateId)
 
-            </div>
         </div>
-
-        <div class="form-group">
-            <div id="States">
-                <label for="States">State</label>
-                <select required id="StatesId" name="StateId" class="form-control">
-                    <option value="3930">Florida</option>
-                    @foreach (var item in Model.States)
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+    </div>
+    <div class="form-group">
+        <div id="Cities">
+            <label for="Cities">City</label>
+            <select id="CitiesId" name="CityId" class="form-control">
+                <option value="43769">Miami</option>
+                @foreach (var item in Model.Cities)
                 {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.StateId)
-
-            </div>
-            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(m => m.CityId)
         </div>
-
-        <div class="form-group">
-            <div id="Cities">
-                <label for="Cities">City</label>
-                <select id="CitiesId" name="CityId" class="form-control">
-                    <option value="43769">Miami</option>
-                    @foreach (var item in Model.Cities)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.CityId)
-            </div>
-            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Address2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.PartnerId)
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.PartnerId)
-            </div>
-            @Html.LabelFor(model => model.PartnerId, "PartnerId", htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AccountType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.AccountType, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.AccountType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address1)
+        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Address1)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address2)
+        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Address2)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Zip)
+        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Zip)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/xpopulate")

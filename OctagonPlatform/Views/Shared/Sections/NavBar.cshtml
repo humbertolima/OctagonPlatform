@@ -9,10 +9,12 @@
 
         
         @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard", "", htmlAttributes: new {@class = "navbar-brand"})
-        &nbsp;&nbsp;&nbsp; CryptoCurrency Market &nbsp;&nbsp;&nbsp;&nbsp;
-        @Session["BTC"] &nbsp;&nbsp;&nbsp;
-        @Session["ETH"] &nbsp;&nbsp;&nbsp;
-        @Session["LTC"] &nbsp;&nbsp;&nbsp;
+        
+            &nbsp;&nbsp;&nbsp; CryptoCurrency Market &nbsp;&nbsp;&nbsp;&nbsp;
+            @Session["BTC"] &nbsp;&nbsp;&nbsp;
+            @Session["ETH"] &nbsp;&nbsp;&nbsp;
+            @Session["LTC"]&nbsp;&nbsp;&nbsp;
+        
     </div>
 }
     <ul class="nav navbar-top-links navbar-right">

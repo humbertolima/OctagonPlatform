@@ -2,7 +2,6 @@
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
@@ -37,6 +36,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required(ErrorMessage = "Partner is required")]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
+
+        public Partner Partner { get; set; }
 
         public IEnumerable<Partner> Partners { get; set; }
 

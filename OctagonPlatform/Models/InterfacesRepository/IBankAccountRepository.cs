@@ -1,19 +1,15 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-   public interface IBankAccountRepository
+    public interface IBankAccountRepository
     {
         IEnumerable<BankAccount> GetAllBankAccount();
 
         BAEditFVModel BankAccountToEdit(int id);
 
-        BAEditFVModel RenderBAFormViewModel();
+        BAEditFVModel RenderBaFormViewModel(int partnerId);
         
         void SaveBankAccount(BAEditFVModel viewModel, string action);
 

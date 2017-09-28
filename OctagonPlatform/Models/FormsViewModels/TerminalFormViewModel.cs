@@ -142,7 +142,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public DateTime? InstalledDate { get; set; }
 
         [Display(Name = "Charged By?")]
-        public string ChargedBy { get; set; }
+        public string LoadedBy { get; set; }
 
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }

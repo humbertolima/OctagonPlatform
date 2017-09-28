@@ -115,7 +115,7 @@ namespace OctagonPlatform.Models
         public DateTime? InstalledDate { get; set; }
 
         [Display(Name = "Charged By?")]
-        public string ChargedBy { get; set; }
+        public string LoadedBy { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "The Communication Date")]

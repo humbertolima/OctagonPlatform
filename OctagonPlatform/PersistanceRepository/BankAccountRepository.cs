@@ -1,12 +1,12 @@
-﻿using OctagonPlatform.Models.InterfacesRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
+using OctagonPlatform.Models.InterfacesRepository;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using AutoMapper;
-using System.Collections;
+using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -51,15 +51,17 @@ namespace OctagonPlatform.PersistanceRepository
             return bankAccount;
         }
 
-        public BAEditFVModel RenderBAFormViewModel()
+        public BAEditFVModel RenderBaFormViewModel(int partnerId)
         {
             BAEditFVModel viewModel = new BAEditFVModel();
 
             viewModel.Partners = Context.Partners.ToList();
+            viewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId);
             viewModel.Countries = Context.Countries.ToList();
             viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
             viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
-
+            viewModel.Status = StatusType.Status.Active;
+            viewModel.AccountType = AccountType.TypeName.Checkings;
             return viewModel;
         }
 

@@ -1,6 +1,7 @@
 ﻿@model OctagonPlatform.Models.User
 
 @Html.AntiForgeryToken()
+<h3 class="alert-info">General Info</h3>
 
 <div class="">
     @Html.LabelFor(m => m.UserName)
@@ -25,6 +26,25 @@
 <div class="">
     @Html.LabelFor(m => m.IsLocked)
     @Model.IsLocked
+</div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li class="active">
+            @Html.ActionLink(
+                linkText: "Edit",
+                actionName: "Edit",
+                controllerName: "Users",
+                routeValues: new
+                {
+                    Id = Model.Id
+                },
+                htmlAttributes: new {@class = "btn btn-primary"}
+                )
+        </li>
+
+
+    </ul>
+
 </div>
 
 @section Scripts {

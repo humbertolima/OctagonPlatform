@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Create Terminal</h2>
+<h3 class="alert-info">Create Terminal</h3>
 
 @using (Html.BeginForm("Create", "Terminals")) 
 {
@@ -177,25 +177,25 @@
             @Html.ValidationMessageFor(m => m.InstalledDate)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ChargedBy)
-            @Html.TextBoxFor(m => m.ChargedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
-            @Html.ValidationMessageFor(m => m.ChargedBy)
+            @Html.LabelFor(m => m.LoadedBy)
+            @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
+            @Html.ValidationMessageFor(m => m.LoadedBy)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Balance)
-            @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500" })
             @Html.ValidationMessageFor(m => m.Balance)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.MinAmmountCash)
-            @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "300" })
             @Html.ValidationMessageFor(m => m.MinAmmountCash)
         </div>
     </div>
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
             <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 }

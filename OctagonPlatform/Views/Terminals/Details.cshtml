@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Terminal <strong class="alert-info">@Model.Id</strong></h2>
+<h3 class="alert-info">Terminal: <strong class="alert-info">@Model.Id</strong></h3>
 <br />
 <hr />
 <br />
@@ -36,6 +36,7 @@
 <div id="notes">
     @Html.Partial("Sections/Notes", Model)
 </div>
+<br />
 <hr />
 <br />
 <div id="contacts">

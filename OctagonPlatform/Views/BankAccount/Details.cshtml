@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Details</h2>
+<h3 class="alert-info">BankAccount Details</h3>
 
 <div>
     <h4>BankAccount</h4>
@@ -148,7 +148,23 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+        @Html.ActionLink(
+            linkText: "Edit",
+            actionName: "Edit",
+            controllerName: "BankAccount",
+            routeValues: new
+            {
+                Model.Id
+            },
+            htmlAttributes: new
+            {
+                @type = "submit",
+                @class = "btn btn-warning"
+
+            }
+            )
+    </div>
+</div>

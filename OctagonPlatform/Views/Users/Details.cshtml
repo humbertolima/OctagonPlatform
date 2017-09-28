@@ -4,19 +4,17 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h1>User Details</h1>
+<h3 class="alert-info">User: <strong class="alert-link">@Model.UserName</strong></h3>
 
-<h2>Partner: @Model.Partner.BusinessName</h2>
-
-<div id="logo">
-    <img src="@Model.Partner.Logo" width="150" height="150" alt="Partner Logo" />
-</div>
 
 @Html.HiddenFor(m => m.Id)
 <div id="generalInfo">
     @Html.Partial("Sections/GenralInfo")
 </div>
-BANKACCOUNT
+<br />
+<hr />
+<br />
+<h3>BankAccounts</h3>
 
 <div class="panel-group" style="width: 49%;float: right;">
     <div class="panel panel-default">
@@ -44,10 +42,15 @@ BANKACCOUNT
         </div>
     </div>
 </div>
-
+<br />
+<hr />
+<br />
 <div id="terminals">
     @Html.Partial("Sections/Terminals")
 </div>
+<br />
+<hr />
+<br />
 <div id="reports">
     @Html.Partial("Sections/Reports")
 </div>

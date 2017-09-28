@@ -23,7 +23,7 @@ namespace OctagonPlatform.PersistanceRepository
         }
 
 
-        public UserFormViewModel RenderUserFormViewModel()
+        public UserFormViewModel RenderUserFormViewModel(int parentId)
         {
             //Revisar que dependencias tienen los usuarios para mostrar ademas de sus datos.
             // reportes y grupos.
@@ -31,8 +31,10 @@ namespace OctagonPlatform.PersistanceRepository
 
             var viewModel = new UserFormViewModel()
             {
+                
                 Partners = Context.Partners.ToList(),
-
+                Status = StatusType.Status.Active,
+                Partner = Context.Partners.SingleOrDefault(x => x.Id == parentId),
                 SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
             };
 
@@ -58,6 +60,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             var result = Table
                 .Include("Permissions")
+                .Include(x => x.Partner)
                 .Single(c => c.Id == id);
 
             var mapping = new MappingProfile();
@@ -74,6 +77,7 @@ namespace OctagonPlatform.PersistanceRepository
                     LastName = result.LastName,
                     Name = result.Name,
                     PartnerId = result.PartnerId,
+                    Partner = result.Partner,
                     Partners = Context.Partners,
                     Permissions = result.Permissions,
                     Phone = result.Phone,
@@ -185,6 +189,7 @@ namespace OctagonPlatform.PersistanceRepository
                 LastName = viewModel.LastName,
                 Name = viewModel.Name,
                 PartnerId = viewModel.PartnerId,
+                Partner = Context.Partners.SingleOrDefault(x => x.Id == viewModel.PartnerId),
                 Partners = Context.Partners,
                 Phone = viewModel.Phone,
                 Status = viewModel.Status,

@@ -4,6 +4,7 @@ using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Net;
 using System.Web.Mvc;
 
@@ -55,14 +56,14 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Create
-        public ActionResult Create()
+        public ActionResult Create(int partnerId)
         {
 
             //ViewBag.CityId = new SelectList(db.Cities, "Id", "Name");
             //ViewBag.CountryId = new SelectList(db.Countries, "Id", "Name");
             //ViewBag.PartnerId = new SelectList(db.Partners, "Id", "BusinessName");
             //ViewBag.StateId = new SelectList(db.States, "Id", "Name");
-            return View(_bAccountRepository.RenderBAFormViewModel());
+            return View(_bAccountRepository.RenderBaFormViewModel(partnerId));
         }
 
         // POST: BankAccount/Create
@@ -125,17 +126,33 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Delete/5
-        public ActionResult Delete(int? id)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            _bAccountRepository.DeleteBankAccount(Convert.ToInt32(id));
 
-            return RedirectToAction("Index");
+            return View(_bAccountRepository.BankAccountToEdit(id));
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                _bAccountRepository.DeleteBankAccount(id);
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error deleting BankAccount" + exDb.Message;
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting BankAccount" + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

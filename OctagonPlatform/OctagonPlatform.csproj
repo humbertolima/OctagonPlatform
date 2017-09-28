@@ -474,6 +474,10 @@
     <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.Designer.cs">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.cs" />
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.Designer.cs">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -832,7 +836,6 @@
     <Content Include="Views\Partners\Sections\Contacts.cshtml" />
     <Content Include="Views\PartnerContacts\Search.cshtml" />
     <Content Include="Views\BankAccount\Create.cshtml" />
-    <Content Include="Views\BankAccount\Delete.cshtml" />
     <Content Include="Views\BankAccount\Details.cshtml" />
     <Content Include="Views\BankAccount\Edit.cshtml" />
     <Content Include="Views\BankAccount\Index.cshtml" />
@@ -864,6 +867,8 @@
     <Content Include="Views\TerminalContacts\Edit.cshtml" />
     <Content Include="Views\Terminals\Sections\Disputes.cshtml" />
     <Content Include="Views\Users\Search.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1070,6 +1075,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709271928089_AddedBoolBindedKeys.resx">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.resx">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

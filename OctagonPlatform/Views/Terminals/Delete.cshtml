@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Delete Terminal</h2>
+<h3 class="alert-danger">Delete Terminal</h3>
 
 <h3 class="alert-warning">Are you sure you want to delete this?</h3>
 <div>
@@ -222,7 +222,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-group">
-            <input type="submit" value="Delete" class="btn btn-danger"/> |
+            <input type="submit" value="Delete" class="btn btn-primary"/> |
             <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
         </div>
     }

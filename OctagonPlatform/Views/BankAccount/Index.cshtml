@@ -4,14 +4,29 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-<div class="form-group">
-    <input type="text" class="form-control" id="searchBA" placeholder="Search" name="search" />
-</div>
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3 class="alert-info">List of BankAccounts</h3>
+<nav class="navbar navbar-default"> 
+    <div class="container-fluid">
+        
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">@Html.ActionLink(
+                                       linkText: "Add BankAccount",
+                                       actionName: "Create",
+                                       controllerName: "BankAccount",
+                                       routeValues: new
+                                       {
+                                           partnerId = 1
+                                       },
+                                       htmlAttributes: null
+                                       )</li>
+            </ul>
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchPartner" placeholder="Search" name="search" />
+            </div> 
+        </div>
+    </div>
+</nav>
 <table class="table">
     <tr>
         <th>
@@ -122,12 +137,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AccountType)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id },
-                                                                 new { onclick = "return confirm('Are sure wants to delete?');" }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
-                </td>
+                    <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                    <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                    <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
             </tr>
         }
     </tbody>
