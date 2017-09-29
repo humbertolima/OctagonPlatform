@@ -474,6 +474,14 @@
     <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.Designer.cs">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.cs" />
+    <Compile Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.Designer.cs">
+      <DependentUpon>201709281656169_AddterminalAlertConfig_TerminalMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.cs" />
+    <Compile Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.Designer.cs">
+      <DependentUpon>201709281928410_AddterminalAlertConfig_TerminalMessage2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -1071,6 +1079,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709271928089_AddedBoolBindedKeys.resx">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.resx">
+      <DependentUpon>201709281656169_AddterminalAlertConfig_TerminalMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.resx">
+      <DependentUpon>201709281928410_AddterminalAlertConfig_TerminalMessage2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

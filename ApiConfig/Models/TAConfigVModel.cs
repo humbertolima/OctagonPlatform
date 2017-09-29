@@ -1,19 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using OctagonPlatform.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace OctagonPlatform.Models
+namespace ApiConfig.Models
 {
-    public class TerminalAlertConfig
+    public class TAConfigVModel
     {
-        [Key]
         public int Id { get; set; }
-
-        //pendiente
-        //public Terminal TerminalId { get; set; }      //este sera el enlace con emi.
         
         [Required]
         public double LowCach1 { get; set; }
@@ -24,7 +20,7 @@ namespace OctagonPlatform.Models
 
         public DateTime? InactivePeriod { get; set; }
 
-        [JsonIgnore]
-        public ICollection<TerminalMessage> MessagesToIgnored { get; set; }
+        public ICollection<TerminalMViewModel> MessagesToIgnored { get; set; }
+
     }
 }

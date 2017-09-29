@@ -50,5 +50,6 @@ namespace OctagonPlatform.Models
 
         }
 
-        }
+        public System.Data.Entity.DbSet<OctagonPlatform.Models.TerminalAlertConfig> TerminalAlertConfigs { get; set; }
+    }
 }

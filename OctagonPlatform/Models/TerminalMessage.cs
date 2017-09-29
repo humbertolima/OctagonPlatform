@@ -17,9 +17,12 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
+        [MaxLength(50)]
+        [Index("TerminalMessage_Id_8583_Index",IsUnique = true)]
         public string Id_8583 { get; set; }     //enlace con Api de Emi
 
+        [ForeignKey("TerminalAlertConfig")]
+        public int TerminalAlertConfigId { get; set; }
         public TerminalAlertConfig TerminalAlertConfig { get; set; }
 
         public DateTime? CreatedAt { get; set; }
