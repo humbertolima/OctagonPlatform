@@ -40,6 +40,9 @@ namespace OctagonPlatform.Models
         [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
         public string Password { get; set; }
 
+        [Required]
+        public string Key { get; set; }
+
         public bool IsLocked { get; set; }
 
         [Required(ErrorMessage = "Email is required")]

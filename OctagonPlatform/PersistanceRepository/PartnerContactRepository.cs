@@ -60,6 +60,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(x => x.Country)
                 .Include(x => x.State)
                 .Include(x => x.City)
+                .Include(x => x.ContactType)
                 .Include(x => x.Partner)
                 .SingleOrDefault();
 

@@ -17,6 +17,7 @@ namespace OctagonPlatform.Controllers
             _partnerRepository = partnerRepository;
         }
 
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -129,6 +130,58 @@ namespace OctagonPlatform.Controllers
         {
             return PartialView(_partnerRepository.Search(search));
         }
+
+        #region PartnerPartialViews
+
+        [HttpPost]
+        public PartialViewResult Contacts(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Contacts", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult GeneralInfo(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/GeneralInfo", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult BankAccounts(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/BankAccounts", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Partners(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Partners", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Terminals(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Terminals", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Users(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Users", partner);
+
+        }
+
+        #endregion
 
     }
 }

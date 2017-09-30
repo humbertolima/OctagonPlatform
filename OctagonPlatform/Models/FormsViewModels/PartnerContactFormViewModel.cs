@@ -33,6 +33,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Contact type")]
         public int ContactTypeId { get; set; }
 
+        public ContactType ContactType { get; set; }
+
         public IEnumerable<ContactType> ContactTypes { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]

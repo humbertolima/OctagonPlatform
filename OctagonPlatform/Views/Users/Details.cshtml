@@ -20,7 +20,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">Assigned</h4>
-            @Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new { toAttach = true, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
+            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users", new { toAttach = true, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
             <div id="addBankAccounts" class="panel-collapse collapse">
 
             </div>
@@ -32,9 +32,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                All Bank Account to asign
+                All Bank Accounts to asign
             </h4>
-            @Ajax.ActionLink("Show Banks Accounts", "GetAllBankAccount", "Users", new { toAttach = false, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
+            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users", new { toAttach = false, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
 
             <div id="bankAccounts" class="panel-collapse collapse">
 
@@ -53,6 +53,12 @@
 <br />
 <div id="reports">
     @Html.Partial("Sections/Reports")
+</div>
+<br />
+<hr />
+<br />
+<div id="alerts">
+    @Html.Partial("Sections/Alerts")
 </div>
 
 @section Scripts {

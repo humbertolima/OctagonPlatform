@@ -162,11 +162,6 @@
             @Html.ValidationMessageFor(m => m.SettledType)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.InterChangeAmount)
-            @Html.TextBoxFor(m => m.InterChangeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "0.15" })
-            @Html.ValidationMessageFor(m => m.InterChangeAmount)
-        </div>
-        <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)
             @Html.EnumDropDownListFor(m => m.WhoInitiates, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.WhoInitiates)

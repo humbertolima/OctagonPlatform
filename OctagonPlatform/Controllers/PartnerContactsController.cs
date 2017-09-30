@@ -88,23 +88,30 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult Delete(int id, int partnerId)
+        public ActionResult Delete(int id)
+        {
+
+            return View(_partnerContactRepository.PartnerContactToEdit(id));
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             try
             {
                 _partnerContactRepository.DeletePartner(id);
-                return RedirectToAction("Details", "Partners", new { id = partnerId });
+                return RedirectToAction("Index");
             }
             catch (DbEntityValidationException exDb)
             {
-                ViewBag.Error = "Validation error deleting Partner" + exDb.Message;
-                return RedirectToAction("Details", "Partners", new { id = partnerId });
+                ViewBag.Error = "Validation error deleting Contact" + exDb.Message;
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error deleiting Partner" + ex.Message;
-                return RedirectToAction("Details", "Partners", new { id = partnerId });
+                ViewBag.Error = "Validation error deleting Contact" + ex.Message;
+                return RedirectToAction("Index");
             }
         }
 

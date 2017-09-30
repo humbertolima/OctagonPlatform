@@ -112,49 +112,71 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void SaveUser(UserFormViewModel viewModel, string action)
         {
-
-            if (action == "Edit")
+            try
             {
-                var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id);
 
-                if (user != null)
+                if (action == "Edit")
                 {
-                    user.Email = viewModel.Email.Trim();
-                    user.LastName = viewModel.LastName.Trim();
-                    user.Name = viewModel.Name.Trim();
-                    user.Phone = viewModel.Phone.Trim();
-                    user.Status = viewModel.Status;
-                    user.UserName = viewModel.UserName.Trim();
-                    user.IsLocked = viewModel.IsLocked;
-                    user.PartnerId = viewModel.PartnerId;
+                    var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id);
 
-                    if (!string.IsNullOrEmpty(viewModel.Password))
-                        user.Password = viewModel.Password.Trim();
+                    if (user != null)
+                    {
+                        user.Email = viewModel.Email.Trim();
+                        user.LastName = viewModel.LastName.Trim();
+                        user.Name = viewModel.Name.Trim();
+                        user.Phone = viewModel.Phone.Trim();
+                        user.Status = viewModel.Status;
+                        user.UserName = viewModel.UserName.Trim();
+                        user.IsLocked = viewModel.IsLocked;
+                        user.PartnerId = viewModel.PartnerId;
 
-                    user.Permissions = viewModel.Permissions;
+                        if (!string.IsNullOrEmpty(viewModel.Password))
+                            user.Password = viewModel.Password.Trim();
 
-                    Edit(user);
+                        user.Permissions = viewModel.Permissions;
+
+                        Edit(user);
+                    }
+
+                    throw new Exception("User does not exist in our records");
                 }
-            }
-            else if (action == "Create")
-            {
-                //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
-
-                var user = new User()
+                else if (action == "Create")
                 {
-                    PartnerId = viewModel.PartnerId,
-                    Email = viewModel.Email.Trim(),
-                    LastName = viewModel.LastName.Trim(),
-                    Name = viewModel.Name.Trim(),
-                    Password = viewModel.Password.Trim(), // crear metodo privado que haga hash de la BD
-                    Phone = viewModel.Phone.Trim(),
-                    Status = viewModel.Status,
-                    UserName = viewModel.UserName.Trim(),
-                    IsLocked = viewModel.IsLocked,
-                    Permissions = viewModel.Permissions,
-                };
+                    //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
+                    var user = Table.SingleOrDefault(
+                        x => x.UserName == viewModel.UserName || x.Email == viewModel.Email);
+                    if (user != null) throw new Exception("User already exists in our records!!!");
+                    {
+                        var key = Cryptography.GenerateKey();
+                        var hash = Cryptography.EncodePassword(viewModel.Password, key);
 
-                Add(user);
+                        user = new User()
+                        {
+                            PartnerId = viewModel.PartnerId,
+                            Email = viewModel.Email.Trim(),
+                            LastName = viewModel.LastName.Trim(),
+                            Name = viewModel.Name.Trim(),
+                            Key = key,
+                            Password = hash, // crear metodo privado que haga hash de la BD
+                            Phone = viewModel.Phone.Trim(),
+                            Status = viewModel.Status,
+                            UserName = viewModel.UserName.Trim(),
+                            IsLocked = viewModel.IsLocked,
+                            Permissions = viewModel.Permissions,
+                        };
+
+                        Add(user);
+                        
+                        
+                    }
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Error Creating or Editing User");
             }
         }
 

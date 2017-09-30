@@ -186,11 +186,8 @@ namespace OctagonPlatform.Models
         [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
 
-        public ICollection<Surcharge> Surcharges { get; set; }
 
-        [Required]
-        [Display(Name = "Interchange Amount")]
-        public double InterChangeAmount { get; set; }
+        public ICollection<Surcharge> Surcharges { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Data.Entity;
@@ -11,11 +12,15 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public UserLoginViewModel Login(UserLoginViewModel userLogin)
         {
-            var user = Table.Where(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password && !u.Deleted && !u.IsLocked)
-                .Include(x => x.Partner).SingleOrDefault();
+            var user = Table.Where(u => u.UserName == userLogin.UserName && !u.Deleted && !u.IsLocked)
+                .Include(x => x.Partner).SingleOrDefault(); 
             if (user != null)
             {
+                var key = user.Key;
+                var hash = Cryptography.EncodePassword(userLogin.Password, key);
                 
+                if (user.Password == hash)
+                {
                     return new UserLoginViewModel()
                     {
                         UserName = userLogin.UserName,
@@ -23,7 +28,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Partner = user.Partner,
                         BusinessName = user.Partner.BusinessName
                     };
-               
+                }
             }
             
             var userTrying = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && !u.Deleted);

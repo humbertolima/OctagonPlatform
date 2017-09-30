@@ -142,5 +142,26 @@ namespace OctagonPlatform.Controllers
             return PartialView(_repository.Search(search));
         }
 
+        #region TerminalPartialViews
+
+        [HttpPost]
+        public PartialViewResult Contacts(int terminalId)
+        {
+            var terminal = _repository.TerminalDetails(terminalId);
+            return PartialView("Sections/Contacts", terminal);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult GeneralInfo(int terminalId)
+        {
+            var terminal = _repository.TerminalDetails(terminalId);
+            return PartialView("Sections/GeneralInfo", terminal);
+
+        }
+
+
+        #endregion
+
     }
 }

@@ -148,7 +148,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.FixSurcharge)
-            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "After this ammount will be charged by percent" })
+            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "Over this amount, Will be charged by percent" })
             @Html.ValidationMessageFor(m => m.FixSurcharge)
         </div>
         <div class="form-group">
@@ -160,11 +160,6 @@
             @Html.LabelFor(m => m.SettledType)
             @Html.EnumDropDownListFor(m => m.SettledType, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.SettledType)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.InterChangeAmount)
-            @Html.TextBoxFor(m => m.InterChangeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "0.15"})
-            @Html.ValidationMessageFor(m => m.InterChangeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)

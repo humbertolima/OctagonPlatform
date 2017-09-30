@@ -3,7 +3,6 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Net;
 using System.Web.Mvc;
@@ -24,16 +23,8 @@ namespace OctagonPlatform.Controllers
         {
             var bankAccounts = _bAccountRepository.GetAllBankAccount();
 
-            var viewModel = new List<BAccountFVModel>();
-
-            //var viewModel = bankAccounts.Select(item => Mapper.Map<BankAccount, BAccountFVModel>(item)).ToList();
-
-            foreach (var item in bankAccounts)
-            {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
-                viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
-            }
-
-            return View(viewModel);
+            
+            return View(bankAccounts);
         }
 
         // GET: BankAccount/Details/5

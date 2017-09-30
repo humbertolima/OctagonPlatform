@@ -82,6 +82,17 @@ namespace OctagonPlatform
 
             #endregion
 
+
+            #region VaultCash Mapping
+
+            CreateMap<VaultCash, VaultCashFormViewModel>();
+
+            CreateMap<VaultCashFormViewModel, VaultCashFormViewModel>();
+            //Dto to Domain
+            CreateMap<VaultCashFormViewModel, VaultCash>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
+
         }
 
     }

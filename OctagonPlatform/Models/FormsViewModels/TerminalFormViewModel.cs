@@ -114,7 +114,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Surcharge Amount")]
         public double SurchargeAmount { get; set; }
 
-        [Display(Name = "Fix Surcharge")]
+        [Display(AutoGenerateField = true, Prompt = "Test", Name = "Fix Surcharge")]
         public double FixSurcharge { get; set; }
 
         [Required]
@@ -125,18 +125,12 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
 
-        [Required]
-        [Display(Name = "Interchange Amount")]
-        public double InterChangeAmount { get; set; }
-
         [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Charge by Cryptocurrency Trnasaction")]
-        public int CryptoPercentChargeAmount { get; set; }
-
-        public DateTime Now => DateTime.Now;
+        [Display(Name = "Percent Charge By CryptoTransaction")]
+        public double CryptoPercentChargeAmount { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
@@ -144,7 +138,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
         public DateTime? InstalledDate { get; set; }
 
-        [Display(Name = "Charged By?")]
+        [Display(Name = "Loaded By?")]
         public string LoadedBy { get; set; }
 
         [Display(Name = "Terminal Balance")]
