@@ -20,9 +20,6 @@ namespace OctagonPlatform.Models
         public BankAccount BankAccount { get; set; }
 
         [Required]
-        public int TotalAmmount { get; set; }
-
-        [Required]
         public Settled.SettledType SettledType { get; set; }
 
         [Required]

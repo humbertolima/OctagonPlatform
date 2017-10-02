@@ -24,7 +24,7 @@ namespace OctagonPlatform.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<LoadCash> LoadCashs { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<TransactionStatistic> TransactionStatistics { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<VaultCash> VaultCashs { get; set; }
         public DbSet<InterChange> InterChanges { get; set; }

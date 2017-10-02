@@ -5,12 +5,20 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Terminal <strong class="alert-info">@Model.Id</strong></h2>
+<h3 class="alert-info">Terminal: <strong class="alert-info">@Model.Id</strong></h3>
 <br />
 <hr />
 <br />
-<div id="generalInfo">
-    @Html.Partial("Sections/GeneralInfo", Model)
+<div class="panel-group" style="width: 50%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
+
+            <div id="getGeneralInfo" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
 <br />
 <hr />
@@ -36,10 +44,19 @@
 <div id="notes">
     @Html.Partial("Sections/Notes", Model)
 </div>
+<br />
 <hr />
 <br />
-<div id="contacts">
-    @Html.Partial("Sections/Contacts", Model)
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+
+            <div id="getContacts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
 <br />
 <hr />
@@ -79,3 +96,7 @@
 <br />
 <hr />
 <br />
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}

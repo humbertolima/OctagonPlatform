@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-<h2>Edit Partner</h2>
+<h3 class="alert-info">Edit Partner</h3>
 
 @using (Html.BeginForm("Edit", "Partners", new { @class="form-group"}))
 {
@@ -122,7 +122,7 @@
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
             <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 }

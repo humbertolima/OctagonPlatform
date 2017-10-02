@@ -1,65 +1,86 @@
 ﻿@model OctagonPlatform.Models.Partner
 
-<h3>General Info</h3>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-        <li class="active">@Html.ActionLink(
+<table class="table table-striped table-hover " >
+    <tbody>
+    <tr class="info">
+
+        <th>Business Name: </th><th>@Model.BusinessName</th>
+    </tr>
+    <tr class="info">
+
+        <th>Parent:</th>
+        <th>@Model.Parent.BusinessName</th>
+    </tr>
+    <tr class="info">
+
+        <th>Address1:</th>
+        <th>@Model.Address1</th>
+    </tr>
+    <tr class="info">
+
+       <th>Address2:</th> 
+        <th>@Model.Address2</th>
+    </tr>
+    <tr class="info">
+
+        <th>Country:</th>
+        <th>@Model.Country.Name</th>
+    </tr>
+    <tr class="info">
+
+        <th>State:</th>
+        <th>@Model.State.Name</th>
+    </tr>
+    @if (Model.City != null)
+    {
+        <tr class="info">
+
+            <th>City:</th> <th>@Model.City.Name</th>
+        </tr>
+    }
+    <tr class="info">
+
+        <th>Created At:</th>
+        <th>@Model.CreatedAt</th>
+    </tr>
+    <tr class="info">
+
+        <th>Created By:</th>
+        <th>@Model.CreatedByName</th>
+    </tr>
+    <tr class="info">
+
+        <th>Status:</th>
+        <th>@Model.Status</th>
+    </tr>
+    <tr class="info">
+
+        <th>Email:</th>
+        <th>@Model.Email</th>
+    </tr>
+    <tr class="info">
+
+        <th>Mobil:</th>
+        <th>@Model.Mobile</th>
+    </tr>
+    </tbody>
+</table>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                @Html.ActionLink(
                                linkText: "Edit",
                                actionName: "Edit",
                                controllerName: "Partners",
-                               routeValues: new {
+                               routeValues: new
+                               {
                                    Id = Model.Id
                                },
-                               htmlAttributes: null
-                               )</li>
+                               htmlAttributes: new { @class = "btn btn-primary" }
+                               )
+            </li>
 
 
-    </ul>
-            
-</div>
-<div class="form-group">
+        </ul>
 
-    <label class="label-column">Business Name: @Model.BusinessName</label>
-</div>
-<div class="form-group">
-    <label class="label-column">ISO: @Model.Parent.BusinessName</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Address: @Model.Address1</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Address2: @Model.Address2</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Country: @Model.Country.Name</label>
-</div>
-<div class="form-group">
-    <label class="label-column">State: @Model.State.Name</label>
-</div>
-<div class="form-group">
-    <label class="label-column">City: @Model.City.Name</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Created: @Model.CreatedAt</label>
-</div>
-<div class="form-group">
-    <label class="label-column">CreatedBy: @Model.CreatedByName</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Created By: @Model.CreatedByName</label>
-</div>
-@if (Model.UpdatedAt != null)
-{
-    <div class="form-group">
-        <label class="label-column">Updated: @Model.UpdatedAt</label>
     </div>
-}
-<div class="form-group">
-    <label class="label-column">Status: @Model.Status</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Email: @Model.Email</label>
-</div>
-<div class="form-group">
-    <label class="label-column">Mobile: @Model.Mobile</label>
-</div>

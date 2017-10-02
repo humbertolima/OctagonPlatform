@@ -1,12 +1,12 @@
-﻿using OctagonPlatform.Models.InterfacesRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
+using OctagonPlatform.Models.InterfacesRepository;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using AutoMapper;
-using System.Collections;
+using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -14,6 +14,7 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public IEnumerable<BankAccount> GetAllBankAccount()
         {
+            try { 
             var result = Table.Where(c => !c.Deleted)
                 .Include(c => c.Partner)
                 .Include(c => c.City)
@@ -22,10 +23,17 @@ namespace OctagonPlatform.PersistanceRepository
                 .ToList();
 
             return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public BankAccount BAccountDetails(int id)
         {
+            try { 
             BankAccount bankAccount = new BankAccount();
             try
             {
@@ -49,77 +57,130 @@ namespace OctagonPlatform.PersistanceRepository
             #endregion
 
             return bankAccount;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
-        public BAEditFVModel RenderBAFormViewModel()
+        public BAEditFVModel RenderBaFormViewModel(int partnerId)
         {
-            BAEditFVModel viewModel = new BAEditFVModel();
+            try
+            {
+                BAEditFVModel viewModel = new BAEditFVModel();
 
-            viewModel.Partners = Context.Partners.ToList();
-            viewModel.Countries = Context.Countries.ToList();
-            viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
-            viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+                viewModel.Partners = Context.Partners.ToList();
+                viewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId);
+                viewModel.Countries = Context.Countries.ToList();
+                viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
+                viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
+                viewModel.Status = StatusType.Status.Active;
+                viewModel.AccountType = AccountType.TypeName.Checkings;
+                return viewModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-            return viewModel;
         }
 
         public BAEditFVModel BankAccountToEdit(int id)
         {
-            var model = Table
-                .Include(c => c.Partner)
-                .Include(c => c.Country)
-                .Include(c => c.State)
-                .Include(c => c.City)
-                .Single(c => c.Id == id)
-                ;
-            var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
-            editViewModel.Partners = Context.Partners.ToList();
-            editViewModel.Countries = Context.Countries.ToList();
-            editViewModel.Cities = Context.Cities.ToList();
-            editViewModel.States = Context.States.ToList();
+            try
+            {
+                var model = Table.Where(x => x.Id == id && !x.Deleted)
+                    .Include(c => c.Partner)
+                    .Include(c => c.Country)
+                    .Include(c => c.State)
+                    .Include(c => c.City)
+                    .Single(c => c.Id == id);
+                if (model == null) throw new Exception("BankAccount does not exists in our records!!!");
+                {
+                    var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
+                    editViewModel.Partners = Context.Partners.ToList();
+                    editViewModel.Partner = model.Partner;
+                    editViewModel.Countries = Context.Countries.ToList();
+                    editViewModel.States = Context.States.Where(x => x.CountryId == model.CountryId).ToList();
+                    editViewModel.Cities = Context.Cities.Where(x => x.StateId == model.StateId).ToList();
 
-            return editViewModel;
+                    return editViewModel;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public void DeleteBankAccount(int id)
         {
-            Delete(id);
+            try
+            {
+                Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public void SaveBankAccount(BAEditFVModel editViewModel, string action)
         {
-            if (action == "Create")
+            try
             {
-                var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id);
-                if (model == null)
+                if (action == "Edit")
                 {
-                    model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-                    Add(model);
+                    var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
+                    if (model == null) throw new Exception("BankAccount does not exists in pur records!!!");
+                    {
+                        Mapper.Map(editViewModel, model);
+                        Edit(model);
+                    }
+                }
+                else
+                {
+                    var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id || c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax);
+                    if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
+
+                    if (model != null && model.Deleted) Table.Remove(model);
+                        
+
+
+                    var model1 = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
+                       
+                    Add(model1);
+                    
                 }
             }
-            else
+            catch (Exception ex)
             {
-                var model = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-                //Revisar este codigo para que no salve si no se le hizo modificacion al entity.
-                //db.Entry(bankAccount).State = EntityState.Modified;
-                Edit(model);
+                throw new Exception(ex.Message);
             }
         }
 
-        public IEnumerable<BAccountFVModel> Search(string search)
+        public IEnumerable<BankAccount> Search(string search)
         {
-            var bankAccounts = Table.Where(c => !c.Deleted && (c.NickName.Contains(search) || c.Partner.BusinessName.Contains(search)))
-                .Include(x => x.Partner)
-                .ToList();
+            try
+            {
+                var result = Table.Where(c => !c.Deleted && (c.NickName.Contains(search) || c.NameOnCheck.Contains(search)))
+                    .Include(c => c.Partner)
+                    .Include(c => c.City)
+                    .Include(c => c.Country)
+                    .Include(c => c.State)
+                    .ToList();
 
-            List<BAccountFVModel> viewModel = new List<BAccountFVModel>();
-
-            foreach (var item in bankAccounts)
-            {   //creado porque no se puede mapear una lista de tipos de objetos. Solo se mapea un tipo de objeto.
-                viewModel.Add(Mapper.Map<BankAccount, BAccountFVModel>(item));
+                return result;
             }
-
-            return viewModel;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

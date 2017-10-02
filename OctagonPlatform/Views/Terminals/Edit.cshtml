@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Edit Terminal</h2>
+<h3 class="alert-info">Edit Terminal</h3>
 
 @using (Html.BeginForm("Edit", "Terminals"))
 {
@@ -142,9 +142,9 @@
             @Html.ValidationMessageFor(m => m.SurchargeType)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeAmmount)
-            @Html.TextBoxFor(m => m.SurchargeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.99" })
-            @Html.ValidationMessageFor(m => m.SurchargeAmmount)
+            @Html.LabelFor(m => m.SurchargeAmount)
+            @Html.TextBoxFor(m => m.SurchargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.99" })
+            @Html.ValidationMessageFor(m => m.SurchargeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.SurchargeByPercent)
@@ -152,14 +152,14 @@
             @Html.ValidationMessageFor(m => m.SurchargeByPercent)
         </div>
         <div class="form-group">
+            @Html.LabelFor(m => m.FixSurcharge)
+            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "After this ammount will be charged by percent" })
+            @Html.ValidationMessageFor(m => m.FixSurcharge)
+        </div>
+        <div class="form-group">
             @Html.LabelFor(m => m.SettledType)
             @Html.EnumDropDownListFor(m => m.SettledType, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.SettledType)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.InterChangeAmmount)
-            @Html.TextBoxFor(m => m.InterChangeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "0.15" })
-            @Html.ValidationMessageFor(m => m.InterChangeAmmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)
@@ -167,9 +167,9 @@
             @Html.ValidationMessageFor(m => m.WhoInitiates)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.CryptoPercentChargeAmmount)
-            @Html.TextBoxFor(m => m.CryptoPercentChargeAmmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
-            @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmmount)
+            @Html.LabelFor(m => m.CryptoPercentChargeAmount)
+            @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
+            @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.InstalledDate)
@@ -177,9 +177,9 @@
             @Html.ValidationMessageFor(m => m.InstalledDate)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.ChargedBy)
-            @Html.TextBoxFor(m => m.ChargedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
-            @Html.ValidationMessageFor(m => m.ChargedBy)
+            @Html.LabelFor(m => m.LoadedBy)
+            @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
+            @Html.ValidationMessageFor(m => m.LoadedBy)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Balance)
@@ -195,7 +195,7 @@
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
             <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 }

@@ -27,7 +27,7 @@ namespace OctagonPlatform
             //Dto to Domain
             CreateMap<BAccountFVModel, BankAccount>();
 
-            CreateMap<BAEditFVModel, BankAccount>();
+            CreateMap<BAEditFVModel, BankAccount>().ForMember(x => x.Id, opt => opt.Ignore());
 
             CreateMap<BankAccount, BAEditFVModel>();
 
@@ -79,6 +79,17 @@ namespace OctagonPlatform
             CreateMap<TerminalContactFormViewModel, TerminalContactFormViewModel>();
             //Dto to Domain
             CreateMap<TerminalContactFormViewModel, TerminalContact>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
+
+
+            #region VaultCash Mapping
+
+            CreateMap<VaultCash, VaultCashFormViewModel>();
+
+            CreateMap<VaultCashFormViewModel, VaultCashFormViewModel>();
+            //Dto to Domain
+            CreateMap<VaultCashFormViewModel, VaultCash>().ForMember(c => c.Id, opt => opt.Ignore());
 
             #endregion
 

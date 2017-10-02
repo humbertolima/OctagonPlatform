@@ -4,54 +4,104 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h2>Partner <strong class="alert-info">@Model.BusinessName</strong></h2>
+<h3  class="alert-info">Partner: <strong class="alert-link">@Model.BusinessName</strong></h3>
 <br />
 <hr />
 <br />
 
-   <img src="~/Uploads/@Model.Logo" width="200" height="100" alt="" class="img-responsive img-rounded">
-
+   <img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
+<br />
 <div>
-    @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, "")
+    @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, htmlAttributes: new{@class = "btn btn-primary"})
 </div>
 <br/>
 <hr />
 <br />
-<div id="generalInfo">
-    @Html.Partial("Sections/GeneralInfo", Model)
+<div class="panel-group" style="width: 50%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
+
+            <div id="getGeneralInfo" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<br />
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+            <div id="getContacts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
 <br/>
 <hr />
 <br />
-<div id="contacts">
-    @Html.Partial("Sections/Contacts", Model)
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Partners", "Partners", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getPartners", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getPartners" })</h3>
+
+            <div id="getPartners" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<br />
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Bank Accounts", "BankAccounts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getBankAccounts" })</h3>
+
+            <div id="getBankAccounts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
 <br/>
 <hr />
 <br />
-<div id="users">
-    @Html.Partial("Sections/Users", Model)
-</div>
-<br/>
-<hr />
-<br />
-<div id="partners">
-    @Html.Partial("Sections/Partners", Model)
-</div>
-<hr />
-<br />
-<div id="bankAccounts">
-    @Html.Partial("Sections/BankAccounts", Model)
-</div>
-<br/>
-<hr />
-<br />
-<div id="terminals">
-    @Html.Partial("Sections/Terminals", Model)
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Terminals", "Terminals", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getTerminals", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getTerminals" })</h3>
+
+            <div id="getTerminals" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
 </div>
 <br />
 <hr />
 <br />
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Users", "Users", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getUsers", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getUsers" })</h3>
+
+            <div id="getUsers" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<br />
+
 @section Scripts {
     @Scripts.Render("~/bundles/search")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 }

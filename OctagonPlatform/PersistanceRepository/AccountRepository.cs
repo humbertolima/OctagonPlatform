@@ -1,6 +1,8 @@
-﻿using OctagonPlatform.Models;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Security;
@@ -11,48 +13,66 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public UserLoginViewModel Login(UserLoginViewModel userLogin)
         {
-            var user = Table.Where(u => u.UserName == userLogin.UserName && u.Password == userLogin.Password && !u.Deleted && !u.IsLocked)
-                .Include(x => x.Partner).SingleOrDefault();
-            if (user != null)
+            try
             {
-                
-                    return new UserLoginViewModel()
-                    {
-                        UserName = userLogin.UserName,
-                        Logo = user.Partner.Logo,
-                        Partner = user.Partner,
-                        BusinessName = user.Partner.BusinessName
-                    };
-               
-            }
-            
-            var userTrying = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && !u.Deleted);
-            if (userTrying == null)
-                return userLogin;
+                var user = Table.Where(u => u.UserName == userLogin.UserName && !u.Deleted && !u.IsLocked)
+                    .Include(x => x.Partner).SingleOrDefault();
+                if (user != null)
+                {
+                    var key = user.Key;
+                    var hash = Cryptography.EncodePassword(userLogin.Password, key);
 
-            if (userTrying.IsLocked)
-            {
+                    if (user.Password == hash)
+                    {
+                        return new UserLoginViewModel()
+                        {
+                            UserName = userLogin.UserName,
+                            Logo = user.Partner.Logo,
+                            Partner = user.Partner,
+                            BusinessName = user.Partner.BusinessName
+                        };
+                    }
+                }
+
+                var userTrying = Table.SingleOrDefault(u => u.UserName == userLogin.UserName && !u.Deleted);
+                if (userTrying == null)
+                    return userLogin;
+
+                if (userTrying.IsLocked)
+                {
+                    userLogin.IsLocked = true;
+                    return userLogin;
+                }
+
+
+                if (userLogin.TriesToLogin <= 3)
+                {
+                    userLogin.TriesToLogin++;
+                    return userLogin;
+                }
+
+                userTrying.IsLocked = true;
+                Save();
                 userLogin.IsLocked = true;
                 return userLogin;
             }
-
-
-            if (userLogin.TriesToLogin <= 3)
+            catch (Exception ex)
             {
-                userLogin.TriesToLogin++;
-                return userLogin;
+                throw new Exception(ex.Message);
             }
 
-            userTrying.IsLocked = true;
-            Save();
-            userLogin.IsLocked = true;
-            return userLogin;
-            
         }
 
         public void Logout()
         {
+            try { 
             FormsAuthentication.SignOut();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }

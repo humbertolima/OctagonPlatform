@@ -111,29 +111,26 @@ namespace OctagonPlatform.Models.FormsViewModels
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Ammount")]
-        public double SurchargeAmmount { get; set; }
+        [Display(Name = "Surcharge Amount")]
+        public double SurchargeAmount { get; set; }
+
+        [Display(AutoGenerateField = true, Prompt = "Test", Name = "Fix Surcharge")]
+        public double FixSurcharge { get; set; }
 
         [Required]
-        [Display(Name = "Percent Surcharge Ammount")]
+        [Display(Name = "Percent Surcharge Amount")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
         [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
 
-        [Required]
-        [Display(Name = "Interchange Ammount")]
-        public double InterChangeAmmount { get; set; }
-
         [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Charge by Cryptocurrency Trnasaction")]
-        public int CryptoPercentChargeAmmount { get; set; }
-
-        public DateTime Now => DateTime.Now;
+        [Display(Name = "Percent Charge By CryptoTransaction")]
+        public double CryptoPercentChargeAmount { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
@@ -141,8 +138,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
         public DateTime? InstalledDate { get; set; }
 
-        [Display(Name = "Charged By?")]
-        public string ChargedBy { get; set; }
+        [Display(Name = "Loaded By?")]
+        public string LoadedBy { get; set; }
 
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }

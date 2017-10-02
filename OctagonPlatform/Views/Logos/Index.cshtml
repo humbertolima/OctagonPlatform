@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 
-<h1>Upload Logo</h1>
-<h2>@ViewBag.Error</h2>
+<h3 class="alert-info">Upload Logo</h3>
+<h4 class="alert-warning">@ViewBag.Error</h4>
 @using (Html.BeginForm("Upload", "Logos", new { partnerId = @ViewBag.PartnerId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()

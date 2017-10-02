@@ -4,10 +4,9 @@
     {
         public enum SurchargeTypes
         {
-            Ammount = 1,
-            Percent = 2,
-            Greater = 3,
-            Lesser = 4
+            FixAmmount = 1,
+            Greater = 2,
+            Lesser = 3
         }
     }
 }

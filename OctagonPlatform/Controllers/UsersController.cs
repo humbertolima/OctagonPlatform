@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -25,8 +25,15 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var result = _userRepository.GetAllUsers();
-            return View(result);
+            try
+            {
+                var result = _userRepository.GetAllUsers();
+                return View(result);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         //public ActionResult Details(int id)
@@ -36,11 +43,11 @@ namespace OctagonPlatform.Controllers
         //}
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int partnerId)
         {
             try
             {
-                return View(_userRepository.RenderUserFormViewModel());
+                return View(_userRepository.RenderUserFormViewModel(partnerId));
             }
             #region Exception
             catch (SqlException ex)
@@ -98,15 +105,15 @@ namespace OctagonPlatform.Controllers
 
             catch (DbEntityValidationException exDb)
             {
-                viewModel = _userRepository.RenderUserFormViewModel();
+               
                 viewModel.Error = "Validation error in database. " + exDb.Message.ToString();
-                return View(viewModel);
+                return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             catch (Exception ex)
             {
                 viewModel.Error = "Error creating user. " + ex.Message.ToString();
-                viewModel = _userRepository.RenderUserFormViewModel();    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
-                return View(viewModel);
+                //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
+                return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             #endregion
         }
@@ -119,18 +126,17 @@ namespace OctagonPlatform.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Parameter required in Edit.");
             }
 
-            var userEdit = default(UserEditFormViewModel);
             try
             {
-                userEdit = _userRepository.UserToEdit(Convert.ToInt32(id));
+                var userEdit = _userRepository.UserToEdit(Convert.ToInt32(id));
                 return View(userEdit);
             }
             #region Exception
             catch (Exception ex)
             {
-                userEdit = new UserEditFormViewModel();
+               
+                var userEdit = _userRepository.UserToEdit(Convert.ToInt32(id));
                 userEdit.Error = "Error edit user. " + ex.Message.ToString();
-                userEdit.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(userEdit);
             }
             #endregion
@@ -140,8 +146,6 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserEditFormViewModel editViewModel, string[] permissions1)
         {
-            var viewModel = default(UserFormViewModel);
-
             if (!ModelState.IsValid)
             {
                 var userEdit = _userRepository.UserToEdit(editViewModel.Id);
@@ -152,7 +156,7 @@ namespace OctagonPlatform.Controllers
                 editViewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
 
                 //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
-                viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
+                var viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
                 return RedirectToAction("Index");
@@ -161,13 +165,13 @@ namespace OctagonPlatform.Controllers
             catch (DbEntityValidationException exDb)
             {
                 editViewModel.Error = "Validation error in database. " + exDb.Message.ToString();
-                editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;
+                editViewModel.Partners = _userRepository.RenderUserFormViewModel(editViewModel.PartnerId).Partners;
                 return View(editViewModel);
             }
             catch (Exception ex)
             {
                 editViewModel.Error = "Error creating user. " + ex.Message.ToString();
-                editViewModel.Partners = _userRepository.RenderUserFormViewModel().Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
+                editViewModel.Partners = _userRepository.RenderUserFormViewModel(editViewModel.PartnerId).Partners;    //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(editViewModel);
             }
             #endregion
@@ -188,19 +192,46 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
+                return View(_userRepository.UserToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
                 _userRepository.DeleteUser(id);
+                return RedirectToAction("Index");
+            }
+            catch (DbEntityValidationException exDb)
+            {
+                ViewBag.Error = "Validation error deleting User" + exDb.Message;
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                throw new Exception("Error Show User Details. " + ex.Message, ex);
+                ViewBag.Error = "Validation error deleting User" + ex.Message;
+                return RedirectToAction("Index");
             }
         }
 
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_userRepository.Search(search));
+            try
+            {
+                return PartialView(_userRepository.Search(search));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         #region Get BankAccount Of User
@@ -209,33 +240,31 @@ namespace OctagonPlatform.Controllers
         // [ValidateAntiForgeryToken]       //pendiente probar los validatetoken
         public ActionResult Attach(string userId, string bankAccountId)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
-
-            userBAViewModel = _userRepository.AddBankAccountToUser(userId, bankAccountId);
+            var userBaViewModel = _userRepository.AddBankAccountToUser(userId, bankAccountId);
 
             //pendiente retornar al partial view para refrescar solo el pedazo de la la lista de bank Account que tiene el usuario.
-            return PartialView("Sections/BankAccounts", userBAViewModel);
+            return PartialView("Sections/BankAccounts", userBaViewModel);
         }
 
-        public ActionResult DeAttach(string userId, string bankAccountID)
+        public ActionResult DeAttach(string userId, string bankAccountId)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
+            UserBAViewModel userBaViewModel = new UserBAViewModel();
 
             if (ModelState.IsValid)
             {
-                if (!string.IsNullOrEmpty(bankAccountID) && (!string.IsNullOrEmpty(userId)))
+                if (!string.IsNullOrEmpty(bankAccountId) && (!string.IsNullOrEmpty(userId)))
                 {
                     var userIdConvert = Convert.ToInt32(userId);
-                    var bAId = Convert.ToInt32(bankAccountID);
-                    userBAViewModel = _userRepository.DeAttachBankAccountToUser(userIdConvert, bAId);
+                    var bAId = Convert.ToInt32(bankAccountId);
+                    userBaViewModel = _userRepository.DeAttachBankAccountToUser(userIdConvert, bAId);
                 }
             }
-            return PartialView("Sections/BankAccounts", userBAViewModel);
+            return PartialView("Sections/BankAccounts", userBaViewModel);
         }
 
         public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
-            UserBAViewModel userBAViewModel = new UserBAViewModel();
+   
 
             ViewBag.assigned = toAttach;
 

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class PartnersController : Controller
     {
 
@@ -17,92 +17,143 @@ namespace OctagonPlatform.Controllers
             _partnerRepository = partnerRepository;
         }
 
+
         [HttpGet]
         public ActionResult Index()
         {
-            return View(_partnerRepository.GetAllPartners());
+            try
+            {
+                return View(_partnerRepository.GetAllPartners());
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         [HttpGet]
         public ActionResult Create(int partnerId)
         {
-            return View(_partnerRepository.RenderPartnerFormViewModel(partnerId));
+            try
+            {
+                return View(_partnerRepository.RenderPartnerFormViewModel(partnerId));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PartnerFormViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-
-                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
-            }
             try
             {
-                _partnerRepository.SavePartner(viewModel, "Create");
-                return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error creating Partner " + exDb.Message 
-                    + " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                if (!ModelState.IsValid)
+                {
+
+                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                }
+                try
+                {
+                    _partnerRepository.SavePartner(viewModel, "Create");
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException exDb)
+                {
+                    ViewBag.Error = "Validation error creating Partner " + exDb.Message
+                                    + " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
+                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Validation error creating Partner "
+                                    + ex.Message +
+                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
+                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating Partner " 
-                    + ex.Message + " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
             }
-           
+
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View(_partnerRepository.PartnerToEdit(id));
+            try
+            {
+                return View(_partnerRepository.PartnerToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PartnerFormViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
-            }
             try
             {
-                _partnerRepository.SavePartner(viewModel, "Edit");
-                return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error creating Partner " + exDb.Message +
-                                " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+                if (!ModelState.IsValid)
+                {
+                    return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+                }
+                try
+                {
+                    _partnerRepository.SavePartner(viewModel, "Edit");
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException exDb)
+                {
+                    ViewBag.Error = "Validation error creating Partner " + exDb.Message +
+                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
+                    return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Validation error editing Partner " + ex.Message +
+                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
+                    return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing Partner " + ex.Message + 
-                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
             }
         }
 
         public ActionResult Details(int id)
         {
-            return View(_partnerRepository.PartnerDetails(id));
+            try
+            {
+                return View(_partnerRepository.PartnerDetails(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
 
         public ActionResult Delete(int id)
         {
-
-            return View(_partnerRepository.PartnerToEdit(id));
+            try
+            {
+                return View(_partnerRepository.PartnerToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
-        
+
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -127,8 +178,67 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_partnerRepository.Search(search));
+            try
+            {
+                return PartialView(_partnerRepository.Search(search));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
+
+        #region PartnerPartialViews
+
+        [HttpPost]
+        public PartialViewResult Contacts(int partnerId)
+        {
+            var contacts = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Contacts", contacts);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult GeneralInfo(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/GeneralInfo", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult BankAccounts(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/BankAccounts", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Partners(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Partners", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Terminals(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Terminals", partner);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult Users(int partnerId)
+        {
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            return PartialView("Sections/Users", partner);
+
+        }
+
+        #endregion
 
     }
 }

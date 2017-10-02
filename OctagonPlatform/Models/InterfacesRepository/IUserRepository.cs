@@ -1,6 +1,5 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -12,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserEditFormViewModel UserToEdit(int id);
 
-        UserFormViewModel RenderUserFormViewModel();
+        UserFormViewModel RenderUserFormViewModel(int parentId);
 
         ICollection<Permission> AddPermissionToUser(string[] permissions);
 
@@ -20,7 +19,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserBAViewModel AddBankAccountToUser(string userId, string bankAccountId);
 
-        UserBAViewModel DeAttachBankAccountToUser(int userId, int bankAccountID);
+        UserBAViewModel DeAttachBankAccountToUser(int userId, int bankAccountId);
 
         void SaveUser(UserFormViewModel viewModel, string action);
 

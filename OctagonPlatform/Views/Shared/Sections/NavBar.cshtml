@@ -3,16 +3,18 @@
 @if (Request.IsAuthenticated)
 {
     <div>
-        <img src="~/Uploads/@Session["logo"]" width="200" height="100" alt="" class="img-responsive img-rounded">
+        <img src="~/Uploads/@Session["logo"]" width="100" height="50" alt="" class="img-responsive img-rounded">
     </div>
     <div class="navbar-header">
 
         
         @Html.ActionLink(Session["businessName"].ToString(), "Index", "Dashboard", "", htmlAttributes: new {@class = "navbar-brand"})
-        &nbsp;&nbsp;&nbsp; CryptoCurrency Market &nbsp;&nbsp;&nbsp;&nbsp;
-        @Session["BTC"] &nbsp;&nbsp;&nbsp;
-        @Session["ETH"] &nbsp;&nbsp;&nbsp;
-        @Session["LTC"] &nbsp;&nbsp;&nbsp;
+        
+            &nbsp;&nbsp;&nbsp; CryptoCurrency Market &nbsp;&nbsp;&nbsp;&nbsp;
+            @Session["BTC"] &nbsp;&nbsp;&nbsp;
+            @Session["ETH"] &nbsp;&nbsp;&nbsp;
+            @Session["LTC"]&nbsp;&nbsp;&nbsp;
+        
     </div>
 }
     <ul class="nav navbar-top-links navbar-right">

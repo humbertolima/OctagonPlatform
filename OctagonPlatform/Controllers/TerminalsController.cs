@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
+    [Authorize]
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
@@ -18,26 +19,45 @@ namespace OctagonPlatform.Controllers
         // GET: Terminals
         public ActionResult Index()
         {
-           
-            return View(_repository.GetAllTerminals());
+            try
+            {
+                return View(_repository.GetAllTerminals());
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         // GET: Terminals/Details/5
         public ActionResult Details(int id)
         {
-            var terminal = _repository.TerminalDetails(id);
-            if (terminal == null)
+            try
             {
-                return HttpNotFound();
+                var terminal = _repository.TerminalDetails(id);
+                if (terminal == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(terminal);
             }
-            return View(terminal);
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         // GET: Terminals/Create
         public ActionResult Create(int partnerId)
         {
-            
-            return View(_repository.RenderTerminalFormViewModel(partnerId));
+            try
+            {
+                return View(_repository.RenderTerminalFormViewModel(partnerId));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
        
@@ -45,35 +65,48 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalFormViewModel terminalFormViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-
-                return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-            }
             try
             {
-                _repository.SaveTerminal(terminalFormViewModel, "Create");
-                return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error creating Terminal " + exDb.Message;
-                                
-                return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                if (!ModelState.IsValid)
+                {
+
+                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                }
+                try
+                {
+                    _repository.SaveTerminal(terminalFormViewModel, "Create");
+                    return RedirectToAction("Index");
+                }
+                catch (DbEntityValidationException exDb)
+                {
+                    ViewBag.Error = "Validation error creating Terminal " + exDb.Message;
+
+                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Validation error creating Terminal "
+                                    + ex.Message;
+                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating Terminal "
-                                + ex.Message;
-                return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
             }
         }
 
         // GET: Terminals/Edit/5
         public ActionResult Edit(int id)
         {
-
-            return View(_repository.TerminalToEdit(id));
+            try
+            {
+                return View(_repository.TerminalToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
        
@@ -99,7 +132,7 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating Terminal "
+                ViewBag.Error = "Validation error editing Terminal "
                                 + ex.Message;
                 return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
             }
@@ -109,8 +142,14 @@ namespace OctagonPlatform.Controllers
         // GET: Terminals/Delete/5
         public ActionResult Delete(int id)
         {
-            
-            return View(_repository.TerminalToEdit(id));
+            try
+            {
+                return View(_repository.TerminalToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         // POST: Terminals/Delete/5
@@ -139,8 +178,36 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_repository.Search(search));
+            try
+            {
+                return PartialView(_repository.Search(search));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
+
+        #region TerminalPartialViews
+
+        [HttpPost]
+        public PartialViewResult Contacts(int terminalId)
+        {
+            var terminal = _repository.TerminalDetails(terminalId);
+            return PartialView("Sections/Contacts", terminal);
+
+        }
+
+        [HttpPost]
+        public PartialViewResult GeneralInfo(int terminalId)
+        {
+            var terminal = _repository.TerminalDetails(terminalId);
+            return PartialView("Sections/GeneralInfo", terminal);
+
+        }
+
+
+        #endregion
 
     }
 }
