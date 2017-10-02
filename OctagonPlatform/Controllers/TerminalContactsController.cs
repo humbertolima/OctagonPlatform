@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
+    [Authorize]
     public class TerminalContactsController : Controller
     {
         private readonly ITerminalContactRepository _terminalContactRepository;
@@ -17,20 +18,39 @@ namespace OctagonPlatform.Controllers
         // GET: TerminalContacts
         public ActionResult Index()
         {
-            
-            return View(_terminalContactRepository.GetAllTerminalContacts());
+            try
+            {
+                return View(_terminalContactRepository.GetAllTerminalContacts());
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         public ActionResult Details(int id)
         {
-            return View(_terminalContactRepository.Details(id));
+            try
+            {
+                return View(_terminalContactRepository.Details(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         // GET: TerminalContacts/Create
         public ActionResult Create(int terminalId)
         {
-            
-            return View(_terminalContactRepository.RenderTerminalContactFormViewModel(terminalId));
+            try
+            {
+                return View(_terminalContactRepository.RenderTerminalContactFormViewModel(terminalId));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
        
@@ -38,34 +58,47 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalContactFormViewModel terminalContactFormViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
-            }
             try
             {
-                _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Save");
-                return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error creating Contact " + exDb.Message +
-                                " The email must be unique, make sure that is not already in use";
-                return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                if (!ModelState.IsValid)
+                {
+                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                }
+                try
+                {
+                    _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Save");
+                    return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
+                }
+                catch (DbEntityValidationException exDb)
+                {
+                    ViewBag.Error = "Validation error creating Contact " + exDb.Message +
+                                    " The email must be unique, make sure that is not already in use";
+                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Validation error creating Contact " + ex.Message +
+                                    " The email must be unique, make sure that is not already in use";
+                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating Contact " + ex.Message +
-                                " The email must be unique, make sure that is not already in use";
-                return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
             }
         }
 
         // GET: TerminalContacts/Edit/5
         public ActionResult Edit(int id)
         {
-            
-            return View(_terminalContactRepository.TerminalContactToEdit(id));
+            try
+            {
+                return View(_terminalContactRepository.TerminalContactToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         [HttpPost]
@@ -98,7 +131,14 @@ namespace OctagonPlatform.Controllers
         // GET: TerminalContacts/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(_terminalContactRepository.TerminalContactToEdit(id));
+            try
+            {
+                return View(_terminalContactRepository.TerminalContactToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         // POST: TerminalContacts/Delete/5
@@ -126,7 +166,14 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_terminalContactRepository.Search(search));
+            try
+            {
+                return PartialView(_terminalContactRepository.Search(search));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
 

@@ -27,7 +27,7 @@
 
             </ul>
             <div class="form-group">
-                <input type="text" class="form-control search" id="searchPartner" placeholder="Search" name="search" />
+                <input type="text" class="form-control search" id="searchBankAccount" placeholder="Search" name="search" />
             </div> 
         </div>
     </div>
@@ -50,7 +50,7 @@
             <th>Status</th>
         </tr>
     </thead>
-    <tbody id="listOfPartners">
+    <tbody id="listOfBankAccounts">
         @foreach (var item in Model)
         {
             if (!item.Deleted)

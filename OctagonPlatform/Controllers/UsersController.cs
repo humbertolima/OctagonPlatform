@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -25,8 +25,15 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var result = _userRepository.GetAllUsers();
-            return View(result);
+            try
+            {
+                var result = _userRepository.GetAllUsers();
+                return View(result);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         //public ActionResult Details(int id)
@@ -183,8 +190,14 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-
-            return View(_userRepository.UserToEdit(id));
+            try
+            {
+                return View(_userRepository.UserToEdit(id));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         [HttpPost, ActionName("Delete")]
@@ -211,7 +224,14 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult Search(string search)
         {
-            return PartialView(_userRepository.Search(search));
+            try
+            {
+                return PartialView(_userRepository.Search(search));
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
         }
 
         #region Get BankAccount Of User

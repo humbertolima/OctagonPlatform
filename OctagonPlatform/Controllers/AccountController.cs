@@ -52,7 +52,7 @@ namespace OctagonPlatform.Controllers
             if (Session["tries"] != null) Session["tries"] = 0;
             return RedirectToAction("Index", "Dashboard");
         }
-
+        [Authorize]
         [HttpGet]
         public ActionResult Logout()
         {
