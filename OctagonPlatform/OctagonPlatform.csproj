@@ -215,7 +215,6 @@
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
-    <Compile Include="Helpers\GreaterOrLessAmmount.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\Initiate.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
@@ -915,7 +914,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Helpers\CustomValidations\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
