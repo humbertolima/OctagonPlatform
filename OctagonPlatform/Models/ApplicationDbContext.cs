@@ -32,6 +32,7 @@ namespace OctagonPlatform.Models
         public DbSet<Cassette> Cassettes { get; set; }
         public DbSet<BindedKey> BindedKeys { get; set; }
         public DbSet<Dispute> Disputes { get; set; }
+        public DbSet<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
@@ -50,6 +51,6 @@ namespace OctagonPlatform.Models
 
         }
 
-        public System.Data.Entity.DbSet<OctagonPlatform.Models.TerminalAlertConfig> TerminalAlertConfigs { get; set; }
+        
     }
 }
