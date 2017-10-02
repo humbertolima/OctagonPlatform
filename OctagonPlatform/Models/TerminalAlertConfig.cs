@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace OctagonPlatform.Models
 {
@@ -13,8 +11,9 @@ namespace OctagonPlatform.Models
         public int Id { get; set; }
 
         //pendiente
-        //public Terminal TerminalId { get; set; }      //este sera el enlace con emi.
-        
+        //public int TerminalId { get; set; }      //este sera el enlace con emi.
+        //public ICollection<Terminal> Terminals { get; set; }
+
         [Required]
         public double LowCach1 { get; set; }
 
