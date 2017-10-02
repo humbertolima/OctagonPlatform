@@ -199,7 +199,9 @@ namespace OctagonPlatform.Models
 
         public ICollection<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
 
-        public ICollection<Dispute> Disputes { get; set; }  
+        public ICollection<Dispute> Disputes { get; set; }
+
+        public ICollection<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
 
         public Terminal()
         {

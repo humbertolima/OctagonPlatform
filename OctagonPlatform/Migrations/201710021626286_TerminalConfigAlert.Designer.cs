@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddterminalAlertConfig_TerminalMessage2 : IMigrationMetadata
+    public sealed partial class TerminalConfigAlert : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddterminalAlertConfig_TerminalMessage2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(TerminalConfigAlert));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709281928410_AddterminalAlertConfig_TerminalMessage2"; }
+            get { return "201710021626286_TerminalConfigAlert"; }
         }
         
         string IMigrationMetadata.Source

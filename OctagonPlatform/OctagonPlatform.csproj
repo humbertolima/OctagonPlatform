@@ -210,6 +210,8 @@
     </Compile>
     <Compile Include="Helpers\AccountType.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\GreaterOrLessAmmount.cs" />
@@ -474,13 +476,45 @@
     <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.Designer.cs">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.cs" />
-    <Compile Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.Designer.cs">
-      <DependentUpon>201709281656169_AddterminalAlertConfig_TerminalMessage.cs</DependentUpon>
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.cs" />
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.Designer.cs">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.cs" />
-    <Compile Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.Designer.cs">
-      <DependentUpon>201709281928410_AddterminalAlertConfig_TerminalMessage2.cs</DependentUpon>
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.cs" />
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.Designer.cs">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.cs" />
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.Designer.cs">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs" />
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.Designer.cs">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.cs" />
+    <Compile Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.Designer.cs">
+      <DependentUpon>201709282132023_ElimineCampoInterchangedeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709292200097_EliminadoVaultCashAmount.cs" />
+    <Compile Include="Migrations\201709292200097_EliminadoVaultCashAmount.Designer.cs">
+      <DependentUpon>201709292200097_EliminadoVaultCashAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300251235_AddedKeyToUser.cs" />
+    <Compile Include="Migrations\201709300251235_AddedKeyToUser.Designer.cs">
+      <DependentUpon>201709300251235_AddedKeyToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300303349_UserNameUnique.cs" />
+    <Compile Include="Migrations\201709300303349_UserNameUnique.Designer.cs">
+      <DependentUpon>201709300303349_UserNameUnique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300355273_UserNameUniqueEliminado.cs" />
+    <Compile Include="Migrations\201709300355273_UserNameUniqueEliminado.Designer.cs">
+      <DependentUpon>201709300355273_UserNameUniqueEliminado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710021626286_TerminalConfigAlert.cs" />
+    <Compile Include="Migrations\201710021626286_TerminalConfigAlert.Designer.cs">
+      <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -511,6 +545,7 @@
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
@@ -524,6 +559,7 @@
     <Compile Include="Models\FormsViewModels\PartnerContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\PartnerFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserFormViewModel.cs" />
+    <Compile Include="Models\InterfacesRepository\IVaultCashRepository.cs" />
     <Compile Include="Models\LoadCash.cs" />
     <Compile Include="Models\LocationType.cs" />
     <Compile Include="Models\Make.cs" />
@@ -540,7 +576,7 @@
     <Compile Include="Models\TerminalContact.cs" />
     <Compile Include="Models\TerminalMessage.cs" />
     <Compile Include="Models\TerminalPicture.cs" />
-    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionStatistic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
@@ -551,6 +587,7 @@
     <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
+    <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1080,11 +1117,35 @@
     <EmbeddedResource Include="Migrations\201709271928089_AddedBoolBindedKeys.resx">
       <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709281656169_AddterminalAlertConfig_TerminalMessage.resx">
-      <DependentUpon>201709281656169_AddterminalAlertConfig_TerminalMessage.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.resx">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709281928410_AddterminalAlertConfig_TerminalMessage2.resx">
-      <DependentUpon>201709281928410_AddterminalAlertConfig_TerminalMessage2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.resx">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.resx">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.resx">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.resx">
+      <DependentUpon>201709282132023_ElimineCampoInterchangedeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709292200097_EliminadoVaultCashAmount.resx">
+      <DependentUpon>201709292200097_EliminadoVaultCashAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300251235_AddedKeyToUser.resx">
+      <DependentUpon>201709300251235_AddedKeyToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300303349_UserNameUnique.resx">
+      <DependentUpon>201709300303349_UserNameUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300355273_UserNameUniqueEliminado.resx">
+      <DependentUpon>201709300355273_UserNameUniqueEliminado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021626286_TerminalConfigAlert.resx">
+      <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
