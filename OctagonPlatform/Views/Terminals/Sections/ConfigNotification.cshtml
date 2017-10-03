@@ -39,20 +39,9 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
         <li>
-            @Html.ActionLink(
-                linkText: "Edit",
-                actionName: "Edit",
-                controllerName: "",
-                routeValues: new
-                {
-                    Id = Model.Id
-                },
-                htmlAttributes: new { @class = "btn btn-primary" }
-                )
+            @Ajax.ActionLink("Edit", "EditConfigAlert", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "" }, htmlAttributes: new { @class = "link", data_toggle = "modal", data_target = "#myModal" })
         </li>
-
-
     </ul>
-
+    <div id="myModal"></div>
 </div>
 
