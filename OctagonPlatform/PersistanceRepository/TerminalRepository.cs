@@ -12,11 +12,11 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalRepository: GenericRepository<Terminal>, ITerminalRepository
     {
-        public IEnumerable<Terminal> GetAllTerminals()
+        public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
             {
-                return Table.Where(x => !x.Deleted)
+                return Table.Where(x => x.PartnerId == partnerId && !x.Deleted)
                     .Include(x => x.Partner)
                     .Include(x => x.Country)
                     .Include(x => x.State)
@@ -32,11 +32,11 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<Terminal> Search(string search)
+        public IEnumerable<Terminal> Search(string search, int partnerId)
         {
             try
             {
-                return Table.Where(x => !x.Deleted &&
+                return Table.Where(x => !x.Deleted && x.PartnerId == partnerId &&
                                         (x.LocationType.Name.Contains(search) || x.Model.Name.Contains(search) ||
                                          x.Make.Name.Contains(search)))
                     .Include(x => x.Partner)
@@ -125,6 +125,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                
                 if (action == "Edit")
                 {
                     var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
@@ -136,7 +137,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var terminalNew = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    var terminalNew = Table.SingleOrDefault(x => x.LocationType == viewModel.LocationType && x.Address1 == viewModel.Address1 && x.Address2 == viewModel.Address2 && x.MachineSerialNumber == viewModel.MachineSerialNumber);
 
                     if(terminalNew != null && !terminalNew.Deleted)
                         throw new Exception("Terminal already exists!!!");

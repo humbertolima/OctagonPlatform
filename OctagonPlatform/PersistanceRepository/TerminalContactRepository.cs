@@ -3,7 +3,6 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -11,17 +10,19 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalContactRepository: GenericRepository<TerminalContact>, ITerminalContactRepository
     {
-        public IEnumerable<TerminalContact> GetAllTerminalContacts()
-        {
-            try
-            {
-                return Table.Where(x => !x.Deleted).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public IEnumerable<TerminalContact> GetAllTerminalContacts(int partnerId)
+        //{
+        //    try
+        //    {
+        //        var terminals = Context.Terminals.Where(x => x.PartnerId == partnerId && !x.Deleted)
+        //            .Include(x => x.TerminalContacts).ToList();
+        //        return terminals
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
         public TerminalContact Details(int id)
         {
@@ -41,21 +42,21 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<TerminalContact> Search(string search)
-        {
-            try
-            {
-                return Table.Where(x => !x.Deleted && (x.Name.Contains(search) || x.Address1.Contains(search) ||
-                                                       x.City.Name.Contains(search) ||
-                                                       x.Country.Name.Contains(search) ||
-                                                       x.State.Name.Contains(search) ||
-                                                       x.Terminal.Partner.BusinessName.Contains(search))).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public IEnumerable<TerminalContact> Search(string search, int partnerId)
+        //{
+        //    try
+        //    {
+        //        return Table.Where(x => !x.Deleted && (x.Name.Contains(search) || x.Address1.Contains(search) ||
+        //                                               x.City.Name.Contains(search) ||
+        //                                               x.Country.Name.Contains(search) ||
+        //                                               x.State.Name.Contains(search) ||
+        //                                               x.Terminal.Partner.BusinessName.Contains(search))).ToList();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
         public TerminalContactFormViewModel RenderTerminalContactFormViewModel(int terminalId)
         {
@@ -139,7 +140,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var terminalContactNew = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    var terminalContactNew = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
 
                     if(terminalContactNew != null && !terminalContactNew.Deleted)
                         throw new Exception("Contact already exists!!!");

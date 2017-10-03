@@ -16,17 +16,17 @@ namespace OctagonPlatform.Controllers
             _terminalContactRepository = repository;
         }
         // GET: TerminalContacts
-        public ActionResult Index()
-        {
-            try
-            {
-                return View(_terminalContactRepository.GetAllTerminalContacts());
-            }
-            catch (Exception ex)
-            {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
-            }
-        }
+        //public ActionResult Index()
+        //{
+        //    try
+        //    {
+        //        return View(_terminalContactRepository.GetAllTerminalContacts(TODO));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return HttpNotFound(ex.Message + ", Page Not Found!!!");
+        //    }
+        //}
 
         public ActionResult Details(int id)
         {
@@ -163,18 +163,18 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult Search(string search)
-        {
-            try
-            {
-                return PartialView(_terminalContactRepository.Search(search));
-            }
-            catch (Exception ex)
-            {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
-            }
-        }
+        //[HttpPost]
+        //public ActionResult Search(string search)
+        //{
+        //    try
+        //    {
+        //        return PartialView(_terminalContactRepository.Search(search, TODO));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return HttpNotFound(ex.Message + ", Page Not Found!!!");
+        //    }
+        //}
 
 
     }

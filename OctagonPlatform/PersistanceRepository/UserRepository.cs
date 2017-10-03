@@ -13,11 +13,11 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class UserRepository : GenericRepository<User>, IUserRepository
     {
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<User> GetAllUsers(int partnerId)
         {
             try
             {
-                return Table.Where(u => !u.Deleted) //Seleccionar los que no esten borrados. Bloqueados sis
+                return Table.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
                     //.Include(x => x.Alerts)
                     //.Include(x => x.Reports)
                     .Include(x => x.Partner)
@@ -215,7 +215,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var userDetails = Table.Where(x => x.Id == id)
+                var userDetails = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Partner)
                     .Include(x => x.Permissions)
                     .Include(x => x.BankAccounts)
@@ -273,11 +273,11 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<User> Search(string search)
+        public IEnumerable<User> Search(string search, int partnerId)
         {
             try
             {
-                var users = Table.Where(c => !c.Deleted &&
+                var users = Table.Where(c => !c.Deleted && c.PartnerId == partnerId &&
                                              (c.Name.Contains(search) || c.Partner.BusinessName.Contains(search)))
                     .Include(x => x.Partner)
                     .ToList();

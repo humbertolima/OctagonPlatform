@@ -5,7 +5,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IBankAccountRepository
     {
-        IEnumerable<BankAccount> GetAllBankAccount();
+        IEnumerable<BankAccount> GetAllBankAccount(int partnerId);
 
         BAEditFVModel BankAccountToEdit(int id);
 
@@ -17,7 +17,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         
         void DeleteBankAccount(int id);
 
-        IEnumerable<BankAccount> Search(string search);
+        IEnumerable<BankAccount> Search(string search, int partnerId);
 
     }
 }

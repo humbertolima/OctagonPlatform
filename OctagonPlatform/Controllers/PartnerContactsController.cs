@@ -21,7 +21,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                return View(_partnerContactRepository.GetAllPartners());
+                return View(_partnerContactRepository.GetAllPartners(int.Parse(Session["partnerId"].ToString())));
             }
             catch (Exception ex)
             {
@@ -169,7 +169,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                return PartialView(_partnerContactRepository.Search(search));
+                return PartialView(_partnerContactRepository.Search(search, int.Parse(Session["partnerId"].ToString())));
             }
             catch (Exception ex)
             {

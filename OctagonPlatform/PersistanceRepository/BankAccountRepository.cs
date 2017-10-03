@@ -12,10 +12,10 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class BankAccountRepository : GenericRepository<BankAccount>, IBankAccountRepository
     {
-        public IEnumerable<BankAccount> GetAllBankAccount()
+        public IEnumerable<BankAccount> GetAllBankAccount(int partnerId)
         {
             try { 
-            var result = Table.Where(c => !c.Deleted)
+            var result = Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
                 .Include(c => c.Partner)
                 .Include(c => c.City)
                 .Include(c => c.Country)
@@ -38,12 +38,12 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 bankAccount = Table
-                .Include(c => c.Partner)
-                .Include(c => c.City)
-                .Include(c => c.Country)
-                .Include(c => c.State)
-                .Single(c => !c.Deleted && c.Id == id)
-                ;
+                    .Include(c => c.Partner)
+                    .Include(c => c.City)
+                    .Include(c => c.Country)
+                    .Include(c => c.State)
+                    .Single(c => !c.Deleted && c.Id == id);
+
             }
             #region Exeption
             catch (ArgumentNullException Aex)
@@ -134,18 +134,20 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
                     if (model == null) throw new Exception("BankAccount does not exists in pur records!!!");
                     {
+                        
                         Mapper.Map(editViewModel, model);
                         Edit(model);
                     }
                 }
                 else
                 {
-                    var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id || c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax);
+                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax);
                     if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
 
                     if (model != null && model.Deleted) Table.Remove(model);
@@ -153,7 +155,7 @@ namespace OctagonPlatform.PersistanceRepository
 
 
                     var model1 = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
-                       
+                    
                     Add(model1);
                     
                 }
@@ -164,17 +166,13 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<BankAccount> Search(string search)
+        public IEnumerable<BankAccount> Search(string search, int partnerId)
         {
             try
             {
-                var result = Table.Where(c => !c.Deleted && (c.NickName.Contains(search) || c.NameOnCheck.Contains(search)))
-                    .Include(c => c.Partner)
-                    .Include(c => c.City)
-                    .Include(c => c.Country)
-                    .Include(c => c.State)
-                    .ToList();
-
+                var result = GetAllBankAccount(partnerId)
+                    .Where(c => c.NickName.Contains(search) || c.NameOnCheck.Contains(search));
+                    
                 return result;
             }
             catch (Exception ex)
