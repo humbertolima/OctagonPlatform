@@ -46,7 +46,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Password { get; set; }
 
         //puesto el namespace completo por ambiguedad con el System.Web.MVC
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
+        [Compare("Password", ErrorMessage = "Password and Confirmation Password must match.")]
         public string ConfirmPassword { get; set; }
 
         public bool IsLocked { get; set; }

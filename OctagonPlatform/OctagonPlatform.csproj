@@ -221,6 +221,7 @@
     <Compile Include="Helpers\PermissionsAssigned.cs" />
     <Compile Include="Helpers\Settled.cs" />
     <Compile Include="Helpers\Status.cs" />
+    <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargeType.cs" />
     <Compile Include="Migrations\201708160653179_Initial.cs" />
     <Compile Include="Migrations\201708160653179_Initial.Designer.cs">

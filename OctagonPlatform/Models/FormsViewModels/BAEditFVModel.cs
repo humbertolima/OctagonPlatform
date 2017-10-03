@@ -18,14 +18,17 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         [Display(Name = "Nick Name")]
         [StringLength(50)]
+        [StringValidation(ErrorMessage = "Nick Name must not cotain space. ")]
         public string NickName { get; set; }
 
         [Required]
         [StringLength(50)]
+        [StringValidation(ErrorMessage = "Routing Number must be only numbers. ")]
         public string RoutingNumber { get; set; }
 
         [Required]
         [StringLength(50)]
+        [StringValidation(ErrorMessage = "Account Number must be only numbers. ")]
         public string AccountNumber { get; set; }
 
         [Required]
@@ -36,9 +39,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string NameOnCheck { get; set; }
 
         [Required]
+        [StringValidation(ErrorMessage = "Fed Tax must be only numbers. ")]
         public string FedTax { get; set; }
 
         [Display(Name = "Social Security Number")]
+        [StringValidation(ErrorMessage = "Ssn must be only numbers. ")]
         public string Ssn { get; set; }
 
         [Required]
