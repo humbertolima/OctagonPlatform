@@ -8,6 +8,10 @@ namespace OctagonPlatform.Models
 {
     public class TerminalAlertConfig
     {
+        public TerminalAlertConfig()
+        {
+            this.MessagesToIgnored = new List<TerminalMessage>();
+        }
         [Key]
         public int Id { get; set; }
         

@@ -20,6 +20,17 @@
         </div>
     </div>
 </div>
+<div class="panel-group" style="width: 50%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
+
+            <div id="getConfigNotification" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
 <br />
 <hr />
 <br />
