@@ -10,11 +10,11 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class PartnerContactRepository: GenericRepository<PartnerContact>, IPartnerContactRepository
     {
-        public IEnumerable<PartnerContact> GetAllPartners()
+        public IEnumerable<PartnerContact> GetAllPartners(int partnerId)
         {
             try
             {
-                return Table.Where(c => !c.Deleted)
+                return Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
                     .Include(x => x.Country)
                     .Include(x => x.State)
                     .Include(x => x.City)
@@ -45,17 +45,13 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<PartnerContact> Search(string search)
+        public IEnumerable<PartnerContact> Search(string search, int partnerId)
         {
             try
             {
-                return Table.Where(c => !c.Deleted &&
-                                        (c.Name.Contains(search) || c.Partner.BusinessName.Contains(search)))
-                    .Include(x => x.Country)
-                    .Include(x => x.State)
-                    .Include(x => x.City)
-                    .Include(x => x.Partner)
-                    .ToList();
+                return GetAllPartners(partnerId)
+                    .Where(c => c.Name.Contains(search) || c.Partner.BusinessName.Contains(search));
+
             }
             catch (Exception ex)
             {
@@ -155,7 +151,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var partnerContactNew = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    var partnerContactNew = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
                     if (partnerContactNew != null && !partnerContactNew.Deleted)
                         throw new Exception("Contact already exists!!!");
 

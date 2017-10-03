@@ -5,9 +5,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAllUsers();
+        IEnumerable<User> GetAllUsers(int partnerId);
 
-        IEnumerable<User> Search(string search);
+        IEnumerable<User> Search(string search, int partnerId);
 
         UserEditFormViewModel UserToEdit(int id);
 

@@ -11,12 +11,13 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class PartnerRepository: GenericRepository<Partner>, IPartnerRepository
     {
-       
-        public IEnumerable<Partner> GetAllPartners()
+        
+        public IEnumerable<Partner> GetAllPartners(int parentId)
         {
             try
             {
-                return Table.Where(c => !c.Deleted)
+                return Table.Where(c => c.ParentId == parentId && !c.Deleted)
+                    .Include(x => x.Partners)
                     .Include(x => x.Parent)
                     .ToList();
             }
@@ -26,14 +27,12 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<Partner> Search(string search)
+        public IEnumerable<Partner> Search(string search, int parentId)
         {
             try
             {
-                return Table.Where(c => !c.Deleted &&
-                                        (c.BusinessName.Contains(search) || c.Parent.BusinessName.Contains(search)))
-                    .Include(x => x.Parent)
-                    .ToList();
+                return GetAllPartners(parentId).Where(c =>
+                    (c.BusinessName.Contains(search) || c.Parent.BusinessName.Contains(search)));
             }
             catch (Exception ex)
             {
@@ -87,9 +86,9 @@ namespace OctagonPlatform.PersistanceRepository
                     partnerToEdit.WebSite = viewModel.WebSite;
                     Edit(partnerToEdit);
                 }
-                else
+                else 
                 {
-                    var partnerNew = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    var partnerNew = Table.SingleOrDefault(x => x.BusinessName == viewModel.BusinessName || x.Email == viewModel.Email);
 
                     if (partnerNew != null && !partnerNew.Deleted)
                         throw new Exception("Partner already exists!!!");
@@ -172,7 +171,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return Table.Where(x => x.Id == id && !x.Deleted)
+                var partner = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Parent)
                     .Include(x => x.PartnerContacts)
                     .Include(x => x.Users)
@@ -181,8 +180,13 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.State)
                     .Include(x => x.City)
                     .Include(x => x.BankAccounts)
+                    .Include(x => x.Partners)
                     .Include(x => x.Terminals)
                     .FirstOrDefault();
+                if(partner == null) throw new Exception("Partner does not exist in our records. ");
+
+               
+                return partner;
             }
             catch (Exception ex)
             {

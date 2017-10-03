@@ -24,7 +24,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                var bankAccounts = _bAccountRepository.GetAllBankAccount();
+                var bankAccounts = _bAccountRepository.GetAllBankAccount(int.Parse(Session["partnerId"].ToString()));
 
 
                 return View(bankAccounts);
@@ -218,7 +218,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                return PartialView(_bAccountRepository.Search(search));
+                return PartialView(_bAccountRepository.Search(search, int.Parse(Session["partnerId"].ToString())));
             }
             catch (Exception ex)
             {

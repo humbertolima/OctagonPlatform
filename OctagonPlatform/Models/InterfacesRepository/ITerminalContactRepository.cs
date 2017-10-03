@@ -1,15 +1,14 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
-using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalContactRepository
     {
-        IEnumerable<TerminalContact> GetAllTerminalContacts();
+        //IEnumerable<TerminalContact> GetAllTerminalContacts(int prtnerId);
 
         TerminalContact Details(int id);
 
-        IEnumerable<TerminalContact> Search(string search);
+        //IEnumerable<TerminalContact> Search(string search, int partnerId);
 
         TerminalContactFormViewModel RenderTerminalContactFormViewModel(int terminalId);
 

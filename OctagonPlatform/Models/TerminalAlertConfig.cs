@@ -16,6 +16,7 @@ namespace OctagonPlatform.Models
         public int Id { get; set; }
         
         public int TerminalId { get; set; }
+
         public Terminal Terminal { get; set; }
 
         [Required]

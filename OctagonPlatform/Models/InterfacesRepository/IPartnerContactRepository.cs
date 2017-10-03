@@ -5,11 +5,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IPartnerContactRepository
     {
-        IEnumerable<PartnerContact> GetAllPartners();
+        IEnumerable<PartnerContact> GetAllPartners(int partnerId);
 
         PartnerContact Details(int id);
 
-        IEnumerable<PartnerContact> Search(string search);
+        IEnumerable<PartnerContact> Search(string search, int partnerId);
 
         PartnerContactFormViewModel RenderPartnerContactFormViewModel(int partnerId);
 
