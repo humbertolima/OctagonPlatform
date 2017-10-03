@@ -206,6 +206,12 @@ namespace OctagonPlatform.Controllers
 
         }
 
+        [HttpPost]
+        public PartialViewResult ConfigNotification(int terminalId)
+        {
+            var configNotification = _repository.GetConfigNotification(terminalId);
+            return PartialView("Sections/ConfigNotification", configNotification);
+        }
 
         #endregion
 

@@ -1,0 +1,47 @@
+﻿@model OctagonPlatform.Models.TerminalAlertConfig
+
+<table class="table table-striped table-hover ">
+
+    <tr class="info">
+
+        <th>Inactive Period:</th>
+        <th>@Model.InactivePeriod</th>
+    </tr>
+    <tr class="info">
+
+        <th>Low Cash 1:</th>
+        <th>@Model.LowCach1</th>
+    </tr>
+    <tr class="info">
+
+        <th>Low Cash 2:</th>
+        <th>@Model.LowCash2</th>
+    </tr>
+    <tr class="info">
+
+        <th>Low Cash 3:</th>
+        <th>@Model.LowCash3</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.MessagesToIgnored)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TerminalAlertConfig)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li>
+            @Ajax.ActionLink("Edit", "EditConfigAlert", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "" }, htmlAttributes: new { @class = "link", data_toggle = "modal", data_target = "#myModal" })
+        </li>
+    </ul>
+    <div id="myModal"></div>
+</div>
+

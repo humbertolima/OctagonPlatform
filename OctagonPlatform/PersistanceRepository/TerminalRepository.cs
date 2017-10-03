@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class TerminalRepository: GenericRepository<Terminal>, ITerminalRepository
+    public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
@@ -139,7 +139,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     var terminalNew = Table.SingleOrDefault(x => x.LocationType == viewModel.LocationType && x.Address1 == viewModel.Address1 && x.Address2 == viewModel.Address2 && x.MachineSerialNumber == viewModel.MachineSerialNumber);
 
-                    if(terminalNew != null && !terminalNew.Deleted)
+                    if (terminalNew != null && !terminalNew.Deleted)
                         throw new Exception("Terminal already exists!!!");
 
                     if (terminalNew != null && terminalNew.Deleted)
@@ -185,6 +185,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.BindedKey)
                     .Include(x => x.Disputes)
+                    .Include(x => x.TerminalAlertConfigs)
                     .FirstOrDefault();
             }
             catch (Exception ex)
@@ -232,8 +233,16 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception(ex.Message);
             }
+        }
 
-
+        public TerminalAlertConfig GetConfigNotification(int terminalId)
+        {
+             var terminalConfigs = Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
+            if (terminalConfigs == null)
+            {
+                terminalConfigs = new TerminalAlertConfig();
+            }
+            return terminalConfigs;
         }
     }
 }

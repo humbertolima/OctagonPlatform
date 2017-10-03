@@ -7,6 +7,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<Terminal> GetAllTerminals(int partnerId);
 
+        TerminalAlertConfig GetConfigNotification(int terminalId);
+
         IEnumerable<Terminal> Search(string search, int partnerId);
 
         TerminalFormViewModel RenderTerminalFormViewModel(int partnerId);
