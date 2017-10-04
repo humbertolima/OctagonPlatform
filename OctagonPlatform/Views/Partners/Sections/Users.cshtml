@@ -30,28 +30,30 @@
 </p>
 <table class="table table-striped table-hover ">
     <thead>
-        <tr>
-            <th>Parent</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Status</th>
-        </tr>
+    <tr>
+        <th>Username</th>
+        <th>Parent</th>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Status</th>
+    </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             if (!item.Deleted)
             {
-                <tr  class="info">
+                <tr class="info">
+                    <td>@item.UserName</td>
                     <td>@item.Partner.BusinessName</td>
                     <td>@item.Name</td>
                     <td>@item.LastName</td>
                     <td>@item.Phone</td>
                     <td>@item.Email</td>
                     <td>@item.Status</td>
-                    
+
                     <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                                                                     linkText: "Edit",
                                                                     actionName: "Edit",
@@ -83,7 +85,7 @@
                                                                         },
                                                                         htmlAttributes: null
                                                                         )</td>
-            </tr>
+                </tr>
             }
         }
 
