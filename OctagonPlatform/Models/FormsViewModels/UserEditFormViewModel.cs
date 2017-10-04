@@ -25,6 +25,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required(ErrorMessage = "Phone number is required")]
         [DataType(DataType.PhoneNumber)]
+        [StringValidation(ErrorMessage = "Phone must be only numbers, with no spaces. ")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]

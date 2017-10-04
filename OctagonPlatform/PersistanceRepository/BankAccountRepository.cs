@@ -138,7 +138,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
-                    if (model == null) throw new Exception("BankAccount does not exists in pur records!!!");
+                    if (model == null) throw new Exception("BankAccount does not exists in our records!!!");
                     {
                         
                         Mapper.Map(editViewModel, model);
@@ -147,7 +147,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax);
+                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName);
                     if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
 
                     if (model != null && model.Deleted) Table.Remove(model);

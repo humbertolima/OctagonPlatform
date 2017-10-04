@@ -12,14 +12,14 @@ namespace OctagonPlatform.PersistanceRepository
     public class PartnerRepository: GenericRepository<Partner>, IPartnerRepository
     {
         
-        public IEnumerable<Partner> GetAllPartners(int parentId)
+        public Partner GetAllPartners(int parentId)
         {
             try
             {
-                return Table.Where(c => c.ParentId == parentId && !c.Deleted)
+                return Table.Where(c => c.Id == parentId && !c.Deleted)
                     .Include(x => x.Partners)
                     .Include(x => x.Parent)
-                    .ToList();
+                    .FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -31,7 +31,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return GetAllPartners(parentId).Where(c =>
+                return Table.Where(c =>
                     (c.BusinessName.Contains(search) || c.Parent.BusinessName.Contains(search)));
             }
             catch (Exception ex)

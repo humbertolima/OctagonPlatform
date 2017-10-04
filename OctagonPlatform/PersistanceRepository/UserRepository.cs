@@ -168,7 +168,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                     
                 }
-                else if (action == "Create")
+                else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
                     var user = Table.SingleOrDefault(

@@ -1,4 +1,4 @@
-﻿@model OctagonPlatform.Models.Partner
+﻿@model IEnumerable<OctagonPlatform.Models.User>
 
 
 <nav class="navbar navbar-default">
@@ -13,7 +13,7 @@
                                        controllerName: "Users",
                                        routeValues: new
                                        {
-                                           partnerId = Model.Id
+                                           partnerId = ViewBag.PartnerId
                                        },
                                        htmlAttributes: null
                                        )
@@ -40,7 +40,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Users)
+        @foreach (var item in Model)
         {
             if (!item.Deleted)
             {

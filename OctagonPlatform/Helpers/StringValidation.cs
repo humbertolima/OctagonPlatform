@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web.WebPages;
 
 namespace OctagonPlatform.Helpers
 {
@@ -6,16 +8,16 @@ namespace OctagonPlatform.Helpers
     {
         public override bool IsValid(object value)
         {
-            const string chars = " /~!@#$%^&*()+=?><:;}]{[<,>.`";
-            var result = true;
-            foreach (var item in chars)
-            {
-                if (value.ToString().Contains(item.ToString()))
-                    result = false;
-            }
+            if (value == null) return true;
 
-            return result;
+            if (value.ToString().IsEmpty()) return true;
 
+            var temp = value.ToString();
+            const string chars = " AaQqZzWwSsXxEeDdCcRrFfVvTtGgBbYyHhNnUuJjMmIiKk<,OoLl>.Pp:;?/{['}]|+=_-)(*&^%$#@!~`";
+
+            
+
+            return !chars.Any(item => temp.Contains(item.ToString()));
         }
     }
 }

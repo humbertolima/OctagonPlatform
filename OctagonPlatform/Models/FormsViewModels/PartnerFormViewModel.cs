@@ -61,17 +61,21 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Display(Name = "Work Phone")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Work phone number is not valid")]
+        [StringValidation(ErrorMessage = "Phone must be only numbers, with no spaces. ")]
         public string WorkPhone { get; set; }
 
         [Display(Name = "Mobile Phone")]
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Mobile phone number is not valid")]
+        [StringValidation(ErrorMessage = "Mobile must be only numbers, with no spaces. ")]
         public string Mobile { get; set; }
 
         [Display(Name = "Fax Number")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Fax number is not valid")]
+        [StringValidation(ErrorMessage = "Fax must be only numbers, with no spaces. ")]
         public string Fax { get; set; }
 
+        [DataType(DataType.Url)]
         public string WebSite { get; set; }
 
     }

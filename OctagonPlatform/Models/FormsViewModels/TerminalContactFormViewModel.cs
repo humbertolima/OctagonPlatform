@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OctagonPlatform.Helpers;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
@@ -66,6 +67,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
+        [StringValidation(ErrorMessage = "Phone must be only numbers, with no spaces. ")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "The zip code is required")]

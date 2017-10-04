@@ -5,7 +5,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IPartnerRepository
     {
-        IEnumerable<Partner> GetAllPartners(int parentId);
+        Partner GetAllPartners(int parentId);
 
         IEnumerable<Partner> Search(string search, int parentId);
 
