@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Data.Entity.Validation;
@@ -193,8 +194,10 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult Contacts(int partnerId)
         {
-            var contacts = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/Contacts", contacts);
+            var partner = _partnerRepository.PartnerDetails(partnerId);
+            ViewBag.PartnerId = partnerId;
+
+            return PartialView("Sections/Contacts", partner.PartnerContacts);
 
         }
 
@@ -202,7 +205,23 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult GeneralInfo(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/GeneralInfo", partner);
+
+            return PartialView("Sections/GeneralInfo", new Partner()
+            {
+                Id = partnerId,
+                BusinessName = partner.BusinessName,
+                Parent = partner.Parent,
+                Address1 = partner.Address1,
+                Address2 = partner.Address2,
+                Country = partner.Country,
+                State = partner.State,
+                City = partner.City,
+                CreatedAt = partner.CreatedAt,
+                CreatedByName = partner.CreatedByName,
+                Status = partner.Status,
+                Email = partner.Email,
+                Mobile = partner.Mobile
+            });
 
         }
 
@@ -210,7 +229,8 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult BankAccounts(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/BankAccounts", partner);
+            ViewBag.PartnerId = partnerId;
+            return PartialView("Sections/BankAccounts", partner.BankAccounts);
 
         }
 
@@ -218,7 +238,8 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult Partners(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/Partners", partner);
+            ViewBag.PartnerId = partnerId;
+            return PartialView("Sections/Partners", partner.Partners);
 
         }
 
@@ -226,7 +247,8 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult Terminals(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/Terminals", partner);
+            ViewBag.PartnerId = partnerId;
+            return PartialView("Sections/Terminals", partner.Terminals);
 
         }
 
@@ -234,7 +256,8 @@ namespace OctagonPlatform.Controllers
         public PartialViewResult Users(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
-            return PartialView("Sections/Users", partner);
+            ViewBag.PartnerId = partnerId;
+            return PartialView("Sections/Users", partner.Users);
 
         }
 

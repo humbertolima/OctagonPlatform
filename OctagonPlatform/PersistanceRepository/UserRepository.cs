@@ -60,13 +60,11 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var permissionList = new List<Permission>();
-                if (permissions != null)
+                if (permissions == null) return permissionList;
+                foreach (var t in permissions)
                 {
-                    foreach (var t in permissions)
-                    {
-                        var convertId = Convert.ToInt32(t);
-                        permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
-                    }
+                    var convertId = Convert.ToInt32(t);
+                    permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
                 }
                 //si viene null se envia la instancia vacia.
                 return permissionList;
@@ -168,7 +166,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                     
                 }
-                else if (action == "Create")
+                else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
                     var user = Table.SingleOrDefault(
@@ -302,13 +300,11 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 List<BankAccount> bankAccountList = new List<BankAccount>();
-                if (bankAccounts != null)
+                if (bankAccounts == null) return bankAccountList;
+                foreach (var t in bankAccounts)
                 {
-                    foreach (var t in bankAccounts)
-                    {
-                        var convertId = Convert.ToInt32(t);
-                        bankAccountList.Add(Context.BankAccounts.FirstOrDefault(c => c.Id == convertId));
-                    }
+                    var convertId = Convert.ToInt32(t);
+                    bankAccountList.Add(Context.BankAccounts.FirstOrDefault(c => c.Id == convertId));
                 }
                 return bankAccountList;
             }

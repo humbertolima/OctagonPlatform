@@ -22,6 +22,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public string BusinessName { get; set; }
 
+        [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
     }
 }

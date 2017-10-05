@@ -1,5 +1,5 @@
 ﻿
-@model OctagonPlatform.Models.Partner
+@model IEnumerable<OctagonPlatform.Models.Terminal>
 
 <nav class="navbar navbar-default"> 
     <div class="container-fluid">
@@ -12,7 +12,7 @@
                                        controllerName: "Terminals",
                                        routeValues: new
                                        {
-                                           partnerId = Model.Id
+                                           partnerId = ViewBag.PartnerId
                                        },
                                        htmlAttributes: null
                                        )</li>
@@ -42,7 +42,7 @@
     
     <tbody id="listOfTerminals">
 
-    @foreach (var item in Model.Terminals)
+    @foreach (var item in Model)
     {
         if (!item.Deleted)
         {

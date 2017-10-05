@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OctagonPlatform.Models.Partner>
+﻿@model OctagonPlatform.Models.Partner
 
 @{
     ViewBag.Title = "Index";
@@ -45,21 +45,42 @@
     </tr>
     </thead>
     <tbody id ="listOfPartners">
-        @foreach (var item in Model)
+        <tr class="info">
+            <td>@Model.Parent.BusinessName</td>
+            <td>@Model.BusinessName</td>
+            <td>@Model.Address1</td>
+            <td>@Model.Mobile</td>
+            <td>@Model.Email</td>
+            <td>@Model.Status</td>
+            <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = Model.Id})</td>
+            <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = Model.Id})
+            </td>
+            <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = Model.Id})</td>
+
+
+        </tr>
+        @foreach (var item in Model.Partners)
         {
-            <tr class="info">
-                <td>@item.Parent.BusinessName</td>
-                <td>@item.BusinessName</td>
-                <td>@item.Address1</td>
-                <td>@item.Mobile</td>
-                <td>@item.Email</td>
-                <td>@item.Status</td>
-                <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
-                <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
-                </td>
-                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
-            </tr>
+            if (!item.Deleted && item.Id != Model.Id)
+            {
+                <tr class="info">
+                    <td>@item.Parent.BusinessName</td>
+                    <td>@item.BusinessName</td>
+                    <td>@item.Address1</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Email</td>
+                    <td>@item.Status</td>
+                    <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                    <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                    <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
+
+
+                </tr>
+            }
         }
+    
+    
     </tbody>
 </table> 
         

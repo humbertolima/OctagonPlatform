@@ -9,8 +9,8 @@
 <hr />
 <br />
 
-   <img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
-<br />
+<img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
+<br/>
 <div>
     @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = ""}, htmlAttributes: new{@class = "btn btn-primary"})
 </div>
@@ -20,10 +20,10 @@
 <div class="panel-group" style="width: 50%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", LoadingElementId = "loading1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
 
             <div id="getGeneralInfo" class="panel-collapse collapse">
-
+                <img id="loading1" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -34,9 +34,9 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
             <div id="getContacts" class="panel-collapse collapse">
-
+                <img id="loading2" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -47,10 +47,10 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Partners", "Partners", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getPartners", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getPartners" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Partners", "Partners", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getPartners", LoadingElementId = "loading3", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getPartners" })</h3>
 
             <div id="getPartners" class="panel-collapse collapse">
-
+                <img id="loading3" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -61,10 +61,10 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Bank Accounts", "BankAccounts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getBankAccounts" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Bank Accounts", "BankAccounts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getBankAccounts", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getBankAccounts" })</h3>
 
             <div id="getBankAccounts" class="panel-collapse collapse">
-
+                <img id="loading4" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -75,10 +75,10 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Terminals", "Terminals", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getTerminals", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getTerminals" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Terminals", "Terminals", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getTerminals", LoadingElementId = "loading5", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getTerminals" })</h3>
 
             <div id="getTerminals" class="panel-collapse collapse">
-
+                <img id="loading5" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -89,10 +89,10 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Users", "Users", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getUsers", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getUsers" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Users", "Users", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getUsers", LoadingElementId = "loading6", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getUsers" })</h3>
 
             <div id="getUsers" class="panel-collapse collapse">
-
+                <img id="loading6" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>

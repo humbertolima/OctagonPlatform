@@ -34,7 +34,7 @@ namespace OctagonPlatform.PersistanceRepository
         public BankAccount BAccountDetails(int id)
         {
             try { 
-            BankAccount bankAccount = new BankAccount();
+            BankAccount bankAccount;
             try
             {
                 bankAccount = Table
@@ -46,13 +46,13 @@ namespace OctagonPlatform.PersistanceRepository
 
             }
             #region Exeption
-            catch (ArgumentNullException Aex)
+            catch (ArgumentNullException aex)
             {
-                throw new Exception("Error Arguments is null. ", Aex);
+                throw new Exception("Error Arguments is null. ", aex);
             }
-            catch (InvalidOperationException Iex)
+            catch (InvalidOperationException iex)
             {
-                throw new Exception("Error, invalid operation. ", Iex);
+                throw new Exception("Error, invalid operation. ", iex);
             }
             #endregion
 
@@ -69,15 +69,17 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                BAEditFVModel viewModel = new BAEditFVModel();
+                var viewModel = new BAEditFVModel
+                {
+                    Partners = Context.Partners.ToList(),
+                    Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId),
+                    Countries = Context.Countries.ToList(),
+                    States = Context.States.Where(x => x.CountryId == 231).ToList(),
+                    Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
+                    Status = StatusType.Status.Active,
+                    AccountType = AccountType.TypeName.Checkings
+                };
 
-                viewModel.Partners = Context.Partners.ToList();
-                viewModel.Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId);
-                viewModel.Countries = Context.Countries.ToList();
-                viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
-                viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
-                viewModel.Status = StatusType.Status.Active;
-                viewModel.AccountType = AccountType.TypeName.Checkings;
                 return viewModel;
             }
             catch (Exception ex)
@@ -138,7 +140,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
-                    if (model == null) throw new Exception("BankAccount does not exists in pur records!!!");
+                    if (model == null) throw new Exception("BankAccount does not exists in our records!!!");
                     {
                         
                         Mapper.Map(editViewModel, model);
@@ -147,7 +149,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax);
+                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName);
                     if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
 
                     if (model != null && model.Deleted) Table.Remove(model);
