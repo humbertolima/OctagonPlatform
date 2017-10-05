@@ -125,7 +125,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                
+
                 if (action == "Edit")
                 {
                     var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
@@ -237,12 +237,27 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalAlertConfig GetConfigNotification(int terminalId)
         {
-             var terminalConfigs = Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
-            if (terminalConfigs == null)
+            Terminal terminal = Table
+                .Include(c => c.TerminalAlertConfigs)
+                .FirstOrDefault(c => c.Id == terminalId);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
+
+            var terminalConfigs = new TerminalAlertConfig();
+            if (terminal == null)
             {
                 terminalConfigs = new TerminalAlertConfig();
             }
+            else { terminalConfigs = terminal.TerminalAlertConfigs; }
+
             return terminalConfigs;
+        }
+
+        public TerminalAlertConfig SetConfigNotification(TerminalAlertConfig terminalAlertConfig, string[] Messages, int terminalId)
+        {
+            var terminalConfig = GetConfigNotification(terminalId);    //reusando metodo de GetConfigNotification.
+
+            terminalConfig = terminalAlertConfig;
+            
+            return terminalConfig;
         }
     }
 }

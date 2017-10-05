@@ -39,9 +39,74 @@
 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
         <li>
-            @Ajax.ActionLink("Edit", "EditConfigAlert", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "" }, htmlAttributes: new { @class = "link", data_toggle = "modal", data_target = "#myModal" })
+            @Ajax.ActionLink("Edit", "EditConfigAlert", "Terminals", new { terminalId = Model.TerminalId }, new AjaxOptions { UpdateTargetId = "" }, htmlAttributes: new { @class = "link", data_toggle = "modal" })
         </li>
     </ul>
-    <div id="myModal"></div>
-</div>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+
+                <h3 class="alert-info">Edit Config Alert</h3>
+
+                @using (Html.BeginForm("EditConfigAlert", "Terminals"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.TerminalId)
+                <p class="alert alert-danger">
+                    All fields are <strong>required.</strong>
+                    @ViewBag.Error
+                    @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+                </p>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InactivePeriod)
+                    @Html.TextBoxFor(m => m.InactivePeriod, new { @class = "form-control", autofocus = "autofocus", placeholder = "" })
+                    @Html.ValidationMessageFor(m => m.InactivePeriod)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCach1)
+                    @Html.TextBoxFor(m => m.LowCach1, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCach1)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCash2)
+                    @Html.TextBoxFor(m => m.LowCash2, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCash2)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCash3)
+                    @Html.TextBoxFor(m => m.LowCash3, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCash3)
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="Messages" value="1" />Chest door is open<br />
+                    <input type="checkbox" name="Messages" value="2" />Top door is Open<br />
+                    <input type="checkbox" name="Messages" value="3" />Receipt printer paper  is low/out<br />
+                    <input type="checkbox" name="Messages" value="4" />Receipt printer ribbon is low/out<br />
+                    <input type="checkbox" name="Messages" value="5" />Journal printer paper is low/out<br />
+                    <input type="checkbox" name="Messages" value="6" />Journal printer ribbon is low/out<br />
+                    <input type="checkbox" name="Messages" value="7" />Cassette notes are out<br />
+                    <input type="checkbox" name="Messages" value="8" />Receipt printer need attention or out of service<br />
+                    <input type="checkbox" name="Messages" value="9" />Journal printer needs attention or out of service<br />
+                    <input type="checkbox" name="Messages" value="10" />Bill dispenser needs attention or out of service<br />
+                    <input type="checkbox" name="Messages" value="11" />Comm system needs attention or out of service<br />
+                    <input type="checkbox" name="Messages" value="12" />Card reader needs attention or out of service<br />
+                </div>
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

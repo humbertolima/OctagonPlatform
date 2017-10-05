@@ -1,11 +1,7 @@
 ﻿@model OctagonPlatform.Models.TerminalAlertConfig
-
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
         <h3 class="alert-info">Edit Config Alert</h3>
 
-        @using (Html.BeginForm("EditConfigAlert", "Terminals"))
+        @using (Html.BeginForm("EditConfigAlert", "Terminals", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.TerminalId)
@@ -56,8 +52,3 @@
                 </div>
             </div>
         }
-        @section Scripts {
-        }
-
-    </div>
-</div>

@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Data.Entity.Validation;
@@ -60,7 +61,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalFormViewModel terminalFormViewModel)
@@ -109,7 +110,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TerminalFormViewModel terminalFormViewModel)
@@ -211,6 +212,15 @@ namespace OctagonPlatform.Controllers
         {
             var configNotification = _repository.GetConfigNotification(terminalId);
             return PartialView("Sections/ConfigNotification", configNotification);
+        }
+
+
+        [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
+        public ActionResult EditConfigAlert(TerminalAlertConfig terminalAlertConfig, string[] messages, int terminalId)
+        {
+            var configNotification = _repository.SetConfigNotification(terminalAlertConfig, messages, terminalId);
+
+            return RedirectToAction("Details/"+terminalId);
         }
 
         #endregion

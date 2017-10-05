@@ -201,7 +201,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Dispute> Disputes { get; set; }
 
-        public ICollection<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
+        public TerminalAlertConfig TerminalAlertConfigs { get; set; }
 
         public Terminal()
         {

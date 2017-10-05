@@ -12,11 +12,9 @@ namespace OctagonPlatform.Models
         {
             this.MessagesToIgnored = new List<TerminalMessage>();
         }
-        [Key]
-        public int Id { get; set; }
-        
-        public int TerminalId { get; set; }
 
+        [Key, ForeignKey("Terminal")]
+        public int TerminalId { get; set; }
         public Terminal Terminal { get; set; }
 
         [Required]

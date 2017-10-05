@@ -515,6 +515,10 @@
     <Compile Include="Migrations\201710021626286_TerminalConfigAlert.Designer.cs">
       <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs" />
+    <Compile Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.Designer.cs">
+      <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -1149,6 +1153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710021626286_TerminalConfigAlert.resx">
       <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.resx">
+      <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
