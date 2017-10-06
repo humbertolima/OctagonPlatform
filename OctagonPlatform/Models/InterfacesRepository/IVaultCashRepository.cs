@@ -1,13 +1,10 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
-using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IVaultCashRepository
     {
-        IEnumerable<VaultCash> GetAllVaultCash();
-
-        IEnumerable<VaultCash> Search(string search);
+        VaultCash GetVaultCash(int terminalId);
 
         VaultCashFormViewModel RenderVaultCashFormViewModel(int terminalId);
 
