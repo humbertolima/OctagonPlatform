@@ -275,7 +275,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .FirstOrDefault(c => c.Id == terminalId);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
 
             var terminalConfigs = new TerminalAlertConfig();
-            if (terminal == null)
+            if (terminal.TerminalAlertConfigs == null)
             {
                 terminalConfigs = new TerminalAlertConfig();
             }
@@ -286,11 +286,15 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalAlertConfig SetConfigNotification(TerminalAlertConfig terminalAlertConfig, string[] Messages, int terminalId)
         {
-            var terminalConfig = GetConfigNotification(terminalId);    //reusando metodo de GetConfigNotification.
+            var terminal = Table
+                .Include(c => c.TerminalAlertConfigs)
+                .FirstOrDefault();
 
-            terminalConfig = terminalAlertConfig;
-            
-            return terminalConfig;
+            terminal.TerminalAlertConfigs = terminalAlertConfig;
+
+            Edit(terminal);
+
+            return terminal.TerminalAlertConfigs;
         }
     }
 }

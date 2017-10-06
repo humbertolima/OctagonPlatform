@@ -22,26 +22,23 @@
         <th>Low Cash 3:</th>
         <th>@Model.LowCash3</th>
     </tr>
-    <tbody>
-        @foreach (var item in Model.MessagesToIgnored)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TerminalAlertConfig)
-                </td>
-            </tr>
-        }
-    </tbody>
+    <tbody></tbody>
 </table>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-        <li>
-            @Ajax.ActionLink("Edit", "EditConfigAlert", "Terminals", new { terminalId = Model.TerminalId }, new AjaxOptions { UpdateTargetId = "" }, htmlAttributes: new { @class = "link", data_toggle = "modal" })
-        </li>
-    </ul>
+            <input type="checkbox" name="Messages" value="1" />Chest door is open<br />
+            <input type="checkbox" name="Messages" value="2" />Top door is Open<br />
+            <input type="checkbox" name="Messages" value="3" />Receipt printer paper  is low/out<br />
+            <input type="checkbox" name="Messages" value="4" />Receipt printer ribbon is low/out<br />
+            <input type="checkbox" name="Messages" value="5" />Journal printer paper is low/out<br />
+            <input type="checkbox" name="Messages" value="6" />Journal printer ribbon is low/out<br />
+            <input type="checkbox" name="Messages" value="7" />Cassette notes are out<br />
+            <input type="checkbox" name="Messages" value="8" />Receipt printer need attention or out of service<br />
+            <input type="checkbox" name="Messages" value="9" />Journal printer needs attention or out of service<br />
+            <input type="checkbox" name="Messages" value="10" />Bill dispenser needs attention or out of service<br />
+            <input type="checkbox" name="Messages" value="11" />Comm system needs attention or out of service<br />
+            <input type="checkbox" name="Messages" value="12" />Card reader needs attention or out of service<br />
+ 
+ 
+
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
     <div id="myModal" class="modal fade" role="dialog">
