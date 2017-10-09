@@ -523,6 +523,10 @@
     <Compile Include="Migrations\201710062059595_quitarRelacionBD.Designer.cs">
       <DependentUpon>201710062059595_quitarRelacionBD.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710092022284_BankAccountBankName.cs" />
+    <Compile Include="Migrations\201710092022284_BankAccountBankName.Designer.cs">
+      <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -1166,6 +1170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710062059595_quitarRelacionBD.resx">
       <DependentUpon>201710062059595_quitarRelacionBD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710092022284_BankAccountBankName.resx">
+      <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
