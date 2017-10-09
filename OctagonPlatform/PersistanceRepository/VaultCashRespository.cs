@@ -20,7 +20,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
                     .SingleOrDefault();
-                if(vaulcash == null) throw new Exception("Vault Cash not found.");
                 return vaulcash;
             }
             catch (Exception ex)
@@ -40,7 +39,7 @@ namespace OctagonPlatform.PersistanceRepository
                     BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
                     SettledType = Settled.SettledType.Monthly,
                     StartDate = DateTime.Now,
-                    StopDate = DateTime.Now
+                    StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day)
                 };
             }
             catch (Exception ex)
@@ -72,22 +71,77 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void SaveVaultCash(VaultCashFormViewModel viewModel, string action)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (action == "Edit")
+                {
+                    var vaultcashToEdit = Table.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                    if(vaultcashToEdit == null) throw new Exception("Vault Cash does not exist in our records. ");
+                    Mapper.Map(viewModel, vaultcashToEdit);
+                    Edit(vaultcashToEdit);
+                }
+                else
+                {
+                    var vaultcash = Table.SingleOrDefault(x => x.Id == viewModel.TerminalId);
+                    if(vaultcash != null && !vaultcash.Deleted) throw new Exception("This Terminal already has a Vaultcash account. ");
+                    if (vaultcash != null && vaultcash.Deleted)
+                        Table.Remove(vaultcash);
+                    var vaultcashNew = Mapper.Map<VaultCashFormViewModel, VaultCash>(viewModel);
+                    Add(vaultcashNew);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public VaultCash VaultCashDetails(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var vaulcash = Table.Where(x => x.Id == id && !x.Deleted)
+                    .Include(x => x.Terminal)
+                    .Include(x => x.BankAccount)
+                    .SingleOrDefault();
+                if (vaulcash == null) throw new Exception("Vault Cash not found.");
+                return vaulcash;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void DeleteVaultCash(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var vaulcash = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if (vaulcash == null) throw new Exception("Vault Cash not found.");
+                Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public VaultCashFormViewModel InitializeNewVaultCashFormViewModel(VaultCashFormViewModel viewModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
+                viewModel.SettledType = Settled.SettledType.Monthly;
+                viewModel.StartDate = DateTime.Now;
+                viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
+                return viewModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
