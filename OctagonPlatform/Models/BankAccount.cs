@@ -19,6 +19,10 @@ namespace OctagonPlatform.Models
         public string NickName { get; set; }
 
         [Required]
+        [StringLength(50)]
+        public string BankName { get; set; }
+
+        [Required]
         [Index(IsUnique = true)]
         [StringLength(50)]
         public string RoutingNumber { get; set; }

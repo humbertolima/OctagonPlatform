@@ -20,6 +20,11 @@
         @Html.ValidationMessageFor(m => m.NickName)
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.BankName)
+        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Bank Name" })
+        @Html.ValidationMessageFor(m => m.BankName)
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.RoutingNumber)
         @Html.TextBoxFor(m => m.RoutingNumber, new { @class = "form-control", autofocus = "autofocus"})
         @Html.ValidationMessageFor(m => m.RoutingNumber)

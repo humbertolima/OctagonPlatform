@@ -519,6 +519,10 @@
     <Compile Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.Designer.cs">
       <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710080408354_BankName.cs" />
+    <Compile Include="Migrations\201710080408354_BankName.Designer.cs">
+      <DependentUpon>201710080408354_BankName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -915,7 +919,6 @@
     <Content Include="Views\Partners\Delete.cshtml" />
     <Content Include="Views\TerminalContacts\Edit.cshtml" />
     <Content Include="Views\Terminals\Sections\Disputes.cshtml" />
-    <Content Include="Views\VaultCash\Index.cshtml" />
     <Content Include="Views\PartnerContacts\Delete.cshtml" />
     <Content Include="Views\Users\Sections\Alerts.cshtml" />
     <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
@@ -925,6 +928,11 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Terminals\Sections\EditTerminalConfig.cshtml" />
     <Content Include="Views\Terminals\Sections\ConfigNotification.cshtml" />
+    <Content Include="Views\VaultCash\Details.cshtml" />
+    <Content Include="Views\VaultCash\Index.cshtml" />
+    <Content Include="Views\VaultCash\Edit.cshtml" />
+    <Content Include="Views\VaultCash\Create.cshtml" />
+    <Content Include="Views\VaultCash\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1155,6 +1163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.resx">
       <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710080408354_BankName.resx">
+      <DependentUpon>201710080408354_BankName.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
