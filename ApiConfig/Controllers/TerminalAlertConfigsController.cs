@@ -1,20 +1,20 @@
-﻿//using System.Collections.Generic;
-//using System.Data.Entity;
-//using System.Data.Entity.Infrastructure;
-//using System.Linq;
-//using System.Net;
-//using System.Threading.Tasks;
-//using System.Web.Http;
-//using System.Web.Http.Description;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 
-//using OctagonPlatform.Models;
-//using ApiConfig.Models;
+using OctagonPlatform.Models;
+using ApiConfig.Models;
 
-//namespace ApiConfig.Controllers
-//{
-//    public class TerminalAlertConfigsController : ApiController
-//    {
-//        private OctagonPlatform.Models.ApplicationDbContext db = new OctagonPlatform.Models.ApplicationDbContext();
+namespace ApiConfig.Controllers
+{
+    public class TerminalAlertConfigsController : ApiController
+    {
+        private OctagonPlatform.Models.ApplicationDbContext db = new OctagonPlatform.Models.ApplicationDbContext();
 
 //        // GET: api/TerminalAlertConfigs
 //        public List<TAConfigVModel> GetTerminalAlertConfigs()
