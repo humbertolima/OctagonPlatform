@@ -8,10 +8,6 @@ namespace OctagonPlatform.Models
 {
     public class TerminalAlertConfig
     {
-        public TerminalAlertConfig()
-        {
-            this.MessagesToIgnored = new List<TerminalMessage>();
-        }
 
         [Key, ForeignKey("Terminal")]
         public int TerminalId { get; set; }
@@ -25,8 +21,18 @@ namespace OctagonPlatform.Models
         public double? LowCash3 { get; set; }
 
         public DateTime? InactivePeriod { get; set; }
-
-        [JsonIgnore]
-        public ICollection<TerminalMessage> MessagesToIgnored { get; set; }
+        
+        public bool IgnoreChestDoorOpen { get; set; }
+        public bool IgnoreTopDoorOpen { get; set; }
+        public bool IgnoreReceiptPaper { get; set; }
+        public bool IgnoreReceiptRibbon { get; set; }
+        public bool IgnoreJournalPaper { get; set; }
+        public bool IgnoreJournalRibbon { get; set; }
+        public bool IgnoreCassetteNotes { get; set; }
+        public bool IgnoreReceiptNeedAttention { get; set; }
+        public bool IgnoreJournalNeedAttention { get; set; }
+        public bool IgnoreBillDispenserNeedAttention { get; set; }
+        public bool IgnoreCommNeedAttention { get; set; }
+        public bool IgnoreCardReaderNeedAttention { get; set; }
     }
 }

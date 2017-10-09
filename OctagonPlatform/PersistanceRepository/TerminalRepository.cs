@@ -277,7 +277,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             var terminal = Table
                 .Include(c => c.TerminalAlertConfigs)
-                .FirstOrDefault();
+                .FirstOrDefault(c => c.Id == terminalId);
 
             terminal.TerminalAlertConfigs = terminalAlertConfig;
 
