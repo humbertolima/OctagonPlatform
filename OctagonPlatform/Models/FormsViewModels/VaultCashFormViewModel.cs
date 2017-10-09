@@ -14,8 +14,6 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public Terminal Terminal { get; set; }
 
-        public IEnumerable<Terminal> Terminals { get; set; }    
-
         [Required]
         [Display(Name = "Bank Account")]
         public int BankAccountId { get; set; }

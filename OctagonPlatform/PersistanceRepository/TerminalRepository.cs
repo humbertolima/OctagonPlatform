@@ -19,45 +19,34 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminals = new List<Terminal>();
 
                 var partner = Context.Partners.Where(x => x.Id == partnerId && !x.Deleted)
-                    .Include(x => x.Partners).SingleOrDefault();
+                    .Include(x => x.Partners)
+                    .Include(x => x.Terminals)
+                    .SingleOrDefault();
+
 
                 if (partner == null) return terminals;
                 {
-                    terminals.AddRange(Table.Where(x => x.Id == partnerId)
-                        .Include(x => x.Partner)
-                        .Include(x => x.Country)
-                        .Include(x => x.State)
-                        .Include(x => x.City)
-                        .Include(x => x.TransactionStatistics)
-                        .Include(x => x.LastTransaction)
-                        .Include(x => x.LocationType)
-                        .ToList());
+                    terminals.AddRange(partner.Terminals);
 
                     foreach (var item in partner.Partners)
                     {
-
-                        terminals.AddRange(Table.Where(x => x.PartnerId == item.Id)
-                            .Include(x => x.Partner)
-                            .Include(x => x.Country)
-                            .Include(x => x.State)
-                            .Include(x => x.City)
-                            .Include(x => x.TransactionStatistics)
-                            .Include(x => x.LastTransaction)
-                            .Include(x => x.LocationType)
-                            .ToList());
+                        if (item.Id != partnerId)
+                        {
+                            terminals.AddRange(Table.Where(x => x.PartnerId == item.Id)
+                                .Include(x => x.Partner)
+                                .Include(x => x.Country)
+                                .Include(x => x.State)
+                                .Include(x => x.City)
+                                .Include(x => x.TransactionStatistics)
+                                .Include(x => x.LastTransaction)
+                                .Include(x => x.LocationType)
+                                .ToList());
+                        }
                     }
                 }
 
                 return terminals;
-                //return Table.Where(x => x.PartnerId == partnerId && !x.Deleted)
-                //    .Include(x => x.Partner)
-                //    .Include(x => x.Country)
-                //    .Include(x => x.State)
-                //    .Include(x => x.City)
-                //    .Include(x => x.TransactionStatistics)
-                //    .Include(x => x.LastTransaction)
-                //    .Include(x => x.LocationType)
-                //    .ToList();
+                
             }
             catch (Exception ex)
             {
