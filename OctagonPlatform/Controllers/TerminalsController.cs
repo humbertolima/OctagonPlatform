@@ -200,6 +200,14 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        public PartialViewResult VaultCash(int terminalId)
+        {
+            var terminal = _repository.TerminalDetails(terminalId);
+            return PartialView("Sections/VaultCash", terminal.VaultCash);
+
+        }
+
+        [HttpPost]
         public PartialViewResult GeneralInfo(int terminalId)
         {
             var terminal = _repository.TerminalDetails(terminalId);

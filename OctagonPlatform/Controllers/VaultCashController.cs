@@ -17,7 +17,8 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: VaultCash
-        public ActionResult Index(int terminalId)
+        [HttpPost]
+        public PartialViewResult Index(int terminalId)
         {
             try
             {
@@ -26,9 +27,9 @@ namespace OctagonPlatform.Controllers
                 ViewBag.TerminalId = terminalId;
                 return PartialView(model);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + "Page not found. ");
+                return PartialView("Error");
             }
         }
 
@@ -148,18 +149,18 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _vaultCashRepository.DeleteVaultCash(id);
-                return RedirectToAction("Details", "Terminals", new { id = id });
+                return RedirectToAction("Details", "Terminals", new { id });
             }
             catch (DbEntityValidationException exDb)
 
             {
                 ViewBag.Error = "Validation error deleting VaultCash" + exDb.Message;
-                return RedirectToAction("Details", "Terminals", new { id = id });
+                return RedirectToAction("Details", "Terminals", new { id });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting VaultCash" + ex.Message;
-                return RedirectToAction("Details", "Terminals", new { id = id });
+                return RedirectToAction("Details", "Terminals", new { id });
             }
         }
 

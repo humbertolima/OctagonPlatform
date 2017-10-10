@@ -14,7 +14,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
-
+            
             <div id="getConfigNotification" class="panel-collapse collapse">
 
             </div>
@@ -74,8 +74,16 @@
 <br />
 <hr />
 <br />
-<div id="vaultcash">
-    @Html.Partial("Sections/VaultCash", Model)
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Vault Cash", "VaultCash", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getVaultcash", LoadingElementId = "loading1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getVaultcash" })</h3>
+
+            <div id="getVaultcash" class="panel-collapse collapse">
+                <img id="loading1" style="display:none" src="~/Content/loading_icon.gif" alt="" />
+            </div>
+        </div>
+    </div>
 </div>
 <br />
 <hr />
