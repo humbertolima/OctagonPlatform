@@ -89,7 +89,7 @@ namespace OctagonPlatform.Controllers
                 try
                 {
                     _bAccountRepository.SaveBankAccount(bankAccount, "Create");
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new {id = bankAccount.PartnerId});
                 }
                 catch (DbEntityValidationException exDb)
                 {
@@ -149,7 +149,7 @@ namespace OctagonPlatform.Controllers
                 try
                 {
                     _bAccountRepository.SaveBankAccount(bankAccount, "Edit");
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = bankAccount.PartnerId });
                 }
                 catch (DbEntityValidationException exDb)
                 {
@@ -190,20 +190,22 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
+                var partnerId = _bAccountRepository.BAccountDetails(id).PartnerId;
                 try
                 {
+                    
                     _bAccountRepository.DeleteBankAccount(id);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = partnerId});
                 }
                 catch (DbEntityValidationException exDb)
                 {
                     ViewBag.Error = "Validation error deleting BankAccount" + exDb.Message;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = partnerId });
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Error = "Validation error deleting BankAccount" + ex.Message;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = partnerId });
                 }
             }
             catch (Exception ex)

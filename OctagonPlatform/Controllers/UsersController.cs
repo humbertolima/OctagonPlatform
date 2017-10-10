@@ -98,7 +98,7 @@ namespace OctagonPlatform.Controllers
                 viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
 
                 _userRepository.SaveUser(viewModel, "Create");
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new{id = viewModel.PartnerId});
             }
             #region Exception
 
@@ -159,7 +159,7 @@ namespace OctagonPlatform.Controllers
                 var viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
             #region Exception
             catch (DbEntityValidationException exDb)
@@ -206,8 +206,9 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
+                var partnerId = _userRepository.UserDetails(id).PartnerId;
                 _userRepository.DeleteUser(id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
             catch (DbEntityValidationException exDb)
             {
