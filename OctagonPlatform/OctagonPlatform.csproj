@@ -299,10 +299,6 @@
     <Compile Include="Migrations\201708211637076_Pending.Designer.cs">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201708212240546_InsertUserAdmin.cs" />
-    <Compile Include="Migrations\201708212240546_InsertUserAdmin.Designer.cs">
-      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201708231758444_UpdatedUser.cs" />
     <Compile Include="Migrations\201708231758444_UpdatedUser.Designer.cs">
       <DependentUpon>201708231758444_UpdatedUser.cs</DependentUpon>
@@ -526,6 +522,10 @@
     <Compile Include="Migrations\201710092022284_BankAccountBankName.cs" />
     <Compile Include="Migrations\201710092022284_BankAccountBankName.Designer.cs">
       <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710100356557_InsertUserAdmin02.cs" />
+    <Compile Include="Migrations\201710100356557_InsertUserAdmin02.Designer.cs">
+      <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -937,6 +937,7 @@
     <Content Include="Views\VaultCash\Delete.cshtml" />
     <Content Include="Views\VaultCash\Details.cshtml" />
     <Content Include="Views\VaultCash\Edit.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1002,9 +1003,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708211637076_Pending.resx">
       <DependentUpon>201708211637076_Pending.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708212240546_InsertUserAdmin.resx">
-      <DependentUpon>201708212240546_InsertUserAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708231758444_UpdatedUser.resx">
       <DependentUpon>201708231758444_UpdatedUser.cs</DependentUpon>
@@ -1173,6 +1171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710092022284_BankAccountBankName.resx">
       <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100356557_InsertUserAdmin02.resx">
+      <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

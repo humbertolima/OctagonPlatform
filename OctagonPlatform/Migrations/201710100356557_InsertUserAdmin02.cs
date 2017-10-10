@@ -2,7 +2,7 @@ namespace OctagonPlatform.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    public partial class InsertUserAdmin : DbMigration
+    public partial class InsertUserAdmin02 : DbMigration
     {
         public override void Up()
         {
@@ -16,7 +16,6 @@ namespace OctagonPlatform.Migrations
         
         public override void Down()
         {
-
         }
     }
 }
