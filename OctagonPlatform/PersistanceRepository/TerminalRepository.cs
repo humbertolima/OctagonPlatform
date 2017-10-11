@@ -178,7 +178,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
 
-                    terminal.TerminalId = "00000";
+                    terminal.TerminalId = "000000000";
                     Add(terminal);
 
                     terminal.TerminalId = TerminalIdGenerator.Generator(terminal.Id);
