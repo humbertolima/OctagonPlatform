@@ -24,20 +24,20 @@
     </tr>
     <tbody></tbody>
 </table>
-@Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention) Bill dispenser needs attention or out of service<br />
-@Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention) Card reader needs attention or out of service<br />
-@Html.CheckBoxFor(m => m.IgnoreCassetteNotes) Cassette notes are out<br />
-@Html.CheckBoxFor(m => m.IgnoreChestDoorOpen) Chest door is open<br />
-@Html.CheckBoxFor(m => m.IgnoreCommNeedAttention) Comm system needs attention or out of service<br />
-@Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention) Journal printer needs attention or out of service<br />
-@Html.CheckBoxFor(m => m.IgnoreJournalPaper) Journal printer paper is low/out<br />
-@Html.CheckBoxFor(m => m.IgnoreJournalRibbon) Journal printer ribbon is low/out<br />
-@Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention) Receipt printer need attention or out of service<br />
-@Html.CheckBoxFor(m => m.IgnoreReceiptPaper) Receipt printer paper is low/out<br />
-@Html.CheckBoxFor(m => m.IgnoreReceiptRibbon) Receipt printer ribbon is low/out<br />
-@Html.CheckBoxFor(m => m.IgnoreTopDoorOpen) Top door is Open<br />
+@Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention, new { @disabled = "disabled" }) Bill dispenser needs attention or out of service<br />
+@Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention, new { @disabled = "disabled" }) Card reader needs attention or out of service<br />
+@Html.CheckBoxFor(m => m.IgnoreCassetteNotes, new { @disabled = "disabled" }) Cassette notes are out<br />
+@Html.CheckBoxFor(m => m.IgnoreChestDoorOpen, new { @disabled = "disabled" }) Chest door is open<br />
+@Html.CheckBoxFor(m => m.IgnoreCommNeedAttention, new { @disabled = "disabled" }) Comm system needs attention or out of service<br />
+@Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention, new { @disabled = "disabled" }) Journal printer needs attention or out of service<br />
+@Html.CheckBoxFor(m => m.IgnoreJournalPaper, new { @disabled = "disabled" }) Journal printer paper is low/out<br />
+@Html.CheckBoxFor(m => m.IgnoreJournalRibbon, new { @disabled = "disabled" }) Journal printer ribbon is low/out<br />
+@Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention, new { @disabled = "disabled" }) Receipt printer need attention or out of service<br />
+@Html.CheckBoxFor(m => m.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
+@Html.CheckBoxFor(m => m.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
+@Html.CheckBoxFor(m => m.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
 
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -60,7 +60,7 @@
                 </p>
                 <div class="form-group">
                     @Html.LabelFor(m => m.InactivePeriod)
-                    @Html.TextBoxFor(m => m.InactivePeriod, new { @class = "form-control", autofocus = "autofocus", placeholder = "" })
+                    @Html.TextBoxFor(m => m.InactivePeriod, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
                     @Html.ValidationMessageFor(m => m.InactivePeriod)
                 </div>
                 <div class="form-group">

@@ -282,7 +282,7 @@ namespace OctagonPlatform.PersistanceRepository
             return terminalConfigs;
         }
 
-        public TerminalAlertConfig SetConfigNotification(TerminalAlertConfig terminalAlertConfig, string[] Messages, int terminalId)
+        public TerminalAlertConfig SetConfigNotification(TerminalAlertConfig terminalAlertConfig, int terminalId)
         {
             var terminal = Table
                 .Include(c => c.TerminalAlertConfigs)

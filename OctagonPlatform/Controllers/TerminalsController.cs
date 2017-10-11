@@ -224,9 +224,9 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
-        public ActionResult EditConfigAlert(TerminalAlertConfig terminalAlertConfig, string[] messages, int terminalId)
+        public ActionResult EditConfigAlert(TerminalAlertConfig terminalAlertConfig, int terminalId)
         {
-            var configNotification = _repository.SetConfigNotification(terminalAlertConfig, messages, terminalId);
+            var configNotification = _repository.SetConfigNotification(terminalAlertConfig, terminalId);
 
             return RedirectToAction("Details/"+terminalId);
         }
