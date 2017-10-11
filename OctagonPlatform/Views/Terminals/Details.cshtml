@@ -13,10 +13,10 @@
 <div class="panel-group" style="width: 33%; float:right;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
             
             <div id="getConfigNotification" class="panel-collapse collapse">
-
+                <img id="loading4" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -25,10 +25,10 @@
 <div class="panel-group" style="width: 33%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", LoadingElementId = "loading3", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
 
             <div id="getGeneralInfo" class="panel-collapse collapse">
-
+                <img id="loading3" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
@@ -63,10 +63,10 @@
 <div class="panel-group" style="width: 100%;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Contacts", "Contacts", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
 
             <div id="getContacts" class="panel-collapse collapse">
-
+                <img id="loading2" style="display:none" src="~/Content/loading_icon.gif" alt="" />
             </div>
         </div>
     </div>
