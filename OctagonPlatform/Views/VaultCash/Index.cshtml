@@ -1,9 +1,8 @@
 ﻿@model OctagonPlatform.Models.VaultCash
-    
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        @if (Model == null)
-        {
+@if (Model == null)
+{
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
@@ -21,10 +20,10 @@
                 </ul>
 
             </div>
-        }
-    </div>
-</nav>
 
+        </div>
+    </nav>
+}
 <p class="alert alert-info">
     <strong>@ViewBag.Error</strong>
 </p>
