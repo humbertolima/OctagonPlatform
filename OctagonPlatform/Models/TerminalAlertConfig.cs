@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +9,8 @@ namespace OctagonPlatform.Models
     {
 
         [Key, ForeignKey("Terminal")]
-        public int TerminalId { get; set; }
+        public int Id { get; set; }
+
         public Terminal Terminal { get; set; }
 
         [Required]

@@ -111,9 +111,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Surcharge Fee")]
         public double SurchargeAmount { get; set; }
 
+        [Required]
         [Display(Name = "Percent Surcharge Fee")]
         public double SurchargeByPercent { get; set; }
 
+        [Required]
         [Display(Name = "Fix Surcharge Fee")]
         public double FixSurcharge { get; set; }
 

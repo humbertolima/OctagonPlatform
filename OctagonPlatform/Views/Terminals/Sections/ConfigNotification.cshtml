@@ -52,7 +52,7 @@
             @using (Html.BeginForm("EditConfigAlert", "Terminals"))
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.TerminalId)
+                @Html.HiddenFor(m => m.Id)
                 <p class="alert alert-danger">
                     All fields are <strong>required.</strong>
                     @ViewBag.Error

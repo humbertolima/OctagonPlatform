@@ -223,6 +223,7 @@
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargeType.cs" />
+    <Compile Include="Helpers\TerminalIdGenerator.cs" />
     <Compile Include="Migrations\201708160653179_Initial.cs" />
     <Compile Include="Migrations\201708160653179_Initial.Designer.cs">
       <DependentUpon>201708160653179_Initial.cs</DependentUpon>
@@ -534,6 +535,14 @@
     <Compile Include="Migrations\201710111839188_Surcharge.cs" />
     <Compile Include="Migrations\201710111839188_Surcharge.Designer.cs">
       <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710112027426_TerminalId.cs" />
+    <Compile Include="Migrations\201710112027426_TerminalId.Designer.cs">
+      <DependentUpon>201710112027426_TerminalId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.cs" />
+    <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.Designer.cs">
+      <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -1187,6 +1196,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710111839188_Surcharge.resx">
       <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710112027426_TerminalId.resx">
+      <DependentUpon>201710112027426_TerminalId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.resx">
+      <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

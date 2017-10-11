@@ -177,7 +177,12 @@ namespace OctagonPlatform.PersistanceRepository
                         Table.Remove(terminalNew);
 
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
+
+                    terminal.TerminalId = "00000";
                     Add(terminal);
+
+                    terminal.TerminalId = TerminalIdGenerator.Generator(terminal.Id);
+                    Edit(terminal);
                 }
             }
             catch (Exception ex)

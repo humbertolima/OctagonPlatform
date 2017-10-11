@@ -12,6 +12,9 @@ namespace OctagonPlatform.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required]
+        public string TerminalId { get; set; }
    
         [Required]
         [Display(Name = "Partner")]
@@ -134,8 +137,6 @@ namespace OctagonPlatform.Models
 
         public bool Offline { get; set; }
 
-        public bool BindedKeys { get; set; }
-
         public BindedKey BindedKey { get; set; }
 
         [Display(Name = "Default Bank Account")]
@@ -172,12 +173,14 @@ namespace OctagonPlatform.Models
         [Display(Name = "Surcharge Amount Fee")]
         public double SurchargeAmount { get; set; }
 
+        [Required]
         [Display(Name = "Surcharge Fee by Percent")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
+        [Required]
         [Display(Name = "Fix Surcharge Fee")]
         public double FixSurcharge { get; set; }
 
