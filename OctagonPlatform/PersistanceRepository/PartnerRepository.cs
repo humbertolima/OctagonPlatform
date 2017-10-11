@@ -69,7 +69,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
-                    if (partnerToEdit == null) throw new Exception("Partner does not exists in our records!!!");
+                    if (partnerToEdit == null) throw new Exception("Partner does not exist in our records!!!");
 
                     partnerToEdit.ParentId = viewModel.ParentId;
                     partnerToEdit.BusinessName = viewModel.BusinessName;
