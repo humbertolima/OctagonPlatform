@@ -30,8 +30,8 @@
     
     <thead>
     <tr>
-        <th>Parent</th>
         <th>Business Name</th>
+        <th>Parent</th>
         <th>Address</th>
         <th>Phone</th>
         <th>Email</th>
@@ -44,8 +44,8 @@
         if (!item.Deleted)
         {
             <tr class="info">
-                <td>@item.Parent.BusinessName</td>
                 <td>@item.BusinessName</td>
+                <td>@item.Parent.BusinessName</td>
                 <td>@item.Address1</td>
                 <td>@item.Mobile</td>
                 <td>@item.Email</td>

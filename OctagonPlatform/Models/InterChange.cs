@@ -22,7 +22,7 @@ namespace OctagonPlatform.Models
         public BankAccount BankAccount { get; set; }
 
         [Required]
-        [Display(Name = "Inter Change Ammount")]
+        [Display(Name = "Split Ammount")]
         public double Ammount { get; set; }
 
         public string CalculationMethod { get; set; }

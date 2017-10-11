@@ -68,24 +68,24 @@ namespace OctagonPlatform.Controllers
             if (!ModelState.IsValid)
             {
                 
-                return View(_vaultCashRepository.VaultCashToEdit(viewModel.TerminalId));
+                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
             try
             {
                 _vaultCashRepository.SaveVaultCash(viewModel, "Edit");
-                return RedirectToAction("Details", "Terminals", new {id = viewModel.TerminalId});
+                return RedirectToAction("Details", "Terminals", new {id = viewModel.Id});
             }
             catch (DbEntityValidationException exDb)
             {
                 ViewBag.Error = "Validation error editing VaultCash " + exDb.Message;
 
-                return View(_vaultCashRepository.VaultCashToEdit(viewModel.TerminalId));
+                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error editing VaultCash "
                                 + ex.Message;
-                return View(_vaultCashRepository.VaultCashToEdit(viewModel.TerminalId));
+                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
         }
 
@@ -113,7 +113,7 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _vaultCashRepository.SaveVaultCash(viewModel, "Create");
-                return RedirectToAction("Details", "Terminals", new { id = viewModel.TerminalId });
+                return RedirectToAction("Details", "Terminals", new { id = viewModel.Id });
             }
             catch (DbEntityValidationException exDb)
             {

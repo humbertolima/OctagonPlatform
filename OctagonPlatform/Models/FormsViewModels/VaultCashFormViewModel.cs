@@ -10,7 +10,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Key]
         [Required]
         [Display(Name = "Terminal")]
-        public int TerminalId { get; set; }
+        public int Id { get; set; }
 
         public Terminal Terminal { get; set; }
 
@@ -29,11 +29,17 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Starts on")]
+        [DisplayFormat(DataFormatString =
+                "{0:d MMM yyyy}",
+            ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Stops on")]
+        [DisplayFormat(DataFormatString =
+                "{0:d MMM yyyy}",
+            ApplyFormatInEditMode = true)]
         public DateTime StopDate { get; set; }
     }
 }

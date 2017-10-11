@@ -114,7 +114,7 @@ namespace OctagonPlatform.Models
         [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
         public DateTime? InstalledDate { get; set; }
 
-        [Display(Name = "Charged By?")]
+        [Display(Name = "Loaded By?")]
         public string LoadedBy { get; set; }
 
         [DataType(DataType.DateTime)]

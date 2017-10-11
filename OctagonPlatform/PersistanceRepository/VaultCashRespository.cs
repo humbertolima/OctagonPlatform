@@ -34,7 +34,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 return new VaultCashFormViewModel()
                 {
-                    TerminalId = terminalId,
+                    Id = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
                     BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
                     SettledType = Settled.SettledType.Monthly,
@@ -73,16 +73,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if(viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date");
+
                 if (action == "Edit")
                 {
-                    var vaultcashToEdit = Table.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                    var vaultcashToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if(vaultcashToEdit == null) throw new Exception("Vault Cash does not exist in our records. ");
                     Mapper.Map(viewModel, vaultcashToEdit);
                     Edit(vaultcashToEdit);
                 }
                 else
                 {
-                    var vaultcash = Table.SingleOrDefault(x => x.Id == viewModel.TerminalId);
+                    var vaultcash = Table.SingleOrDefault(x => x.Id == viewModel.Id);
                     if(vaultcash != null && !vaultcash.Deleted) throw new Exception("This Terminal already has a Vaultcash account. ");
                     if (vaultcash != null && vaultcash.Deleted)
                         Table.Remove(vaultcash);
@@ -131,7 +133,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
                 viewModel.SettledType = Settled.SettledType.Monthly;
                 viewModel.StartDate = DateTime.Now;

@@ -108,20 +108,22 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string FimwareVersion { get; set; }
 
         [Required]
-        [Display(Name = "Surcharged Type")]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
-
-        [Required]
         [Display(Name = "Surcharge Amount")]
         public double SurchargeAmount { get; set; }
-
-        [Display(AutoGenerateField = true, Prompt = "Test", Name = "Fix Surcharge")]
-        public double FixSurcharge { get; set; }
 
         [Required]
         [Display(Name = "Percent Surcharge Amount")]
         public double SurchargeByPercent { get; set; }
 
+        [Required]
+        [Display(Name = "Surcharged Type")]
+        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+
+       
+        [Display(Name = "Fix Surcharge")]
+        public double FixSurcharge { get; set; }
+
+        
         [Required]
         [Display(Name = "Recolection Type")]
         public Settled.SettledType SettledType { get; set; }
@@ -130,7 +132,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public Initiate.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Percent Charge By CryptoTransaction")]
+        [Display(Name = "Percent Charged By CryptoTransaction")]
         public double CryptoPercentChargeAmount { get; set; }
 
         [DataType(DataType.Date)]
