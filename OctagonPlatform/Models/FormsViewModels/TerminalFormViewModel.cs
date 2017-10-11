@@ -108,20 +108,18 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string FimwareVersion { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Amount")]
+        [Display(Name = "Surcharge Fee")]
         public double SurchargeAmount { get; set; }
 
-        [Required]
-        [Display(Name = "Percent Surcharge Amount")]
+        [Display(Name = "Percent Surcharge Fee")]
         public double SurchargeByPercent { get; set; }
+
+        [Display(Name = "Fix Surcharge Fee")]
+        public double FixSurcharge { get; set; }
 
         [Required]
         [Display(Name = "Surcharged Type")]
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
-
-       
-        [Display(Name = "Fix Surcharge")]
-        public double FixSurcharge { get; set; }
 
         
         [Required]

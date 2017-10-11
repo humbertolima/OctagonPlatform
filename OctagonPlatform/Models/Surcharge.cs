@@ -16,7 +16,7 @@ namespace OctagonPlatform.Models
         public Terminal Terminal { get; set; }
 
         [Required]
-        [Display(Name = "Bank Account Azossiated")]
+        [Display(Name = "Bank Account Associated")]
         public int BankAccountId { get; set; }
 
         public BankAccount BankAccount { get; set; }
@@ -30,7 +30,10 @@ namespace OctagonPlatform.Models
         public DateTime StopDate { get; set; }
 
         [Required]
-        public double SplitAmmount { get; set; }
+        public double SplitAmount { get; set; }
+
+        [Required]
+        public double SplitAmountPercent { get; set; }
 
         [Required]
         public Settled.SettledType SettledType { get; set; }

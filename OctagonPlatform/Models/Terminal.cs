@@ -169,17 +169,16 @@ namespace OctagonPlatform.Models
         public VaultCash VaultCash { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Amount")]
+        [Display(Name = "Surcharge Amount Fee")]
         public double SurchargeAmount { get; set; }
 
-        [Required]
-        [Display(Name = "Surcharge by Percent")]
+        [Display(Name = "Surcharge Fee by Percent")]
         public double SurchargeByPercent { get; set; }
 
         [Required]
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
-        [Display(Name = "Fix Surcharge")]
+        [Display(Name = "Fix Surcharge Fee")]
         public double FixSurcharge { get; set; }
 
         [Required]

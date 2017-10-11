@@ -527,6 +527,14 @@
     <Compile Include="Migrations\201710100356557_InsertUserAdmin02.Designer.cs">
       <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs" />
+    <Compile Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.Designer.cs">
+      <DependentUpon>201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710111839188_Surcharge.cs" />
+    <Compile Include="Migrations\201710111839188_Surcharge.Designer.cs">
+      <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -1173,6 +1181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710100356557_InsertUserAdmin02.resx">
       <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.resx">
+      <DependentUpon>201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111839188_Surcharge.resx">
+      <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
