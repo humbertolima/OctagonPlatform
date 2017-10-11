@@ -36,8 +36,9 @@
     
     <thead>
     <tr>
-        <th>Parent</th>
+        
         <th>Business Name</th>
+        <th>Parent</th>
         <th>Address</th>
         <th>Phone</th>
         <th>Email</th>
@@ -46,8 +47,8 @@
     </thead>
     <tbody id ="listOfPartners">
         <tr class="info">
-            <td>@Model.Parent.BusinessName</td>
             <td>@Model.BusinessName</td>
+            <td>@Model.Parent.BusinessName</td>
             <td>@Model.Address1</td>
             <td>@Model.Mobile</td>
             <td>@Model.Email</td>
@@ -64,8 +65,8 @@
             if (!item.Deleted && item.Id != Model.Id)
             {
                 <tr class="info">
-                    <td>@item.Parent.BusinessName</td>
                     <td>@item.BusinessName</td>
+                    <td>@item.Parent.BusinessName</td>
                     <td>@item.Address1</td>
                     <td>@item.Mobile</td>
                     <td>@item.Email</td>

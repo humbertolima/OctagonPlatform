@@ -37,7 +37,7 @@
         <tr>
             <th>Terminal ID</th>
             <th>Partner</th>
-            <th>Location Name</th>
+            <th>Location Type</th>
             <th>Address</th>
             <th>Phone</th>
             <th>Country</th>
@@ -45,7 +45,6 @@
             <th>State</th>
             <th>Status</th>
             <th>Cash Balance</th>
-            <th>Last Transaction</th>
         </tr>
     </thead>
     
@@ -64,16 +63,6 @@
                 <td>@item.State.Name</td>
                 <td>@item.Status</td>
                 <td>@item.Balance</td>
-                @if (item.LastTransactionId != null)
-                {
-                    <td>@item.LastTransactionDate</td>
-                }
-                else
-                {
-                    <td>
-                    </td>
-                    <td></td>
-                }
                 <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
                 <td>
                     <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.Id })

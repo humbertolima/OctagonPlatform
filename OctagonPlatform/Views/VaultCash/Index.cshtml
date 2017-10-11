@@ -1,9 +1,8 @@
 ﻿@model OctagonPlatform.Models.VaultCash
-    
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        @if (Model == null)
-        {
+@if (Model == null)
+{
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active">
@@ -21,15 +20,14 @@
                 </ul>
 
             </div>
-        }
-    </div>
-</nav>
 
-@*<p class="alert alert-info">
+        </div>
+    </nav>
+}
+<p class="alert alert-info">
     <strong>@ViewBag.Error</strong>
 </p>
 <table class="table table-striped table-hover ">
-
     <thead>
     <tr>
         <th>BankAccount</th>
@@ -38,54 +36,53 @@
         <th>Stop Date</th>
     </tr>
     </thead>
-    <tbody id="vaultCash">
-        @if (!Model.Deleted)
-        {
-            <tr class="info">
-                <td>@Model.BankAccount.NickName</td>
-                <td>@Model.BankAccount.BankName</td>
-                <td>@Model.StartDate</td>
-                <td>@Model.StopDate</td>
-                <td>
-                    <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
-                                                                linkText: "Edit",
-                                                                actionName: "Edit",
-                                                                controllerName: "PartnerContacts",
+    @if (Model != null)
+    {
+        <tbody>
+        <tr>
+            <td>@Model.BankAccount.NickName</td>
+            <td>@Model.BankAccount.BankName</td>
+            <td>@Model.StartDate.ToShortDateString()</td>
+            <td>@Model.StopDate.ToShortDateString()</td>
+            <td>
+                <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                            linkText: "Edit",
+                                                            actionName: "Edit",
+                                                            controllerName: "VaultCash",
+                                                            routeValues: new
+                                                            {
+                                                                id = Model.Id
+                                                            },
+                                                            htmlAttributes: null
+                                                            )
+            </td>
+            <td>
+                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                             linkText: "Delete",
+                                                             actionName: "Delete",
+                                                             controllerName: "VaultCash",
+                                                             routeValues: new
+                                                             {
+                                                                 id = Model.Id
+                                                             },
+                                                             htmlAttributes: null
+                                                             )
+            </td>
+            <td>
+                <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                linkText: "Details",
+                                                                actionName: "Details",
+                                                                controllerName: "VaultCash",
                                                                 routeValues: new
                                                                 {
                                                                     id = Model.Id
                                                                 },
                                                                 htmlAttributes: null
                                                                 )
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
-                                                                 linkText: "Delete",
-                                                                 actionName: "Delete",
-                                                                 controllerName: "PartnerContacts",
-                                                                 routeValues: new
-                                                                 {
-                                                                     id = Model.Id
-                                                                 },
-                                                                 htmlAttributes: null
-                                                                 )
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
-                                                                    linkText: "Details",
-                                                                    actionName: "Details",
-                                                                    controllerName: "PartnerContacts",
-                                                                    routeValues: new
-                                                                    {
-                                                                        id = Model.Id
-                                                                    },
-                                                                    htmlAttributes: null
-                                                                    )
-                </td>
-            </tr>
-        }
-    
-    </tbody>
-</table>*@
+            </td>
+        </tr>
+        </tbody>
+    }
+</table>
 
 

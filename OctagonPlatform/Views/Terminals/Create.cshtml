@@ -148,7 +148,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.FixSurcharge)
-            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "Over this amount, Will be charged by percent" })
+            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "Over this, Will be charged by percent" })
             @Html.ValidationMessageFor(m => m.FixSurcharge)
         </div>
         <div class="form-group">
@@ -173,7 +173,7 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.InstalledDate)
-            @Html.TextBoxFor(m => m.InstalledDate, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date"})
+            @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date"})
             @Html.ValidationMessageFor(m => m.InstalledDate)
         </div>
         <div class="form-group">
