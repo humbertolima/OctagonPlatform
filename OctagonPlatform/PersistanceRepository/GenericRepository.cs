@@ -43,7 +43,7 @@ namespace OctagonPlatform.PersistanceRepository
             Table.Add(obj);
             if (obj is IAuditEntity)
             {
-                var date = DateTime.Now;
+                var date = DateTime.UtcNow;
                 var userName = HttpContext.Current.User.Identity.Name;
              
                 (obj as IAuditEntity).CreatedAt = date;
@@ -59,7 +59,7 @@ namespace OctagonPlatform.PersistanceRepository
             Context.Entry(obj).State = EntityState.Modified;
             if (obj is IAuditEntity)
             {
-                var date = DateTime.Now;
+                var date = DateTime.UtcNow;
                 var user = HttpContext.Current.User;
                 var userName = user.Identity.Name;
                 (obj as IAuditEntity).UpdatedAt = date;
@@ -77,7 +77,7 @@ namespace OctagonPlatform.PersistanceRepository
                 ((ISoftDeleted) existing).Deleted = true;
                 if (existing is IAuditEntity)
                 {
-                    var date = DateTime.Now;
+                    var date = DateTime.UtcNow;
                     var user = HttpContext.Current.User;
                     var userName = user.Identity.Name;
                     (existing as IAuditEntity).DeletedAt = date;

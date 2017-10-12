@@ -6,7 +6,7 @@ namespace OctagonPlatform.Helpers
     {
         public static string Generator(int id)
         {
-            return "TOD" + DateTime.UtcNow.ToString("MMddyy") + id;
+            return "TOD" + DateTime.UtcNow.ToString("yyMMdd") + id;
         }
     }
 }
