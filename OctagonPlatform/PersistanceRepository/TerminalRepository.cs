@@ -33,6 +33,7 @@ namespace OctagonPlatform.PersistanceRepository
                         .Include(x => x.TransactionStatistics)
                         .Include(x => x.LastTransaction)
                         .Include(x => x.LocationType)
+                        .Include(x => x.DefaultBankAccount)
                         .ToList();
 
                     terminals.AddRange(partnerTerminals);
@@ -49,6 +50,7 @@ namespace OctagonPlatform.PersistanceRepository
                                 .Include(x => x.TransactionStatistics)
                                 .Include(x => x.LastTransaction)
                                 .Include(x => x.LocationType)
+                                .Include(x => x.DefaultBankAccount)
                                 .ToList());
                         }
                     }
@@ -76,6 +78,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.City)
                     .Include(x => x.TransactionStatistics)
                     .Include(x => x.LastTransaction)
+                    .Include(x => x.DefaultBankAccount)
                     .ToList();
             }
             catch (Exception ex)
@@ -105,10 +108,8 @@ namespace OctagonPlatform.PersistanceRepository
                     ModelId = 1,
                     CommunicationType = CommunicationType.Communication.TcpIp,
                     EmvReady = true,
-                    SurchargeType = SurchargeType.SurchargeTypes.Amount,
-                    SettledType = Settled.SettledType.Daily,
-                    WhoInitiates = Initiate.Who.Host
-
+                    WhoInitiates = Initiate.Who.Host,
+                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList()
 
                 };
             }
@@ -130,6 +131,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.LocationType)
+                    .Include(x => x.DefaultBankAccount)
                     .SingleOrDefault();
                 if (terminal == null) throw new Exception("Terminal does not exist in our records!!!");
                 {
@@ -142,7 +144,8 @@ namespace OctagonPlatform.PersistanceRepository
                     terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
                     terminalViewModel.Makes = Context.Makes.ToList();
                     terminalViewModel.Models = Context.Models.ToList();
-
+                    terminalViewModel.DefaultBankAccount = terminalViewModel.DefaultBankAccount;
+                    terminalViewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
                     return terminalViewModel;
                 }
             }
@@ -222,6 +225,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.BindedKey)
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
+                    .Include(x => x.DefaultBankAccount)
                     .FirstOrDefault();
             }
             catch (Exception ex)
@@ -259,10 +263,8 @@ namespace OctagonPlatform.PersistanceRepository
                 viewModel.ModelId = 1;
                 viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
                 viewModel.EmvReady = true;
-                viewModel.SurchargeType = SurchargeType.SurchargeTypes.Amount;
-                viewModel.SettledType = Settled.SettledType.Daily;
                 viewModel.WhoInitiates = Initiate.Who.Host;
-
+                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
                 return viewModel;
             }
             catch (Exception ex)

@@ -108,25 +108,29 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string FimwareVersion { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Fee")]
-        public double SurchargeAmount { get; set; }
+        [Display(Name = "Default Bank Account")]
+        public int BankAccountId { get; set; }
 
-        [Required]
-        [Display(Name = "Percent Surcharge Fee")]
-        public double SurchargeByPercent { get; set; }
+        public BankAccount DefaultBankAccount { get; set; }
 
-        [Required]
-        [Display(Name = "Fix Surcharge Fee")]
-        public double FixSurcharge { get; set; }
+        public IEnumerable<BankAccount> BankAccounts { get; set; }
 
-        [Required]
-        [Display(Name = "Surcharged Type")]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+        //[Required]
+        //[Display(Name = "Surcharge Fee")]
+        //public double SurchargeAmount { get; set; }
 
-        
-        [Required]
-        [Display(Name = "Recolection Type")]
-        public Settled.SettledType SettledType { get; set; }
+        //[Required]
+        //[Display(Name = "Percent Surcharge Fee")]
+        //public double SurchargeByPercent { get; set; }
+
+        //[Required]
+        //[Display(Name = "Fix Surcharge Fee")]
+        //public double FixSurcharge { get; set; }
+
+        //[Required]
+        //[Display(Name = "Surcharged Type")]
+        //public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+
 
         [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }

@@ -545,6 +545,10 @@
     <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.Designer.cs">
       <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.cs" />
+    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.Designer.cs">
+      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
@@ -1207,6 +1211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.resx">
       <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710121826015_TerminalDefaultBankAccount.resx">
+      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>

@@ -137,29 +137,9 @@
             @Html.ValidationMessageFor(m => m.FimwareVersion)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeAmount)
-            @Html.TextBoxFor(m => m.SurchargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.99"})
-            @Html.ValidationMessageFor(m => m.SurchargeAmount)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeByPercent)
-            @Html.TextBoxFor(m => m.SurchargeByPercent, new { @class = "form-control", autofocus = "autofocus", placeholder = "2.5"})
-            @Html.ValidationMessageFor(m => m.SurchargeByPercent)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.FixSurcharge)
-            @Html.TextBoxFor(m => m.FixSurcharge, new { @class = "form-control", autofocus = "autofocus", placeholder = "Over this, Will be charged by percent" })
-            @Html.ValidationMessageFor(m => m.FixSurcharge)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeType)
-            @Html.EnumDropDownListFor(m => m.SurchargeType, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.SurchargeType)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SettledType)
-            @Html.EnumDropDownListFor(m => m.SettledType, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.SettledType)
+            @Html.LabelFor(m => m.BankAccountId)
+            @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.BankAccountId)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)
