@@ -47,11 +47,9 @@ namespace OctagonPlatform.Models
             return new ApplicationDbContext();
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
         }
-
     }
 }

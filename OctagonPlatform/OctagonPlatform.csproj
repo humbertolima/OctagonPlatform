@@ -200,8 +200,8 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
-    <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
+    <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VaultCashController.cs" />
@@ -573,7 +573,6 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
-    <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
@@ -586,7 +585,6 @@
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
-    <Compile Include="Models\InterfacesRepository\ISurchargeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalContactRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
@@ -619,7 +617,6 @@
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
-    <Compile Include="PersistanceRepository\SurchargeRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
@@ -962,7 +959,7 @@
     <Content Include="Views\VaultCash\Details.cshtml" />
     <Content Include="Views\VaultCash\Edit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Surcharge\Index.cshtml" />
+    <Content Include="Views\TerminalMessages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
