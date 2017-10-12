@@ -105,7 +105,7 @@ namespace OctagonPlatform.PersistanceRepository
                     ModelId = 1,
                     CommunicationType = CommunicationType.Communication.TcpIp,
                     EmvReady = true,
-                    SurchargeType = SurchargeType.SurchargeTypes.ByStaticAmount,
+                    SurchargeType = SurchargeType.SurchargeTypes.Amount,
                     SettledType = Settled.SettledType.Daily,
                     WhoInitiates = Initiate.Who.Host
 
@@ -259,7 +259,7 @@ namespace OctagonPlatform.PersistanceRepository
                 viewModel.ModelId = 1;
                 viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
                 viewModel.EmvReady = true;
-                viewModel.SurchargeType = SurchargeType.SurchargeTypes.ByStaticAmount;
+                viewModel.SurchargeType = SurchargeType.SurchargeTypes.Amount;
                 viewModel.SettledType = Settled.SettledType.Daily;
                 viewModel.WhoInitiates = Initiate.Who.Host;
 

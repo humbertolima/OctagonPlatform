@@ -75,6 +75,31 @@ namespace OctagonPlatform.Controllers
                 }
                 try
                 {
+                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByStaticAmount &&
+                    //    terminalFormViewModel.SurchargeAmount <= 0)
+                    //{
+                    //    ViewBag.SurchargeError = "Must be a Surcharge amount fee, or select another Surcharge type";
+                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                    //}
+                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByPercent &&
+                    //    terminalFormViewModel.SurchargeByPercent <= 0)
+                    //{
+                    //    ViewBag.SurchargeError = "Must be a Surcharge percent fee, or select another Surcharge type";
+                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                    //}
+                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByFixAmmount &&
+                    //    terminalFormViewModel.FixSurcharge <= 0)
+                    //{
+                    //    ViewBag.SurchargeError = "Must be a Fix Surcharge amount fee, or select another Surcharge type," +
+                    //                             " over this amount the Surcharge will be charged by the greater or lesser, depent on your choise. ";
+                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                    //}
+                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByFixAmmount &&
+                    //    terminalFormViewModel.SurchargeAmount <= 0)
+                    //{
+                    //    ViewBag.SurchargeError = "Must be a Surcharge amount fee, or select another Surcharge type";
+                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                    //}
                     _repository.SaveTerminal(terminalFormViewModel, "Create");
                     return RedirectToAction("Index");
                 }
