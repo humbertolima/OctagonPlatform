@@ -115,21 +115,17 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public IEnumerable<BankAccount> BankAccounts { get; set; }
 
-        //[Required]
-        //[Display(Name = "Surcharge Fee")]
-        //public double SurchargeAmount { get; set; }
+        [Required]
+        [Display(Name = "Surcharge Fee")]
+        public double SurchargeAmountFee { get; set; }
 
-        //[Required]
-        //[Display(Name = "Percent Surcharge Fee")]
-        //public double SurchargeByPercent { get; set; }
+        [Required]
+        [Display(Name = "Percent Surcharge Fee")]
+        public double SurchargePercentageFee { get; set; }
 
-        //[Required]
-        //[Display(Name = "Fix Surcharge Fee")]
-        //public double FixSurcharge { get; set; }
-
-        //[Required]
-        //[Display(Name = "Surcharged Type")]
-        //public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+        [Required]
+        [Display(Name = "Surcharged By")]
+        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
 
         [Display(Name = "Who Initiates Day Closed")]

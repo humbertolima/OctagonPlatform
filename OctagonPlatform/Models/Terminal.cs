@@ -175,6 +175,19 @@ namespace OctagonPlatform.Models
 
         public ICollection<Surcharge> Surcharges { get; set; }
 
+        [Required]
+        [Display(Name = "Surcharge Fee")]
+        public double SurchargeAmountFee { get; set; }
+
+        [Required]
+        [Display(Name = "Percent Surcharge Fee")]
+        public double SurchargePercentageFee { get; set; }
+
+        [Required]
+        [Display(Name = "Surcharged Type")]
+        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+
+
         public ICollection<InterChange> InterChanges { get; set; }
 
         [Required]

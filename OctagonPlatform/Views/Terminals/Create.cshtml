@@ -142,6 +142,21 @@
             @Html.ValidationMessageFor(m => m.BankAccountId)
         </div>
         <div class="form-group">
+            @Html.LabelFor(m => m.SurchargeAmountFee)
+            @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
+            @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.SurchargePercentageFee)
+            @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
+            @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.SurchargeType)
+            @Html.EnumDropDownListFor(m => m.SurchargeType, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.SurchargeType)
+        </div>
+        <div class="form-group">
             @Html.LabelFor(m => m.WhoInitiates)
             @Html.EnumDropDownListFor(m => m.WhoInitiates, "", new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.WhoInitiates)

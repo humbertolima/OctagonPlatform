@@ -30,10 +30,7 @@ namespace OctagonPlatform.PersistanceRepository
                         .Include(x => x.Country)
                         .Include(x => x.State)
                         .Include(x => x.City)
-                        .Include(x => x.TransactionStatistics)
-                        .Include(x => x.LastTransaction)
                         .Include(x => x.LocationType)
-                        .Include(x => x.DefaultBankAccount)
                         .ToList();
 
                     terminals.AddRange(partnerTerminals);
@@ -47,10 +44,7 @@ namespace OctagonPlatform.PersistanceRepository
                                 .Include(x => x.Country)
                                 .Include(x => x.State)
                                 .Include(x => x.City)
-                                .Include(x => x.TransactionStatistics)
-                                .Include(x => x.LastTransaction)
                                 .Include(x => x.LocationType)
-                                .Include(x => x.DefaultBankAccount)
                                 .ToList());
                         }
                     }
@@ -76,9 +70,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Country)
                     .Include(x => x.State)
                     .Include(x => x.City)
-                    .Include(x => x.TransactionStatistics)
-                    .Include(x => x.LastTransaction)
-                    .Include(x => x.DefaultBankAccount)
                     .ToList();
             }
             catch (Exception ex)
@@ -109,8 +100,8 @@ namespace OctagonPlatform.PersistanceRepository
                     CommunicationType = CommunicationType.Communication.TcpIp,
                     EmvReady = true,
                     WhoInitiates = Initiate.Who.Host,
-                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList()
-
+                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
+                    SurchargeType = SurchargeType.SurchargeTypes.Greater
                 };
             }
             catch (Exception ex)
