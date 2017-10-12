@@ -201,6 +201,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
+    <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VaultCashController.cs" />
@@ -954,6 +955,7 @@
     <Content Include="Views\VaultCash\Details.cshtml" />
     <Content Include="Views\VaultCash\Edit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\TerminalMessages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

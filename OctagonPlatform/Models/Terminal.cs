@@ -22,6 +22,8 @@ namespace OctagonPlatform.Models
 
         public Partner Partner { get; set; }
 
+        public virtual ICollection<TerminalMessage> Messages { get; set; }
+
         public ICollection<TerminalContact> TerminalContacts { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]

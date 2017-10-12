@@ -1,41 +1,24 @@
-﻿using OctagonPlatform.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace OctagonPlatform.Models
 {
-    public class TerminalMessage : IAuditEntity
+    [NotMapped]
+    public class TerminalMessage
     {
-        [Key]
+        
+        [Required]
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public Terminal Terminal { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        [Index("TerminalMessage_Id_8583_Index",IsUnique = true)]
-        public string Id_8583 { get; set; }     //enlace con Api de Emi
+        public DateTime Date { get; set; }
 
-        [ForeignKey("TerminalAlertConfig")]
-        public int TerminalAlertConfigId { get; set; }
-        public TerminalAlertConfig TerminalAlertConfig { get; set; }
+        [Required]
+        public string Direction { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public int? DeletedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
-        public string UpdatedByName { get; set; }
-        public string CreatedByName { get; set; }
-        public string DeletedByName { get; set; }
-
-        //pendiente poner relacion en Terminals
-        //public ICollection<Terminal> Terminals { get; set; }
     }
 }
