@@ -560,6 +560,10 @@
     <Compile Include="Migrations\201710131817088_SeatledVaultcashDeleted.Designer.cs">
       <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131904558_AddTerminalsAlerts.cs" />
+    <Compile Include="Migrations\201710131904558_AddTerminalsAlerts.Designer.cs">
+      <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1239,6 +1243,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131817088_SeatledVaultcashDeleted.resx">
       <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131904558_AddTerminalsAlerts.resx">
+      <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
