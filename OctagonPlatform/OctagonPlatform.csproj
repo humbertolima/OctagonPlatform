@@ -200,7 +200,6 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
-    <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
@@ -215,13 +214,11 @@
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
-    <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\NumberOfCassettes.cs" />
-    <Compile Include="Helpers\PartnerFreeSurchargeFeeContractCalculation.cs" />
     <Compile Include="Helpers\PermissionsAssigned.cs" />
     <Compile Include="Helpers\Settled.cs" />
     <Compile Include="Helpers\Status.cs" />
@@ -280,9 +277,9 @@
     <Compile Include="Migrations\201708190230422_Updated2.Designer.cs">
       <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\AddNewPartner.cs" />
-    <Compile Include="Migrations\AddNewPartner.Designer.cs">
-      <DependentUpon>AddNewPartner.cs</DependentUpon>
+    <Compile Include="Migrations\201708191620206_AddNewPartner.cs" />
+    <Compile Include="Migrations\201708191620206_AddNewPartner.Designer.cs">
+      <DependentUpon>201708191620206_AddNewPartner.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201708191633395_UpdateulongToLong.cs" />
     <Compile Include="Migrations\201708191633395_UpdateulongToLong.Designer.cs">
@@ -547,18 +544,6 @@
     <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.cs" />
     <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.Designer.cs">
       <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.cs" />
-    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.Designer.cs">
-      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.cs" />
-    <Compile Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.Designer.cs">
-      <DependentUpon>201710122043144_TerminalSurchargeFeeNewConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.cs" />
-    <Compile Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.Designer.cs">
-      <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DeleteLogoModel.cs" />
     <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
@@ -883,7 +868,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
     <Content Include="Scripts\xpopulate.js" />
-    <Content Include="Uploads\logo.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -975,10 +959,11 @@
     <Content Include="Views\VaultCash\Edit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\TerminalMessages\Index.cshtml" />
-    <Content Include="Views\Surcharge\Index.cshtml" />
+    <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1023,8 +1008,8 @@
     <EmbeddedResource Include="Migrations\201708190230422_Updated2.resx">
       <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\AddNewPartner.resx">
-      <DependentUpon>AddNewPartner.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201708191620206_AddNewPartner.resx">
+      <DependentUpon>201708191620206_AddNewPartner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708191633395_UpdateulongToLong.resx">
       <DependentUpon>201708191633395_UpdateulongToLong.cs</DependentUpon>
@@ -1223,15 +1208,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.resx">
       <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710121826015_TerminalDefaultBankAccount.resx">
-      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.resx">
-      <DependentUpon>201710122043144_TerminalSurchargeFeeNewConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.resx">
-      <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
       <DependentUpon>DeleteLogoModel.cs</DependentUpon>
