@@ -54,9 +54,5 @@ namespace OctagonPlatform.Models
             var surcharge = Terminal.SurchargeAmountFee;
         }
 
-        public void Calc_SplitAmount()
-        {
-
-        }
     }
 }
