@@ -140,7 +140,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var terminalContactNew = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
+                    var terminalContactNew = Table.SingleOrDefault(x => ((x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email) && !x.Deleted);
 
                     if(terminalContactNew != null && !terminalContactNew.Deleted)
                         throw new Exception("Contact already exists!!!");

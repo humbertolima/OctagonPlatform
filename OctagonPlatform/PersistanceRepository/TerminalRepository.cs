@@ -162,7 +162,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var terminalNew = Table.SingleOrDefault(x => x.LocationTypeId == viewModel.LocationTypeId && x.Address1 == viewModel.Address1 && x.Address2 == viewModel.Address2 && x.MachineSerialNumber == viewModel.MachineSerialNumber);
+                    var terminalNew = Table.SingleOrDefault(x => (x.LocationTypeId == viewModel.LocationTypeId && x.Address1 == viewModel.Address1 && x.Address2 == viewModel.Address2 && x.MachineSerialNumber == viewModel.MachineSerialNumber) && !x.Deleted);
 
                     if (terminalNew != null && !terminalNew.Deleted)
                         throw new Exception("Terminal already exists!!!");

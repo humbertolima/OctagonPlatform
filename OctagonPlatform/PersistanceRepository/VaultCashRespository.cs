@@ -31,11 +31,14 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId);
+                if (terminal == null) throw new Exception("Page not found. ");
+
                 return new VaultCashFormViewModel()
                 {
                     Id = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
-                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
+                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == terminal.PartnerId).ToList(),
                     StartDate = DateTime.Now,
                     StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day)
                 };
@@ -58,7 +61,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var result = Mapper.Map<VaultCash, VaultCashFormViewModel>(vaultcash);
                 result.Terminal = vaultcash.Terminal;
                 result.BankAccount = vaultcash.BankAccount;
-                result.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
+                result.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == vaultcash.Terminal.PartnerId).ToList();
                 return result;
             }
             catch (Exception ex)
@@ -82,7 +85,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var vaultcash = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    var vaultcash = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if(vaultcash != null && !vaultcash.Deleted) throw new Exception("This Terminal already has a Vaultcash account. ");
                     if (vaultcash != null && vaultcash.Deleted)
                         Table.Remove(vaultcash);
@@ -132,7 +135,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
-                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
+                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
                 viewModel.StartDate = DateTime.Now;
                 viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
                 return viewModel;

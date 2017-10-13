@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using AuthorizeAttribute = System.Web.Mvc.AuthorizeAttribute;
+
 
 namespace OctagonPlatform
 {
@@ -9,6 +12,7 @@ namespace OctagonPlatform
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalFilters.Filters.Add(new AuthorizeAttribute());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

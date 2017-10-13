@@ -151,7 +151,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var partnerContactNew = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
+                    var partnerContactNew = Table.SingleOrDefault(x => ((x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email) && !x.Deleted);
                     if (partnerContactNew != null && !partnerContactNew.Deleted)
                         throw new Exception("Contact already exists!!!");
 
