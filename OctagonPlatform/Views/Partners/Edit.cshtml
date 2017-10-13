@@ -21,6 +21,11 @@
         @Html.ValidationMessageFor(m => m.BusinessName)
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.FreeSurchargeFeeContractConclude)
+        @Html.TextBoxFor(m => m.FreeSurchargeFeeContractConclude, new { @class = "form-control", autofocus = "autofocus", @Value = Model.FreeSurchargeFeeContractConclude.ToShortDateString() })
+        @Html.ValidationMessageFor(m => m.FreeSurchargeFeeContractConclude)
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.ParentId)
         @Html.DropDownListFor(m => m.ParentId, new SelectList(Model.Parents, "Id", "BusinessName"), "", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ParentId)

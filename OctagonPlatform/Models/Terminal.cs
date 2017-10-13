@@ -102,6 +102,12 @@ namespace OctagonPlatform.Models
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
+        [Required]
+        [Display(Name = "Default Bank Account")]
+        public int BankAccountId { get; set; }
+
+        public BankAccount DefaultBankAccount { get; set; }
+
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? DeletedAt { get; set; }
@@ -141,11 +147,6 @@ namespace OctagonPlatform.Models
 
         public BindedKey BindedKey { get; set; }
 
-        [Display(Name = "Default Bank Account")]
-        public int? BankAccountId { get; set; }
-
-        public BankAccount DefaultBankAccount { get; set; }
-
         public ICollection<TerminalPicture> TerminalPictures { get; set; }
 
         public ICollection<Note> Notes { get; set; }
@@ -166,32 +167,26 @@ namespace OctagonPlatform.Models
 
         public ICollection<Cassette> Cassettes { get; set; }
 
+
         [Display(Name = "Who Initiates Day Closed")]
         public Initiate.Who WhoInitiates { get; set; }
 
         public VaultCash VaultCash { get; set; }
 
-        [Required]
-        [Display(Name = "Surcharge Amount Fee")]
-        public double SurchargeAmount { get; set; }
+        public ICollection<Surcharge> Surcharges { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Fee by Percent")]
-        public double SurchargeByPercent { get; set; }
+        [Display(Name = "Surcharge Fee")]
+        public double SurchargeAmountFee { get; set; }
 
         [Required]
+        [Display(Name = "Percent Surcharge Fee")]
+        public double SurchargePercentageFee { get; set; }
+
+        [Required]
+        [Display(Name = "Surcharged Type")]
         public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
-        [Required]
-        [Display(Name = "Fix Surcharge Fee")]
-        public double FixSurcharge { get; set; }
-
-        [Required]
-        [Display(Name = "Recolection Type")]
-        public Settled.SettledType SettledType { get; set; }
-
-
-        public ICollection<Surcharge> Surcharges { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
 

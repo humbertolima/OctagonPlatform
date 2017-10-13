@@ -83,12 +83,16 @@ namespace OctagonPlatform.Models
 
         public ICollection<PartnerContact> PartnerContacts { get; set; }
 
-        
-         public ICollection<Terminal> Terminals { get; set; }
-        
-         public ICollection<BankAccount> BankAccounts { get; set; }
-             
 
+        public ICollection<Terminal> Terminals { get; set; }
+
+        public ICollection<BankAccount> BankAccounts { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime FreeSurchargeFeeContractConclude { get; set; }
+
+        public bool IsFreeSurchargeFeeContractFinished { get; set; }
+             
         public Partner()
         {
             Users = new Collection<User>();
@@ -120,5 +124,11 @@ namespace OctagonPlatform.Models
         public string DeletedByName { get; set; }
 
         public bool Deleted { get; set; }
+
+        public void FreeSurchargeFeeContractCalculation()
+        {
+            if (DateTime.UtcNow.CompareTo(FreeSurchargeFeeContractConclude) >= 0)
+                IsFreeSurchargeFeeContractFinished = true;
+        }
     }
 }

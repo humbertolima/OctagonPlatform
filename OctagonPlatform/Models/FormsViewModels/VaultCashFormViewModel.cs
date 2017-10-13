@@ -32,6 +32,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DisplayFormat(DataFormatString =
                 "{0:d MMM yyyy}",
             ApplyFormatInEditMode = true)]
+        [DateTimeValidationLesserThan]
         public DateTime StartDate { get; set; }
 
         [Required]
@@ -40,6 +41,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DisplayFormat(DataFormatString =
                 "{0:d MMM yyyy}",
             ApplyFormatInEditMode = true)]
+        [DateTimeValidationLesserThan]
         public DateTime StopDate { get; set; }
     }
 }
