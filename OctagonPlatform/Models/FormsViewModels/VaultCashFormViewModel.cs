@@ -23,10 +23,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         public IEnumerable<BankAccount> BankAccounts { get; set; }
 
         [Required]
-        [Display(Name = "Settled...")]
-        public Settled.SettledType SettledType { get; set; }
-
-        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Starts on")]
         [DisplayFormat(DataFormatString =

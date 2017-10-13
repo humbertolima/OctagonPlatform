@@ -223,7 +223,7 @@
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\NumberOfCassettes.cs" />
     <Compile Include="Helpers\PermissionsAssigned.cs" />
-    <Compile Include="Helpers\Settled.cs" />
+    <Compile Include="Helpers\SurchargeSettled.cs" />
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargedBy.cs" />
@@ -556,6 +556,10 @@
     <Compile Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.Designer.cs">
       <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131817088_SeatledVaultcashDeleted.cs" />
+    <Compile Include="Migrations\201710131817088_SeatledVaultcashDeleted.Designer.cs">
+      <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -569,6 +573,7 @@
       <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AchTable.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\BindedKey.cs" />
@@ -1230,6 +1235,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.resx">
       <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131817088_SeatledVaultcashDeleted.resx">
+      <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

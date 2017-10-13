@@ -20,9 +20,6 @@ namespace OctagonPlatform.Models
         public BankAccount BankAccount { get; set; }
 
         [Required]
-        public Settled.SettledType SettledType { get; set; }
-
-        [Required]
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
