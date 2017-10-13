@@ -1,6 +1,6 @@
 ﻿namespace OctagonPlatform.Helpers
 {
-    public class SurchargeType
+    public class SurchargedBy
     {
         public enum SurchargeTypes
         {

@@ -169,7 +169,7 @@ namespace OctagonPlatform.Models
 
 
         [Display(Name = "Who Initiates Day Closed")]
-        public Initiate.Who WhoInitiates { get; set; }
+        public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
 
         public VaultCash VaultCash { get; set; }
 
@@ -185,7 +185,7 @@ namespace OctagonPlatform.Models
 
         [Required]
         [Display(Name = "Surcharged Type")]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+        public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
 
         public ICollection<InterChange> InterChanges { get; set; }

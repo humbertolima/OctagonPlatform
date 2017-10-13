@@ -71,7 +71,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var viewModel = new BAEditFVModel
                 {
-                    Partners = Context.Partners.ToList(),
+                    Partners = Context.Partners.Where(x => (x.Id == partnerId || x.ParentId == partnerId) && !x.Deleted).ToList(),
                     Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId),
                     Countries = Context.Countries.ToList(),
                     States = Context.States.Where(x => x.CountryId == 231).ToList(),
@@ -102,7 +102,8 @@ namespace OctagonPlatform.PersistanceRepository
                 if (model == null) throw new Exception("BankAccount does not exists in our records!!!");
                 {
                     var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
-                    editViewModel.Partners = Context.Partners.ToList();
+                    editViewModel.Partners = Context.Partners.Where(x => (x.Id == model.PartnerId || x.ParentId == model.PartnerId) && !x.Deleted)
+                        .ToList();
                     editViewModel.Partner = model.Partner;
                     editViewModel.Countries = Context.Countries.ToList();
                     editViewModel.States = Context.States.Where(x => x.CountryId == model.CountryId).ToList();

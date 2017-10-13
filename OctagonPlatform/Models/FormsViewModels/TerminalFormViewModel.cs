@@ -125,11 +125,11 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         [Display(Name = "Surcharged By")]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
+        public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
 
         [Display(Name = "Who Initiates Day Closed")]
-        public Initiate.Who WhoInitiates { get; set; }
+        public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
 
         [Required]
         [Display(Name = "Percent Charged By CryptoTransaction")]

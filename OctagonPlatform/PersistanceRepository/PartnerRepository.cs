@@ -46,7 +46,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 return new PartnerFormViewModel()
                 {
-                    Parents = Table.Where(x => !x.Deleted).ToList(),
+                    Parents = Table.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     ParentId = parentId,
                     Status = StatusType.Status.Active,
                     Parent = Context.Partners.SingleOrDefault(x => x.Id == parentId),
@@ -139,7 +139,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Id = partner.Id,
                         ParentId = partner.ParentId,
                         Parent = partner.Parent,
-                        Parents = Table.Where(x => !x.Deleted).ToList(),
+                        Parents = Table.Where(x => (x.Id == partner.ParentId || x.ParentId == partner.ParentId) && !x.Deleted).ToList(),
                         BusinessName = partner.BusinessName,
                         Address1 = partner.Address1,
                         Address2 = partner.Address2,
@@ -218,7 +218,7 @@ namespace OctagonPlatform.PersistanceRepository
                     Id = viewModel.Id,
                     ParentId = viewModel.ParentId,
                     Parent = Context.Partners.SingleOrDefault(x => x.Id == viewModel.ParentId),
-                    Parents = Table.Where(x => !x.Deleted).ToList(),
+                    Parents = Table.Where(x => (x.Id == viewModel.ParentId || x.ParentId == viewModel.ParentId) && !x.Deleted).ToList(),
                     BusinessName = viewModel.BusinessName,
                     Address1 = viewModel.Address1,
                     Address2 = viewModel.Address2,

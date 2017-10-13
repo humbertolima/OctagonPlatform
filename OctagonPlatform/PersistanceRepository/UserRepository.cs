@@ -41,7 +41,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var viewModel = new UserFormViewModel()
                 {
 
-                    Partners = Context.Partners.ToList(),
+                    Partners = Context.Partners.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     Status = StatusType.Status.Active,
                     Partner = Context.Partners.SingleOrDefault(x => x.Id == parentId),
                     SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
@@ -99,7 +99,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Name = result.Name,
                         PartnerId = result.PartnerId,
                         Partner = result.Partner,
-                        Partners = Context.Partners,
+                        Partners = Context.Partners.Where(x => (x.Id == result.PartnerId || x.ParentId == result.PartnerId) && !x.Deleted).ToList(),
                         Permissions = result.Permissions,
                         Phone = result.Phone,
                         Status = result.Status,
@@ -257,12 +257,12 @@ namespace OctagonPlatform.PersistanceRepository
                     Name = viewModel.Name,
                     PartnerId = viewModel.PartnerId,
                     Partner = Context.Partners.SingleOrDefault(x => x.Id == viewModel.PartnerId),
-                    Partners = Context.Partners,
+                    Partners = Context.Partners.Where(x =>(x.Id == viewModel.PartnerId || x.ParentId == viewModel.PartnerId) && !x.Deleted).ToList(),
                     Phone = viewModel.Phone,
                     Status = viewModel.Status,
                     UserName = viewModel.UserName,
                     SetOfPermissions = viewModel.SetOfPermissions,
-                    Error = viewModel.Error,
+                    Error = viewModel.Error
                 };
             }
             catch (Exception ex)

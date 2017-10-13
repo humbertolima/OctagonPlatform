@@ -211,13 +211,13 @@
     </Compile>
     <Compile Include="Helpers\AccountType.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
-    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
-    <Compile Include="Helpers\Initiate.cs" />
+    <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\NumberOfCassettes.cs" />
@@ -226,7 +226,7 @@
     <Compile Include="Helpers\Settled.cs" />
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Helpers\StringValidation.cs" />
-    <Compile Include="Helpers\SurchargeType.cs" />
+    <Compile Include="Helpers\SurchargedBy.cs" />
     <Compile Include="Helpers\TerminalIdGenerator.cs" />
     <Compile Include="Migrations\201708160653179_Initial.cs" />
     <Compile Include="Migrations\201708160653179_Initial.Designer.cs">

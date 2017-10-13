@@ -1,6 +1,6 @@
 ﻿namespace OctagonPlatform.Helpers
 {
-    public static class Constants
+    public static class InterchangeConstants
     {
         public const double TotalInterchangeAmount = 0.21;
 

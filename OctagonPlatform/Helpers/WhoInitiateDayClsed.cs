@@ -1,6 +1,6 @@
 ﻿namespace OctagonPlatform.Helpers
 {
-    public class Initiate
+    public class WhoInitiateDayClsed
     {
         public enum Who
         {

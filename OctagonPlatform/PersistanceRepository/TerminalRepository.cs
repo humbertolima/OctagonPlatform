@@ -88,9 +88,9 @@ namespace OctagonPlatform.PersistanceRepository
                     States = Context.States.Where(x => x.CountryId == 231).ToList(),
                     Status = StatusType.Status.Active,
                     Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
-                    Partners = Context.Partners.Where(x => !x.Deleted).ToList(),
+                    Partners = Context.Partners.Where(x => (x.Id == partnerId || x.ParentId == partnerId) && !x.Deleted).ToList(),
                     PartnerId = partnerId,
-                    Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId),
+                    Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted),
                     LocationTypes = Context.LocationTypes.ToList(),
                     Makes = Context.Makes.ToList(),
                     Models = Context.Models.ToList(),
@@ -99,9 +99,9 @@ namespace OctagonPlatform.PersistanceRepository
                     ModelId = 1,
                     CommunicationType = CommunicationType.Communication.TcpIp,
                     EmvReady = true,
-                    WhoInitiates = Initiate.Who.Host,
-                    BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
-                    SurchargeType = SurchargeType.SurchargeTypes.Greater
+                    WhoInitiates = WhoInitiateDayClsed.Who.Host,
+                    BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == partnerId && !x.Deleted).ToList(),
+                    SurchargeType = SurchargedBy.SurchargeTypes.Greater
                 };
             }
             catch (Exception ex)
@@ -130,13 +130,13 @@ namespace OctagonPlatform.PersistanceRepository
                     terminalViewModel.Countries = Context.Countries.ToList();
                     terminalViewModel.States = Context.States.Where(x => x.CountryId == terminal.CountryId).ToList();
                     terminalViewModel.Cities = Context.Cities.Where(x => x.StateId == terminal.StateId).ToList();
-                    terminalViewModel.Partners = Context.Partners.Where(x => !x.Deleted).ToList();
+                    terminalViewModel.Partners = Context.Partners.Where(x => (x.Id == terminal.PartnerId || x.ParentId == terminal.PartnerId) && !x.Deleted).ToList();
                     terminalViewModel.Partner = terminal.Partner;
                     terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
                     terminalViewModel.Makes = Context.Makes.ToList();
                     terminalViewModel.Models = Context.Models.ToList();
                     terminalViewModel.DefaultBankAccount = terminalViewModel.DefaultBankAccount;
-                    terminalViewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
+                    terminalViewModel.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == terminal.PartnerId && !x.Deleted).ToList();
                     return terminalViewModel;
                 }
             }
@@ -254,8 +254,8 @@ namespace OctagonPlatform.PersistanceRepository
                 viewModel.ModelId = 1;
                 viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
                 viewModel.EmvReady = true;
-                viewModel.WhoInitiates = Initiate.Who.Host;
-                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
+                viewModel.WhoInitiates = WhoInitiateDayClsed.Who.Host;
+                viewModel.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == viewModel.PartnerId && !x.Deleted).ToList();
                 return viewModel;
             }
             catch (Exception ex)
