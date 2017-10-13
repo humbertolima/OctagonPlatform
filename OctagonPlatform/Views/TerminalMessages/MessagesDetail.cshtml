@@ -1,0 +1,19 @@
+﻿@model Dictionary<string, string>
+
+<table class="table table-striped table-hover ">
+
+    <tr class="info">
+        <th>Field Label</th>
+        <th>Value</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Key</td>
+                <td>@item.Value</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

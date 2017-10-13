@@ -221,7 +221,6 @@ namespace OctagonPlatform.Controllers
         {
             var terminal = _repository.TerminalDetails(terminalId);
             return PartialView("Sections/Contacts", terminal);
-
         }
 
         [HttpPost]
@@ -229,7 +228,6 @@ namespace OctagonPlatform.Controllers
         {
             var terminal = _repository.TerminalDetails(terminalId);
             return PartialView("Sections/GeneralInfo", terminal);
-
         }
 
         [HttpPost]

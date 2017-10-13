@@ -569,6 +569,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
+    <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
@@ -581,6 +582,7 @@
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
     <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ISurchargeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalContactRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
@@ -613,6 +615,7 @@
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerRepository.cs" />
+    <Compile Include="PersistanceRepository\SurchargeRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
@@ -956,6 +959,7 @@
     <Content Include="Views\VaultCash\Edit.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\TerminalMessages\Index.cshtml" />
+    <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
