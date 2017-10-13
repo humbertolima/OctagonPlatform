@@ -564,6 +564,14 @@
     <Compile Include="Migrations\201710131904558_AddTerminalsAlerts.Designer.cs">
       <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131956336_AddTerminalsAlerts2.cs" />
+    <Compile Include="Migrations\201710131956336_AddTerminalsAlerts2.Designer.cs">
+      <DependentUpon>201710131956336_AddTerminalsAlerts2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.cs" />
+    <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.Designer.cs">
+      <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1246,6 +1254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131904558_AddTerminalsAlerts.resx">
       <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131956336_AddTerminalsAlerts2.resx">
+      <DependentUpon>201710131956336_AddTerminalsAlerts2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132121410_modifiedTerminalAlert.resx">
+      <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

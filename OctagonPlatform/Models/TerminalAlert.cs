@@ -13,12 +13,12 @@ namespace OctagonPlatform.Models
         public int Id { get; set; }
 
         [Required]
-        public int TerminalId { get; set; }
+        public string TerminalId { get; set; }
         public Terminal Terminal { get; set; }
 
         public bool Notificated { get; set; }
 
-        public int CashAvailable { get; set; }
+        public string CashAvailable { get; set; }
         public string AlarmChestdooropen { get; set; }
         public string AlarmTopdooropen { get; set; }
         public string AlarmSupervisoractive { get; set; }
