@@ -33,6 +33,7 @@ namespace OctagonPlatform.Models
         public DbSet<BindedKey> BindedKeys { get; set; }
         public DbSet<Dispute> Disputes { get; set; }
         public DbSet<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
+        public DbSet<TerminalAlert> TerminalAlerts{ get; set; }
         public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
 

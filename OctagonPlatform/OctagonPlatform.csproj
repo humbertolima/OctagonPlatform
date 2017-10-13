@@ -618,6 +618,7 @@
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
     <Compile Include="Models\Terminal.cs" />
+    <Compile Include="Models\TerminalAlert.cs" />
     <Compile Include="Models\TerminalAlertConfig.cs" />
     <Compile Include="Models\TerminalContact.cs" />
     <Compile Include="Models\TerminalMessage.cs" />
