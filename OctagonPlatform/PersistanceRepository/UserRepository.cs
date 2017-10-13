@@ -170,7 +170,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
                     var user = Table.SingleOrDefault(
-                        x => x.UserName == viewModel.UserName || x.Email == viewModel.Email);
+                        x => (x.UserName == viewModel.UserName || x.Email == viewModel.Email) && !x.Deleted);
                     if (user != null && !user.Deleted) throw new Exception("User already exists in our records!!!");
 
                     if (user != null && user.Deleted)

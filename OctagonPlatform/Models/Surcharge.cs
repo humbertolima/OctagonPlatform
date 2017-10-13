@@ -49,10 +49,5 @@ namespace OctagonPlatform.Models
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
 
-        public void Calc_SplitAmountPercent()
-        {
-            var surcharge = Terminal.SurchargeAmountFee;
-        }
-
     }
 }

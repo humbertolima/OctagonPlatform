@@ -150,7 +150,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var model = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName);
+                    var model = Table.SingleOrDefault(c => (c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName) && !c.Deleted);
                     if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
 
                     if (model != null && model.Deleted) Table.Remove(model);
