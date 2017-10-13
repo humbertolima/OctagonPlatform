@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -37,7 +36,6 @@ namespace OctagonPlatform.PersistanceRepository
                     Id = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
                     BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList(),
-                    SettledType = Settled.SettledType.Monthly,
                     StartDate = DateTime.Now,
                     StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day)
                 };
@@ -135,7 +133,6 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted).ToList();
-                viewModel.SettledType = Settled.SettledType.Monthly;
                 viewModel.StartDate = DateTime.Now;
                 viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
                 return viewModel;

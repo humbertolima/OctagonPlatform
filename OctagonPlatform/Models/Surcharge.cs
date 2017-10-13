@@ -36,7 +36,7 @@ namespace OctagonPlatform.Models
         public double SplitAmountPercent { get; set; }
 
         [Required]
-        public Settled.SettledType SettledType { get; set; }
+        public SurchargeSettled.SettledType SettledType { get; set; }
 
         public bool Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }

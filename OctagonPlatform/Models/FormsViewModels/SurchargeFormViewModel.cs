@@ -49,6 +49,6 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         [Display(Name = "Settled...")]
-        public Settled.SettledType SettledType { get; set; }
+        public SurchargeSettled.SettledType SettledType { get; set; }
     }
 }

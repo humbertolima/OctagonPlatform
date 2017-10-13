@@ -1,6 +1,6 @@
 ﻿namespace OctagonPlatform.Helpers
 {
-    public class Settled
+    public class SurchargeSettled
     {
         public enum SettledType
         {
