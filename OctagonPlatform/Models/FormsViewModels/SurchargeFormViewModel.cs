@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
+
     public class SurchargeFormViewModel
     { 
         public int Id { get; set; }

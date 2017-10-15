@@ -1,2 +1,95 @@
-﻿@model OctagonPlatform.Models.Surcharge
+﻿@model IEnumerable<OctagonPlatform.Models.Surcharge>
+    
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    @Html.ActionLink(
+                        linkText: "Add Surcharge",
+                        actionName: "Create",
+                        controllerName: "Surcharge",
+                        routeValues: new
+                        {
+                            terminalId = ViewBag.TerminalId
+                        },
+                        htmlAttributes: null
+                        )
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+<p class="alert alert-info">
+    <strong>@ViewBag.Error</strong>
+</p>
+<table class="table table-striped table-hover ">
+    <thead>
+    <tr>
+        <th>BankAccount</th>
+        <th>BankName</th>
+        <th>Split Amount</th>
+        <th>Split Percentage</th>
+        <th>Effective Date</th>
+        <th>Stop Date</th>
+       
+    </tr>
+    </thead>
+
+    @if (Model != null)
+    {
+        <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>@item.BankAccount.NickName</td>
+                <td>@item.BankAccount.BankName</td>
+                <td>@item.SplitAmount</td>
+                <td>@item.SplitAmountPercent</td>
+                <td>@item.StartDate.ToShortDateString()</td>
+                <td>@item.StopDate.ToShortDateString()</td>
+                <td>
+                    <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                                linkText: "Edit",
+                                                                actionName: "Edit",
+                                                                controllerName: "Surcharge",
+                                                                routeValues: new
+                                                                {
+                                                                    id = item.Id
+                                                                },
+                                                                htmlAttributes: null
+                                                                )
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id},
+                        new { onclick = "return confirm('Are sure wants to delete?');" })
+                </td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                    linkText: "Details",
+                                                                    actionName: "Details",
+                                                                    controllerName: "Surcharge",
+                                                                    routeValues: new
+                                                                    {
+                                                                        id = item.Id
+                                                                    },
+                                                                    htmlAttributes: null
+                                                                    )
+                </td>
+            </tr>
+
+        }
+        </tbody>
+    }
+
+    
+</table>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}
 

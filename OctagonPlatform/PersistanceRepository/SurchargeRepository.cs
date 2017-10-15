@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -19,7 +20,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
                     .ToList();
-                if(surcharges.Count <= 0) throw new Exception("Model not found. ");
                 return surcharges;
             }
             catch (Exception ex)
@@ -40,8 +40,9 @@ namespace OctagonPlatform.PersistanceRepository
                     TerminalId = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
                     BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == terminal.PartnerId && !x.Deleted),
-                    StartDate = DateTime.UtcNow,
-                    StopDate = new DateTime(DateTime.UtcNow.Year + 1, DateTime.UtcNow.Month, DateTime.UtcNow.Day)
+                    StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day + 1),
+                    StopDate = new DateTime(DateTime.UtcNow.Year + 1, DateTime.UtcNow.Month, DateTime.UtcNow.Day),
+                    SettledType = SurchargeSettled.SettledType.Daily
                 };
             }
             catch (Exception ex)
@@ -138,8 +139,10 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
-                viewModel.StartDate = DateTime.Now;
+                viewModel.StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,
+                    DateTime.UtcNow.Day + 1);
                 viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
+                viewModel.SettledType = SurchargeSettled.SettledType.Daily;
                 return viewModel;
             }
             catch (Exception ex)

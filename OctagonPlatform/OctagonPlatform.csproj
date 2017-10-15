@@ -808,8 +808,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -888,6 +886,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -903,6 +904,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
+    <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -965,7 +967,6 @@
     <Content Include="Views\Terminals\Sections\Documents.cshtml" />
     <Content Include="Views\Terminals\Sections\Notes.cshtml" />
     <Content Include="Views\Terminals\Sections\Contacts.cshtml" />
-    <Content Include="Views\Terminals\Sections\SurchargeSplits.cshtml" />
     <Content Include="Views\Terminals\Sections\Interchanges.cshtml" />
     <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagment.cshtml" />
@@ -985,8 +986,6 @@
     <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Search.cshtml" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Terminals\Sections\EditTerminalConfig.cshtml" />
     <Content Include="Views\Terminals\Sections\ConfigNotification.cshtml" />
     <Content Include="Views\VaultCash\Create.cshtml" />
@@ -997,6 +996,9 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
+    <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
