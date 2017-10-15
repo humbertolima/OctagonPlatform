@@ -24,6 +24,8 @@ namespace OctagonPlatform.Models
 
         public virtual ICollection<TerminalMessage> Messages { get; set; }
 
+        public ICollection<TerminalAlert> TerminalAlerts { get; set; }
+
         public ICollection<TerminalContact> TerminalContacts { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
