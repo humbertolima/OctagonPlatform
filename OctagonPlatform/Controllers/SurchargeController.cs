@@ -70,16 +70,23 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(SurchargeFormViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-
-                return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
-            }
             try
             {
+                if (!ModelState.IsValid && viewModel.Id > 0)
+                {
+
+                    return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
+                }
+                if (!ModelState.IsValid && viewModel.Id == 0)
+                {
+                    return View("SurchargeForm",
+                        _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId));
+                }
+
+
                 _surchargeRepository.SaveSurcharge(viewModel, viewModel.Id == 0 ? "Create" : "Edit");
 
-                return RedirectToAction("Details", "Terminals", new { id = viewModel.TerminalId });
+                return RedirectToAction("Details", "Terminals", new {id = viewModel.TerminalId});
             }
             catch (DbEntityValidationException exDb)
             {
@@ -91,24 +98,42 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = "Validation error editing VaultCash "
                                 + ex.Message;
-                return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
+                return View("SurchargeForm", viewModel.Id == 0 ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId) : _surchargeRepository.SurchargeToEdit(viewModel.Id));
             }
         }
 
-        [HttpDelete]
         public ActionResult Delete(int id)
         {
             try
             {
-                _surchargeRepository.DeleteSurcharge(id);
-                var surcharge = _surchargeRepository.SurchargeToEdit(id);
-                return RedirectToAction("Details", "Terminals", new { id = surcharge.TerminalId });
-
+                return View(_surchargeRepository.SurchargeToEdit(id));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return PartialView("Error");
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id, int terminalId)
+        {
+            try
+            {
+                _surchargeRepository.DeleteSurcharge(id);
+                return RedirectToAction("Details", "Terminals", new { id = terminalId });
+            }
+            catch (DbEntityValidationException exDb)
+
+            {
+                ViewBag.Error = "Validation error deleting VaultCash" + exDb.Message;
+                return RedirectToAction("Details", "Terminals", new { id = terminalId });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting VaultCash" + ex.Message;
+                return RedirectToAction("Details", "Terminals", new { id = terminalId});
             }
         }
     }

@@ -41,10 +41,10 @@
 
     @if (Model != null)
     {
-        <tbody>
-        @foreach (var item in Model)
-        {
 
+        foreach (var item in Model)
+        {
+            <tbody>
             <tr>
                 <td>@item.BankAccount.NickName</td>
                 <td>@item.BankAccount.BankName</td>
@@ -65,29 +65,30 @@
                                                                 )
                 </td>
                 <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id},
-                        new { onclick = "return confirm('Are sure wants to delete?');" })
+                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                                 linkText: "Delete",
+                                                                 actionName: "Delete",
+                                                                 controllerName: "Surcharge",
+                                                                 routeValues: new
+                                                                 {
+                                                                     id = item.Id
+                                                                 },
+                                                                 htmlAttributes: null)
                 </td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
-                                                                    linkText: "Details",
-                                                                    actionName: "Details",
-                                                                    controllerName: "Surcharge",
-                                                                    routeValues: new
-                                                                    {
-                                                                        id = item.Id
-                                                                    },
-                                                                    htmlAttributes: null
-                                                                    )
-                </td>
+
             </tr>
 
+
+            </tbody>
+            
         }
-        </tbody>
     }
 
-    
+
+
 </table>
+
+
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")

@@ -97,27 +97,15 @@
         </dd>
     </dl>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Delete", "TerminalContacts", new {id = Model.Id, terminalId = Model.TerminalId})) {
     @Html.AntiForgeryToken()
 
     <div class="form-group">
         <div class="col-lg-10 col-lg-offset-2">
-            <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-            @Html.ActionLink(
-                linkText: "Delete",
-                actionName: "Delete",
-                controllerName: "TerminalContacts",
-                routeValues: new
-                {
-                    Model.Id
-                },
-                htmlAttributes: new
-                {
-                    @type = "submit",
-                    @class = "btn btn-primary"
-
-                }
-                )
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> 
+                <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+            </div>
         </div>
     </div>
 }
