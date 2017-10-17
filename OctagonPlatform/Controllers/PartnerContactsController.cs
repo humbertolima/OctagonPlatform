@@ -138,24 +138,24 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, int partnerId)
         {
             try
             {
                 try
                 {
                     _partnerContactRepository.DeletePartner(id);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = partnerId });
                 }
                 catch (DbEntityValidationException exDb)
                 {
                     ViewBag.Error = "Validation error deleting Contact" + exDb.Message;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new {id = partnerId});
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Error = "Validation error deleting Contact" + ex.Message;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", "Partners", new { id = partnerId });
                 }
             }
             catch (Exception ex)

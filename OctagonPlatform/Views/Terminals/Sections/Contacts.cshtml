@@ -48,39 +48,18 @@
     <tbody id="listOfTerminalContacts">
     @foreach (var item in Model.TerminalContacts)
     {
-        <tr class="info">
-            <td>@item.TerminalId</td>
-            <td>@item.Name</td>
-            <td>@item.LastName</td>
-            <td>@item.Phone</td>
-            <td>@item.Email</td>
-            <td>@item.Address1</td>
-            <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
-                                                            linkText: "Edit",
-                                                            actionName: "Edit",
-                                                            controllerName: "TerminalContacts",
-                                                            routeValues: new
-                                                            {
-                                                                id = item.Id
-                                                            },
-                                                            htmlAttributes: null
-                                                            )</td>
-            <td>
-                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
-                                                             linkText: "Delete",
-                                                             actionName: "Delete",
-                                                             controllerName: "TerminalContacts",
-                                                             routeValues: new
-                                                             {
-                                                                 id = item.Id,
-                                                                 terminalId = Model.Id
-                                                             },
-                                                             htmlAttributes: null
-                                                             )
-            </td>
-            <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
-                                                                linkText: "Details",
-                                                                actionName: "Details",
+        if (!item.Deleted)
+        {
+            <tr class="info">
+                <td>@item.TerminalId</td>
+                <td>@item.Name</td>
+                <td>@item.LastName</td>
+                <td>@item.Phone</td>
+                <td>@item.Email</td>
+                <td>@item.Address1</td>
+                <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                                linkText: "Edit",
+                                                                actionName: "Edit",
                                                                 controllerName: "TerminalContacts",
                                                                 routeValues: new
                                                                 {
@@ -88,7 +67,31 @@
                                                                 },
                                                                 htmlAttributes: null
                                                                 )</td>
-        </tr>
+                <td>
+                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                                 linkText: "Delete",
+                                                                 actionName: "Delete",
+                                                                 controllerName: "TerminalContacts",
+                                                                 routeValues: new
+                                                                 {
+                                                                     id = item.Id,
+                                                                     terminalId = Model.Id
+                                                                 },
+                                                                 htmlAttributes: null
+                                                                 )
+                </td>
+                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                    linkText: "Details",
+                                                                    actionName: "Details",
+                                                                    controllerName: "TerminalContacts",
+                                                                    routeValues: new
+                                                                    {
+                                                                        id = item.Id
+                                                                    },
+                                                                    htmlAttributes: null
+                                                                    )</td>
+            </tr>
+        }
     }
 
 </table>

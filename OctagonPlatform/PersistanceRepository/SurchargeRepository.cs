@@ -125,7 +125,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var surcharge = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
                 if (surcharge == null) throw new Exception("Model not found. ");
-                Delete(surcharge);
+                Delete(id);
             }
             catch (Exception ex)
             {

@@ -41,6 +41,9 @@ namespace OctagonPlatform
             container.RegisterType<IVaultCashRepository, VaultCashRespository>();
 
             container.RegisterType<ISurchargeRepository, SurchargeRepository>();
+
+            container.RegisterType<ITerminalAlertRepository, TerminalAlertRepository>();
+
         }
     }
 }

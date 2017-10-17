@@ -149,17 +149,17 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _terminalContactRepository.DeleteTerminalContact(id);
-                return RedirectToAction("Details", "Partners", new { id = terminalId });
+                return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
             catch (DbEntityValidationException exDb)
             {
                 ViewBag.Error = "Validation error deleting Contact" + exDb.Message;
-                return RedirectToAction("Details", "Partners", new { id = terminalId });
+                return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleiting Terminal" + ex.Message;
-                return RedirectToAction("Details", "Partners", new { id = terminalId });
+                return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
         }
 

@@ -97,27 +97,14 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("Delete", "PartnerContacts", new {id = Model.Id, partnerId = Model.PartnerId})) {
         @Html.AntiForgeryToken()
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
+                <input type="submit" value="Delete" class="btn btn-primary" /> 
                 <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-                @Html.ActionLink(
-                    linkText: "Delete",
-                    actionName: "Delete",
-                    controllerName: "PartnerContacts",
-                    routeValues: new
-                    {
-                        Model.Id
-                    },
-                    htmlAttributes: new
-                    {
-                        @type = "submit",
-                        @class = "btn btn-primary"
 
-                    }
-                    )
             </div>
         </div>
     }
