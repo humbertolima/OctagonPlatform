@@ -31,7 +31,7 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
                                 </div>
                                 <div>
                                     @Html.LabelFor(model => model.Password);
-                                    @Html.TextBoxFor(model => model.Password, new {placeholder = "Enter Password"})
+                                    @Html.PasswordFor(model => model.Password, new {placeholder = "Enter Password"})
                                     @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
                                 </div>
                                 <input type="submit" value="Login" class="btn btn-primary btn-block"/>
