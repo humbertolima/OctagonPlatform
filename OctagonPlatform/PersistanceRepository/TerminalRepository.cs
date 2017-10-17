@@ -39,7 +39,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if (item.Id != partnerId)
                         {
-                            terminals.AddRange(Table.Where(x => x.PartnerId == item.Id)
+                            terminals.AddRange(Table.Where(x => x.PartnerId == item.Id && !x.Deleted)
                                 .Include(x => x.Partner)
                                 .Include(x => x.Country)
                                 .Include(x => x.State)

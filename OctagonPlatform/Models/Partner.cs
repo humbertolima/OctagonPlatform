@@ -88,10 +88,9 @@ namespace OctagonPlatform.Models
 
         public ICollection<BankAccount> BankAccounts { get; set; }
 
-        [DataType(DataType.DateTime)]
-        public DateTime FreeSurchargeFeeContractConclude { get; set; }
+        [Required]
+        public double Interchange { get; set; }
 
-        public bool IsFreeSurchargeFeeContractFinished { get; set; }
              
         public Partner()
         {
@@ -125,10 +124,6 @@ namespace OctagonPlatform.Models
 
         public bool Deleted { get; set; }
 
-        public void FreeSurchargeFeeContractCalculation()
-        {
-            if (DateTime.UtcNow.CompareTo(FreeSurchargeFeeContractConclude) >= 0)
-                IsFreeSurchargeFeeContractFinished = true;
-        }
+       
     }
 }

@@ -84,7 +84,6 @@ namespace OctagonPlatform.PersistanceRepository
                     partnerToEdit.Mobile = viewModel.Mobile;
                     partnerToEdit.Fax = viewModel.Fax;
                     partnerToEdit.WebSite = viewModel.WebSite;
-                    partnerToEdit.FreeSurchargeFeeContractConclude = viewModel.FreeSurchargeFeeContractConclude;
                     Edit(partnerToEdit);
                 }
                 else 
@@ -110,8 +109,8 @@ namespace OctagonPlatform.PersistanceRepository
                         Mobile = viewModel.Mobile,
                         Fax = viewModel.Fax,
                         WebSite = viewModel.WebSite,
-                        FreeSurchargeFeeContractConclude = viewModel.FreeSurchargeFeeContractConclude
-                    };
+                        Interchange = InterchangeConstants.ClientInterchangeAmount
+                        };
                     Add(partner);
                 }
             }
@@ -157,8 +156,7 @@ namespace OctagonPlatform.PersistanceRepository
                         WorkPhone = partner.WorkPhone,
                         Mobile = partner.Mobile,
                         Fax = partner.Fax,
-                        WebSite = partner.WebSite,
-                        FreeSurchargeFeeContractConclude = partner.FreeSurchargeFeeContractConclude
+                        WebSite = partner.WebSite
                     };
                 }
             }
