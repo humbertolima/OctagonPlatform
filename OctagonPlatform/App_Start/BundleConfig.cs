@@ -40,6 +40,7 @@ namespace OctagonPlatform
 
             bundles.Add(new ScriptBundle("~/bundles/user").Include(
                 "~/Scripts/User.js"));
+            
         }
     }
 }

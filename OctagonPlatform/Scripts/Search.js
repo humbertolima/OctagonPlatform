@@ -1,86 +1,87 @@
 ﻿
+$(document).ready(function () {
 
-$("#searchPartner").keydown(function () {
+    $("#searchPartner").keydown(function() {
 
-    var searchText = $("#searchPartner").val();
-    $.ajax({
-        type: "Post",
-        url: "Partners/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchPartner").val();
+        $.ajax({
+            type: "Post",
+            url: "Partners/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfPartners").html(data);
-        }
+                $("#listOfPartners").html(data);
+            }
+        });
     });
-});
 
-$("#searchPartnerContact").keydown(function () {
+    $("#searchPartnerContact").keydown(function() {
 
-    var searchText = $("#searchPartnerContact").val();
-    $.ajax({
-        type: "Post",
-        url: "PartnerContacts/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchPartnerContact").val();
+        $.ajax({
+            type: "Post",
+            url: "PartnerContacts/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfPartnersContact").html(data);
-        }
+                $("#listOfPartnersContact").html(data);
+            }
+        });
     });
-});
-$("#searchBA").keydown(function () {
+    $("#searchBA").keydown(function() {
 
-    var searchText = $("#searchBA").val();
-    $.ajax({
-        type: "Post",
-        url: "BankAccount/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchBA").val();
+        $.ajax({
+            type: "Post",
+            url: "BankAccount/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfBA").html(data);
-        }
+                $("#listOfBA").html(data);
+            }
+        });
     });
-});
 
-$("#searchUser").keydown(function () {
+    $("#searchUser").keydown(function() {
 
-    var searchText = $("#searchUser").val();
-    $.ajax({
-        type: "Post",
-        url: "Users/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchUser").val();
+        $.ajax({
+            type: "Post",
+            url: "Users/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfUsers").html(data);
-        }
+                $("#listOfUsers").html(data);
+            }
+        });
     });
-});
 
-$("#searchTerminal").keydown(function () {
+    $("#searchTerminal").keydown(function() {
 
-    var searchText = $("#searchTerminal").val();
-    $.ajax({
-        type: "Post",
-        url: "Terminals/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchTerminal").val();
+        $.ajax({
+            type: "Post",
+            url: "Terminals/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfTerminals").html(data);
-        }
+                $("#listOfTerminals").html(data);
+            }
+        });
     });
-});
 
-$("#searchTerminalContact").keydown(function () {
+    $("#searchTerminalContact").keydown(function() {
 
-    var searchText = $("#searchTerminalContact").val();
-    $.ajax({
-        type: "Post",
-        url: "TerminalContacts/Search?search=" + searchText,
-        datatype: "html",
-        success: function (data) {
+        var searchText = $("#searchTerminalContact").val();
+        $.ajax({
+            type: "Post",
+            url: "TerminalContacts/Search?search=" + searchText,
+            datatype: "html",
+            success: function(data) {
 
-            $("#listOfTerminalContacts").html(data);
-        }
+                $("#listOfTerminalContacts").html(data);
+            }
+        });
     });
+
 });
-
-

@@ -39,20 +39,23 @@
     <tbody id="listOfTerminalContacts">
         @foreach (var item in Model)
         {
-            <tr class="info">
-                <td>@item.TerminalId</td>
-                <td>@item.Name</td>
-                <td>@item.LastName</td>
-                <td>@item.Phone</td>
-                <td>@item.Email</td>
-                <td>@item.Address1</td>
-                <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id, terminalId = item.TerminalId })
-                    
-                </td>
-                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
-            </tr>
+            if (!item.Deleted)
+            {
+                <tr class="info">
+                    <td>@item.TerminalId</td>
+                    <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@item.Address1</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id, terminalId = item.TerminalId})
+
+                    </td>
+                    <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
+                </tr>
+            }
         }
 
 </table>

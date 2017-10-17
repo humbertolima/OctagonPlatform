@@ -39,8 +39,10 @@ namespace OctagonPlatform.PersistanceRepository
                     Id = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
                     BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == terminal.PartnerId).ToList(),
-                    StartDate = DateTime.Now,
+                    StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day + 1),
                     StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day)
+                    
+                    
                 };
             }
             catch (Exception ex)
@@ -136,7 +138,8 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
-                viewModel.StartDate = DateTime.Now;
+                viewModel.StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,
+                    DateTime.UtcNow.Day + 1);
                 viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
                 return viewModel;
             }

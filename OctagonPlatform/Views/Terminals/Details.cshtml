@@ -12,7 +12,7 @@
 @Html.ActionLink(linkText: "View messages", actionName: "Index", controllerName: "TerminalMessages", routeValues: new
 {
     terminalId = Model.TerminalId
-}, htmlAttributes: null);
+}, htmlAttributes: null)
 
 <div class="panel-group" style="width: 33%; float:right;">
     <div class="panel panel-default">
@@ -92,8 +92,16 @@
 <br />
 <hr />
 <br />
-<div id="surcharges">
-    @Html.Partial("Sections/SurchargeSplits", Model)
+<div class="panel-group" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="alert-info">@Ajax.ActionLink("Surcharges", "Index", "Surcharge", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getSurcharge", LoadingElementId = "loading5", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getSurcharge" })</h3>
+
+            <div id="getSurcharge" class="panel-collapse collapse">
+                <img id="loading5" style="display:none" src="~/Content/loading_icon.gif" alt="" />
+            </div>
+        </div>
+    </div>
 </div>
 <br />
 <hr />
