@@ -229,7 +229,6 @@
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
-    <Compile Include="Helpers\PartnerFreeSurchargeFeeContractCalculation.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
@@ -583,6 +582,10 @@
     <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.cs" />
     <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.Designer.cs">
       <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710172032557_PartnerUpdate.cs" />
+    <Compile Include="Migrations\201710172032557_PartnerUpdate.Designer.cs">
+      <DependentUpon>201710172032557_PartnerUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
@@ -1196,6 +1199,11 @@
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
     <Content Include="Views\TerminalAlerts\Index.cshtml" />
+    <Content Include="Views\Home\IndexOld.cshtml" />
+    <Content Include="Views\Surcharge\Delete.cshtml" />
+    <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutOctagon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1462,6 +1470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710132121410_modifiedTerminalAlert.resx">
       <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710172032557_PartnerUpdate.resx">
+      <DependentUpon>201710172032557_PartnerUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
