@@ -6,8 +6,7 @@
         {
             Active = 1,
             Inactive = 2,
-            CompleteActive = 3,
-            IncompleteInactive = 4
+            IncompleteActive = 3
         }
     }
 }
