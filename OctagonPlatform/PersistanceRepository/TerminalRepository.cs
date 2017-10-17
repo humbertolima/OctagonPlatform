@@ -51,7 +51,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
 
                 return terminals;
-                
+
             }
             catch (Exception ex)
             {
@@ -264,33 +264,37 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public TerminalAlertConfig GetConfigNotification(int terminalId)
+        public TerminalAlertIngnoredViewModel GetConfigNotification(int id)
         {
             Terminal terminal = Table
                 .Include(c => c.TerminalAlertConfigs)
-                .FirstOrDefault(c => c.Id == terminalId);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
-
-            var terminalConfigs = new TerminalAlertConfig();
+                .FirstOrDefault(c => c.Id == id);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
             if (terminal.TerminalAlertConfigs == null)
             {
-                terminalConfigs = new TerminalAlertConfig();
+                terminal.TerminalAlertConfigs = new TerminalAlertConfig();
             }
-            else { terminalConfigs = terminal.TerminalAlertConfigs; }
+            var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
 
-            return terminalConfigs;
+            terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
+
+            return terminalAlertConfigViewModel;
         }
 
-        public TerminalAlertConfig SetConfigNotification(TerminalAlertConfig terminalAlertConfig, int terminalId)
+        public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
-            var terminal = Table
-                .Include(c => c.TerminalAlertConfigs)
-                .FirstOrDefault(c => c.Id == terminalId);
+            Terminal terminal = new Terminal();
+            TerminalAlertConfig terminalAlertConfig =  Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
 
-            terminal.TerminalAlertConfigs = terminalAlertConfig;
+                terminal = Table
+                   .Include(c => c.TerminalAlertConfigs)
+                   .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
 
-            Edit(terminal);
+                terminal.TerminalAlertConfigs = terminalAlertConfig;
 
-            return terminal.TerminalAlertConfigs;
+                Edit(terminal);
+                 
+            
+            return terminal;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model OctagonPlatform.Models.TerminalAlertConfig
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalAlertIngnoredViewModel
 
 <table class="table table-striped table-hover ">
 
@@ -49,10 +49,11 @@
 
             <h3 class="alert-info">Edit Config Alert</h3>
 
-            @using (Html.BeginForm("EditConfigAlert", "Terminals"))
+            @using (Html.BeginForm("SetConfigNotification", "Terminals"))
             {
+                @Model
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.TerminalId)
                 <p class="alert alert-danger">
                     All fields are <strong>required.</strong>
                     @ViewBag.Error

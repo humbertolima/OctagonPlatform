@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -11,65 +9,20 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using OctagonPlatform.Models;
 using Newtonsoft.Json;
+using OctagonPlatform.Models.InterfacesRepository;
+using System.Web.Helpers;
+using System;
 
 namespace ApiConfig.Controllers
 {
     public class TerminalAlertsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/TerminalAlerts
-        public IQueryable<TerminalAlert> GetTerminalAlerts()
+        public void PostSendSurcharge(HttpRequestMessage alerts)
         {
-            return db.TerminalAlerts;
-        }
-
-        // GET: api/TerminalAlerts/5
-        [ResponseType(typeof(TerminalAlert))]
-        public async Task<IHttpActionResult> GetTerminalAlert(int id)
-        {
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            if (terminalAlert == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(terminalAlert);
-        }
-
-        // PUT: api/TerminalAlerts/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutTerminalAlert(int id, TerminalAlert terminalAlert)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != terminalAlert.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(terminalAlert).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TerminalAlertExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var p = alerts.Content.ReadAsStringAsync().Result;
+            //esto devuelve el surcharge de la terminal. tiene que conicidir con lo que me manda el ATM
         }
 
         // POST: api/TerminalAlerts
@@ -79,31 +32,40 @@ namespace ApiConfig.Controllers
             //if (!ModelState.IsValid)
             //{
             //    return BadRequest(ModelState);
-            ////}
-            //List<KeyValuePair<string, string>> prueba = new List<KeyValuePair<string, string>>();
-            //prueba.Add(new KeyValuePair<string, string>("TerminalId", "TR024019"));
-            //prueba.Add(new KeyValuePair<string, string>("CashAvailable", "345"));
+            //}
+            List<KeyValuePair<string, string>> prueba = new List<KeyValuePair<string, string>>();
+            prueba.Add(new KeyValuePair<string, string>("TerminalId", "TR024019"));
+            prueba.Add(new KeyValuePair<string, string>("CashAvailable", "345"));
 
 
             var p = alerts.Content.ReadAsStringAsync().Result;
             List<KeyValuePair<string, string>> list = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(p);
             TerminalAlert terminalAlert = new TerminalAlert();
 
-           // terminalAlert.TerminalId = list.FirstOrDefault(c => c.Key == "TerminalId").Value;
-           // terminalAlert.CashAvailable = Convert.ToInt32(list.FirstOrDefault(c => c.Key == "CashAvailable").Value);
-            foreach (var item in list)
+            //terminalAlert.TerminalId = list.FirstOrDefault(c => c.Key == "TerminalId").Value;
+            //terminalAlert.CashAvailable = Convert.ToInt32(list.FirstOrDefault(c => c.Key == "CashAvailable").Value);
+            foreach (var item in prueba)
             {
-                terminalAlert.GetType().GetProperty(item.Key).SetValue(terminalAlert,item.Value);
+                terminalAlert.GetType().GetProperty(item.Key).SetValue(terminalAlert, item.Value);
             }
 
-           
-
-
-
             db.TerminalAlerts.Add(terminalAlert);
-            db.SaveChanges();
-            
-            //return CreatedAtRoute("DefaultApi", new { id = terminalAlert.Id }, terminalAlert);
+            //db.SaveChanges();
+            try
+            {
+                //enviar el correo a los que tengan configurado que les llegue las alertas.
+                var query = db.Terminals
+                    .Include(x => x.Users)
+                    .Include(x => x.TerminalAlertConfigs)
+                    .Include(x => x.TerminalAlerts)
+                    .FirstOrDefault(c => c.TerminalId == terminalAlert.TerminalId);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
         }
 
         // DELETE: api/TerminalAlerts/5

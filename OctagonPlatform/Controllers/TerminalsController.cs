@@ -231,19 +231,19 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult ConfigNotification(int terminalId)
+        public PartialViewResult ConfigNotification(int id)
         {
-            var configNotification = _repository.GetConfigNotification(terminalId);
+            var configNotification = _repository.GetConfigNotification(id);
             return PartialView("Sections/ConfigNotification", configNotification);
         }
 
 
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
-        public ActionResult EditConfigAlert(TerminalAlertConfig terminalAlertConfig, int terminalId)
+        public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
-            var configNotification = _repository.SetConfigNotification(terminalAlertConfig, terminalId);
+            var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
 
-            return RedirectToAction("Details/"+terminalId);
+            return RedirectToAction("Details/" + terminal.Id);
         }
 
         #endregion

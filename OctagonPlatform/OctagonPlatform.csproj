@@ -212,6 +212,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
+    <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
@@ -613,6 +614,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
@@ -621,6 +623,7 @@
     <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
@@ -655,6 +658,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
@@ -1005,6 +1009,7 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
+    <Content Include="Views\TerminalAlerts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
