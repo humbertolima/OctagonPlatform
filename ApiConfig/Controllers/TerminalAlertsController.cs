@@ -38,8 +38,8 @@ namespace ApiConfig.Controllers
             prueba.Add(new KeyValuePair<string, string>("CashAvailable", "345"));
 
 
-            var p = alerts.Content.ReadAsStringAsync().Result;
-            List<KeyValuePair<string, string>> list = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(p);
+            //var p = alerts.Content.ReadAsStringAsync().Result;
+            //List<KeyValuePair<string, string>> list = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(p);
             TerminalAlert terminalAlert = new TerminalAlert();
 
             //terminalAlert.TerminalId = list.FirstOrDefault(c => c.Key == "TerminalId").Value;
@@ -54,11 +54,21 @@ namespace ApiConfig.Controllers
             try
             {
                 //enviar el correo a los que tengan configurado que les llegue las alertas.
+                //no se puede enviar acorreo de alertas que esten ingnoradas.
                 var query = db.Terminals
                     .Include(x => x.Users)
                     .Include(x => x.TerminalAlertConfigs)
                     .Include(x => x.TerminalAlerts)
                     .FirstOrDefault(c => c.TerminalId == terminalAlert.TerminalId);
+
+                WebMail.EnableSsl = true;
+                WebMail.From = "luisrafael.gamez@outlook.com";
+                WebMail.SmtpPort = 25;
+                WebMail.UserName = "luisrafael.gamez@outlook.com";
+                WebMail.SmtpServer = "smtp.live.com";
+                WebMail.Password = "Vv19477002";
+                WebMail.SmtpUseDefaultCredentials = true;
+                WebMail.Send("yasser.osuna@gmail.com", "Alerta de terminal", "Esto es una prueba");
             }
             catch (Exception ex)
             {
