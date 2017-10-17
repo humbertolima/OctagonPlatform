@@ -212,6 +212,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
+    <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
@@ -616,6 +617,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
@@ -624,6 +626,7 @@
     <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
@@ -658,6 +661,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
     <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
@@ -819,6 +823,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -897,9 +903,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <None Include="Scripts\jquery-3.1.1-vsdoc.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -915,7 +918,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
-    <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -978,6 +980,7 @@
     <Content Include="Views\Terminals\Sections\Documents.cshtml" />
     <Content Include="Views\Terminals\Sections\Notes.cshtml" />
     <Content Include="Views\Terminals\Sections\Contacts.cshtml" />
+    <Content Include="Views\Terminals\Sections\SurchargeSplits.cshtml" />
     <Content Include="Views\Terminals\Sections\Interchanges.cshtml" />
     <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagment.cshtml" />
@@ -997,6 +1000,8 @@
     <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Users\Search.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Terminals\Sections\EditTerminalConfig.cshtml" />
     <Content Include="Views\Terminals\Sections\ConfigNotification.cshtml" />
     <Content Include="Views\VaultCash\Create.cshtml" />
@@ -1007,10 +1012,7 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
-    <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
-    <Content Include="Views\Surcharge\Delete.cshtml" />
+    <Content Include="Views\TerminalAlerts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

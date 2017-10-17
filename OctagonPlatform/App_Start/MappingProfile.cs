@@ -64,12 +64,19 @@ namespace OctagonPlatform
 
             CreateMap<Terminal, TerminalFormViewModel>();
 
-            CreateMap<TerminalFormViewModel, TerminalFormViewModel>();
+            //CreateMap<TerminalFormViewModel, TerminalFormViewModel>();
             //Dto to Domain
             CreateMap<TerminalFormViewModel, Terminal>().ForMember(c => c.Id, opt => opt.Ignore());
 
             #endregion
 
+            #region Terminal Alert Ignnored Mapped
+
+            CreateMap<TerminalAlertConfig, TerminalAlertIngnoredViewModel>();
+
+            CreateMap<TerminalAlertIngnoredViewModel, TerminalAlertConfig>();
+            //Dto to Domain
+            #endregion
 
 
             #region TerminalContact Mapping

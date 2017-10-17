@@ -4,7 +4,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class UserLoginViewModel
     {
-
+        [Display(Name = "User Name")]
         [Required(ErrorMessage = "User name is required")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         public string UserName { get; set; }
