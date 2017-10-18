@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
@@ -14,7 +13,6 @@ namespace OctagonPlatform.Models
 
         [Required]
         [Display(Name = "Nick Name")]
-        [Index(IsUnique = true)]
         [StringLength(50)]
         public string NickName { get; set; }
 
@@ -23,12 +21,10 @@ namespace OctagonPlatform.Models
         public string BankName { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         [StringLength(50)]
         public string RoutingNumber { get; set; }
 
         [Required]
-        [Index(IsUnique = true)]
         [StringLength(50)]
         public string AccountNumber { get; set; }
 

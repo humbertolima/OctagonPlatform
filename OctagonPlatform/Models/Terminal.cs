@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
@@ -91,7 +90,6 @@ namespace OctagonPlatform.Models
 
         [Required]
         [Display(Name = "Machine Serial Number")]
-        [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
@@ -179,6 +177,7 @@ namespace OctagonPlatform.Models
 
         [Required]
         [Display(Name = "Surcharge Fee")]
+        [DataType(DataType.Currency)]
         public double SurchargeAmountFee { get; set; }
 
         [Required]
