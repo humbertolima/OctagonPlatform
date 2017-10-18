@@ -212,7 +212,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
-    <Compile Include="Controllers\TerminalAlertsController.cs" />
+    <Compile Include="Controllers\TerminalAlertsController1.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
@@ -626,7 +626,7 @@
     <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
-    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />

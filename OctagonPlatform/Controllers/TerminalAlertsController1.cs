@@ -8,11 +8,11 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class TerminalAlertsController : Controller
+    public class TerminalAlertsController1 : Controller
     {
-        private readonly ITerminalAlertRepository _repository;
+        private readonly ITerminalAlertRepositoryAPI _repository;
 
-        public TerminalAlertsController(ITerminalAlertRepository repository)
+        public TerminalAlertsController1(ITerminalAlertRepositoryAPI repository)
         {
             _repository = repository;
         }
