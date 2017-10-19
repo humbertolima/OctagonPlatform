@@ -78,20 +78,35 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date");
+                var surchargeDefault = Table.SingleOrDefault(x => x.BankAccountId == viewModel.BankAccountId);
+               
 
                 if (action == "Edit")
                 {
-                    var surcharge = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
-                    if(surcharge == null) throw new Exception("Model not found. ");
+
+                    var surcharge = Table.SingleOrDefault(x => x.Id == viewModel.Id);
+                    if (surcharge == null) throw new Exception("Model not found. ");
+                    if (surchargeDefault != null)
+                    {
+                        if (!surchargeDefault.Deleted && surchargeDefault.Id != surcharge.Id)
+                            throw new Exception("This Terminal already has a Surcharge with the same Bank Account. ");
+                        if(surchargeDefault.Deleted)
+                            Table.Remove(surchargeDefault);
+
+                    }
                     Mapper.Map(viewModel, surcharge);
                     Edit(surcharge);
                 }
                 else
                 {
-                    var surcharge = Table.SingleOrDefault(x => (x.Id == viewModel.Id || x.BankAccountId == viewModel.BankAccountId) && !x.Deleted);
-                    if (surcharge != null && !surcharge.Deleted) throw new Exception("This Terminal already has this Surcharge account. ");
-                    if (surcharge != null && surcharge.Deleted)
-                        Table.Remove(surcharge);
+                    if (surchargeDefault != null)
+                    {
+                        if (!surchargeDefault.Deleted)
+                            throw new Exception("This Terminal already has this Surcharge account. ");
+                        Table.Remove(surchargeDefault);
+                    }
+                    
+                    
                     var result = Mapper.Map<SurchargeFormViewModel, Surcharge>(viewModel);
                     Add(result);
                 }

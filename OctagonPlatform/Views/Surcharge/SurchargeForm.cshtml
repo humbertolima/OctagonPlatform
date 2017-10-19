@@ -31,8 +31,8 @@
             @Html.ValidationMessageFor(m => m.SplitAmount)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.SplitAmountPercent)%
-            @Html.TextBoxFor(m => m.SplitAmountPercent, new { placeholder = "%", @class = "form-control", autofocus = "autofocus" })
+            @Html.LabelFor(m => m.SplitAmountPercent)
+            @Html.TextBoxFor(m => m.SplitAmountPercent, new { placeholder = "%", @class = "form-control", autofocus = "autofocus" })%
             @Html.ValidationMessageFor(m => m.SplitAmountPercent)
         </div>
         <div class="form-group">
@@ -67,12 +67,14 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $("#SplitAmount").keyup(function() {
-            var amount = $("#SplitAmount").val();
-            var percent = Math.ceil((100 * amount) / @Model.Terminal.SurchargeAmountFee);
+        if (@Model.Terminal.SurchargeAmountFee > 0) {
+            $("#SplitAmount").keyup(function() {
+                var amount = $("#SplitAmount").val();
+                var percent = Math.ceil((100 * amount) / @Model.Terminal.SurchargeAmountFee);
 
-            $("#SplitAmountPercent").val(percent);
-        });
+                $("#SplitAmountPercent").val(percent);
+            });
+        }
     </script>
     <script>
         $("#SplitAmountPercent").keyup(function() {
