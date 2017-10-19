@@ -1,27 +1,45 @@
 ﻿<div class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
-            
+            <!--<li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                </div> -->
+            <!-- /input-group -->
+           <!-- </li> -->
             <li>
-                <a href="@Url.Action("Index", "Dashboard", new { logo = ViewBag.Logo, businessName = ViewBag.BusinessName })"><i class="fa fa-table fa-fw"></i> Dashboard</a>
+             <!--   <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a> -->
+                <a href="@Url.Action("Index", "Dashboard", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+                    <i class="fa fa-dashboard fa-fw"></i> Dashboard
+                </a>
             </li>
             <li>
-                <a href="@Url.Action("Index", "Terminals")"><i class="fa fa-table fa-fw"></i> Terminals</a>
+                <a href="@Url.Action("Index", "Terminals")">
+                    <i class="fa fa-desktop fa-fw"></i> Terminals
+                </a>
             </li>
             <li>
-                <a href="@Url.Action("Index", "Partners")"><i class="fa fa-table fa-fw"></i> Partners</a>
+               @* <a href="#"><i class="fa fa-group fa-fw"></i> Partners</a> *@
+                <a href="@Url.Action("Index", "Partners")">
+                    <i class="fa fa-group fa-fw"></i> Partners
+                </a>
             </li>
             <li>
-                <a href="@Url.Action("", "")"><i class="fa fa-table fa-fw"></i> Reports</a>
-                <!-- /.nav-second-level -->
+                <a href="#">
+                    <i class="fa fa-edit fa-fw"></i> Reports
+                </a>
             </li>
             <li>
-                <a href="@Url.Action("Index", "Alerts")"><i class="fa fa-table fa-fw"></i> Alerts</a>
+                <a href="#">
+                    <i class="fa fa-flag fa-fw"></i> Alerts
+                </a>
             </li>
-            
         </ul>
     </div>
     <!-- /.sidebar-collapse -->
 </div>
-
-

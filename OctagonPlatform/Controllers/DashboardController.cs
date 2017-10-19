@@ -12,7 +12,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                ViewBag.priceBTC = "BTC " + GetBitcoinPrice(1);
+                ViewBag.priceBTC = GetBitcoinPrice(1);
                 Session["BTC"] = ViewBag.priceBTC;
                 ViewBag.priceETH = "ETH " + GetBitcoinPrice(2);
                 Session["ETH"] = ViewBag.priceETH;
