@@ -4,7 +4,6 @@ using OctagonPlatform.PersistanceRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Helpers;
 using WebApiOctagon.Repository.InterfacesRepository;
 
@@ -14,45 +13,25 @@ namespace WebApiOctagon.Repository.PersistanceRepository
     {
         public void SaveAlerts(List<KeyValuePair<string, string>> alerts)
         {
-            TerminalAlert terminalAlert = new TerminalAlert();
-
-            foreach (var item in alerts)
+            try
             {
-                terminalAlert.GetType().GetProperty(item.Key).SetValue(terminalAlert, item.Value);
+                TerminalAlert terminalAlert = new TerminalAlert();
+
+                foreach (var item in alerts)
+                {
+                    terminalAlert.GetType().GetProperty(item.Key).SetValue(terminalAlert, item.Value);
+                }
+                Table.Add(terminalAlert);
+
+                Save();
+                NotifAlertToUser(terminalAlert);
             }
-            Table.Add(terminalAlert);
-
-            Save();
-
-            NotifAlertToUser(terminalAlert);
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
-
         
-        public void Add(TerminalAlert obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TerminalAlert> All()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public TerminalAlert FindBy(object id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save()
-        {
-            throw new NotImplementedException();
-        }
-
         public void NotifAlertToUser(TerminalAlert terminalAlert)
         {
             try
@@ -76,7 +55,6 @@ namespace WebApiOctagon.Repository.PersistanceRepository
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
