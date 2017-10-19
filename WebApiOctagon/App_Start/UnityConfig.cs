@@ -1,8 +1,11 @@
+
 using Microsoft.Practices.Unity;
+using WebApiOctagon.Repository.InterfacesRepository;
+using WebApiOctagon.Repository.PersistanceRepository;
 using System.Web.Http;
 using Unity.WebApi;
 
-namespace ApiConfig
+namespace WebApiOctagon
 {
     public static class UnityConfig
     {
@@ -15,6 +18,10 @@ namespace ApiConfig
             
             // e.g. container.RegisterType<ITestService, TestService>();
             
+            //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            container.RegisterType<ITerminalAlertRepo, TerminalAlertRepo>();
+
+            //POR DIOS !!!
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
     }

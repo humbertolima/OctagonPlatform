@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctagonPlatform", "OctagonP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiConfig", "ApiConfig\ApiConfig.csproj", "{D17D66CA-888F-41F4-935D-D59CCA727AFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiOctagon", "WebApiOctagon\WebApiOctagon.csproj", "{CBE4902E-B3E2-49EB-83EB-D744B18D5DF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE4902E-B3E2-49EB-83EB-D744B18D5DF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE4902E-B3E2-49EB-83EB-D744B18D5DF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE4902E-B3E2-49EB-83EB-D744B18D5DF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE4902E-B3E2-49EB-83EB-D744B18D5DF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

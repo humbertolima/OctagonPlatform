@@ -19,10 +19,10 @@ namespace ApiConfig.Controllers
         {
             _repository = repository;
         }
-        public TerminalAlertsController()
-        {
+        //public TerminalAlertsController()
+        //{
             
-        }
+        //}
         public void PostSendSurcharge(HttpRequestMessage alerts)
         {
             var p = alerts.Content.ReadAsStringAsync().Result;
