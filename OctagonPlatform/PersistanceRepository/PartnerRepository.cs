@@ -66,7 +66,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var partnerBName = Table.SingleOrDefault(x => string.Equals(x.BusinessName.ToLower(), viewModel.BusinessName.ToLower(), StringComparison.CurrentCultureIgnoreCase));
+                var partnerBName = Table.SingleOrDefault(x => x.BusinessName.ToLower().Equals(viewModel.BusinessName.ToLower()));
                 if (action == "Edit")
                 {
                     var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
