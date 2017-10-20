@@ -173,8 +173,6 @@ namespace OctagonPlatform.Models
 
         public VaultCash VaultCash { get; set; }
 
-        public ICollection<Surcharge> Surcharges { get; set; }
-
         [Required]
         [Display(Name = "Surcharge Fee")]
         [DataType(DataType.Currency)]
@@ -188,8 +186,21 @@ namespace OctagonPlatform.Models
         [Display(Name = "Surcharged Type")]
         public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
+        [Required]
+        [Display(Name = "Remaining Surcharge Amount Fee")]
+        public double RemainingSurchargeAmountFee { get; set; }
+
+        [Required]
+        [Display(Name = "Remaining Surcharge Percent Fee")]
+        public double RemainingSurchargePercentFee { get; set; }
+
+        public ICollection<Surcharge> Surcharges { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
+
+        [Required]
+        [Display(Name = "Remaining Interchange")]
+        public double RemainingInterchange { get; set; }
 
         [Required]
         [Display(Name = "Percent Charge By Transaction")]

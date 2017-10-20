@@ -42,7 +42,7 @@ namespace OctagonPlatform
 
             container.RegisterType<ISurchargeRepository, SurchargeRepository>();
 
-            container.RegisterType<ITerminalAlertRepository, TerminalAlertRepository>();
+            container.RegisterType<ITerminalAlertRepositoryAPI, TerminalAlertRepository>();
 
         }
     }

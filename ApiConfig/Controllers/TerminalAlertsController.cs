@@ -1,24 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using OctagonPlatform.Models;
-using Newtonsoft.Json;
-using OctagonPlatform.Models.InterfacesRepository;
 using System.Web.Helpers;
 using System;
+using ApiConfig.Models.InterfacesRepository;
 
 namespace ApiConfig.Controllers
 {
     public class TerminalAlertsController : ApiController
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-
+        private ITerminalAlertRepo _repository;
+        public TerminalAlertsController(ITerminalAlertRepo repository)
+        {
+            _repository = repository;
+        }
+        //public TerminalAlertsController()
+        //{
+            
+        //}
         public void PostSendSurcharge(HttpRequestMessage alerts)
         {
             var p = alerts.Content.ReadAsStringAsync().Result;
@@ -40,72 +44,51 @@ namespace ApiConfig.Controllers
 
             //var p = alerts.Content.ReadAsStringAsync().Result;
             //List<KeyValuePair<string, string>> list = JsonConvert.DeserializeObject<List<KeyValuePair<string, string>>>(p);
-            TerminalAlert terminalAlert = new TerminalAlert();
 
+            _repository.SaveAlerts(prueba);
             //terminalAlert.TerminalId = list.FirstOrDefault(c => c.Key == "TerminalId").Value;
             //terminalAlert.CashAvailable = Convert.ToInt32(list.FirstOrDefault(c => c.Key == "CashAvailable").Value);
-            foreach (var item in prueba)
-            {
-                terminalAlert.GetType().GetProperty(item.Key).SetValue(terminalAlert, item.Value);
-            }
-
-            db.TerminalAlerts.Add(terminalAlert);
+            
             //db.SaveChanges();
-            try
-            {
-                //enviar el correo a los que tengan configurado que les llegue las alertas.
-                //no se puede enviar acorreo de alertas que esten ingnoradas.
-                var query = db.Terminals
-                    .Include(x => x.Users)
-                    .Include(x => x.TerminalAlertConfigs)
-                    .Include(x => x.TerminalAlerts)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlert.TerminalId);
-
-                WebMail.EnableSsl = true;
-                WebMail.From = "luisrafael.gamez@outlook.com";
-                WebMail.SmtpPort = 25;
-                WebMail.UserName = "luisrafael.gamez@outlook.com";
-                WebMail.SmtpServer = "smtp.live.com";
-                WebMail.Password = "Vv19477002";
-                WebMail.SmtpUseDefaultCredentials = true;
-                WebMail.Send("yasser.osuna@gmail.com", "Alerta de terminal", "Esto es una prueba");
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+            
 
         }
-
+        [Route("api/terminalAlerts/prueba")]
+        public string GetPrueba()
+        {
+            return "fff";
+        }
         // DELETE: api/TerminalAlerts/5
         [ResponseType(typeof(TerminalAlert))]
         public async Task<IHttpActionResult> DeleteTerminalAlert(int id)
         {
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            if (terminalAlert == null)
-            {
-                return NotFound();
-            }
+            throw new NotImplementedException();
+            //TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
+            //if (terminalAlert == null)
+            //{
+            //    return NotFound();
+            //}
 
-            db.TerminalAlerts.Remove(terminalAlert);
-            await db.SaveChangesAsync();
+            //db.TerminalAlerts.Remove(terminalAlert);
+            //await db.SaveChangesAsync();
 
-            return Ok(terminalAlert);
+            //return Ok(terminalAlert);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            throw new NotImplementedException();
+            //    if (disposing)
+            //    {
+            //        db.Dispose();
+            //    }
+            //    base.Dispose(disposing);
         }
 
         private bool TerminalAlertExists(int id)
         {
-            return db.TerminalAlerts.Count(e => e.Id == id) > 0;
+            throw new NotImplementedException();
+            //return db.TerminalAlerts.Count(e => e.Id == id) > 0;
         }
     }
 }
