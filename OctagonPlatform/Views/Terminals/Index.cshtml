@@ -32,7 +32,7 @@
 <p class="alert alert-info">
     <strong>@ViewBag.Error</strong>
 </p>
-<table id="terminalsTable"class="table table-striped table-hover ">
+<table id="terminalsTable" class="table table-striped table-hover ">
     <thead>
         <tr>
             <th>Terminal ID</th>
@@ -48,8 +48,7 @@
         </tr>
     </thead>
     
-    <tbody id="listOfTerminals">
-
+    <tbody>
         @foreach (var item in Model)
         {
             <tr class="info">
@@ -75,13 +74,13 @@
 
 </table>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/search")
-    <script>
+  @*  <script>
         $(document).ready(function() {
             $("#terminalsTable").DataTable();
-        })
-    </script>
+        }) 
+    </script> *@
 }
 
 
