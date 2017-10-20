@@ -5,117 +5,127 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-<h3 class="alert-info">Create Partner</h3>
+<div class="alingleft">
+    <div>
+        <h3> Create Partner</h3>
+    </div>
 
-@using (Html.BeginForm("Create", "Partners"))
-{
-    @Html.AntiForgeryToken()
-    <p class="alert alert-danger">
-        All fields are <strong>required.</strong>
+    @using (Html.BeginForm("Create", "Partners"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="alert">
+            <h3>
+                <strong>All fields are required.</strong>
+            </h3>
+        </div>
+
         @ViewBag.Error
         @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
-    </p>
-    <div class="form-group">
-        @Html.LabelFor(m => m.BusinessName)
-        @Html.TextBoxFor(m => m.BusinessName, new {@class = "form-control", autofocus = "autofocus", placeholder = "Company's Name"})
-        @Html.ValidationMessageFor(m => m.BusinessName)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ParentId)
-        @Html.DropDownListFor(m => m.ParentId, new SelectList(Model.Parents, "Id", "BusinessName"), "", new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.ParentId)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Status)
-        @Html.EnumDropDownListFor(m => m.Status, "", new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Status)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address1)
-        @Html.TextBoxFor(m => m.Address1, new {@class = "form-control", placeholder = "124 SW 105 Ave"})
-        @Html.ValidationMessageFor(m => m.Address1)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Address2)
-        @Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus", placeholder = "Apto 203, 33181"})
-        @Html.ValidationMessageFor(m => m.Address2)
-    </div>
-    <div class="form-group">
-        <div id="Countries">
-            <label for="Countries">Country</label>
-            <select required id="CountryId" name="CountryId" class="form-control">
-                <option value="231">United States</option>
-                @foreach (var item in Model.Countries)
-                {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            </select>
-            @Html.ValidationMessageFor(m => m.CountryId)
 
+        <div class="form-group">
+            @Html.LabelFor(m => m.BusinessName)
+            @Html.TextBoxFor(m => m.BusinessName, new {@class = "form-control", autofocus = "autofocus", placeholder = "Company's Name"})
+            @Html.ValidationMessageFor(m => m.BusinessName)
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-    </div>
-    <div class="form-group">
-        <div id="States">
-            <label for="States">State</label>
-            <select required id="StatesId" name="StateId" class="form-control">
-                <option value="3930">Florida</option>
-                @foreach (var item in Model.States)
+        <div class="form-group">
+            @Html.LabelFor(m => m.ParentId)
+            @Html.DropDownListFor(m => m.ParentId, new SelectList(Model.Parents, "Id", "BusinessName"), "", new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ParentId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status)
+            @Html.EnumDropDownListFor(m => m.Status, "", new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Status)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address1)
+            @Html.TextBoxFor(m => m.Address1, new {@class = "form-control", placeholder = "124 SW 105 Ave"})
+            @Html.ValidationMessageFor(m => m.Address1)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address2)
+            @Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus", placeholder = "Apto 203, 33181"})
+            @Html.ValidationMessageFor(m => m.Address2)
+        </div>
+        <div class="form-group">
+            <div id="Countries">
+                <label for="Countries">Country</label>
+                <select required id="CountryId" name="CountryId" class="form-control">
+                    <option value="231">United States</option>
+                    @foreach (var item in Model.Countries)
                 {
-                    <option value="@item.Id">@item.Name</option>
+                <option value="@item.Id">@item.Name</option>
                 }
-            </select>
-            @Html.ValidationMessageFor(m => m.StateId)
+                </select>
+                @Html.ValidationMessageFor(m => m.CountryId)
 
+            </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-    </div>
-    <div class="form-group">
-        <div id="Cities">
-            <label for="Cities">City</label>
+        <div class="form-group">
+            <div id="States">
+                <label for="States">State</label>
+                <select required id="StatesId" name="StateId" class="form-control">
+                    <option value="3930">Florida</option>
+                    @foreach (var item in Model.States)
+                {
+                <option value="@item.Id">@item.Name</option>
+                }
+                </select>
+                @Html.ValidationMessageFor(m => m.StateId)
+
+            </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+        </div>
+        <div class="form-group">
+            <div id="Cities">
+                <label for="Cities">City</label>
                 <select id="CitiesId" name="CityId" class="form-control">
                     <option value="43769">Miami</option>
                     @foreach (var item in Model.Cities)
                     {
-                        <option value="@item.Id">@item.Name</option>
+                    <option value="@item.Id">@item.Name</option>
                     }
                 </select>
                 @Html.ValidationMessageFor(m => m.CityId)
+            </div>
+            <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
         </div>
-        <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com"})
-        @Html.ValidationMessageFor(m => m.Email)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.WorkPhone)
-        @Html.TextBoxFor(m => m.WorkPhone, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187"})
-        @Html.ValidationMessageFor(m => m.WorkPhone)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Mobile)
-        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
-        @Html.ValidationMessageFor(m => m.Mobile)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Fax)
-        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
-        @Html.ValidationMessageFor(m => m.Fax)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.WebSite)
-        @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", autofocus = "autofocus", placeholder = "wwww.website.com" })
-        @Html.ValidationMessageFor(m => m.WebSite)
-    </div>
-    <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-            <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save</button>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com"})
+            @Html.ValidationMessageFor(m => m.Email)
         </div>
-    </div>
-}
+        <div class="form-group">
+            @Html.LabelFor(m => m.WorkPhone)
+            @Html.TextBoxFor(m => m.WorkPhone, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187"})
+            @Html.ValidationMessageFor(m => m.WorkPhone)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Mobile)
+            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
+            @Html.ValidationMessageFor(m => m.Mobile)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Fax)
+            @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
+            @Html.ValidationMessageFor(m => m.Fax)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.WebSite)
+            @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", autofocus = "autofocus", placeholder = "wwww.website.com" })
+            @Html.ValidationMessageFor(m => m.WebSite)
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
+    }
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/xpopulate")
