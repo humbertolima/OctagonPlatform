@@ -212,7 +212,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
-    <Compile Include="Controllers\TerminalAlertsController1.cs" />
+    <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
     <Compile Include="Controllers\TerminalMessagesController.cs" />
     <Compile Include="Controllers\TerminalsController.cs" />
@@ -1206,7 +1206,6 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
-    <Content Include="Views\TerminalAlerts\Index.cshtml" />
     <Content Include="Views\Home\IndexOld.cshtml" />
     <Content Include="Views\Surcharge\Delete.cshtml" />
     <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
@@ -1217,6 +1216,11 @@
     <Content Include="Views\Shared\Sections\Scripts.cshtml" />
     <Content Include="Views\Shared\Sections\Sidebar.cshtml" />
     <Content Include="Views\Shared\Sections\NavBar.cshtml" />
+    <Content Include="Views\TerminalAlerts\Create.cshtml" />
+    <Content Include="Views\TerminalAlerts\Delete.cshtml" />
+    <Content Include="Views\TerminalAlerts\Details.cshtml" />
+    <Content Include="Views\TerminalAlerts\Edit.cshtml" />
+    <Content Include="Views\TerminalAlerts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
