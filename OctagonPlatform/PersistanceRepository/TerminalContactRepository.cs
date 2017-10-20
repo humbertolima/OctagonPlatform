@@ -129,24 +129,35 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminalContact = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
                 if (action == "Edit")
                 {
                     var terminalContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
 
                     if (terminalContactToEdit == null) throw new Exception("Contact does not exist in our records!!!");
+                    if (terminalContact != null)
+                    {
+                        if(!terminalContact.Deleted && terminalContactToEdit.Id != terminalContact.Id)
+                            throw new Exception("Contact already exists. ");
+                        if(terminalContact.Deleted)
+                            Table.Remove(terminalContact);
+
+                    }
 
                     Mapper.Map(viewModel, terminalContactToEdit);
                     Edit(terminalContactToEdit);
                 }
                 else
                 {
-                    var terminalContactNew = Table.SingleOrDefault(x => ((x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email) && !x.Deleted);
 
-                    if(terminalContactNew != null && !terminalContactNew.Deleted)
-                        throw new Exception("Contact already exists!!!");
 
-                    if (terminalContactNew != null && terminalContactNew.Deleted)
-                        Table.Remove(terminalContactNew);
+                    if (terminalContact != null)
+                    {
+                        if (!terminalContact.Deleted)
+                            throw new Exception("Contact already exists. ");
+                        Table.Remove(terminalContact);
+
+                    }
 
                     Add(Mapper.Map<TerminalContactFormViewModel, TerminalContact>(viewModel));
                 }

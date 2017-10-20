@@ -66,11 +66,19 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var partnerBName = Table.SingleOrDefault(x => string.Equals(x.BusinessName.ToLower(), viewModel.BusinessName.ToLower(), StringComparison.CurrentCultureIgnoreCase));
                 if (action == "Edit")
                 {
                     var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if (partnerToEdit == null) throw new Exception("Partner does not exist in our records!!!");
+                    if (partnerBName != null)
+                    {
 
+                        if (!partnerBName.Deleted && partnerToEdit.Id != partnerBName.Id)
+                            throw new Exception("Partner already exists. ");
+                        if (partnerBName.Deleted)
+                            Table.Remove(partnerBName);
+                    }
                     partnerToEdit.ParentId = viewModel.ParentId;
                     partnerToEdit.BusinessName = viewModel.BusinessName;
                     partnerToEdit.Address1 = viewModel.Address1;
@@ -88,12 +96,13 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else 
                 {
-                    var partnerNew = Table.SingleOrDefault(x => (x.BusinessName == viewModel.BusinessName || x.Email == viewModel.Email) && !x.Deleted);
 
-                    if (partnerNew != null && !partnerNew.Deleted)
-                        throw new Exception("Partner already exists!!!");
-                    if (partnerNew != null && partnerNew.Deleted)
-                        Table.Remove(partnerNew);
+                    if (partnerBName != null)
+                    {
+                        if (!partnerBName.Deleted)
+                            throw new Exception("Partner already exists!!!");
+                        Table.Remove(partnerBName);
+                    }
                     var partner = new Partner()
                     {
                         ParentId = viewModel.ParentId,

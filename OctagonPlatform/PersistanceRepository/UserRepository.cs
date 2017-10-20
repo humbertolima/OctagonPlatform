@@ -140,12 +140,20 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-
+                var currrentuser = Table.SingleOrDefault(
+                    x => x.UserName == viewModel.UserName || x.Email == viewModel.Email);
                 if (action == "Edit")
                 {
                     var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id && !c.Deleted);
 
                     if (user == null) throw new Exception("User does not exist in our records");
+                    if (currrentuser != null)
+                    {
+                        if(!currrentuser.Deleted && currrentuser.Id != viewModel.Id)
+                            throw new Exception("User already exists. ");
+                        if(currrentuser.Deleted)
+                            Table.Remove(currrentuser);
+                    }
                     {
                         user.Email = viewModel.Email.Trim();
                         user.LastName = viewModel.LastName.Trim();
@@ -169,17 +177,18 @@ namespace OctagonPlatform.PersistanceRepository
                 else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
-                    var user = Table.SingleOrDefault(
-                        x => (x.UserName == viewModel.UserName || x.Email == viewModel.Email) && !x.Deleted);
-                    if (user != null && !user.Deleted) throw new Exception("User already exists in our records!!!");
 
-                    if (user != null && user.Deleted)
-                        Table.Remove(user);
+                    if (currrentuser != null)
+                    {
+                        if (!currrentuser.Deleted)
+                            throw new Exception("User already exists. ");
+                        Table.Remove(currrentuser);
+                    }
 
                     var key = Cryptography.GenerateKey();
                     var hash = Cryptography.EncodePassword(viewModel.Password, key);
 
-                    user = new User()
+                    var userResult = new User()
                     {
                         PartnerId = viewModel.PartnerId,
                         Email = viewModel.Email.Trim(),
@@ -194,7 +203,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Permissions = viewModel.Permissions,
                     };
 
-                    Add(user);
+                    Add(userResult);
 
 
 
