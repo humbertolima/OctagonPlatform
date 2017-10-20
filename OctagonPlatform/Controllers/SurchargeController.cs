@@ -90,13 +90,13 @@ namespace OctagonPlatform.Controllers
             }
             catch (DbEntityValidationException exDb)
             {
-                ViewBag.Error = "Validation error editing VaultCash " + exDb.Message;
+                ViewBag.Error = "Validation error editing or creating Surcharge" + exDb.Message;
 
                 return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing VaultCash "
+                ViewBag.Error = "Validation error editing or creating Surcharge "
                                 + ex.Message;
                 return View("SurchargeForm", viewModel.Id == 0 ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId) : _surchargeRepository.SurchargeToEdit(viewModel.Id));
             }
