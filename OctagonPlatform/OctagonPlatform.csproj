@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -833,6 +834,7 @@
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
     <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Octagon\assets\css\Dashboard.css" />
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
     <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
