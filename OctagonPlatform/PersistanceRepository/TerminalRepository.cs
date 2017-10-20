@@ -150,11 +150,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-
+                var terminalCurrent = Table.SingleOrDefault(x => x.MachineSerialNumber == viewModel.MachineSerialNumber);
                 if (action == "Edit")
                 {
                     var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if (terminalToEdit == null) throw new Exception("Terminal does not exist in our records!!!");
+                    if (terminalCurrent != null)
+                    {
+                        if(!terminalCurrent.Deleted && terminalCurrent.Id != terminalToEdit.Id)
+                            throw new Exception("Terminal already exists. ");
+                        if(terminalCurrent.Deleted)
+                            Table.Remove(terminalCurrent);
+                    }
                     {
                         Mapper.Map(viewModel, terminalToEdit);
                         Edit(terminalToEdit);
@@ -162,13 +169,14 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var terminalNew = Table.SingleOrDefault(x => (x.LocationTypeId == viewModel.LocationTypeId && x.Address1 == viewModel.Address1 && x.Address2 == viewModel.Address2 && x.MachineSerialNumber == viewModel.MachineSerialNumber) && !x.Deleted);
 
-                    if (terminalNew != null && !terminalNew.Deleted)
-                        throw new Exception("Terminal already exists!!!");
 
-                    if (terminalNew != null && terminalNew.Deleted)
-                        Table.Remove(terminalNew);
+                    if (terminalCurrent != null)
+                    {
+                        if (!terminalCurrent.Deleted)
+                            throw new Exception("Terminal already exists. ");
+                        Table.Remove(terminalCurrent);
+                    }
 
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
 

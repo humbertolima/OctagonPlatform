@@ -74,6 +74,11 @@
 
                 $("#SplitAmountPercent").val(percent);
             });
+        } else {
+            $("#SplitAmount").keyup(function() {
+                $("#SplitAmount").val(0);
+                
+            });
         }
     </script>
     <script>
