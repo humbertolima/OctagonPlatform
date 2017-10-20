@@ -137,11 +137,19 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var current = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName);
 
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
                     if (model == null) throw new Exception("BankAccount does not exist in our records!!!");
+                    if (current != null)
+                    {
+                        if(!current.Deleted && current.Id != editViewModel.Id)
+                            throw new Exception("BankAccount already exists. ");
+                        if (current.Deleted)
+                            Table.Remove(current);
+                    }
                     {
                         
                         Mapper.Map(editViewModel, model);
@@ -150,12 +158,14 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var model = Table.SingleOrDefault(c => (c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName) && !c.Deleted);
-                    if(model != null && !model.Deleted) throw new Exception("BankAccount already exists in our records!!!");
+                    if (current != null)
+                    {
+                        if (!current.Deleted)
+                            throw new Exception("BankAccount already exists in our records!!!");
 
-                    if (model != null && model.Deleted) Table.Remove(model);
-                        
+                        if (current.Deleted) Table.Remove(current);
 
+                    }
 
                     var model1 = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
                     

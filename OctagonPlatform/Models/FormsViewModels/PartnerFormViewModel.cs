@@ -1,5 +1,4 @@
 ﻿using OctagonPlatform.Helpers;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -21,11 +20,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [StringLength(50)]
         [Display(Name = "Business's name")]
         public string BusinessName { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Free Surcharage fee Contract Coclude")]
-        [DateTimeValidationLesserThan]
-        public DateTime FreeSurchargeFeeContractConclude { get; set; }
 
         [Required(ErrorMessage = "The partner's status is required")]
         public StatusType.Status Status { get; set; }

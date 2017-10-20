@@ -130,10 +130,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var partnerContact = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
                 if (action == "Edit")
                 {
                     var partnerContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if (partnerContactToEdit == null) throw new Exception("Contact does not exist in our records!!!");
+                    if (partnerContact != null)
+                    {
+                        if(!partnerContact.Deleted && partnerContactToEdit.Id != partnerContact.Id)
+                            throw new Exception("Contact already exists. ");
+                        if (partnerContact.Deleted)
+                            Table.Remove(partnerContact);
+                    }
 
                     partnerContactToEdit.PartnerId = viewModel.PartnerId;
                     partnerContactToEdit.Name = viewModel.Name;
@@ -151,14 +159,14 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    var partnerContactNew = Table.SingleOrDefault(x => ((x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email) && !x.Deleted);
-                    if (partnerContactNew != null && !partnerContactNew.Deleted)
-                        throw new Exception("Contact already exists!!!");
+                    if (partnerContact != null)
+                    {
+                        if (!partnerContact.Deleted)
+                            throw new Exception("Contact already exists!!!");
+                        Table.Remove(partnerContact);
+                    }
 
-                    if (partnerContactNew != null && partnerContactNew.Deleted)
-                        Table.Remove(partnerContactNew);
-
-                    var partnerContact = new PartnerContact()
+                    var partnerContactResult = new PartnerContact()
                     {
                         PartnerId = viewModel.PartnerId,
                         Name = viewModel.Name,
@@ -174,7 +182,7 @@ namespace OctagonPlatform.PersistanceRepository
                         CityId = viewModel.CityId,
 
                     };
-                    Add(partnerContact);
+                    Add(partnerContactResult);
                 }
             }
             catch (Exception ex)
