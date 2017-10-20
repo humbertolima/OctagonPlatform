@@ -77,6 +77,19 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var amoutFee = viewModel.SplitAmount;
+                var amountPercentFee = viewModel.SplitAmountPercent;
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId);
+                if (terminal != null)
+                {
+                    var terminalAmountFee = terminal.SurchargeAmountFee;
+                    var terminalAmountPercentFee = terminal.SurchargePercentageFee;
+
+
+                    if (amoutFee > terminalAmountFee)
+                        throw new Exception("The amount fee is biger that the Terminal amount fee. ");
+                    
+                }
                 if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date");
                 var surchargeDefault = Table.SingleOrDefault(x => x.BankAccountId == viewModel.BankAccountId);
                
