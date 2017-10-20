@@ -5,12 +5,11 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 <div class="alingleft">
-
     <h3>Edit Partner</h3>
-
+    <hr>
     @using (Html.BeginForm("Edit", "Partners", new { @class = "form-group" }))
     {
-        <p class="alert alert-danger">
+        <p class="alert alert-warning">
             All fields are <strong>required.</strong>
             @ViewBag.Error
             @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
