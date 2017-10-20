@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class TerminalAlertRepository : GenericRepository<TerminalAlert>, ITerminalAlertRepository
+    public class TerminalAlertRepository : GenericRepository<TerminalAlert>, ITerminalAlertRepositoryAPI
     {
         public IEnumerable GetAllAlerts()
         {

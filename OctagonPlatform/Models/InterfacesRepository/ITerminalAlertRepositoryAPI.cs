@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-   public interface ITerminalAlertRepository
+   public interface ITerminalAlertRepositoryAPI
     {
         IEnumerable GetAllAlerts();
     }

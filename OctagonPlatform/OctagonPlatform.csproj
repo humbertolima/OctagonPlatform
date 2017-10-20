@@ -634,7 +634,7 @@
     <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
-    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IError.cs" />
@@ -858,9 +858,13 @@
     <Content Include="Octagon\assets\img\carousel1.jpg" />
     <Content Include="Octagon\assets\img\carousel2.jpg" />
     <Content Include="Octagon\assets\img\carousel3.jpg" />
+    <Content Include="Octagon\assets\img\eth-16x16.png" />
+    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
+    <Content Include="Octagon\assets\img\ltc-16x16.png" />
+    <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\img\map.jpg" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
@@ -1206,7 +1210,6 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
-    <Content Include="Views\TerminalAlerts\Index.cshtml" />
     <Content Include="Views\Home\IndexOld.cshtml" />
     <Content Include="Views\Surcharge\Delete.cshtml" />
     <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
@@ -1217,6 +1220,11 @@
     <Content Include="Views\Shared\Sections\Scripts.cshtml" />
     <Content Include="Views\Shared\Sections\Sidebar.cshtml" />
     <Content Include="Views\Shared\Sections\NavBar.cshtml" />
+    <Content Include="Views\TerminalAlerts\Create.cshtml" />
+    <Content Include="Views\TerminalAlerts\Delete.cshtml" />
+    <Content Include="Views\TerminalAlerts\Details.cshtml" />
+    <Content Include="Views\TerminalAlerts\Edit.cshtml" />
+    <Content Include="Views\TerminalAlerts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
