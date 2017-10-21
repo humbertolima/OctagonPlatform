@@ -17,7 +17,9 @@ namespace OctagonPlatform
             bundles.Add(new ScriptBundle("~/bundles/ajax").Include(
                 "~/Scripts/jquery.unobtrusive-ajax.min"));
 
-
+            /*bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                "~/Scripts/DataTables/jquery.dataTables.js",
+                "~/Scripts/DataTables/jquery.bootstrap.js")); */
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -30,6 +32,7 @@ namespace OctagonPlatform
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-superhero.css",
+                  //    "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/xpopulate").Include(
