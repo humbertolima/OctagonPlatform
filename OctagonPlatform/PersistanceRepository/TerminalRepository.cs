@@ -163,7 +163,11 @@ namespace OctagonPlatform.PersistanceRepository
                             Table.Remove(terminalCurrent);
                     }
                     {
+                       
+                        
                         Mapper.Map(viewModel, terminalToEdit);
+                        terminalToEdit.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
+                        terminalToEdit.RemainingSurchargePercentFee = viewModel.SurchargePercentageFee;
                         Edit(terminalToEdit);
                     }
                 }
@@ -178,7 +182,11 @@ namespace OctagonPlatform.PersistanceRepository
                         Table.Remove(terminalCurrent);
                     }
 
+                    
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
+                    terminal.RemainingInterchange = InterchangeConstants.ClientInterchangeAmount;
+                    terminal.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
+                    terminal.RemainingSurchargePercentFee = viewModel.SurchargePercentageFee;
 
                     terminal.TerminalId = "000000000";
                     Add(terminal);
