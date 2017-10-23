@@ -80,15 +80,19 @@ namespace OctagonPlatform.PersistanceRepository
                 var amoutFee = viewModel.SplitAmount;
                 var amountPercentFee = viewModel.SplitAmountPercent;
                 var terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId);
+
                 if (terminal != null)
                 {
-                    var terminalAmountFee = terminal.SurchargeAmountFee;
-                    var terminalAmountPercentFee = terminal.SurchargePercentageFee;
+                    var terminalAmountFee = terminal.RemainingSurchargeAmountFee;
+                    var terminalAmountPercentFee = terminal.RemainingSurchargePercentFee;
 
 
                     if (amoutFee > terminalAmountFee)
-                        throw new Exception("The amount fee is biger that the Terminal amount fee. ");
-                    
+                        throw new Exception("The amount fee is biger that the remaining Terminal amount fee. ");
+                    if(amountPercentFee > terminalAmountPercentFee)
+                        throw new Exception("The percent amount fee is biger that the remaining Terminal percent amount fee. ");
+
+
                 }
                 if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date");
                 var surchargeDefault = Table.SingleOrDefault(x => x.BankAccountId == viewModel.BankAccountId);
@@ -107,7 +111,15 @@ namespace OctagonPlatform.PersistanceRepository
                             Table.Remove(surchargeDefault);
 
                     }
+
                     Mapper.Map(viewModel, surcharge);
+                    if (terminal != null)
+                    {
+                        terminal.RemainingSurchargeAmountFee -= amoutFee;
+                        terminal.RemainingSurchargePercentFee -= amountPercentFee;
+                    }
+                    GenericRepository<Terminal> t = new TerminalRepository();
+                    t.Edit(terminal);
                     Edit(surcharge);
                 }
                 else
@@ -122,6 +134,13 @@ namespace OctagonPlatform.PersistanceRepository
                     
                     var result = Mapper.Map<SurchargeFormViewModel, Surcharge>(viewModel);
                     Add(result);
+                    if (terminal != null)
+                    {
+                        terminal.RemainingSurchargeAmountFee -= amoutFee;
+                        terminal.RemainingSurchargePercentFee -= amountPercentFee;
+                    }
+                    GenericRepository<Terminal> t = new TerminalRepository();
+                    t.Edit(terminal);
                 }
             }
             catch (Exception ex)

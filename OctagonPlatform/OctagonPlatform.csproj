@@ -596,6 +596,10 @@
     <Compile Include="Migrations\201710201826295_RemainingSurchargeFeeAndInterchangeFee.Designer.cs">
       <DependentUpon>201710201826295_RemainingSurchargeFeeAndInterchangeFee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs" />
+    <Compile Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.Designer.cs">
+      <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1675,6 +1679,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710201826295_RemainingSurchargeFeeAndInterchangeFee.resx">
       <DependentUpon>201710201826295_RemainingSurchargeFeeAndInterchangeFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.resx">
+      <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
