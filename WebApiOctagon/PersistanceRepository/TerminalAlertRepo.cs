@@ -71,7 +71,7 @@ namespace WebApiOctagon.Repository.PersistanceRepository
                 }
                 if (!String.IsNullOrEmpty(terminalAlert.ReceiptPrinterRibbonStatus))
                 {
-                    if ((terminalAlert.ReceiptPrinterRibbonStatus.Contains("Low") || terminalAlert.ReceiptPrinterRibbonStatus.Contains("Out") || terminalAlert.ReceiptPrinterRibbonStatus.Contains("Terminal")) && (!query.TerminalAlertConfigs.IgnoreReceiptRibbon))
+                    if ((terminalAlert.ReceiptPrinterRibbonStatus.Contains("Low") || terminalAlert.ReceiptPrinterRibbonStatus.Contains("Out") || terminalAlert.ReceiptPrinterRibbonStatus.Contains("Thermal")) && (!query.TerminalAlertConfigs.IgnoreReceiptRibbon))
                         SendEmailTo(query.Users, terminalAlert.Receiptprinterpaperstatus);
                 }
                 if (!String.IsNullOrEmpty(terminalAlert.JournalPrinterPaperStatus))
@@ -81,7 +81,7 @@ namespace WebApiOctagon.Repository.PersistanceRepository
                 }
                 if (!String.IsNullOrEmpty(terminalAlert.JournalPrinterRibbonStatus))
                 {
-                    if ((terminalAlert.JournalPrinterRibbonStatus == "Low" || terminalAlert.JournalPrinterRibbonStatus.Contains("Out") || terminalAlert.JournalPrinterRibbonStatus.Contains("Terminal")) && (!query.TerminalAlertConfigs.IgnoreJournalRibbon))
+                    if ((terminalAlert.JournalPrinterRibbonStatus == "Low" || terminalAlert.JournalPrinterRibbonStatus.Contains("Out") || terminalAlert.JournalPrinterRibbonStatus.Contains("Thermal")) && (!query.TerminalAlertConfigs.IgnoreJournalRibbon))
                         SendEmailTo(query.Users, terminalAlert.JournalPrinterRibbonStatus);
                 }
 
