@@ -35,15 +35,15 @@ namespace OctagonPlatform.Controllers
 
                 if (Session["tries"] != null) Session["tries"] = 0;
                 ViewBag.Message = "User Locked, please call the Administrator";
-                return View(userToLogin);
-                
+                return RedirectToAction("Index", "Home", viewModel);
+
             }
             
             if (userToLogin.Partner == null)
             {
                 ViewBag.Message = "Invalid User";
                 Session["tries"] = userToLogin.TriesToLogin;
-                return View(userToLogin);
+                return RedirectToAction("Index", "Home", viewModel);
             }
             FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
             Session["logo"] = userToLogin.Partner.Logo;
