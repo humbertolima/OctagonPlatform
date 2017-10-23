@@ -64,6 +64,27 @@ namespace WebApiOctagon.Repository.PersistanceRepository
                 //    SendEmailTo(query.Users);
                 //}
                 //}
+                if (!String.IsNullOrEmpty(terminalAlert.CashAvailable))
+                {
+                    if ((Convert.ToDouble(terminalAlert.CashAvailable) < query.TerminalAlertConfigs.LowCach1))
+                        SendEmailTo(query.Users, "Low Cash level 1");
+                    else
+                    {
+                        if ((Convert.ToDouble(terminalAlert.CashAvailable) < query.TerminalAlertConfigs.LowCash2))
+                            SendEmailTo(query.Users, "Low Cash level 2");
+                    }
+                }
+
+                if (!String.IsNullOrEmpty(terminalAlert.CashAvailable))
+                {
+
+                }
+                if (!String.IsNullOrEmpty(terminalAlert.CashAvailable))
+                {
+                    if ((Convert.ToDouble(terminalAlert.CashAvailable) < query.TerminalAlertConfigs.LowCash3))
+                        SendEmailTo(query.Users, "Low Cash level 3");
+                }
+
                 if (!String.IsNullOrEmpty(terminalAlert.Receiptprinterpaperstatus))
                 {
                     if ((terminalAlert.Receiptprinterpaperstatus.Contains("Low") || terminalAlert.Receiptprinterpaperstatus.Contains("Out")) && (!query.TerminalAlertConfigs.IgnoreReceiptPaper))
