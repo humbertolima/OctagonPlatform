@@ -3,3 +3,21 @@
     float: none;
     margin-left: 50px;
 }
+
+.delete {
+    width: 50%;
+   }
+
+.fontdelete{
+    color: red;
+}
+
+.rowDetail {
+    text-decoration: none;
+    text-align:center;
+
+}
+
+.imageupload{
+    float:right;
+}
