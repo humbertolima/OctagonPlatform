@@ -35,6 +35,9 @@ namespace OctagonPlatform
                   //    "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/base").Include(
+                      "~/Content/themes/base/*.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/xpopulate").Include(
                         "~/Scripts/xpopulate.js"));
 
@@ -43,7 +46,9 @@ namespace OctagonPlatform
 
             bundles.Add(new ScriptBundle("~/bundles/user").Include(
                 "~/Scripts/User.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                "~/Scripts/jquery-ui-1.12.1.js"));
         }
     }
 }

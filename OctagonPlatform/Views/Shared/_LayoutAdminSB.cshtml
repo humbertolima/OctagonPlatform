@@ -1,25 +1,26 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    
+
     @Html.Partial("Sections/Header")
 </head>
 <body>
-<div id="wrapper">
-    
-    @Html.Partial("Sections/NavBar")
-    <div id="page-wrapper">
-        @RenderBody()
-    </div>
-    <!-- /#page-wrapper -->
-</div>
-<!-- /#wrapper -->
-    
-    
-  
-@Html.Partial("Sections/Scripts")
-@Scripts.Render("~/bundles/datatables")
-@RenderSection("scripts", required: false)
+    <div id="wrapper">
 
+        @Html.Partial("Sections/NavBar")
+        <div id="page-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+
+
+
+    @Html.Partial("Sections/Scripts")
+    @Scripts.Render("~/bundles/datatables")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/base")
 </body>
 </html>
