@@ -14,10 +14,41 @@
 
 .rowDetail {
     text-decoration: none;
-    text-align:center;
-
+    text-align: center;
 }
+
+a {
+    text-decoration: none !important;
+    a: hover, a:focus
+}
+  
+.texth3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+
 
 .imageupload{
     float:right;
+}
+@media (max-width:991px){
+    #imageupload{
+    
+    }
+}
+
+@media (max-width:991px){
+    #lingleft{
+
+    }
+}
+
+@media (max-width:991px){
+    .delete{
+
+    }
+}
+@media (max-width:767px){
+
 }
