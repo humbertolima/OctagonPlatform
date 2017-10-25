@@ -5,8 +5,19 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 <div class="container">
-<h3> List of Partners</h3>
+    <h3> List of Partners</h3>
+    @Html.ActionLink(
+        linkText: "Add Partner",
+        actionName: "Create",
+        controllerName: "Partners",
+        routeValues: new
+        {
+            partnerId = int.Parse(Session["partnerId"].ToString())
+        },
+        htmlAttributes: new {@class= "btn btn-primary" }
+        )
     <hr>
+@*
 <nav class="navbar navbar-default"> 
     <div class="container-fluid">
         
@@ -29,14 +40,13 @@
         </div>
     </div>
 </nav>
-
-    <div class="alert-info">
-<h3>
-    <strong>@ViewBag.Error</strong>
-</h3>
-    </div>
-
-<table class="table table-hover table-striped table-condensed">
+*@
+<div class="alert-info">
+    <h3>
+        <strong>@ViewBag.Error</strong>
+    </h3> 
+</div>
+<table id="partners" class="table table-hover table-striped table-condensed">
     
     <thead>
     <tr>
@@ -47,9 +57,12 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Details</th>
     </tr>
     </thead>
-    <tbody id ="listOfPartners">
+    <tbody>
         <tr>
             <td>@Model.BusinessName</td>
             <td>@Model.Parent.BusinessName</td>
@@ -57,10 +70,10 @@
             <td>@Model.Mobile</td>
             <td>@Model.Email</td>
             <td>@Model.Status</td>
-            <td><i class="fa fa-pencil"></i>@Html.ActionLink("Edit", "Edit", new {id = Model.Id})</td>
-            <td><i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = Model.Id})
+            <td><i class="fa fa-pencil"style="font-size:16px;color:darkblue"></i> @Html.ActionLink("Edit", "Edit", new {id = Model.Id})</td>
+            <td><i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
             </td>
-            <td><i class="fa fa-list"></i>@Html.ActionLink("Details", "Details", new {id = Model.Id})</td>
+            <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new {id = Model.Id})</td>
 
 
         </tr>
@@ -68,17 +81,17 @@
         {
             if (!item.Deleted && item.Id != Model.Id)
             {
-                <tr class="info">
+                <tr>
                     <td>@item.BusinessName</td>
                     <td>@item.Parent.BusinessName</td>
                     <td>@item.Address1</td>
                     <td>@item.Mobile</td>
                     <td>@item.Email</td>
                     <td>@item.Status</td>
-                    <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
-                    <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    <td><i class="fa fa-pencil" style="font-size:16px;color:darkblue";></i> @Html.ActionLink("Edit", "Edit", new {id = item.Id})</td>
+                    <td><i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new {id = item.Id})
                     </td>
-                    <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink("Details", "Details", new {id = item.Id})</td>
+                    <td><i class="fa fa-list" style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new {id = item.Id})</td>
 
 
                 </tr>
@@ -87,8 +100,22 @@
     
     
     </tbody>
-</table> 
- </div>       
+    </table>     
+</div>       
 @section Scripts {
     @Scripts.Render("~/bundles/search")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    <script>
+
+        var jQuery_1_10_2 = $.noConflict(true);
+
+        jQuery_1_10_2(function () {
+            $("#partners").DataTable();
+        });
+    </script>
+
+   
 }
+
+
+
