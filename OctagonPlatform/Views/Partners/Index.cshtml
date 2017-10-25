@@ -46,8 +46,7 @@
         <strong>@ViewBag.Error</strong>
     </h3> 
 </div>
-
-<table class="table table-hover table-striped table-condensed">
+<table id="partners" class="table table-hover table-striped table-condensed">
     
     <thead>
     <tr>
@@ -58,6 +57,9 @@
         <th>Phone</th>
         <th>Email</th>
         <th>Status</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Details</th>
     </tr>
     </thead>
     <tbody>
@@ -98,8 +100,22 @@
     
     
     </tbody>
-</table> 
- </div>       
+    </table>     
+</div>       
 @section Scripts {
     @Scripts.Render("~/bundles/search")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    <script>
+
+        var jQuery_1_10_2 = $.noConflict(true);
+
+        jQuery_1_10_2(function () {
+            $("#partners").DataTable();
+        });
+    </script>
+
+   
 }
+
+
+
