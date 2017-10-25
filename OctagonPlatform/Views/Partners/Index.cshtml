@@ -5,8 +5,19 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 <div class="container">
-<h3> List of Partners</h3>
+    <h3> List of Partners</h3>
+    @Html.ActionLink(
+        linkText: "Add Partner",
+        actionName: "Create",
+        controllerName: "Partners",
+        routeValues: new
+        {
+            partnerId = int.Parse(Session["partnerId"].ToString())
+        },
+        htmlAttributes: new {@class= "btn btn-primary" }
+        )
     <hr>
+@*
 <nav class="navbar navbar-default"> 
     <div class="container-fluid">
         
@@ -29,12 +40,12 @@
         </div>
     </div>
 </nav>
-
-    <div class="alert-info">
-<h3>
-    <strong>@ViewBag.Error</strong>
-</h3>
-    </div>
+*@
+<div class="alert-info">
+    <h3>
+        <strong>@ViewBag.Error</strong>
+    </h3> 
+</div>
 
 <table class="table table-hover table-striped table-condensed">
     
