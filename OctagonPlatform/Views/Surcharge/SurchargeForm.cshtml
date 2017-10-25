@@ -68,15 +68,17 @@
 
     <script>
         if (@Model.Terminal.SurchargeAmountFee > 0) {
-            $("#SplitAmount").keyup(function() {
+            $("#SplitAmount").keyup(function () {
+               
                 var amount = $("#SplitAmount").val();
-                var percent = Math.ceil((100 * amount) / @Model.Terminal.SurchargeAmountFee);
+                
+                var percent = (100 * amount) / @Model.Terminal.SurchargeAmountFee;
 
-                $("#SplitAmountPercent").val(percent);
+                $("#SplitAmountPercent").val(percent.toFixed(2));
             });
         } else {
             $("#SplitAmount").keyup(function() {
-                $("#SplitAmount").val(0);
+                $("#SplitAmount").val(0.00);
                 
             });
         }
@@ -86,7 +88,7 @@
             var percent = $("#SplitAmountPercent").val();
             var amount = (@Model.Terminal.SurchargeAmountFee * percent) / 100;
 
-            $("#SplitAmount").val(amount);
+            $("#SplitAmount").val(amount.toFixed(2));
         });
     </script>
 }
