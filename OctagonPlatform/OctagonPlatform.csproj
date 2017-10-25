@@ -959,6 +959,7 @@
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
     <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
+    <Content Include="Octagon\assets\css\sidebar.css" />
     <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
     <Content Include="Octagon\assets\css\styles.min.css" />
