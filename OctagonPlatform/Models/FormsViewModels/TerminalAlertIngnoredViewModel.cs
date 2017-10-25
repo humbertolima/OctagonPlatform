@@ -1,12 +1,23 @@
-﻿using System;
+﻿using OctagonPlatform.Helpers;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
     public class TerminalAlertIngnoredViewModel
     {
-       [Required]
+        [Required]
         public string TerminalId { get; set; }
+
+        public Week.Day Days { get; set; }
+
+        public ICollection<TerminalWorkingHours> WorkingHours { get; set; }
+
+        public int StartTime { get; set; }
+
+        public int EndTime { get; set; }
 
         [Required]
         public double LowCach1 { get; set; }

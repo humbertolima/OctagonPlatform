@@ -4,9 +4,40 @@
 
     <tr class="info">
 
-        <th>Inactive Period:</th>
-        <th>@Model.InactivePeriod</th>
+        <th data-toggle="collapse" data-target="#demo">
+            Inactive Period:
+            <div id="demo" class="collapse">
+                <table>
+                    <tbody>
+                        @{
+                            foreach (var item in Model.WorkingHours)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Day
+                                        @item.StartTime
+                                        - @item.EndTime
+                                    </td>   
+                                    <td>
+                                        <button type="button" class="WorkingHoursEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </th>
+        <th></th>
     </tr>
+
     <tr class="info">
 
         <th>Low Cash 1:</th>
@@ -114,15 +145,170 @@ Ignored Alerts <br />
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Modal Header</h4>
                 <h3 class="alert-info">Edit Config Alert</h3>
-
-                @using (Html.BeginForm("SetWorkingHours", "Terminals"))
-                {
-                    @Model
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.TerminalId)
-
-                }
             </div>
+
+            @using (Html.BeginForm("SetWorkingHours", "Terminals"))
+            {
+            @Model
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.TerminalId)
+            @Html.Hidden("WorkingHoursEdit")
+            <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+            @Html.EnumDropDownListFor(x => x.Days, "Select My Type", new { @class = "form-control" })
+
+            @Html.DropDownList("StartTime", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="01:00", Value = "1" },
+                    new SelectListItem{ Text="02:00", Value = "2" },
+                    new SelectListItem{ Text="03:00", Value = "3" },
+                    new SelectListItem{ Text="04:00", Value = "4" },
+                    new SelectListItem{ Text="05:00", Value = "5" },
+                    new SelectListItem{ Text="06:00", Value = "6" },
+                    new SelectListItem{ Text="07:00", Value = "7" },
+                    new SelectListItem{ Text="08:00", Value = "8" },
+                    new SelectListItem{ Text="09:00", Value = "9" },
+                    new SelectListItem{ Text="10:00", Value = "10" },
+                    new SelectListItem{ Text="11:00", Value = "11" },
+                    new SelectListItem{ Text="12:00", Value = "12" },
+                    new SelectListItem{ Text="13:00", Value = "13" },
+                    new SelectListItem{ Text="14:00", Value = "14" },
+                    new SelectListItem{ Text="15:00", Value = "15" },
+                    new SelectListItem{ Text="16:00", Value = "16" },
+                    new SelectListItem{ Text="17:00", Value = "17" },
+                    new SelectListItem{ Text="18:00", Value = "18" },
+                    new SelectListItem{ Text="19:00", Value = "19" },
+                    new SelectListItem{ Text="20:00", Value = "20" },
+                    new SelectListItem{ Text="21:00", Value = "21" },
+                    new SelectListItem{ Text="22:00", Value = "22" },
+                    new SelectListItem{ Text="23:00", Value = "23" },
+                    new SelectListItem{ Text="24:00", Value = "24" },
+                 })
+
+            @Html.DropDownList("EndTime", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="01:00", Value = "1" },
+                    new SelectListItem{ Text="02:00", Value = "2" },
+                    new SelectListItem{ Text="03:00", Value = "3" },
+                    new SelectListItem{ Text="04:00", Value = "4" },
+                    new SelectListItem{ Text="05:00", Value = "5" },
+                    new SelectListItem{ Text="06:00", Value = "6" },
+                    new SelectListItem{ Text="07:00", Value = "7" },
+                    new SelectListItem{ Text="08:00", Value = "8" },
+                    new SelectListItem{ Text="09:00", Value = "9" },
+                    new SelectListItem{ Text="10:00", Value = "10" },
+                    new SelectListItem{ Text="11:00", Value = "11" },
+                    new SelectListItem{ Text="12:00", Value = "12" },
+                    new SelectListItem{ Text="13:00", Value = "13" },
+                    new SelectListItem{ Text="14:00", Value = "14" },
+                    new SelectListItem{ Text="15:00", Value = "15" },
+                    new SelectListItem{ Text="16:00", Value = "16" },
+                    new SelectListItem{ Text="17:00", Value = "17" },
+                    new SelectListItem{ Text="18:00", Value = "18" },
+                    new SelectListItem{ Text="19:00", Value = "19" },
+                    new SelectListItem{ Text="20:00", Value = "20" },
+                    new SelectListItem{ Text="21:00", Value = "21" },
+                    new SelectListItem{ Text="22:00", Value = "22" },
+                    new SelectListItem{ Text="23:00", Value = "23" },
+                    new SelectListItem{ Text="24:00", Value = "24" },
+                 })
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+            }
         </div>
     </div>
 </div>
+
+<div id="ModalAddWorkingHours" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+                <h3 class="alert-info">Edit Config Alert</h3>
+            </div>
+
+            @using (Html.BeginForm("AddWorkingHours", "Terminals"))
+            {
+                @Model
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.TerminalId)
+
+                @Html.EnumDropDownListFor(x => x.Days, "Select My Type", new { @class = "form-control" })
+
+                @Html.DropDownList("StartTime", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="01:00", Value = "1" },
+                    new SelectListItem{ Text="02:00", Value = "2" },
+                    new SelectListItem{ Text="03:00", Value = "3" },
+                    new SelectListItem{ Text="04:00", Value = "4" },
+                    new SelectListItem{ Text="05:00", Value = "5" },
+                    new SelectListItem{ Text="06:00", Value = "6" },
+                    new SelectListItem{ Text="07:00", Value = "7" },
+                    new SelectListItem{ Text="08:00", Value = "8" },
+                    new SelectListItem{ Text="09:00", Value = "9" },
+                    new SelectListItem{ Text="10:00", Value = "10" },
+                    new SelectListItem{ Text="11:00", Value = "11" },
+                    new SelectListItem{ Text="12:00", Value = "12" },
+                    new SelectListItem{ Text="13:00", Value = "13" },
+                    new SelectListItem{ Text="14:00", Value = "14" },
+                    new SelectListItem{ Text="15:00", Value = "15" },
+                    new SelectListItem{ Text="16:00", Value = "16" },
+                    new SelectListItem{ Text="17:00", Value = "17" },
+                    new SelectListItem{ Text="18:00", Value = "18" },
+                    new SelectListItem{ Text="19:00", Value = "19" },
+                    new SelectListItem{ Text="20:00", Value = "20" },
+                    new SelectListItem{ Text="21:00", Value = "21" },
+                    new SelectListItem{ Text="22:00", Value = "22" },
+                    new SelectListItem{ Text="23:00", Value = "23" },
+                    new SelectListItem{ Text="24:00", Value = "24" },
+                 })
+
+                @Html.DropDownList("EndTime", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="01:00", Value = "1" },
+                    new SelectListItem{ Text="02:00", Value = "2" },
+                    new SelectListItem{ Text="03:00", Value = "3" },
+                    new SelectListItem{ Text="04:00", Value = "4" },
+                    new SelectListItem{ Text="05:00", Value = "5" },
+                    new SelectListItem{ Text="06:00", Value = "6" },
+                    new SelectListItem{ Text="07:00", Value = "7" },
+                    new SelectListItem{ Text="08:00", Value = "8" },
+                    new SelectListItem{ Text="09:00", Value = "9" },
+                    new SelectListItem{ Text="10:00", Value = "10" },
+                    new SelectListItem{ Text="11:00", Value = "11" },
+                    new SelectListItem{ Text="12:00", Value = "12" },
+                    new SelectListItem{ Text="13:00", Value = "13" },
+                    new SelectListItem{ Text="14:00", Value = "14" },
+                    new SelectListItem{ Text="15:00", Value = "15" },
+                    new SelectListItem{ Text="16:00", Value = "16" },
+                    new SelectListItem{ Text="17:00", Value = "17" },
+                    new SelectListItem{ Text="18:00", Value = "18" },
+                    new SelectListItem{ Text="19:00", Value = "19" },
+                    new SelectListItem{ Text="20:00", Value = "20" },
+                    new SelectListItem{ Text="21:00", Value = "21" },
+                    new SelectListItem{ Text="22:00", Value = "22" },
+                    new SelectListItem{ Text="23:00", Value = "23" },
+                    new SelectListItem{ Text="24:00", Value = "24" },
+                 })
+
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on("click", ".WorkingHoursEdit", function () {
+        var myBookId = $(this).data('id');
+        $("#myModalWorkingHours #WorkingHoursEdit").val(myBookId);
+    });
+</script>

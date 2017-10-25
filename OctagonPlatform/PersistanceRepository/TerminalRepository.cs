@@ -5,6 +5,7 @@ using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 
@@ -157,14 +158,14 @@ namespace OctagonPlatform.PersistanceRepository
                     if (terminalToEdit == null) throw new Exception("Terminal does not exist in our records!!!");
                     if (terminalCurrent != null)
                     {
-                        if(!terminalCurrent.Deleted && terminalCurrent.Id != terminalToEdit.Id)
+                        if (!terminalCurrent.Deleted && terminalCurrent.Id != terminalToEdit.Id)
                             throw new Exception("Terminal already exists. ");
-                        if(terminalCurrent.Deleted)
+                        if (terminalCurrent.Deleted)
                             Table.Remove(terminalCurrent);
                     }
                     {
-                       
-                        
+
+
                         Mapper.Map(viewModel, terminalToEdit);
                         terminalToEdit.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
                         terminalToEdit.RemainingSurchargePercentFee = 100;
@@ -182,7 +183,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Table.Remove(terminalCurrent);
                     }
 
-                    
+
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
                     terminal.RemainingInterchange = InterchangeConstants.ClientInterchangeAmount;
                     terminal.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
@@ -284,6 +285,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Terminal terminal = Table
                 .Include(c => c.TerminalAlertConfigs)
+                .Include(c => c.WorkingHours)
                 .FirstOrDefault(c => c.Id == id);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
             if (terminal.TerminalAlertConfigs == null)
             {
@@ -291,6 +293,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
 
+            terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
             terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
 
             return terminalAlertConfigViewModel;
@@ -299,17 +302,58 @@ namespace OctagonPlatform.PersistanceRepository
         public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
             Terminal terminal = new Terminal();
-            TerminalAlertConfig terminalAlertConfig =  Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
+            TerminalAlertConfig terminalAlertConfig = Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
 
-                terminal = Table
-                   .Include(c => c.TerminalAlertConfigs)
-                   .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+            terminal = Table
+               .Include(c => c.TerminalAlertConfigs)
+               .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
 
-                terminal.TerminalAlertConfigs = terminalAlertConfig;
+            terminal.TerminalAlertConfigs = terminalAlertConfig;
 
-                Edit(terminal);
-                 
-            
+            Edit(terminal);
+
+
+            return terminal;
+        }
+
+        public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        {
+            Terminal terminal = new Terminal();
+            TimeSpan startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
+            TimeSpan endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+
+            terminal = Table
+                .Include(c => c.WorkingHours)
+                .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+
+            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).StartTime = startTime;
+            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).EndTime = endTime;
+            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).Day = terminalAlertIngnoredViewModel.Days;
+
+            Edit(terminal);
+
+
+            return terminal;
+        }
+        public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        {
+            Terminal terminal = new Terminal();
+
+            TimeSpan startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
+            TimeSpan endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+
+            terminal = Table
+               .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+            terminal.WorkingHours = new List<TerminalWorkingHours>();
+            terminal.WorkingHours.Add(new TerminalWorkingHours
+            {
+                Day = terminalAlertIngnoredViewModel.Days,
+                StartTime = startTime,
+                EndTime = endTime,
+                TerminalId = terminal.TerminalId
+            });
+
+            Save();
             return terminal;
         }
     }
