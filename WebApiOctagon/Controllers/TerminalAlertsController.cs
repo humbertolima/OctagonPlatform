@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web.Helpers;
 using System.Web.Http;
 using WebApiOctagon.Repository.InterfacesRepository;
 
@@ -49,8 +50,18 @@ namespace WebApiOctagon.Controllers
             }
             catch (Exception ex)
             {
-                HttpResponseMessage respo = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-                return respo;
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                WebMail.EnableSsl = true;
+                WebMail.From = "luisrafael.gamez@outlook.com";
+                WebMail.SmtpPort = 25;
+                WebMail.UserName = "luisrafael.gamez@outlook.com";
+                WebMail.SmtpServer = "smtp.live.com";
+                WebMail.Password = "Vv19477002";
+                WebMail.SmtpUseDefaultCredentials = true;
+
+                WebMail.Send("yasser.osuna@gmail.com", "Error en el Api", ex.Message);
+
+                return response;
                 throw;
             }
         }

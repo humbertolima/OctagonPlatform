@@ -230,6 +230,7 @@
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
+    <Compile Include="Helpers\Week.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
@@ -600,6 +601,10 @@
     <Compile Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.Designer.cs">
       <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710232152432_AddTerminalWorksHours.cs" />
+    <Compile Include="Migrations\201710232152432_AddTerminalWorksHours.Designer.cs">
+      <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -670,6 +675,7 @@
     <Compile Include="Models\TerminalContact.cs" />
     <Compile Include="Models\TerminalMessage.cs" />
     <Compile Include="Models\TerminalPicture.cs" />
+    <Compile Include="Models\TerminalWorkingHours.cs" />
     <Compile Include="Models\TransactionStatistic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
@@ -1682,6 +1688,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.resx">
       <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710232152432_AddTerminalWorksHours.resx">
+      <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

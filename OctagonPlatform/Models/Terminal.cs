@@ -27,6 +27,8 @@ namespace OctagonPlatform.Models
 
         public ICollection<TerminalContact> TerminalContacts { get; set; }
 
+        public ICollection<TerminalWorkingHours> WorkingHours { get; set; }
+
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
         public string Phone { get; set; }
