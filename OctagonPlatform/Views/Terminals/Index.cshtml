@@ -4,9 +4,14 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
+<br />
+<br />
+<br />
+<br />
+<br />
 <div class="container">
     <div class="buttonterminal">
-    <h3>Terminals</h3>
+    <h1 class="page-header">Terminals</h1>
     @Html.ActionLink(
         linkText: "Add Terminal",
         actionName: "Create",
@@ -80,14 +85,41 @@
                 <td>@item.Country.Name</td>
                 <td>@item.City.Name</td>
                 <td>@item.State.Name</td>
-                <td>@item.Status</td>
-                <td>@item.Balance</td>
-                <td><i class="fa fa-pencil"></i>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                <td>@if (item.Status.ToString().Equals("Active"))
+                    {
+                        <strong class="text-success">
+                                @item.Status
+                        </strong>
+                    }
+                    else if (item.Status.ToString().Equals("Inactive"))
+                    {
+                        <strong class="text-danger">
+                            @item.Status
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="text-warning">
+                            @item.Status
+                        </strong>
+                    }
+                </td>
+                <td>@if (item.Balance.ToString().Equals(""))
+                    {
+                        <p>$0.00</p>
+                    }
+                    else
+                    {
+
+                        <p>$@item.Balance</p>
+                    }
+                </td>
+                <td><i class="fa fa-pencil"style="font-size:16px;color:darkblue"></i> @Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
                 <td>
-                    <i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                                                  
                 </td>
-                <td><i class="fa fa-trash"></i>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
+                <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td>
             </tr>
         }
         </tbody>
