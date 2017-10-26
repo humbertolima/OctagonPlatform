@@ -5,7 +5,6 @@ using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 
@@ -167,8 +166,8 @@ namespace OctagonPlatform.PersistanceRepository
 
 
                         Mapper.Map(viewModel, terminalToEdit);
-                        terminalToEdit.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
-                        terminalToEdit.RemainingSurchargePercentFee = 100;
+                        terminalToEdit.RemainingSurchargeAmountFee += viewModel.SurchargeAmountFee - terminalToEdit.SurchargeAmountFee;
+                        terminalToEdit.RemainingSurchargePercentFee += viewModel.SurchargePercentageFee - terminalToEdit.SurchargePercentageFee;
                         Edit(terminalToEdit);
                     }
                 }
@@ -185,14 +184,15 @@ namespace OctagonPlatform.PersistanceRepository
 
 
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
-                    terminal.RemainingInterchange = InterchangeConstants.ClientInterchangeAmount;
-                    terminal.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
-                    terminal.RemainingSurchargePercentFee = 100;
+                   
 
                     terminal.TerminalId = "000000000";
                     Add(terminal);
 
                     terminal.TerminalId = TerminalIdGenerator.Generator(terminal.Id);
+                    terminal.RemainingInterchange = InterchangeConstants.ClientInterchangeAmount;
+                    terminal.RemainingSurchargeAmountFee = viewModel.SurchargeAmountFee;
+                    terminal.RemainingSurchargePercentFee = 100;
                     Edit(terminal);
                 }
             }
