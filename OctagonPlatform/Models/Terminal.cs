@@ -14,7 +14,8 @@ namespace OctagonPlatform.Models
 
         [Required]
         public string TerminalId { get; set; }
-   
+
+
         [Required]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
@@ -130,22 +131,8 @@ namespace OctagonPlatform.Models
         [Display(Name = "Loaded By?")]
         public string LoadedBy { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "The Communication Date")]
-        public DateTime? LastCommunicationDate { get; set; }
-
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Last Transaction Date")]
-        public DateTime? LastTransactionDate { get; set; }
-
-        [DataType(DataType.Currency)]
-        [Display(Name = "Minimun Chash Balance")]
-        public double? MinAmmountCash { get; set; }
-
-        public bool Offline { get; set; }
 
         public BindedKey BindedKey { get; set; }
 
@@ -188,21 +175,9 @@ namespace OctagonPlatform.Models
         [Display(Name = "Surcharged Type")]
         public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
-        [Required]
-        [Display(Name = "Remaining Surcharge Amount Fee")]
-        public double RemainingSurchargeAmountFee { get; set; }
-
-        [Required]
-        [Display(Name = "Remaining Surcharge Percent Fee")]
-        public double RemainingSurchargePercentFee { get; set; }
-
         public ICollection<Surcharge> Surcharges { get; set; }
 
         public ICollection<InterChange> InterChanges { get; set; }
-
-        [Required]
-        [Display(Name = "Remaining Interchange")]
-        public double RemainingInterchange { get; set; }
 
         [Required]
         [Display(Name = "Percent Charge By Transaction")]
