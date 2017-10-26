@@ -174,10 +174,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal).SingleOrDefault();
                 
                 if (surcharge == null) throw new Exception("Model not found. ");
-                surcharge.Terminal.RemainingSurchargeAmountFee += surcharge.SplitAmount;
-                surcharge.Terminal.RemainingSurchargePercentFee += surcharge.SplitAmountPercent;
-                GenericRepository<Terminal> t = new TerminalRepository();
-                t.Edit(surcharge.Terminal);
+                
                 Delete(id);
             }
             catch (Exception ex)
