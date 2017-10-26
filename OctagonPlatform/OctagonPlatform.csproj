@@ -1463,6 +1463,7 @@
     <Content Include="Views\TerminalAlerts\Details.cshtml" />
     <Content Include="Views\TerminalAlerts\Edit.cshtml" />
     <Content Include="Views\TerminalAlerts\Index.cshtml" />
+    <Content Include="Views\Shared\Sections\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

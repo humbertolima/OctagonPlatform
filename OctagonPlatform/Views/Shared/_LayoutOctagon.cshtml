@@ -26,16 +26,13 @@
 
     <link rel="icon" type="image/png" href="~/Octagon/assets/img/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="~/Octagon/assets/img/favicon-16x16.png" sizes="16x16" />
-
-
 </head>
 <body>
-    @RenderBody()
-    @Scripts.Render("~/Octagon/assets/js/jquery.min.js")
-    @Scripts.Render("~/Octagon/bootstrap/js/bootstrap.min.js")
-    @Scripts.Render("~/Octagon/assets/js/Contact-FormModal-Contact-Form-with-Google-Map.js")
-
-
-    @RenderSection("scripts", required: false)
-  </body>
+@RenderBody()
+@Scripts.Render("~/Octagon/assets/js/jquery.min.js")
+@Scripts.Render("~/Octagon/bootstrap/js/bootstrap.min.js")
+@Scripts.Render("~/Octagon/assets/js/Contact-FormModal-Contact-Form-with-Google-Map.js")
+@RenderSection("scripts", required: false)
+</body>
+@Html.Partial("Sections/Footer")
 </html>
