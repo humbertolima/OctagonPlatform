@@ -3,9 +3,12 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-<br><br/>
-<h3>Partner: <strong class="alert-link">@Model.BusinessName</strong></h3>
-<hr />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h1 class="page-header">@Model.BusinessName</h1>
 <div class="rowDetail">
     <div class="col-md-4">
         <div class="panel-group" style="width: 100%;">
@@ -88,7 +91,7 @@
     <img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
     <br />
     <br/>
-        <hr>
+       
     <div>
         @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = "" }, htmlAttributes: new { @class = "btn btn-primary" })
     </div>

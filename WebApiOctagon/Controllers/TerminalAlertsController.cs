@@ -59,7 +59,7 @@ namespace WebApiOctagon.Controllers
                 WebMail.Password = "Vv19477002";
                 WebMail.SmtpUseDefaultCredentials = true;
 
-                WebMail.Send("yasser.osuna@gmail.com", "Error en el Api", ex.Message);
+                WebMail.Send("yasser.osuna@gmail.com", "Error en el Api ", ex.Message + " " + ex.InnerException.Message);
 
                 return response;
                 throw;

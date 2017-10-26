@@ -7,74 +7,81 @@ ViewBag.Title = "Octagon";
 Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
 
 }
-<nav class="navbar navbar-default" style="background-color:#ffffff;font-size:15px;padding:0px;">
+
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#ffffff;font-size:15px;padding:0px;">
     <div class="container">
 
         <div class="nav navbar-nav navbar-right">
-        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
-        {
-            <div class="form-group">
-                <div id="id01" class="modal">
-                    <div class="containerlogin">
-                        <form class="form-inline">
-                            <div class="imgcontainer">
-                                <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
-                            </div>
-                            <div class="">
-                                @Html.AntiForgeryToken()
-                                @Html.HiddenFor(m => m.TriesToLogin)
-                                @Html.ValidationSummary(true, "", new {@class = "text-warning"})
-                                <div>
-                                    @Html.LabelFor(model => model.UserName);
-                                    @Html.TextBoxFor(model => model.UserName, new {placeholder = "Enter Username"})
-                                    @Html.ValidationMessageFor(model => model.UserName, "", new {@class = "text-danger"})
+            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div id="id01" class="modal">
+                        <div class="containerlogin">
+                            <form class="form-inline">
+                                <div class="imgcontainer">
+                                    <span onclick="document.getElementById('id01').style.display = 'none'" class="close" title="Close Modal">&times;</span>
                                 </div>
-                                <div>
-                                    @Html.LabelFor(model => model.Password);
-                                    @Html.PasswordFor(model => model.Password, new {placeholder = "Enter Password"})
-                                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                                <div class="">
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(m => m.TriesToLogin)
+                                    @Html.ValidationSummary(true, "", new {@class = "text-warning"})
+                                    <div>
+                                        @Html.LabelFor(model => model.UserName);
+                                        @Html.TextBoxFor(model => model.UserName, new {placeholder = "Enter Username"})
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new {@class = "text-danger"})
+                                    </div>
+                                    <div>
+                                        @Html.LabelFor(model => model.Password);
+                                        @Html.PasswordFor(model => model.Password, new {placeholder = "Enter Password"})
+                                        @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                                    </div>
+                                    <input type="submit" value="Login" class="btn btn-primary btn-block"/>
+                                    <input type="checkbox" checked="checked"> Remember me
                                 </div>
-                                <input type="submit" value="Login" class="btn btn-primary btn-block"/>
-                                <input type="checkbox" checked="checked"> Remember me
-                            </div>
-                            <div class="" style="background-color: #f1f1f1">
-                                <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
-                                <span class="psw">Forgot <a href="#">Password?</a></span>
-                            </div>
-                        </form>
+                                <div class="" style="background-color: #f1f1f1">
+                                    <button type="button" onclick="document.getElementById('id01').style.display = 'none'" class="cancelbtn">Cancel</button>
+                                    <span class="psw">Forgot <a href="#">Password?</a></span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <script>
-                    // Get the modal
-                    var modal = document.getElementById('id01');
+                    <script>
+                        // Get the modal
+                        var modal = document.getElementById('id01');
 
-                    // When the user clicks anywhere outside of the modal, close it
-                    window.onclick = function(event) {
-                        if (event.target == modal) {
-                            modal.style.display = "none";
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
                         }
-                    }
-                </script>
-                <div class="container">
-                    <div class="navbar-header">
-                        <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed" style="width: 45px;"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                        <a href="#" class="navbar-brand navbar-link" style="font-size: 35px; color: #222222; margin: -29px; height: 0px; padding: 28px; width: 238px;"><img src="~/Octagon/assets/img/favicon-32x32.png" id="logo"/><strong>Octagon </strong></a>
+                    </script>
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed" style="width: 45px;"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                            <a href="#" class="navbar-brand navbar-link" style="font-size: 35px; color: #222222; margin: -29px; height: 0px; padding: 28px; width: 238px;"><img src="~/Octagon/assets/img/favicon-32x32.png" id="logo"/><strong>Octagon </strong></a>
 
-                    </div>
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <ul class="nav navbar-nav navbar-right">
+                        </div>
+                        <div class="collapse navbar-collapse" id="navcol-1">
+                            <ul class="nav navbar-nav navbar-right">
 
-                            <li role="presentation"><a href="#contact" style="color: rgb(57, 65, 69);">Contact Us</a></li>
-                            <li role="presentation"><a href="#" style="color: rgb(57, 65, 69);" onclick="document.getElementById('id01').style.display = 'block'">Login</a></li>
-                            @* @Html.Partial("_LoginPartial") *@
-                        </ul>
+                                <li role="presentation"><a href="#contact" style="color: rgb(57, 65, 69);">Contact Us</a></li>
+                                <li role="presentation"><a href="#" style="color: rgb(57, 65, 69);" onclick="document.getElementById('id01').style.display = 'block'">Login</a></li>
+                                @* @Html.Partial("_LoginPartial") *@
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
         </div>
     </div>
 </nav>
+
+<br/>
+<br />
+<br />
+<br />
+
 <div id="promo">
     <div class="jumbotron">
         <h1 style="color:rgb(171,160,160);">OCTAGON </h1>
@@ -89,18 +96,21 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
     <div class="row" style="background-color:rgba(255,255,255,0.247059);">
         <div class="col-md-4">
             <a href="">
-                <img src="~/Octagon/assets/img/1.jpg" id="team" /> <h2 style="color:rgb(129,124,124);">TEAM</h2> <p>&nbsp;</p>
+                <img src="~/Octagon/assets/img/1.jpg" id="team" /> 
+                <!--<h2 style="color:rgb(129,124,124);">TEAM</h2> <p>&nbsp;</p>-->
             </a>
         </div>
 
         <div class="col-md-4">
             <a href="">
-                <img src="~/Octagon/assets/img/2.jpg" id="vision" style="color:rgb(129,124,124);" /><h2 style="color:rgb(129,124,124);">VISION</h2> <p>&nbsp;</p>
+                <img src="~/Octagon/assets/img/2.jpg" id="vision" style="color:rgb(129,124,124);" />
+                <!--<h2 style="color:rgb(129,124,124);">VISION</h2> <p>&nbsp;</p>-->
             </a>
         </div>
         <div class="col-md-4">
             <a href="">
-                <img src="~/Octagon/assets/img/3.jpg" id="innovation" /> <h2 style="color:rgb(129,124,124);">INNOVATION</h2> <p>&nbsp;</p>
+                <img src="~/Octagon/assets/img/3.jpg" id="innovation" /> 
+                <!--<h2 style="color:rgb(129,124,124);">INNOVATION</h2> <p>&nbsp;</p>-->
             </a>
         </div>
     </div>
