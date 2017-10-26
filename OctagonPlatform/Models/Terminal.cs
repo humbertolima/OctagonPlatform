@@ -14,7 +14,9 @@ namespace OctagonPlatform.Models
 
         [Required]
         public string TerminalId { get; set; }
-   
+
+        public int InactiveHours { get; set; }
+
         [Required]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
