@@ -80,8 +80,35 @@
                 <td>@item.Country.Name</td>
                 <td>@item.City.Name</td>
                 <td>@item.State.Name</td>
-                <td>@item.Status</td>
-                <td>@item.Balance</td>
+                <td>@if (item.Status.ToString().Equals("Active"))
+                    {
+                        <strong class="text-success">
+                                @item.Status
+                        </strong>
+                    }
+                    else if (item.Status.ToString().Equals("Inactive"))
+                    {
+                        <strong class="text-danger">
+                            @item.Status
+                        </strong>
+                    }
+                    else
+                    {
+                        <strong class="text-warning">
+                            @item.Status
+                        </strong>
+                    }
+                </td>
+                <td>@if (item.Balance.ToString().Equals(""))
+                    {
+                        <p>$0.00</p>
+                    }
+                    else
+                    {
+
+                        <p>$@item.Balance</p>
+                    }
+                </td>
                 <td><i class="fa fa-pencil"></i>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
                 <td>
                     <i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
