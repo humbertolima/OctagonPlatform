@@ -4,11 +4,9 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
-
 <h3 class="alert-info">Terminal: <strong class="alert-info">@Model.Id</strong></h3>
 <br />
 <hr />
-<br />
 @Html.ActionLink(linkText: "View messages", actionName: "Index", controllerName: "TerminalMessages", routeValues: new
 {
     terminalId = Model.TerminalId
@@ -17,7 +15,7 @@
 <div class="panel-group" style="width: 33%; float:right;">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
+            <h3 class="alert-info">@Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
 
             <div id="getConfigNotification" class="panel-collapse collapse">
                 <img id="loading4" style="display:none" src="~/Content/loading_icon.gif" alt="" />
@@ -131,4 +129,5 @@
 
 @section Scripts {
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
 }

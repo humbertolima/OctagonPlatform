@@ -17,5 +17,6 @@ namespace OctagonPlatform.Helpers
             Saturday = 6,
             Sunday = 7
         }
+     
     }
 }
