@@ -82,12 +82,12 @@
                 <td>@item.State.Name</td>
                 <td>@item.Status</td>
                 <td>@item.Balance</td>
-                <td><i class="fa fa-pencil"></i>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+                <td><i class="fa fa-pencil"style="font-size:16px;color:darkblue"></i> @Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
                 <td>
-                    <i class="fa fa-trash"></i>@Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                                                  
                 </td>
-                <td><i class="fa fa-trash"></i>@Html.ActionLink("Details", "Details", new { id = item.Id })</td>
+                <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td>
             </tr>
         }
         </tbody>
