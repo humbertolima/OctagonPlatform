@@ -246,6 +246,20 @@ namespace OctagonPlatform.Controllers
             return RedirectToAction("Details/" + terminal.Id);
         }
 
+        [HttpPost]
+        public ActionResult SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        {
+            var terminal = _repository.SetWorkingHours(terminalAlertIngnoredViewModel, WorkingHoursEdit);
+
+            return RedirectToAction("Details/" + terminal.Id);
+        }
+        [HttpPost]
+        public ActionResult AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        {
+            var terminal = _repository.AddWorkingHours(terminalAlertIngnoredViewModel);
+
+            return RedirectToAction("Details/" + terminal.Id);
+        }
         #endregion
 
     }
