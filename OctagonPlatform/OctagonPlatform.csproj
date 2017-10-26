@@ -605,6 +605,10 @@
     <Compile Include="Migrations\201710232152432_AddTerminalWorksHours.Designer.cs">
       <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710262026269_EditTerminalInactiveHours.cs" />
+    <Compile Include="Migrations\201710262026269_EditTerminalInactiveHours.Designer.cs">
+      <DependentUpon>201710262026269_EditTerminalInactiveHours.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1736,6 +1740,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710232152432_AddTerminalWorksHours.resx">
       <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710262026269_EditTerminalInactiveHours.resx">
+      <DependentUpon>201710262026269_EditTerminalInactiveHours.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
