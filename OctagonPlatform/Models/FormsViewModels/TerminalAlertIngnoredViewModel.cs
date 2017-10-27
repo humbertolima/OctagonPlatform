@@ -26,7 +26,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public double? LowCash3 { get; set; }
 
-        public DateTime? InactivePeriod { get; set; }
+        public int IgnoreHoursInactive { get; set; }
 
         public bool IgnoreChestDoorOpen { get; set; }
         public bool IgnoreTopDoorOpen { get; set; }

@@ -92,9 +92,9 @@ Ignored Alerts <br />
                     @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
                 </p>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.InactivePeriod)
-                    @Html.TextBoxFor(m => m.InactivePeriod, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
-                    @Html.ValidationMessageFor(m => m.InactivePeriod)
+                    @Html.LabelFor(m => m.IgnoreHoursInactive)
+                    @Html.TextBoxFor(m => m.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
+                    @Html.ValidationMessageFor(m => m.IgnoreHoursInactive)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.LowCach1)
