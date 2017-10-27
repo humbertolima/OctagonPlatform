@@ -20,8 +20,8 @@ namespace OctagonPlatform.Models
 
         public double? LowCash3 { get; set; }
 
-        public DateTime? InactivePeriod { get; set; }
-        
+        public int IgnoreHoursInactive { get; set; }
+
         public bool IgnoreChestDoorOpen { get; set; }
         public bool IgnoreTopDoorOpen { get; set; }
         public bool IgnoreReceiptPaper { get; set; }

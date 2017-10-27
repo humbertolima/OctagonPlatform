@@ -16,12 +16,9 @@
   #promo {
     padding:20px;
   }
-}
-
-@media (max-width:991px) {
-  promo .jumbotron {
-    padding:20px;
-  }
+    promo .jumbotron {
+        padding: 20px;
+    }
 }
 
 #promo .jumbotron {
@@ -48,41 +45,42 @@ a:hover, a:focus {
   }
 }
 
-#team {
-  margin:0 auto;
-  margin-left:0px;
-  margin-top:-30px;
-}
-
-#vision {
-  margin:0 auto;
-  align-items:center;
-  margin-top:-30px;
-}
 
 @media (max-width:767px) {
-  #innovation {
-  }
+    #vision {
+        margin: 0 auto;
+        align-items: center;
+        margin-top: 10px;
+    }
+    #innovation {
+        margin: 0 auto;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    #team {
+        margin: 0 auto;
+        margin-left: 0px;
+        margin-top: 10px;
+    }
 }
 
-#innovation {
-  margin-left:0px;
-  margin-top:-30px;
-}
 
-#container-fluid {
-  align-content:center;
-}
+    #container-fluid {
+        align-content: center;
+    }
 
-@media (min-width:1200px) {
-  #container-fluid {
-    width:1200px;
-  }
-}
+    @media (min-width:1200px) {
+        #container-fluid {
+            width: 1200px;
+        }
+    }
 
-#map {
-  align-self:auto;
-  align-items:center;
-  align-content:flex-end;
-}
+    @media (max-width:767px) {
 
+
+        #map {
+            align-self: auto;
+            align-items: center;
+            align-content: flex-end;
+        }
+    }

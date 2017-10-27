@@ -11,14 +11,15 @@
     <div id="page-wrapper">
         @RenderBody()
     </div>
+    @Html.Partial("Sections/Footer")
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
     
     
-  
 @Html.Partial("Sections/Scripts")
 @RenderSection("scripts", required: false)
 
 </body>
+
 </html>
