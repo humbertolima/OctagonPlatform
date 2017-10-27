@@ -30,7 +30,6 @@ namespace OctagonPlatform.Models
         public DateTime StopDate { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
         public double SplitAmount { get; set; }
 
         [Required]

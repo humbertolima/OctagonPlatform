@@ -49,7 +49,7 @@ namespace OctagonPlatform.PersistanceRepository
                 (obj as IAuditEntity).CreatedAt = date;
                 (obj as IAuditEntity).CreatedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
                 (obj as IAuditEntity).CreatedByName = userName;
-            }
+            }   
             Save();
         }
 

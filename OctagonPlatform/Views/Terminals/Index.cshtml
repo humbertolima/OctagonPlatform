@@ -11,18 +11,18 @@
 <br />
 <div class="container">
     <div class="buttonterminal">
-    <h1 class="page-header">Terminals</h1>
-    @Html.ActionLink(
-        linkText: "Add Terminal",
-        actionName: "Create",
-        controllerName: "Terminals",
-        routeValues: new
-        {
-            partnerId = int.Parse(Session["partnerId"].ToString())
-        },
-        htmlAttributes: new {@class= "btn btn-primary" }
-        )
-        </div>
+        <h1 class="page-header">Terminals</h1>
+        @Html.ActionLink(
+            linkText: "Add Terminal",
+            actionName: "Create",
+            controllerName: "Terminals",
+            routeValues: new
+            {
+                partnerId = int.Parse(Session["partnerId"].ToString())
+            },
+            htmlAttributes: new {@class= "btn btn-primary" }
+            )
+    </div>
     <hr>
     @*
 <nav class="navbar navbar-default"> 

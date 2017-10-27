@@ -24,7 +24,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Surcharges not found. ");
             }
         }
 
@@ -33,7 +33,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId);
-                if (terminal == null) throw new Exception("Page not found. ");
+                if (terminal == null) throw new Exception("Surcharge not found. ");
 
                 return new SurchargeFormViewModel()
                 {
@@ -47,7 +47,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Could not open this page. ");
             }
         }
 
@@ -56,20 +56,17 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var surcharge = Table.Where(x => x.Id == id && !x.Deleted)
-                    .Include(x => x.Terminal)
-                    .Include(x => x.BankAccount).SingleOrDefault();
+                    .Include(x => x.Terminal).SingleOrDefault();
 
-                if(surcharge == null) throw new Exception("Model not found. ");
+                if(surcharge == null) throw new Exception("Surcharge not found. ");
 
                 var result = Mapper.Map<Surcharge, SurchargeFormViewModel>(surcharge);
-                result.Terminal = surcharge.Terminal;
-                result.BankAccount = surcharge.BankAccount;
                 result.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == surcharge.Terminal.PartnerId && !x.Deleted).ToList();
                 return result;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Could not open this page. ");
             }
         }
 
@@ -78,57 +75,54 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                
-                if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date");
+                if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date. ");
+
                 var surchargeDefault = Table.SingleOrDefault(x => x.BankAccountId == viewModel.BankAccountId);
-                
+
+                //var sumAmountFee = viewModel.SplitAmount + Table.Where(x => x.Id != viewModel.Id && !x.Deleted).ToList().Sum(item => item.SplitAmount);
+
+                //var sumAmoutPercent = viewModel.SplitAmountPercent + Table.Where(x => x.Id != viewModel.Id && !x.Deleted).ToList().Sum(item => item.SplitAmountPercent);
+
 
                 if (action == "Edit")
                 {
 
 
-                    var surcharge = Table.SingleOrDefault(x => x.Id == viewModel.Id);
-                    if (surcharge == null) throw new Exception("Surcharge not found. ");
-
-                    var sumAmountFee = Table.Where(x => x.Id != surcharge.Id).Sum(x => x.SplitAmount) + viewModel.SplitAmount;
-                    var sumAmoutPercent = Table.Where(x => x.Id != surcharge.Id).Sum(x => x.SplitAmountPercent) + viewModel.SplitAmountPercent;
-
-                    var terminal = Context.Terminals.SingleOrDefault(x => x.Id == surcharge.TerminalId);
-                    if (terminal == null) throw new Exception("This terminal does not exist. ");
-                    {
-                        if (sumAmountFee > terminal.SurchargeAmountFee)
-                            throw new Exception("This Amount Fee is biger that the remaining Surcharge Amount");
-                        if (sumAmoutPercent > terminal.SurchargePercentageFee)
-                            throw new Exception("This Percent Amount Fee is biger that the remaining Surcharge Amount");
-
-                    }
-
-                    if (surchargeDefault != null)
-                    {
-                        if (!surchargeDefault.Deleted && surchargeDefault.Id != surcharge.Id)
-                            throw new Exception("This Terminal already has a Surcharge with the same Bank Account. ");
-                        if(surchargeDefault.Deleted)
-                            Table.Remove(surchargeDefault);
-
-                    }
-
+                    var surcharge = Table.Where(x => x.Id == viewModel.Id && !x.Deleted)
+                        .Include(x => x.Terminal).SingleOrDefault();
                     
+                    //if (surcharge == null) throw new Exception("Surcharge not found. ");
+
+                    //var splitAmountFee = surcharge.Terminal.SurchargeAmountFee;
+                    //if (sumAmountFee > splitAmountFee)
+                    //    throw new Exception("This Amount Fee is biger that the remaining Surcharge Amount. ");
+                    //if (sumAmoutPercent > 100)
+                    //    throw new Exception("This Percent Amount Fee is biger that the remaining Surcharge Amount. ");
+
+                    //if (surchargeDefault != null)
+                    //{
+                    //    if (!surchargeDefault.Deleted && surchargeDefault.Id != surcharge.Id)
+                    //        throw new Exception("This Terminal already has a Surcharge with the same Bank Account. ");
+                    //    if (surchargeDefault.Deleted)
+                    //        Table.Remove(surchargeDefault);
+
+                    //}
+
+
                     Mapper.Map(viewModel, surcharge);
+                    
                     Edit(surcharge);
                 }
                 else
                 {
-                    var sumAmountFee = Table.Sum(x => x.SplitAmount) + viewModel.SplitAmount;
-                    var sumAmoutPercent = Table.Sum(x => x.SplitAmountPercent) + viewModel.SplitAmountPercent;
+                    //var terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                    //if (terminal == null) throw new Exception("This Surcharge's Terminal does not exist. ");
 
-                    var terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId);
-                    if (terminal == null) throw new Exception("This terminal does not exist. ");
-                    {
-                        if (sumAmountFee > terminal.SurchargeAmountFee)
-                            throw new Exception("This Amount Fee is biger that the remaining Surcharge Amount");
-                        if (sumAmoutPercent > terminal.SurchargePercentageFee)
-                            throw new Exception("This Percent Amount Fee is biger that the remaining Surcharge Amount");
+                    //if (sumAmountFee > terminal.SurchargeAmountFee)
+                    //    throw new Exception("This Amount Fee is biger that the remaining Surcharge Amount");
+                    //if (sumAmoutPercent > 100)
+                    //    throw new Exception("This Percent Amount Fee is biger that the remaining Surcharge Amount");
 
-                    }
 
                     if (surchargeDefault != null)
                     {
@@ -157,7 +151,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
                     .SingleOrDefault();
-                if(surcharge == null) throw new Exception("Model not found. ");
+                if(surcharge == null) throw new Exception("Surchage not found. ");
                 return surcharge;
             }
             catch (Exception ex)
@@ -173,7 +167,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var surcharge = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Terminal).SingleOrDefault();
                 
-                if (surcharge == null) throw new Exception("Model not found. ");
+                if (surcharge == null) throw new Exception("Surcharge not found. ");
                 
                 Delete(id);
             }
