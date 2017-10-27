@@ -85,3 +85,7 @@ a {
         transform: rotate(360deg);
     }
 }
+
+#PartnerDetailButtons:hover {
+     background-color: white;
+ }
