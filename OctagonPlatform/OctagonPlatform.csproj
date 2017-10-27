@@ -225,6 +225,7 @@
     <Compile Include="Helpers\AccountType.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
+    <Compile Include="Helpers\Email.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
