@@ -1468,6 +1468,7 @@
     <Content Include="Views\TerminalAlerts\Edit.cshtml" />
     <Content Include="Views\TerminalAlerts\Index.cshtml" />
     <Content Include="Views\Shared\Sections\Footer.cshtml" />
+    <Content Include="Views\Terminals\DeleteTerminalModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
