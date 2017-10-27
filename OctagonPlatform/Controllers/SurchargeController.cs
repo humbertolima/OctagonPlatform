@@ -25,8 +25,9 @@ namespace OctagonPlatform.Controllers
                 ViewBag.TerminalId = terminalId;
                 return PartialView(surcharges);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return PartialView("Error");
             }
         }
@@ -80,7 +81,7 @@ namespace OctagonPlatform.Controllers
                 if (!ModelState.IsValid && viewModel.Id == 0)
                 {
                     return View("SurchargeForm",
-                        _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId));
+                        _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel));
                 }
 
 
@@ -88,17 +89,23 @@ namespace OctagonPlatform.Controllers
 
                 return RedirectToAction("Details", "Terminals", new {id = viewModel.TerminalId});
             }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error editing or creating Surcharge" + exDb.Message;
+            //catch (DbEntityValidationException)
+            //{
+            //    ViewBag.Error = "Validation error editing or creating Surcharge";
 
-                return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
-            }
+            //    return View("SurchargeForm",
+            //        viewModel.Id == 0
+            //            ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId)
+            //            : _surchargeRepository.SurchargeToEdit(viewModel.Id));
+            //}
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing or creating Surcharge "
+                ViewBag.Error = "Error editing or creating Surcharge "
                                 + ex.Message;
-                return View("SurchargeForm", viewModel.Id == 0 ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId) : _surchargeRepository.SurchargeToEdit(viewModel.Id));
+                return View("SurchargeForm",
+                    viewModel.Id == 0
+                        ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId)
+                        : _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel));
             }
         }
 
@@ -124,15 +131,15 @@ namespace OctagonPlatform.Controllers
                 _surchargeRepository.DeleteSurcharge(id);
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
-            catch (DbEntityValidationException exDb)
+            catch (DbEntityValidationException)
 
             {
-                ViewBag.Error = "Validation error deleting VaultCash" + exDb.Message;
+                ViewBag.Error = "Validation error deleting Surcharge";
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error deleting VaultCash" + ex.Message;
+                ViewBag.Error = "Validation error deleting Surcharge" + ex.Message;
                 return RedirectToAction("Details", "Terminals", new { id = terminalId});
             }
         }

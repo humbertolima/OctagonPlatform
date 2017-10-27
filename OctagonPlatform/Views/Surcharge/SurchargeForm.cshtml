@@ -11,15 +11,15 @@
 @using (Html.BeginForm("Save", "Surcharge", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.TerminalId)
     <div class="form-group">
-        <p class="alert alert-danger">
+        <p class="alert-warning">
             All fields are <strong>required.</strong>
             @ViewBag.Error
-            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new {@class = "text-danger"})
+            @Html.ValidationSummary(false,"",  new {@class = "text-warning"})
         </p>
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.TerminalId)
+       
         <div class="form-group">
             @Html.LabelFor(m => m.BankAccountId)
             @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new {@class = "form-control"})
@@ -27,12 +27,12 @@
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.SplitAmount)
-            @Html.TextBoxFor(m => m.SplitAmount, new { @class = "form-control", autofocus = "autofocus"})
+            @Html.TextBoxFor(m => m.SplitAmount, new {@class = "form-control", autofocus = "autofocus"})
             @Html.ValidationMessageFor(m => m.SplitAmount)
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.SplitAmountPercent)
-            @Html.TextBoxFor(m => m.SplitAmountPercent, new { placeholder = "%", @class = "form-control", autofocus = "autofocus" })%
+            @Html.TextBoxFor(m => m.SplitAmountPercent, new {@class = "form-control", autofocus = "autofocus" })
             @Html.ValidationMessageFor(m => m.SplitAmountPercent)
         </div>
         <div class="form-group">

@@ -11,10 +11,7 @@ namespace OctagonPlatform.Controllers
         // GET: TerminalMessages
         public ActionResult Index(string terminalId)
         {
-            string url = "http://apiatm.azurewebsites.net/api/response/viewmessage/" + terminalId;
-            var json = new WebClient().DownloadString(url);
-            List<TerminalMessage> list = JsonConvert.DeserializeObject<List<TerminalMessage>>(json);
-
+            var list = Helpers.Terminals.GetTerminalMessages(terminalId);
             return View(list);
         }
         
