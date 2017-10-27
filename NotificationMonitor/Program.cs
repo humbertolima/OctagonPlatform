@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotificationMonitor.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,8 @@ namespace NotificationMonitor
         static void Main(string[] args)
         {
 
-
+            TerminalsRepository terminalstatus = new TerminalsRepository();
+            terminalstatus.CheckTerminalsStatus();
 
             Console.WriteLine("Hola Mundo");
             Console.Read();

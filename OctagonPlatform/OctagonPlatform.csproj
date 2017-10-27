@@ -230,6 +230,7 @@
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
+    <Compile Include="Helpers\Terminals.cs" />
     <Compile Include="Helpers\Week.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
     <Compile Include="Helpers\ISoftDeleted.cs" />
