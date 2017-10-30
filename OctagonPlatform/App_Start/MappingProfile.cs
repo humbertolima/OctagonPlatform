@@ -106,7 +106,7 @@ namespace OctagonPlatform
 
             CreateMap<SurchargeFormViewModel, SurchargeFormViewModel>();
             //Dto to Domain
-            CreateMap<SurchargeFormViewModel, Surcharge>();
+            CreateMap<SurchargeFormViewModel, Surcharge>().ForMember(c => c.Id, opt => opt.Ignore());
 
 
 

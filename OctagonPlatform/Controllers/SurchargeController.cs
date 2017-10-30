@@ -89,15 +89,6 @@ namespace OctagonPlatform.Controllers
 
                 return RedirectToAction("Details", "Terminals", new {id = viewModel.TerminalId});
             }
-            //catch (DbEntityValidationException)
-            //{
-            //    ViewBag.Error = "Validation error editing or creating Surcharge";
-
-            //    return View("SurchargeForm",
-            //        viewModel.Id == 0
-            //            ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId)
-            //            : _surchargeRepository.SurchargeToEdit(viewModel.Id));
-            //}
             catch (Exception ex)
             {
                 ViewBag.Error = "Error editing or creating Surcharge "

@@ -1,5 +1,4 @@
-﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Data.Entity.Validation;
