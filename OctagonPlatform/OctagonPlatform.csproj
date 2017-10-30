@@ -1473,6 +1473,7 @@
     <Content Include="Views\TerminalAlerts\Index.cshtml" />
     <Content Include="Views\Shared\Sections\Footer.cshtml" />
     <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
+    <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

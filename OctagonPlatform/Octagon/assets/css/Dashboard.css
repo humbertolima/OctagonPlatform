@@ -1,4 +1,9 @@
-﻿.alingleft {
+﻿a {
+    font-family: "Helvetica Neue", Helvetica,
+}
+
+
+.alingleft {
     width: 50%;
     float: none;
     margin-left: 50px;
@@ -89,3 +94,4 @@ a {
 #PartnerDetailButtons:hover {
      background-color: white;
  }
+
