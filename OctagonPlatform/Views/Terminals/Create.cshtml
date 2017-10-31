@@ -36,23 +36,31 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Status)
-                @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Status)
+                <div class="col-lg-10">
+                    @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Status)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Address1)
-                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
-                @Html.ValidationMessageFor(m => m.Address1)
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
+                    @Html.ValidationMessageFor(m => m.Address1)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Address2)
-                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
-                @Html.ValidationMessageFor(m => m.Address2)
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
+                    @Html.ValidationMessageFor(m => m.Address2)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Zip)
-                @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
-                @Html.ValidationMessageFor(m => m.Zip)
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
+                    @Html.ValidationMessageFor(m => m.Zip)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.LocationTypeId)
