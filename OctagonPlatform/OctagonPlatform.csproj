@@ -1383,7 +1383,6 @@
     <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Partners\Index.cshtml" />
     <Content Include="Views\Partners\Edit.cshtml" />
@@ -1458,7 +1457,6 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
-    <Content Include="Views\Home\IndexOld.cshtml" />
     <Content Include="Views\Surcharge\Delete.cshtml" />
     <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
