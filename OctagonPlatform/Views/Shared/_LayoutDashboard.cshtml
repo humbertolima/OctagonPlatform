@@ -1,7 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-
     @Html.Partial("Sections/Header")
 </head>
 <body>
@@ -16,6 +15,7 @@
     </div>
     <!-- /#wrapper -->
     @Html.Partial("Sections/Scripts")
+@RenderSection("scripts", required: false)
     @* @RenderSection("scripts", required: false)*@
 </body>
 </html>

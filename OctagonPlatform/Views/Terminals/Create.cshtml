@@ -1,9 +1,9 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.TerminalFormViewModel
-@Styles.Render("~/Content/bootstrap-lumen.css") 
+@*@Styles.Render("~/Content/bootstrap-lumen.css") *@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 
@@ -13,7 +13,7 @@
 <br />
 <br />
 
-<div class="alingleft">
+<div>
     <br><br />
     <h3>Create Terminal</h3>
     <hr>
@@ -24,13 +24,15 @@
             <p class="alert alert-warning">
                 All fields are <strong>required.</strong>
                 @ViewBag.Error
-                @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </p>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.PartnerId)
-                @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.PartnerId)
+                @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.PartnerId)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.Status)
@@ -225,6 +227,7 @@
     @using (Html.BeginForm("Create", "Terminals", FormMethod.Post, new {@class = "form-horizontal"}))
     {
         @Html.AntiForgeryToken()
+        <div>
         <p class="alert alert-warning">
             All fields are <strong>required.</strong>
             @ViewBag.Error
@@ -452,6 +455,7 @@
                 @Html.TextBoxFor(m => m.MinAmmountCash, new {@class = "form-control", autofocus = "autofocus", placeholder = "300"})
                 @Html.ValidationMessageFor(m => m.MinAmmountCash)
             </div>
+        </div>
         </div>
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
