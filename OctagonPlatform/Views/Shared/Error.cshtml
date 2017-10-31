@@ -1,6 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<h1 class="alert-info">Error, Page not found. </h1>
+<h1 class="alert-info">@ViewBag.Error.</h1>
 <h3 class="alert-danger">@ViewBag.Error</h3>

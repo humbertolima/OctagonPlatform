@@ -1,5 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -25,39 +26,57 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(UserLoginViewModel viewModel)
         {
-            if (Session["tries"] != null)
+            try
             {
-                viewModel.TriesToLogin = int.Parse(Session["tries"].ToString());
-            }
-            var userToLogin = _accountRepository.Login(viewModel);
-            if (userToLogin.IsLocked)
-            {
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("Index", "Home", viewModel);
+                }
+                if (Session["tries"] != null)
+                {
+                    viewModel.TriesToLogin = int.Parse(Session["tries"].ToString());
+                }
+                var userToLogin = _accountRepository.Login(viewModel);
+                if (userToLogin.IsLocked)
+                {
 
+                    if (Session["tries"] != null) Session["tries"] = 0;
+                    ViewBag.Message = "User Locked, please call the Administrator";
+                    return RedirectToAction("Index", "Home", viewModel);
+
+                }
+
+                if (userToLogin.Partner == null)
+                {
+                    ViewBag.Message = "Invalid User";
+                    Session["tries"] = userToLogin.TriesToLogin;
+                    return RedirectToAction("Index", "Home", viewModel);
+                }
+                FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
+                Session["logo"] = userToLogin.Partner.Logo;
+                Session["partnerId"] = userToLogin.Partner.Id;
+                Session["businessName"] = userToLogin.Partner.BusinessName;
                 if (Session["tries"] != null) Session["tries"] = 0;
-                ViewBag.Message = "User Locked, please call the Administrator";
-                return RedirectToAction("Index", "Home", viewModel);
-
+                return RedirectToAction("Index", "Dashboard");
             }
-            
-            if (userToLogin.Partner == null)
+            catch (Exception)
             {
-                ViewBag.Message = "Invalid User";
-                Session["tries"] = userToLogin.TriesToLogin;
-                return RedirectToAction("Index", "Home", viewModel);
+                return HttpNotFound("User not found. ");
             }
-            FormsAuthentication.SetAuthCookie(userToLogin.UserName, false);
-            Session["logo"] = userToLogin.Partner.Logo;
-            Session["partnerId"] = userToLogin.Partner.Id;
-            Session["businessName"] = userToLogin.Partner.BusinessName;
-            if (Session["tries"] != null) Session["tries"] = 0;
-            return RedirectToAction("Index", "Dashboard");
         }
         [Authorize]
         [HttpGet]
         public ActionResult Logout()
         {
-            _accountRepository.Logout();
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                _accountRepository.Logout();
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return HttpNotFound("Page not found. ");
+            }
         }
 
         //Implementacion

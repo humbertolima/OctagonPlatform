@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using OctagonPlatform.Models.FormsViewModels;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
@@ -7,7 +8,7 @@ namespace OctagonPlatform.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View(new UserLoginViewModel());
         }
 
         
