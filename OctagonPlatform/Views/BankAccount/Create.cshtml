@@ -12,7 +12,7 @@
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
         @ViewBag.Error
-        @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     </p>
     <div class="form-group">
         @Html.LabelFor(m => m.NickName)

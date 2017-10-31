@@ -3,7 +3,6 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Net;
 using System.Web.Mvc;
 
@@ -29,9 +28,10 @@ namespace OctagonPlatform.Controllers
 
                 return View(bankAccounts);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank accounts not found. ";
+                return View("Error");
             }
         }
 
@@ -45,19 +45,20 @@ namespace OctagonPlatform.Controllers
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
 
-                BankAccount bankAccount = _bAccountRepository.BAccountDetails((int) id);
+                var bankAccount = _bAccountRepository.BAccountDetails((int) id);
 
                 if (bankAccount == null)
                 {
                     return HttpNotFound();
                 }
-                BAccountFVModel viewModel = Mapper.Map<BankAccount, BAccountFVModel>(bankAccount);
+                var viewModel = Mapper.Map<BankAccount, BAccountFVModel>(bankAccount);
 
                 return View(viewModel);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
         }
 
@@ -68,9 +69,10 @@ namespace OctagonPlatform.Controllers
             {
                 return View(_bAccountRepository.RenderBaFormViewModel(partnerId));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
         }
 
@@ -84,53 +86,36 @@ namespace OctagonPlatform.Controllers
                 if (!ModelState.IsValid)
                 {
 
-                    return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
+                    return View(_bAccountRepository.RenderBaFormViewModel(bankAccount.PartnerId));
                 }
-                try
-                {
-                    _bAccountRepository.SaveBankAccount(bankAccount, "Create");
-                    return RedirectToAction("Details", "Partners", new {id = bankAccount.PartnerId});
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating BankAccount " + exDb.Message;
-
-                    return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error creating BankAccount "
-                                    + ex.Message;
-                    return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
-                }
+                _bAccountRepository.SaveBankAccount(bankAccount, "Create");
+                return RedirectToAction("Details", "Partners", new {id = bankAccount.PartnerId});
+          
+                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Error creating Bank account, please check the entered values. ";
+                return View(_bAccountRepository.RenderBaFormViewModel(bankAccount.PartnerId));
             }
 
         }
 
         // GET: BankAccount/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             try
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                BAEditFVModel bankAccount = _bAccountRepository.BankAccountToEdit((int) id);
-                if (bankAccount == null)
-                {
-                    return HttpNotFound();
-                }
                 
-                return View(bankAccount);
+                var bankAccount = _bAccountRepository.BankAccountToEdit(id);
+                if (bankAccount != null) return View(bankAccount);
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
         }
 
@@ -146,27 +131,16 @@ namespace OctagonPlatform.Controllers
 
                     return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
                 }
-                try
-                {
-                    _bAccountRepository.SaveBankAccount(bankAccount, "Edit");
-                    return RedirectToAction("Details", "Partners", new { id = bankAccount.PartnerId });
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error editing BankAccount " + exDb.Message;
-
-                    return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error editing BankAccount "
-                                    + ex.Message;
-                    return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
-                }
+               
+                _bAccountRepository.SaveBankAccount(bankAccount, "Edit");
+                return RedirectToAction("Details", "Partners", new { id = bankAccount.PartnerId });
+                
+                
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Error editing BankAccount, please check the entered values.  ";
+                return View(_bAccountRepository.BankAccountToEdit(bankAccount.Id));
             }
 
         }
@@ -176,11 +150,18 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                return View(_bAccountRepository.BankAccountToEdit(id));
+
+                var bankAccount = _bAccountRepository.BankAccountToEdit(id);
+
+                if (bankAccount != null) return View(bankAccount);
+
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
         }
 
@@ -197,20 +178,16 @@ namespace OctagonPlatform.Controllers
                     _bAccountRepository.DeleteBankAccount(id);
                     return RedirectToAction("Details", "Partners", new { id = partnerId});
                 }
-                catch (DbEntityValidationException exDb)
+                catch (Exception)
                 {
-                    ViewBag.Error = "Validation error deleting BankAccount" + exDb.Message;
-                    return RedirectToAction("Details", "Partners", new { id = partnerId });
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error deleting BankAccount" + ex.Message;
+                    ViewBag.Error = "Bank account not found. ";
                     return RedirectToAction("Details", "Partners", new { id = partnerId });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
 
         }
@@ -222,9 +199,10 @@ namespace OctagonPlatform.Controllers
             {
                 return PartialView(_bAccountRepository.Search(search, int.Parse(Session["partnerId"].ToString())));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
         }
     }

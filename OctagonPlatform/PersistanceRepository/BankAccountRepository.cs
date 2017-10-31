@@ -99,7 +99,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(c => c.State)
                     .Include(c => c.City)
                     .Single(c => c.Id == id);
-                if (model == null) throw new Exception("BankAccount does not exists in our records!!!");
+                if (model == null) throw new Exception("BankAccount does not exist in our records. ");
                 {
                     var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
                     editViewModel.Partners = Context.Partners.Where(x => (x.Id == model.PartnerId || x.ParentId == model.PartnerId) && !x.Deleted)
