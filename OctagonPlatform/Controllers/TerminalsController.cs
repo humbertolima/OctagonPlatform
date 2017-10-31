@@ -16,6 +16,33 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
+        public ActionResult GetKey(string terminalId)
+        {
+            try
+            {
+                var result = _repository.GetKey(terminalId);
+                ViewBag.Key = result.Checksum;
+                return View("Sections/BindKey");
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+        [HttpPost]
+        public ActionResult SetBindKey(string terminalId, string serial1, string serial2)
+        {
+            try
+            {
+                BindKeyViewModel result = _repository.SetBindKey(terminalId, serial1, serial2);
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
         // GET: Terminals
         public ActionResult Index()
         {

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -7,11 +8,69 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 
 namespace OctagonPlatform.PersistanceRepository
 {
+    public class K1
+    {
+        public int id { get; set; }
+        public string serial { get; set; }
+        public string partA { get; set; }
+        public string partB { get; set; }
+        public string kcv_partA { get; set; }
+        public string kcv_partB { get; set; }
+        public string kcv_partAB { get; set; }
+        public object NewBrand { get; set; }
+    }
+
+    public class K2
+    {
+        public int id { get; set; }
+        public string serial { get; set; }
+        public string partA { get; set; }
+        public string partB { get; set; }
+        public string kcv_partA { get; set; }
+        public string kcv_partB { get; set; }
+        public string kcv_partAB { get; set; }
+        public object NewBrand { get; set; }
+    }
+
+    public class KeyManager
+    {
+        public int Id { get; set; }
+        public string zmk { get; set; }
+        public string Checksum { get; set; }
+        public string TerminalId { get; set; }
+        public int Idk1 { get; set; }
+        public int Idk2 { get; set; }
+        public string PWK { get; set; }
+        public K1 k1 { get; set; }
+        public K2 k2 { get; set; }
+    }
+
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
+
+        public KeyManager GetKey(string messagesId)
+        {
+            string url = "http://apiatm.azurewebsites.net/api/key/getbyterminal/" + messagesId;
+            var json = new WebClient().DownloadString(url);
+            KeyManager list = JsonConvert.DeserializeObject<KeyManager>(json);
+
+            return list;
+        }
+
+        public BindKeyViewModel SetBindKey(string messagesId, string seria1, string serial2)
+        {
+
+            string url = "http://apiatm.azurewebsites.net/api/key/bindkey/" + seria1 + "/" + serial2 + "/" + messagesId;
+            var json = new WebClient().DownloadString(url);
+            var list = JsonConvert.DeserializeObject<bool>(json);
+
+            return null ;
+        }
+
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
@@ -166,7 +225,7 @@ namespace OctagonPlatform.PersistanceRepository
 
 
                         Mapper.Map(viewModel, terminalToEdit);
-                        
+
                         Edit(terminalToEdit);
                     }
                 }
@@ -183,13 +242,13 @@ namespace OctagonPlatform.PersistanceRepository
 
 
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
-                   
+
 
                     terminal.TerminalId = "000000000";
                     Add(terminal);
 
                     terminal.TerminalId = TerminalIdGenerator.Generator(terminal.Id);
-                    
+
                     Edit(terminal);
                 }
             }

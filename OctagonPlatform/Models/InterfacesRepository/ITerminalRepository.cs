@@ -1,4 +1,5 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
+using OctagonPlatform.PersistanceRepository;
 using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
@@ -6,6 +7,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
     public interface ITerminalRepository
     {
         IEnumerable<Terminal> GetAllTerminals(int partnerId);
+
+        KeyManager GetKey(string messagesId);
+
+        BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
 
