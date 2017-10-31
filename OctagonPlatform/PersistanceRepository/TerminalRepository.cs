@@ -61,14 +61,20 @@ namespace OctagonPlatform.PersistanceRepository
             return list;
         }
 
-        public BindKeyViewModel SetBindKey(string messagesId, string seria1, string serial2)
+        public BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2)
         {
 
-            string url = "http://apiatm.azurewebsites.net/api/key/bindkey/" + seria1 + "/" + serial2 + "/" + messagesId;
+            string url = "http://apiatm.azurewebsites.net/api/key/bindkey/" + serial1 + "/" + serial2 + "/" + messagesId;
             var json = new WebClient().DownloadString(url);
             var list = JsonConvert.DeserializeObject<bool>(json);
+            var viewModel = new BindKeyViewModel() { Serial1 = "", Serial2 = "", TerminalId = "" };
 
-            return null ;
+            if (list)
+            {
+                 viewModel = new BindKeyViewModel() { TerminalId = messagesId, Serial1 = serial1, Serial2 = serial2 };
+            }
+
+            return viewModel;
         }
 
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
