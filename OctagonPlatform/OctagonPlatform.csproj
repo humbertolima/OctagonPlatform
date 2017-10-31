@@ -845,11 +845,13 @@
     <Content Include="Content\assets\js\jquery.min.js" />
     <Content Include="Content\assets\js\script.min.js" />
     <Content Include="Content\bootstrap-cosmo.min.css" />
+    <Content Include="Content\bootstrap-lumen.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min-superhero.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cosmo.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
@@ -1016,13 +1018,13 @@
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
     <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
+    <Content Include="Octagon\assets\css\sb-admin.css" />
+    <Content Include="Octagon\assets\css\sb-admin.min.css" />
     <Content Include="Octagon\assets\css\sidebar.css" />
     <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
-    <Content Include="Octagon\assets\css\untitled-1.css" />
-    <Content Include="Octagon\assets\css\untitled.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\morris-data.js" />
     <Content Include="Octagon\assets\fonts\font-awesome.min.css" />
@@ -1362,6 +1364,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\Search.js" />
+    <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1381,7 +1384,6 @@
     <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Dashboard\IndexOLD.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Partners\Index.cshtml" />
     <Content Include="Views\Partners\Edit.cshtml" />
@@ -1456,7 +1458,6 @@
     <Content Include="Views\TerminalMessages\Index.cshtml" />
     <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
     <Content Include="Views\Surcharge\Index.cshtml" />
-    <Content Include="Views\Home\IndexOld.cshtml" />
     <Content Include="Views\Surcharge\Delete.cshtml" />
     <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
