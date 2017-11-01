@@ -118,34 +118,46 @@
                 <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Phone)
-                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
-                @Html.ValidationMessageFor(m => m.Phone)
+                @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
+                    @Html.ValidationMessageFor(m => m.Phone)
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.MakeId)
-                @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.MakeId)
+                @Html.LabelFor(m => m.MakeId, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MakeId)
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.ModelId)
-                @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ModelId)
+                @Html.LabelFor(m => m.ModelId, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ModelId)
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.CommunicationType)
-                @Html.EnumDropDownListFor(m => m.CommunicationType, "", new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.CommunicationType)
+                @Html.LabelFor(m => m.CommunicationType, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.EnumDropDownListFor(m => m.CommunicationType, "", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.CommunicationType)
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.EmvReady)
-                @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus" })
-                @Html.ValidationMessageFor(m => m.EmvReady)
+                @Html.LabelFor(m => m.EmvReady, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.EmvReady)
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.MachineSerialNumber)
-                @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
-                @Html.ValidationMessageFor(m => m.MachineSerialNumber)
+                @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "col-lg-2 control-label" })
+                <div class="col-lg-10">
+                    @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
+                    @Html.ValidationMessageFor(m => m.MachineSerialNumber)
+                </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.VeppSerialNumber)
