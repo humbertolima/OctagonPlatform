@@ -17,7 +17,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var user = Table.Where(u => u.UserName == userLogin.UserName && !u.Deleted && !u.IsLocked)
                     .Include(x => x.Partner).SingleOrDefault();
-                if (user != null)
+                if (user == null) throw new Exception("User not found. ");
                 {
                     var key = user.Key;
                     var hash = Cryptography.EncodePassword(userLogin.Password, key);
@@ -65,8 +65,9 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void Logout()
         {
-            try { 
-            FormsAuthentication.SignOut();
+            try
+            {
+                FormsAuthentication.SignOut();
             }
             catch (Exception ex)
             {

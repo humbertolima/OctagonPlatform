@@ -649,6 +649,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
+    <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
@@ -1474,6 +1475,7 @@
     <Content Include="Views\Shared\Sections\Footer.cshtml" />
     <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
     <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
+    <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

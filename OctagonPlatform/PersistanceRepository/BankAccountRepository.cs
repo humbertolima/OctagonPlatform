@@ -14,15 +14,16 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public IEnumerable<BankAccount> GetAllBankAccount(int partnerId)
         {
-            try { 
-            var result = Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
-                .Include(c => c.Partner)
-                .Include(c => c.City)
-                .Include(c => c.Country)
-                .Include(c => c.State)
-                .ToList();
+            try
+            {
+                var result = Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
+                    .Include(c => c.Partner)
+                    .Include(c => c.City)
+                    .Include(c => c.Country)
+                    .Include(c => c.State)
+                    .ToList();
 
-            return result;
+                return result;
             }
             catch (Exception ex)
             {
@@ -33,30 +34,18 @@ namespace OctagonPlatform.PersistanceRepository
 
         public BankAccount BAccountDetails(int id)
         {
-            try { 
-            BankAccount bankAccount;
             try
             {
-                bankAccount = Table
+                
+                var bankAccount = Table
                     .Include(c => c.Partner)
                     .Include(c => c.City)
                     .Include(c => c.Country)
                     .Include(c => c.State)
-                    .Single(c => !c.Deleted && c.Id == id);
+                    .SingleOrDefault(c => !c.Deleted && c.Id == id);
 
-            }
-            #region Exeption
-            catch (ArgumentNullException aex)
-            {
-                throw new Exception("Error Arguments is null. ", aex);
-            }
-            catch (InvalidOperationException iex)
-            {
-                throw new Exception("Error, invalid operation. ", iex);
-            }
-            #endregion
-
-            return bankAccount;
+                if(bankAccount == null) throw new Exception("Bank account does not found. ");
+                return bankAccount;
             }
             catch (Exception ex)
             {
@@ -69,10 +58,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId);
+                if (partner == null) throw new Exception("Bank account not found. ");
+
                 var viewModel = new BAEditFVModel
                 {
                     Partners = Context.Partners.Where(x => (x.Id == partnerId || x.ParentId == partnerId) && !x.Deleted).ToList(),
-                    Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId),
+                    Partner = partner,
                     Countries = Context.Countries.ToList(),
                     States = Context.States.Where(x => x.CountryId == 231).ToList(),
                     Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
@@ -99,7 +91,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(c => c.State)
                     .Include(c => c.City)
                     .Single(c => c.Id == id);
-                if (model == null) throw new Exception("BankAccount does not exist in our records. ");
+                if (model == null) throw new Exception("Bank account does not exist in our records. ");
                 {
                     var editViewModel = Mapper.Map<BankAccount, BAEditFVModel>(model);
                     editViewModel.Partners = Context.Partners.Where(x => (x.Id == model.PartnerId || x.ParentId == model.PartnerId) && !x.Deleted)
@@ -124,6 +116,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var bankaccount = Table.SingleOrDefault(x => x.Id == id);
+                if(bankaccount == null) throw new Exception("Bank account not found. ");
                 Delete(id);
             }
             catch (Exception ex)
@@ -142,11 +136,11 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
-                    if (model == null) throw new Exception("BankAccount does not exist in our records!!!");
+                    if (model == null) throw new Exception("Bank account not found.");
                     if (current != null)
                     {
                         if(!current.Deleted && current.Id != editViewModel.Id)
-                            throw new Exception("BankAccount already exists. ");
+                            throw new Exception("Bank account already exists. ");
                         if (current.Deleted)
                             Table.Remove(current);
                     }
@@ -161,15 +155,15 @@ namespace OctagonPlatform.PersistanceRepository
                     if (current != null)
                     {
                         if (!current.Deleted)
-                            throw new Exception("BankAccount already exists in our records!!!");
+                            throw new Exception("Bank account already exists. ");
 
                         if (current.Deleted) Table.Remove(current);
 
                     }
 
-                    var model1 = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
+                    var modelNew = Mapper.Map<BAEditFVModel, BankAccount>(editViewModel);
                     
-                    Add(model1);
+                    Add(modelNew);
                     
                 }
             }

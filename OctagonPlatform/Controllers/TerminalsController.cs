@@ -10,12 +10,48 @@ namespace OctagonPlatform.Controllers
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
+        private string _ChkDigt1;
+        private string _ChkDigt2;
+        private string _AtmChkDigt;
 
         public TerminalsController(ITerminalRepository repository)
         {
             _repository = repository;
         }
 
+        public ActionResult GetKey(string terminalId)
+        {
+            try
+            {
+                var result = _repository.GetKey(terminalId);
+                var viewModel = new BindKeyViewModel() { Serial1 = "", Serial2 = "", TerminalId = "" };
+                
+                return View("Sections/BindKey", viewModel);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+        [HttpPost]
+        public ActionResult SetBindKey(string terminalId, string serial1, string serial2)
+        {
+            try
+            {
+                BindKeyViewModel result = _repository.SetBindKey(terminalId, serial1, serial2);
+                var result2 = _repository.GetKey(terminalId);
+                
+                ViewBag.ChkDigt1 = result2.Idk1;
+                ViewBag.ChkDigt2 = result2.Idk2;
+                ViewBag.AtmChkDigt = result2.zmk;
+
+                return View("Sections/BindKey", result);
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
         // GET: Terminals
         public ActionResult Index()
         {
