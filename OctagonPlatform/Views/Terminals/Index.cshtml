@@ -39,9 +39,9 @@
             <th>Location</th>
             <th>Address</th>
             <th>Phone</th>
-            <th>Country</th>
+  <!--          <th>Country</th>
             <th>City</th>
-            <th>State</th>
+            <th>State</th> -->
             <th>Status</th>
             <th>Balance</th>
             <th>Edit</th>
@@ -59,11 +59,11 @@
                 <td>@item.TerminalId</td>
                 <td>@item.Partner.BusinessName</td>
                 <td>@item.LocationType.Name</td>
-                <td>@item.Address1</td>
+                <td>@item.Address1, @item.City.Name, @item.State.Name, @item.Zip</td>
                 <td>@item.Phone</td>
-                <td>@item.Country.Name</td>
+            @*    <td>@item.Country.Name</td>
                 <td>@item.City.Name</td>
-                <td>@item.State.Name</td>
+                <td>@item.State.Name</td> *@
                 <td>@if (item.Status.ToString().Equals("Active"))
                     {
                         <strong class="text-success">
