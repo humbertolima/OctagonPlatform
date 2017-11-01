@@ -6,8 +6,8 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<style>
-   
+<style>   
+     
 </style>
 
 
@@ -29,8 +29,7 @@
                 @ViewBag.Error
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </p>
-            <div class="row"></div>
-            
+            <div class="row"></div>        
             <div class="col-md-5">
                 <div class="form-group">
                     @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
@@ -47,23 +46,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Address1, new { @class = "col-lg-2 control-label" })
+                    @Html.LabelFor(m => m.Address1, new { @class = "col-lg-2 control-label"})
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
+                        <i>@Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave", id="PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Address1)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Address2, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
+                        <i>@Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Address2)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Zip, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
+                        <i>@Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Zip)
                     </div>
                 </div>
@@ -125,7 +124,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.Phone)
                     </div>
                 </div>
@@ -153,7 +152,7 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.EmvReady, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus" })
+                        @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.EmvReady)
                     </div>
                 </div>
@@ -164,28 +163,28 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
+                        @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.MachineSerialNumber)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.VeppSerialNumber, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
+                        @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.VeppSerialNumber)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.SoftwareVersion, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.SoftwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
+                        @Html.TextBoxFor(m => m.SoftwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.SoftwareVersion)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.FimwareVersion, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.FimwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
+                        @Html.TextBoxFor(m => m.FimwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.FimwareVersion)
                     </div>
                 </div>
@@ -199,14 +198,14 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "" })
+                        @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.SurchargePercentageFee, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "%" })
+                        @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "%", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
                     </div>
                 </div>
@@ -227,35 +226,35 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.CryptoPercentChargeAmount, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
+                        @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.InstalledDate, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
+                        @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.InstalledDate)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.LoadedBy, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
+                        @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.LoadedBy)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Balance, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500" })
+                        @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.Balance)
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.MinAmmountCash, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "300" })
+                        @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "300", id = "PlaceHolderForm" })
                         @Html.ValidationMessageFor(m => m.MinAmmountCash)
                     </div>
                 </div>
