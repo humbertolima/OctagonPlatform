@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.UI.WebControls;
+
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -17,6 +17,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Table.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 return Table.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
                     //.Include(x => x.Alerts)
                     //.Include(x => x.Reports)
@@ -38,12 +41,15 @@ namespace OctagonPlatform.PersistanceRepository
             //alertas y notificaciones.
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == parentId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 var viewModel = new UserFormViewModel()
                 {
 
                     Partners = Context.Partners.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     Status = StatusType.Status.Active,
-                    Partner = Context.Partners.SingleOrDefault(x => x.Id == parentId),
+                    Partner = parent,
                     SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
                 };
 
@@ -84,11 +90,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partner)
                     .Single(c => c.Id == id);
 
-                var mapping = new MappingProfile();
+                
 
-                //mapping.CreateMap(result, userEdit);
-
-                if (result == null) throw new System.Exception("User don't exist. ");
+                if (result == null) throw new Exception("User not found. ");
                 {
                     var userEdit = new UserEditFormViewModel()
                     {
@@ -108,24 +112,6 @@ namespace OctagonPlatform.PersistanceRepository
                         PermissionsAssigned = new List<PermissionAssigned>()
                     };
 
-
-                    //foreach (var setPerm in userEdit.PermissionsAll)
-                    //{
-                    //    PermissionAssigned permissionA = new PermissionAssigned();
-
-                    //    permissionA.Selected = false;
-                    //    permissionA.Type = setPerm.Type;
-                    //    permissionA.Text = setPerm.Name;
-                    //    permissionA.Value = setPerm.Id.ToString();
-
-                    //    Permission permiso = userEdit.Permissions.FirstOrDefault(c => c.Id == setPerm.Id);
-
-                    //    if (permiso != null) { permissionA.Selected = true; }
-
-                    //    permissionA.Group = new SelectListGroup { Name = setPerm.SetOfPermissionId.ToString()}; //el setOf permiso seria las filas en el view de permisos
-
-                    //    userEdit.PermissionsAssigned.Add(permissionA);
-                    //};
 
                     return userEdit;
                 }
@@ -214,7 +200,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Error Creating or Editing User");
+                throw new Exception(ex.Message + ", Please check the entered values. ");
             }
         }
 
@@ -228,7 +214,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.BankAccounts)
                     .Include(x => x.Terminals)
                     .FirstOrDefault();
-
+                if(userDetails == null) throw new Exception("User not found. ");
                 return userDetails;
             }
             catch (Exception ex)
@@ -241,6 +227,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var user = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if(user == null) throw new Exception("User not found. ");
                 Delete(id);
             }
             catch (Exception ex)
@@ -253,6 +241,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found.");
                 if (viewModel.SetOfPermissions == null)
                 {
                     viewModel.SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList();
@@ -308,13 +297,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                List<BankAccount> bankAccountList = new List<BankAccount>();
+                var bankAccountList = new List<BankAccount>();
                 if (bankAccounts == null) return bankAccountList;
-                foreach (var t in bankAccounts)
-                {
-                    var convertId = Convert.ToInt32(t);
-                    bankAccountList.Add(Context.BankAccounts.FirstOrDefault(c => c.Id == convertId));
-                }
+
+                bankAccountList.AddRange(bankAccounts.Select(t => Convert.ToInt32(t))
+                    .Select(convertId => Context.BankAccounts
+                    .FirstOrDefault(c => c.Id == convertId)));
+
                 return bankAccountList;
             }
             catch (Exception ex)
@@ -327,8 +316,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                UserBAViewModel userBAViewModel = new UserBAViewModel();
-                User user = new User();
+                var user = new User();
                 var userIdConvert = Convert.ToInt32(userId);
                 var bankAccountIdConvert = Convert.ToInt32(bankAccountId);
 
@@ -338,7 +326,7 @@ namespace OctagonPlatform.PersistanceRepository
                     user = Table
                         .Include(c => c.BankAccounts)
                         .Single(c => c.Id == userIdConvert);
-                    BankAccount bankAccount = GetBankAccountById(bankAccountIdConvert);
+                    var bankAccount = GetBankAccountById(bankAccountIdConvert);
                     if (!user.BankAccounts.Contains(bankAccount)
                     ) //si el usario no contiene esa cuenta de banco se la add.
                     {
@@ -346,9 +334,9 @@ namespace OctagonPlatform.PersistanceRepository
                         Edit(user);
                     }
                 }
-                userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
-                userBAViewModel.UserId = userIdConvert;
-                return userBAViewModel;
+                var userBaViewModel = Mapper.Map<User, UserBAViewModel>(user);
+                userBaViewModel.UserId = userIdConvert;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {
@@ -360,7 +348,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return Context.BankAccounts.Single(c => c.Id == bankAccountId);
+                var ba = Context.BankAccounts.Single(c => c.Id == bankAccountId && !c.Deleted);
+                if(ba == null) throw new Exception("Bank account not found. ");
+                return ba;
             }
             catch (Exception ex)
             {
@@ -372,13 +362,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                List<BankAccount> bankAccounts = new List<BankAccount>();
-                UserBAViewModel userBAViewModel = new UserBAViewModel();
+                List<BankAccount> bankAccounts;
+                var userBaViewModel = new UserBAViewModel();
 
                 if (toAttach) //selecciono cuentas de bancos para usuarios
                 {
-                    int userIdConverted = Convert.ToInt32(userId);
-                    User user = Table
+                    var userIdConverted = Convert.ToInt32(userId);
+                    var user = Table
                         .Include(c => c.BankAccounts)
                         .Single(c => c.Id == userIdConverted);
 
@@ -390,10 +380,10 @@ namespace OctagonPlatform.PersistanceRepository
                         .Where(c => c.Deleted == false).ToList();
                 }
                 //Mapeo que se le hace a los dos casos.
-                userBAViewModel.UserId = Convert.ToInt32(userId);
-                userBAViewModel.BankAccounts = bankAccounts;
+                userBaViewModel.UserId = Convert.ToInt32(userId);
+                userBaViewModel.BankAccounts = bankAccounts;
 
-                return userBAViewModel;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {
@@ -407,7 +397,7 @@ namespace OctagonPlatform.PersistanceRepository
             //List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
             try
             {
-                User user = Table
+                var user = Table
                     .Include(c => c.BankAccounts)
                     .Single(c => c.Id == userId);
 
@@ -418,10 +408,10 @@ namespace OctagonPlatform.PersistanceRepository
                     Edit(user);
                 }
 
-                UserBAViewModel userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
-                userBAViewModel.UserId = userId;
+                var userBaViewModel = Mapper.Map<User, UserBAViewModel>(user);
+                userBaViewModel.UserId = userId;
 
-                return userBAViewModel;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {

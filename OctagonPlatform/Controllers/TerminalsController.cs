@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -10,9 +9,7 @@ namespace OctagonPlatform.Controllers
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-        private string _ChkDigt1;
-        private string _ChkDigt2;
-        private string _AtmChkDigt;
+        
 
         public TerminalsController(ITerminalRepository repository)
         {
@@ -30,7 +27,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
         [HttpPost]
@@ -38,18 +36,19 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                BindKeyViewModel result = _repository.SetBindKey(terminalId, serial1, serial2);
+                var result = _repository.SetBindKey(terminalId, serial1, serial2);
                 var result2 = _repository.GetKey(terminalId);
                 
                 ViewBag.ChkDigt1 = result2.Idk1;
                 ViewBag.ChkDigt2 = result2.Idk2;
-                ViewBag.AtmChkDigt = result2.zmk;
+                ViewBag.AtmChkDigt = result2.Zmk;
 
                 return View("Sections/BindKey", result);
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
         // GET: Terminals
@@ -61,7 +60,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -79,7 +79,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -92,7 +93,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -105,55 +107,20 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Please check the entered values. ";
+                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
+                }
 
-                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                }
-                try
-                {
-                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByStaticAmount &&
-                    //    terminalFormViewModel.SurchargeAmount <= 0)
-                    //{
-                    //    ViewBag.SurchargeError = "Must be a Surcharge amount fee, or select another Surcharge type";
-                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                    //}
-                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByPercent &&
-                    //    terminalFormViewModel.SurchargeByPercent <= 0)
-                    //{
-                    //    ViewBag.SurchargeError = "Must be a Surcharge percent fee, or select another Surcharge type";
-                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                    //}
-                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByFixAmmount &&
-                    //    terminalFormViewModel.FixSurcharge <= 0)
-                    //{
-                    //    ViewBag.SurchargeError = "Must be a Fix Surcharge amount fee, or select another Surcharge type," +
-                    //                             " over this amount the Surcharge will be charged by the greater or lesser, depent on your choise. ";
-                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                    //}
-                    //if (terminalFormViewModel.SurchargeType == SurchargeType.SurchargeTypes.ByFixAmmount &&
-                    //    terminalFormViewModel.SurchargeAmount <= 0)
-                    //{
-                    //    ViewBag.SurchargeError = "Must be a Surcharge amount fee, or select another Surcharge type";
-                    //    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                    //}
-                    _repository.SaveTerminal(terminalFormViewModel, "Create");
-                    return RedirectToAction("Index");
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating Terminal " + exDb.Message;
 
-                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error creating Terminal "
-                                    + ex.Message;
-                    return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
-                }
+                _repository.SaveTerminal(terminalFormViewModel, "Create");
+                return RedirectToAction("Index");
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "Validation error editing Terminal, "
+                                + ex.Message;
+                return View(_repository.InitializeNewFormViewModel(terminalFormViewModel));
             }
         }
 
@@ -166,7 +133,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -177,19 +145,13 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-
+                ViewBag.Error = "Please check the entered values. ";
                 return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
             }
             try
             {
                 _repository.SaveTerminal(terminalFormViewModel, "Edit");
                 return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error editing Terminal " + exDb.Message;
-
-                return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
             }
             catch (Exception ex)
             {
@@ -209,7 +171,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -221,12 +184,6 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _repository.DeleteTerminal(id);
-                return RedirectToAction("Index");
-            }
-            catch (DbEntityValidationException exDb)
-
-            {
-                ViewBag.Error = "Validation error deleting Terminal" + exDb.Message;
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

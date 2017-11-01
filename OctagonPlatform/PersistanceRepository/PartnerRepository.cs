@@ -16,6 +16,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Table.SingleOrDefault(x => x.Id == parentId && !x.Deleted);
+                if(parent == null) throw new Exception("Parent not found. ");
+
                 return Table.Where(c => c.Id == parentId && !c.Deleted)
                     .Include(x => x.Partners)
                     .Include(x => x.Parent)
@@ -23,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
         }
 
@@ -36,7 +39,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
         }
 
@@ -44,12 +47,14 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Table.SingleOrDefault(x => x.Id == parentId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
                 return new PartnerFormViewModel()
                 {
                     Parents = Table.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     ParentId = parentId,
                     Status = StatusType.Status.Active,
-                    Parent = Context.Partners.SingleOrDefault(x => x.Id == parentId),
+                    Parent = parent,
                     Countries = Context.Countries.ToList(),
                     States = Context.States.Where(x => x.CountryId == 231).ToList(),
                     Cities = Context.Cities.Where(x => x.StateId == 3930).ToList()
@@ -58,7 +63,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
         }
         
@@ -125,7 +130,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
 
         }
@@ -171,7 +176,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
         }
 
@@ -198,7 +203,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
 
         }
@@ -207,11 +212,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var partner = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if(partner == null) throw new Exception("Partner not found. ");
                 Delete(id);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
 
         }
@@ -220,6 +227,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found. ");
+
                 return new PartnerFormViewModel()
                 {
                     Id = viewModel.Id,
@@ -246,7 +255,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Partner not found. ");
             }
         }
     }

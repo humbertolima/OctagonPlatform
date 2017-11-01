@@ -14,6 +14,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 return Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
                     .Include(x => x.Country)
                     .Include(x => x.State)
@@ -23,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
@@ -31,17 +34,20 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return Table.Where(x => x.Id == id && !x.Deleted)
+                var contact = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Partner)
                     .Include(x => x.ContactType)
                     .Include(x => x.City)
                     .Include(x => x.Country)
                     .Include(x => x.State)
                     .SingleOrDefault();
+                if (contact == null)
+                    throw new Exception("Contact not found. ");
+                return contact;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
@@ -55,7 +61,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
@@ -63,6 +69,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (partner == null) throw new Exception("Contact not found. ");
+
                 return new PartnerContactFormViewModel()
                 {
                     Countries = Context.Countries.ToList(),
@@ -75,7 +84,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
@@ -91,12 +100,13 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partner)
                     .SingleOrDefault();
 
-                if (partnerContact == null) throw new Exception("Contact does not exists in our records!!!");
+                if (partnerContact == null) throw new Exception("Contact not found. ");
                 {
                     return new PartnerContactFormViewModel()
                     {
                         Id = partnerContact.Id,
                         PartnerId = partnerContact.PartnerId,
+                        Partner = partnerContact.Partner,
                         Name = partnerContact.Name,
                         LastName = partnerContact.LastName,
                         Email = partnerContact.Email,
@@ -122,7 +132,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
@@ -134,7 +144,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var partnerContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
-                    if (partnerContactToEdit == null) throw new Exception("Contact does not exist in our records!!!");
+                    if (partnerContactToEdit == null) throw new Exception("Contact not found. ");
                     if (partnerContact != null)
                     {
                         if(!partnerContact.Deleted && partnerContactToEdit.Id != partnerContact.Id)
@@ -162,7 +172,7 @@ namespace OctagonPlatform.PersistanceRepository
                     if (partnerContact != null)
                     {
                         if (!partnerContact.Deleted)
-                            throw new Exception("Contact already exists!!!");
+                            throw new Exception("Contact already exists.");
                         Table.Remove(partnerContact);
                     }
 
@@ -187,20 +197,31 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
 
         
         public void DeletePartner(int id)
         {
-            Delete(id);
+            try
+            {
+                var contact = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if (contact == null) throw new Exception("Contact not found. ");
+                Delete(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + ", Contact not found. ");
+            }
         }
 
         public PartnerContactFormViewModel InitializeNewFormViewModel(PartnerContactFormViewModel viewModel)
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found. ");
+
                 return new PartnerContactFormViewModel()
                 {
                     Id = viewModel.Id,
@@ -226,7 +247,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Contact not found. ");
             }
         }
     }

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Data.SqlClient;
 using System.Net;
 using System.Web.Mvc;
 
@@ -32,7 +29,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -49,26 +47,13 @@ namespace OctagonPlatform.Controllers
             {
                 return View(_userRepository.RenderUserFormViewModel(partnerId));
             }
-            #region Exception
-            catch (SqlException ex)
-            {
-                return View(new UserFormViewModel
-                {
-                    Error = "Error rendering UserFormModel. " + ex.Message.ToString(),
-                    Partners = new List<Partner>(),
-                    SetOfPermissions = new List<SetOfPermission>()
-                });
-            }
+            
             catch (Exception ex)
             {
-                return View(new UserFormViewModel
-                {
-                    Error = "Error rendering UserFormModel. " + ex.Message.ToString(),
-                    Partners = new List<Partner>(),
-                    SetOfPermissions = new List<SetOfPermission>()
-                });
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
-            #endregion
+         
         }
 
         [HttpPost]

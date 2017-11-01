@@ -16,6 +16,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 var result = Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
                     .Include(c => c.Partner)
                     .Include(c => c.City)
@@ -27,7 +30,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank accounts not found. ");
             }
 
         }
@@ -44,12 +47,12 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(c => c.State)
                     .SingleOrDefault(c => !c.Deleted && c.Id == id);
 
-                if(bankAccount == null) throw new Exception("Bank account does not found. ");
+                if(bankAccount == null) throw new Exception("Bank account not found. ");
                 return bankAccount;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank account not found. ");
             }
 
         }
@@ -58,7 +61,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId);
+                var partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
                 if (partner == null) throw new Exception("Bank account not found. ");
 
                 var viewModel = new BAEditFVModel
@@ -76,7 +79,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank account not found. ");
             }
 
         }
@@ -107,7 +110,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank account not found. ");
             }
 
         }
@@ -116,13 +119,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var bankaccount = Table.SingleOrDefault(x => x.Id == id);
+                var bankaccount = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
                 if(bankaccount == null) throw new Exception("Bank account not found. ");
                 Delete(id);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank account not found. ");
             }
 
         }
@@ -136,7 +139,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var model = Table.SingleOrDefault(c => c.Id == editViewModel.Id && !c.Deleted);
-                    if (model == null) throw new Exception("Bank account not found.");
+                    if (model == null) throw new Exception("Bank account not found, check entered values. ");
                     if (current != null)
                     {
                         if(!current.Deleted && current.Id != editViewModel.Id)
@@ -169,7 +172,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", check entered values. ");
             }
         }
 
@@ -184,7 +187,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Bank account not found. ");
             }
         }
     }

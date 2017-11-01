@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -27,8 +26,9 @@ namespace OctagonPlatform.Controllers
                 ViewBag.TerminalId = terminalId;
                 return PartialView(model);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return PartialView("Error");
             }
         }
@@ -37,13 +37,13 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                var model = _vaultCashRepository.VaultCashDetails(id);
-                if (model == null) return HttpNotFound("Model not found. ");
-                return View(model);
+                
+                return View(_vaultCashRepository.GetVaultCash(id));
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + "Page not found. ");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -51,13 +51,13 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                var model = _vaultCashRepository.VaultCashToEdit(id);
-                if (model == null) return HttpNotFound("Model not found. ");
-                return View(model);
+                
+                return View(_vaultCashRepository.VaultCashToEdit(id));
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message);
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -67,7 +67,7 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                
+                ViewBag.Error = "Please check the entered values. ";
                 return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
             try
@@ -75,17 +75,11 @@ namespace OctagonPlatform.Controllers
                 _vaultCashRepository.SaveVaultCash(viewModel, "Edit");
                 return RedirectToAction("Details", "Terminals", new {id = viewModel.Id});
             }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error editing VaultCash " + exDb.Message;
-
-                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
-            }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing VaultCash "
-                                + ex.Message;
-                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
+                ViewBag.Error = ex.Message;
+                
+                return View(_vaultCashRepository.InitializeNewVaultCashFormViewModel(viewModel));
             }
         }
 
@@ -97,7 +91,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + "Page not found. ");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -107,7 +102,7 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-
+                ViewBag.Error = "Please check the entered values. ";
                 return View(_vaultCashRepository.InitializeNewVaultCashFormViewModel(viewModel));
             }
             try
@@ -115,16 +110,9 @@ namespace OctagonPlatform.Controllers
                 _vaultCashRepository.SaveVaultCash(viewModel, "Create");
                 return RedirectToAction("Details", "Terminals", new { id = viewModel.Id });
             }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error creating VaultCash " + exDb.Message;
-
-                return View(_vaultCashRepository.InitializeNewVaultCashFormViewModel(viewModel));
-            }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error creating VaultCash "
-                                + ex.Message;
+                ViewBag.Error = ex.Message;
                 return View(_vaultCashRepository.InitializeNewVaultCashFormViewModel(viewModel));
             }
         }
@@ -137,7 +125,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -151,15 +140,9 @@ namespace OctagonPlatform.Controllers
                 _vaultCashRepository.DeleteVaultCash(id);
                 return RedirectToAction("Details", "Terminals", new { id });
             }
-            catch (DbEntityValidationException exDb)
-
-            {
-                ViewBag.Error = "Validation error deleting VaultCash" + exDb.Message;
-                return RedirectToAction("Details", "Terminals", new { id });
-            }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error deleting VaultCash" + ex.Message;
+                ViewBag.Error = ex.Message;
                 return RedirectToAction("Details", "Terminals", new { id });
             }
         }

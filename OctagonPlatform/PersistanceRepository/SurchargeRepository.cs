@@ -16,6 +16,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted);
+                if(terminal == null) throw new Exception("Terminal not found. ");
+
                 var surcharges = Table.Where(x => x.TerminalId == terminalId && !x.Deleted)
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
@@ -32,13 +35,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId);
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted);
                 if (terminal == null) throw new Exception("Surcharge not found. ");
 
                 return new SurchargeFormViewModel()
                 {
                     TerminalId = terminalId,
-                    Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
+                    Terminal = terminal,
                     BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == terminal.PartnerId && !x.Deleted),
                     StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day + 1),
                     StopDate = new DateTime(DateTime.UtcNow.Year + 1, DateTime.UtcNow.Month, DateTime.UtcNow.Day),
@@ -142,7 +145,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Surcharge not found. ");
             }
         }
 
@@ -159,7 +162,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Surcharge not found. ");
             }
         }
 
@@ -167,6 +170,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found. ");
+
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
                 viewModel.StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,
@@ -177,7 +182,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Surcharge not found. ");
             }
         }
     }

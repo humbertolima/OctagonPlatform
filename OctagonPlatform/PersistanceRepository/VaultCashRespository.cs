@@ -15,6 +15,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted);
+                if(terminal == null) throw new Exception("Terminal not found. ");
+
                 var vaulcash = Table.Where(x => x.Id == terminalId && !x.Deleted)
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
@@ -97,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Please check the entered values. ");
             }
         }
 
@@ -136,6 +139,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if(viewModel == null) throw new Exception("Model not found. ");
+
                 viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                 viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
                 viewModel.StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,

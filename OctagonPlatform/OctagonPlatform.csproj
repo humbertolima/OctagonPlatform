@@ -232,6 +232,9 @@
     <Compile Include="Helpers\CustomRoleProvider.cs" />
     <Compile Include="Helpers\DateTimeValidation.cs" />
     <Compile Include="Helpers\IAuditEntity.cs" />
+    <Compile Include="Helpers\K1.cs" />
+    <Compile Include="Helpers\K2.cs" />
+    <Compile Include="Helpers\KeyManager.cs" />
     <Compile Include="Helpers\Terminals.cs" />
     <Compile Include="Helpers\Week.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />

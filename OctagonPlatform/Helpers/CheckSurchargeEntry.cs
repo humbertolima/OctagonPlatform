@@ -39,11 +39,11 @@ namespace OctagonPlatform.Helpers
                 if (countPercentFee > 100.00)
                     throw new Exception("Surcharge percent fee biger that the remaining percent fee. ");
 
-                return new Exception("Error. ");
+                return new Exception("Could not add this Surcharge, please check the entered values. ");
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
     }
