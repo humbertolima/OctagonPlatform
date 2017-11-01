@@ -121,7 +121,7 @@ button, input, optgroup, select, textarea {
     margin: 0
 }
 
-.button {
+button {
     overflow: visible
 }
 
