@@ -2,15 +2,15 @@
 @*@Styles.Render("~/Content/bootstrap-lumen.css")*@
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
 <br />
 <br />
 <br />
-<br />
+
 <div class="container">
-    <h1 class="page-header">List of Partners</h1>
+    <h1 class="page-header">Partners</h1>
     @Html.ActionLink(
         linkText: "Add Partner",
         actionName: "Create",

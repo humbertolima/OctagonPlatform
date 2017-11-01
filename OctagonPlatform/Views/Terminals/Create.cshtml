@@ -6,8 +6,15 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
+<style>   
+     
+</style>
+
 
 <br/>
+<br/>
+<br/>
+<br />
 
 <div>
     <br><br />
@@ -22,228 +29,234 @@
                 @ViewBag.Error
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </p>
+            <div class="row"></div>        
+            <div class="col-md-5">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PartnerId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Status, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Status)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address1, new { @class = "col-lg-2 control-label"})
+                    <div class="col-lg-10">
+                        <i>@Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave", id="PlaceHolderForm" })</i>
+                        @Html.ValidationMessageFor(m => m.Address1)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address2, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        <i>@Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203", id = "PlaceHolderForm" })</i>
+                        @Html.ValidationMessageFor(m => m.Address2)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Zip, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        <i>@Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181", id = "PlaceHolderForm" })</i>
+                        @Html.ValidationMessageFor(m => m.Zip)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LocationTypeId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.LocationTypeId, new SelectList(Model.LocationTypes, "Id", "Name"), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.LocationTypeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div id="Countries">
+                        <label class="col-lg-2 control-label" for="Countries">Country</label>
+                        <div class="col-lg-10">
+                            <select required id="CountryId" name="CountryId" class="form-control">
+                                <option value="231">United States</option>
+                                @foreach (var item in Model.Countries)
+                            {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.CountryId)
+                        </div>
+                    </div>
+                    <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+                </div>
+                <div class="form-group">
+                    <div id="States">
+                        <label class="col-lg-2 control-label" for="States">State</label>
+                        <div class="col-lg-10">
+                            <select required id="StatesId" name="StateId" class="form-control">
+                                <option value="3930">Florida</option>
+                                @foreach (var item in Model.States)
+                            {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.StateId)
+                        </div>
+                    </div>
+                    <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+                </div>
+                <div class="form-group">
+                    <div id="Cities">
+                        <label class="col-lg-2 control-label" for="Cities">City</label>
+                        <div class="col-lg-10">
+                            <select id="CitiesId" name="CityId" class="form-control">
+                                <option value="43769">Miami</option>
+                                @foreach (var item in Model.Cities)
+                            {
+                                    <option value="@item.Id">@item.Name</option>
+                            }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.CityId)
+                        </div>
+                    </div>
+                    <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MakeId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MakeId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ModelId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ModelId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CommunicationType, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EnumDropDownListFor(m => m.CommunicationType, "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.CommunicationType)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.EmvReady, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.EmvReady)
+                    </div>
+                </div>
+            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.PartnerId)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Status, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Status)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Address1, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
-                    @Html.ValidationMessageFor(m => m.Address1)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Address2, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203" })
-                    @Html.ValidationMessageFor(m => m.Address2)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Zip, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181" })
-                    @Html.ValidationMessageFor(m => m.Zip)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.LocationTypeId, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.LocationTypeId, new SelectList(Model.LocationTypes, "Id", "Name"), "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.LocationTypeId)
-                </div>
-            </div>
-            <div class="form-group">
-                <div id="Countries">
-                    <label class="col-lg-2 control-label" for="Countries">Country</label>
+
+            <div class="col-md-7">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        <select required id="CountryId" name="CountryId" class="form-control">
-                            <option value="231">United States</option>
-                            @foreach (var item in Model.Countries)
-                            {
-                                <option value="@item.Id">@item.Name</option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(m => m.CountryId)
+                        @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.MachineSerialNumber)
                     </div>
                 </div>
-                <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-            </div>
-            <div class="form-group">
-                <div id="States">
-                    <label class="col-lg-2 control-label" for="States">State</label>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.VeppSerialNumber, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        <select required id="StatesId" name="StateId" class="form-control">
-                            <option value="3930">Florida</option>
-                            @foreach (var item in Model.States)
-                            {
-                                <option value="@item.Id">@item.Name</option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(m => m.StateId)
+                        @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.VeppSerialNumber)
                     </div>
                 </div>
-                <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-            </div>
-            <div class="form-group">
-                <div id="Cities">
-                    <label class="col-lg-2 control-label" for="Cities">City</label>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SoftwareVersion, new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        <select id="CitiesId" name="CityId" class="form-control">
-                            <option value="43769">Miami</option>
-                            @foreach (var item in Model.Cities)
-                            {
-                                <option value="@item.Id">@item.Name</option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(m => m.CityId)
+                        @Html.TextBoxFor(m => m.SoftwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.SoftwareVersion)
                     </div>
                 </div>
-                <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555" })
-                    @Html.ValidationMessageFor(m => m.Phone)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FimwareVersion, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.FimwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.FimwareVersion)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.MakeId, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.MakeId)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BankAccountId, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.BankAccountId)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.ModelId, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.ModelId)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.CommunicationType, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EnumDropDownListFor(m => m.CommunicationType, "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.CommunicationType)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SurchargePercentageFee, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "%", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.EmvReady, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(m => m.EmvReady)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SurchargeType, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EnumDropDownListFor(m => m.SurchargeType, "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.SurchargeType)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
-                    @Html.ValidationMessageFor(m => m.MachineSerialNumber)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.WhoInitiates, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EnumDropDownListFor(m => m.WhoInitiates, "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.WhoInitiates)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.VeppSerialNumber, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "1117060030" })
-                    @Html.ValidationMessageFor(m => m.VeppSerialNumber)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CryptoPercentChargeAmount, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.SoftwareVersion, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.SoftwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
-                    @Html.ValidationMessageFor(m => m.SoftwareVersion)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InstalledDate, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.InstalledDate)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.FimwareVersion, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.FimwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1" })
-                    @Html.ValidationMessageFor(m => m.FimwareVersion)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LoadedBy, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.LoadedBy)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.BankAccountId, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.BankAccountId)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Balance, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.Balance)
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "" })
-                    @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.SurchargePercentageFee, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "%" })
-                    @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.SurchargeType, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EnumDropDownListFor(m => m.SurchargeType, "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.SurchargeType)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.WhoInitiates, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.EnumDropDownListFor(m => m.WhoInitiates, "", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.WhoInitiates)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.CryptoPercentChargeAmount, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "4.99" })
-                    @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.InstalledDate, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
-                    @Html.ValidationMessageFor(m => m.InstalledDate)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.LoadedBy, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo" })
-                    @Html.ValidationMessageFor(m => m.LoadedBy)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Balance, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500" })
-                    @Html.ValidationMessageFor(m => m.Balance)
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.MinAmmountCash, new { @class = "col-lg-2 control-label" })
-                <div class="col-lg-10">
-                    @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "300" })
-                    @Html.ValidationMessageFor(m => m.MinAmmountCash)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MinAmmountCash, new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "300", id = "PlaceHolderForm" })
+                        @Html.ValidationMessageFor(m => m.MinAmmountCash)
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,7 +267,13 @@
             </div>
         </div>
     }
-</div>    @section Scripts {
+</div> 
+
+<br/>
+
+
+
+@section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/xpopulate")
     }
@@ -262,260 +281,3 @@
 
 
 
-@*
-    <br/>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-<div>
-    @using (Html.BeginForm("Create", "Terminals", FormMethod.Post, new {@class = "form-horizontal"}))
-    {
-        @Html.AntiForgeryToken()
-        <div>
-        <p class="alert alert-warning">
-            All fields are <strong>required.</strong>
-            @ViewBag.Error
-            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new {@class = "text-danger"})
-        </p>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PartnerId, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.PartnerId)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Status, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.EnumDropDownListFor(m => m.Status, "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Status)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Address1, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Address1, new {@class = "form-control", placeholder = "124 SW 105 Ave"})
-                @Html.ValidationMessageFor(m => m.Address1)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Address2, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus", placeholder = "Apto 203"})
-                @Html.ValidationMessageFor(m => m.Address2)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Zip, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Zip, new {@class = "form-control", autofocus = "autofocus", placeholder = "33181"})
-                @Html.ValidationMessageFor(m => m.Zip)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.LocationTypeId, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.LocationTypeId, new SelectList(Model.LocationTypes, "Id", "Name"), "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.LocationTypeId)
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Country</label>
-            <div class="col-lg-10">
-                <select required id="CountryId" name="CountryId" class="form-control">
-                    <option value="231">United States</option>
-                    @foreach (var item in Model.Countries)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.CountryId)
-                <div>
-                    <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">State</label>
-            <div class="col-lg-10">
-                <select required id="StatesId" name="StateId" class="form-control">
-                    <option value="3930">Florida</option>
-                    @foreach (var item in Model.States)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.StateId)
-                <div>
-                    <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-lg-2 control-label">City</label>
-            <div class="col-lg-10">
-                <select required id="CitiesId" name="CitiesId" class="form-control">
-                    <option value="43769">Miami</option>
-                    @foreach (var item in Model.States)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(m => m.CityId)
-                <div>
-                    <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Phone, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Phone, new {@class = "form-control", autofocus = "autofocus", placeholder = "(786) 555 5555"})
-                @Html.ValidationMessageFor(m => m.Phone)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.MakeId, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.MakeId)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ModelId, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.ModelId)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.CommunicationType, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.EnumDropDownListFor(m => m.CommunicationType, "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.CommunicationType)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.EmvReady, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.EmvReady, new {@class = "form-control", autofocus = "autofocus"})
-                @Html.ValidationMessageFor(m => m.EmvReady)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.MachineSerialNumber, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.MachineSerialNumber, new {@class = "form-control", autofocus = "autofocus", placeholder = "1117060030"})
-                @Html.ValidationMessageFor(m => m.MachineSerialNumber)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.VeppSerialNumber, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.VeppSerialNumber, new {@class = "form-control", autofocus = "autofocus", placeholder = "1117060030"})
-                @Html.ValidationMessageFor(m => m.VeppSerialNumber)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SoftwareVersion, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.SoftwareVersion, new {@class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1"})
-                @Html.ValidationMessageFor(m => m.SoftwareVersion)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.FimwareVersion, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.FimwareVersion, new {@class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1"})
-                @Html.ValidationMessageFor(m => m.FimwareVersion)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.BankAccountId, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.BankAccountId)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeAmountFee, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.SurchargeAmountFee, new {@class = "form-control", autofocus = "autofocus", placeholder = ""})
-                @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SurchargePercentageFee, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.SurchargePercentageFee, new {@class = "form-control", autofocus = "autofocus", placeholder = "%"})
-                @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.SurchargeType, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.EnumDropDownListFor(m => m.SurchargeType, "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.SurchargeType)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.WhoInitiates, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.EnumDropDownListFor(m => m.WhoInitiates, "", new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.WhoInitiates)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.CryptoPercentChargeAmount, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new {@class = "form-control", autofocus = "autofocus", placeholder = "4.99"})
-                @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.InstalledDate, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new {@class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date"})
-                @Html.ValidationMessageFor(m => m.InstalledDate)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.LoadedBy, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.LoadedBy, new {@class = "form-control", autofocus = "autofocus", placeholder = "Leo"})
-                @Html.ValidationMessageFor(m => m.LoadedBy)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Balance, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.Balance, new {@class = "form-control", autofocus = "autofocus", placeholder = "1500"})
-                @Html.ValidationMessageFor(m => m.Balance)
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.MinAmmountCash, new {@class = "col-lg-2 control-label"})
-            <div class="col-lg-10">
-                @Html.TextBoxFor(m => m.MinAmmountCash, new {@class = "form-control", autofocus = "autofocus", placeholder = "300"})
-                @Html.ValidationMessageFor(m => m.MinAmmountCash)
-            </div>
-        </div>
-        </div>
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    }
-</div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/xpopulate")
-    }
-
-*@

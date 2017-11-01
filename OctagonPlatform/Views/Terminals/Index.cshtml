@@ -4,13 +4,13 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <br />
 <br />
 <br />
 <br />
-<br />
+
 <div class="container">
     <div class="buttonterminal">
         <h1 class="page-header">Terminals</h1>
@@ -39,14 +39,14 @@
             <th>Location</th>
             <th>Address</th>
             <th>Phone</th>
-            <th>Country</th>
+  <!--          <th>Country</th>
             <th>City</th>
-            <th>State</th>
+            <th>State</th> -->
             <th>Status</th>
             <th>Balance</th>
             <th>Edit</th>
             <th>Delete</th>
-            <th>Details</th>
+  <!--          <th>Details</th>         -->
 
         </tr>
         </thead>
@@ -55,15 +55,15 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.TerminalId</td>
+            <tr>              
+                <td>@Html.ActionLink(item.TerminalId, "Details", new { id = item.Id })</td>
                 <td>@item.Partner.BusinessName</td>
                 <td>@item.LocationType.Name</td>
-                <td>@item.Address1</td>
+                <td>@item.Address1, @item.City.Name, @item.State.Name, @item.Zip</td>
                 <td>@item.Phone</td>
-                <td>@item.Country.Name</td>
+                @*    <td>@item.Country.Name</td>
                 <td>@item.City.Name</td>
-                <td>@item.State.Name</td>
+                <td>@item.State.Name</td> *@
                 <td>@if (item.Status.ToString().Equals("Active"))
                     {
                         <strong class="text-success">
@@ -92,18 +92,15 @@
 
                         <p>$@item.Balance</p>
                     }
-                </td>
+                </td>                
                 <td>
                     <i class="fa fa-pencil"style="font-size: 16px; color: darkblue"></i> @Html.ActionLink("Edit", "Edit", new {id = item.Id})
                 </td>
                 <td>
-                  @*  <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@              
-
-                    <i class="fa fa-trash"style="font-size:16px;color:red"></i><button type="button" style="margin: -2px;" value ="@item.Id" id="deleteItem" class="btn-link" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
-                    
-                    
+                    @*  <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
+                    <i class="fa fa-trash"style="font-size: 16px; color: red"></i><button type="button" style="margin: -2px;" value="@item.Id" id="deleteItem" class="btn-link" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
                 </td>
-                <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td>
+                @*  <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td> *@
             </tr>
         }
         </tbody>
