@@ -649,6 +649,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
+    <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
@@ -1017,13 +1018,13 @@
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
     <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
+    <Content Include="Octagon\assets\css\sb-admin.css" />
+    <Content Include="Octagon\assets\css\sb-admin.min.css" />
     <Content Include="Octagon\assets\css\sidebar.css" />
     <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
-    <Content Include="Octagon\assets\css\untitled-1.css" />
-    <Content Include="Octagon\assets\css\untitled.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\morris-data.js" />
     <Content Include="Octagon\assets\fonts\font-awesome.min.css" />
@@ -1474,6 +1475,7 @@
     <Content Include="Views\Shared\Sections\Footer.cshtml" />
     <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
     <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
+    <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
