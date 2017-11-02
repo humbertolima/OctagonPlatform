@@ -108,3 +108,29 @@ a {
 {
     font-size: x-small
 }
+
+.businessName {
+    font-size: 55px;
+    font-family: "Helvetica";
+    color: rgb(0, 168, 225);
+    
+    text-shadow: 0px 4px 8.56px rgba(0, 0, 0, 0.35);
+    -moz-transform: matrix( 0.85884798696826,0,0,0.85884798696826,0,0);
+    -webkit-transform: matrix( 0.85884798696826,0,0,0.85884798696826,0,0);
+    -ms-transform: matrix( 0.85884798696826,0,0,0.85884798696826,0,0);
+    
+    left: -20.167px;
+    top: 426.802px;
+    z-index: 2;
+}
+
+#footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    background: gray;
+    padding-top: 30px;
+}

@@ -4,13 +4,9 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
 <h1 class="page-header">@Model.BusinessName</h1>
-<div class="rowDetail">
+<div class="row rowDetail">
     <div class="col-md-4">
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
@@ -23,18 +19,18 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons"class="panel-heading">
-                   <h3 class="texth3"><i class="fa fa-list" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+                <div id="PartnerDetailButtons" class="panel-heading">
+                    <h3 class="texth3"><i class="fa fa-list" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
                     <div id="getContacts" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
@@ -60,7 +56,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
@@ -72,7 +68,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
@@ -87,19 +83,21 @@
         </div>
 
     </div>
-</div>
-<div class="col-md-2">
-    <div class="imageupload">
-        <img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
-        <br />
-        <br/>
-       
-        <div>
-            @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = "" }, htmlAttributes: new { @class = "btn btn-primary" })
+
+    <div class="col-md-2">
+        <div class="imageupload">
+            <img src="~/Uploads/@Model.Logo" width="100" height="50" alt="" class="img-responsive img-rounded">
+            <br />
+            <br />
+
+            <div>
+                @Html.ActionLink("Upload logo", "Index", "Logos", new { partnerId = @Model.Id, error = "" }, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
         </div>
     </div>
 </div>
-    
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/search")
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")

@@ -7,12 +7,14 @@
     <div id="wrapper">
         <!-- Navigation -->
         @Html.Partial("Sections/NavBar")
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="margin-top:120px;padding-top:10px;">
+
             @RenderBody()
         </div>
-        @Html.Partial("Sections/Footer")
+       
         <!-- /#page-wrapper -->
     </div>
+    @Html.Partial("Sections/Footer")
     <!-- /#wrapper -->
     @Html.Partial("Sections/Scripts")
 @RenderSection("scripts", required: false)
