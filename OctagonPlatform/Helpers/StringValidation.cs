@@ -13,7 +13,7 @@ namespace OctagonPlatform.Helpers
             if (value.ToString().IsEmpty()) return true;
 
             var temp = value.ToString();
-            const string chars = " AaQqZzWwSsXxEeDdCcRrFfVvTtGgBbYyHhNnUuJjMmIiKk<,OoLl>.Pp:;?/{['}]|+=_-)(*&^%$#@!~`";
+            const string chars = "AaQqZzWwSsXxEeDdCcRrFfVvTtGgBbYyHhNnUuJjMmIiKk<,OoLl>.Pp:;?/{['}]|+=_*&^%$#@!~`";
 
             
 
