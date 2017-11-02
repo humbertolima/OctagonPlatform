@@ -24,10 +24,12 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = error;
                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "File not found. ";
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
+
         }
 
         [HttpPost]
@@ -62,9 +64,10 @@ namespace OctagonPlatform.Controllers
 
                 return RedirectToAction("Details", "Partners", new {id = partnerId});
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = "File not found. ";
+                return RedirectToAction("Details", "Partners", new { id = partnerId });
             }
         }
     }

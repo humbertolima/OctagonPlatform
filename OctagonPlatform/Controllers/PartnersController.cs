@@ -2,7 +2,6 @@
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -28,7 +27,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -41,7 +41,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -53,31 +54,18 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Model not valid, please check the entered values. ";
+                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
+                }
 
-                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
-                }
-                try
-                {
-                    _partnerRepository.SavePartner(viewModel, "Create");
-                    return RedirectToAction("Index");
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating Partner " + exDb.Message
-                                    + " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error creating Partner "
-                                    + ex.Message +
-                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                    return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
-                }
+                _partnerRepository.SavePartner(viewModel, "Create");
+                return RedirectToAction("Index");
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
 
         }
@@ -91,7 +79,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -103,29 +92,19 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Model not valid, please check the entered values. ";
                     return View(_partnerRepository.PartnerToEdit(viewModel.Id));
                 }
-                try
-                {
-                    _partnerRepository.SavePartner(viewModel, "Edit");
-                    return RedirectToAction("Index");
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating Partner " + exDb.Message +
-                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                    return View(_partnerRepository.PartnerToEdit(viewModel.Id));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error editing Partner " + ex.Message +
-                                    " Business Name, email or mobile phone must be unique, make sure that they are not already in use";
-                    return View(_partnerRepository.PartnerToEdit(viewModel.Id));
-                }
+
+                _partnerRepository.SavePartner(viewModel, "Edit");
+                return RedirectToAction("Index");
+
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -137,7 +116,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -150,7 +130,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -164,15 +145,10 @@ namespace OctagonPlatform.Controllers
                 _partnerRepository.DeletePartner(id);
                 return RedirectToAction("Index");
             }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error deleting Partner" + exDb.Message;
-                return RedirectToAction("Index");
-            }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error deleting Partner" + ex.Message;
-                return RedirectToAction("Index");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -185,7 +161,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 

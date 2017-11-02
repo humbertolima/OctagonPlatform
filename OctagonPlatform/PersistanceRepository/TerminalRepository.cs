@@ -12,75 +12,55 @@ using System.Net;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class K1
-    {
-        public int id { get; set; }
-        public string serial { get; set; }
-        public string partA { get; set; }
-        public string partB { get; set; }
-        public string kcv_partA { get; set; }
-        public string kcv_partB { get; set; }
-        public string kcv_partAB { get; set; }
-        public object NewBrand { get; set; }
-    }
-
-    public class K2
-    {
-        public int id { get; set; }
-        public string serial { get; set; }
-        public string partA { get; set; }
-        public string partB { get; set; }
-        public string kcv_partA { get; set; }
-        public string kcv_partB { get; set; }
-        public string kcv_partAB { get; set; }
-        public object NewBrand { get; set; }
-    }
-
-    public class KeyManager
-    {
-        public int Id { get; set; }
-        public string zmk { get; set; }
-        public string Checksum { get; set; }
-        public string TerminalId { get; set; }
-        public int Idk1 { get; set; }
-        public int Idk2 { get; set; }
-        public string PWK { get; set; }
-        public K1 k1 { get; set; }
-        public K2 k2 { get; set; }
-    }
-
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
 
         public KeyManager GetKey(string messagesId)
         {
-            string url = "http://apiatm.azurewebsites.net/api/key/getbyterminal/" + messagesId;
-            var json = new WebClient().DownloadString(url);
-            KeyManager list = JsonConvert.DeserializeObject<KeyManager>(json);
+            try
+            {
+                var url = "http://apiatm.azurewebsites.net/api/key/getbyterminal/" + messagesId;
+                var json = new WebClient().DownloadString(url);
+                var list = JsonConvert.DeserializeObject<KeyManager>(json);
 
-            return list;
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + ", Key not found. ");
+            }
         }
 
         public BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2)
         {
-
-            string url = "http://apiatm.azurewebsites.net/api/key/bindkey/" + serial1 + "/" + serial2 + "/" + messagesId;
-            var json = new WebClient().DownloadString(url);
-            var list = JsonConvert.DeserializeObject<bool>(json);
-            var viewModel = new BindKeyViewModel() { Serial1 = "", Serial2 = "", TerminalId = "" };
-
-            if (list)
+            try
             {
-                 viewModel = new BindKeyViewModel() { TerminalId = messagesId, Serial1 = serial1, Serial2 = serial2 };
-            }
+                var url = "http://apiatm.azurewebsites.net/api/key/bindkey/" + serial1 + "/" + serial2 + "/" + messagesId;
+                var json = new WebClient().DownloadString(url);
+                var list = JsonConvert.DeserializeObject<bool>(json);
+                var viewModel = new BindKeyViewModel() { Serial1 = "", Serial2 = "", TerminalId = "" };
 
-            return viewModel;
+                if (list)
+                {
+                    viewModel = new BindKeyViewModel() { TerminalId = messagesId, Serial1 = serial1, Serial2 = serial2 };
+                }
+
+                return viewModel;
+            }
+            catch (Exception ex)
+            {
+               throw new Exception(ex.Message + ", Binded Key not found. ");
+            }
+            
         }
 
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 var terminals = new List<Terminal>();
 
                 var partner = Context.Partners.Where(x => x.Id == partnerId && !x.Deleted)
@@ -147,6 +127,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 return new TerminalFormViewModel()
                 {
                     Countries = Context.Countries.ToList(),
@@ -155,7 +138,7 @@ namespace OctagonPlatform.PersistanceRepository
                     Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
                     Partners = Context.Partners.Where(x => (x.Id == partnerId || x.ParentId == partnerId) && !x.Deleted).ToList(),
                     PartnerId = partnerId,
-                    Partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted),
+                    Partner = parent,
                     LocationTypes = Context.LocationTypes.ToList(),
                     Makes = Context.Makes.ToList(),
                     Models = Context.Models.ToList(),
@@ -179,6 +162,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                
+
                 var terminal = Table.Where(x => x.Id == id)
                     .Include(x => x.Partner)
                     .Include(x => x.Country)
@@ -260,7 +245,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + ", Please check the entered values. ");
             }
         }
 
@@ -268,7 +253,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return Table.Where(x => x.Id == id && !x.Deleted)
+                var terminal = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Partner)
                     .Include(x => x.Country)
                     .Include(x => x.State)
@@ -297,6 +282,8 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.TerminalAlertConfigs)
                     .Include(x => x.DefaultBankAccount)
                     .FirstOrDefault();
+                if (terminal == null) throw new Exception("Terminal not found. ");
+                return terminal;
             }
             catch (Exception ex)
             {
@@ -308,6 +295,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminal = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if(terminal == null) throw new Exception("Terminal not found. ");
+
                 Delete(id);
             }
             catch (Exception ex)
@@ -320,6 +310,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if(viewModel == null) throw new Exception("Model not found. ");
                 viewModel.Countries = Context.Countries.ToList();
                 viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
                 viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
@@ -345,78 +336,123 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalAlertIngnoredViewModel GetConfigNotification(int id)
         {
-            Terminal terminal = Table
-                .Include(c => c.TerminalAlertConfigs)
-                .Include(c => c.WorkingHours)
-                .FirstOrDefault(c => c.Id == id);          //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
-            if (terminal.TerminalAlertConfigs == null)
+            try
             {
-                terminal.TerminalAlertConfigs = new TerminalAlertConfig();
+                var terminal = Table
+                    .Include(c => c.TerminalAlertConfigs)
+                    .Include(c => c.WorkingHours)
+                    .FirstOrDefault(c => c.Id == id);  
+                if(terminal == null) throw new Exception("Terminal not found. ");    //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
+                if (terminal.TerminalAlertConfigs == null)
+                {
+                    terminal.TerminalAlertConfigs = new TerminalAlertConfig();
+                }
+                var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
+
+                terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
+                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
+
+                return terminalAlertConfigViewModel;
             }
-            var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
-
-            terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-            terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
-
-            return terminalAlertConfigViewModel;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
-            Terminal terminal = new Terminal();
-            TerminalAlertConfig terminalAlertConfig = Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
+            try
+            {
+                var terminalAlertConfig = Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
 
-            terminal = Table
-               .Include(c => c.TerminalAlertConfigs)
-               .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                var terminal = Table
+                    .Include(c => c.TerminalAlertConfigs)
+                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                if (terminal == null) throw new Exception("Terminal not found. ");
 
-            terminal.TerminalAlertConfigs = terminalAlertConfig;
+                terminal.TerminalAlertConfigs = terminalAlertConfig;
 
-            Edit(terminal);
+                Edit(terminal);
 
 
-            return terminal;
+                return terminal;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
-        public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string workingHoursEdit)
         {
-            Terminal terminal = new Terminal();
-            TimeSpan startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-            TimeSpan endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+            try
+            {
+                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
-            terminal = Table
-                .Include(c => c.WorkingHours)
-                .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                var terminal = Table
+                    .Include(c => c.WorkingHours)
+                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
 
-            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).StartTime = startTime;
-            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).EndTime = endTime;
-            terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(WorkingHoursEdit)).Day = terminalAlertIngnoredViewModel.Days;
+                if (terminal == null) throw new Exception("Terminal not found. ");
 
-            Edit(terminal);
+                var terminalWorkingHours = terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(workingHoursEdit));
+                if (terminalWorkingHours != null)
+                    terminalWorkingHours.StartTime =
+                        startTime;
+                var firstOrDefault = terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(workingHoursEdit));
+                if (firstOrDefault != null)
+                    firstOrDefault.EndTime = endTime;
+                var workingHours = terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(workingHoursEdit));
+                if (workingHours != null)
+                    workingHours.Day =
+                        terminalAlertIngnoredViewModel.Days;
+
+                Edit(terminal);
 
 
-            return terminal;
+                return terminal;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
-            Terminal terminal = new Terminal();
 
-            TimeSpan startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-            TimeSpan endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
-            terminal = Table
-               .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
-            terminal.WorkingHours = new List<TerminalWorkingHours>();
-            terminal.WorkingHours.Add(new TerminalWorkingHours
+            try
             {
-                Day = terminalAlertIngnoredViewModel.Days,
-                StartTime = startTime,
-                EndTime = endTime,
-                TerminalId = terminal.TerminalId
-            });
+                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
-            Save();
-            return terminal;
+                var terminal = Table
+                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                terminal.WorkingHours = new List<TerminalWorkingHours>
+                {
+                    new TerminalWorkingHours
+                    {
+                        Day = terminalAlertIngnoredViewModel.Days,
+                        StartTime = startTime,
+                        EndTime = endTime,
+                        TerminalId = terminal.TerminalId
+                    }
+                };
+
+                Save();
+                return terminal;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

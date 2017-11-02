@@ -95,3 +95,16 @@ a {
      background-color: white;
  }
 
+.field-validation-error {
+    color: red;
+    font-style: italic;
+}
+
+.input-validation-error {
+    border: 2px solid red;
+}
+
+#PlaceHolderForm::-moz-placeholder
+{
+    font-size: x-small
+}

@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -40,12 +39,12 @@ namespace OctagonPlatform.Controllers
                 var model = _surchargeRepository.SurchargeToEdit(id);
                 if (model != null) return View("SurchargeForm", model);
                 ViewBag.Error = "Model not found. ";
-                return PartialView("Error");
+                return View("Error");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return PartialView("Error");
+                return View("Error");
             }
         }
         
@@ -57,12 +56,12 @@ namespace OctagonPlatform.Controllers
                 var model = _surchargeRepository.RenderSurchargeFormViewModel(terminalId);
                 if (model != null) return View("SurchargeForm", model);
                 ViewBag.Error = "Model not found. ";
-                return PartialView("Error");
+                return View("Error");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return PartialView("Error");
+                return View("Error");
             }
         }
 
@@ -75,11 +74,12 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid && viewModel.Id > 0)
                 {
-
+                    ViewBag.Error = "Please check the entered values. ";
                     return View("SurchargeForm", _surchargeRepository.SurchargeToEdit(viewModel.Id));
                 }
                 if (!ModelState.IsValid && viewModel.Id == 0)
                 {
+                    ViewBag.Error = "Please check the entered values. ";
                     return View("SurchargeForm",
                         _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel));
                 }
@@ -91,12 +91,11 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Error editing or creating Surcharge "
-                                + ex.Message;
+                ViewBag.Error = ex.Message + ", Please check the entered values. ";
                 return View("SurchargeForm",
                     viewModel.Id == 0
-                        ? _surchargeRepository.RenderSurchargeFormViewModel(viewModel.TerminalId)
-                        : _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel));
+                        ? _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel)
+                        : _surchargeRepository.SurchargeToEdit(viewModel.Id));
             }
         }
 
@@ -109,7 +108,7 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return PartialView("Error");
+                return View("Error");
             }
         }
 
@@ -120,12 +119,6 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _surchargeRepository.DeleteSurcharge(id);
-                return RedirectToAction("Details", "Terminals", new { id = terminalId });
-            }
-            catch (DbEntityValidationException)
-
-            {
-                ViewBag.Error = "Validation error deleting Surcharge";
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
             catch (Exception ex)

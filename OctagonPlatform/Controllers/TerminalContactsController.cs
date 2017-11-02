@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -15,18 +14,7 @@ namespace OctagonPlatform.Controllers
         {
             _terminalContactRepository = repository;
         }
-        // GET: TerminalContacts
-        //public ActionResult Index()
-        //{
-        //    try
-        //    {
-        //        return View(_terminalContactRepository.GetAllTerminalContacts(TODO));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return HttpNotFound(ex.Message + ", Page Not Found!!!");
-        //    }
-        //}
+        
 
         public ActionResult Details(int id)
         {
@@ -36,7 +24,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -49,7 +38,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -62,29 +52,19 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Please check the entered values. ";
                     return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
                 }
-                try
-                {
-                    _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Save");
-                    return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating Contact " + exDb.Message +
-                                    " The email must be unique, make sure that is not already in use";
-                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error creating Contact " + ex.Message +
-                                    " The email must be unique, make sure that is not already in use";
-                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
-                }
+
+                _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Save");
+                return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
+
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -97,7 +77,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -105,30 +86,23 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TerminalContactFormViewModel terminalContactFormViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
-            }
+
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                }
                 _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Edit");
-                return RedirectToAction("Details", "Terminals", new { id = terminalContactFormViewModel.TerminalId });
-            }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error editing Contact " + exDb.Message +
-                                " The email must be unique, make sure that is not already in use";
-                return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
+                return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing Contact " + ex.Message +
-                                " The email must be unique, make sure that is not already in use";
+                ViewBag.Error = ex.Message;
                 return View(_terminalContactRepository.InitializeNewFormViewModel(terminalContactFormViewModel));
             }
         }
 
-        // GET: TerminalContacts/Delete/5
         public ActionResult Delete(int id)
         {
             try
@@ -137,7 +111,8 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -151,31 +126,14 @@ namespace OctagonPlatform.Controllers
                 _terminalContactRepository.DeleteTerminalContact(id);
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
-            catch (DbEntityValidationException exDb)
-            {
-                ViewBag.Error = "Validation error deleting Contact" + exDb.Message;
-                return RedirectToAction("Details", "Terminals", new { id = terminalId });
-            }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error deleiting Terminal" + ex.Message;
+                ViewBag.Error = "Validation error deleiting Terminal, " + ex.Message;
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
         }
 
-        //[HttpPost]
-        //public ActionResult Search(string search)
-        //{
-        //    try
-        //    {
-        //        return PartialView(_terminalContactRepository.Search(search, TODO));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return HttpNotFound(ex.Message + ", Page Not Found!!!");
-        //    }
-        //}
-
+       
 
     }
 }
