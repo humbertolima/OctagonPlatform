@@ -127,10 +127,12 @@ a {
 #footer {
     position: relative;
     left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
     color: white;
     text-align: center;
     background: gray;
     padding-top: 30px;
+
 }
