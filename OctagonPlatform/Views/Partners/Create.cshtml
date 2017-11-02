@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         @Html.LabelFor(m => m.BusinessName)
-                        @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Company's Name" })
+                        <i>@Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Company's Name", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.BusinessName)
                     </div>
                     <div class="form-group">
@@ -41,12 +41,12 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Address1)
-                        @Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave" })
+                        <i>@Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Address1)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Address2)
-                        @Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203, 33181" })
+                        <i>@Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203, 33181", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Address2)
                     </div>
                     <div class="form-group">
@@ -98,27 +98,27 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com" })
+                        <i>@Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus", placeholder = "test@email.com", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Email)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.WorkPhone)
-                        @Html.TextBoxFor(m => m.WorkPhone, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
+                        <i>@Html.TextBoxFor(m => m.WorkPhone, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.WorkPhone)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Mobile)
-                        @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
+                        <i>@Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Mobile)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Fax)
-                        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187" })
+                        <i>@Html.TextBoxFor(m => m.Fax, new { @class = "form-control", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.Fax)
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.WebSite)
-                        @Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", autofocus = "autofocus", placeholder = "wwww.website.com" })
+                        <i>@Html.TextBoxFor(m => m.WebSite, new { @class = "form-control", autofocus = "autofocus", placeholder = "wwww.website.com", id = "PlaceHolderForm" })</i>
                         @Html.ValidationMessageFor(m => m.WebSite)
                     </div>
                 </div>
