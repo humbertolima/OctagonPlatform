@@ -136,3 +136,13 @@ a {
     padding-top: 30px;
 
 }
+
+.form-control{
+    border-radius: 0px;
+}
+
+.alert-warning{
+    color:white;
+    background-color:red;
+    width: 180px;
+}
