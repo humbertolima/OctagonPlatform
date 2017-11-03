@@ -26,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
         }
 
@@ -39,7 +39,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
         }
 
@@ -63,7 +63,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
         }
         
@@ -71,18 +71,17 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var partnerBName = Table.SingleOrDefault(x => x.BusinessName.ToLower().Equals(viewModel.BusinessName.ToLower()));
+                var partnerBName = Table.SingleOrDefault(x => x.BusinessName.Replace(" ", "").ToLower().Trim().Equals(viewModel.BusinessName.Replace(" ","").ToLower().Trim()) || x.Email == viewModel.Email);
                 if (action == "Edit")
                 {
                     var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
-                    if (partnerToEdit == null) throw new Exception("Partner does not exist in our records!!!");
+                    if (partnerToEdit == null) throw new Exception("Partner does not exist in our records.");
                     if (partnerBName != null)
                     {
 
                         if (!partnerBName.Deleted && partnerToEdit.Id != partnerBName.Id)
                             throw new Exception("Partner already exists. ");
-                        if (partnerBName.Deleted)
-                            Table.Remove(partnerBName);
+                      
                     }
                     partnerToEdit.ParentId = viewModel.ParentId;
                     partnerToEdit.BusinessName = viewModel.BusinessName;
@@ -105,8 +104,8 @@ namespace OctagonPlatform.PersistanceRepository
                     if (partnerBName != null)
                     {
                         if (!partnerBName.Deleted)
-                            throw new Exception("Partner already exists!!!");
-                        Table.Remove(partnerBName);
+                            throw new Exception("Partner already exists.");
+        
                     }
                     var partner = new Partner()
                     {
@@ -130,7 +129,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
 
         }
@@ -176,7 +175,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
         }
 
@@ -203,7 +202,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
 
         }
@@ -218,7 +217,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
 
         }
@@ -255,7 +254,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Partner not found. ");
+                throw new Exception(ex.Message + "Partner not found. ");
             }
         }
     }

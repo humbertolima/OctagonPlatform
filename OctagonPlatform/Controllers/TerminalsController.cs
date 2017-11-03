@@ -66,11 +66,16 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
-                var terminal = _repository.TerminalDetails(id);
+                if (id == null)
+                {
+                    ViewBag.Error = "Terminal not found. ";
+                    return View("Error");
+                }
+                var terminal = _repository.TerminalDetails((int)id);
                 if (terminal == null)
                 {
                     return HttpNotFound();
@@ -85,11 +90,13 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Create
-        public ActionResult Create(int partnerId)
+        public ActionResult Create(int? partnerId)
         {
             try
             {
-                return View(_repository.RenderTerminalFormViewModel(partnerId));
+                if (partnerId != null) return View(_repository.RenderTerminalFormViewModel((int) partnerId));
+                ViewBag.Error = "Terminal not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -125,11 +132,13 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                return View(_repository.TerminalToEdit(id));
+                if (id != null) return View(_repository.TerminalToEdit((int) id));
+                ViewBag.Error = "Terminal not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -163,11 +172,13 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_repository.TerminalToEdit(id));
+                if (id != null) return View(_repository.TerminalToEdit((int) id));
+                ViewBag.Error = "Terminal not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -179,11 +190,16 @@ namespace OctagonPlatform.Controllers
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                _repository.DeleteTerminal(id);
+                if (id == null)
+                {
+                    ViewBag.Error = "Terminal not found. ";
+                    return View("Error");
+                }
+                _repository.DeleteTerminal((int)id);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
