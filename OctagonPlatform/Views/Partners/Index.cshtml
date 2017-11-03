@@ -61,23 +61,18 @@
         <th>Status</th>
         <th>Edit</th>
         <th>Delete</th>
-        <th>Details</th>
     </tr>
     </thead>
     <tbody>
         <tr>
-            <td>@Model.BusinessName</td>
+            <td>@Html.ActionLink(Model.BusinessName, "Details", "Partners", new { id = Model.Id })</td>
             <td>@Model.Parent.BusinessName</td>
             <td>@Model.Address1</td>
             <td>@Model.Mobile</td>
             <td>@Model.Email</td>
             <td>@Model.Status</td>
             <td><i class="fa fa-pencil"style="font-size:16px;color:darkblue"></i> @Html.ActionLink("Edit", "Edit", new {id = Model.Id})</td>
-            <td><i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
-            </td>
-            <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new {id = Model.Id})</td>
-
-
+            <td><i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new {id = Model.Id})</td>
         </tr>
         @foreach (var item in Model.Partners)
         {
