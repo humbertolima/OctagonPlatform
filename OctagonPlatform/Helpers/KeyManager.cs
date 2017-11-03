@@ -9,7 +9,7 @@
         public int Idk1 { get; set; }
         public int Idk2 { get; set; }
         public string Pwk { get; set; }
-        public K1 K1 { get; set; }
-        public K2 K2 { get; set; }
+        public K11 K1 { get; set; }
+        public K22 K2 { get; set; }
     }
 }
