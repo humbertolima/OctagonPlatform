@@ -27,7 +27,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Key not found. ");
+                throw new Exception(ex.Message + "Key not found. ");
             }
         }
 
@@ -49,7 +49,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-               throw new Exception(ex.Message + ", Binded Key not found. ");
+               throw new Exception(ex.Message + "Binded Key not found. ");
             }
             
         }
@@ -100,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message  + "Terminals not found. ");
             }
         }
 
@@ -154,7 +154,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Terminal not found.");
             }
         }
 
@@ -192,7 +192,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Terminal not found.");
             }
         }
 
@@ -200,38 +200,20 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminalCurrent = Table.SingleOrDefault(x => x.MachineSerialNumber == viewModel.MachineSerialNumber);
+
                 if (action == "Edit")
                 {
                     var terminalToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
                     if (terminalToEdit == null) throw new Exception("Terminal does not exist in our records!!!");
-                    if (terminalCurrent != null)
-                    {
-                        if (!terminalCurrent.Deleted && terminalCurrent.Id != terminalToEdit.Id)
-                            throw new Exception("Terminal already exists. ");
-                        if (terminalCurrent.Deleted)
-                            Table.Remove(terminalCurrent);
-                    }
-                    {
 
+                    Mapper.Map(viewModel, terminalToEdit);
 
-                        Mapper.Map(viewModel, terminalToEdit);
+                    Edit(terminalToEdit);
 
-                        Edit(terminalToEdit);
-                    }
                 }
                 else
                 {
-
-
-                    if (terminalCurrent != null)
-                    {
-                        if (!terminalCurrent.Deleted)
-                            throw new Exception("Terminal already exists. ");
-                        Table.Remove(terminalCurrent);
-                    }
-
-
+                    
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
 
 
@@ -245,7 +227,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Please check the entered values. ");
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
 
@@ -287,7 +269,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Terminal not found.");
             }
         }
 
@@ -302,7 +284,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Terminal not found.");
             }
         }
 
@@ -330,7 +312,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Model not found. ");
             }
         }
 
@@ -356,7 +338,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message + "Terminal not found.");
             }
             
         }
@@ -381,7 +363,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message + "Terminal not found.");
             }
             
         }
@@ -418,7 +400,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message + "Terminal not found.");
             }
         }
         public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
@@ -451,7 +433,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message + "Terminal not found.");
             }
         }
     }

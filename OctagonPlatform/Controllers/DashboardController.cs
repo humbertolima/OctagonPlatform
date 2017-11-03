@@ -32,9 +32,9 @@ namespace OctagonPlatform.Controllers
             {
                 var price = " ";
 
-                var URL = "http://buywidget220170913030514.azurewebsites.net/api/ticker/" + i;
+                var url = "http://buywidget220170913030514.azurewebsites.net/api/ticker/" + i;
 
-                var json = new WebClient().DownloadString(URL);
+                var json = new WebClient().DownloadString(url);
                 json = json.Replace("\"", "");
                 price = price + json;
 

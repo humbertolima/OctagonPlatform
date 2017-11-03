@@ -28,7 +28,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -67,7 +67,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -82,7 +82,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.City)
                     .Include(x => x.Terminal)
                     .SingleOrDefault();
-                if (terminalContact == null) throw new Exception("Contact does not exist in our records!!!");
+                if (terminalContact == null) throw new Exception("Contact does not exist in our records.");
                 {
 
                     return new TerminalContactFormViewModel()
@@ -112,7 +112,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
 
         }
@@ -121,7 +121,10 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminalContact = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
+                var terminalContact = Table.SingleOrDefault(x => (string.Equals(x.Name.Trim().ToLower(),
+                                                                      viewModel.Name.Trim().ToLower()) &&
+                                                                  string.Equals(x.LastName.Trim().ToLower(),
+                                                                      viewModel.LastName.Trim().ToLower()) || x.Email == viewModel.Email || x.Phone == viewModel.Phone));
                 if (action == "Edit")
                 {
                     var terminalContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
@@ -131,8 +134,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if(!terminalContact.Deleted && terminalContactToEdit.Id != terminalContact.Id)
                             throw new Exception("Contact already exists. ");
-                        if(terminalContact.Deleted)
-                            Table.Remove(terminalContact);
+                       
 
                     }
 
@@ -147,7 +149,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if (!terminalContact.Deleted)
                             throw new Exception("Contact already exists. ");
-                        Table.Remove(terminalContact);
+                   
 
                     }
 
@@ -170,7 +172,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -191,7 +193,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
     }

@@ -1,39 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using OctagonPlatform.Models;
+using System;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using OctagonPlatform.Models;
 
 namespace OctagonPlatform.Controllers
 {
     public class TerminalAlertsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
         // GET: TerminalAlerts
         public async Task<ActionResult> Index()
         {
-            return View(await db.TerminalAlerts.ToListAsync());
+            return View(await _db.TerminalAlerts.ToListAsync());
         }
 
         // GET: TerminalAlerts/Details/5
         public async Task<ActionResult> Details(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    ViewBag.Error = "Alert not found. ";
+                    return View("Error");
+                }
+                var terminalAlert = await _db.TerminalAlerts.FindAsync(id);
+                if (terminalAlert != null) return View(terminalAlert);
+                ViewBag.Error = "Alert not found. ";
+                return View("Error");
             }
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            if (terminalAlert == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
-            return View(terminalAlert);
+            
         }
 
         // GET: TerminalAlerts/Create
@@ -49,29 +52,45 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,TerminalId,Notificated,CashAvailable,AlarmChestdooropen,AlarmTopdooropen,AlarmSupervisoractive,Receiptprinterpaperstatus,ReceiptPrinterRibbonStatus,JournalPrinterPaperStatus,JournalPrinterRibbonStatus,NoteStatusDispenser,ReceiptPrinter,JournalPrinter,Dispenser,CommunicationsSystem,CardReader")] TerminalAlert terminalAlert)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TerminalAlerts.Add(terminalAlert);
-                await db.SaveChangesAsync();
+                if (!ModelState.IsValid) return View(terminalAlert);
+
+                _db.TerminalAlerts.Add(terminalAlert);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            return View(terminalAlert);
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(terminalAlert);
+            }
+            
         }
 
         // GET: TerminalAlerts/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    ViewBag.Error = "Alert not found. ";
+                    return View("Error");
+                }
+                var terminalAlert = await _db.TerminalAlerts.FindAsync(id);
+
+                if (terminalAlert != null) return View(terminalAlert);
+
+                ViewBag.Error = "Alert not found. ";
+                return View("Error");
             }
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            if (terminalAlert == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
-            return View(terminalAlert);
+            
         }
 
         // POST: TerminalAlerts/Edit/5
@@ -81,46 +100,78 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "Id,TerminalId,Notificated,CashAvailable,AlarmChestdooropen,AlarmTopdooropen,AlarmSupervisoractive,Receiptprinterpaperstatus,ReceiptPrinterRibbonStatus,JournalPrinterPaperStatus,JournalPrinterRibbonStatus,NoteStatusDispenser,ReceiptPrinter,JournalPrinter,Dispenser,CommunicationsSystem,CardReader")] TerminalAlert terminalAlert)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(terminalAlert).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                if (!ModelState.IsValid) return View(terminalAlert);
+
+                _db.Entry(terminalAlert).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(terminalAlert);
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(terminalAlert);
+            }
+            
         }
 
         // GET: TerminalAlerts/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (id == null)
+                {
+                    ViewBag.Error = "Alert not found. ";
+                    return View("Error");
+                }
+                var terminalAlert = await _db.TerminalAlerts.FindAsync(id);
+
+                if (terminalAlert != null) return View(terminalAlert);
+
+                ViewBag.Error = "Alert not found. ";
+                return View("Error");
             }
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            if (terminalAlert == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
-            return View(terminalAlert);
+            
         }
 
         // POST: TerminalAlerts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int? id)
         {
-            TerminalAlert terminalAlert = await db.TerminalAlerts.FindAsync(id);
-            db.TerminalAlerts.Remove(terminalAlert);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                if (id == null)
+                {
+                    ViewBag.Error = "Alert not found. ";
+                    return View("Error");
+                }
+                var terminalAlert = await _db.TerminalAlerts.FindAsync(id);
+
+                if (terminalAlert != null) _db.TerminalAlerts.Remove(terminalAlert);
+
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Error");
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -52,7 +52,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Bank account not found. ");
+                throw new Exception(ex.Message + "Bank account not found. ");
             }
 
         }
@@ -79,7 +79,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Bank account not found. ");
+                throw new Exception(ex.Message + "Bank account not found. ");
             }
 
         }
@@ -110,7 +110,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Bank account not found. ");
+                throw new Exception(ex.Message + "Bank account not found. ");
             }
 
         }
@@ -125,7 +125,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Bank account not found. ");
+                throw new Exception(ex.Message + "Bank account not found. ");
             }
 
         }
@@ -134,7 +134,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var current = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName);
+                var current = Table.SingleOrDefault(c => c.AccountNumber == editViewModel.AccountNumber || c.RoutingNumber == editViewModel.RoutingNumber || c.FedTax == editViewModel.FedTax || c.Ssn == editViewModel.Ssn || c.NickName == editViewModel.NickName.Trim());
 
                 if (action == "Edit")
                 {
@@ -144,8 +144,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if(!current.Deleted && current.Id != editViewModel.Id)
                             throw new Exception("Bank account already exists. ");
-                        if (current.Deleted)
-                            Table.Remove(current);
+                        
                     }
                     {
                         
@@ -160,7 +159,6 @@ namespace OctagonPlatform.PersistanceRepository
                         if (!current.Deleted)
                             throw new Exception("Bank account already exists. ");
 
-                        if (current.Deleted) Table.Remove(current);
 
                     }
 
@@ -172,7 +170,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", check entered values. ");
+                throw new Exception(ex.Message + "Please check entered values. ");
             }
         }
 
@@ -187,7 +185,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Bank account not found. ");
+                throw new Exception(ex.Message + "Bank account not found. ");
             }
         }
     }

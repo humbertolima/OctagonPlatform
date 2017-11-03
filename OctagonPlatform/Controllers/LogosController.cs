@@ -20,6 +20,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
+                
                 ViewBag.PartnerId = partnerId;
                 ViewBag.Error = error;
                 return View();
