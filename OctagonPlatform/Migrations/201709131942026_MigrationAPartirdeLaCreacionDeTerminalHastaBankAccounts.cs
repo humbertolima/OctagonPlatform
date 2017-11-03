@@ -44,7 +44,7 @@ namespace OctagonPlatform.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.CityId)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
-                .ForeignKey("dbo.Partners", t => t.PartnerId, cascadeDelete: true)
+                .ForeignKey("dbo.Partners", t => t.PartnerId, cascadeDelete: false)
                 .ForeignKey("dbo.States", t => t.StateId)
                 .Index(t => t.NickName, unique: true)
                 .Index(t => t.RoutingNumber, unique: true)
@@ -91,7 +91,7 @@ namespace OctagonPlatform.Migrations
                 .ForeignKey("dbo.ContactTypes", t => t.ContactTypeId)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.States", t => t.StateId)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
                 .Index(t => t.TerminalId)
                 .Index(t => t.ContactTypeId)
                 .Index(t => t.CountryId)
@@ -177,7 +177,7 @@ namespace OctagonPlatform.Migrations
                         MakeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Makes", t => t.MakeId, cascadeDelete: true)
+                .ForeignKey("dbo.Makes", t => t.MakeId, cascadeDelete: false)
                 .Index(t => t.MakeId);
             
             CreateTable(
@@ -188,8 +188,8 @@ namespace OctagonPlatform.Migrations
                         BankAccount_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.User_Id, t.BankAccount_Id })
-                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: true)
-                .ForeignKey("dbo.BankAccounts", t => t.BankAccount_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: false)
+                .ForeignKey("dbo.BankAccounts", t => t.BankAccount_Id, cascadeDelete: false)
                 .Index(t => t.User_Id)
                 .Index(t => t.BankAccount_Id);
             
@@ -201,8 +201,8 @@ namespace OctagonPlatform.Migrations
                         Terminal_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.User_Id, t.Terminal_Id })
-                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Terminals", t => t.Terminal_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: false)
+                .ForeignKey("dbo.Terminals", t => t.Terminal_Id, cascadeDelete: false)
                 .Index(t => t.User_Id)
                 .Index(t => t.Terminal_Id);
             

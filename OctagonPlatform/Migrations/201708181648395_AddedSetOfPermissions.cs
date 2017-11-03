@@ -16,7 +16,7 @@ namespace OctagonPlatform.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateIndex("dbo.Permissions", "SetOfPermissionId");
-            AddForeignKey("dbo.Permissions", "SetOfPermissionId", "dbo.SetOfPermissions", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Permissions", "SetOfPermissionId", "dbo.SetOfPermissions", "Id", cascadeDelete: false);
         }
         
         public override void Down()

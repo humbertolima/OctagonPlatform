@@ -27,7 +27,7 @@ namespace OctagonPlatform.Migrations
                         DeletedByName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BankAccounts", t => t.BankAccountId, cascadeDelete: true)
+                .ForeignKey("dbo.BankAccounts", t => t.BankAccountId, cascadeDelete: false)
                 .ForeignKey("dbo.Terminals", t => t.Id)
                 .Index(t => t.Id)
                 .Index(t => t.BankAccountId);

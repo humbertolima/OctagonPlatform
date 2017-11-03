@@ -22,7 +22,7 @@ namespace OctagonPlatform.Migrations
             AlterColumn("dbo.TerminalAlerts", "TerminalId", c => c.Int(nullable: false));
             DropColumn("dbo.TerminalAlerts", "Terminal_Id");
             CreateIndex("dbo.TerminalAlerts", "TerminalId");
-            AddForeignKey("dbo.TerminalAlerts", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.TerminalAlerts", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: false);
         }
     }
 }

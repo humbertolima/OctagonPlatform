@@ -22,7 +22,7 @@ namespace OctagonPlatform.Migrations
             AddColumn("dbo.CryptoChargeAccounts", "DeletedByName", c => c.String());
             AlterColumn("dbo.CryptoCurrencyTransactions", "TerminalId", c => c.Int(nullable: false));
             CreateIndex("dbo.CryptoCurrencyTransactions", "TerminalId");
-            AddForeignKey("dbo.CryptoCurrencyTransactions", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.CryptoCurrencyTransactions", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: false);
         }
         
         public override void Down()

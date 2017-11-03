@@ -28,8 +28,8 @@ namespace OctagonPlatform.Migrations
             AlterColumn("dbo.PartnerContacts", "CityId", c => c.Int(nullable: false));
             CreateIndex("dbo.Partners", "CityId");
             CreateIndex("dbo.PartnerContacts", "CityId");
-            AddForeignKey("dbo.Partners", "CityId", "dbo.Cities", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.PartnerContacts", "CityId", "dbo.Cities", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Partners", "CityId", "dbo.Cities", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.PartnerContacts", "CityId", "dbo.Cities", "Id", cascadeDelete: false);
         }
     }
 }
