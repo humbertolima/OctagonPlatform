@@ -99,8 +99,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if (surchargeDefault.Id != surcharge.Id && !surcharge.Deleted)
                             throw new Exception("This Terminal already has this Surcharge account. ");
-                        if (surchargeDefault.Deleted)
-                            Table.Remove(surchargeDefault);
+                     
                     }
                     
 
@@ -128,7 +127,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Page not found. ");
+                throw new Exception(ex.Message + "Please check entered values. ");
             }
         }
 

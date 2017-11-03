@@ -16,11 +16,16 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult Index(int terminalId)
+        public PartialViewResult Index(int? terminalId)
         {
             try
             {
-                var surcharges = _surchargeRepository.GetAllSurcharges(terminalId);
+                if (terminalId == null)
+                {
+                    ViewBag.Error = "Surcharge not found. ";
+                    return PartialView("Error");
+                }
+                var surcharges = _surchargeRepository.GetAllSurcharges((int)terminalId);
                 ViewBag.TerminalId = terminalId;
                 return PartialView(surcharges);
             }
@@ -32,11 +37,16 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                var model = _surchargeRepository.SurchargeToEdit(id);
+                if (id == null)
+                {
+                    ViewBag.Error = "Surcharge not found. ";
+                    return View("Error");
+                }
+                var model = _surchargeRepository.SurchargeToEdit((int)id);
                 if (model != null) return View("SurchargeForm", model);
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
@@ -49,11 +59,16 @@ namespace OctagonPlatform.Controllers
         }
         
         [HttpGet]
-        public ActionResult Create(int terminalId)
+        public ActionResult Create(int? terminalId)
         {
             try
             {
-                var model = _surchargeRepository.RenderSurchargeFormViewModel(terminalId);
+                if (terminalId == null)
+                {
+                    ViewBag.Error = "Surcharge not found. ";
+                    return View("Error");
+                }
+                var model = _surchargeRepository.RenderSurchargeFormViewModel((int)terminalId);
                 if (model != null) return View("SurchargeForm", model);
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
@@ -99,11 +114,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_surchargeRepository.SurchargeToEdit(id));
+                if (id != null) return View(_surchargeRepository.SurchargeToEdit((int) id));
+                ViewBag.Error = "Surcharge not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -114,11 +131,16 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, int terminalId)
+        public ActionResult DeleteConfirmed(int? id, int? terminalId)
         {
             try
             {
-                _surchargeRepository.DeleteSurcharge(id);
+                if (terminalId == null || id == null)
+                {
+                    ViewBag.Error = "Surcharge not found. ";
+                    return View("Error");
+                }
+                _surchargeRepository.DeleteSurcharge((int)id);
                 return RedirectToAction("Details", "Terminals", new { id = terminalId });
             }
             catch (Exception ex)

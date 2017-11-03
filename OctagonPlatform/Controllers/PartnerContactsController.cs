@@ -30,11 +30,14 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(int partnerId)
+        public ActionResult Create(int? partnerId)
         {
             try
             {
-                return View(_partnerContactRepository.RenderPartnerContactFormViewModel(partnerId));
+                if (partnerId != null)
+                    return View(_partnerContactRepository.RenderPartnerContactFormViewModel((int)partnerId));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -68,11 +71,13 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.PartnerContactToEdit(id));
+                if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -104,11 +109,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.PartnerContactToEdit(id));
+                if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -119,12 +126,17 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, int partnerId)
+        public ActionResult DeleteConfirmed(int? id, int? partnerId)
         {
             try
             {
+                if (id == null || partnerId == null)
+                {
+                    ViewBag.Error = "Contact not found. ";
+                    return View("Error");
+                }
 
-                _partnerContactRepository.DeletePartner(id);
+                _partnerContactRepository.DeletePartner((int)id);
                 return RedirectToAction("Details", "Partners", new {id = partnerId});
                 
             }
@@ -149,11 +161,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.Details(id));
+                if (id != null) return View(_partnerContactRepository.Details((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
