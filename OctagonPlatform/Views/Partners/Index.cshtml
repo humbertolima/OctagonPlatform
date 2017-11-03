@@ -79,7 +79,7 @@
             if (!item.Deleted && item.Id != Model.Id)
             {
                 <tr>
-                    <td>@item.BusinessName</td>
+                    <td>@Html.ActionLink(item.BusinessName, "Details", new { id = item.Id })</td>
                     <td>@item.Parent.BusinessName</td>
                     <td>@item.Address1</td>
                     <td>@item.Mobile</td>
@@ -91,9 +91,6 @@
                     <td>
                       @*  <i class="fa fa-trash"style="font-size: 16px; color: red"></i> @Html.ActionLink("Delete", "Delete", new {id = item.Id}) *@
                         <i class="fa fa-trash"style="font-size:16px;color:red"></i><button type="button" style="margin: -2px;" value ="@item.Id" id="deleteItem" class="btn-link" data-toggle="modal" data-target="#DeletePartner">Delete</button>
-                    </td>
-                    <td>
-                        <i class="fa fa-list" style="font-size: 16px; color: green"></i> @Html.ActionLink("Details", "Details", new {id = item.Id})
                     </td>
                 </tr>
             }
