@@ -2,8 +2,9 @@
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+<div class="container" style="padding-bottom: 20px; padding-top:20px">
 <h3 class="alert-info">Create BankAccount</h3>
 
 @using (Html.BeginForm("Create", "BankAccount"))
@@ -140,6 +141,7 @@
         </div>
     </div>
 }
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/xpopulate")
