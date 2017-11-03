@@ -12,7 +12,7 @@ namespace OctagonPlatform.Migrations
             DropPrimaryKey("dbo.TerminalAlertConfigs");
             AddPrimaryKey("dbo.TerminalAlertConfigs", "TerminalId");
             AddForeignKey("dbo.TerminalAlertConfigs", "TerminalId", "dbo.Terminals", "Id");
-            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "TerminalId", cascadeDelete: true);
+            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "TerminalId", cascadeDelete: false);
             DropColumn("dbo.TerminalAlertConfigs", "Id");
         }
         
@@ -23,8 +23,8 @@ namespace OctagonPlatform.Migrations
             DropForeignKey("dbo.TerminalAlertConfigs", "TerminalId", "dbo.Terminals");
             DropPrimaryKey("dbo.TerminalAlertConfigs");
             AddPrimaryKey("dbo.TerminalAlertConfigs", "Id");
-            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "Id", cascadeDelete: true);
-            AddForeignKey("dbo.TerminalAlertConfigs", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "Id", cascadeDelete: false);
+            AddForeignKey("dbo.TerminalAlertConfigs", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: false);
         }
     }
 }

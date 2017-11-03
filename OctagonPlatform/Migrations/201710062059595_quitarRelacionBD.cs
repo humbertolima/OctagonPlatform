@@ -61,7 +61,7 @@ namespace OctagonPlatform.Migrations
             DropColumn("dbo.TerminalAlertConfigs", "IgnoreChestDoorOpen");
             CreateIndex("dbo.TerminalMessages", "TerminalAlertConfigId");
             CreateIndex("dbo.TerminalMessages", "Id_8583", unique: true, name: "TerminalMessage_Id_8583_Index");
-            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "TerminalId", cascadeDelete: true);
+            AddForeignKey("dbo.TerminalMessages", "TerminalAlertConfigId", "dbo.TerminalAlertConfigs", "TerminalId", cascadeDelete: false);
         }
     }
 }

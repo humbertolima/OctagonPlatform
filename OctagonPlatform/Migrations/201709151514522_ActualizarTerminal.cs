@@ -20,7 +20,7 @@ namespace OctagonPlatform.Migrations
             DropIndex("dbo.Terminals", new[] { "BankAccountId" });
             AlterColumn("dbo.Terminals", "BankAccountId", c => c.Int(nullable: false));
             CreateIndex("dbo.Terminals", "BankAccountId");
-            AddForeignKey("dbo.Terminals", "BankAccountId", "dbo.BankAccounts", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Terminals", "BankAccountId", "dbo.BankAccounts", "Id", cascadeDelete: false);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace OctagonPlatform.Migrations
                         TerminalId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
                 .Index(t => t.TerminalId);
             
         }

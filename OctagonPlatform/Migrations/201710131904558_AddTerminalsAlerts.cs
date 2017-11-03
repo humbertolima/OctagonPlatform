@@ -30,7 +30,7 @@ namespace OctagonPlatform.Migrations
                         CardReader = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
                 .Index(t => t.TerminalId);
             
         }

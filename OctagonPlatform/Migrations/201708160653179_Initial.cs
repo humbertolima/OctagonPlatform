@@ -77,7 +77,7 @@ namespace OctagonPlatform.Migrations
                 .ForeignKey("dbo.ContactTypes", t => t.ContactTypeId)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.Users", t => t.CreatedBy_Id)
-                .ForeignKey("dbo.Partners", t => t.PartnerId, cascadeDelete: true)
+                .ForeignKey("dbo.Partners", t => t.PartnerId, cascadeDelete: false)
                 .ForeignKey("dbo.States", t => t.StateId)
                 .ForeignKey("dbo.Users", t => t.UpdatedBy_Id)
                 .Index(t => t.PartnerId)
