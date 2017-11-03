@@ -150,14 +150,14 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control1", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Serial Number, example: 1117060030", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.MachineSerialNumber)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.VeppSerialNumber, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control1", autofocus = "autofocus", placeholder = "1117060030", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Veep Serial Number, example: 1117060030", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.VeppSerialNumber)
                         </div>
                     </div>
@@ -189,14 +189,14 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control1", autofocus = "autofocus", placeholder = "", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Surcharge AMOUNT Fee Per Transaction", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.SurchargePercentageFee, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control1", autofocus = "autofocus", placeholder = "%", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Surchage PERCENTAGE Fee per transaction", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
                         </div>
                     </div>
@@ -217,7 +217,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.CryptoPercentChargeAmount, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control1", autofocus = "autofocus", placeholder = "4.99", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Cryptocurrency Percent Fee", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
                         </div>
                     </div>
@@ -245,7 +245,7 @@
                     <div class="form-group">
                         @Html.LabelFor(m => m.MinAmmountCash, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
-                            @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control1", autofocus = "autofocus", placeholder = "300", id = "PlaceHolderForm" })
+                            @Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control1", autofocus = "autofocus", placeholder = "Minimum Cash Balance", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.MinAmmountCash)
                         </div>
                     </div>
