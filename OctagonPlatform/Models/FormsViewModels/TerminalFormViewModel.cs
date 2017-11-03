@@ -82,10 +82,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Address")]
         public string Address1 { get; set; }
 
+        [Display(Name = "Cont.")]
         public string Address2 { get; set; }
 
         [Required(ErrorMessage = "The zip code is required")]
-        [Display(Name = "Zip Code")]
+        [Display(Name = "Zip")]
         public int Zip { get; set; }
 
         [Required]
@@ -93,12 +94,12 @@ namespace OctagonPlatform.Models.FormsViewModels
         public bool EmvReady { get; set; }
 
         [Required]
-        [Display(Name = "Serial Number")]
+        [Display(Name = "Serial")]
         [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
-        [Display(Name = "Veep Serial number")]
+        [Display(Name = "Veep Serial")]
         public string VeppSerialNumber { get; set; }
 
         [Display(Name = "Software Version")]
@@ -108,7 +109,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string FimwareVersion { get; set; }
 
         [Required]
-        [Display(Name = "Default Bank Account")]
+        [Display(Name = "Bank Account")]
         public int BankAccountId { get; set; }
 
         public BankAccount DefaultBankAccount { get; set; }
@@ -116,23 +117,23 @@ namespace OctagonPlatform.Models.FormsViewModels
         public IEnumerable<BankAccount> BankAccounts { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Fee per transaction")]
+        [Display(Name = "Surcharge Amount")]
         public double SurchargeAmountFee { get; set; }
 
         [Required]
-        [Display(Name = "Percent Surcharge Fee per transaction")]
+        [Display(Name = "Surcharge Percentage")]
         public double SurchargePercentageFee { get; set; }
 
         [Required]
-        [Display(Name = "Surcharged By the")]
+        [Display(Name = "Surcharge Logic")]
         public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
 
-        [Display(Name = "Who Initiates Day Closed")]
+        [Display(Name = "Day Closed")]
         public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Percent Charged By CryptoTransaction")]
+        [Display(Name = "Cryptocurrency Fee")]
         public double CryptoPercentChargeAmount { get; set; }
 
         [DataType(DataType.Date)]
@@ -148,7 +149,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public double? Balance { get; set; }
 
         [DataType(DataType.Currency)]
-        [Display(Name = "Minimun Chash Balance")]
+        [Display(Name = "Min Cash")]
         public double? MinAmmountCash { get; set; }
     }
 }
