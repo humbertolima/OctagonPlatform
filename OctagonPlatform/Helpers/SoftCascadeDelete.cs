@@ -1,15 +1,18 @@
-﻿using System;
+﻿using OctagonPlatform.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace OctagonPlatform.Helpers
 {
     public static class SoftCascadeDelete
     {
-        public static void PartnerSoftCascadeDelete(int id)
+        public static void PartnerSoftCascadeDelete(int partnerId, List<Partner> partners)
         {
-            
+           
+        }
+
+        public static void TerminalSoftCascadeDelete(int terminalId, List<Terminal> terminals)
+        {
+
         }
     }
 }
