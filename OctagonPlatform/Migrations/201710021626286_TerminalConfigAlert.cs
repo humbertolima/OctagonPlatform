@@ -19,7 +19,7 @@ namespace OctagonPlatform.Migrations
                         InactivePeriod = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
                 .Index(t => t.TerminalId);
             
             CreateTable(
@@ -41,7 +41,7 @@ namespace OctagonPlatform.Migrations
                         DeletedByName = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.TerminalAlertConfigs", t => t.TerminalAlertConfigId, cascadeDelete: true)
+                .ForeignKey("dbo.TerminalAlertConfigs", t => t.TerminalAlertConfigId, cascadeDelete: false)
                 .Index(t => t.Id_8583, unique: true, name: "TerminalMessage_Id_8583_Index")
                 .Index(t => t.TerminalAlertConfigId);
             

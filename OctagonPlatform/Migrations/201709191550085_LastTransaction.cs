@@ -12,7 +12,7 @@ namespace OctagonPlatform.Migrations
             AddColumn("dbo.Transactions", "Terminal_Id", c => c.Int());
             CreateIndex("dbo.Terminals", "LastTransactionId");
             CreateIndex("dbo.Transactions", "Terminal_Id");
-            AddForeignKey("dbo.Terminals", "LastTransactionId", "dbo.Transactions", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Terminals", "LastTransactionId", "dbo.Transactions", "Id", cascadeDelete: false);
             AddForeignKey("dbo.Transactions", "Terminal_Id", "dbo.Terminals", "Id");
         }
         
@@ -24,7 +24,7 @@ namespace OctagonPlatform.Migrations
             DropIndex("dbo.Terminals", new[] { "LastTransactionId" });
             DropColumn("dbo.Transactions", "Terminal_Id");
             DropColumn("dbo.Terminals", "LastTransactionId");
-            AddForeignKey("dbo.Transactions", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Transactions", "TerminalId", "dbo.Terminals", "Id", cascadeDelete: false);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Users not found.");
             }
         }
 
@@ -57,7 +57,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -67,17 +67,15 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var permissionList = new List<Permission>();
                 if (permissions == null) return permissionList;
-                foreach (var t in permissions)
-                {
-                    var convertId = Convert.ToInt32(t);
-                    permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
-                }
+                permissionList.AddRange(permissions.Select(t => Convert.ToInt32(t))
+                    .Select(convertId => Context.Permissions
+                    .FirstOrDefault(c => c.Id == convertId)));
                 //si viene null se envia la instancia vacia.
                 return permissionList;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -118,7 +116,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -127,19 +125,20 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var currrentuser = Table.SingleOrDefault(
-                    x => x.UserName == viewModel.UserName || x.Email == viewModel.Email);
+                    x => string.Equals(x.UserName.Trim().ToLower(), viewModel.UserName.Trim().ToLower()) || x.Email == viewModel.Email);
+                if (currrentuser != null)
+                {
+                    if (currrentuser.Id != viewModel.Id)
+                        throw new Exception("User already exists. ");
+
+                }
+
                 if (action == "Edit")
                 {
                     var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id && !c.Deleted);
 
                     if (user == null) throw new Exception("User does not exist in our records");
-                    if (currrentuser != null)
-                    {
-                        if(!currrentuser.Deleted && currrentuser.Id != viewModel.Id)
-                            throw new Exception("User already exists. ");
-                        if(currrentuser.Deleted)
-                            Table.Remove(currrentuser);
-                    }
+                    
                     {
                         user.Email = viewModel.Email.Trim();
                         user.LastName = viewModel.LastName.Trim();
@@ -151,9 +150,14 @@ namespace OctagonPlatform.PersistanceRepository
                         user.PartnerId = viewModel.PartnerId;
 
                         if (!string.IsNullOrEmpty(viewModel.Password))
-                            user.Password = viewModel.Password.Trim();
-
-                        user.Permissions = viewModel.Permissions;
+                        {
+                            var key = Cryptography.GenerateKey();
+                            var hash = Cryptography.EncodePassword(viewModel.Password, key);
+                            user.Password = hash;
+                            user.Key = key;
+                        }
+                        if (viewModel.Permissions != null)
+                            user.Permissions = viewModel.Permissions;
 
                         Edit(user);
                     }
@@ -163,14 +167,7 @@ namespace OctagonPlatform.PersistanceRepository
                 else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
-
-                    if (currrentuser != null)
-                    {
-                        if (!currrentuser.Deleted)
-                            throw new Exception("User already exists. ");
-                        Table.Remove(currrentuser);
-                    }
-
+                    
                     var key = Cryptography.GenerateKey();
                     var hash = Cryptography.EncodePassword(viewModel.Password, key);
 
@@ -185,10 +182,11 @@ namespace OctagonPlatform.PersistanceRepository
                         Phone = viewModel.Phone.Trim(),
                         Status = viewModel.Status,
                         UserName = viewModel.UserName.Trim(),
-                        IsLocked = viewModel.IsLocked,
-                        Permissions = viewModel.Permissions,
+                        IsLocked = viewModel.IsLocked
+                        
                     };
-
+                    if (viewModel.Permissions != null)
+                        userResult.Permissions = viewModel.Permissions;
                     Add(userResult);
 
 
@@ -200,7 +198,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Please check the entered values. ");
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
 
@@ -219,7 +217,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -233,7 +231,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -260,12 +258,13 @@ namespace OctagonPlatform.PersistanceRepository
                     Status = viewModel.Status,
                     UserName = viewModel.UserName,
                     SetOfPermissions = viewModel.SetOfPermissions,
+                    Permissions = new List<Permission>(),
                     Error = viewModel.Error
                 };
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -289,7 +288,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -308,7 +307,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -340,7 +339,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -354,7 +353,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -387,7 +386,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -415,7 +414,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
         //public List<UserBAViewModel> GetBAOfUser()

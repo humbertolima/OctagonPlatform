@@ -17,11 +17,16 @@ namespace OctagonPlatform.Controllers
 
         // GET: VaultCash
         [HttpPost]
-        public PartialViewResult Index(int terminalId)
+        public PartialViewResult Index(int? terminalId)
         {
             try
             {
-                var model = _vaultCashRepository.GetVaultCash(terminalId);
+                if (terminalId == null)
+                {
+                    ViewBag.Error = "Vaultcash not found. ";
+                    return PartialView("Error");
+                }
+                var model = _vaultCashRepository.GetVaultCash((int)terminalId);
 
                 ViewBag.TerminalId = terminalId;
                 return PartialView(model);
@@ -33,12 +38,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
-                
-                return View(_vaultCashRepository.GetVaultCash(id));
+                if (id != null) return View(_vaultCashRepository.GetVaultCash((int) id));
+                ViewBag.Error = "Vaultcash not found. ";
+                return PartialView("Error");
             }
             catch (Exception ex)
             {
@@ -47,12 +53,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                
-                return View(_vaultCashRepository.VaultCashToEdit(id));
+                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int) id));
+                ViewBag.Error = "Vaultcash not found. ";
+                return PartialView("Error");
             }
             catch (Exception ex)
             {
@@ -79,15 +86,19 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = ex.Message;
                 
-                return View(_vaultCashRepository.InitializeNewVaultCashFormViewModel(viewModel));
+                return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
         }
 
-        public ActionResult Create(int terminalId)
+        public ActionResult Create(int? terminalId)
         {
             try
             {
-                return View(_vaultCashRepository.RenderVaultCashFormViewModel(terminalId));
+                if (terminalId != null)
+                    return View(_vaultCashRepository.RenderVaultCashFormViewModel((int) terminalId));
+
+                ViewBag.Error = "Vaultcash not found. ";
+                return PartialView("Error");
             }
             catch (Exception ex)
             {
@@ -117,11 +128,14 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_vaultCashRepository.VaultCashToEdit(id));
+                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int) id));
+
+                ViewBag.Error = "Vaultcash not found. ";
+                return PartialView("Error");
             }
             catch (Exception ex)
             {
@@ -133,11 +147,16 @@ namespace OctagonPlatform.Controllers
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                _vaultCashRepository.DeleteVaultCash(id);
+                if (id == null)
+                {
+                    ViewBag.Error = "Vaultcash not found. ";
+                    return PartialView("Error");
+                }
+                _vaultCashRepository.DeleteVaultCash((int)id);
                 return RedirectToAction("Details", "Terminals", new { id });
             }
             catch (Exception ex)

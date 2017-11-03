@@ -30,6 +30,7 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Please check the entered values. ";
                     return RedirectToAction("Index", "Home", viewModel);
                 }
                 if (Session["tries"] != null)
@@ -41,14 +42,14 @@ namespace OctagonPlatform.Controllers
                 {
 
                     if (Session["tries"] != null) Session["tries"] = 0;
-                    ViewBag.Message = "User Locked, please call the Administrator";
+                    ViewBag.Error = "User Locked, please call the Administrator";
                     return RedirectToAction("Index", "Home", viewModel);
 
                 }
 
                 if (userToLogin.Partner == null)
                 {
-                    ViewBag.Message = "Invalid User";
+                    ViewBag.Error = "Invalid User";
                     Session["tries"] = userToLogin.TriesToLogin;
                     return RedirectToAction("Index", "Home", viewModel);
                 }
@@ -56,12 +57,14 @@ namespace OctagonPlatform.Controllers
                 Session["logo"] = userToLogin.Partner.Logo;
                 Session["partnerId"] = userToLogin.Partner.Id;
                 Session["businessName"] = userToLogin.Partner.BusinessName;
-                if (Session["tries"] != null) Session["tries"] = 0;
+
+                if (Session["tries"] != null) Session.Remove("tries");
                 return RedirectToAction("Index", "Dashboard");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return HttpNotFound("User not found. ");
+                ViewBag.Error = ex.Message;
+                return RedirectToAction("Index", "Home", viewModel);
             }
         }
         [Authorize]
@@ -73,9 +76,10 @@ namespace OctagonPlatform.Controllers
                 _accountRepository.Logout();
                 return RedirectToAction("Index", "Home");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return HttpNotFound("Page not found. ");
+                ViewBag.Error = ex.Message;
+                return RedirectToAction("Index", "Home");
             }
         }
 

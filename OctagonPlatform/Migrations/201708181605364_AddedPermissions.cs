@@ -24,8 +24,8 @@ namespace OctagonPlatform.Migrations
                         User_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Permission_Id, t.User_Id })
-                .ForeignKey("dbo.Permissions", t => t.Permission_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Permissions", t => t.Permission_Id, cascadeDelete: false)
+                .ForeignKey("dbo.Users", t => t.User_Id, cascadeDelete: false)
                 .Index(t => t.Permission_Id)
                 .Index(t => t.User_Id);
             

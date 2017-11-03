@@ -33,11 +33,13 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(int partnerId)
+        public ActionResult Create(int? partnerId)
         {
             try
             {
-                return View(_partnerRepository.RenderPartnerFormViewModel(partnerId));
+                if (partnerId != null) return View(_partnerRepository.RenderPartnerFormViewModel((int)partnerId));
+                ViewBag.Error = "Partner not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -65,17 +67,19 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View("Error");
+                return View(_partnerRepository.InitializeNewFormViewModel(viewModel));
             }
 
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                return View(_partnerRepository.PartnerToEdit(id));
+                if (id != null) return View(_partnerRepository.PartnerToEdit((int) id));
+                ViewBag.Error = "Partner not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -104,15 +108,17 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View("Error");
+                return View(_partnerRepository.PartnerToEdit(viewModel.Id));
             }
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
-                return View(_partnerRepository.PartnerDetails(id));
+                if (id != null) return View(_partnerRepository.PartnerDetails((int) id));
+                ViewBag.Error = "Partner not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -122,11 +128,13 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_partnerRepository.PartnerToEdit(id));
+                if (id != null) return View(_partnerRepository.PartnerToEdit((int) id));
+                ViewBag.Error = "Partner not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {

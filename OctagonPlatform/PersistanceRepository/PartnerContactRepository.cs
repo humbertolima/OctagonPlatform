@@ -15,7 +15,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
-                if (parent == null) throw new Exception("Parent not found. ");
+                if (parent == null) throw new Exception("Partner not found. ");
 
                 return Table.Where(c => !c.Deleted && c.PartnerId == partnerId)
                     .Include(x => x.Country)
@@ -26,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -47,7 +47,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -61,7 +61,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -84,7 +84,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -132,7 +132,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -140,7 +140,10 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var partnerContact = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
+                var partnerContact = Table.SingleOrDefault(x => (string.Equals(x.Name.Trim().ToLower(),
+                                                                     viewModel.Name.Trim().ToLower()) &&
+                                                                 string.Equals(x.LastName.Trim().ToLower(),
+                                                                     viewModel.LastName.Trim().ToLower()) || x.Email == viewModel.Email || x.Phone == viewModel.Phone));
                 if (action == "Edit")
                 {
                     var partnerContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
@@ -149,8 +152,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if(!partnerContact.Deleted && partnerContactToEdit.Id != partnerContact.Id)
                             throw new Exception("Contact already exists. ");
-                        if (partnerContact.Deleted)
-                            Table.Remove(partnerContact);
+                       
                     }
 
                     partnerContactToEdit.PartnerId = viewModel.PartnerId;
@@ -173,7 +175,7 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if (!partnerContact.Deleted)
                             throw new Exception("Contact already exists.");
-                        Table.Remove(partnerContact);
+    
                     }
 
                     var partnerContactResult = new PartnerContact()
@@ -197,7 +199,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Please check entered values. ");
             }
         }
 
@@ -212,7 +214,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -247,7 +249,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Contact not found. ");
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
     }

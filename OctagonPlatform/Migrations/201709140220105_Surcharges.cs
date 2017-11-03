@@ -30,7 +30,7 @@ namespace OctagonPlatform.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BankAccounts", t => t.BankAccountId)
-                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: true)
+                .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
                 .Index(t => t.TerminalId)
                 .Index(t => t.BankAccountId);
             

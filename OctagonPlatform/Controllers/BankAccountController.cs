@@ -36,12 +36,17 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
+                if (id == null)
+                {
+                    ViewBag.Error = "Bank account not found. ";
+                    return View("Error");
+                }
                 
-                var bankAccount = _bAccountRepository.BAccountDetails(id);
+                var bankAccount = _bAccountRepository.BAccountDetails((int)id);
                 
                 var viewModel = Mapper.Map<BankAccount, BAccountFVModel>(bankAccount);
 
@@ -55,11 +60,13 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Create
-        public ActionResult Create(int partnerId)
+        public ActionResult Create(int? partnerId)
         {
             try
             {
-                return View(_bAccountRepository.RenderBaFormViewModel(partnerId));
+                if (partnerId != null) return View(_bAccountRepository.RenderBaFormViewModel((int) partnerId));
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -94,11 +101,13 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                return View(_bAccountRepository.BankAccountToEdit(id));
+                if (id != null) return View(_bAccountRepository.BankAccountToEdit((int)id));
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -134,11 +143,13 @@ namespace OctagonPlatform.Controllers
         }
 
         [System.Web.Mvc.HttpGet]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_bAccountRepository.BankAccountToEdit(id));
+                if (id != null) return View(_bAccountRepository.BankAccountToEdit((int)id));
+                ViewBag.Error = "Bank account not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
@@ -149,13 +160,18 @@ namespace OctagonPlatform.Controllers
 
         [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
-                var partnerId = _bAccountRepository.BAccountDetails(id).PartnerId;
+                if (id == null)
+                {
+                    ViewBag.Error = "Bank account not found. ";
+                    return View("Error");
+                }
+                var partnerId = _bAccountRepository.BAccountDetails((int)id).PartnerId;
 
-                _bAccountRepository.DeleteBankAccount(id);
+                _bAccountRepository.DeleteBankAccount((int)id);
                 return RedirectToAction("Details", "Partners", new {id = partnerId});
 
             }

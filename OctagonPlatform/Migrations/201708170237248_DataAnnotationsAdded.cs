@@ -79,7 +79,7 @@ namespace OctagonPlatform.Migrations
             AlterColumn("dbo.Cities", "Name", c => c.String());
             DropColumn("dbo.Users", "Email");
             CreateIndex("dbo.Partners", "LogoId");
-            AddForeignKey("dbo.Partners", "LogoId", "dbo.Logoes", "Id", cascadeDelete: true);
+            AddForeignKey("dbo.Partners", "LogoId", "dbo.Logoes", "Id", cascadeDelete: false);
         }
     }
 }

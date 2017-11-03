@@ -26,7 +26,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
 
@@ -50,7 +50,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
 
@@ -71,7 +71,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
 
@@ -100,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + ", Please check the entered values. ");
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
 
@@ -117,7 +117,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
 
@@ -131,7 +131,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
 
@@ -150,7 +150,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Vaultcash not found. ");
             }
         }
     }
