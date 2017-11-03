@@ -1054,6 +1054,7 @@
     <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\img\map.jpg" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
+    <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
     <Content Include="Octagon\assets\js\sb-admin-2.js" />
     <Content Include="Octagon\assets\js\script.min.js" />
