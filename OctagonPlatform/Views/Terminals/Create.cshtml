@@ -6,7 +6,7 @@
 }
 <div class="container">
     <br>
-    <h3>Create Terminal</h3>
+    <h3 style="color: #859298; font-size:30px; "> <i class="fa fa-desktop" style="font-size:25px;color:#859298"></i> Create Terminal</h3>
     <hr>
     @using (Html.BeginForm("Create", "Terminals", FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -72,7 +72,7 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <div> <h4 style="color: cornflowerblue; font-size:40px; text-align:center">General Info</h4></div>
+                    <div> <h4 style="color: #1bacfb; font-size:25px; text-align:center"> <i class="fa fa-globe" style="font-size:25px;color:#1bacfb"></i> General Info</h4></div>
                     <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div> <h4 style="color: cornflowerblue; font-size:40px; text-align:center"> <i class="fa fa-desktop" style="font-size:25px;color:#4776a1"></i> Terminal Info</h4></div>
+                    <div> <h4 style="color: #1bacfb; font-size:25px; text-align:center"> <i class="fa fa-desktop" style="font-size:23px;color:#1bacfb"></i> Terminal Info</h4></div>
                     <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.MakeId, new { @class = "col-lg-2 control-label" })
@@ -236,7 +236,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <div> <h4 style="color: cornflowerblue; font-size:40px; text-align:center">Banking Info</h4></div>
+                    <div> <h4 style="color: #1bacfb; font-size:25px; text-align:center"> <i class="fa fa-bank" style="font-size:23px;color:#1bacfb"></i> Banking Info</h4></div>
                     <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.BankAccountId, new { @class = "col-lg-2 control-label" })
