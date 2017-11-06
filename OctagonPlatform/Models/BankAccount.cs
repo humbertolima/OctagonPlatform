@@ -107,7 +107,6 @@ namespace OctagonPlatform.Models
         public BankAccount()
         {
             Users = new Collection<User>();
-            Terminals = new Collection<Terminal>();
         }
     }
     

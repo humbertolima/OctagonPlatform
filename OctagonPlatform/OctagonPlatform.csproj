@@ -638,6 +638,10 @@
     <Compile Include="Migrations\201711062143567_updateCassetteFields.Designer.cs">
       <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.cs" />
+    <Compile Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.Designer.cs">
+      <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1443,15 +1447,12 @@
     <Content Include="Views\BankAccount\Search.cshtml" />
     <Content Include="Views\Terminals\Search.cshtml" />
     <Content Include="Views\Terminals\Sections\GeneralInfo.cshtml" />
-    <Content Include="Views\Terminals\Sections\TerminalStatistics.cshtml" />
     <Content Include="Views\Terminals\Sections\Documents.cshtml" />
     <Content Include="Views\Terminals\Sections\Notes.cshtml" />
     <Content Include="Views\Terminals\Sections\Contacts.cshtml" />
     <Content Include="Views\Terminals\Sections\SurchargeSplits.cshtml" />
     <Content Include="Views\Terminals\Sections\Interchanges.cshtml" />
     <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
-    <Content Include="Views\Terminals\Sections\CashManagment.cshtml" />
-    <Content Include="Views\Terminals\Sections\Transactions.cshtml" />
     <Content Include="Views\TerminalContacts\Create.cshtml" />
     <Content Include="Views\TerminalContacts\Delete.cshtml" />
     <Content Include="Views\TerminalContacts\Details.cshtml" />
@@ -1460,7 +1461,6 @@
     <Content Include="Views\TerminalContacts\Search.cshtml" />
     <Content Include="Views\Partners\Delete.cshtml" />
     <Content Include="Views\TerminalContacts\Edit.cshtml" />
-    <Content Include="Views\Terminals\Sections\Disputes.cshtml" />
     <Content Include="Views\VaultCash\Index.cshtml" />
     <Content Include="Views\PartnerContacts\Delete.cshtml" />
     <Content Include="Views\Users\Sections\Alerts.cshtml" />
@@ -1496,7 +1496,6 @@
     <Content Include="Views\Shared\Sections\Footer.cshtml" />
     <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
     <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
-    <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
     <Content Include="Views\Disputes\Create.cshtml" />
     <Content Include="Views\Disputes\Delete.cshtml" />
     <Content Include="Views\Disputes\Details.cshtml" />
@@ -1798,6 +1797,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711062143567_updateCassetteFields.resx">
       <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.resx">
+      <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
