@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DisputesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnerContactsController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Helpers\CheckSurchargeEntry.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
+    <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
@@ -627,6 +629,10 @@
     <Compile Include="Migrations\201710271521540_updateFieldInactivePeriodTerminal.Designer.cs">
       <DependentUpon>201710271521540_updateFieldInactivePeriodTerminal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061637175_addFieldToDispute.cs" />
+    <Compile Include="Migrations\201711061637175_addFieldToDispute.Designer.cs">
+      <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -666,6 +672,7 @@
     <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
@@ -702,6 +709,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
@@ -1484,6 +1492,11 @@
     <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
     <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
     <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
+    <Content Include="Views\Disputes\Create.cshtml" />
+    <Content Include="Views\Disputes\Delete.cshtml" />
+    <Content Include="Views\Disputes\Details.cshtml" />
+    <Content Include="Views\Disputes\Edit.cshtml" />
+    <Content Include="Views\Disputes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1774,6 +1787,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710271521540_updateFieldInactivePeriodTerminal.resx">
       <DependentUpon>201710271521540_updateFieldInactivePeriodTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061637175_addFieldToDispute.resx">
+      <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
