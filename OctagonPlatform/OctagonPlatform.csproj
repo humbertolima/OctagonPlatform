@@ -1502,6 +1502,8 @@
     <Content Include="Views\Disputes\Details.cshtml" />
     <Content Include="Views\Disputes\Edit.cshtml" />
     <Content Include="Views\Disputes\Index.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\NotFoundError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
