@@ -36,12 +36,12 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        //[HttpPost]
-        //public PartialViewResult SetCassetes(int terminalId)
-        //{
-        //    var terminal = _repository.SetCassetes(terminalId);
-        //    return PartialView("Sections/GeneralInfo", terminal);
-        //}
+        [HttpPost]
+        public PartialViewResult SetCassettes(CassetteViewModel cassette)
+        {
+            var terminal = _repository.SetCassettes(cassette);
+            return PartialView("Details", terminal);
+        }
 
 
         [HttpPost]

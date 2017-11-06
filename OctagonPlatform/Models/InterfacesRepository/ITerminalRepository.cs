@@ -15,6 +15,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
 
+        Terminal SetCassettes(CassetteViewModel cassette);
+
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);

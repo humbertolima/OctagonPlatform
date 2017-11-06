@@ -49,9 +49,9 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-               throw new Exception(ex.Message + "Binded Key not found. ");
+                throw new Exception(ex.Message + "Binded Key not found. ");
             }
-            
+
         }
 
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
@@ -100,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message  + "Terminals not found. ");
+                throw new Exception(ex.Message + "Terminals not found. ");
             }
         }
 
@@ -162,7 +162,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                
+
 
                 var terminal = Table.Where(x => x.Id == id)
                     .Include(x => x.Partner)
@@ -213,7 +213,7 @@ namespace OctagonPlatform.PersistanceRepository
                 }
                 else
                 {
-                    
+
                     var terminal = Mapper.Map<TerminalFormViewModel, Terminal>(viewModel);
 
 
@@ -278,7 +278,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var terminal = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
-                if(terminal == null) throw new Exception("Terminal not found. ");
+                if (terminal == null) throw new Exception("Terminal not found. ");
 
                 Delete(id);
             }
@@ -292,7 +292,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                if(viewModel == null) throw new Exception("Model not found. ");
+                if (viewModel == null) throw new Exception("Model not found. ");
                 viewModel.Countries = Context.Countries.ToList();
                 viewModel.States = Context.States.Where(x => x.CountryId == 231).ToList();
                 viewModel.Cities = Context.Cities.Where(x => x.StateId == 3930).ToList();
@@ -323,8 +323,8 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.Id == id);  
-                if(terminal == null) throw new Exception("Terminal not found. ");    //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
+                    .FirstOrDefault(c => c.Id == id);
+                if (terminal == null) throw new Exception("Terminal not found. ");    //Context.TerminalAlertConfigs.FirstOrDefault(c => c.TerminalId == terminalId);
                 if (terminal.TerminalAlertConfigs == null)
                 {
                     terminal.TerminalAlertConfigs = new TerminalAlertConfig();
@@ -340,7 +340,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception(e.Message + "Terminal not found.");
             }
-            
+
         }
 
         public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
@@ -365,7 +365,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception(e.Message + "Terminal not found.");
             }
-            
+
         }
 
         public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string workingHoursEdit)
@@ -435,6 +435,27 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception(e.Message + "Terminal not found.");
             }
+        }
+
+        public Terminal SetCassettes(CassetteViewModel cassette)
+        {
+            try
+            {
+                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == cassette.TerminalId);
+                if (terminal != null)
+                {
+                    terminal.Cassettes.Add(Mapper.Map<CassetteViewModel, Cassette>(cassette));
+                    Save();
+                }
+                return terminal;
+            }
+            catch (Exception)
+            {
+                //pendiente
+                throw;
+            }
+
+
         }
     }
 }

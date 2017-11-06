@@ -1,19 +1,60 @@
 ﻿@model OctagonPlatform.Models.Terminal
 
 <h3 data-toggle="collapse" data-target="#getCassetes">Cassettes dw Info</h3>
-<div>
-    @{ <div>
-    @Model.TerminalId
-    </div>
-        foreach (var item in Model.Cassettes)
-        {
-            <div>
-                @item.AutoRecord
-            </div>
+<div id="getCassetes" class="panel-collapse collapse">
+    <div>
+        @{ <div>
+                @Model.TerminalId
 
-            <div>
-                @item.Denomination
             </div>
+            foreach (var item in Model.Cassettes)
+            {
+                <div>
+                    @item.AutoRecord
+                </div>
+
+                <div>
+                    @item.Denomination
+                </div>
+            }
         }
-    }
+        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettes">Add</button>
+
+        <div id="myModalCassettes" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit Config Alert</h3>
+
+                    @using (Html.BeginForm("SetCassettes", "Terminals"))
+            {
+                        @Model
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.TerminalId)
+                        <p class="alert alert-danger">
+                            All fields are <strong>required.</strong>
+                            @ViewBag.Error
+                            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+                        </p>
+                        <div class="form-group">
+                            @*@Html.LabelFor(m => m.Cassettes)
+                                @Html.TextBoxFor(m => m.Cassettes, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
+                                @Html.ValidationMessageFor(m => m.Cassettes)*@
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
