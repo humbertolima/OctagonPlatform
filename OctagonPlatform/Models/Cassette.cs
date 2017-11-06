@@ -10,14 +10,13 @@ namespace OctagonPlatform.Models
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public bool AutoRecord { get; set; }
 
         [Required]
         public int Denomination { get; set; }
 
         [Required]
         public int TerminalId { get; set; }
-
         public Terminal Terminal { get; set; }
 
         public bool Deleted { get; set; }

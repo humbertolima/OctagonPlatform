@@ -634,6 +634,10 @@
     <Compile Include="Migrations\201711061637175_addFieldToDispute.Designer.cs">
       <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711062143567_updateCassetteFields.cs" />
+    <Compile Include="Migrations\201711062143567_updateCassetteFields.Designer.cs">
+      <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1792,6 +1796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711061637175_addFieldToDispute.resx">
       <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062143567_updateCassetteFields.resx">
+      <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
