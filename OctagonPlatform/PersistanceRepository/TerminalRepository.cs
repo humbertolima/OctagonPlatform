@@ -172,7 +172,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.LocationType)
-                    .Include(x => x.DefaultBankAccount)
                     .SingleOrDefault();
                 if (terminal == null) throw new Exception("Terminal does not exist in our records!!!");
                 {
@@ -185,8 +184,6 @@ namespace OctagonPlatform.PersistanceRepository
                     terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
                     terminalViewModel.Makes = Context.Makes.ToList();
                     terminalViewModel.Models = Context.Models.ToList();
-                    terminalViewModel.DefaultBankAccount = terminalViewModel.DefaultBankAccount;
-                    terminalViewModel.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == terminal.PartnerId && !x.Deleted).ToList();
                     return terminalViewModel;
                 }
             }
@@ -240,15 +237,11 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Country)
                     .Include(x => x.State)
                     .Include(x => x.City)
-                    .Include(x => x.LastTransaction)
                     .Include(x => x.LocationType)
                     .Include(x => x.Cassettes)
-                    .Include(x => x.DefaultBankAccount)
                     .Include(x => x.Contracts)
                     .Include(x => x.Documents)
-                    .Include(x => x.Events)
                     .Include(x => x.InterChanges)
-                    .Include(x => x.LoadCashs)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
@@ -257,12 +250,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Notes)
                     .Include(x => x.TerminalContacts)
                     .Include(x => x.TerminalPictures)
-                    .Include(x => x.TransactionStatistics)
                     .Include(x => x.Cassettes)
-                    .Include(x => x.BindedKey)
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
-                    .Include(x => x.DefaultBankAccount)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
                 return terminal;
@@ -307,7 +297,6 @@ namespace OctagonPlatform.PersistanceRepository
                 viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
                 viewModel.EmvReady = true;
                 viewModel.WhoInitiates = WhoInitiateDayClsed.Who.Host;
-                viewModel.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == viewModel.PartnerId && !x.Deleted).ToList();
                 return viewModel;
             }
             catch (Exception ex)

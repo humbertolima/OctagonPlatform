@@ -105,12 +105,6 @@ namespace OctagonPlatform.Models
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
-        [Required]
-        [Display(Name = "Default Bank Account")]
-        public int BankAccountId { get; set; }
-
-        public BankAccount DefaultBankAccount { get; set; }
-
         public DateTime? CreatedAt { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? DeletedAt { get; set; }

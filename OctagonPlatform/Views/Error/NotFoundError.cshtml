@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "NotFoundError";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="container" style="text-align: center; padding-bottom: 20px; padding-top: 20px"></div>
+<div class="form-group">
+    <h1>404</h1>
+    <h2>The page you're looking for doesn't exist.</h2>
+    <h2 class="alert-danger">@ViewBag.Error </h2>
+</div>
+<div class="form-group">
+    <button type="reset" onclick="history.back();" class="btn btn-default" style="background-color:red">Back</button>
+</div>

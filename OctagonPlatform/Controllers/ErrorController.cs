@@ -17,7 +17,25 @@ namespace OctagonPlatform.Controllers
         public ActionResult NotFound()
         {
             Response.StatusCode = 200;
-            return View("Error");
+            return View("NotFoundError");
+        }
+
+        public ActionResult InternalServer()
+        {
+            Response.StatusCode = 200;
+            return View("InternalServerError");
+        }
+
+        public ActionResult BadGateway()
+        {
+            Response.StatusCode = 200;
+            return View("BadGatewayError");
+        }
+
+        public ActionResult ServiceUnavailable()
+        {
+            Response.StatusCode = 200;
+            return View("ServiceUnavailableError");
         }
     }
 }
