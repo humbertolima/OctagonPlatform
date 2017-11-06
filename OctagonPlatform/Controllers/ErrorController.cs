@@ -25,5 +25,17 @@ namespace OctagonPlatform.Controllers
             Response.StatusCode = 200;
             return View("InternalServerError");
         }
+
+        public ActionResult BadGateway()
+        {
+            Response.StatusCode = 200;
+            return View("BadGatewayError");
+        }
+
+        public ActionResult ServiceUnavailable()
+        {
+            Response.StatusCode = 200;
+            return View("ServiceUnavailableError");
+        }
     }
 }
