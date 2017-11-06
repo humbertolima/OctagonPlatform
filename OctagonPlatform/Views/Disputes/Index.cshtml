@@ -1,0 +1,154 @@
+﻿@model IEnumerable<OctagonPlatform.Models.Dispute>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Terminal.TerminalId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transaction.TransactionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Viewed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MessageNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NetworkAdjustmentId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Network)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisputeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SecuenceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountRequested)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisputedAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDayToRepresent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeletedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeletedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedByName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeletedByName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Terminal.TerminalId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transaction.TransactionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Viewed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MessageNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NetworkAdjustmentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Network)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisputeType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecuenceNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountRequested)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisputedAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastDayToRepresent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Deleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeletedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeletedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedByName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedByName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeletedByName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

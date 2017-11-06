@@ -4,23 +4,36 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class Dispute:ISoftDeleted, IAuditEntity
+    public class Dispute : ISoftDeleted, IAuditEntity
     {
         [Key]
         public int Id { get; set; }
 
+        public bool Viewed { get; set; }
+
+        public string MessageNumber { get; set; }
+
+        public string NetworkAdjustmentId { get; set; }
+
         [Required]
         public int TerminalId { get; set; }
-
         public Terminal Terminal { get; set; }
 
         [Required]
         public int TransactionId { get; set; }
-
         public TransactionStatistic Transaction { get; set; }
 
-        public string Message { get; set; } 
+        public string Network { get; set; }
 
+        public DisputeType.Disputes DisputeType { get; set; }
+
+        public string SecuenceNumber { get; set; }
+
+        public decimal AmountRequested { get; set; }
+
+        public decimal DisputedAmount { get; set; }
+
+        public DateTime LastDayToRepresent { get; set; }
 
         public bool Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }
