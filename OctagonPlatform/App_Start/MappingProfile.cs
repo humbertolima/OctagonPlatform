@@ -34,8 +34,6 @@ namespace OctagonPlatform
             CreateMap<BankAccount, UserBAViewModel>();
             #endregion
 
-
-
             #region Partner Mapping
 
             CreateMap<Partner, PartnerFormViewModel>();
@@ -46,8 +44,6 @@ namespace OctagonPlatform
 
             #endregion
 
-
-
             #region PartnerContact Mapping
 
             CreateMap<PartnerContact, PartnerFormViewModel>();
@@ -57,8 +53,6 @@ namespace OctagonPlatform
             CreateMap<PartnerFormViewModel, PartnerContact>();
 
             #endregion
-
-
 
             #region Terminal Mapping
 
@@ -78,7 +72,6 @@ namespace OctagonPlatform
             //Dto to Domain
             #endregion
 
-
             #region TerminalContact Mapping
 
             CreateMap<TerminalContact, TerminalContactFormViewModel>();
@@ -88,7 +81,6 @@ namespace OctagonPlatform
             CreateMap<TerminalContactFormViewModel, TerminalContact>().ForMember(c => c.Id, opt => opt.Ignore());
 
             #endregion
-
 
             #region VaultCash Mapping
 
@@ -129,6 +121,13 @@ namespace OctagonPlatform
 
             #endregion
 
+            #region Cassettes
+
+            CreateMap<Cassette, CassetteViewModel>();
+
+            CreateMap<CassetteViewModel, Cassette>();
+            //Dto to Domain
+            #endregion
         }
 
     }
