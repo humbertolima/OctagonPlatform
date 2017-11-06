@@ -36,7 +36,19 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getGeneralInfo", LoadingElementId = "loading3", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getGeneralInfo" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
+                        @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id },
+                   new AjaxOptions {
+                       UpdateTargetId = "getGeneralInfo",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post" },
+                   htmlAttributes: new {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getGeneralInfo" })
+                    </h3>
                     <div id="getGeneralInfo" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>
@@ -47,12 +59,13 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <div id="cassettes">
-                         @Html.Partial("Sections/Cassettes", Model)
-                            <div id="getGeneralInfo" class="panel-collapse collapse">
-                                <div class="loader"></div>
-                            </div>
-                      </div>
+                    <h3 class="texth3">
+
+                        @Html.Partial("Sections/Cassettes", Model)
+                    </h3>
+                    <div id="getCassetes" class="panel-collapse collapse">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -145,7 +158,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
@@ -164,11 +177,11 @@
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
                     <div id="transactions">
-                            @Html.Partial("Sections/Transactions", Model)
+                        @Html.Partial("Sections/Transactions", Model)
                         <div id="getSurcharge" class="panel-collapse collapse">
                             <div class="loader"></div>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -185,10 +198,10 @@
                 </div>
             </div>
         </div>
-      
-</div>
-</div>
-            @section Scripts {
-                @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
-            }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}

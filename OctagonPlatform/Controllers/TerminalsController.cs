@@ -35,6 +35,15 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
+
+        //[HttpPost]
+        //public PartialViewResult SetCassetes(int terminalId)
+        //{
+        //    var terminal = _repository.SetCassetes(terminalId);
+        //    return PartialView("Sections/GeneralInfo", terminal);
+        //}
+
+
         [HttpPost]
         public ActionResult SetBindKey(string terminalId, string serial1, string serial2)
         {

@@ -1,1 +1,19 @@
-﻿<h3>Cassettes Info</h3>
+﻿@model OctagonPlatform.Models.Terminal
+
+<h3 data-toggle="collapse" data-target="#getCassetes">Cassettes dw Info</h3>
+<div>
+    @{ <div>
+    @Model.TerminalId
+    </div>
+        foreach (var item in Model.Cassettes)
+        {
+            <div>
+                @item.AutoRecord
+            </div>
+
+            <div>
+                @item.Denomination
+            </div>
+        }
+    }
+</div>
