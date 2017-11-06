@@ -12,8 +12,8 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-group">
-            <p class="alert alert-warning">
-                All fields are <strong>required.</strong>
+            <p>
+              <!--  All fields are <strong>required.</strong> -->
                 @ViewBag.Error
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             </p>
