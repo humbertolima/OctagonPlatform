@@ -22,7 +22,7 @@ namespace OctagonPlatform.Models
 
         public Partner Partner { get; set; }
 
-        public virtual ICollection<TerminalMessage> Messages { get; set; }
+        public ICollection<TerminalMessage> TerminalMessages { get; set; }
 
         public ICollection<TerminalAlert> TerminalAlerts { get; set; }
 
@@ -191,6 +191,7 @@ namespace OctagonPlatform.Models
 
         public TerminalAlertConfig TerminalAlertConfigs { get; set; }
 
+
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();
@@ -208,6 +209,9 @@ namespace OctagonPlatform.Models
             CryptoChargeAccounts = new Collection<CryptoChargeAccount>();
             CryptoCurrencyTransactions = new Collection<CryptoCurrencyTransaction>();
             Disputes = new Collection<Dispute>();
+            TerminalAlerts = new Collection<TerminalAlert>();
+            TerminalMessages = new Collection<TerminalMessage>();
+            WorkingHours = new Collection<TerminalWorkingHours>();
         }
     }
 }

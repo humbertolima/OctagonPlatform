@@ -21,7 +21,11 @@ namespace OctagonPlatform.Controllers
             try
             {
                 var result = _repository.GetKey(terminalId);
-                var viewModel = new BindKeyViewModel() { Serial1 = "", Serial2 = "", TerminalId = "" };
+                var viewModel = new BindKeyViewModel() { Serial1 = result.K1.Serial, Serial2 = result.K2.Serial,
+                    CheckDigt1 = result.K1.Kcv_PartAb,
+                    CheckDigt2 = result.K2.Kcv_PartAb,
+                    ATMCheckDigt = result.Checksum,
+                    TerminalId = "" };
                 
                 return View("Sections/BindKey", viewModel);
             }
