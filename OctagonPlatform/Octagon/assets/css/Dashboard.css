@@ -185,3 +185,11 @@ a {
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+
+{
+    text-align: left;
+    font-size: 14px;
+    color: #6e6a6a;
+    font-family: helvetica;
+    float:left;
+}

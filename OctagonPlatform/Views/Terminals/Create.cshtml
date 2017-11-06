@@ -19,6 +19,8 @@
             </p>
             <div class="row">
                 <div class="col-md-4">
+                    <div> <h3 style="color: cornflowerblue; font-size:40px;">General Info</h3></div>
+                    <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.PartnerId, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
@@ -109,9 +111,6 @@
                         </div>
                         <div><img id="loading" style="display:none" src="~/Content/loading_icon.gif" alt="" /></div>
                     </div>
-                </div>
-
-                <div class="col-md-4">
                     <div class="form-group">
                         @Html.LabelFor(m => m.Phone, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
@@ -119,6 +118,11 @@
                             @Html.ValidationMessageFor(m => m.Phone)
                         </div>
                     </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div> <h3 style="color: cornflowerblue; font-size:40px;">Terminal Info</h3></div>
+                    <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.MakeId, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
@@ -179,6 +183,8 @@
                 </div>
 
                 <div class="col-md-4">
+                    <div> <h3 style="color: cornflowerblue; font-size:40px;">Banking Info</h3></div>
+                    <hr>
                     <div class="form-group">
                         @Html.LabelFor(m => m.BankAccountId, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
