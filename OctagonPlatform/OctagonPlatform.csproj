@@ -1038,6 +1038,7 @@
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
     <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Octagon\assets\css\cosmo.css" />
     <Content Include="Octagon\assets\css\Dashboard.css" />
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
