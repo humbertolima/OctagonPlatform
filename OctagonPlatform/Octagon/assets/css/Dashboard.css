@@ -1,4 +1,6 @@
-﻿a {
+﻿
+
+a {
     font-family: "Helvetica Neue", Helvetica,
 }
 
@@ -230,3 +232,278 @@ a {
     margin-right: -15px;
     margin-left: -15px;
 }
+
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+    font-size: 1.2875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #373a3c;
+    text-align: left;
+    background-color: #fff
+}
+
+    .table th, .table td {
+        padding: 0.75rem;
+        vertical-align: top;
+        border-top: 1px solid #e9ecef
+    }
+
+    .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #e9ecef
+    }
+
+    .table tbody + tbody {
+        border-top: 2px solid #e9ecef
+    }
+
+    .table .table {
+        background-color: #fff
+    }
+
+.table-sm th, .table-sm td {
+    padding: 0.3rem
+}
+
+.table-bordered {
+    border: 1px solid #e9ecef
+}
+
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #e9ecef
+    }
+
+    .table-bordered thead th, .table-bordered thead td {
+        border-bottom-width: 2px
+    }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,0.05)
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0,0,0,0.075)
+}
+
+.table-primary, .table-primary > th, .table-primary > td {
+    background-color: #c3dbf7
+}
+
+.table-hover .table-primary:hover {
+    background-color: #adcef4
+}
+
+    .table-hover .table-primary:hover > td, .table-hover .table-primary:hover > th {
+        background-color: #adcef4
+    }
+
+.table-secondary, .table-secondary > th, .table-secondary > td {
+    background-color: #c7c8c8
+}
+
+.table-hover .table-secondary:hover {
+    background-color: #babbbb
+}
+
+    .table-hover .table-secondary:hover > td, .table-hover .table-secondary:hover > th {
+        background-color: #babbbb
+    }
+
+.table-success, .table-success > th, .table-success > td {
+    background-color: #c9ebbe
+}
+
+.table-hover .table-success:hover {
+    background-color: #b9e5ab
+}
+
+    .table-hover .table-success:hover > td, .table-hover .table-success:hover > th {
+        background-color: #b9e5ab
+    }
+
+.table-info, .table-info > th, .table-info > td {
+    background-color: #e2cfec
+}
+
+.table-hover .table-info:hover {
+    background-color: #d7bde5
+}
+
+    .table-hover .table-info:hover > td, .table-hover .table-info:hover > th {
+        background-color: #d7bde5
+    }
+
+.table-warning, .table-warning > th, .table-warning > td {
+    background-color: #ffd8be
+}
+
+.table-hover .table-warning:hover {
+    background-color: #ffc9a5
+}
+
+    .table-hover .table-warning:hover > td, .table-hover .table-warning:hover > th {
+        background-color: #ffc9a5
+    }
+
+.table-danger, .table-danger > th, .table-danger > td {
+    background-color: #ffb8c8
+}
+
+.table-hover .table-danger:hover {
+    background-color: #ff9fb4
+}
+
+    .table-hover .table-danger:hover > td, .table-hover .table-danger:hover > th {
+        background-color: #ff9fb4
+    }
+
+.table-light, .table-light > th, .table-light > td {
+    background-color: #fdfdfe
+}
+
+.table-hover .table-light:hover {
+    background-color: #ececf6
+}
+
+    .table-hover .table-light:hover > td, .table-hover .table-light:hover > th {
+        background-color: #ececf6
+    }
+
+.table-dark, .table-dark > th, .table-dark > td {
+    background-color: #c7c8c8
+}
+
+.table-hover .table-dark:hover {
+    background-color: #babbbb
+}
+
+    .table-hover .table-dark:hover > td, .table-hover .table-dark:hover > th {
+        background-color: #babbbb
+    }
+
+.table-active, .table-active > th, .table-active > td {
+    background-color: rgba(0,0,0,0.075)
+}
+
+.table-hover .table-active:hover {
+    background-color: rgba(0,0,0,0.075)
+}
+
+    .table-hover .table-active:hover > td, .table-hover .table-active:hover > th {
+        background-color: rgba(0,0,0,0.075)
+    }
+
+.table.dataTable .thead-dark th {
+    color: #fff;
+    background-color: #212529;
+    border-color: #32383e
+}
+
+.table.dataTable .thead-light th {
+    color: #495057;
+    background-color: #e9ecef;
+    border-color: #e9ecef
+}
+
+.table.dataTable .thead-blue th {
+    color: #fff;
+    background-color: #00a8e1;
+    border-color: #00a8e1
+}
+
+
+.table-dark {
+    color: #fff;
+    background-color: #212529
+}
+
+    .table-dark th, .table-dark td, .table-dark thead th {
+        border-color: #32383e
+    }
+
+    .table-dark.table-bordered {
+        border: 0
+    }
+
+    .table-dark.table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(255,255,255,0.05)
+    }
+
+    .table-dark.table-hover tbody tr:hover {
+        background-color: rgba(255,255,255,0.075)
+    }
+
+@media (max-width: 575px) {
+    .table-responsive-sm {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+
+        .table-responsive-sm.table-bordered {
+            border: 0
+        }
+}
+
+@media (max-width: 767px) {
+    .table-responsive-md {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+
+        .table-responsive-md.table-bordered {
+            border: 0
+        }
+}
+
+@media (max-width: 991px) {
+    .table-responsive-lg {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+
+        .table-responsive-lg.table-bordered {
+            border: 0
+        }
+}
+
+@media (max-width: 1199px) {
+    .table-responsive-xl {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar
+    }
+
+        .table-responsive-xl.table-bordered {
+            border: 0
+        }
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar
+}
+
+    .table-responsive.table-bordered {
+        border: 0
+    }
+
