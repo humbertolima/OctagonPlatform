@@ -319,6 +319,7 @@ table.dataTable {
 
             .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
                 color: #333 !important;
+                font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
                 border: 1px solid #979797;
                 background-color: white;
                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff), color-stop(100%, #dcdcdc));
@@ -331,9 +332,11 @@ table.dataTable {
 
             .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
                 cursor: default;
+                font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
                 color: #666 !important;
                 border: 1px solid transparent;
                 background: transparent;
+                font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
                 box-shadow: none
             }
 
