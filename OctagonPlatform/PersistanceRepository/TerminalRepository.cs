@@ -148,7 +148,6 @@ namespace OctagonPlatform.PersistanceRepository
                     CommunicationType = CommunicationType.Communication.TcpIp,
                     EmvReady = true,
                     WhoInitiates = WhoInitiateDayClsed.Who.Host,
-                    BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == partnerId && !x.Deleted).ToList(),
                     SurchargeType = SurchargedBy.SurchargeTypes.Greater
                 };
             }
