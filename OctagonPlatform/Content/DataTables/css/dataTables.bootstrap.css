@@ -22,6 +22,7 @@ table.dataTable.nowrap td {
 div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;
+  font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
   white-space: nowrap;
 }
 div.dataTables_wrapper div.dataTables_length select {
@@ -34,6 +35,7 @@ div.dataTables_wrapper div.dataTables_filter {
 div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
   white-space: nowrap;
+  font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
   text-align: left;
 }
 div.dataTables_wrapper div.dataTables_filter input {
@@ -44,6 +46,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 div.dataTables_wrapper div.dataTables_info {
   padding-top: 8px;
   white-space: nowrap;
+  font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
 }
 div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;

@@ -38,6 +38,7 @@ a {
 
 a {
     text-decoration: none !important;
+    font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
     a: hover, a:focus
 }
   
