@@ -248,9 +248,22 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.MinAmmountCash, htmlAttributes: new { data_toggle = "tooltip", title = "Set terminal's minimum cash amount" })
-                            <i>@Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "Minimum Cash Balance", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.MinAmmountCash)
+                        <i>@Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "Minimum Cash Balance", id = "PlaceHolderForm" })</i>
+                        @Html.ValidationMessageFor(m => m.MinAmmountCash)
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label">Input addons</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputAmount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input class="form-control" id="exampleInputAmount" placeholder="Amount" type="text">
+                                <div class="input-group-addon">.00</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
