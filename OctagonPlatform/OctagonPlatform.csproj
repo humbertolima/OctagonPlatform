@@ -241,7 +241,6 @@
     <Compile Include="Helpers\K1.cs" />
     <Compile Include="Helpers\K2.cs" />
     <Compile Include="Helpers\KeyManager.cs" />
-    <Compile Include="Helpers\SoftCascadeDelete.cs" />
     <Compile Include="Helpers\Terminals.cs" />
     <Compile Include="Helpers\Week.cs" />
     <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
