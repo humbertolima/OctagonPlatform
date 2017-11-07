@@ -178,14 +178,6 @@
 
                 </div>
 
-                <div class="col-md-4">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.BankAccountId, new { @class = "col-lg-2 control-label" })
-                        <div class="col-lg-10">
-                            @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.BankAccountId)
-                        </div>
-                    </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "col-lg-2 control-label" })
                         <div class="col-lg-10">
