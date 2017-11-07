@@ -108,13 +108,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
-        [Required]
-        [Display(Name = "Bank Account")]
-        public int BankAccountId { get; set; }
-
-        public BankAccount DefaultBankAccount { get; set; }
-
-        public IEnumerable<BankAccount> BankAccounts { get; set; }
 
         [Required]
         [Display(Name = "Surcharge Amount")]
