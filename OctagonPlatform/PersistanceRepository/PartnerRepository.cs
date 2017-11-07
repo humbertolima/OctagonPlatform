@@ -213,13 +213,27 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var partner = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
                 if(partner == null) throw new Exception("Partner not found. ");
-                Delete(id);
+                CascadeDelete(id);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message + "Partner not found. ");
             }
 
+        }
+
+        public void CascadeDelete(int id)
+        {
+            Delete(id);
+            var partners = Table.Where(x => x.ParentId == id)
+                .Include(x => x.Partners).ToList();
+            foreach (var item in partners)
+            {
+                if (item != null)
+                {
+                    CascadeDelete(item.Id);
+                }
+            }
         }
 
         public PartnerFormViewModel InitializeNewFormViewModel(PartnerFormViewModel viewModel)
