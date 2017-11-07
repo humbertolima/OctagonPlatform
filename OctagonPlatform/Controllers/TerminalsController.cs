@@ -9,7 +9,7 @@ namespace OctagonPlatform.Controllers
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-        
+
 
         public TerminalsController(ITerminalRepository repository)
         {
@@ -21,12 +21,16 @@ namespace OctagonPlatform.Controllers
             try
             {
                 var result = _repository.GetKey(terminalId);
-                var viewModel = new BindKeyViewModel() { Serial1 = result.K1.Serial, Serial2 = result.K2.Serial,
+                var viewModel = new BindKeyViewModel()
+                {
+                    Serial1 = result.K1.Serial,
+                    Serial2 = result.K2.Serial,
                     CheckDigt1 = result.K1.Kcv_PartAb,
                     CheckDigt2 = result.K2.Kcv_PartAb,
                     ATMCheckDigt = result.Checksum,
-                    TerminalId = "" };
-                
+                    TerminalId = ""
+                };
+
                 return View("Sections/BindKey", viewModel);
             }
             catch (Exception ex)
@@ -37,9 +41,9 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SetCassettes(CassetteViewModel cassette)
+        public PartialViewResult SetCassettes(bool autoRecord, int denomination, int terminalId)
         {
-            var terminal = _repository.SetCassettes(cassette);
+            var terminal = _repository.SetCassettes(autoRecord, denomination, terminalId);
             return PartialView("Details", terminal);
         }
 
@@ -51,7 +55,7 @@ namespace OctagonPlatform.Controllers
             {
                 var result = _repository.SetBindKey(terminalId, serial1, serial2);
                 var result2 = _repository.GetKey(terminalId);
-                
+
                 ViewBag.ChkDigt1 = result2.Idk1;
                 ViewBag.ChkDigt2 = result2.Idk2;
                 ViewBag.AtmChkDigt = result2.Zmk;
@@ -107,7 +111,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (partnerId != null) return View(_repository.RenderTerminalFormViewModel((int) partnerId));
+                if (partnerId != null) return View(_repository.RenderTerminalFormViewModel((int)partnerId));
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
             }
@@ -149,7 +153,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_repository.TerminalToEdit((int) id));
+                if (id != null) return View(_repository.TerminalToEdit((int)id));
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
             }
@@ -189,7 +193,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_repository.TerminalToEdit((int) id));
+                if (id != null) return View(_repository.TerminalToEdit((int)id));
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
             }

@@ -120,14 +120,6 @@ namespace OctagonPlatform
 
 
             #endregion
-
-            #region Cassettes
-
-            CreateMap<Cassette, CassetteViewModel>();
-
-            CreateMap<CassetteViewModel, Cassette>();
-            //Dto to Domain
-            #endregion
         }
 
     }

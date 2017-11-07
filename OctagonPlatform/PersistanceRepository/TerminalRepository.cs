@@ -426,14 +426,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal SetCassettes(CassetteViewModel cassette)
+        public Terminal SetCassettes(bool autoRecord, int denomination, int terminalId)
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == cassette.TerminalId);
+                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
                 if (terminal != null)
                 {
-                    terminal.Cassettes.Add(Mapper.Map<CassetteViewModel, Cassette>(cassette));
+                    terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
                     Save();
                 }
                 return terminal;
