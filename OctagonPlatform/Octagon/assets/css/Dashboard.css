@@ -1,5 +1,7 @@
 ﻿
-
+body {
+    font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif
+}
 a {
     font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
 }
