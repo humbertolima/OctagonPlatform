@@ -12,7 +12,7 @@
                 @using (Html.BeginForm("Delete", "Partners", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
-                    <input type="hidden" id="itemId" name="id" value="" />
+                    <input type="hidden" id="id2" name="id2" value="" />
                     <div class="form-group">
                         <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                         <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
