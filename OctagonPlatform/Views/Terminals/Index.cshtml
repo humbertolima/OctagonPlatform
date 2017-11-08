@@ -1,5 +1,4 @@
-﻿@using System.Web.Http.Tracing
-@model IEnumerable<OctagonPlatform.Models.Terminal>
+﻿@model IEnumerable<OctagonPlatform.Models.Terminal>
 @*@Styles.Render("~/Octagon/assets/css/cosmo.css")*@
 @{
     ViewBag.Title = "Index";
@@ -8,25 +7,32 @@
 <div class="container" style="padding-bottom: 20px">
     <div class="row">
         <div class="col-md-6" style="width: 200px;">
-            <h1 class="page-header" style="color: #859298; font-size:30px;"><i class="fa fa-desktop" style="font-size:25px;color:#859298"></i> Terminals</h1>
+            <h1 class="page-header" style="color: #859298; font-size: 30px;">
+                <i class="fa fa-desktop" style="color: #859298; font-size: 25px;"></i>
+                Terminals
+            </h1>
 
-            @Html.ActionLink(
-            linkText: "Add",
-            actionName: "Create",
-            controllerName: "Terminals",
-            routeValues: new
-            {
-                partnerId = int.Parse(Session["partnerId"].ToString())
-            },
-            htmlAttributes: new { @class = "btn btn-primary" }
-            )
-            </div>
-            <div class="col-md-6">
-                <p>
-                    <button type="button" class="btn btn-default btn-sm" style="margin-top: 45px;">
-                        <span class="fa fa-plus-circle" style="font-size: 17px;"></span> Add
-                    </button>
-                </p>
+            @* @Html.ActionLink(
+    linkText: "Add",
+    actionName: "Create",
+    controllerName: "Terminals",
+    routeValues: new
+    {
+        partnerId = int.Parse(Session["partnerId"].ToString())
+    },
+    htmlAttributes: new { @class = "btn btn-primary" }
+    ) *@
+        </div>
+        <div class="col-md-6" style="margin-top: 43px;">
+            <a type="button" href="@Url.Action("Create", "Terminals",
+                                       new
+                                       {
+                                           partnerId = int.Parse(Session["partnerId"].ToString())
+                                       })"
+               class="btn btn-default btn-sm">
+                <span class="fa fa-plus-circle"></span>
+                Add
+            </a>
         </div>
     </div>
     <br>
@@ -37,39 +43,39 @@
 
     <table id="terminals" class="table table-striped table-hover table-bordered">
         <thead class="thead-blue">
-            <tr>
-                <th>ID</th>
-                <th>Partner</th>
-                <th>Location</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <!--          <th>Country</th>
-                <th>City</th>
-                <th>State</th> -->
-                <th>Status</th>
-                <th>Balance</th>
-                <th>Edit</th>
-                <th>Delete</th>
-                <!--          <th>Details</th>         -->
+        <tr>
+            <th>ID</th>
+            <th>Partner</th>
+            <th>Location</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <!-- <th>Country</th>
+            <th>City</th>
+            <th>State</th> -->
+            <th>Status</th>
+            <th>Balance</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <!-- <th>Details</th> -->
 
-            </tr>
+        </tr>
         </thead>
 
         <tbody id="listOfTerminals">
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.ActionLink(item.TerminalId, "Details", new { id = item.Id })</td>
-                    <td>@item.Partner.BusinessName</td>
-                    <td>@item.LocationType.Name</td>
-                    <td>@item.Address1, @item.City.Name, @item.State.Name, @item.Zip</td>
-                    <td>@item.Phone</td>
-                    @*    <td>@item.Country.Name</td>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.TerminalId, "Details", new {id = item.Id})</td>
+                <td>@item.Partner.BusinessName</td>
+                <td>@item.LocationType.Name</td>
+                <td>@item.Address1, @item.City.Name, @item.State.Name, @item.Zip</td>
+                <td>@item.Phone</td>
+                @*    <td>@item.Country.Name</td>
                         <td>@item.City.Name</td>
                         <td>@item.State.Name</td> *@
-                    <td>
-                        @if (item.Status.ToString().Equals("Active"))
+                <td>
+                    @if (item.Status.ToString().Equals("Active"))
                     {
                         <strong class="text-success">
                             @item.Status
@@ -90,31 +96,29 @@
                 </td>
                 <td>
                     @if (item.Balance.ToString().Equals(""))
-                {
-                    <p>$0.00</p>
-                }
-                else
-                {
-
-                    <p>$@item.Balance</p>
-                }
-            </td>
-            <td>
-                <i class="fa fa-pencil" style="font-size: 16px; color: darkblue"></i> @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-            </td>
-            <td>
-                @*  <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
-                <i class="fa fa-trash" style="font-size: 16px; color: red"></i><button type="button" style="margin: -2px;" value="@item.Id" id="deleteItem" class="btn-link" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
-            </td>
-            @*  <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td> *@
-        </tr>
-            }
+                    {
+                        <p>$0.00</p>
+                    }
+                    else
+                    {
+                        <p>$@item.Balance</p>
+                    }
+                </td>
+                <td>
+                    <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i> @Html.ActionLink("Edit", "Edit", new {id = item.Id})
+                </td>
+                <td>
+                    @*  <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
+                    <i class="fa fa-trash" style="color: red; font-size: 16px;"></i><button type="button" style="margin: -2px;" value="@item.Id" id="deleteItem" class="btn-link" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
+                </td>
+                @*  <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td> *@
+            </tr>
+        }
         </tbody>
 
     </table>
 
 </div>
-
 
 
 @Html.Partial("Modals/DeleteTerminalModal")
@@ -126,9 +130,9 @@
 
         var jQuery_1_10_2 = $.noConflict(true);
 
-       jQuery_1_10_2(function() {
+        jQuery_1_10_2(function() {
             $("#terminals").DataTable();
-        }); 
+        });
     </script>
 
     <script>
@@ -140,4 +144,3 @@
         });
     </script>
 }
-
