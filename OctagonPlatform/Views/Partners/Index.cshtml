@@ -7,8 +7,10 @@
 
 
 <div class="container" style="padding-bottom: 20px">
-    <h1 class="page-header"style="color: #859298; font-size:30px;"> <i class="fa fa-group" style="font-size:25px;color:#859298"></i> Partners</h1>
-    @Html.ActionLink(
+    <div class="row">
+        <div class="col-md-6" style="width: 178px;">
+            <h1 class="page-header" style="color: #859298; font-size:30px;"> <i class="fa fa-group" style="font-size:25px;color:#859298"></i> Partners</h1>
+            @Html.ActionLink(
         "Add Partner",
         "Create",
         "Partners",
@@ -16,10 +18,18 @@
         {
             partnerId = int.Parse(Session["partnerId"].ToString())
         },
-        new {@class = "btn btn-primary"}
+        new { @class = "btn btn-primary" }
         )
-    <hr>
+        </div>
 
+        <div class="col-md-6">
+            <p>
+                <button type="button" class="btn btn-default btn-sm" style="margin-top: 45px;">
+                    <span class="fa fa-plus-circle" style="font-size: 17px;"></span> Add
+                </button>
+            </p>
+        </div>
+    </div>
     <div class="alert-info">
         <h3>
             <strong>@ViewBag.Error</strong>
