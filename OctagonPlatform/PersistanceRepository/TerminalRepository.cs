@@ -146,7 +146,6 @@ namespace OctagonPlatform.PersistanceRepository
                     MakeId = 1,
                     ModelId = 1,
                     CommunicationType = CommunicationType.Communication.TcpIp,
-                    EmvReady = true,
                     WhoInitiates = WhoInitiateDayClsed.Who.Host,
                     SurchargeType = SurchargedBy.SurchargeTypes.Greater
                 };
@@ -294,7 +293,6 @@ namespace OctagonPlatform.PersistanceRepository
                 viewModel.MakeId = 1;
                 viewModel.ModelId = 1;
                 viewModel.CommunicationType = CommunicationType.Communication.TcpIp;
-                viewModel.EmvReady = true;
                 viewModel.WhoInitiates = WhoInitiateDayClsed.Who.Host;
                 return viewModel;
             }

@@ -175,11 +175,6 @@
                             @Html.ValidationMessageFor(m => m.CommunicationType)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.EmvReady, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's EMV" })
-                            <i>@Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.EmvReady)
-                    </div>
-                    <div class="form-group">
                         @Html.LabelFor(m => m.MachineSerialNumber, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Serial Number" })
                             @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "Serial Number, example: 1117060030", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.MachineSerialNumber)
@@ -232,24 +227,9 @@
                             @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.InstalledDate, htmlAttributes: new { data_toggle = "tooltip", title = "Installation Date" })
-                            <i>@Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.InstalledDate)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LoadedBy, htmlAttributes: new { data_toggle = "tooltip", title = "Person who loaded the terminal" })
-                            <i>@Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.LoadedBy)
-                    </div>
-                    <div class="form-group">
                         @Html.LabelFor(m => m.Balance, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Current Balance" })
                             <i>@Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.Balance)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.MinAmmountCash, htmlAttributes: new { data_toggle = "tooltip", title = "Set terminal's minimum cash amount" })
-                        <i>@Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "Minimum Cash Balance", id = "PlaceHolderForm" })</i>
-                        @Html.ValidationMessageFor(m => m.MinAmmountCash)
                     </div>
                     
               <!--    <div class="form-group">

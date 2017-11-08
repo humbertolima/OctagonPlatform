@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
@@ -88,10 +87,6 @@ namespace OctagonPlatform.Models
         public ICollection<User> Users { get; set; }
 
         [Required]
-        [Display(Name = "Emv is Ready")]
-        public bool EmvReady { get; set; }
-
-        [Required]
         [Display(Name = "Machine Serial Number")]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
@@ -115,15 +110,6 @@ namespace OctagonPlatform.Models
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
         public bool Deleted { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Installation Date")]
-        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
-        public DateTime? InstalledDate { get; set; }
-
-        [Display(Name = "Loaded By?")]
-        public string LoadedBy { get; set; }
 
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }

@@ -44,6 +44,8 @@ namespace OctagonPlatform
 
             container.RegisterType<ITerminalAlertRepositoryAPI, TerminalAlertRepository>();
 
+            container.RegisterType<IInterChangeRepository, InterChangeRepository>();
+
         }
     }
 }
