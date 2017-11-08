@@ -4,7 +4,6 @@
 <div id="getCassetes" class="panel-collapse collapse">
     <div>
         @{ <div>
-                @Model.TerminalId
 
             </div>
             foreach (var item in Model.Cassettes)
@@ -16,11 +15,14 @@
                 <div>
                     @item.Denomination
                 </div>
+                <div>
+                    <button type="button" class="CassettesEdit" btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
+                </div>
             }
         }
-        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettes">Add</button>
+        <button type="button" class="btn btn-info btn-microsoft CassettesEdit" data-toggle="modal" data-target="#myModalCassettesEdit">Add</button>
 
-        <div id="myModalCassettes" class="modal fade" role="dialog">
+        <div id="myModalCassettesEdit" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -28,24 +30,62 @@
                         <h4 class="modal-title">Modal Header</h4>
                     </div>
 
-                    <h3 class="alert-info">Edit Config Alert</h3>
+                    <h3 class="alert-info">Edit</h3>
+
+                    @using (Html.BeginForm("SetCassettes", "Terminals"))
+            {
+                    @Model
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
+
+                    <p class="alert alert-danger">
+                        @ViewBag.Error
+                    </p>
+                    <div class="form-group">
+                        @Html.TextBox("denomination")
+                    </div>
+                    <div class="form-group">
+                        @Html.CheckBox("AutoRecord")Auto Record
+                        @Html.ValidationMessage("AutoRecord")
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalCassettesAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit</h3>
 
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
             {
                         @Model
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m => m.TerminalId)
+                        <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
+
                         <p class="alert alert-danger">
-                            All fields are <strong>required.</strong>
                             @ViewBag.Error
-                            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
                         </p>
                         <div class="form-group">
-                            @*@Html.LabelFor(m => m.Cassettes)
-                                @Html.TextBoxFor(m => m.Cassettes, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
-                                @Html.ValidationMessageFor(m => m.Cassettes)*@
-                        </div>
+                            <input type="text" id="denomination" name="TerminalId" value="">
 
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="autoRecord" name="TerminalId" value="@Model.Id">
+
+                        </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="reset" class="btn btn-default">Cancel</button>
