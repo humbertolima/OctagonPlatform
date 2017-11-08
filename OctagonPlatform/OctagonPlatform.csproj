@@ -213,6 +213,7 @@
     <Compile Include="Controllers\DisputesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterChangeController.cs" />
     <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
@@ -641,6 +642,10 @@
     <Compile Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.Designer.cs">
       <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs" />
+    <Compile Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.Designer.cs">
+      <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -670,7 +675,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
@@ -682,6 +687,7 @@
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
@@ -719,6 +725,7 @@
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
+    <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
@@ -1038,6 +1045,7 @@
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
     <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Octagon\assets\css\cosmo.css" />
     <Content Include="Octagon\assets\css\Dashboard.css" />
     <Content Include="Octagon\assets\css\Footer-Basic.css" />
     <Content Include="Octagon\assets\css\Map-Clean.css" />
@@ -1058,6 +1066,7 @@
     <Content Include="Octagon\assets\img\1.jpg" />
     <Content Include="Octagon\assets\img\2.jpg" />
     <Content Include="Octagon\assets\img\3.jpg" />
+    <Content Include="Octagon\assets\img\404.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
     <Content Include="Octagon\assets\img\carousel2.jpg" />
     <Content Include="Octagon\assets\img\carousel3.jpg" />
@@ -1507,6 +1516,7 @@
     <Content Include="Views\Error\ServiceUnavailableError.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
+    <Content Include="Views\InterChange\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1806,6 +1816,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.resx">
       <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.resx">
+      <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

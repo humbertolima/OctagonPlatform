@@ -1,7 +1,5 @@
 ﻿using OctagonPlatform.Helpers;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -90,10 +88,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         public int Zip { get; set; }
 
         [Required]
-        [Display(Name = "Emv")]
-        public bool EmvReady { get; set; }
-
-        [Required]
         [Display(Name = "Serial")]
         [Index(IsUnique = true)]
         [StringLength(50)]
@@ -129,20 +123,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Cryptocurrency Fee")]
         public double CryptoPercentChargeAmount { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Installation Date")]
-        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
-        public DateTime? InstalledDate { get; set; }
-
-        [Display(Name = "Loaded By?")]
-        public string LoadedBy { get; set; }
-
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }
-
-        [DataType(DataType.Currency)]
-        [Display(Name = "Min Cash")]
-        public double? MinAmmountCash { get; set; }
+        
     }
 }

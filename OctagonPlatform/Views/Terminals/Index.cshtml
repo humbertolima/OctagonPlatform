@@ -1,7 +1,6 @@
 ﻿@using System.Web.Http.Tracing
 @model IEnumerable<OctagonPlatform.Models.Terminal>
-@*@Styles.Render("~/Content/bootstrap-lumen.css")*@ 
-
+@*@Styles.Render("~/Octagon/assets/css/cosmo.css")*@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
@@ -10,14 +9,14 @@
     <div class="buttonterminal">
         <h1 class="page-header" style="color: #859298; font-size:30px;"> <i class="fa fa-desktop" style="font-size:25px;color:#859298"></i> Terminals</h1>
         @Html.ActionLink(
-            linkText: "Add Terminal",
+            linkText: "Add",
             actionName: "Create",
             controllerName: "Terminals",
             routeValues: new
             {
                 partnerId = int.Parse(Session["partnerId"].ToString())
             },
-            htmlAttributes: new {@class= "btn btn-primary" }
+            htmlAttributes: new {@class= "btn btn-primary"}
             )
     </div>
     <br>
@@ -26,22 +25,22 @@
         <strong>@ViewBag.Error</strong>
     </div>
     
-    <table id="terminals" class="table table-striped table-bordered">
-        <thead>
+    <table id="terminals" class="table table-striped table-hover table-bordered">
+        <thead class="thead-blue">
         <tr>
             <th>ID</th>
             <th>Partner</th>
             <th>Location</th>
             <th>Address</th>
             <th>Phone</th>
-  <!--          <th>Country</th>
+            <!--          <th>Country</th>
             <th>City</th>
             <th>State</th> -->
             <th>Status</th>
             <th>Balance</th>
             <th>Edit</th>
             <th>Delete</th>
-  <!--          <th>Details</th>         -->
+            <!--          <th>Details</th>         -->
 
         </tr>
         </thead>
@@ -101,6 +100,7 @@
         </tbody>
 
     </table>
+
 </div>
 
 @Html.Partial("Modals/DeleteTerminalModal")
@@ -112,9 +112,9 @@
 
         var jQuery_1_10_2 = $.noConflict(true);
 
-        jQuery_1_10_2(function() {
+       jQuery_1_10_2(function() {
             $("#terminals").DataTable();
-        });
+        }); 
     </script>
 
     <script>

@@ -6,7 +6,7 @@
 }
 <div class="terminalsAdd">
     <br>
-    <h3 style="color: #859298; font-size:30px; "> <i class="fa fa-desktop" style="font-size:25px;color:#859298"></i>Create Terminal</h3>
+    <h3 style="color: #859298; font-size:30px; "> <i class="fa fa-desktop" style="font-size:25px;color:#859298"></i> Create Terminal</h3>
     <hr style="width: 42%;margin-left: -1px;">
     @using (Html.BeginForm("Create", "Terminals", FormMethod.Post, new { @class = "form-horizontal" }))
     {
@@ -76,40 +76,40 @@
                     <div> <h4 style="color: #1bacfb; font-size:25px; text-align:left"> <i class="fa fa-globe" style="font-size:25px;color:#1bacfb"></i> General Info</h4></div>
                     <hr style="width: 87%;margin-left: -15px;">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.PartnerId, new { @class = "" })
+                        @Html.LabelFor(m => m.PartnerId, htmlAttributes: new { data_toggle = "tooltip", title = "Partner of the Terminal" })
                            <i>@Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.PartnerId)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Status, new { @class = "" })
+                        @Html.LabelFor(m => m.Status, htmlAttributes: new { data_toggle = "tooltip", title = "Status of the terminal" })
                        
                             @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Status)
                         
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Address1, new { @class = "" })
+                        @Html.LabelFor(m => m.Address1, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Location" })
                             <i>@Html.TextBoxFor(m => m.Address1, new { @class = "form-control", placeholder = "124 SW 105 Ave", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.Address1)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Address2, new { @class = "" })
+                        @Html.LabelFor(m => m.Address2, htmlAttributes: new { data_toggle = "tooltip", title = "Optional" })
                             <i>@Html.TextBoxFor(m => m.Address2, new { @class = "form-control", autofocus = "autofocus", placeholder = "Apto 203", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.Address2)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Zip, new { @class = "" })
+                        @Html.LabelFor(m => m.Zip, htmlAttributes: new { data_toggle = "tooltip", title = "Zip Code" })
                             <i>@Html.TextBoxFor(m => m.Zip, new { @class = "form-control", autofocus = "autofocus", placeholder = "33181", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.Zip)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.LocationTypeId, new { @class = "" })
+                        @Html.LabelFor(m => m.LocationTypeId, htmlAttributes: new { data_toggle = "tooltip", title = "Type of Business" })
                             <i>@Html.DropDownListFor(m => m.LocationTypeId, new SelectList(Model.LocationTypes, "Id", "Name"), "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.LocationTypeId)
                     </div>
                     <div class="form-group">
                         <div id="Countries">
-                            <label  for="Countries">Country</label>
+                            <label  for="Countries" data-toggle="tooltip" title="Country">Country</label>
                                 <select required id="CountryId" name="CountryId" class="form-control">
                                     <option value="231">United States</option>
                                     @foreach (var item in Model.Countries)
@@ -124,7 +124,7 @@
                     </div>
                     <div class="form-group">
                         <div id="States">
-                            <label for="States">State</label>
+                            <label for="States" data-toggle="tooltip" title="State">State</label>
                                 <select required id="StatesId" name="StateId" class="form-control">
                                     <option value="3930">Florida</option>
                                     @foreach (var item in Model.States)
@@ -138,7 +138,7 @@
                     </div>
                     <div class="form-group">
                         <div id="Cities">
-                            <label  for="Cities">City</label>
+                            <label for="Cities"  data-toggle="tooltip" title="City">City</label>
                                 <select id="CitiesId" name="CityId" class="form-control">
                                     <option value="43769">Miami</option>
                                     @foreach (var item in Model.Cities)
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.Phone, new { @class = "" })
+                        @Html.LabelFor(m => m.Phone, htmlAttributes: new { data_toggle = "tooltip", title = "Phone Number" })
                             @Html.TextBoxFor(m => m.Phone, new { @class = "form-control phone", autofocus = "autofocus", placeholder = "(786) 555 5555", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.Phone)
                     </div>
@@ -160,42 +160,37 @@
                     <div> <h4 style="color: #1bacfb; font-size:25px; text-align:left"> <i class="fa fa-desktop" style="font-size:23px;color:#1bacfb"></i> Terminal Info</h4></div>
                     <hr style="width: 87%;margin-left: -15px;">
                     <div class="form-group">
-                        @Html.LabelFor(m => m.MakeId, new { @class = "" })
+                        @Html.LabelFor(m => m.MakeId, htmlAttributes: new { data_toggle = "tooltip", title = "Manufacturer" })
                             <i>@Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Makes, "Id", "Name"), "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.MakeId)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.ModelId, new { @class = "" })
+                        @Html.LabelFor(m => m.ModelId, htmlAttributes: new { data_toggle = "tooltip", title = "Model of the terminal" })
                             <i>@Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Models, "Id", "Name"), "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.ModelId)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CommunicationType, new { @class = "" })
+                        @Html.LabelFor(m => m.CommunicationType, htmlAttributes: new { data_toggle = "tooltip", title = "Network Type" })
                            <i>@Html.EnumDropDownListFor(m => m.CommunicationType, "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.CommunicationType)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.EmvReady, new { @class = "" })
-                            <i>@Html.TextBoxFor(m => m.EmvReady, new { @class = "form-control", autofocus = "autofocus", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.EmvReady)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.MachineSerialNumber, new { @class = "" })
+                        @Html.LabelFor(m => m.MachineSerialNumber, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Serial Number" })
                             @Html.TextBoxFor(m => m.MachineSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "Serial Number, example: 1117060030", id = "PlaceHolderForm" })
                             @Html.ValidationMessageFor(m => m.MachineSerialNumber)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.VeppSerialNumber, new { @class = "" })
+                        @Html.LabelFor(m => m.VeppSerialNumber, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal Veep Number" })
                             <i>@Html.TextBoxFor(m => m.VeppSerialNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "Veep Serial Number, example: 1117060030", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.VeppSerialNumber)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SoftwareVersion, new { @class = "" })
+                        @Html.LabelFor(m => m.SoftwareVersion, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Software" })
                             <i>@Html.TextBoxFor(m => m.SoftwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.SoftwareVersion)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.FimwareVersion, new { @class = "" })
+                        @Html.LabelFor(m => m.FimwareVersion, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Firmware" })
                             <i>@Html.TextBoxFor(m => m.FimwareVersion, new { @class = "form-control", autofocus = "autofocus", placeholder = "V301.1.1", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.FimwareVersion)
                     </div>
@@ -207,50 +202,48 @@
                     <hr style="width: 87%;margin-left: -15px;">
               
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SurchargeAmountFee, new { @class = "" })
+                        @Html.LabelFor(m => m.SurchargeAmountFee, htmlAttributes: new { data_toggle = "tooltip", title = "Transaction Fee" })
                             <i>@Html.TextBoxFor(m => m.SurchargeAmountFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "Surcharge AMOUNT Fee Per Transaction", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.SurchargeAmountFee)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SurchargePercentageFee, new { @class = "" })
+                        @Html.LabelFor(m => m.SurchargePercentageFee, htmlAttributes: new { data_toggle = "tooltip", title = "Surcharge Fee in Percentage" })
                             <i>@Html.TextBoxFor(m => m.SurchargePercentageFee, new { @class = "form-control", autofocus = "autofocus", placeholder = "Surchage PERCENTAGE Fee per transaction", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.SurchargePercentageFee)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.SurchargeType, new { @class = "" })
+                        @Html.LabelFor(m => m.SurchargeType, htmlAttributes: new { data_toggle = "tooltip", title = "Surcharge Type" })
                             <i>@Html.EnumDropDownListFor(m => m.SurchargeType, "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.SurchargeType)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.WhoInitiates, new { @class = "" })
+                        @Html.LabelFor(m => m.WhoInitiates, htmlAttributes: new { data_toggle = "tooltip", title = "The one who initates end of the day" })
                             <i>@Html.EnumDropDownListFor(m => m.WhoInitiates, "", new { @class = "form-control" })</i>
                             @Html.ValidationMessageFor(m => m.WhoInitiates)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CryptoPercentChargeAmount, new { @class = "" })
+                        @Html.LabelFor(m => m.CryptoPercentChargeAmount, htmlAttributes: new { data_toggle = "tooltip", title = "Cryptocurrency Transaction Fee" })
                             <i>@Html.TextBoxFor(m => m.CryptoPercentChargeAmount, new { @class = "form-control", autofocus = "autofocus", placeholder = "Cryptocurrency Percent Fee", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.CryptoPercentChargeAmount)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.InstalledDate, new { @class = "" })
-                            <i>@Html.TextBoxFor(m => m.InstalledDate, "{0:d MMM yyyy}", new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.InstalledDate)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LoadedBy, new { @class = "" })
-                            <i>@Html.TextBoxFor(m => m.LoadedBy, new { @class = "form-control", autofocus = "autofocus", placeholder = "Leo", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.LoadedBy)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Balance, new { @class = "" })
+                        @Html.LabelFor(m => m.Balance, htmlAttributes: new { data_toggle = "tooltip", title = "Terminal's Current Balance" })
                             <i>@Html.TextBoxFor(m => m.Balance, new { @class = "form-control", autofocus = "autofocus", placeholder = "1500", id = "PlaceHolderForm" })</i>
                             @Html.ValidationMessageFor(m => m.Balance)
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.MinAmmountCash, new { @class = "" })
-                            <i>@Html.TextBoxFor(m => m.MinAmmountCash, new { @class = "form-control", autofocus = "autofocus", placeholder = "Minimum Cash Balance", id = "PlaceHolderForm" })</i>
-                            @Html.ValidationMessageFor(m => m.MinAmmountCash)
-                    </div>
+                    
+              <!--    <div class="form-group">
+                        <label class="control-label">Input addons</label>
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputAmount">Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-addon">$</div>
+                                <input class="form-control" id="exampleInputAmount" placeholder="Amount" type="text">
+                                <div class="input-group-addon">.00</div>
+                            </div>
+                        </div>
+                    </div>   --> 
+
                 </div>
             </div>
 
@@ -273,4 +266,11 @@
     <script type="text/javascript">
         $('.phone').mask('(999) 999-9999');
     </script>
+    <!--Tip script-->
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <!--END of tip script-->
 }
