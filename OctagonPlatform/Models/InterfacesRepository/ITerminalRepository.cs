@@ -15,7 +15,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
 
-        Terminal SetCassettes(bool autoRecord, int denomination, int terminalId);
+        Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
+
+        Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
 
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 

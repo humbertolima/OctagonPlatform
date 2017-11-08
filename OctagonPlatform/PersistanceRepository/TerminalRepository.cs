@@ -423,7 +423,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal SetCassettes(bool autoRecord, int denomination, int terminalId)
+        public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
             {
@@ -440,8 +440,26 @@ namespace OctagonPlatform.PersistanceRepository
                 //pendiente
                 throw;
             }
+        }
+        public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
+        {
+            try
+            {
+                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                if (terminal != null)
+                {
+                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
+                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).AutoRecord = autoRecord;
 
-
+                    Edit(terminal);
+                }
+                return terminal;
+            }
+            catch (Exception)
+            {
+                //pendiente
+                throw;
+            }
         }
     }
 }

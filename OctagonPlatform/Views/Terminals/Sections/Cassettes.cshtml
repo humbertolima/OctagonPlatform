@@ -9,6 +9,9 @@
             foreach (var item in Model.Cassettes)
             {
                 <div>
+                    @item.Id
+                </div>
+                <div>
                     @item.AutoRecord
                 </div>
 
@@ -20,8 +23,8 @@
                 </div>
             }
         }
-        <button type="button" class="btn btn-info btn-microsoft CassettesEdit" data-toggle="modal" data-target="#myModalCassettesEdit">Add</button>
-
+        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
+@*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
         <div id="myModalCassettesEdit" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -34,26 +37,28 @@
 
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
             {
-                    @Model
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("cassetteId")
+                        <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
 
-                    <p class="alert alert-danger">
-                        @ViewBag.Error
-                    </p>
-                    <div class="form-group">
-                        @Html.TextBox("denomination")
-                    </div>
-                    <div class="form-group">
-                        @Html.CheckBox("AutoRecord")Auto Record
-                        @Html.ValidationMessage("AutoRecord")
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                        <input type="hidden" id="cassetteId" name="cassetteId" >
+
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.Cassettes.FirstOrDefault(x => x.TerminalId == Model.Id).Denomination)
                         </div>
-                    </div>
+                        <div class="form-group">
+                            @Html.CheckBox("AutoRecord")Auto Record
+                            @Html.ValidationMessage("AutoRecord")
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
@@ -71,30 +76,55 @@
 
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
             {
-                        @Model
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
+                    @Model
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
 
-                        <p class="alert alert-danger">
-                            @ViewBag.Error
-                        </p>
-                        <div class="form-group">
-                            <input type="text" id="denomination" name="TerminalId" value="">
+                    <p class="alert alert-danger">
+                        @ViewBag.Error
+                    </p>
+                    <div class="form-group">
+                        <input type="text" id="denomination" name="denomination" value="">
 
-                        </div>
-                        <div class="form-group">
-                            <input type="checkbox" id="autoRecord" name="TerminalId" value="@Model.Id">
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="autoRecord" name="autoRecord">
 
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
+                    </div>
                     }
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+<script>
+    $(document).on("click", ".CassettesEdit", function () {
+        var passedID = $(this).data('id');
+        $("#myModalCassettesEdit #cassetteId").val(passedID);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

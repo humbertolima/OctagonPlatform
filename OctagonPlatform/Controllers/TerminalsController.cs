@@ -41,9 +41,22 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SetCassettes(bool autoRecord, int denomination, int terminalId)
+        public PartialViewResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
         {
-            var terminal = _repository.SetCassettes(autoRecord, denomination, terminalId);
+            bool isAutoRecord;
+
+            if (!String.IsNullOrEmpty(autoRecord) ? isAutoRecord = true : isAutoRecord = false) ;
+
+            Models.Terminal terminal = new Models.Terminal();
+
+            if (cassetteId != null && cassetteId > 0)    //si viene el ID del cassette es porque se le dio al boton editar.
+            {
+                terminal = _repository.CassettesEdit(isAutoRecord, denomination, terminalId, Convert.ToInt32(cassetteId));
+            }
+            else
+            {
+                terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
+            }
             return PartialView("Details", terminal);
         }
 
