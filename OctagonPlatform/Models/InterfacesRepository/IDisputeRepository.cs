@@ -9,5 +9,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
     public interface IDisputeRepository
     {
         IEnumerable<Dispute> GetAllDispute();
+
+        Transaction GetTerminalTransaction(string terminalId);
     }
 }

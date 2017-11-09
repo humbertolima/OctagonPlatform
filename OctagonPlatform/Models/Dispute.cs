@@ -1,6 +1,7 @@
 ﻿using OctagonPlatform.Helpers;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
@@ -21,7 +22,9 @@ namespace OctagonPlatform.Models
 
         [Required]
         public int TransactionId { get; set; }
-        public TransactionStatistic Transaction { get; set; }
+
+        [NotMapped]
+        public Transaction Transaction { get; set; }
 
         public string Network { get; set; }
 

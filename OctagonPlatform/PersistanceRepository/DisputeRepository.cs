@@ -1,8 +1,10 @@
-﻿using OctagonPlatform.Models;
+﻿using Newtonsoft.Json;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
@@ -11,7 +13,19 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public IEnumerable<Dispute> GetAllDispute()
         {
-            throw new NotImplementedException();
+            var disputes = Table.ToList();
+
+            return disputes;
+        }
+
+        public Transaction GetTerminalTransaction(string terminalId)
+        {
+            //pendiente pasarle por parametro el secuencialnumber
+            var url = "http://apiatm.azurewebsites.net/api/key/getbyterminal/" + terminalId +"/"+0088;
+            var json = new WebClient().DownloadString(url);
+            var transaction = JsonConvert.DeserializeObject<Transaction>(json);
+
+            return transaction;
         }
     }
 }
