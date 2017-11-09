@@ -120,6 +120,14 @@ namespace OctagonPlatform
 
 
             #endregion
+
+            #region Dispute
+
+            CreateMap<Dispute, DisputeViewModel>();
+
+            CreateMap<DisputeViewModel, Dispute>();
+            //Dto to Domain
+            #endregion
         }
 
     }

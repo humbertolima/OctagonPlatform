@@ -646,6 +646,10 @@
     <Compile Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.Designer.cs">
       <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711092202573_UpdateDisputeTransaction.cs" />
+    <Compile Include="Migrations\201711092202573_UpdateDisputeTransaction.Designer.cs">
+      <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -675,6 +679,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
@@ -1820,6 +1825,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.resx">
       <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092202573_UpdateDisputeTransaction.resx">
+      <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

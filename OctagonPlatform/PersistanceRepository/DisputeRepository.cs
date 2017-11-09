@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using AutoMapper;
+using Newtonsoft.Json;
 using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class DisputeRepository : GenericRepository<Dispute>, IDisputeRepository
     {
+
+
         public IEnumerable<Dispute> GetAllDispute()
         {
             var disputes = Table.ToList();
@@ -18,14 +22,32 @@ namespace OctagonPlatform.PersistanceRepository
             return disputes;
         }
 
-        public Transaction GetTerminalTransaction(string terminalId)
+        public DisputeViewModel GetTerminalTransaction(string terminalId)
         {
             //pendiente pasarle por parametro el secuencialnumber
-            var url = "http://apiatm.azurewebsites.net/api/key/getbyterminal/" + terminalId +"/"+0088;
+            var url = "http://apiatm.azurewebsites.net/api/request/transactions/" + "NH061617" + "/" + "0088";
             var json = new WebClient().DownloadString(url);
             var transaction = JsonConvert.DeserializeObject<Transaction>(json);
 
-            return transaction;
+            var viewModel = new DisputeViewModel() { Transaction = transaction };
+
+            return viewModel;
+        }
+
+        public void DisputeAdd(DisputeViewModel viewModel)
+        {
+            try
+            {
+                var dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
+
+                Table.Add(dispute);
+                Save();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

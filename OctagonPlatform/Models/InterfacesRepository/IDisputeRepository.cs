@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OctagonPlatform.Models.FormsViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<Dispute> GetAllDispute();
 
-        Transaction GetTerminalTransaction(string terminalId);
+        DisputeViewModel GetTerminalTransaction(string terminalId);
+
+        void DisputeAdd(DisputeViewModel viewModel);
     }
 }
