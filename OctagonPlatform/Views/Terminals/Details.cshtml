@@ -22,7 +22,7 @@
 <div class="row" id="detailterminal">
 
     <div class="col-md-6">
-        <div class="panel-group" style="width: 100%;">
+        @*<div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
                     <h3 class="texth3"><i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
@@ -31,8 +31,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
+        <div class="panel-group" style="width: 100%;">
+            <div class="panel panel-default">
+                <div id="PartnerDetailButtons" class="panel-heading">
+                    <h3 class="texth3">
+                        @Html.Partial("Sections/ConfigNotification", Model)
+                    </h3>
 
+                </div>
+            </div>
+        </div>
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">

@@ -251,6 +251,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
+                    .Include(x => x.WorkingHours)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
                 return terminal;
