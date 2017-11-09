@@ -26,7 +26,8 @@ namespace OctagonPlatform.Models
         [DataType(DataType.Currency)]
         public double Ammount { get; set; }
 
-        public string CalculationMethod { get; set; }
+        [Required]
+        public CalculationMethod.Method CalculationMethod { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

@@ -229,6 +229,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccountType.cs" />
+    <Compile Include="Helpers\CalculationMethod.cs" />
     <Compile Include="Helpers\CheckSurchargeEntry.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
