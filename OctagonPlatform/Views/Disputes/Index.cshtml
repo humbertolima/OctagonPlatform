@@ -6,7 +6,17 @@
 }
 
 <h2>Index</h2>
-
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p><p>
+    @Html.ActionLink("Create New", "Create")
+</p><p>
+    @Html.ActionLink("Create New", "Create")
+</p><p>
+    @Html.ActionLink("Create New", "Create")
+</p><p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -16,7 +26,7 @@
             @Html.DisplayNameFor(model => model.Terminal.TerminalId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Transaction.TransactionType)
+            @Html.DisplayNameFor(model => model.Transaction)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Viewed)
@@ -84,7 +94,7 @@
             @Html.DisplayFor(modelItem => item.Terminal.TerminalId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Transaction.TransactionType)
+            @Html.DisplayFor(modelItem => item.Transaction)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Viewed)

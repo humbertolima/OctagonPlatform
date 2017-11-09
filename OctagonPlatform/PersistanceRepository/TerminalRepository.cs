@@ -251,6 +251,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
+                    .Include(x => x.WorkingHours)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
                 return terminal;
@@ -275,6 +276,30 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
+        public void CassettesDelete(int cassetteId)
+        {
+            try
+            {
+                var cassette = Context.Cassettes.Single(x => x.Id == cassetteId);
+
+                Context.Cassettes.Remove(cassette);
+                Context.SaveChanges();
+                Context.Dispose();
+
+                //var terminal = Table.Include(x => x.Cassettes).SingleOrDefault(c => c.Cassettes.FirstOrDefault(p => p.Id == cassetteId).Id ==cassetteId);
+                //if (terminal == null) throw new Exception("Terminal not found. ");
+
+                //var cassette = terminal.Cassettes.FirstOrDefault(x => x.Id == cassetteId);
+                //terminal.Cassettes.Remove(cassette);
+
+                //Save();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Terminal not found.");
+            }
+        }
+
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {

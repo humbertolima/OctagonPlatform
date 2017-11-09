@@ -1,13 +1,14 @@
 ﻿using OctagonPlatform.Helpers;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
-namespace OctagonPlatform.Models
+namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class Dispute : ISoftDeleted, IAuditEntity
+    public class DisputeViewModel
     {
-        [Key]
         public int Id { get; set; }
 
         public bool Viewed { get; set; }
@@ -23,7 +24,6 @@ namespace OctagonPlatform.Models
         [Required]
         public int TransactionId { get; set; }
 
-        [NotMapped]
         public Transaction Transaction { get; set; }
 
         public string Network { get; set; }
@@ -37,16 +37,5 @@ namespace OctagonPlatform.Models
         public decimal DisputedAmount { get; set; }
 
         public DateTime LastDayToRepresent { get; set; }
-
-        public bool Deleted { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public int? CreatedBy { get; set; }
-        public DateTime? DeletedAt { get; set; }
-        public int? DeletedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
-        public string UpdatedByName { get; set; }
-        public string CreatedByName { get; set; }
-        public string DeletedByName { get; set; }
     }
 }

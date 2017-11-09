@@ -238,6 +238,29 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index");
             }
         }
+        //======================
+        // POST: Terminals/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CassetteDelete(int? cassetteId)
+        {
+            try
+            {
+                if (cassetteId == null)
+                {
+                    ViewBag.Error = "Terminal not found. ";
+                    return View("Error");
+                }
+                _repository.CassettesDelete(Convert.ToInt32(cassetteId));
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+        //======================
 
         [HttpPost]
         public ActionResult Search(string search)
