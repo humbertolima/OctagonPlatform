@@ -24,9 +24,10 @@ namespace OctagonPlatform.Models
         [Required]
         [Display(Name = "Split Ammount")]
         [DataType(DataType.Currency)]
-        public double Ammount { get; set; }
+        public double SplitAmount { get; set; }
 
-        public string CalculationMethod { get; set; }
+        [Required]
+        public CalculationMethod.Method CalculationMethod { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

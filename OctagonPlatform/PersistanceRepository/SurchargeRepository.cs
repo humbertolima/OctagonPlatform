@@ -77,7 +77,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                CheckSurchargeEntry.Check(viewModel.TerminalId, viewModel.Id, viewModel.SplitAmount);
+                CheckSplitAmountsEntry.CheckSurcharge(viewModel.TerminalId, viewModel.Id, viewModel.SplitAmount);
 
                 if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date. ");
 
@@ -99,7 +99,8 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         if (surchargeDefault.Id != surcharge.Id && !surcharge.Deleted)
                             throw new Exception("This Terminal already has this Surcharge account. ");
-                     
+                        if(surcharge.Deleted)
+                            Table.Remove(surchargeDefault);
                     }
                     
 

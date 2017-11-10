@@ -100,34 +100,36 @@ namespace OctagonPlatform
             //Dto to Domain
             CreateMap<SurchargeFormViewModel, Surcharge>().ForMember(c => c.Id, opt => opt.Ignore());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             #endregion
 
-            #region Dispute
 
-            CreateMap<Dispute, DisputeViewModel>();
+            #region InterChange Mapping
 
-            CreateMap<DisputeViewModel, Dispute>();
+            CreateMap<InterChange, InterChangeFormViewModel>();
+
+            CreateMap<InterChangeFormViewModel, InterChangeFormViewModel>();
             //Dto to Domain
+            CreateMap<InterChangeFormViewModel, InterChange>().ForMember(c => c.Id, opt => opt.Ignore());
+
             #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
     }

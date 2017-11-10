@@ -229,7 +229,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AccountType.cs" />
-    <Compile Include="Helpers\CheckSurchargeEntry.cs" />
+    <Compile Include="Helpers\CalculationMethod.cs" />
+    <Compile Include="Helpers\CheckSplitAmountsEntry.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
@@ -650,6 +651,14 @@
     <Compile Include="Migrations\201711092202573_UpdateDisputeTransaction.Designer.cs">
       <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711092257599_UpdatingInterChange.cs" />
+    <Compile Include="Migrations\201711092257599_UpdatingInterChange.Designer.cs">
+      <DependentUpon>201711092257599_UpdatingInterChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.cs" />
+    <Compile Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.Designer.cs">
+      <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -679,6 +688,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
@@ -1523,6 +1533,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
     <Content Include="Views\InterChange\Index.cshtml" />
+    <Content Include="Views\InterChange\InterChangeForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1828,6 +1839,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711092202573_UpdateDisputeTransaction.resx">
       <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092257599_UpdatingInterChange.resx">
+      <DependentUpon>201711092257599_UpdatingInterChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.resx">
+      <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

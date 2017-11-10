@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         InterChangeFormViewModel InterChangeToEdit(int id);
 
-        void SaveSurcharge(InterChangeFormViewModel viewModel, string action);
+        void SaveInterChange(InterChangeFormViewModel viewModel, string action);
 
         InterChange InterChangeDetails(int id);
 
