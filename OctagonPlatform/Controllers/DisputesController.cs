@@ -30,8 +30,6 @@ namespace OctagonPlatform.Controllers
             {
                 var disputeVM = _repository.GetTerminalTransaction(terminalId);
 
-
-
                 if (disputeVM != null) return View("Create", disputeVM);
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");

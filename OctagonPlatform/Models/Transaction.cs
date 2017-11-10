@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OctagonPlatform.Models
 {
-    [NotMapped]
+
     public class Transaction
     {
         public string SequenceNumber { get; set; }

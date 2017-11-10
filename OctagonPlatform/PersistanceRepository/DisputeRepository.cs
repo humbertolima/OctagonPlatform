@@ -27,9 +27,9 @@ namespace OctagonPlatform.PersistanceRepository
             //pendiente pasarle por parametro el secuencialnumber
             var url = "http://apiatm.azurewebsites.net/api/request/transactions/" + "NH061617" + "/" + "0088";
             var json = new WebClient().DownloadString(url);
-            var transaction = JsonConvert.DeserializeObject<Transaction>(json);
+            var transaction = JsonConvert.DeserializeObject<List<Transaction>>(json);
 
-            var viewModel = new DisputeViewModel() { Transaction = transaction };
+            var viewModel = new DisputeViewModel() { Transaction = transaction[0] };
 
             return viewModel;
         }
