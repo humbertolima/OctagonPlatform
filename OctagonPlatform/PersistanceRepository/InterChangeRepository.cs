@@ -75,32 +75,110 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public void SaveSurcharge(InterChangeFormViewModel viewModel, string action)
+        public void SaveInterChange(InterChangeFormViewModel viewModel, string action)
         {
             try
             {
+                CheckSplitAmountsEntry.CheckInterChange(viewModel.TerminalId, viewModel.Id, viewModel.SplitAmount);
 
+                if (viewModel.StartDate > viewModel.StopDate) throw new Exception("Stop Date must be after Start Date. ");
+
+                var interChange = Table.SingleOrDefault(x => x.BankAccountId == viewModel.BankAccountId);
+                if (action == "Edit")
+                {
+                    var interChangeToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
+                    if (interChangeToEdit == null) throw new Exception("InterChange not found. ");
+
+
+
+
+                    if (interChange != null)
+                    {
+                        if (interChange.Id != interChangeToEdit.Id && !interChange.Deleted)
+                            throw new Exception("This Terminal already has this InterChange account. ");
+                        if (interChange.Deleted)
+                            Table.Remove(interChange);
+                    }
+
+
+                    Mapper.Map(viewModel, interChangeToEdit);
+
+                    Edit(interChangeToEdit);
+                }
+                else
+                {
+
+
+
+                    if (interChange != null)
+                    {
+                        if (!interChange.Deleted)
+                            throw new Exception("This Terminal already has this InterChange account. ");
+                        Table.Remove(interChange);
+                    }
+
+
+                    var result = Mapper.Map<InterChangeFormViewModel, InterChange>(viewModel);
+                    Add(result);
+
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                throw new Exception(e.Message + " Could not add InterChange split amount, please check the entered values. ");
             }
         }
 
         public Models.InterChange InterChangeDetails(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var interchange = Table.Where(x => x.Id == id)
+                    .Include(x => x.BankAccount).Include(x => x.Terminal).SingleOrDefault();
+                if(interchange == null) throw new Exception("InterChange not found. ");
+
+                return interchange;
+            }
+            catch (Exception e)
+            {
+               throw new Exception(e.Message + " InterChange not found. ");
+            }
         }
 
         public void DeleteInterChange(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var interchange = Table.Where(x => x.Id == id)
+                    .Include(x => x.BankAccount).Include(x => x.Terminal).SingleOrDefault();
+                if (interchange == null) throw new Exception("InterChange not found. ");
+
+                Delete(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message + " InterChange not found. ");
+            }
         }
 
         public InterChangeFormViewModel InitializeNewInterChangeFormViewModel(InterChangeFormViewModel viewModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (viewModel == null) throw new Exception("Model not found. ");
+
+                viewModel.Terminal = Context.Terminals.SingleOrDefault(x => x.Id == viewModel.TerminalId && !x.Deleted);
+                viewModel.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == viewModel.Terminal.PartnerId).ToList();
+                viewModel.StartDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month,
+                    DateTime.UtcNow.Day + 1);
+                viewModel.StopDate = new DateTime(DateTime.Now.Year + 1, DateTime.Now.Month, DateTime.Now.Day);
+                viewModel.CalculationMethod = CalculationMethod.Method.PerTransaction;
+                return viewModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "InterChange not found. ");
+            }
         }
 
         
