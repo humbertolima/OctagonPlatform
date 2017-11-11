@@ -16,26 +16,26 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-        [HttpPost]
-        public PartialViewResult Index(int? terminalId)
-        {
-            try
-            {
-                if (terminalId == null)
-                {
-                    ViewBag.Error = "InterChange not found. ";
-                    return PartialView("Error");
-                }
-                var interchanges = _repository.GetAllInterChanges((int) terminalId);
-                ViewBag.TerminalId = terminalId;
-                return PartialView(interchanges);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return PartialView("Error");
-            }
-        }
+        //[HttpPost]
+        //public PartialViewResult Index(int? terminalId)
+        //{
+        //    try
+        //    {
+        //        if (terminalId == null)
+        //        {
+        //            ViewBag.Error = "InterChange not found. ";
+        //            return PartialView("Error");
+        //        }
+        //        var interchanges = _repository.GetAllInterChanges((int) terminalId);
+        //        ViewBag.TerminalId = terminalId;
+        //        return PartialView(interchanges);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //        return PartialView("Error");
+        //    }
+        //}
 
         [HttpGet]
         public ActionResult Edit(int? id)

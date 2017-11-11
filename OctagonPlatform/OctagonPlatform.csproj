@@ -1475,7 +1475,6 @@
     <Content Include="Views\Terminals\Sections\Documents.cshtml" />
     <Content Include="Views\Terminals\Sections\Notes.cshtml" />
     <Content Include="Views\Terminals\Sections\Contacts.cshtml" />
-    <Content Include="Views\Terminals\Sections\SurchargeSplits.cshtml" />
     <Content Include="Views\Terminals\Sections\Interchanges.cshtml" />
     <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
     <Content Include="Views\TerminalContacts\Create.cshtml" />
@@ -1532,7 +1531,6 @@
     <Content Include="Views\Error\ServiceUnavailableError.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
-    <Content Include="Views\InterChange\Index.cshtml" />
     <Content Include="Views\InterChange\InterChangeForm.cshtml" />
   </ItemGroup>
   <ItemGroup>

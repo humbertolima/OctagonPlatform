@@ -239,7 +239,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.Contracts)
                     .Include(x => x.Documents)
-                    .Include(x => x.InterChanges)
+                    //.Include(x => x.InterChanges)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
@@ -254,6 +254,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.WorkingHours)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
+
+                terminal.InterChanges = Context.InterChanges.Where(x => x.TerminalId == terminal.Id && !x.Deleted)
+                    .Include(x => x.BankAccount).ToList();
                 return terminal;
             }
             catch (Exception ex)
