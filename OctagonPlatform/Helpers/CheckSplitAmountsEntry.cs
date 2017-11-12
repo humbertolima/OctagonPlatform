@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace OctagonPlatform.Helpers
 {
-    public static class CheckSurchargeEntry
+    public static class CheckSplitAmountsEntry
     {
         
-        public static Exception Check(int terminalId, int surchargeId, double splitAmountFee)
+        public static Exception CheckSurcharge(int terminalId, int surchargeId, double splitAmountFee)
         {
             try
             {
@@ -39,7 +39,31 @@ namespace OctagonPlatform.Helpers
                 if (countPercentFee > 100.00)
                     throw new Exception("Surcharge percent fee biger that the remaining percent fee. ");
 
-                return new Exception("Could not add this Surcharge, please check the entered values. ");
+                return new Exception("Ok");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Please check the entered values. ");
+            }
+        }
+
+        public static Exception CheckInterChange(int terminalId, int interchangeId, double splitAmountFee)
+        {
+            try
+            {
+
+
+                var context = new ApplicationDbContext();
+                var terminal = context.Terminals.Where(x => x.Id == terminalId)
+                    .Include(x => x.InterChanges).SingleOrDefault();
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                var countFee = splitAmountFee + terminal.InterChanges.Where(item => item.Id != interchangeId).Sum(item => item.SplitAmount);
+
+                if (countFee > InterchangeConstants.ClientInterchangeAmount)
+                    throw new Exception("Split amount fee biger that the remaining fee. ");
+
+                return new Exception("Ok");
             }
             catch (Exception ex)
             {

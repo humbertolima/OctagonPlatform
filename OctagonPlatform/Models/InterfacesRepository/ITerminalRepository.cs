@@ -19,6 +19,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
 
+        void CassettesDelete(int cassetteId);
+
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);

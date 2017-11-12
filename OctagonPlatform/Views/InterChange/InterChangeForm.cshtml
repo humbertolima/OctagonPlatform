@@ -1,0 +1,71 @@
+﻿@using OctagonPlatform.Helpers
+@model OctagonPlatform.Models.FormsViewModels.InterChangeFormViewModel
+
+@{
+    ViewBag.Title = "InterChange Form";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h3 class="alert-info">Interchange</h3>
+
+
+@using (Html.BeginForm("Save", "InterChange", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.TerminalId)
+    <div class="form-group">
+        <p class="alert-warning">
+            All fields are <strong>required.</strong>
+            @ViewBag.Error
+            @Html.ValidationSummary(false, "", new { @class = "text-warning" })
+        </p>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.BankAccountId)
+            @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.BankAccountId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.SplitAmount)
+            @Html.TextBoxFor(m => m.SplitAmount, new { @class = "form-control", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(m => m.SplitAmount)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartDate)
+            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", autofocus = "autofocus", @Value = Model.StartDate.ToShortDateString() })
+            @Html.ValidationMessageFor(m => m.StartDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StopDate)
+            @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control", autofocus = "autofocus", @Value = Model.StopDate.ToShortDateString() })
+            @Html.ValidationMessageFor(m => m.StopDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CalculationMethod)
+            @Html.EnumDropDownListFor(m => m.CalculationMethod, "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CalculationMethod)
+        </div>
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+                <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
+
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+
+    
+}
+
+
+
+
+
