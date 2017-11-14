@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OctagonPlatform.Models.Dispute>
+﻿@model IEnumerable<OctagonPlatform.Models.FormsViewModels.DisputeViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -23,10 +23,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Terminal.TerminalId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Transaction)
+            @Html.DisplayNameFor(model => model.TerminalId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Viewed)
@@ -55,36 +52,6 @@
         <th>
             @Html.DisplayNameFor(model => model.LastDayToRepresent)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedByName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedByName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeletedByName)
-        </th>
         <th></th>
     </tr>
 
@@ -92,9 +59,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Terminal.TerminalId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Transaction)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Viewed)
@@ -124,39 +88,10 @@
             @Html.DisplayFor(modelItem => item.LastDayToRepresent)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Deleted)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedAt)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedByName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedByName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeletedByName)
-        </td>
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Represent", "Represent", new { id = item.Id })
         </td>
     </tr>
 }

@@ -8,16 +8,18 @@ namespace OctagonPlatform.Controllers
 {
     public class DisputesController : Controller
     {
-        private readonly IDisputeRepository _repository;
+        private readonly IDisputeRepository _DisputeRepository;
+        private readonly ITerminalRepository _TerminalRepository;
 
-        public DisputesController(IDisputeRepository repository)
+        public DisputesController(IDisputeRepository repository, ITerminalRepository terminalRepository)
         {
-            _repository = repository;
+            _DisputeRepository = repository;
+            _TerminalRepository = terminalRepository;
         }
 
         public ActionResult Index()
         {
-            var disputes = _repository.GetAllDispute();
+            var disputes = _DisputeRepository.GetAllDispute();
             return View(disputes);
         }
 
@@ -28,7 +30,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                var disputeVM = _repository.GetTerminalTransaction(terminalId);
+                var disputeVM = _DisputeRepository.GetTerminalTransaction(terminalId);
 
                 if (disputeVM != null) return View("Create", disputeVM);
                 ViewBag.Error = "Terminal not found. ";
@@ -53,14 +55,14 @@ namespace OctagonPlatform.Controllers
                     return View(viewModel);
                 }
 
-
-                _repository.DisputeAdd(viewModel);
+                viewModel.Terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
+                _DisputeRepository.DisputeAdd(viewModel);
                 return RedirectToAction("Index");
 
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Validation error editing Terminal, "
+                ViewBag.Error = "Validation error Create Dispute, "
                                 + ex.Message;
                 return View(viewModel);
             }

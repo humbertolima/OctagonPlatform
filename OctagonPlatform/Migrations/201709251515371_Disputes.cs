@@ -28,9 +28,7 @@ namespace OctagonPlatform.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Terminals", t => t.TerminalId, cascadeDelete: false)
-                .ForeignKey("dbo.Transactions", t => t.TransactionId, cascadeDelete: false)
-                .Index(t => t.TerminalId)
-                .Index(t => t.TransactionId);
+                .Index(t => t.TerminalId);
             
             AlterColumn("dbo.Terminals", "Balance", c => c.Double());
             AlterColumn("dbo.Terminals", "MinAmmountCash", c => c.Double());
@@ -38,9 +36,7 @@ namespace OctagonPlatform.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Disputes", "TransactionId", "dbo.Transactions");
             DropForeignKey("dbo.Disputes", "TerminalId", "dbo.Terminals");
-            DropIndex("dbo.Disputes", new[] { "TransactionId" });
             DropIndex("dbo.Disputes", new[] { "TerminalId" });
             AlterColumn("dbo.Terminals", "MinAmmountCash", c => c.Int());
             AlterColumn("dbo.Terminals", "Balance", c => c.Int());

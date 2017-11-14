@@ -53,7 +53,19 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
+        public Terminal GetTerminal(string terminalId)
+        {
+            try
+            {
+                var terminal = Table.FirstOrDefault(x =>x.TerminalId == terminalId);
+                return terminal;
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try

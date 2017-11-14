@@ -32,7 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
             var viewModel = new DisputeViewModel() {
                 TerminalId = transaction.FirstOrDefault().TerminalId,
                 SecuenceNumber = transaction.FirstOrDefault().SequenceNumber,
-                TransactionId = transaction.FirstOrDefault().Id,
+                TransacNo = transaction.FirstOrDefault().Id,
             };
 
             return viewModel;
@@ -42,7 +42,8 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
+                var dispute = new Dispute(){ IndexId = viewModel.Terminal.Id };
+                dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
 
                 Table.Add(dispute);
                 Save();

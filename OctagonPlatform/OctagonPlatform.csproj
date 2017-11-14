@@ -659,6 +659,14 @@
     <Compile Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.Designer.cs">
       <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.cs" />
+    <Compile Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.Designer.cs">
+      <DependentUpon>201711141703089_alterFieldTerminalIdByIndexIdDispute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.cs" />
+    <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
+      <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1844,6 +1852,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.resx">
       <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.resx">
+      <DependentUpon>201711141703089_alterFieldTerminalIdByIndexIdDispute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
+      <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

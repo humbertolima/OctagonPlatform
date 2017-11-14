@@ -7,6 +7,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalRepository
     {
+        Terminal GetTerminal(string terminalId);
+
         IEnumerable<Terminal> GetAllTerminals(int partnerId);
 
         KeyManager GetKey(string messagesId);

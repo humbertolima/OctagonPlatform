@@ -23,7 +23,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public string TerminalId { get; set; }
         [Required]
-        public int TransactionId { get; set; }
+        public int TransacNo { get; set; }
 
         public Transaction Transaction { get; set; }
 

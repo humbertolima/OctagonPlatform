@@ -17,14 +17,12 @@ namespace OctagonPlatform.Models
         public string NetworkAdjustmentId { get; set; }
 
         [Required]
-        public int TerminalId { get; set; }
+        public int IndexId { get; set; }
         public Terminal Terminal { get; set; }
 
         [Required]
-        public int TransactionId { get; set; }
+        public int TransacNo { get; set; }
 
-        [NotMapped]
-        public Transaction Transaction { get; set; }
 
         public string Network { get; set; }
 

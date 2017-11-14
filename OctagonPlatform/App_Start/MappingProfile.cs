@@ -113,7 +113,15 @@ namespace OctagonPlatform
 
             #endregion
 
+            #region Dispute
 
+            CreateMap<Dispute, DisputeViewModel>();
+
+            CreateMap<DisputeViewModel, Dispute>();
+            //Dto to Domain
+            //CreateMap<InterChangeFormViewModel, InterChange>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
 
 
 
