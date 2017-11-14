@@ -1,10 +1,12 @@
 ﻿@model OctagonPlatform.Models.Terminal
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active">
+@{
+    Layout = "~/Views/Shared/_LayoutEdits.cshtml";
+}
+
+<div id="getInterchange" class="panel-collapse collapse">
+    
+                <div class="col-md-6" style="margin-top: 20px; margin-bottom: 20px">
                     @Html.ActionLink(
                         linkText: "Add Interchange",
                         actionName: "Create",
@@ -15,83 +17,121 @@
                         },
                         htmlAttributes: null
                         )
-                </li>
-            </ul>
+                </div>  
+@*
+    <p class="alert alert-info">
+        <strong>@ViewBag.Error</strong>
+    </p>
+*@    
 
-        </div>
+    <table id="interchanges" class="table table-striped table-hover table-bordered">
+        <thead class="thead-blue">
+        <tr>
+            <th>BankAccount</th>
+            <th>BankName</th>
+            <th>Split Amount</th>
+            <th>Effective Date</th>
+            <th>Stop Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
 
-    </div>
-</nav>
-
-<p class="alert alert-info">
-    <strong>@ViewBag.Error</strong>
-</p>
-<table class="table table-striped table-hover ">
-    <thead>
-    <tr>
-
-        <th>BankAccount</th>
-        <th>BankName</th>
-        <th>Split Amount</th>
-        <th>Effective Date</th>
-        <th>Stop Date</th>
-
-    </tr>
-    </thead>
-
-    @if (Model != null)
-    {
-
-        foreach (var item in Model.InterChanges)
+        @if (Model != null)
         {
-            <tbody>
-            <tr>
-                <td>@item.BankAccount.NickName</td>
-                <td>@item.BankAccount.BankName</td>
-                <td>@item.SplitAmount</td>
-                <td>@item.StartDate.ToShortDateString()</td>
-                <td>@item.StopDate.ToShortDateString()</td>
-                <td>
-                    <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
-                                                                linkText: "Edit",
-                                                                actionName: "Edit",
-                                                                controllerName: "InterChange",
-                                                                routeValues: new
-                                                                {
-                                                                    id = item.Id
-                                                                },
-                                                                htmlAttributes: null
-                                                                )
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
-                                                                 linkText: "Delete",
-                                                                 actionName: "Delete",
-                                                                 controllerName: "InterChange",
-                                                                 routeValues: new
-                                                                 {
-                                                                     id = item.Id
-                                                                 },
-                                                                 htmlAttributes: null)
-                </td>
 
-            </tr>
+            foreach (var item in Model.InterChanges)
+            {
+                <tbody>
+                <tr>
+                    <td>@item.BankAccount.NickName</td>
+                    <td>@item.BankAccount.BankName</td>
+                    <td>@item.SplitAmount</td>
+                    <td>@item.StartDate.ToShortDateString()</td>
+                    <td>@item.StopDate.ToShortDateString()</td>
+                    <td>
+                        <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i>@Html.ActionLink(
+                                                                    linkText: "Edit",
+                                                                    actionName: "Edit",
+                                                                    controllerName: "InterChange",
+                                                                    routeValues: new
+                                                                    {
+                                                                        id = item.Id
+                                                                    },
+                                                                    htmlAttributes: null
+                                                                    )
+                    </td>
+                    <td>
+                        <i class="fa fa-trash" style="color: red; font-size: 16px;"></i><button type="button" style="margin: -2px;" data-id="@item.Id" id="deleteInterchange" class="btn-link" data-toggle="modal" data-target="#confirmdeleteInterchange">Delete</button>
+                    </td>
+
+                </tr>
 
 
-            </tbody>
+                </tbody>
 
+            }
         }
+
+
+
+    </table>
+    <div id="confirmdeleteInterchange" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Delete Interchange</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this Interchange? </p>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("Delete", "InterChange", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        
+                        @Html.Hidden("terminalId", Model.Id)
+                        @Html.Hidden("id")
+                        <div class="form-group">
+                            <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+        @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+        <script>
+            $(document)("click", "#deleteInterchange", function () {
+                var id = $(this).data('id');
+                $("#confirmdeleteInterchange #id").val(id);
+            });
+        </script>
+
+        <script>
+            var jQuery_1_10_2 = $.noConflict(true);
+
+            jQuery_1_10_2(function() {
+                $("#interchanges").DataTable();
+            });
+        </script>
+        
+
     }
 
 
 
-</table>
 
 
 
-@section Scripts {
-    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-}
 
 
 

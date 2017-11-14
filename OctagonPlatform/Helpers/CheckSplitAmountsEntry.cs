@@ -55,7 +55,7 @@ namespace OctagonPlatform.Helpers
 
                 var context = new ApplicationDbContext();
                 var terminal = context.Terminals.Where(x => x.Id == terminalId)
-                    .Include(x => x.Surcharges).SingleOrDefault();
+                    .Include(x => x.InterChanges).SingleOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 var countFee = splitAmountFee + terminal.InterChanges.Where(item => item.Id != interchangeId).Sum(item => item.SplitAmount);
