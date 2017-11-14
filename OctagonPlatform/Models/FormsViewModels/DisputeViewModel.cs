@@ -18,9 +18,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string NetworkAdjustmentId { get; set; }
 
         [Required]
-        public int TerminalId { get; set; }
+        public int IndexId { get; set; }
         public Terminal Terminal { get; set; }
 
+        public string TerminalId { get; set; }
         [Required]
         public int TransactionId { get; set; }
 

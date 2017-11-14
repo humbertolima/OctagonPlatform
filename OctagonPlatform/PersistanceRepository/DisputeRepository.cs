@@ -29,7 +29,11 @@ namespace OctagonPlatform.PersistanceRepository
             var json = new WebClient().DownloadString(url);
             var transaction = JsonConvert.DeserializeObject<List<Transaction>>(json);
 
-            var viewModel = new DisputeViewModel() { Transaction = transaction[0] };
+            var viewModel = new DisputeViewModel() {
+                TerminalId = transaction.FirstOrDefault().TerminalId,
+                SecuenceNumber = transaction.FirstOrDefault().SequenceNumber,
+                TransactionId = transaction.FirstOrDefault().Id,
+            };
 
             return viewModel;
         }
