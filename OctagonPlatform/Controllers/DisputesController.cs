@@ -69,5 +69,70 @@ namespace OctagonPlatform.Controllers
         }
 
         //HASTA aqui el CREATTEEE
+
+
+
+        public ActionResult Details(int id)
+        {
+            try
+            {
+                var viewModel = _DisputeRepository.GetDispute(id);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                var viewModel = _DisputeRepository.GetDispute(id);
+                //viewModel.Terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(DisputeViewModel viewModel)
+        {
+            try
+            {
+                //    viewModel.Terminal.TerminalAlertConfigs = null;
+                //        viewModel.Terminal = _TerminalRepository.GetTerminal(viewModel.Terminal.TerminalId);
+                _DisputeRepository.DisputeUpdate(viewModel);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+

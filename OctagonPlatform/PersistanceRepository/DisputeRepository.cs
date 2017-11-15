@@ -15,11 +15,37 @@ namespace OctagonPlatform.PersistanceRepository
     {
 
 
-        public IEnumerable<Dispute> GetAllDispute()
+        public IEnumerable<DisputeViewModel> GetAllDispute()
         {
-            var disputes = Table.ToList();
+            var disputes = Table.Include("Terminal").ToList();
+            var viewModel = new List<DisputeViewModel>();
 
-            return disputes;
+            foreach (var item in disputes)
+            {
+                viewModel.Add(Mapper.Map<Dispute, DisputeViewModel>(item));
+
+            }
+            return viewModel;
+        }
+
+        public DisputeViewModel GetDispute(int id)
+        {
+            try
+            {
+                var dispute = Table.Include("Terminal").FirstOrDefault(m =>m.Id == id);
+
+                var viewModel = new DisputeViewModel();
+
+                viewModel = Mapper.Map<Dispute, DisputeViewModel>(dispute);
+
+                return viewModel;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public DisputeViewModel GetTerminalTransaction(string terminalId)
@@ -29,7 +55,8 @@ namespace OctagonPlatform.PersistanceRepository
             var json = new WebClient().DownloadString(url);
             var transaction = JsonConvert.DeserializeObject<List<Transaction>>(json);
 
-            var viewModel = new DisputeViewModel() {
+            var viewModel = new DisputeViewModel()
+            {
                 TerminalId = transaction.FirstOrDefault().TerminalId,
                 SecuenceNumber = transaction.FirstOrDefault().SequenceNumber,
                 TransacNo = transaction.FirstOrDefault().Id,
@@ -42,11 +69,28 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var dispute = new Dispute(){ IndexId = viewModel.Terminal.Id };
-                dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
+                //var dispute = new Dispute() { IndexId = viewModel.Terminal.Id };
+                var dispute  = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
 
                 Table.Add(dispute);
                 Save();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void DisputeUpdate(DisputeViewModel viewModel)
+        {
+            try
+            {
+                var dispute = new Dispute() { IndexId = viewModel.Terminal.Id };
+
+                dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
+
+                Edit(dispute);
             }
             catch (Exception ex)
             {
