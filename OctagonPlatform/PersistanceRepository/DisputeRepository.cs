@@ -17,7 +17,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public IEnumerable<DisputeViewModel> GetAllDispute()
         {
-            var disputes = Table.Include("Terminal").ToList();
+            var disputes = Table.Include("Terminal").Include("DisputeRepresent").ToList();
             var viewModel = new List<DisputeViewModel>();
 
             foreach (var item in disputes)
@@ -32,7 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var dispute = Table.Include("Terminal").FirstOrDefault(m =>m.Id == id);
+                var dispute = Table.Include("Terminal").Include("DisputeRepresent").FirstOrDefault(m =>m.Id == id);
 
                 var viewModel = new DisputeViewModel();
 

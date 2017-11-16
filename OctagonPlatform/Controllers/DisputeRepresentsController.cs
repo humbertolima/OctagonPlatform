@@ -38,7 +38,7 @@ namespace OctagonPlatform.Controllers
 
 
             //pendiente a ver donde se va a redireccionar.
-            return RedirectToAction("Index", "Dispute");
+            return RedirectToAction("Index", "Disputes");
         }
         [HttpPost]
         public ActionResult Upload(DisputeRepresentVM viewModel)
