@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctagonPlatform", "OctagonPlatform\OctagonPlatform.csproj", "{FC7CEDF6-EF51-4FC2-8B9C-A31BD088D5A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiConfig", "ApiConfig\ApiConfig.csproj", "{D17D66CA-888F-41F4-935D-D59CCA727AFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportsOctagon", "..\..\Visual Studio 2017\Projects\ReportesOctagon\ReportesOctagon\ReportsOctagon.csproj", "{E88172C4-89FC-429E-BD1E-4D3442EBD582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D17D66CA-888F-41F4-935D-D59CCA727AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E88172C4-89FC-429E-BD1E-4D3442EBD582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E88172C4-89FC-429E-BD1E-4D3442EBD582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E88172C4-89FC-429E-BD1E-4D3442EBD582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E88172C4-89FC-429E-BD1E-4D3442EBD582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5EB1513A-8E23-4587-82D3-E10EFC04EEBD}
 	EndGlobalSection
 EndGlobal
