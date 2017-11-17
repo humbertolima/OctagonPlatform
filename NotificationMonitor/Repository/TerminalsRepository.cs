@@ -35,7 +35,7 @@ namespace NotificationMonitor.Repository
                     if (diff > timeToIgnore)    //la diferencia es mayor que lo que esta configurado.
                     {
                         Console.WriteLine("Send email notification for terminal "+ terminal.TerminalId);
-                        OctagonPlatform.Helpers.Email.SendNotification();
+                        OctagonPlatform.Helpers.Email.SendNotification("yasser.osuna@gmail.com","Check terminal Status","Terminal: "+ terminal.TerminalId +" la diferencia es mayor aque la que esta configurado.");
                     }
                 }
 
