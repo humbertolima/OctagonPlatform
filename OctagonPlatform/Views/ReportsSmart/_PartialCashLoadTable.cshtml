@@ -1,0 +1,50 @@
+﻿
+
+@if (TempData["List"] != null)
+{
+<table class="table">
+    <tr>
+        <th>
+           Terminal Id
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Previous Balance
+        </th>
+        <th>
+          Load Amount
+        </th>
+        <th>
+          New Balance
+        </th>
+       
+    
+    </tr>
+
+@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCash>)TempData["List"])
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TerminalId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountPrevius)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountLoad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountCurrent)
+        </td>
+      
+      
+    </tr>
+}
+
+</table>
+}
