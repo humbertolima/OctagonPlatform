@@ -37,6 +37,7 @@ namespace OctagonPlatform.Models
         public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
 
+
         public ApplicationDbContext()
             : base("LocalConection")
         {

@@ -667,6 +667,10 @@
     <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711171901110_reports.cs" />
+    <Compile Include="Migrations\201711171901110_reports.Designer.cs">
+      <DependentUpon>201711171901110_reports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1857,6 +1861,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711171901110_reports.resx">
+      <DependentUpon>201711171901110_reports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
