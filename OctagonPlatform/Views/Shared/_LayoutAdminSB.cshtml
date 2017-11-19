@@ -6,12 +6,20 @@
 <body>
 <div id="wrapper">
     @Html.Partial("Sections/NavBar")
-    <div id="page-wrapper">
-        @RenderBody()
+    <div class="row">
+        <div class="col-md-2">@Html.Partial("Sections/Sidebar")</div>
+        <div class="col-md-10">
+            <div id="">
+                @RenderBody()
+            </div>
+        </div>
     </div>
-    @Html.Partial("Sections/Footer")
+   
     <!-- /#page-wrapper -->
 </div>
+    <div class="row">
+        @Html.Partial("Sections/Footer")
+    </div>
 <!-- /#wrapper -->
 
 @Html.Partial("Sections/Scripts")
