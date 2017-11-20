@@ -670,6 +670,14 @@
     <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711161553191_addModelDisputeRepresents.cs" />
+    <Compile Include="Migrations\201711161553191_addModelDisputeRepresents.Designer.cs">
+      <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.cs" />
+    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.Designer.cs">
+      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201711201540593_report.cs" />
     <Compile Include="Migrations\201711201540593_report.Designer.cs">
       <DependentUpon>201711201540593_report.cs</DependentUpon>
@@ -698,6 +706,7 @@
     <Compile Include="Models\CryptoChargeAccount.cs" />
     <Compile Include="Models\CryptoCurrencyTransaction.cs" />
     <Compile Include="Models\Dispute.cs" />
+    <Compile Include="Models\DisputeRepresent.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
@@ -705,6 +714,7 @@
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
@@ -719,6 +729,7 @@
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
@@ -761,6 +772,7 @@
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
     <Compile Include="PersistanceRepository\ApiATM.cs" />
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
+    <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
@@ -1883,6 +1895,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161553191_addModelDisputeRepresents.resx">
+      <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201242583_AlterFieldDisputeRepresent.resx">
+      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711201540593_report.resx">
       <DependentUpon>201711201540593_report.cs</DependentUpon>
