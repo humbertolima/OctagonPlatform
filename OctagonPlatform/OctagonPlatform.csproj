@@ -670,13 +670,9 @@
     <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711180303304_addreports.cs" />
-    <Compile Include="Migrations\201711180303304_addreports.Designer.cs">
-      <DependentUpon>201711180303304_addreports.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711180320597_changereport.cs" />
-    <Compile Include="Migrations\201711180320597_changereport.Designer.cs">
-      <DependentUpon>201711180320597_changereport.cs</DependentUpon>
+    <Compile Include="Migrations\201711201540593_report.cs" />
+    <Compile Include="Migrations\201711201540593_report.Designer.cs">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
@@ -1888,11 +1884,8 @@
     <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711180303304_addreports.resx">
-      <DependentUpon>201711180303304_addreports.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711180320597_changereport.resx">
-      <DependentUpon>201711180320597_changereport.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711201540593_report.resx">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class changereport : IMigrationMetadata
+    public sealed partial class report : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changereport));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(report));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711180320597_changereport"; }
+            get { return "201711201540593_report"; }
         }
         
         string IMigrationMetadata.Source
