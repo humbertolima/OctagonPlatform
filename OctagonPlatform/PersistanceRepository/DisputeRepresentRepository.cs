@@ -15,11 +15,9 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public DisputeRepresent AddRepresent(DisputeRepresentVM viewModel)
         {
-            string fname = Path.GetFileName(viewModel.File.FileName);
+            
+            Image img = Image.FromStream(viewModel.File.InputStream, true, true);
 
-            viewModel.File.SaveAs(viewModel.relativePath + fname);
-
-            Image img = Image.FromFile(viewModel.relativePath + fname);
             viewModel.Image = ImageToByteArray(img);
 
             var disputeRepresent = Mapper.Map<DisputeRepresentVM, DisputeRepresent>(viewModel);
