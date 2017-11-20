@@ -2,6 +2,8 @@
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,30 +42,31 @@ namespace OctagonPlatform.Controllers
                 return View(viewModel);
             }
 
-            List<byte[]> attaches = new List<byte[]>();
-            
-            viewModel.AttachData = new byte[viewModel.File.InputStream.Length];
-
+            //if (System.IO.File.Exists(Server.MapPath("~/App_Data/" + fname)))
+            //{
+            //    System.IO.File.Delete(Server.MapPath("~/App_Data/" + fname));
+            //}
+            viewModel.relativePath = Server.MapPath("~/App_Data/");
             //attaches.Add(uploadedFile);
 
-            _repository.AddRepresent(viewModel);
+            var result = _repository.AddRepresent(viewModel);
 
             Helpers.Email.SendNotification(
                 "yasser.osuna@gmail.com",
                 "Represents to Dispute",
                 "Dispute: " + viewModel.disputeId + "Terminal: falta poner el terminalId",
-                viewModel.AttachData
+               result.Image
                 );
 
             //pendiente a ver donde se va a redireccionar.
             return RedirectToAction("Index", "Disputes");
         }
 
+
         [HttpPost]
         public ActionResult Upload(DisputeRepresentVM viewModel)
         {
-
-
+            
             return View(viewModel);
 
         }

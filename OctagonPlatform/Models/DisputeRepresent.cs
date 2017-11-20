@@ -22,7 +22,7 @@ namespace OctagonPlatform.Models
 
         public string Comments { get; set; }
 
-        public byte[] AttachData { get; set; }
+        public byte[] Image { get; set; }
 
         [NotMapped]
         public HttpPostedFileBase File { get; set; }

@@ -672,6 +672,10 @@
     <Compile Include="Migrations\201711161553191_addModelDisputeRepresents.Designer.cs">
       <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.cs" />
+    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.Designer.cs">
+      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1871,6 +1875,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711161553191_addModelDisputeRepresents.resx">
       <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201242583_AlterFieldDisputeRepresent.resx">
+      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

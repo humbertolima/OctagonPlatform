@@ -20,8 +20,10 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public string Comments { get; set; }
 
-        public byte[] AttachData { get; set; }
-        
+        public byte[] Image { get; set; }
+
+        public string relativePath { get; set; }
+
         public HttpPostedFileBase File { get; set; }
     }
 }
