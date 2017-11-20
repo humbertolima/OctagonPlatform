@@ -14,8 +14,8 @@ namespace OctagonPlatform.PersistanceRepository
         public void AddRepresent(DisputeRepresentVM viewModel)
         {
 
-            byte[] data = new byte[viewModel.File.ContentLength];                     //convierte a byte[] el length de el file que viene
-            viewModel.File.InputStream.Read(data, 0, viewModel.File.ContentLength);
+            byte[] data = new byte[viewModel.File.ContentLength];                       //convierte a byte[] el length de el file que viene
+            viewModel.File.InputStream.Read(data, 0, viewModel.File.ContentLength);     //esto no entiendo para es exactamente... pediente a quitar.
 
             var disputeRepresent = Mapper.Map<DisputeRepresentVM, DisputeRepresent>(viewModel);
             disputeRepresent.AttachData = data;

@@ -41,10 +41,10 @@ namespace OctagonPlatform.Controllers
             }
 
             List<byte[]> attaches = new List<byte[]>();
+            
+            viewModel.AttachData = new byte[viewModel.File.InputStream.Length];
 
-            byte[] uploadedFile = new byte[viewModel.File.InputStream.Length];
-
-            attaches.Add(uploadedFile);
+            //attaches.Add(uploadedFile);
 
             _repository.AddRepresent(viewModel);
 
@@ -52,7 +52,7 @@ namespace OctagonPlatform.Controllers
                 "yasser.osuna@gmail.com",
                 "Represents to Dispute",
                 "Dispute: " + viewModel.disputeId + "Terminal: falta poner el terminalId",
-                attaches
+                viewModel.AttachData
                 );
 
             //pendiente a ver donde se va a redireccionar.
