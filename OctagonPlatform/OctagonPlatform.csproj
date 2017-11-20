@@ -210,7 +210,6 @@
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -219,6 +218,9 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
+    <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
@@ -668,13 +670,9 @@
     <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711161553191_addModelDisputeRepresents.cs" />
-    <Compile Include="Migrations\201711161553191_addModelDisputeRepresents.Designer.cs">
-      <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.cs" />
-    <Compile Include="Migrations\201711201242583_AlterFieldDisputeRepresent.Designer.cs">
-      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
+    <Compile Include="Migrations\201711201540593_report.cs" />
+    <Compile Include="Migrations\201711201540593_report.Designer.cs">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
@@ -700,16 +698,16 @@
     <Compile Include="Models\CryptoChargeAccount.cs" />
     <Compile Include="Models\CryptoCurrencyTransaction.cs" />
     <Compile Include="Models\Dispute.cs" />
-    <Compile Include="Models\DisputeRepresent.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
@@ -721,8 +719,8 @@
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
-    <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
@@ -745,6 +743,7 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
@@ -760,9 +759,10 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\VaultCash.cs" />
     <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\ApiATM.cs" />
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
-    <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
     <Compile Include="PersistanceRepository\GenericRepository.cs" />
@@ -1553,8 +1553,19 @@
     <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
     <Content Include="Views\InterChange\InterChangeForm.cshtml" />
     <Content Include="Views\Shared\_LayoutEdits.cshtml" />
-    <Content Include="Views\DisputeRepresents\Create.cshtml" />
-    <Content Include="Views\DisputeRepresents\Index.cshtml" />
+    <Content Include="Views\Error\_PartialAlert.cshtml" />
+    <Content Include="Views\_PartialAlert.cshtml" />
+    <Content Include="Views\Reports\Create.cshtml" />
+    <Content Include="Views\Reports\Delete.cshtml" />
+    <Content Include="Views\Reports\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\RepoDashboard.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialCashLoadTable.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
+    <Content Include="Views\ReportsSmart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1873,11 +1884,8 @@
     <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
       <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711161553191_addModelDisputeRepresents.resx">
-      <DependentUpon>201711161553191_addModelDisputeRepresents.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711201242583_AlterFieldDisputeRepresent.resx">
-      <DependentUpon>201711201242583_AlterFieldDisputeRepresent.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711201540593_report.resx">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

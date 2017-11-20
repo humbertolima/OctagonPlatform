@@ -34,6 +34,8 @@ namespace OctagonPlatform
                       "~/Content/bootstrap-superhero.css",
                   //    "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(                   
+                     "~/Content/themes/base/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/base").Include(
                       "~/Content/themes/base/*.css"));
@@ -48,7 +50,9 @@ namespace OctagonPlatform
                 "~/Scripts/User.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                "~/Scripts/jquery-ui-1.12.1.js"));
+                "~/Scripts/jquery-ui-1.12.1.js"
+                
+                ));
         }
     }
 }

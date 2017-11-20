@@ -37,6 +37,7 @@ namespace OctagonPlatform.Models
         public DbSet<TerminalAlert> TerminalAlerts{ get; set; }
         public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
+        public DbSet<ReportModel> Reports { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")

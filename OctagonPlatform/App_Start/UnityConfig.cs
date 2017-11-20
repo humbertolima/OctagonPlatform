@@ -48,7 +48,7 @@ namespace OctagonPlatform
 
             container.RegisterType<IDisputeRepository, DisputeRepository>();
 
-            container.RegisterType<IDisputeRepresentRepository, DisputeRepresentRepository>();
+            container.RegisterType<IReports, ReportsRepository>();
         }
     }
 }
