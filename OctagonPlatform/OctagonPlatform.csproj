@@ -674,6 +674,10 @@
     <Compile Include="Migrations\201711201540593_report.Designer.cs">
       <DependentUpon>201711201540593_report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711201708043_AddLocationNameTerminal.cs" />
+    <Compile Include="Migrations\201711201708043_AddLocationNameTerminal.Designer.cs">
+      <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -1886,6 +1890,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711201540593_report.resx">
       <DependentUpon>201711201540593_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201708043_AddLocationNameTerminal.resx">
+      <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>

@@ -2,6 +2,7 @@
 using OctagonPlatform.PersistanceRepository;
 using System.Collections.Generic;
 using OctagonPlatform.Helpers;
+using OctagonPlatform.Controllers.Reports.JSON;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -42,5 +43,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteTerminal(int id);
 
         TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel);
+        System.Array LoadCashList(List<JsonLoadCash> list);
     }
 }

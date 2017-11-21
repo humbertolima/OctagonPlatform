@@ -8,6 +8,9 @@
            Terminal Id
         </th>
         <th>
+           Location
+        </th>
+        <th>
           Date
         </th>
         <th>
@@ -23,12 +26,18 @@
     
     </tr>
 
-@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCash>)TempData["List"])
+@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
 {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.TerminalId)
         </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Locationname)
+          
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>

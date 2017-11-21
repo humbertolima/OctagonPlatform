@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
+using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -500,6 +501,21 @@ namespace OctagonPlatform.PersistanceRepository
                 //pendiente
                 throw;
             }
+        }
+        public Array LoadCashList(List<JsonLoadCash> list)
+        {
+
+            var terminalIds = list.Select(s => s.TerminalId).ToList();
+
+            var cashlist = (from terminal in Table
+                            where terminalIds.Contains(terminal.TerminalId)
+                            select new
+                            {
+                                terminal.TerminalId,
+                                terminal.LocationName
+                            }).ToArray();
+            return cashlist;
+
         }
     }
 }

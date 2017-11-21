@@ -171,7 +171,8 @@ namespace OctagonPlatform.Models
 
         public TerminalAlertConfig TerminalAlertConfigs { get; set; }
 
-
+        [Required]
+        public string LocationName { get; set; }
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();
