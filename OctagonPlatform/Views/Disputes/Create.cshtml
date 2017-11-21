@@ -6,7 +6,7 @@
 }
 <div class="container" style="padding-bottom: 20px">
     <h2>Create</h2>
-
+    @Html.Raw(ViewBag.Error)
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
