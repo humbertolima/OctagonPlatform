@@ -3,7 +3,7 @@ namespace OctagonPlatform.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addModelDisputeRepresents : DbMigration
+    public partial class AddTableDisputeRepresent : DbMigration
     {
         public override void Up()
         {
@@ -16,7 +16,7 @@ namespace OctagonPlatform.Migrations
                         Phone = c.String(),
                         CC = c.String(),
                         Comments = c.String(),
-                        AttachData = c.Binary(),
+                        Image = c.Binary(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Disputes", t => t.Id)

@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AlterFieldDisputeRepresent : IMigrationMetadata
+    public sealed partial class AddTableDisputeRepresent : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AlterFieldDisputeRepresent));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTableDisputeRepresent));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711201242583_AlterFieldDisputeRepresent"; }
+            get { return "201711202236065_AddTableDisputeRepresent"; }
         }
         
         string IMigrationMetadata.Source
