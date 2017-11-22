@@ -144,13 +144,11 @@ a {
     color: white;
     text-align: center;
     background: gray;
-    padding-top: 25px;
-    padding-bottom: 15px;
-    width: 100%;
-    height: 10%;
-    position: absolute;
-    bottom: 0;
-    margin-left: 15px;
+
+   
+    margin-top: 50px; /* negative value of footer height */
+    height: 50px;
+    padding-top: 20px;
 }
 
 

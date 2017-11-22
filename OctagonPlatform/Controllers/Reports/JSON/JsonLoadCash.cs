@@ -35,4 +35,17 @@ namespace OctagonPlatform.Controllers.Reports.JSON
             TerminalId = terminalId;
         }
     }
+    public class JsonLoadCashChart
+    {
+        public string Date { get; set; }
+        public int AmountPrevius { get; set; }
+        public int AmountLoad { get; set; }
+        
+        public JsonLoadCashChart(string date, int amountPrevius, int amountLoad)
+        {           
+            AmountPrevius = amountPrevius;
+            AmountLoad = amountLoad;          
+            Date = date;
+        }
+    }
 }

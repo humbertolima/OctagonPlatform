@@ -271,6 +271,19 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Partner not found. ");
             }
         }
+
+        public IEnumerable<dynamic> GetAllPartner(string term)
+        {
+            try
+            {              
+               return Table.Where(b => b.BusinessName.Contains(term)).Select(b => new { label = b.BusinessName, value = b.Id }).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 
 }

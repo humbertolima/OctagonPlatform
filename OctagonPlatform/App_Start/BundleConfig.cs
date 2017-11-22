@@ -53,6 +53,7 @@ namespace OctagonPlatform
                 "~/Scripts/jquery-ui-1.12.1.js"
                 
                 ));
+       
         }
     }
 }

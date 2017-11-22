@@ -44,7 +44,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel);
 
-        IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status);
+        IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid);
 
         IEnumerable<string> GetAllTerminalId(string value);
     }

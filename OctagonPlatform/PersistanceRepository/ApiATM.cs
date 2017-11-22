@@ -23,7 +23,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
                     
             HttpResponseMessage response = null;
-            if (tn != "" && start != null && end != null)
+            if ( tn != "" && start != null && end != null)
             {
                 string _start =  start.Value.ToString("yyyyMMdd");
                 string _end = end.Value.ToString("yyyyMMdd");
@@ -35,16 +35,8 @@ namespace OctagonPlatform.PersistanceRepository
                 string _end = end.Value.ToString("yyyyMMdd");
                 response = client.GetAsync(uri + "cash/" + _start + "/" + _end).Result;
             }
-            if (tn == "" && start != null && end != null)
-            {
-                string _start = start.Value.ToString("yyyyMMdd");
-                string _end = end.Value.ToString("yyyyMMdd");
-                response = client.GetAsync(uri + "cash/" + _start + "/" + _end).Result;
-            }
-            if (tn != "" && start == null && end == null)
-                response = client.GetAsync(uri + "cash/" + tn ).Result;
-            if (tn == "" && start == null && end == null)
-                response = client.GetAsync(uri + "cash/" ).Result;
+           
+           
             List<JsonLoadCash> list = new List<JsonLoadCash>();
             //Checking the response is successful or not which is sent using HttpClient  
             if (response != null && response.IsSuccessStatusCode)

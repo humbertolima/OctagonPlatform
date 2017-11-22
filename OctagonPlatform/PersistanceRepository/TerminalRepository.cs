@@ -502,33 +502,61 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 IEnumerable<dynamic> cashlist = null;
-                if (status != StatusType.Status.All)
+                if (partnerid == -1)
                 {
-                    cashlist = (from terminal in Table
-                                where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
-                                select new
-                                {
-                                    terminal.TerminalId,
-                                    terminal.LocationName,
-                                    terminal.Status
-                                }).ToList();
+                    if (status != StatusType.Status.All)
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                    else
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
                 }
                 else
                 {
-                    cashlist = (from terminal in Table
-                                where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
-                                select new
-                                {
-                                    terminal.TerminalId,
-                                    terminal.LocationName,
-                                    terminal.Status
-                                }).ToList();
+                    if (status != StatusType.Status.All)
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status && terminal.PartnerId == partnerid
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                    else
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId)  && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
                 }
                 return cashlist;
             }
@@ -545,9 +573,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                IEnumerable<string> items = Table.Select(b => b.TerminalId).ToList();
-                return items.Where(item => item.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0);
-
+                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();  
             }
             catch (Exception e)
             {

@@ -1,4 +1,5 @@
 ﻿
+using Newtonsoft.Json;
 using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -19,10 +20,12 @@ namespace OctagonPlatform.Controllers.Reports
     {
         private IReports _repo;
         private ITerminalRepository repo_terminal;
-        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal)
+        private IPartnerRepository repo_partner;
+        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner)
         {
             _repo = repo;
             repo_terminal = repoterminal;
+            repo_partner = repopartner;
         }
         // GET: reportModels
         public ActionResult Index()
@@ -40,40 +43,32 @@ namespace OctagonPlatform.Controllers.Reports
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status")] CashLoadViewModel vmodel)
+        public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId")] CashLoadViewModel vmodel)
         {
-           
+
             if (ModelState.IsValid)
             {
                 List<JsonLoadCashReport> listaux = new List<JsonLoadCashReport>();
+                List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
                 List<JsonLoadCash> list = new List<JsonLoadCash>();
                 ApiATM api = new ApiATM();
 
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                list = await api.CashLoad(start, end, vmodel.TerminalId);
 
-                if (vmodel.TerminalId != null && vmodel.StartDate != null && vmodel.EndDate != null)
-                {
-                    DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    list = await api.CashLoad(start, end, vmodel.TerminalId);
-                }
-                if (vmodel.TerminalId == null && vmodel.StartDate != null && vmodel.EndDate != null)
-                {
-                    DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    list = await api.CashLoad(start, end);
-                }
-                if (vmodel.TerminalId != null && vmodel.StartDate == null && vmodel.EndDate == null)
-                    list = await api.CashLoad(null,null,vmodel.TerminalId);
-                if (vmodel.TerminalId == null && vmodel.StartDate == null && vmodel.EndDate == null)
-                    list = await api.CashLoad();
+                IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
-                IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list,vmodel.Status);
-
-                if (listTn.Count() > 0)
-                {
+                  if (listTn.Count() > 0)
+                 {
+             
+              
+                int count = 0;
                     foreach (var item in list)
                     {
+
                         string locationname = "";
+
                         foreach (dynamic x in listTn)
                         {
                             if (x.TerminalId == item.TerminalId)
@@ -82,12 +77,18 @@ namespace OctagonPlatform.Controllers.Reports
                                 break;
                             }
                         }
-                        JsonLoadCashReport obj = new JsonLoadCashReport(locationname, item.Date, item.AmountPrevius, item.AmountLoad, item.AmountCurrent, item.TerminalId);
-                        listaux.Add(obj);
+                        if (locationname != "")
+                        {
+                            JsonLoadCashReport obj = new JsonLoadCashReport(locationname, item.Date, item.AmountPrevius, item.AmountLoad, item.AmountCurrent, item.TerminalId);
+                            JsonLoadCashChart objchart = new JsonLoadCashChart(item.Date.ToString("yyyy-MM-dd"), item.AmountPrevius, item.AmountLoad);
+                            listchart.Add(objchart);
+                            listaux.Add(obj);
+                        }
                     }
-                   
+
                 }
                 TempData["List"] = listaux;
+                TempData["Chart"] = JsonConvert.SerializeObject(listchart);
                 Session["businessName"] = "";
                 return View();
             }
@@ -98,20 +99,19 @@ namespace OctagonPlatform.Controllers.Reports
 
         public ActionResult AutoTerminal(string term)
         {
-          
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);         
-           
+
+            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Autocomplete(string term)
+        public ActionResult AutoPartner(string term)
         {
-            var items = new[] {"Apple", "Pear", "Banana", "Pineapple", "Peach"};
 
-            var filteredItems = items.Where(
-                item => item.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0
-                );
-            return Json(filteredItems, JsonRequestBehavior.AllowGet);
+            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
+
         public ActionResult CashBalanceatClose()
         {
             return View();
