@@ -262,6 +262,18 @@
     <Compile Include="Migrations\201711221558077_Initial.Designer.cs">
       <DependentUpon>201711221558077_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711221625432_AddCountries.cs" />
+    <Compile Include="Migrations\201711221625432_AddCountries.Designer.cs">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221627296_AddStates.cs" />
+    <Compile Include="Migrations\201711221627296_AddStates.Designer.cs">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221632000_AddCities.cs" />
+    <Compile Include="Migrations\201711221632000_AddCities.Designer.cs">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1160,6 +1172,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711221558077_Initial.resx">
       <DependentUpon>201711221558077_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221625432_AddCountries.resx">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221627296_AddStates.resx">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
