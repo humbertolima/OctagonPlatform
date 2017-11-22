@@ -258,9 +258,9 @@
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargedBy.cs" />
     <Compile Include="Helpers\TerminalIdGenerator.cs" />
-    <Compile Include="Migrations\201711212135442_ini.cs" />
-    <Compile Include="Migrations\201711212135442_ini.Designer.cs">
-      <DependentUpon>201711212135442_ini.cs</DependentUpon>
+    <Compile Include="Migrations\201711221558077_Initial.cs" />
+    <Compile Include="Migrations\201711221558077_Initial.Designer.cs">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1158,8 +1158,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711212135442_ini.resx">
-      <DependentUpon>201711212135442_ini.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711221558077_Initial.resx">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
