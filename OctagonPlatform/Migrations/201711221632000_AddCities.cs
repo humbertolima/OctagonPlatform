@@ -129,7 +129,7 @@
         
         public override void Down()
         {
-            Sql("DELETE * FROM cities");
+            Sql("DELETE FROM Cities");
         }
     }
 }

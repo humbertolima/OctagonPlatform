@@ -57,8 +57,12 @@ namespace OctagonPlatform.Controllers
                     return View(viewModel);
                 }
 
-                viewModel.Terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
-                if (viewModel.Terminal != null)
+                var terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
+
+                viewModel.IndexId = terminal.Id;
+                viewModel.TerminalId = terminal.TerminalId;
+
+                if (viewModel.IndexId > 0)
                 {
                     _DisputeRepository.DisputeAdd(viewModel);
                 }

@@ -16,7 +16,7 @@ namespace OctagonPlatform.Models
 
         public string NetworkAdjustmentId { get; set; }
 
-        [Required]
+        [Required,ForeignKey("Terminal")]   //importante. de lo contrario, crea un Terminal_Id como foreignKey
         public int IndexId { get; set; }
         public Terminal Terminal { get; set; }
 

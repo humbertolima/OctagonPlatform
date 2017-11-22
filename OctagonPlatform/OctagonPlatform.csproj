@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -273,6 +274,10 @@
     <Compile Include="Migrations\201711221632000_AddCities.cs" />
     <Compile Include="Migrations\201711221632000_AddCities.Designer.cs">
       <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.cs" />
+    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1158,6 +1163,8 @@
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
+    <Content Include="Views\DisputeRepresents\Create.cshtml" />
+    <Content Include="Views\DisputeRepresents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1181,6 +1188,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
       <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

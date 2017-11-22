@@ -17,7 +17,7 @@ namespace OctagonPlatform.Migrations
         
         public override void Down()
         {
-            Sql("DELETE * FROM  countries; ");
+            Sql("DELETE FROM Countries; ");
         }
     }
 }

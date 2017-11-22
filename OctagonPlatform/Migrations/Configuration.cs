@@ -18,13 +18,13 @@ namespace OctagonPlatform.Migrations
                 ParentId = 1,
                 BusinessName = "Odyssey Group",
                 Status = Helpers.StatusType.Status.Active,
-                Address1= "753 Shotgum RD",
-                CountryId=1,
-                StateId=1,
-                CityId =1,
+                Address1 = "753 Shotgum RD",
+                CountryId = 1,
+                StateId = 1,
+                CityId = 1,
                 Email = "admin@xyncro.net",
                 Mobile = "7867921950",
-                Deleted =false,
+                Deleted = false,
             });
 
             context.Users.AddOrUpdate(u => u.Name, new Models.User
@@ -41,6 +41,22 @@ namespace OctagonPlatform.Migrations
                 Deleted = false,
                 Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
             });
+
+            context.LocationTypes.AddOrUpdate(l => l.Name,
+                new Models.LocationType { Name = "Restaurant" },
+                new Models.LocationType { Name = "Barber Shop" }
+                );
+
+            context.Makes.AddOrUpdate(m => m.Name,
+                new Models.Make { Name = "Puloon" },
+                new Models.Make { Name = "N. Hyosung" }
+                );
+
+            context.Models.AddOrUpdate(m => m.Name,
+                new Models.Model { Name = "Mini ATM", MakeId = 1 },
+                new Models.Model { Name = "Siri Atm", MakeId = 1 }
+                );
+
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //

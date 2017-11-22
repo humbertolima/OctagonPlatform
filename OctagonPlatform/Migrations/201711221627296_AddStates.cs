@@ -4186,7 +4186,7 @@
         
         public override void Down()
         {
-            Sql("DELETE * FROM States");
+            Sql("DELETE FROM States");
         }
     }
 }
