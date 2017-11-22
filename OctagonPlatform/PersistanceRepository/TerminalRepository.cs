@@ -502,20 +502,58 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public Array LoadCashList(List<JsonLoadCash> list)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status)
         {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                IEnumerable<dynamic> cashlist = null;
+                if (status != StatusType.Status.All)
+                {
+                    cashlist = (from terminal in Table
+                                where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
+                                select new
+                                {
+                                    terminal.TerminalId,
+                                    terminal.LocationName,
+                                    terminal.Status
+                                }).ToList();
+                }
+                else
+                {
+                    cashlist = (from terminal in Table
+                                where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                select new
+                                {
+                                    terminal.TerminalId,
+                                    terminal.LocationName,
+                                    terminal.Status
+                                }).ToList();
+                }
+                return cashlist;
+            }
+            catch (Exception e)
+            {
 
-            var terminalIds = list.Select(s => s.TerminalId).ToList();
+                throw new Exception("Error database "+e.Message);
+            }
+            
+            
+        }
 
-            var cashlist = (from terminal in Table
-                            where terminalIds.Contains(terminal.TerminalId)
-                            select new
-                            {
-                                terminal.TerminalId,
-                                terminal.LocationName
-                            }).ToArray();
-            return cashlist;
+        public IEnumerable<string> GetAllTerminalId(string value)
+        {
+            try
+            {
+                IEnumerable<string> items = Table.Select(b => b.TerminalId).ToList();
+                return items.Where(item => item.IndexOf(value, StringComparison.InvariantCultureIgnoreCase) >= 0);
 
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
     }
 }

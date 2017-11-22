@@ -6,7 +6,7 @@ using OctagonPlatform.Controllers.Reports.JSON;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-    public interface ITerminalRepository
+    public interface ITerminalRepository : IGenericRepository<Terminal>
     {
         Terminal GetTerminal(string terminalId);
 
@@ -43,6 +43,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteTerminal(int id);
 
         TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel);
-        System.Array LoadCashList(List<JsonLoadCash> list);
+
+        IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status);
+
+        IEnumerable<string> GetAllTerminalId(string value);
     }
 }
