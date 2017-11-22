@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InsertUserAdmin02 : IMigrationMetadata
+    public sealed partial class ini : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InsertUserAdmin02));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ini));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710100356557_InsertUserAdmin02"; }
+            get { return "201711212135442_ini"; }
         }
         
         string IMigrationMetadata.Source
