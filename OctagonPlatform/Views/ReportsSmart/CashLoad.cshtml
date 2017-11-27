@@ -77,8 +77,10 @@
    
 <script>
     var projects = [{ value: "12", label: "Don Davis" }, { value: "17", label: "Stan Smith" }]
-  
+
     $(function () {
+
+       
         $("#EndDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
@@ -91,10 +93,10 @@
            $('#partner').autocomplete({
                source: '@Url.Action("AutoPartner")',
                select: function (event, ui) {
-                 
+
                    $("#partner").val(ui.item.label); // display the selected text
                    $("#partnerid").val(ui.item.value); // save selected id to hidden input
-                   
+
                    return false;
                }
           });

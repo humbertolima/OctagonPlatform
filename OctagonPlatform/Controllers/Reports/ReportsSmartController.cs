@@ -59,15 +59,15 @@ namespace OctagonPlatform.Controllers.Reports
 
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
-                  if (listTn.Count() > 0)
-                 {
+                //  if (listTn.Count() > 0)
+                // {
              
               
                 int count = 0;
                     foreach (var item in list)
                     {
 
-                        string locationname = "";
+                        string locationname = "borrar esto";
 
                         foreach (dynamic x in listTn)
                         {
@@ -86,7 +86,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                     }
 
-                }
+               // }
                 TempData["List"] = listaux;
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
                 Session["businessName"] = "";

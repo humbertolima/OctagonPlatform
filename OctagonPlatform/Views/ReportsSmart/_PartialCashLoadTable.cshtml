@@ -2,7 +2,18 @@
 
 @if (TempData["List"] != null)
 {
-  
+  <!-- Single button -->
+    <div class="btn-group" style="margin-bottom:5px">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Export <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="ExportToExcel('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>
+            <li><a href="#">Pdf</a></li>
+            <li><a href="#">Word</a></li>
+        </ul>
+    </div>
+  <div id="TableLoadCash" >
 <table class="table">
     <tr>
         <th>
@@ -57,14 +68,18 @@
 }
 
 </table>
-
-<div id="myfirstchart" style="height: 100%;"></div>
+  </div>
+<div id="myfirstchart" style="height: 100%;width:100%"></div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
+    <div style="display:none" id="idhead">
+        @Html.Partial("_PartialExcelHead")
+    </div>
 }
 
  
     <script>
+       
         function ChartBar() {
           
             var range = 'day';
@@ -96,7 +111,8 @@
                     else
                     return  ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getFullYear())).slice(-2);
                      
-                }
+                },
+                resize:true
             });
 
         }

@@ -1420,6 +1420,7 @@
     <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\export.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1570,6 +1571,7 @@
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
