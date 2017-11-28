@@ -8,13 +8,13 @@
             Export <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="#" onclick="ExportToExcel('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>
+            <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>           
+            <li><a href="#" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');">Word</a></li>
             <li><a href="#">Pdf</a></li>
-            <li><a href="#">Word</a></li>
         </ul>
     </div>
   <div id="TableLoadCash" >
-<table class="table">
+<table class="table table-bordered table-striped">
     <tr>
         <th>
            Terminal Id
@@ -33,8 +33,7 @@
         </th>
         <th>
           New Balance
-        </th>
-       
+        </th>      
     
     </tr>
 

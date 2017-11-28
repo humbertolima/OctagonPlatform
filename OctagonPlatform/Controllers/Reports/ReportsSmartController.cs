@@ -60,8 +60,7 @@ namespace OctagonPlatform.Controllers.Reports
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
                 //  if (listTn.Count() > 0)
-                // {
-             
+                // {            
               
                 int count = 0;
                     foreach (var item in list)
@@ -86,9 +85,15 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                     }
 
-               // }
+                // }
+                #region Variables Partial
                 TempData["List"] = listaux;
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = vmodel.StartDate;
+                TempData["to"] = vmodel.EndDate;
+                #endregion
                 Session["businessName"] = "";
                 return View();
             }
