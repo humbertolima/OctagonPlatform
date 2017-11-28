@@ -251,7 +251,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.Contracts)
                     .Include(x => x.Documents)
-                    //.Include(x => x.InterChanges)
+                    .Include(x => x.InterChanges)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
