@@ -56,11 +56,6 @@ namespace OctagonPlatform.Models
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
 
-        public ICollection<Dispute> Disputes { get; set; }
-
-        public TransactionStatistic()
-        {
-            Disputes = new Collection<Dispute>();
-        }
+       
     }
 }

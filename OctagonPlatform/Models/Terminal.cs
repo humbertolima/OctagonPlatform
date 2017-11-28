@@ -196,7 +196,6 @@ namespace OctagonPlatform.Models
             TerminalAlerts = new Collection<TerminalAlert>();
             TerminalMessages = new Collection<TerminalMessage>();
             WorkingHours = new Collection<TerminalWorkingHours>();
-            TerminalAlertConfigs = new TerminalAlertConfig();
         }
     }
 }

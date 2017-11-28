@@ -20,7 +20,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int IndexId { get; set; }
         public Terminal Terminal { get; set; }
-
+        public DisputeRepresent DisputeRepresent { get; set; }
         public string TerminalId { get; set; }
         [Required]
         public int TransacNo { get; set; }

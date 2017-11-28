@@ -123,6 +123,13 @@ namespace OctagonPlatform
 
             #endregion
 
+            #region Dispute Represents
+
+            CreateMap<DisputeRepresent, DisputeRepresentVM>();
+
+            CreateMap<DisputeRepresentVM, DisputeRepresent>();
+            #endregion
+
 
 
 
