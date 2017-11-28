@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public class Terminal: IAuditEntity, ISoftDeleted
+    public class Terminal : IAuditEntity, ISoftDeleted
     {
         [Key]
         public int Id { get; set; }
@@ -128,7 +128,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<TransactionStatistic> TransactionStatistics { get; set; }
 
-        public int? LastTransactionId { get; set; }  
+        public int? LastTransactionId { get; set; }
 
         public TransactionStatistic LastTransaction { get; set; }
 
@@ -173,6 +173,9 @@ namespace OctagonPlatform.Models
 
         [Required]
         public string LocationName { get; set; }
+
+        public ReportGroupModel ReportGroupModel { get; set; }
+        
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();

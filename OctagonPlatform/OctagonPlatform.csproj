@@ -218,6 +218,7 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
@@ -678,6 +679,14 @@
     <Compile Include="Migrations\201711201708043_AddLocationNameTerminal.Designer.cs">
       <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711280455353_addreportsgroup.cs" />
+    <Compile Include="Migrations\201711280455353_addreportsgroup.Designer.cs">
+      <DependentUpon>201711280455353_addreportsgroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280502145_addreportsgroup2.cs" />
+    <Compile Include="Migrations\201711280502145_addreportsgroup2.Designer.cs">
+      <DependentUpon>201711280502145_addreportsgroup2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddNewPartner.cs" />
     <Compile Include="Migrations\AddNewPartner.Designer.cs">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
@@ -724,6 +733,7 @@
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
@@ -747,6 +757,7 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
@@ -766,6 +777,7 @@
     <Compile Include="PersistanceRepository\ApiATM.cs" />
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
@@ -1572,6 +1584,11 @@
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
+    <Content Include="Views\ReportGroup\Create.cshtml" />
+    <Content Include="Views\ReportGroup\Delete.cshtml" />
+    <Content Include="Views\ReportGroup\Details.cshtml" />
+    <Content Include="Views\ReportGroup\Edit.cshtml" />
+    <Content Include="Views\ReportGroup\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1895,6 +1912,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711201708043_AddLocationNameTerminal.resx">
       <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280455353_addreportsgroup.resx">
+      <DependentUpon>201711280455353_addreportsgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280502145_addreportsgroup2.resx">
+      <DependentUpon>201711280502145_addreportsgroup2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddNewPartner.resx">
       <DependentUpon>AddNewPartner.cs</DependentUpon>
