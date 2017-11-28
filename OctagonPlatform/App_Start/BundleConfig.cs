@@ -53,6 +53,13 @@ namespace OctagonPlatform
                 "~/Scripts/jquery-ui-1.12.1.js"
                 
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/selectmulti").Include(
+              "~/Content/selectmulti/js/jquery.select-multiple.js"
+
+              ));
+            bundles.Add(new StyleBundle("~/bundles/selectmulticss").Include(
+                     "~/Content/selectmulti/css/select-multiple.css"));
         }
     }
 }

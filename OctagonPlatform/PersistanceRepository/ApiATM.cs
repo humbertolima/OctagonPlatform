@@ -19,22 +19,36 @@ namespace OctagonPlatform.PersistanceRepository
             uri = new Uri("http://apiatm.azurewebsites.net/api/");
             client = new HttpClient();
         }
-        public async Task<List<JsonLoadCash>> CashLoad(string tn, DateTime start, DateTime end)
+        public async Task<List<JsonLoadCash>> CashLoad(DateTime? start = null, DateTime? end = null, string tn = "")
         {
-            string _start = start.ToString("yyyyMMdd");
-            string _end = end.ToString("yyyyMMdd");
-            HttpResponseMessage response = client.GetAsync(uri+ "cash/"+tn+"/"+_start+"/"+_end).Result;
+                    
+            HttpResponseMessage response = null;
+            if ( tn != "" && start != null && end != null)
+            {
+                string _start =  start.Value.ToString("yyyyMMdd");
+                string _end = end.Value.ToString("yyyyMMdd");
+                response = client.GetAsync(uri + "cash/" + tn + "/" + _start + "/" + _end).Result;
+            }
+            if (tn == "" && start != null && end != null)
+            {
+                string _start = start.Value.ToString("yyyyMMdd");
+                string _end = end.Value.ToString("yyyyMMdd");
+                response = client.GetAsync(uri + "cash/" + _start + "/" + _end).Result;
+            }
+           
+           
             List<JsonLoadCash> list = new List<JsonLoadCash>();
             //Checking the response is successful or not which is sent using HttpClient  
-            if (response.IsSuccessStatusCode)
+            if (response != null && response.IsSuccessStatusCode)
             {
                 //Storing the response details recieved from web api   
                 var cash = response.Content.ReadAsStringAsync().Result;
-
                 //Deserializing the response recieved from web api and storing into the Employee list  
                 list = JsonConvert.DeserializeObject<List<JsonLoadCash>>(cash);
 
             }
+            else
+                throw new NullReferenceException("Response is null" );
             return list;
 
         }

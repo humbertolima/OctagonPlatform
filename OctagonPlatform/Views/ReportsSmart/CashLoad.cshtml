@@ -8,6 +8,7 @@
 <h2>CashLoad</h2>
 
 
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -19,10 +20,27 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TerminalId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TerminalId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TerminalId, new { htmlAttributes = new { @class = "form-control", @id = "terminal" ,@placeholder = "< All >"} })
                 @Html.ValidationMessageFor(model => model.TerminalId, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Partner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner" } })
+                @Html.HiddenFor(model => model.PartnerId, new { id = "partnerid" })
+                @Html.ValidationMessageFor(model => model.Partner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(b => b.Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
 
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -47,25 +65,46 @@
         </div>
     </div>
 }
-
-
 @Html.Partial("_PartialCashLoadTable")
+
 <div>
     @Html.ActionLink("Back to List", "Index")
+   
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    
+   
 <script>
-      $(function () {
-          $("#EndDate").datepicker({
-              dateFormat: "mm/dd/yy"
+    var projects = [{ value: "12", label: "Don Davis" }, { value: "17", label: "Stan Smith" }]
+
+    $(function () {
+
+       
+        $("#EndDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $("#StartDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $('#terminal').autocomplete({
+            source: '@Url.Action("AutoTerminal")'
           });
-          $("#StartDate").datepicker({
-              dateFormat: "mm/dd/yy"
+           $('#partner').autocomplete({
+               source: '@Url.Action("AutoPartner")',
+               select: function (event, ui) {
+
+                   $("#partner").val(ui.item.label); // display the selected text
+                   $("#partnerid").val(ui.item.value); // save selected id to hidden input
+
+                   return false;
+               }
           });
-      });
+          ChartBar();
+    });
+
 </script>
 
 }
+
+

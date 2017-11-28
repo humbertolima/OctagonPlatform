@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-    public interface IPartnerRepository
+    public interface IPartnerRepository : IGenericRepository<Partner>
     {
         Partner GetAllPartners(int parentId);
 
@@ -21,5 +21,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         PartnerFormViewModel InitializeNewFormViewModel(PartnerFormViewModel viewModel);
 
+        IEnumerable<dynamic> GetAllPartner(string term);
     }
 }

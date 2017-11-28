@@ -2,10 +2,25 @@
 
 @if (TempData["List"] != null)
 {
-<table class="table">
+  <!-- Single button -->
+    <div class="btn-group" style="margin-bottom:5px">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Export <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>           
+            <li><a href="#" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');">Word</a></li>
+            <li><a href="#">Pdf</a></li>
+        </ul>
+    </div>
+  <div id="TableLoadCash" >
+<table class="table table-bordered table-striped">
     <tr>
         <th>
            Terminal Id
+        </th>
+        <th>
+           Location
         </th>
         <th>
           Date
@@ -18,17 +33,22 @@
         </th>
         <th>
           New Balance
-        </th>
-       
+        </th>      
     
     </tr>
 
-@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCash>)TempData["List"])
+@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
 {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.TerminalId)
         </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Locationname)
+          
+        </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
@@ -47,4 +67,61 @@
 }
 
 </table>
+  </div>
+<div id="myfirstchart" style="height: 100%;width:100%"></div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <div style="display:none" id="idhead">
+        @Html.Partial("_PartialExcelHead")
+    </div>
 }
+
+ 
+    <script>
+       
+        function ChartBar() {
+          
+            var range = 'day';
+            var days = days_between($("#StartDate").val(), $("#EndDate").val());
+            if (days > 15 && days < 93)
+                range = 'week';
+            else
+                if (days > 92)
+                    range = 'month';
+           
+            new Morris.Line({
+                // ID of the element in which to draw the chart.
+                element: 'myfirstchart',
+                data: @Html.Raw(@TempData["Chart"]),
+                // The name of the data record attribute that contains x-values.
+                xkey: 'Date',
+                // A list of names of data record attributes that contain y-values.
+                ykeys: ['AmountPrevius', 'AmountLoad'],
+                // Labels for the ykeys -- will be displayed when you hover over the
+                // chart.
+                labels: ['Previus', 'Load'],
+                xLabels: range,
+                xLabelAngle: 45,
+                lineColors: ['#00a8e1', '#FF6541'],
+                xLabelFormat: function (d) {                 
+                    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    if (range == 'month')
+                        return d.getFullYear()+" - "+months[d.getMonth()];
+                    else
+                    return  ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getFullYear())).slice(-2);
+                     
+                },
+                resize:true
+            });
+
+        }
+        function days_between(date1, date2) {
+            var date1 = new Date(date1);
+            var date2 = new Date(date2);
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+           return diffDays;
+
+        }
+    </script>
+
