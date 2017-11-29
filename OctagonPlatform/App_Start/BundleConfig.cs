@@ -60,6 +60,13 @@ namespace OctagonPlatform
               ));
             bundles.Add(new StyleBundle("~/bundles/selectmulticss").Include(
                      "~/Content/selectmulti/css/select-multiple.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/multiselect").Include(
+             "~/Content/multiselect/js/jquery.multi-select.js"
+
+             ));
+            bundles.Add(new StyleBundle("~/bundles/multiselectcss").Include(
+                     "~/Content/multiselect/css/multi-select.css"));
         }
     }
 }
