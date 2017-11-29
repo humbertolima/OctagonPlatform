@@ -259,6 +259,22 @@
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargedBy.cs" />
     <Compile Include="Helpers\TerminalIdGenerator.cs" />
+    <Compile Include="Migrations\201711221558077_Initial.cs" />
+    <Compile Include="Migrations\201711221558077_Initial.Designer.cs">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221625432_AddCountries.cs" />
+    <Compile Include="Migrations\201711221625432_AddCountries.Designer.cs">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221627296_AddStates.cs" />
+    <Compile Include="Migrations\201711221627296_AddStates.Designer.cs">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221632000_AddCities.cs" />
+    <Compile Include="Migrations\201711221632000_AddCities.Designer.cs">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.cs" />
     <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
@@ -1168,6 +1184,18 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711221558077_Initial.resx">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221625432_AddCountries.resx">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221627296_AddStates.resx">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
