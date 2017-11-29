@@ -32,6 +32,8 @@ namespace OctagonPlatform.Controllers
             {
                 var disputeVM = _DisputeRepository.GetTerminalTransaction(terminalId);
 
+                disputeVM.LastDayToRepresent = DateTime.Now.AddDays(15);
+
                 if (disputeVM != null) return View("Create", disputeVM);
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
@@ -55,8 +57,19 @@ namespace OctagonPlatform.Controllers
                     return View(viewModel);
                 }
 
-                viewModel.Terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
-                _DisputeRepository.DisputeAdd(viewModel);
+                var terminal = _TerminalRepository.GetTerminal(viewModel.TerminalId);
+
+                viewModel.IndexId = terminal.Id;
+                viewModel.TerminalId = terminal.TerminalId;
+
+                if (viewModel.IndexId > 0)
+                {
+                    _DisputeRepository.DisputeAdd(viewModel);
+                }
+                else {
+                    ViewBag.Error = "Terminal not found";
+                    return View(viewModel);
+                }
                 return RedirectToAction("Index");
 
             }
