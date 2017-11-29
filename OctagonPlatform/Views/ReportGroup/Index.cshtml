@@ -8,10 +8,10 @@
 <div class="row">
     <div class="col-md-4">
         <figure class="highlight">
-          
-            <p><b>Reporting Groups</b></p>
+          <h5><b>Add Reporting Group </b></h5><hr>
+         
             <p>Enter new group name and click.</p>
-            <div class="row">
+            <div class="row" style="height: 484px;">
                 <div class="col-lg-8">
                     <form id="frmgroup">
                         @Html.AntiForgeryToken()
@@ -65,32 +65,71 @@
     </div>
     <div class="col-md-8">
         <figure class="highlight">
-            Asignar terminales a un grupo
-            <select id='callbacks' multiple='multiple'>
-                <option value='elem_1'>elem 1</option>
-                <option value='elem_2'>elem 2</option>
-                <option value='elem_3'>elem 3</option>
-                <option value='elem_4'>elem 4</option>               
-                <option value='elem_100'>elem 100</option>
-            </select>
+          
+            <h5><b>Reporting Group Details</b></h5><hr>
+            <div class="row" >
+                <div class="col-lg-12">
+                    <div class='custom-header'>
+                        <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
+                            <li><a href='#' id='select-all' style="color:white">Unassociated Terminals </a></li>
+                           
+                        </ol>
+                    </div>
+                    <select id='select1' multiple='multiple'>
+
+                        @foreach (var item in Model)
+                        {
+                            <option value='@item.Id'>@item.Name</option>
+
+                        }
+                    </select>
+
+                </div>
+                </div>
+            <div style="text-align:center">
+            <a href="#" style="margin-right:10px"> <i class="fa fa-angle-double-down fa-3x"></i></a>
+            <a href="#" ><i class="fa fa-angle-double-up fa-3x"></i></a>
+            
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class='custom-header'>
+                        <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
+                            <li><a href='#' id='select-all' style="color:white">Associated Terminals </a></li>
+                        </ol>
+                    </div>
+                    <select id='select2' multiple='multiple'>
+
+                        @foreach (var item in Model)
+                        {
+                            <option value='@item.Id'>@item.Name</option>
+
+                        }
+                    </select>
+
+
+                </div>
+
+            </div>
+
+
         </figure>
     </div>
 
 </div>
 
 
-
 @section Scripts {
     <script>
         var urlcreate ='@Url.Action("Create", "ReportGroup")';
-        var urldelete ='@Url.Action("DeleteAjax", "ReportGroup")';
-    </script>
+        var urldelete = '@Url.Action("DeleteAjax", "ReportGroup")';
+</script>
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/selectmulti")
     @Scripts.Render("~/bundles/multiselect")
     @Scripts.Render("~/Scripts/addgroup.js")
-
- 
+    
 
 }
 

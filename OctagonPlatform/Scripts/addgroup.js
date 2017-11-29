@@ -41,7 +41,7 @@
         }
 
     });
-
+    
     $('#select-all').click(function () {
         $('#public-methods').selectMultiple('select_all');
         return false;
@@ -51,18 +51,38 @@
         return false;
     });
 
+    $('#select1').selectMultiple({
 
-    //end
-
-    //SelectMulti
-    $('#callbacks').multiSelect({
         afterSelect: function (values) {
-            alert("Select value: " + values);
+            listid.push(parseInt(values, 10));
         },
         afterDeselect: function (values) {
-            alert("Deselect value: " + values);
+            var index = listid.indexOf(parseInt(values));
+            if (index > -1) {
+                listid.splice(index, 1);
+            }
+
         }
+
     });
+    $('#select2').selectMultiple({
+
+        afterSelect: function (values) {
+            listid.push(parseInt(values, 10));
+        },
+        afterDeselect: function (values) {
+            var index = listid.indexOf(parseInt(values));
+            if (index > -1) {
+                listid.splice(index, 1);
+            }
+
+        }
+
+    });
+    //end
+    
+    //SelectMulti
+
     //end
 
 });
