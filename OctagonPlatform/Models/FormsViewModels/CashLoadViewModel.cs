@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OctagonPlatform.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,13 +10,19 @@ namespace OctagonPlatform.Models.FormsViewModels
     public class CashLoadViewModel
     {
         public string TerminalId { get; set; }
+        public string Partner { get; set; }
+        [HiddenInput]
+        public int PartnerId { get; set; }
+        
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public StatusType.Status Status { get; set; }
         public CashLoadViewModel()
         {
-            TerminalId = "NH061617";
+            TerminalId = "TR024019";// "NH061617";
             StartDate = DateTime.Now.ToString("MM/dd/yyyy");
             EndDate = DateTime.Now.ToString("MM/dd/yyyy");
+            PartnerId = -1;
         }
     }
 }

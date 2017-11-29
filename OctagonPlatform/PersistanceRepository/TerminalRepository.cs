@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
+using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -499,6 +500,85 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 //pendiente
                 throw;
+            }
+        }
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                IEnumerable<dynamic> cashlist = null;
+                if (partnerid == -1)
+                {
+                    if (status != StatusType.Status.All)
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                    else
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                }
+                else
+                {
+                    if (status != StatusType.Status.All)
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status && terminal.PartnerId == partnerid
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                    else
+                    {
+                        cashlist = (from terminal in Table
+                                    where terminalIds.Contains(terminal.TerminalId)  && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                    select new
+                                    {
+                                        terminal.TerminalId,
+                                        terminal.LocationName,
+                                        terminal.Status
+                                    }).ToList();
+                    }
+                }
+                return cashlist;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database "+e.Message);
+            }
+            
+            
+        }
+
+        public IEnumerable<string> GetAllTerminalId(string value)
+        {
+            try
+            {
+                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();  
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
             }
         }
     }

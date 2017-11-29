@@ -219,6 +219,7 @@
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
@@ -279,6 +280,10 @@
     <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711290328285_addreportinggroup.cs" />
+    <Compile Include="Migrations\201711290328285_addreportinggroup.Designer.cs">
+      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -316,6 +321,7 @@
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
@@ -339,6 +345,7 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
@@ -359,6 +366,7 @@
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
@@ -1013,6 +1021,7 @@
     <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\export.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1163,6 +1172,12 @@
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
+    <Content Include="Views\ReportGroup\Create.cshtml" />
+    <Content Include="Views\ReportGroup\Delete.cshtml" />
+    <Content Include="Views\ReportGroup\Details.cshtml" />
+    <Content Include="Views\ReportGroup\Edit.cshtml" />
+    <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
   </ItemGroup>
@@ -1191,6 +1206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290328285_addreportinggroup.resx">
+      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
