@@ -42,7 +42,7 @@ namespace OctagonPlatform.Controllers
         public JsonResult Create([Bind(Include = "Id,Name")] ReportGroupModel reportGroupModel)
         {
             List<string> modelErrors = new List<string>();
-         
+         //quitar esto
             if (ModelState.IsValid && !IsNameExists(reportGroupModel.Name))
             {
                 _repo.Add(reportGroupModel);
