@@ -81,6 +81,10 @@
 
 
 @section Scripts {
+    <script>
+        var urlcreate ='@Url.Action("Create", "ReportGroup")';
+        var urldelete ='@Url.Action("DeleteAjax", "ReportGroup")';
+    </script>
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/selectmulti")
     @Scripts.Render("~/bundles/multiselect")

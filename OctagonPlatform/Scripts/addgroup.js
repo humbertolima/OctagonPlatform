@@ -3,8 +3,8 @@
     var listid = [];
 
     $("#CreateGroup").click(function () {
-
-        $.post('@Url.Action("Create", "ReportGroup")', $('#frmgroup').serialize(), function (data) {
+      
+        $.post(urlcreate, $('#frmgroup').serialize(), function (data) {
 
             if (data.Id != undefined && data.Name != undefined) {
                 $('#public-methods').selectMultiple('addOption', { value: data.Id, text: data.Name, index: 0 });
@@ -17,7 +17,7 @@
     });
     $("#DeleteGroup").click(function () {
 
-        $.post('@Url.Action("DeleteAjax", "ReportGroup")', { Ids: listid.toString() }, function (data) {
+        $.post(urldelete, { Ids: listid.toString() }, function (data) {
 
             for (var i = 0; i < data.length; i++) {
                 $("#public-methods option[value='" + data[i] + "']").remove();
