@@ -41,13 +41,28 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public JsonResult Create([Bind(Include = "Id,Name")] ReportGroupModel reportGroupModel)
         {
-            if (ModelState.IsValid)
+            List<string> modelErrors = new List<string>();
+         //quitar esto
+            if (ModelState.IsValid && !IsNameExists(reportGroupModel.Name))
             {
-                _repo.Add(reportGroupModel);               
+                _repo.Add(reportGroupModel);
                 return Json(reportGroupModel);
             }
+            else
+            {
+                
+                foreach (var modelState in ModelState.Values)
+                {
+                    foreach (var modelError in modelState.Errors)
+                    {
+                        modelErrors.Add(modelError.ErrorMessage);
+                    }
+                }
+                if (IsNameExists(reportGroupModel.Name))
+                    modelErrors.Add("Name already exist");
+            }
 
-            return Json("error");
+            return Json(modelErrors);
         }             
         
         
@@ -69,5 +84,8 @@ namespace OctagonPlatform.Controllers
             }
             base.Dispose(disposing);
         }
+              
+
+        private bool IsNameExists(string name) => _repo.FindByName(name) != null; // => este operador dice que es una funcion que va a return bool segun la expresion 
     }
 }

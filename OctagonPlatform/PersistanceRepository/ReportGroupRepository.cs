@@ -14,5 +14,10 @@ namespace OctagonPlatform.PersistanceRepository
           Table.RemoveRange( Table.Where(c => ids.Contains(c.Id.ToString())).ToList());
             Context.SaveChanges();
         }
+
+        public object FindByName(string name)
+        {
+            return Table.Where(c => c.Name.Equals( name,System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+        }
     }
 }
