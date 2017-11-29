@@ -17,7 +17,7 @@ namespace OctagonPlatform.Controllers
         }
 
         public ActionResult GetKey(string terminalId)
-        {
+        {   // prueba de branch
             try
             {
                 var result = _repository.GetKey(terminalId);
