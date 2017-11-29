@@ -1,0 +1,1976 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC7CEDF6-EF51-4FC2-8B9C-A31BD088D5A2}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OctagonPlatform</RootNamespace>
+    <AssemblyName>OctagonPlatform</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Scaffolding.12.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Entity.Design.Extensibility, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.15.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MappingProfile.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AchBankAccountsApiController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DisputesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InterChangeController.cs" />
+    <Compile Include="Controllers\LogosController.cs" />
+    <Compile Include="Controllers\PartnerContactsController.cs" />
+    <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\ReportGroupController.cs" />
+    <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
+    <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
+    <Compile Include="Controllers\SurchargeController.cs" />
+    <Compile Include="Controllers\TerminalAlertsController.cs" />
+    <Compile Include="Controllers\TerminalContactsController.cs" />
+    <Compile Include="Controllers\TerminalMessagesController.cs" />
+    <Compile Include="Controllers\TerminalsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\VaultCashController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AccountType.cs" />
+    <Compile Include="Helpers\CalculationMethod.cs" />
+    <Compile Include="Helpers\CheckSplitAmountsEntry.cs" />
+    <Compile Include="Helpers\CommunicationType.cs" />
+    <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
+    <Compile Include="Helpers\DisputeType.cs" />
+    <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\InterchangeConstants.cs" />
+    <Compile Include="Helpers\Cryptography.cs" />
+    <Compile Include="Helpers\CustomRoleProvider.cs" />
+    <Compile Include="Helpers\DateTimeValidation.cs" />
+    <Compile Include="Helpers\IAuditEntity.cs" />
+    <Compile Include="Helpers\K1.cs" />
+    <Compile Include="Helpers\K2.cs" />
+    <Compile Include="Helpers\KeyManager.cs" />
+    <Compile Include="Helpers\Terminals.cs" />
+    <Compile Include="Helpers\Week.cs" />
+    <Compile Include="Helpers\WhoInitiateDayClsed.cs" />
+    <Compile Include="Helpers\ISoftDeleted.cs" />
+    <Compile Include="Helpers\MapFrom.cs" />
+    <Compile Include="Helpers\NumberOfCassettes.cs" />
+    <Compile Include="Helpers\PermissionsAssigned.cs" />
+    <Compile Include="Helpers\SurchargeSettled.cs" />
+    <Compile Include="Helpers\Status.cs" />
+    <Compile Include="Helpers\StringValidation.cs" />
+    <Compile Include="Helpers\SurchargedBy.cs" />
+    <Compile Include="Helpers\TerminalIdGenerator.cs" />
+    <Compile Include="Migrations\201708160653179_Initial.cs" />
+    <Compile Include="Migrations\201708160653179_Initial.Designer.cs">
+      <DependentUpon>201708160653179_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708160909049_ModelsUpdated.cs" />
+    <Compile Include="Migrations\201708160909049_ModelsUpdated.Designer.cs">
+      <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.cs" />
+    <Compile Include="Migrations\201708162239290_AddedCountryConfiguration.Designer.cs">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.cs" />
+    <Compile Include="Migrations\201708170237248_DataAnnotationsAdded.Designer.cs">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.cs" />
+    <Compile Include="Migrations\201708170249524_UpdatedDataNotations.Designer.cs">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172118297_testing.cs" />
+    <Compile Include="Migrations\201708172118297_testing.Designer.cs">
+      <DependentUpon>201708172118297_testing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172211410_AddCountryScript.cs" />
+    <Compile Include="Migrations\201708172211410_AddCountryScript.Designer.cs">
+      <DependentUpon>201708172211410_AddCountryScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172223546_AddStatesScript.cs" />
+    <Compile Include="Migrations\201708172223546_AddStatesScript.Designer.cs">
+      <DependentUpon>201708172223546_AddStatesScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708172230006_AddCitiesScript.cs" />
+    <Compile Include="Migrations\201708172230006_AddCitiesScript.Designer.cs">
+      <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708181605364_AddedPermissions.cs" />
+    <Compile Include="Migrations\201708181605364_AddedPermissions.Designer.cs">
+      <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708181648395_AddedSetOfPermissions.cs" />
+    <Compile Include="Migrations\201708181648395_AddedSetOfPermissions.Designer.cs">
+      <DependentUpon>201708181648395_AddedSetOfPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708181939342_AddFieldUserModel.cs" />
+    <Compile Include="Migrations\201708181939342_AddFieldUserModel.Designer.cs">
+      <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708190230422_Updated2.cs" />
+    <Compile Include="Migrations\201708190230422_Updated2.Designer.cs">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191633395_UpdateulongToLong.cs" />
+    <Compile Include="Migrations\201708191633395_UpdateulongToLong.Designer.cs">
+      <DependentUpon>201708191633395_UpdateulongToLong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191639108_TestToCreateANewPartner.cs" />
+    <Compile Include="Migrations\201708191639108_TestToCreateANewPartner.Designer.cs">
+      <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708191649073_UpdatePartnerId.cs" />
+    <Compile Include="Migrations\201708191649073_UpdatePartnerId.Designer.cs">
+      <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708192125217_ChangeIsLocked.cs" />
+    <Compile Include="Migrations\201708192125217_ChangeIsLocked.Designer.cs">
+      <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708211637076_Pending.cs" />
+    <Compile Include="Migrations\201708211637076_Pending.Designer.cs">
+      <DependentUpon>201708211637076_Pending.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708231758444_UpdatedUser.cs" />
+    <Compile Include="Migrations\201708231758444_UpdatedUser.Designer.cs">
+      <DependentUpon>201708231758444_UpdatedUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708231807479_ChangedSoftDelete.cs" />
+    <Compile Include="Migrations\201708231807479_ChangedSoftDelete.Designer.cs">
+      <DependentUpon>201708231807479_ChangedSoftDelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708231817015_Last.cs" />
+    <Compile Include="Migrations\201708231817015_Last.Designer.cs">
+      <DependentUpon>201708231817015_Last.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.cs" />
+    <Compile Include="Migrations\201708282054263_ChangedCityNotRequired2.Designer.cs">
+      <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282213412_ChangedPhoneFromLongToString.cs" />
+    <Compile Include="Migrations\201708282213412_ChangedPhoneFromLongToString.Designer.cs">
+      <DependentUpon>201708282213412_ChangedPhoneFromLongToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.cs" />
+    <Compile Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.Designer.cs">
+      <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709030055313_UniqueCollumnsInPartners.cs" />
+    <Compile Include="Migrations\201709030055313_UniqueCollumnsInPartners.Designer.cs">
+      <DependentUpon>201709030055313_UniqueCollumnsInPartners.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709030056438_UniqueCollumnsInPartnersEmail.cs" />
+    <Compile Include="Migrations\201709030056438_UniqueCollumnsInPartnersEmail.Designer.cs">
+      <DependentUpon>201709030056438_UniqueCollumnsInPartnersEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709052040597_UniquePartnerContactEmail.cs" />
+    <Compile Include="Migrations\201709052040597_UniquePartnerContactEmail.Designer.cs">
+      <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs" />
+    <Compile Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.Designer.cs">
+      <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132110567_ActualizacionTerminal.cs" />
+    <Compile Include="Migrations\201709132110567_ActualizacionTerminal.Designer.cs">
+      <DependentUpon>201709132110567_ActualizacionTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132119208_TerminalPictures.cs" />
+    <Compile Include="Migrations\201709132119208_TerminalPictures.Designer.cs">
+      <DependentUpon>201709132119208_TerminalPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132130326_Notes.cs" />
+    <Compile Include="Migrations\201709132130326_Notes.Designer.cs">
+      <DependentUpon>201709132130326_Notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132136470_Event.cs" />
+    <Compile Include="Migrations\201709132136470_Event.Designer.cs">
+      <DependentUpon>201709132136470_Event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132141168_Documents.cs" />
+    <Compile Include="Migrations\201709132141168_Documents.Designer.cs">
+      <DependentUpon>201709132141168_Documents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs" />
+    <Compile Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.Designer.cs">
+      <DependentUpon>201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132201470_Transactions.cs" />
+    <Compile Include="Migrations\201709132201470_Transactions.Designer.cs">
+      <DependentUpon>201709132201470_Transactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132207182_Contracts.cs" />
+    <Compile Include="Migrations\201709132207182_Contracts.Designer.cs">
+      <DependentUpon>201709132207182_Contracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132231438_ActualizaciondeTerminals.cs" />
+    <Compile Include="Migrations\201709132231438_ActualizaciondeTerminals.Designer.cs">
+      <DependentUpon>201709132231438_ActualizaciondeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs" />
+    <Compile Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.Designer.cs">
+      <DependentUpon>201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.cs" />
+    <Compile Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.Designer.cs">
+      <DependentUpon>201709140051236_ActualizacionStartDateEnContracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140143264_VaultCash.cs" />
+    <Compile Include="Migrations\201709140143264_VaultCash.Designer.cs">
+      <DependentUpon>201709140143264_VaultCash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140220105_Surcharges.cs" />
+    <Compile Include="Migrations\201709140220105_Surcharges.Designer.cs">
+      <DependentUpon>201709140220105_Surcharges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709140234360_InterChange.cs" />
+    <Compile Include="Migrations\201709140234360_InterChange.Designer.cs">
+      <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709141906082_BankAccountActualizado.cs" />
+    <Compile Include="Migrations\201709141906082_BankAccountActualizado.Designer.cs">
+      <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142127198_PopulateLocationTypes.cs" />
+    <Compile Include="Migrations\201709142127198_PopulateLocationTypes.Designer.cs">
+      <DependentUpon>201709142127198_PopulateLocationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142134115_PopulateMakes.cs" />
+    <Compile Include="Migrations\201709142134115_PopulateMakes.Designer.cs">
+      <DependentUpon>201709142134115_PopulateMakes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142136084_PopulateModels.cs" />
+    <Compile Include="Migrations\201709142136084_PopulateModels.Designer.cs">
+      <DependentUpon>201709142136084_PopulateModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709142154436_UpdateTerminalTable.cs" />
+    <Compile Include="Migrations\201709142154436_UpdateTerminalTable.Designer.cs">
+      <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709151514522_ActualizarTerminal.cs" />
+    <Compile Include="Migrations\201709151514522_ActualizarTerminal.Designer.cs">
+      <DependentUpon>201709151514522_ActualizarTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709151552531_ActualizarTerminal2.cs" />
+    <Compile Include="Migrations\201709151552531_ActualizarTerminal2.Designer.cs">
+      <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.cs" />
+    <Compile Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.Designer.cs">
+      <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.cs" />
+    <Compile Include="Migrations\201709152220553_ActualizacionCrytoModel.Designer.cs">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.cs" />
+    <Compile Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.Designer.cs">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709181911451_AddedCassette.cs" />
+    <Compile Include="Migrations\201709181911451_AddedCassette.Designer.cs">
+      <DependentUpon>201709181911451_AddedCassette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709191550085_LastTransaction.cs" />
+    <Compile Include="Migrations\201709191550085_LastTransaction.Designer.cs">
+      <DependentUpon>201709191550085_LastTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709191957147_SerialNumberRectificadodeNombre.cs" />
+    <Compile Include="Migrations\201709191957147_SerialNumberRectificadodeNombre.Designer.cs">
+      <DependentUpon>201709191957147_SerialNumberRectificadodeNombre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709192010164_SurchageTypeArreglarNombre.cs" />
+    <Compile Include="Migrations\201709192010164_SurchageTypeArreglarNombre.Designer.cs">
+      <DependentUpon>201709192010164_SurchageTypeArreglarNombre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709201854589_UpdatedTerminalNulleableLastTransactionId.cs" />
+    <Compile Include="Migrations\201709201854589_UpdatedTerminalNulleableLastTransactionId.Designer.cs">
+      <DependentUpon>201709201854589_UpdatedTerminalNulleableLastTransactionId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709211620330_UpdatedTerminalCrypto.cs" />
+    <Compile Include="Migrations\201709211620330_UpdatedTerminalCrypto.Designer.cs">
+      <DependentUpon>201709211620330_UpdatedTerminalCrypto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251458056_BindedKeys.cs" />
+    <Compile Include="Migrations\201709251458056_BindedKeys.Designer.cs">
+      <DependentUpon>201709251458056_BindedKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251515371_Disputes.cs" />
+    <Compile Include="Migrations\201709251515371_Disputes.Designer.cs">
+      <DependentUpon>201709251515371_Disputes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.cs" />
+    <Compile Include="Migrations\201709271928089_AddedBoolBindedKeys.Designer.cs">
+      <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.cs" />
+    <Compile Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.Designer.cs">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.cs" />
+    <Compile Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.Designer.cs">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.cs" />
+    <Compile Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.Designer.cs">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs" />
+    <Compile Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.Designer.cs">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.cs" />
+    <Compile Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.Designer.cs">
+      <DependentUpon>201709282132023_ElimineCampoInterchangedeTerminals.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709292200097_EliminadoVaultCashAmount.cs" />
+    <Compile Include="Migrations\201709292200097_EliminadoVaultCashAmount.Designer.cs">
+      <DependentUpon>201709292200097_EliminadoVaultCashAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300251235_AddedKeyToUser.cs" />
+    <Compile Include="Migrations\201709300251235_AddedKeyToUser.Designer.cs">
+      <DependentUpon>201709300251235_AddedKeyToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300303349_UserNameUnique.cs" />
+    <Compile Include="Migrations\201709300303349_UserNameUnique.Designer.cs">
+      <DependentUpon>201709300303349_UserNameUnique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709300355273_UserNameUniqueEliminado.cs" />
+    <Compile Include="Migrations\201709300355273_UserNameUniqueEliminado.Designer.cs">
+      <DependentUpon>201709300355273_UserNameUniqueEliminado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710021626286_TerminalConfigAlert.cs" />
+    <Compile Include="Migrations\201710021626286_TerminalConfigAlert.Designer.cs">
+      <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs" />
+    <Compile Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.Designer.cs">
+      <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062059595_quitarRelacionBD.cs" />
+    <Compile Include="Migrations\201710062059595_quitarRelacionBD.Designer.cs">
+      <DependentUpon>201710062059595_quitarRelacionBD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710092022284_BankAccountBankName.cs" />
+    <Compile Include="Migrations\201710092022284_BankAccountBankName.Designer.cs">
+      <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710100356557_InsertUserAdmin02.cs" />
+    <Compile Include="Migrations\201710100356557_InsertUserAdmin02.Designer.cs">
+      <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs" />
+    <Compile Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.Designer.cs">
+      <DependentUpon>201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710111839188_Surcharge.cs" />
+    <Compile Include="Migrations\201710111839188_Surcharge.Designer.cs">
+      <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710112027426_TerminalId.cs" />
+    <Compile Include="Migrations\201710112027426_TerminalId.Designer.cs">
+      <DependentUpon>201710112027426_TerminalId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.cs" />
+    <Compile Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.Designer.cs">
+      <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.cs" />
+    <Compile Include="Migrations\201710121826015_TerminalDefaultBankAccount.Designer.cs">
+      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.cs" />
+    <Compile Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.Designer.cs">
+      <DependentUpon>201710122043144_TerminalSurchargeFeeNewConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.cs" />
+    <Compile Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.Designer.cs">
+      <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131817088_SeatledVaultcashDeleted.cs" />
+    <Compile Include="Migrations\201710131817088_SeatledVaultcashDeleted.Designer.cs">
+      <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131904558_AddTerminalsAlerts.cs" />
+    <Compile Include="Migrations\201710131904558_AddTerminalsAlerts.Designer.cs">
+      <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131956336_AddTerminalsAlerts2.cs" />
+    <Compile Include="Migrations\201710131956336_AddTerminalsAlerts2.Designer.cs">
+      <DependentUpon>201710131956336_AddTerminalsAlerts2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.cs" />
+    <Compile Include="Migrations\201710132121410_modifiedTerminalAlert.Designer.cs">
+      <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710172032557_PartnerUpdate.cs" />
+    <Compile Include="Migrations\201710172032557_PartnerUpdate.Designer.cs">
+      <DependentUpon>201710172032557_PartnerUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710180534471_ElimineTodosLOsCamposUnique.cs" />
+    <Compile Include="Migrations\201710180534471_ElimineTodosLOsCamposUnique.Designer.cs">
+      <DependentUpon>201710180534471_ElimineTodosLOsCamposUnique.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710201826295_RemainingSurchargeFeeAndInterchangeFee.cs" />
+    <Compile Include="Migrations\201710201826295_RemainingSurchargeFeeAndInterchangeFee.Designer.cs">
+      <DependentUpon>201710201826295_RemainingSurchargeFeeAndInterchangeFee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs" />
+    <Compile Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.Designer.cs">
+      <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710232152432_AddTerminalWorksHours.cs" />
+    <Compile Include="Migrations\201710232152432_AddTerminalWorksHours.Designer.cs">
+      <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710262026269_EditTerminalInactiveHours.cs" />
+    <Compile Include="Migrations\201710262026269_EditTerminalInactiveHours.Designer.cs">
+      <DependentUpon>201710262026269_EditTerminalInactiveHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710262053457_TableTerminalUpdatedDeletedSomeFields.cs" />
+    <Compile Include="Migrations\201710262053457_TableTerminalUpdatedDeletedSomeFields.Designer.cs">
+      <DependentUpon>201710262053457_TableTerminalUpdatedDeletedSomeFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710271521540_updateFieldInactivePeriodTerminal.cs" />
+    <Compile Include="Migrations\201710271521540_updateFieldInactivePeriodTerminal.Designer.cs">
+      <DependentUpon>201710271521540_updateFieldInactivePeriodTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061637175_addFieldToDispute.cs" />
+    <Compile Include="Migrations\201711061637175_addFieldToDispute.Designer.cs">
+      <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711062143567_updateCassetteFields.cs" />
+    <Compile Include="Migrations\201711062143567_updateCassetteFields.Designer.cs">
+      <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.cs" />
+    <Compile Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.Designer.cs">
+      <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs" />
+    <Compile Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.Designer.cs">
+      <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711092202573_UpdateDisputeTransaction.cs" />
+    <Compile Include="Migrations\201711092202573_UpdateDisputeTransaction.Designer.cs">
+      <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711092257599_UpdatingInterChange.cs" />
+    <Compile Include="Migrations\201711092257599_UpdatingInterChange.Designer.cs">
+      <DependentUpon>201711092257599_UpdatingInterChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.cs" />
+    <Compile Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.Designer.cs">
+      <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.cs" />
+    <Compile Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.Designer.cs">
+      <DependentUpon>201711141703089_alterFieldTerminalIdByIndexIdDispute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.cs" />
+    <Compile Include="Migrations\201711142011492_deleteReferenceTransaction.Designer.cs">
+      <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711201540593_report.cs" />
+    <Compile Include="Migrations\201711201540593_report.Designer.cs">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711201708043_AddLocationNameTerminal.cs" />
+    <Compile Include="Migrations\201711201708043_AddLocationNameTerminal.Designer.cs">
+      <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280455353_addreportsgroup.cs" />
+    <Compile Include="Migrations\201711280455353_addreportsgroup.Designer.cs">
+      <DependentUpon>201711280455353_addreportsgroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280502145_addreportsgroup2.cs" />
+    <Compile Include="Migrations\201711280502145_addreportsgroup2.Designer.cs">
+      <DependentUpon>201711280502145_addreportsgroup2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AddNewPartner.cs" />
+    <Compile Include="Migrations\AddNewPartner.Designer.cs">
+      <DependentUpon>AddNewPartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\DeleteLogoModel.cs" />
+    <Compile Include="Migrations\DeleteLogoModel.Designer.cs">
+      <DependentUpon>DeleteLogoModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708301536055_ScriptSetOfPermisson.cs" />
+    <Compile Include="Migrations\201708301536055_ScriptSetOfPermisson.Designer.cs">
+      <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BindedKey.cs" />
+    <Compile Include="Models\Cassette.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Models\ContactType.cs" />
+    <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\CryptoChargeAccount.cs" />
+    <Compile Include="Models\CryptoCurrencyTransaction.cs" />
+    <Compile Include="Models\Dispute.cs" />
+    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
+    <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
+    <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
+    <Compile Include="Models\InterChange.cs" />
+    <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
+    <Compile Include="Models\InterfacesRepository\IReports.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
+    <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IGenericRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IError.cs" />
+    <Compile Include="Models\InterfacesRepository\IPartnerContactRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ISurchargeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalContactRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\ITerminalRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IUserRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IPartnerRepository.cs" />
+    <Compile Include="Models\FormsViewModels\PartnerContactFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\PartnerFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\UserFormViewModel.cs" />
+    <Compile Include="Models\InterfacesRepository\IVaultCashRepository.cs" />
+    <Compile Include="Models\LoadCash.cs" />
+    <Compile Include="Models\LocationType.cs" />
+    <Compile Include="Models\Make.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\Partner.cs" />
+    <Compile Include="Models\PartnerContact.cs" />
+    <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\ReportGroupModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\SetOfPermission.cs" />
+    <Compile Include="Models\State.cs" />
+    <Compile Include="Models\Surcharge.cs" />
+    <Compile Include="Models\Terminal.cs" />
+    <Compile Include="Models\TerminalAlert.cs" />
+    <Compile Include="Models\TerminalAlertConfig.cs" />
+    <Compile Include="Models\TerminalContact.cs" />
+    <Compile Include="Models\TerminalMessage.cs" />
+    <Compile Include="Models\TerminalPicture.cs" />
+    <Compile Include="Models\TerminalWorkingHours.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionStatistic.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\VaultCash.cs" />
+    <Compile Include="PersistanceRepository\AccountRepository.cs" />
+    <Compile Include="PersistanceRepository\ApiATM.cs" />
+    <Compile Include="PersistanceRepository\DisputeRepository.cs" />
+    <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportsRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
+    <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
+    <Compile Include="PersistanceRepository\GenericRepository.cs" />
+    <Compile Include="PersistanceRepository\PartnerContactRepository.cs" />
+    <Compile Include="PersistanceRepository\PartnerRepository.cs" />
+    <Compile Include="PersistanceRepository\SurchargeRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
+    <Compile Include="PersistanceRepository\TerminalRepository.cs" />
+    <Compile Include="PersistanceRepository\UserRepository.cs" />
+    <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\adminsb\.gitignore" />
+    <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Content\adminsb\data\morris-data.js" />
+    <Content Include="Content\adminsb\dist\css\sb-admin-2.css" />
+    <Content Include="Content\adminsb\dist\css\sb-admin-2.min.css" />
+    <Content Include="Content\adminsb\dist\js\sb-admin-2.js" />
+    <Content Include="Content\adminsb\dist\js\sb-admin-2.min.js" />
+    <Content Include="Content\adminsb\gulpfile.js" />
+    <Content Include="Content\adminsb\index.html" />
+    <Content Include="Content\adminsb\js\sb-admin-2.js" />
+    <Content Include="Content\adminsb\pages\blank.html" />
+    <Content Include="Content\adminsb\pages\buttons.html" />
+    <Content Include="Content\adminsb\pages\flot.html" />
+    <Content Include="Content\adminsb\pages\forms.html" />
+    <Content Include="Content\adminsb\pages\grid.html" />
+    <Content Include="Content\adminsb\pages\icons.html" />
+    <Content Include="Content\adminsb\pages\index.html" />
+    <Content Include="Content\adminsb\pages\login.html" />
+    <Content Include="Content\adminsb\pages\morris.html" />
+    <Content Include="Content\adminsb\pages\notifications.html" />
+    <Content Include="Content\adminsb\pages\panels-wells.html" />
+    <Content Include="Content\adminsb\pages\tables.html" />
+    <Content Include="Content\adminsb\pages\typography.html" />
+    <Content Include="Content\adminsb\vendor\bootstrap-social\bootstrap-social.css" />
+    <Content Include="Content\adminsb\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\adminsb\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\adminsb\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\adminsb\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\adminsb\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables-plugins\dataTables.bootstrap.css" />
+    <Content Include="Content\adminsb\vendor\datatables-plugins\dataTables.bootstrap.js" />
+    <Content Include="Content\adminsb\vendor\datatables-plugins\dataTables.bootstrap.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables-plugins\index.html" />
+    <Content Include="Content\adminsb\vendor\datatables-responsive\dataTables.responsive.css" />
+    <Content Include="Content\adminsb\vendor\datatables-responsive\dataTables.responsive.js" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.foundation.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.material.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.material.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.uikit.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\jquery.dataTables.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\adminsb\vendor\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\adminsb\vendor\datatables\images\favicon.ico" />
+    <Content Include="Content\adminsb\vendor\datatables\images\sort_asc.png" />
+    <Content Include="Content\adminsb\vendor\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Content\adminsb\vendor\datatables\images\sort_both.png" />
+    <Content Include="Content\adminsb\vendor\datatables\images\sort_desc.png" />
+    <Content Include="Content\adminsb\vendor\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.foundation.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.material.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.material.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.uikit.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\jquery.dataTables.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Content\adminsb\vendor\datatables\js\jquery.js" />
+    <Content Include="Content\adminsb\vendor\flot-tooltip\jquery.flot.tooltip.js" />
+    <Content Include="Content\adminsb\vendor\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\adminsb\vendor\flot-tooltip\jquery.flot.tooltip.source.js" />
+    <Content Include="Content\adminsb\vendor\flot\excanvas.js" />
+    <Content Include="Content\adminsb\vendor\flot\excanvas.min.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.colorhelpers.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.canvas.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.categories.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.crosshair.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.errorbars.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.image.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.navigate.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.pie.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.resize.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.selection.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.stack.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.symbol.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.threshold.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.flot.time.js" />
+    <Content Include="Content\adminsb\vendor\flot\jquery.js" />
+    <Content Include="Content\adminsb\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\adminsb\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\adminsb\vendor\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Content\adminsb\vendor\jquery\jquery.js" />
+    <Content Include="Content\adminsb\vendor\jquery\jquery.min.js" />
+    <Content Include="Content\adminsb\vendor\metisMenu\metisMenu.css" />
+    <Content Include="Content\adminsb\vendor\metisMenu\metisMenu.js" />
+    <Content Include="Content\adminsb\vendor\metisMenu\metisMenu.min.css" />
+    <Content Include="Content\adminsb\vendor\metisMenu\metisMenu.min.js" />
+    <Content Include="Content\adminsb\vendor\morrisjs\morris.css" />
+    <Content Include="Content\adminsb\vendor\morrisjs\morris.js" />
+    <Content Include="Content\adminsb\vendor\morrisjs\morris.min.js" />
+    <Content Include="Content\adminsb\vendor\raphael\raphael.js" />
+    <Content Include="Content\adminsb\vendor\raphael\raphael.min.js" />
+    <Content Include="Content\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\assets\css\styles.min.css" />
+    <Content Include="Content\assets\fonts\font-awesome.min.css" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\assets\fonts\ionicons.min.css" />
+    <Content Include="Content\assets\fonts\ionicons.svg" />
+    <Content Include="Content\assets\img\1.jpg" />
+    <Content Include="Content\assets\img\2.jpg" />
+    <Content Include="Content\assets\img\3.jpg" />
+    <Content Include="Content\assets\img\320 320.png" />
+    <Content Include="Content\assets\img\Ariel-Sebastián-Ponceliz.jpg" />
+    <Content Include="Content\assets\img\corpo link bordeado gris .png" />
+    <Content Include="Content\assets\img\corpo link carrito.png" />
+    <Content Include="Content\assets\img\Corpo Sin Fondo.png" />
+    <Content Include="Content\assets\img\meeting.jpg" />
+    <Content Include="Content\assets\img\mountain_bg.jpg" />
+    <Content Include="Content\assets\img\Odyssey Group US.png" />
+    <Content Include="Content\assets\img\odyssey-atm-1.png" />
+    <Content Include="Content\assets\img\star-sky.jpg" />
+    <Content Include="Content\assets\js\jquery.min.js" />
+    <Content Include="Content\assets\js\script.min.js" />
+    <Content Include="Content\bootstrap-cosmo.min.css" />
+    <Content Include="Content\bootstrap-lumen.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min-superhero.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cosmo.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Octagon\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Octagon\assets\css\bootstrap.css" />
+    <Content Include="Octagon\assets\css\bootstrap.min.css" />
+    <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
+    <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
+    <Content Include="Octagon\assets\css\cosmo.css" />
+    <Content Include="Octagon\assets\css\Dashboard.css" />
+    <Content Include="Octagon\assets\css\Footer-Basic.css" />
+    <Content Include="Octagon\assets\css\Map-Clean.css" />
+    <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
+    <Content Include="Octagon\assets\css\sb-admin.css" />
+    <Content Include="Octagon\assets\css\sb-admin.min.css" />
+    <Content Include="Octagon\assets\css\sidebar.css" />
+    <Content Include="Octagon\assets\css\styles-1.css" />
+    <Content Include="Octagon\assets\css\styles.css" />
+    <Content Include="Octagon\assets\css\styles.min.css" />
+    <Content Include="Octagon\assets\css\styles2.css" />
+    <Content Include="Octagon\assets\data\flot-data.js" />
+    <Content Include="Octagon\assets\data\morris-data.js" />
+    <Content Include="Octagon\assets\fonts\font-awesome.min.css" />
+    <Content Include="Octagon\assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="Octagon\assets\fonts\simple-line-icons.min.css" />
+    <Content Include="Octagon\assets\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Octagon\assets\img\1.jpg" />
+    <Content Include="Octagon\assets\img\2.jpg" />
+    <Content Include="Octagon\assets\img\3.jpg" />
+    <Content Include="Octagon\assets\img\404.jpg" />
+    <Content Include="Octagon\assets\img\carousel1.jpg" />
+    <Content Include="Octagon\assets\img\carousel2.jpg" />
+    <Content Include="Octagon\assets\img\carousel3.jpg" />
+    <Content Include="Octagon\assets\img\eth-16x16.png" />
+    <Content Include="Octagon\assets\img\eth-32x32.png" />
+    <Content Include="Octagon\assets\img\favicon-32x32.png" />
+    <Content Include="Octagon\assets\img\logo.jpg" />
+    <Content Include="Octagon\assets\img\logo.png" />
+    <Content Include="Octagon\assets\img\ltc-16x16.png" />
+    <Content Include="Octagon\assets\img\ltc-32x32.png" />
+    <Content Include="Octagon\assets\img\map.jpg" />
+    <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
+    <Content Include="Octagon\assets\js\inputmask.js" />
+    <Content Include="Octagon\assets\js\jquery.min.js" />
+    <Content Include="Octagon\assets\js\sb-admin-2.js" />
+    <Content Include="Octagon\assets\js\script.min.js" />
+    <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.css" />
+    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables-plugins\dataTables.bootstrap.css" />
+    <Content Include="Octagon\assets\vendor\datatables-plugins\dataTables.bootstrap.js" />
+    <Content Include="Octagon\assets\vendor\datatables-plugins\dataTables.bootstrap.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables-plugins\index.html" />
+    <Content Include="Octagon\assets\vendor\datatables-responsive\dataTables.responsive.css" />
+    <Content Include="Octagon\assets\vendor\datatables-responsive\dataTables.responsive.js" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.bootstrap.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.foundation.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.foundation.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.jqueryui.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.material.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.material.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.semanticui.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.semanticui.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.uikit.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\dataTables.uikit.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\jquery.dataTables.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\jquery.dataTables.min.css" />
+    <Content Include="Octagon\assets\vendor\datatables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Octagon\assets\vendor\datatables\images\favicon.ico" />
+    <Content Include="Octagon\assets\vendor\datatables\images\sort_asc.png" />
+    <Content Include="Octagon\assets\vendor\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Octagon\assets\vendor\datatables\images\sort_both.png" />
+    <Content Include="Octagon\assets\vendor\datatables\images\sort_desc.png" />
+    <Content Include="Octagon\assets\vendor\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.bootstrap.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.bootstrap.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.bootstrap4.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.foundation.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.foundation.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.jqueryui.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.jqueryui.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.material.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.material.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.semanticui.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.semanticui.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.uikit.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\dataTables.uikit.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\jquery.dataTables.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\jquery.dataTables.min.js" />
+    <Content Include="Octagon\assets\vendor\datatables\js\jquery.js" />
+    <Content Include="Octagon\assets\vendor\dist\css\sb-admin-2.css" />
+    <Content Include="Octagon\assets\vendor\dist\css\sb-admin-2.min.css" />
+    <Content Include="Octagon\assets\vendor\dist\js\sb-admin-2.js" />
+    <Content Include="Octagon\assets\vendor\dist\js\sb-admin-2.min.js" />
+    <Content Include="Octagon\assets\vendor\flot-tooltip\jquery.flot.tooltip.js" />
+    <Content Include="Octagon\assets\vendor\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="Octagon\assets\vendor\flot-tooltip\jquery.flot.tooltip.source.js" />
+    <Content Include="Octagon\assets\vendor\flot\excanvas.js" />
+    <Content Include="Octagon\assets\vendor\flot\excanvas.min.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.colorhelpers.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.canvas.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.categories.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.crosshair.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.errorbars.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.image.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.navigate.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.pie.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.resize.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.selection.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.stack.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.symbol.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.threshold.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.flot.time.js" />
+    <Content Include="Octagon\assets\vendor\flot\jquery.js" />
+    <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Octagon\assets\vendor\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Octagon\assets\vendor\jquery\jquery.js" />
+    <Content Include="Octagon\assets\vendor\jquery\jquery.min.js" />
+    <Content Include="Octagon\assets\vendor\metisMenu\metisMenu.css" />
+    <Content Include="Octagon\assets\vendor\metisMenu\metisMenu.js" />
+    <Content Include="Octagon\assets\vendor\metisMenu\metisMenu.min.css" />
+    <Content Include="Octagon\assets\vendor\metisMenu\metisMenu.min.js" />
+    <Content Include="Octagon\assets\vendor\morrisjs\morris.css" />
+    <Content Include="Octagon\assets\vendor\morrisjs\morris.js" />
+    <Content Include="Octagon\assets\vendor\morrisjs\morris.min.js" />
+    <Content Include="Octagon\assets\vendor\raphael\raphael.js" />
+    <Content Include="Octagon\assets\vendor\raphael\raphael.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\adminsb\bower.json" />
+    <Content Include="Content\adminsb\less\mixins.less" />
+    <Content Include="Content\adminsb\less\sb-admin-2.less" />
+    <Content Include="Content\adminsb\less\variables.less" />
+    <Content Include="Content\adminsb\LICENSE" />
+    <Content Include="Content\adminsb\package.json" />
+    <Content Include="Content\adminsb\README.md" />
+    <Content Include="Content\adminsb\vendor\bootstrap-social\bootstrap-social.less" />
+    <Content Include="Content\adminsb\vendor\bootstrap-social\bootstrap-social.scss" />
+    <Content Include="Content\adminsb\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\adminsb\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\adminsb\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\adminsb\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\adminsb\vendor\datatables-responsive\dataTables.responsive.scss" />
+    <Content Include="Content\adminsb\vendor\datatables\images\Sorting icons.psd" />
+    <Content Include="Content\adminsb\vendor\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\adminsb\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\animated.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\core.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\extras.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\icons.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\larger.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\list.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\path.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\spinning.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\less\variables.less" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_extras.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_spinning.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\adminsb\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\assets\.DS_Store" />
+    <Content Include="Content\assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\assets\fonts\FontAwesome.otf" />
+    <Content Include="Content\assets\fonts\ionicons.eot" />
+    <Content Include="Content\assets\fonts\ionicons.ttf" />
+    <Content Include="Content\assets\fonts\ionicons.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Octagon\assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="Octagon\assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Octagon\assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="Octagon\assets\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Octagon\assets\fonts\FontAwesome.otf" />
+    <Content Include="Octagon\assets\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Octagon\assets\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Octagon\assets\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Octagon\assets\fonts\Simple-Line-Icons.woff2" />
+    <Content Include="Octagon\assets\less\mixins.less" />
+    <Content Include="Octagon\assets\less\sb-admin-2.less" />
+    <Content Include="Octagon\assets\less\variables.less" />
+    <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.less" />
+    <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.scss" />
+    <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Octagon\assets\vendor\datatables-responsive\dataTables.responsive.scss" />
+    <Content Include="Octagon\assets\vendor\datatables\images\Sorting icons.psd" />
+    <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\animated.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\core.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\extras.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\icons.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\larger.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\list.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\path.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\spinning.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\variables.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_extras.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_spinning.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\export.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\Search.js" />
+    <Content Include="Scripts\User.js" />
+    <Content Include="Scripts\xpopulate.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdminSB.cshtml" />
+    <Content Include="Views\Shared\Sections\Header.cshtml" />
+    <Content Include="Views\Shared\Sections\Old Views\NavBarOLD.cshtml" />
+    <Content Include="Views\Shared\Sections\Old Views\ScriptsOLD.cshtml" />
+    <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
+    <Content Include="Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Partners\Index.cshtml" />
+    <Content Include="Views\Partners\Edit.cshtml" />
+    <Content Include="Views\Partners\Create.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\PartnerContacts\Create.cshtml" />
+    <Content Include="Views\PartnerContacts\Edit.cshtml" />
+    <Content Include="Views\Partners\Details.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Partners\Sections\Users.cshtml" />
+    <Content Include="Views\Partners\Sections\Partners.cshtml" />
+    <Content Include="Views\Partners\Sections\BankAccounts.cshtml" />
+    <Content Include="Views\Partners\Sections\Terminals.cshtml" />
+    <Content Include="Views\Users\Sections\BankAccounts.cshtml" />
+    <Content Include="Views\Users\Sections\GenralInfo.cshtml" />
+    <Content Include="Views\Users\Sections\Reports.cshtml" />
+    <Content Include="Views\Users\Sections\Terminals.cshtml" />
+    <Content Include="Views\Partners\Sections\GeneralInfo.cshtml" />
+    <Content Include="Views\Logos\Index.cshtml" />
+    <Content Include="Views\Partners\Search.cshtml" />
+    <Content Include="Views\PartnerContacts\Index.cshtml" />
+    <Content Include="Views\Partners\Sections\Contacts.cshtml" />
+    <Content Include="Views\PartnerContacts\Search.cshtml" />
+    <Content Include="Views\BankAccount\Create.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
+    <Content Include="Views\BankAccount\Details.cshtml" />
+    <Content Include="Views\BankAccount\Edit.cshtml" />
+    <Content Include="Views\BankAccount\Index.cshtml" />
+    <Content Include="Views\Terminals\Create.cshtml" />
+    <Content Include="Views\Terminals\Delete.cshtml" />
+    <Content Include="Views\Terminals\Details.cshtml" />
+    <Content Include="Views\Terminals\Edit.cshtml" />
+    <Content Include="Views\Terminals\Index.cshtml" />
+    <Content Include="Views\BankAccount\Search.cshtml" />
+    <Content Include="Views\Terminals\Search.cshtml" />
+    <Content Include="Views\Terminals\Sections\GeneralInfo.cshtml" />
+    <Content Include="Views\Terminals\Sections\Documents.cshtml" />
+    <Content Include="Views\Terminals\Sections\Notes.cshtml" />
+    <Content Include="Views\Terminals\Sections\Contacts.cshtml" />
+    <Content Include="Views\Terminals\Sections\Interchanges.cshtml" />
+    <Content Include="Views\Terminals\Sections\Cassettes.cshtml" />
+    <Content Include="Views\TerminalContacts\Create.cshtml" />
+    <Content Include="Views\TerminalContacts\Delete.cshtml" />
+    <Content Include="Views\TerminalContacts\Details.cshtml" />
+    <Content Include="Views\TerminalContacts\Index.cshtml" />
+    <Content Include="Views\PartnerContacts\Details.cshtml" />
+    <Content Include="Views\TerminalContacts\Search.cshtml" />
+    <Content Include="Views\Partners\Delete.cshtml" />
+    <Content Include="Views\TerminalContacts\Edit.cshtml" />
+    <Content Include="Views\VaultCash\Index.cshtml" />
+    <Content Include="Views\PartnerContacts\Delete.cshtml" />
+    <Content Include="Views\Users\Sections\Alerts.cshtml" />
+    <Content Include="Views\Users\Sections\GetAllBankAccount.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Search.cshtml" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Terminals\Sections\EditTerminalConfig.cshtml" />
+    <Content Include="Views\Terminals\Sections\ConfigNotification.cshtml" />
+    <Content Include="Views\VaultCash\Create.cshtml" />
+    <Content Include="Views\VaultCash\Delete.cshtml" />
+    <Content Include="Views\VaultCash\Details.cshtml" />
+    <Content Include="Views\VaultCash\Edit.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\TerminalMessages\Index.cshtml" />
+    <Content Include="Views\TerminalMessages\MessagesDetail.cshtml" />
+    <Content Include="Views\Surcharge\Index.cshtml" />
+    <Content Include="Views\Surcharge\Delete.cshtml" />
+    <Content Include="Views\Surcharge\SurchargeForm.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutOctagon.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
+    <Content Include="Views\Shared\Sections\Scripts.cshtml" />
+    <Content Include="Views\Shared\Sections\Sidebar.cshtml" />
+    <Content Include="Views\Shared\Sections\NavBar.cshtml" />
+    <Content Include="Views\TerminalAlerts\Create.cshtml" />
+    <Content Include="Views\TerminalAlerts\Delete.cshtml" />
+    <Content Include="Views\TerminalAlerts\Details.cshtml" />
+    <Content Include="Views\TerminalAlerts\Edit.cshtml" />
+    <Content Include="Views\TerminalAlerts\Index.cshtml" />
+    <Content Include="Views\Shared\Sections\Footer.cshtml" />
+    <Content Include="Views\Terminals\Modals\DeleteTerminalModal.cshtml" />
+    <Content Include="Views\Partners\Modals\DeletePartner.cshtml" />
+    <Content Include="Views\Disputes\Create.cshtml" />
+    <Content Include="Views\Disputes\Delete.cshtml" />
+    <Content Include="Views\Disputes\Details.cshtml" />
+    <Content Include="Views\Disputes\Edit.cshtml" />
+    <Content Include="Views\Disputes\Index.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
+    <Content Include="Views\Error\NotFoundError.cshtml" />
+    <Content Include="Views\Error\BadGatewayError.cshtml" />
+    <Content Include="Views\Error\ServiceUnavailableError.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Terminals\Sections\BindKey.cshtml" />
+    <Content Include="Views\InterChange\InterChangeForm.cshtml" />
+    <Content Include="Views\Shared\_LayoutEdits.cshtml" />
+    <Content Include="Views\Error\_PartialAlert.cshtml" />
+    <Content Include="Views\_PartialAlert.cshtml" />
+    <Content Include="Views\Reports\Create.cshtml" />
+    <Content Include="Views\Reports\Delete.cshtml" />
+    <Content Include="Views\Reports\Edit.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\RepoDashboard.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialCashLoadTable.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
+    <Content Include="Views\ReportsSmart\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
+    <Content Include="Views\ReportGroup\Create.cshtml" />
+    <Content Include="Views\ReportGroup\Delete.cshtml" />
+    <Content Include="Views\ReportGroup\Details.cshtml" />
+    <Content Include="Views\ReportGroup\Edit.cshtml" />
+    <Content Include="Views\ReportGroup\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708160653179_Initial.resx">
+      <DependentUpon>201708160653179_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708160909049_ModelsUpdated.resx">
+      <DependentUpon>201708160909049_ModelsUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708162239290_AddedCountryConfiguration.resx">
+      <DependentUpon>201708162239290_AddedCountryConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170237248_DataAnnotationsAdded.resx">
+      <DependentUpon>201708170237248_DataAnnotationsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170249524_UpdatedDataNotations.resx">
+      <DependentUpon>201708170249524_UpdatedDataNotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172118297_testing.resx">
+      <DependentUpon>201708172118297_testing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172211410_AddCountryScript.resx">
+      <DependentUpon>201708172211410_AddCountryScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172223546_AddStatesScript.resx">
+      <DependentUpon>201708172223546_AddStatesScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708172230006_AddCitiesScript.resx">
+      <DependentUpon>201708172230006_AddCitiesScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708181605364_AddedPermissions.resx">
+      <DependentUpon>201708181605364_AddedPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708181648395_AddedSetOfPermissions.resx">
+      <DependentUpon>201708181648395_AddedSetOfPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708181939342_AddFieldUserModel.resx">
+      <DependentUpon>201708181939342_AddFieldUserModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708190230422_Updated2.resx">
+      <DependentUpon>201708190230422_Updated2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191633395_UpdateulongToLong.resx">
+      <DependentUpon>201708191633395_UpdateulongToLong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191639108_TestToCreateANewPartner.resx">
+      <DependentUpon>201708191639108_TestToCreateANewPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708191649073_UpdatePartnerId.resx">
+      <DependentUpon>201708191649073_UpdatePartnerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708192125217_ChangeIsLocked.resx">
+      <DependentUpon>201708192125217_ChangeIsLocked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708211637076_Pending.resx">
+      <DependentUpon>201708211637076_Pending.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708231758444_UpdatedUser.resx">
+      <DependentUpon>201708231758444_UpdatedUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708231807479_ChangedSoftDelete.resx">
+      <DependentUpon>201708231807479_ChangedSoftDelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708231817015_Last.resx">
+      <DependentUpon>201708231817015_Last.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282054263_ChangedCityNotRequired2.resx">
+      <DependentUpon>201708282054263_ChangedCityNotRequired2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282213412_ChangedPhoneFromLongToString.resx">
+      <DependentUpon>201708282213412_ChangedPhoneFromLongToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708282250512_ChangedPhoneFromLongToString2.resx">
+      <DependentUpon>201708282250512_ChangedPhoneFromLongToString2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709030055313_UniqueCollumnsInPartners.resx">
+      <DependentUpon>201709030055313_UniqueCollumnsInPartners.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709030056438_UniqueCollumnsInPartnersEmail.resx">
+      <DependentUpon>201709030056438_UniqueCollumnsInPartnersEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709052040597_UniquePartnerContactEmail.resx">
+      <DependentUpon>201709052040597_UniquePartnerContactEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.resx">
+      <DependentUpon>201709131942026_MigrationAPartirdeLaCreacionDeTerminalHastaBankAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132110567_ActualizacionTerminal.resx">
+      <DependentUpon>201709132110567_ActualizacionTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132119208_TerminalPictures.resx">
+      <DependentUpon>201709132119208_TerminalPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132130326_Notes.resx">
+      <DependentUpon>201709132130326_Notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132136470_Event.resx">
+      <DependentUpon>201709132136470_Event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132141168_Documents.resx">
+      <DependentUpon>201709132141168_Documents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.resx">
+      <DependentUpon>201709132151411_LoadCashYAgregueAnterioresModelosALDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132201470_Transactions.resx">
+      <DependentUpon>201709132201470_Transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132207182_Contracts.resx">
+      <DependentUpon>201709132207182_Contracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132231438_ActualizaciondeTerminals.resx">
+      <DependentUpon>201709132231438_ActualizaciondeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709132237139_UpdatedBankAccountConCollectionDeTerminals.resx">
+      <DependentUpon>201709132237139_UpdatedBankAccountConCollectionDeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140051236_ActualizacionStartDateEnContracts.resx">
+      <DependentUpon>201709140051236_ActualizacionStartDateEnContracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140143264_VaultCash.resx">
+      <DependentUpon>201709140143264_VaultCash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140220105_Surcharges.resx">
+      <DependentUpon>201709140220105_Surcharges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709140234360_InterChange.resx">
+      <DependentUpon>201709140234360_InterChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709141906082_BankAccountActualizado.resx">
+      <DependentUpon>201709141906082_BankAccountActualizado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142127198_PopulateLocationTypes.resx">
+      <DependentUpon>201709142127198_PopulateLocationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142134115_PopulateMakes.resx">
+      <DependentUpon>201709142134115_PopulateMakes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142136084_PopulateModels.resx">
+      <DependentUpon>201709142136084_PopulateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709142154436_UpdateTerminalTable.resx">
+      <DependentUpon>201709142154436_UpdateTerminalTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709151514522_ActualizarTerminal.resx">
+      <DependentUpon>201709151514522_ActualizarTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709151552531_ActualizarTerminal2.resx">
+      <DependentUpon>201709151552531_ActualizarTerminal2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152215114_TerminalAddedCryptoTransactions.resx">
+      <DependentUpon>201709152215114_TerminalAddedCryptoTransactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709152220553_ActualizacionCrytoModel.resx">
+      <DependentUpon>201709152220553_ActualizacionCrytoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709160237198_ActualizadoPhoneEnTerminal.resx">
+      <DependentUpon>201709160237198_ActualizadoPhoneEnTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709181911451_AddedCassette.resx">
+      <DependentUpon>201709181911451_AddedCassette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709191550085_LastTransaction.resx">
+      <DependentUpon>201709191550085_LastTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709191957147_SerialNumberRectificadodeNombre.resx">
+      <DependentUpon>201709191957147_SerialNumberRectificadodeNombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709192010164_SurchageTypeArreglarNombre.resx">
+      <DependentUpon>201709192010164_SurchageTypeArreglarNombre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709201854589_UpdatedTerminalNulleableLastTransactionId.resx">
+      <DependentUpon>201709201854589_UpdatedTerminalNulleableLastTransactionId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709211620330_UpdatedTerminalCrypto.resx">
+      <DependentUpon>201709211620330_UpdatedTerminalCrypto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251458056_BindedKeys.resx">
+      <DependentUpon>201709251458056_BindedKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251515371_Disputes.resx">
+      <DependentUpon>201709251515371_Disputes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709271928089_AddedBoolBindedKeys.resx">
+      <DependentUpon>201709271928089_AddedBoolBindedKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709280242402_CambiadoChargedByLoadedByEnTerminal.resx">
+      <DependentUpon>201709280242402_CambiadoChargedByLoadedByEnTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709281540200_CambiodeNombreTransactionStatistics.resx">
+      <DependentUpon>201709281540200_CambiodeNombreTransactionStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282110209_CampoFixAmmounEnTerminales.resx">
+      <DependentUpon>201709282110209_CampoFixAmmounEnTerminales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282113300_ArregladoAmmountPorAmountErrorGramatical.resx">
+      <DependentUpon>201709282113300_ArregladoAmmountPorAmountErrorGramatical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709282132023_ElimineCampoInterchangedeTerminals.resx">
+      <DependentUpon>201709282132023_ElimineCampoInterchangedeTerminals.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709292200097_EliminadoVaultCashAmount.resx">
+      <DependentUpon>201709292200097_EliminadoVaultCashAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300251235_AddedKeyToUser.resx">
+      <DependentUpon>201709300251235_AddedKeyToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300303349_UserNameUnique.resx">
+      <DependentUpon>201709300303349_UserNameUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709300355273_UserNameUniqueEliminado.resx">
+      <DependentUpon>201709300355273_UserNameUniqueEliminado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021626286_TerminalConfigAlert.resx">
+      <DependentUpon>201710021626286_TerminalConfigAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.resx">
+      <DependentUpon>201710051958596_cambiarRelacionUnoAUnoTerminalAlertConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062059595_quitarRelacionBD.resx">
+      <DependentUpon>201710062059595_quitarRelacionBD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710092022284_BankAccountBankName.resx">
+      <DependentUpon>201710092022284_BankAccountBankName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710100356557_InsertUserAdmin02.resx">
+      <DependentUpon>201710100356557_InsertUserAdmin02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.resx">
+      <DependentUpon>201710111811414_EliminarRequiredCampoSurchargeByPercentInTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111839188_Surcharge.resx">
+      <DependentUpon>201710111839188_Surcharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710112027426_TerminalId.resx">
+      <DependentUpon>201710112027426_TerminalId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710112040464_TerminalIdTerminalAlertConfig.resx">
+      <DependentUpon>201710112040464_TerminalIdTerminalAlertConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710121826015_TerminalDefaultBankAccount.resx">
+      <DependentUpon>201710121826015_TerminalDefaultBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710122043144_TerminalSurchargeFeeNewConfig.resx">
+      <DependentUpon>201710122043144_TerminalSurchargeFeeNewConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710122202388_FreeSurchargeFeePartnerContractDuration.resx">
+      <DependentUpon>201710122202388_FreeSurchargeFeePartnerContractDuration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131817088_SeatledVaultcashDeleted.resx">
+      <DependentUpon>201710131817088_SeatledVaultcashDeleted.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131904558_AddTerminalsAlerts.resx">
+      <DependentUpon>201710131904558_AddTerminalsAlerts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131956336_AddTerminalsAlerts2.resx">
+      <DependentUpon>201710131956336_AddTerminalsAlerts2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132121410_modifiedTerminalAlert.resx">
+      <DependentUpon>201710132121410_modifiedTerminalAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710172032557_PartnerUpdate.resx">
+      <DependentUpon>201710172032557_PartnerUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180534471_ElimineTodosLOsCamposUnique.resx">
+      <DependentUpon>201710180534471_ElimineTodosLOsCamposUnique.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710201826295_RemainingSurchargeFeeAndInterchangeFee.resx">
+      <DependentUpon>201710201826295_RemainingSurchargeFeeAndInterchangeFee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710231947520_SeCambioEmailPasswordUserNameDataAnotations.resx">
+      <DependentUpon>201710231947520_SeCambioEmailPasswordUserNameDataAnotations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710232152432_AddTerminalWorksHours.resx">
+      <DependentUpon>201710232152432_AddTerminalWorksHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710262026269_EditTerminalInactiveHours.resx">
+      <DependentUpon>201710262026269_EditTerminalInactiveHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710262053457_TableTerminalUpdatedDeletedSomeFields.resx">
+      <DependentUpon>201710262053457_TableTerminalUpdatedDeletedSomeFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710271521540_updateFieldInactivePeriodTerminal.resx">
+      <DependentUpon>201710271521540_updateFieldInactivePeriodTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061637175_addFieldToDispute.resx">
+      <DependentUpon>201711061637175_addFieldToDispute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062143567_updateCassetteFields.resx">
+      <DependentUpon>201711062143567_updateCassetteFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711062330445_EliminadoDefaultBankAccountTerminal.resx">
+      <DependentUpon>201711062330445_EliminadoDefaultBankAccountTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.resx">
+      <DependentUpon>201711080426156_RemovingEMVMinimunCashPropertyFromTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092202573_UpdateDisputeTransaction.resx">
+      <DependentUpon>201711092202573_UpdateDisputeTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092257599_UpdatingInterChange.resx">
+      <DependentUpon>201711092257599_UpdatingInterChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711092322307_UpdatingInterChangeSplitAmount.resx">
+      <DependentUpon>201711092322307_UpdatingInterChangeSplitAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141703089_alterFieldTerminalIdByIndexIdDispute.resx">
+      <DependentUpon>201711141703089_alterFieldTerminalIdByIndexIdDispute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142011492_deleteReferenceTransaction.resx">
+      <DependentUpon>201711142011492_deleteReferenceTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201540593_report.resx">
+      <DependentUpon>201711201540593_report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201708043_AddLocationNameTerminal.resx">
+      <DependentUpon>201711201708043_AddLocationNameTerminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280455353_addreportsgroup.resx">
+      <DependentUpon>201711280455353_addreportsgroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280502145_addreportsgroup2.resx">
+      <DependentUpon>201711280502145_addreportsgroup2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AddNewPartner.resx">
+      <DependentUpon>AddNewPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\DeleteLogoModel.resx">
+      <DependentUpon>DeleteLogoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708301536055_ScriptSetOfPermisson.resx">
+      <DependentUpon>201708301536055_ScriptSetOfPermisson.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51141</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51141/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
