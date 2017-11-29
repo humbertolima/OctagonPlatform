@@ -1,0 +1,106 @@
+﻿@model IEnumerable<OctagonPlatform.Models.TerminalAlert>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.CashAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlarmChestdooropen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlarmTopdooropen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AlarmSupervisoractive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Receiptprinterpaperstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptPrinterRibbonStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JournalPrinterPaperStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JournalPrinterRibbonStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoteStatusDispenser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptPrinter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JournalPrinter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dispenser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommunicationsSystem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CardReader)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.CashAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlarmChestdooropen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlarmTopdooropen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AlarmSupervisoractive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Receiptprinterpaperstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiptPrinterRibbonStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JournalPrinterPaperStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JournalPrinterRibbonStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoteStatusDispenser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiptPrinter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JournalPrinter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dispenser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommunicationsSystem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CardReader)
+        </td>
+    </tr>
+}
+
+</table>

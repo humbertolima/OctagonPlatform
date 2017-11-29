@@ -1,0 +1,162 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.PartnerFormViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="alingleft">
+    <br>
+    <h3> Create Partner</h3>
+    <hr>
+    @using (Html.BeginForm("Create", "Partners"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <p>
+            <!--<strong>All fields are required.</strong>-->
+
+            @ViewBag.Error
+            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+            <p>
+
+            <div class="row rowCreatePartner" style="width: 1100px">
+                <div class="col-md-4">
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.BusinessName, htmlAttributes: new {data_toggle="tooltip", title="Name of the company" })
+                        <i>@Html.TextBoxFor(m => m.BusinessName, new {@class = "form-control", autofocus = "autofocus", placeholder = "Company's Name", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.BusinessName)
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ParentId, htmlAttributes: new { data_toggle = "tooltip", title = "Parent of the company" })
+                        @Html.DropDownListFor(m => m.ParentId, new SelectList(Model.Parents, "Id", "BusinessName"), "", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.ParentId)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Status, htmlAttributes: new { data_toggle = "tooltip", title = "Active, Inactive, Incomplete" })
+                        @Html.EnumDropDownListFor(m => m.Status, "", new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Status)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Address1, htmlAttributes: new { data_toggle = "tooltip", title = "Address of the company" })
+                        <i>@Html.TextBoxFor(m => m.Address1, new {@class = "form-control", placeholder = "124 SW 105 Ave", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.Address1)
+                    </div>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Address2, htmlAttributes: new { data_toggle = "tooltip", title = "Optional" })
+                        <i>@Html.TextBoxFor(m => m.Address2, new {@class = "form-control", autofocus = "autofocus", placeholder = "Apto 203, 33181", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.Address2)
+                    </div>
+                    <div class="form-group">
+                        <div id="Countries">
+                            <label for="Countries" data-toggle = "tooltip", title = "Parent's Country">Country</label>
+                            <select required id="CountryId" name="CountryId" class="form-control">
+                                <option value="231">United States</option>
+                                @foreach (var item in Model.Countries)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.CountryId)
+
+                        </div>
+                        <div>
+                            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="States">
+                            <label for="States" data-toggle = "tooltip", title = "Parent's State">State</label>
+                            <select required id="StatesId" name="StateId" class="form-control">
+                                <option value="3930">Florida</option>
+                                @foreach (var item in Model.States)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.StateId)
+
+                        </div>
+                        <div>
+                            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="Cities">
+                            <label for="Cities" data-toggle = "tooltip", title = "Parent's City">City</label>
+                            <select id="CitiesId" name="CityId" class="form-control">
+                                <option value="43769">Miami</option>
+                                @foreach (var item in Model.Cities)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.CityId)
+                        </div>
+                        <div>
+                            <img id="loading" style="display: none" src="~/Content/loading_icon.gif" alt=""/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, htmlAttributes: new { data_toggle = "tooltip", title = "A contact's email address"})
+                        <i>@Html.TextBoxFor(m => m.Email, new {@class = "form-control", autofocus = "autofocus", placeholder = "test@email.com", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.WorkPhone, htmlAttributes: new { data_toggle = "tooltip", title = "Office phone number" })
+                        <i>@Html.TextBoxFor(m => m.WorkPhone, new {@class = "form-control phone", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.WorkPhone)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Mobile, htmlAttributes: new { data_toggle = "tooltip", title = "Cellphone number" })
+                        <i>@Html.TextBoxFor(m => m.Mobile, new {@class = "form-control phone", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.Mobile)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Fax, htmlAttributes: new { data_toggle = "tooltip", title = "Fax number" })
+                        <i>@Html.TextBoxFor(m => m.Fax, new {@class = "form-control phone", autofocus = "autofocus", placeholder = "+1 (305) 227 4187", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.Fax)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.WebSite, htmlAttributes: new { data_toggle = "tooltip", title = "Company's website" })
+                        <i>@Html.TextBoxFor(m => m.WebSite, new {@class = "form-control", autofocus = "autofocus", placeholder = "wwww.website.com", id = "PlaceHolderForm"})</i>
+                        @Html.ValidationMessageFor(m => m.WebSite)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="padding-bottom: 20px">
+            <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/xpopulate")
+
+    <!--Phone number script-->
+    <script src="~/Octagon/assets/js/inputmask.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $('.phone').mask('(999) 999-9999');
+    </script>
+    <!--END of Phone number script-->
+    
+    <!--Tip script-->
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+    <!--END of tip script-->
+}

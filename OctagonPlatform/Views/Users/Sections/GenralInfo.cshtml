@@ -1,0 +1,52 @@
+﻿@model OctagonPlatform.Models.User
+
+@Html.AntiForgeryToken()
+<h3 class="alert-info">General Info</h3>
+
+<div class="">
+    @Html.LabelFor(m => m.UserName)
+    @Model.UserName
+</div>
+<div class="">
+    @Html.LabelFor(m => m.Status)
+    @Model.Status
+</div>
+<div class="">
+    @Html.LabelFor(m => m.Name)
+    @Model.Name @Model.LastName
+</div>
+<div class="">
+    @Html.LabelFor(m => m.Email)
+    @Model.Email
+</div>
+<div class="">
+    @Html.LabelFor(m => m.Phone)
+    @Model.Phone
+</div>
+<div class="">
+    @Html.LabelFor(m => m.IsLocked)
+    @Model.IsLocked
+</div>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+        <li class="active">
+            @Html.ActionLink(
+                linkText: "Edit",
+                actionName: "Edit",
+                controllerName: "Users",
+                routeValues: new
+                {
+                    Id = Model.Id
+                },
+                htmlAttributes: new {@class = "btn btn-primary"}
+                )
+        </li>
+
+
+    </ul>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

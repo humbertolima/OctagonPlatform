@@ -1,0 +1,85 @@
+﻿@model OctagonPlatform.Models.PartnerContact
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h3  class="alert-info">Contact Info</h3>
+
+<div class="form-group">
+
+    <label class="label-column">Partner Name: @Model.Partner.BusinessName</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Name: @Model.Name</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Last Name: @Model.LastName</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Email: @Model.Email</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Contact Type: @Model.ContactType.Name</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Phone: @Model.Phone</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Address1: @Model.Address1</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Address2: @Model.Address2</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Zip: @Model.Zip</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Created By: @Model.CreatedByName</label>
+</div>
+<div class="form-group">
+    <label class="label-column">Created At: @Model.CreatedAt</label>
+</div>
+@if (Model.UpdatedAt != null)
+{
+    <div class="form-group">
+        <label class="label-column">Updated: @Model.UpdatedAt</label>
+    </div>
+}
+@if (Model.UpdatedByName != null)
+{
+    <div class="form-group">
+        <label class="label-column">Updated: @Model.UpdatedByName</label>
+    </div>
+}
+<div class="form-group">
+    <label class="label-column">Country: @Model.Country.Name</label>
+</div>
+<div class="form-group">
+    <label class="label-column">State: @Model.State.Name</label>
+</div>
+<div class="form-group">
+    <label class="label-column">City: @Model.City.Name</label>
+</div>
+
+<div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+        @Html.ActionLink(
+            linkText: "Edit",
+            actionName: "Edit",
+            controllerName: "PartnerContacts",
+            routeValues: new
+            {
+                Model.Id
+            },
+            htmlAttributes: new
+            {
+                @type = "submit", @class = "btn btn-warning"
+
+            }
+            )
+    </div>
+</div>
+
+

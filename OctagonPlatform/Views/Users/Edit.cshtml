@@ -1,0 +1,156 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.UserEditFormViewModel
+
+@{
+    ViewBag.Title = "Edit User";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+<h3 class="alert-info">Edit User</h3>
+@using (Html.BeginForm("Edit", "Users"))
+{
+    <p class="alert alert-danger">
+        All fields are <strong>required.</strong>
+        @ViewBag.Error
+        @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+    </p>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
+    if (!string.IsNullOrEmpty(Model.Error))
+    {
+        <div class="alert alert-danger">
+            @Model.Error.ToString()
+        </div>
+    }
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.UserName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Status)
+        @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Status)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PartnerId)
+        @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.PartnerId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.IsLocked)
+        @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
+        @Html.ValidationMessageFor(m => m.IsLocked)
+    </div>
+
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>SetOf</th>
+            <th>All</th>
+            <th>Create</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.SetOfPermissions)       //Recorro cada uno de los grupos de permisos.
+        {
+            var temp = false;
+            var type = "";
+            var cheqCreate = "";
+            var cheqView = "";
+            var cheqEdit = "";
+            var cheqDelete = "";
+            foreach (var toCheck in Model.Permissions)      //recorro cada uno de los permisos que tiene el usuario.
+            {
+                if (toCheck.Id == 7)
+                { 
+
+                }
+                temp = item.Permissions.Contains(toCheck);  //true si el recorrido de todos los permisos se encuentra slguno de los permisos que tiene el usuario.
+                type = toCheck.Type;
+                if (temp)
+                {
+                    if (type == "Create")
+                    {
+                        cheqCreate= "checked";
+                    }
+                    if (type == "View")
+                    {
+                        cheqView= "checked";
+                    }
+                    if (type == "Edit")
+                    {
+                        cheqEdit= "checked";
+                    }
+                    if (type == "Delete")
+                    {
+                        cheqDelete= "checked";
+                    }
+                    //break;
+                }
+            }
+            <tr>
+                <td>@Html.Label(item.Name)</td>
+                <td><input type="checkbox" name="Permissions1" value=" " /></td>
+                <td><input type="checkbox" { @cheqCreate ; } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Id" /></td>
+                <td><input type="checkbox" { @cheqView } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="View").Id" /></td>
+                <td><input type="checkbox" { @cheqEdit } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Edit").Id" /></td>
+                <td><input type="checkbox" { @cheqDelete } name="Permissions1" value="@item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Delete").Id" /></td>
+
+                @*<td><input type="checkbox" name="Permissions1" value=" " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Create") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "View") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Edit") { item.Value.ToString(); } " /></td>
+                        <td><input type="checkbox" checked="@item.Selected" name="Permissions1" value="@if (item.Type == "Delete") { item.Value.ToString(); } " /></td>*@
+
+                @*<td>@Html.CheckBox(item.Permissions.FirstOrDefault(c=> c.SetOfPermissionId == item.Id && c.Type=="Create").Name,true)</td>
+                        <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "View").Name)</td>
+                        <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Edit").Name)</td>
+                        <td>@Html.CheckBox(item.Permissions.FirstOrDefault(c => c.SetOfPermissionId == item.Id && c.Type == "Delete").Name)</td>*@
+            </tr>
+        }
+
+    </table>
+    <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+            <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+

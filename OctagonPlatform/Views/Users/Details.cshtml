@@ -1,0 +1,68 @@
+﻿@model OctagonPlatform.Models.User
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h3 class="alert-info">User: <strong class="alert-link">@Model.UserName</strong></h3>
+
+
+@Html.HiddenFor(m => m.Id)
+<div id="generalInfo">
+    @Html.Partial("Sections/GenralInfo")
+</div>
+<br />
+<hr />
+<br />
+<h3>BankAccounts</h3>
+
+<div class="panel-group" style="width: 49%;float: right;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Assigned</h4>
+            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users", new { toAttach = true, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
+            <div id="addBankAccounts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel-group" style="width: 49%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                All Bank Accounts to asign
+            </h4>
+            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users", new { toAttach = false, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
+
+            <div id="bankAccounts" class="panel-collapse collapse">
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<br />
+<div id="terminals">
+    @Html.Partial("Sections/Terminals")
+</div>
+<br />
+<hr />
+<br />
+<div id="reports">
+    @Html.Partial("Sections/Reports")
+</div>
+<br />
+<hr />
+<br />
+<div id="alerts">
+    @Html.Partial("Sections/Alerts")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/user")
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}

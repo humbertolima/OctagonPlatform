@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @Html.Partial("Sections/Header")
+</head>
+<body>
+<div id="wrapper">
+    @Html.Partial("Sections/NavBar")
+    <div class="row">
+        <div class="col-md-2">@Html.Partial("Sections/Sidebar")</div>
+        <div class="col-md-10">
+            <div id="">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+   
+    <!-- /#page-wrapper -->
+</div>
+    <div class="navbar navbar-fixed-bottom">
+        @Html.Partial("Sections/Footer")
+    </div>
+<!-- /#wrapper -->
+
+@Html.Partial("Sections/Scripts")
+@RenderSection("scripts", false)
+
+</body>
+
+</html>

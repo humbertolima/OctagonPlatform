@@ -1,0 +1,63 @@
+﻿@model  OctagonPlatform.Models.FormsViewModels.UserBAViewModel
+
+<table class="table">
+    <tr>
+        <th>
+            NickName
+        </th>
+        <th>
+            RoutingNumber
+        </th>
+        <th>
+            AccountNumber
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            AccountType
+        </th>
+        <th></th>
+    </tr>
+    <tbody id="listOfBA">
+        @foreach (var item  in Model.BankAccounts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NickName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoutingNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountType)
+                </td>
+                <td>
+                    @{
+                        if (ViewBag.assigned == false)
+                        {
+                            <div>
+                                @Ajax.ActionLink("Attach", "Attach", "Users", new { bankAccountId = item.Id, userId = Model.UserId }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#BankAccounts" })
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                @Ajax.ActionLink("De-Attach", "DeAttach", "Users", new { bankAccountId = item.Id, userId = Model.UserId }, new AjaxOptions { UpdateTargetId = "addBankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#addBankAccounts" })
+                            </div>
+                        }
+                    }
+
+                </td>
+
+            </tr>
+                        }
+    </tbody>
+</table>

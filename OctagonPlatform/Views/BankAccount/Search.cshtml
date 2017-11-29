@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OctagonPlatform.Models.BankAccount>
+
+@foreach (var item in Model)
+{
+    if (!item.Deleted)
+    {
+        <tr class="info">
+            <td>@item.NickName</td>
+            <td>@item.BankName</td>
+            <td>@item.RoutingNumber</td>
+            <td>@item.AccountNumber</td>
+            <td>@item.NameOnCheck</td>
+            <td>@item.AccountType</td>
+            <td>@item.Phone</td>
+            <td>@item.Email</td>
+            <td>@item.Status</td>
+            <td>
+                <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                            linkText: "Edit",
+                                                            actionName: "Edit",
+                                                            controllerName: "BankAccount",
+                                                            routeValues: new
+                                                            {
+                                                                id = item.Id
+                                                            },
+                                                            htmlAttributes: null
+                                                            )
+            </td>
+            <td>
+                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                             linkText: "Delete",
+                                                             actionName: "Delete",
+                                                             controllerName: "BankAccount",
+                                                             routeValues: new
+                                                             {
+                                                                 id = item.Id
+                                                             },
+                                                             htmlAttributes: null
+                                                             )
+            </td>
+            <td>
+                <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                                linkText: "Details",
+                                                                actionName: "Details",
+                                                                controllerName: "BankAccount",
+                                                                routeValues: new
+                                                                {
+                                                                    id = item.Id
+                                                                },
+                                                                htmlAttributes: null
+                                                                )
+            </td>
+        </tr>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/search")
+}

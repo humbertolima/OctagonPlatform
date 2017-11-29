@@ -1,0 +1,162 @@
+﻿@model OctagonPlatform.Models.Terminal
+
+<h3 data-toggle="collapse" data-target="#getCassetes">Cassettes dw Info</h3>
+<div id="getCassetes" class="panel-collapse collapse">
+    <div>
+
+        <table>
+            <tbody>
+                @{
+                    foreach (var item in Model.Cassettes)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.AutoRecord
+                            </td>
+                            <td>
+                                @item.Denomination
+                            </td>
+                            <td>
+                                <button type="button" class="CassettesEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
+                            </td>
+                            <td>
+                                <button type="button" class="CassettesDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteCassetteModal">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+
+        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
+        @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
+        <div id="myModalCassettesEdit" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit</h3>
+
+                    @using (Html.BeginForm("SetCassettes", "Terminals"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("cassetteId")
+                        <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
+
+                        <input type="hidden" id="cassetteId" name="cassetteId">
+
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Cassettes.FirstOrDefault(x => x.TerminalId == Model.Id).Denomination)
+                            </div>
+                            <div class="form-group">
+                                @Html.CheckBox("AutoRecord")Auto Record
+                                @Html.ValidationMessage("AutoRecord")
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="myModalCassettesAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit</h3>
+
+                    @using (Html.BeginForm("SetCassettes", "Terminals"))
+                    {
+                        @Model
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
+
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                            <div class="form-group">
+                                <input type="text" id="denomination" name="denomination" value="">
+
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="autoRecord" name="autoRecord">
+
+                            </div>
+                                <div class="form-group">
+                                    <div class="col-lg-10 col-lg-offset-2">
+                                        <button type="reset" class="btn btn-default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="DeleteCassetteModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Delete Cassette</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this cassette? </p>
+                    </div>
+                    <div class="modal-footer">
+                        @using (Html.BeginForm("CassetteDelete", "Terminals", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("cassetteId")
+                            <input type="hidden" id="itemId" name="id" value="" />
+                            <div class="form-group">
+                                <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                                <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+<script>
+    $(document).on("click", ".CassettesEdit", function () {
+        var passedID = $(this).data('id');
+        $("#myModalCassettesEdit #cassetteId").val(passedID);
+    });
+</script>
+
+<script>
+    $(document).on("click", ".CassettesDelete", function () {
+        var passedID = $(this).data('id');
+        $("#DeleteCassetteModal #cassetteId").val(passedID);
+    });
+</script>
+
+
+
+
+

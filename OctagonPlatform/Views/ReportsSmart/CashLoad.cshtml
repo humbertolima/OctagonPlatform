@@ -1,0 +1,110 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.CashLoadViewModel
+@{
+    ViewBag.Title = "CashLoad";
+    
+    
+}
+
+<h2>CashLoad</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>reportModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TerminalId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TerminalId, new { htmlAttributes = new { @class = "form-control", @id = "terminal" ,@placeholder = "< All >"} })
+                @Html.ValidationMessageFor(model => model.TerminalId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Partner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner" } })
+                @Html.HiddenFor(model => model.PartnerId, new { id = "partnerid" })
+                @Html.ValidationMessageFor(model => model.Partner, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(b => b.Status, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+       
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control",@id = "StartDate",@readonly =""} })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @id = "EndDate", @readonly = "" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@Html.Partial("_PartialCashLoadTable")
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+   
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+   
+<script>
+    var projects = [{ value: "12", label: "Don Davis" }, { value: "17", label: "Stan Smith" }]
+
+    $(function () {
+
+       
+        $("#EndDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $("#StartDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $('#terminal').autocomplete({
+            source: '@Url.Action("AutoTerminal")'
+          });
+           $('#partner').autocomplete({
+               source: '@Url.Action("AutoPartner")',
+               select: function (event, ui) {
+
+                   $("#partner").val(ui.item.label); // display the selected text
+                   $("#partnerid").val(ui.item.value); // save selected id to hidden input
+
+                   return false;
+               }
+          });
+          ChartBar();
+    });
+
+</script>
+
+}
+
+

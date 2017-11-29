@@ -1,0 +1,102 @@
+﻿@model OctagonPlatform.Models.VaultCash
+    
+@{
+    Layout = "~/Views/Shared/_LayoutEdits.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="col-md-6" style="margin-top: 20px; margin-bottom: 20px">
+        @Html.ActionLink(
+            linkText: "Add VaultCash",
+            actionName: "Create",
+            controllerName: "VaultCash",
+            routeValues: new
+            {
+                terminalId = ViewBag.TerminalId
+            },
+            htmlAttributes: null
+            )
+    </div>
+}
+
+@*<p class="alert alert-info">
+        <strong>@ViewBag.Error</strong>
+    </p>
+*@
+
+<table id="vaultcash" class="table table-striped table-hover table-bordered">
+    <thead class="thead-blue">
+    <tr>
+        <th>Bank Acc</th>
+        <th>Bank Name</th>
+        <th>Effective Date</th>
+        <th>Stop Date</th>
+     @*   <th>Edit</th>
+    <th>Delete</th> *@
+    </tr>
+    </thead>
+    @if (Model != null)
+    {
+        <tbody>
+        <tr>
+            <td>@Model.BankAccount.NickName</td>
+            <td>@Model.BankAccount.BankName</td>
+            <td>@Model.StartDate.ToShortDateString()</td>
+            <td>@Model.StopDate.ToShortDateString()</td>
+         @*   <td>
+        <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                                                    linkText: "Edit",
+                                                    actionName: "Edit",
+                                                    controllerName: "VaultCash",
+                                                    routeValues: new
+                                                    {
+                                                        id = Model.Id
+                                                    },
+                                                    htmlAttributes: null
+                                                    )
+    </td>
+    <td>
+        <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                     linkText: "Delete",
+                                                     actionName: "Delete",
+                                                     controllerName: "VaultCash",
+                                                     routeValues: new
+                                                     {
+                                                         id = Model.Id
+                                                     },
+                                                     htmlAttributes: null
+                                                     )
+    </td>
+    <td>
+        <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                                                        linkText: "Details",
+                                                        actionName: "Details",
+                                                        controllerName: "VaultCash",
+                                                        routeValues: new
+                                                        {
+                                                            id = Model.Id
+                                                        },
+                                                        htmlAttributes: null
+                                                        )
+    </td> *@
+        </tr>
+        </tbody>
+    }
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/search")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+   @* @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js") *@
+
+    <script>
+
+        var jQuery_1_10_2 = $.noConflict(true);
+
+        jQuery_1_10_2(function() {
+            $("#vaultcash").DataTable();
+        });
+    </script>
+}

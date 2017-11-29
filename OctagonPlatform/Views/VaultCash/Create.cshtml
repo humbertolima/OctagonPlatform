@@ -1,0 +1,51 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.VaultCashFormViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h3 class="alert-info">Create VaultCash</h3>
+
+
+@using (Html.BeginForm("Create", "VaultCash", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <p class="alert alert-danger">
+            All fields are <strong>required.</strong>
+            @ViewBag.Error
+            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+        </p>
+        @Html.HiddenFor(m => m.Id)
+        <div class="form-group">
+            @Html.LabelFor(m => m.BankAccountId)
+            @Html.DropDownListFor(m => m.BankAccountId, new SelectList(Model.BankAccounts, "Id", "NickName"), "", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.BankAccountId)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StartDate)
+            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", autofocus = "autofocus", @type = "date"})
+            @Html.ValidationMessageFor(m => m.StartDate)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.StopDate)
+            @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control", autofocus = "autofocus", @type = "date" })
+            @Html.ValidationMessageFor(m => m.StopDate)
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
