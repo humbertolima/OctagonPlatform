@@ -280,6 +280,10 @@
     <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711290328285_addreportinggroup.cs" />
+    <Compile Include="Migrations\201711290328285_addreportinggroup.Designer.cs">
+      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1174,7 +1178,7 @@
     <Content Include="Views\ReportGroup\Details.cshtml" />
     <Content Include="Views\ReportGroup\Edit.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
-	  <Content Include="Views\DisputeRepresents\Create.cshtml" />
+    <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1202,6 +1206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290328285_addreportinggroup.resx">
+      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
