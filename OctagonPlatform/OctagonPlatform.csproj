@@ -817,6 +817,7 @@
     <Content Include="Octagon\assets\vendor\morrisjs\morris.min.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.min.js" />
+    <Content Include="Scripts\addgroup.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
