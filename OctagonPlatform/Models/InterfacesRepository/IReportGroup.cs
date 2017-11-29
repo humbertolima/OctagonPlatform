@@ -9,5 +9,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
     public interface IReportGroup : IGenericRepository<ReportGroupModel>
     {
         void DeleteRange(string[] ids);
+        object FindByName(string name);
     }
 }

@@ -50,9 +50,11 @@ namespace OctagonPlatform
 
             container.RegisterType<IReports, ReportsRepository>();
 
+<<<<<<<<< Temporary merge branch 1
+            container.RegisterType<IDisputeRepresentRepository, DisputeRepresentRepository>();
+
             container.RegisterType<IReportGroup, ReportGroupRepository>();
 
-            container.RegisterType<IDisputeRepresentRepository, DisputeRepresentRepository>();
         }
     }
 }
