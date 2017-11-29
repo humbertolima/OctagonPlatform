@@ -280,9 +280,9 @@
     <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201711290328285_addreportinggroup.cs" />
-    <Compile Include="Migrations\201711290328285_addreportinggroup.Designer.cs">
-      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
+    <Compile Include="Migrations\201711291452285_addreportinggroup.cs" />
+    <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
+      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1207,8 +1207,8 @@
     <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
       <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711290328285_addreportinggroup.resx">
-      <DependentUpon>201711290328285_addreportinggroup.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
+      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

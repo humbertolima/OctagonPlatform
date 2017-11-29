@@ -12,7 +12,7 @@ namespace OctagonPlatform.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(maxLength: 200),
+                        Name = c.String(nullable: false, maxLength: 200),
                     })
                 .PrimaryKey(t => t.Id);
             

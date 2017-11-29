@@ -13,7 +13,7 @@ namespace OctagonPlatform.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201711290328285_addreportinggroup"; }
+            get { return "201711291452285_addreportinggroup"; }
         }
         
         string IMigrationMetadata.Source
