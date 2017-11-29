@@ -66,7 +66,7 @@ namespace OctagonPlatform.Controllers.Reports
                     foreach (var item in list)
                     {
 
-                        string locationname = "borrar esto";
+                        string locationname = "borrar esto  kk";
 
                         foreach (dynamic x in listTn)
                         {
