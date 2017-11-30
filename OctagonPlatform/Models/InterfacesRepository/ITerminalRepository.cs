@@ -3,11 +3,14 @@ using OctagonPlatform.PersistanceRepository;
 using System.Collections.Generic;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Controllers.Reports.JSON;
+using System;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalRepository : IGenericRepository<Terminal>
     {
+       System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
+
         Terminal GetTerminal(string terminalId);
 
         IEnumerable<Terminal> GetAllTerminals(int partnerId);

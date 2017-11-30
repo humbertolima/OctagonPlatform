@@ -302,6 +302,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
@@ -1180,6 +1181,7 @@
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
+    <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

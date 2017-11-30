@@ -1,0 +1,37 @@
+﻿@model List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCash>
+        <table>
+            <tbody>
+                @{
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>Last 30 days Loads</td>
+                            <td>Type</td>
+                            <td>Previous Balance</td>
+                            <td>Load Amount</td>
+                            <td>New Balance</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                @item.Date
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                                @item.AmountPrevius
+                            </td>
+                            <td>
+                                @item.AmountLoad
+                            </td>
+                            <td>
+                                @item.AmountCurrent
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+

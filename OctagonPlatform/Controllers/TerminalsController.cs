@@ -1,6 +1,7 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -15,6 +16,23 @@ namespace OctagonPlatform.Controllers
         {
             _repository = repository;
         }
+
+        public  ActionResult CashManagement(string terminalId)
+        {
+            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+            var result =  _repository.GetCashLoad(start, end, terminalId);
+
+            foreach (var item in result.Result)
+            {
+                
+            }
+            return PartialView("Sections/CashManagements", result.Result);
+        }
+
+
+
 
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch

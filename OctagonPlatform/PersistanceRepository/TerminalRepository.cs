@@ -10,11 +10,24 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
+
+        public async Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId)
+        {
+            List<JsonLoadCash> list = new List<JsonLoadCash>();
+            ApiATM api = new ApiATM();
+
+            list = await api.CashLoad(start, end, terminalId);
+
+            return list;
+        }
+
+
 
         public KeyManager GetKey(string messagesId)
         {
@@ -58,7 +71,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Table.FirstOrDefault(x =>x.TerminalId == terminalId);
+                var terminal = Table.FirstOrDefault(x => x.TerminalId == terminalId);
                 return terminal;
             }
             catch (Exception ex)
@@ -502,7 +515,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
             {
@@ -549,7 +562,7 @@ namespace OctagonPlatform.PersistanceRepository
                     else
                     {
                         cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId)  && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
+                                    where terminalIds.Contains(terminal.TerminalId) && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
                                     select new
                                     {
                                         terminal.TerminalId,
@@ -563,17 +576,17 @@ namespace OctagonPlatform.PersistanceRepository
             catch (Exception e)
             {
 
-                throw new Exception("Error database "+e.Message);
+                throw new Exception("Error database " + e.Message);
             }
-            
-            
+
+
         }
 
         public IEnumerable<string> GetAllTerminalId(string value)
         {
             try
             {
-                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();  
+                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();
             }
             catch (Exception e)
             {
