@@ -581,5 +581,37 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
+        public List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId)
+        {
+            try
+            {
+                if(partnerId > 0)
+                return Table.Where(b => b.ReportGroupId != groupId && b.PartnerId == partnerId).Include(x => x.Partner).ToList();
+                else
+                    return Table.Where(b => b.ReportGroupId != groupId).Include(x => x.Partner).ToList();                 
+                    
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public List<Terminal> GetTerminalAssociatedGroup(int groupId,int partnerId)
+        {
+            try
+            {
+                if (partnerId > 0)
+                    return Table.Where(b => b.ReportGroupId == groupId && b.PartnerId == partnerId).Include(x => x.Partner).ToList();
+                else
+                    return Table.Where(b => b.ReportGroupId == groupId).Include(x => x.Partner).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

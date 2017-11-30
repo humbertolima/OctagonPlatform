@@ -105,7 +105,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult AutoTerminal(string term)
         {
 
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
+           IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

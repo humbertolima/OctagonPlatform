@@ -19,5 +19,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Where(c => c.Name.Equals( name,System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
         }
+
+        public IEnumerable<dynamic> GetAllGroup(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.Name.Contains(term)).Select(b => b.Name).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

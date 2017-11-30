@@ -1,17 +1,18 @@
-﻿@model IEnumerable<OctagonPlatform.Models.ReportGroupModel>
+﻿@model OctagonPlatform.Models.FormsViewModels.ReportingGroupVM
 
 @{
     ViewBag.Title = "Index";
 }
 @Styles.Render("~/bundles/selectmulticss")
 @Styles.Render("~/bundles/multiselectcss")
+
 <div class="row">
     <div class="col-md-4">
         <figure class="highlight">
-          <h5><b>Add Reporting Group </b></h5><hr>
-         
+            <h5><b>Add Reporting Group </b></h5><hr>
+
             <p>Enter new group name and click.</p>
-            <div class="row" style="height: 484px;">
+            <div class="row" style="height: 565px;">
                 <div class="col-lg-8">
                     <form id="frmgroup">
                         @Html.AntiForgeryToken()
@@ -43,9 +44,9 @@
                         </div>
                         <select id='public-methods' multiple='multiple'>
 
-                            @foreach (var item in Model)
+                            @foreach (var item in Model.ListGroup)
                                         {
-                        <option value='@item.Id'>@item.Name</option>
+                            <option value='@item.Id'>@item.Name</option>
 
                                         }
                         </select>
@@ -65,31 +66,41 @@
     </div>
     <div class="col-md-8">
         <figure class="highlight">
-          
+
             <h5><b>Reporting Group Details</b></h5><hr>
-            <div class="row" >
+            <div class="row">
+           
+                <div class="col-lg-5">
+                    <div class="form-inline">
+                        @Html.Label("Terminals For Partner: ")
+                        @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner", @placeholder = "<All>" } })
+                        @Html.HiddenFor(model => model.PartnerId, new { id = "partnerid" })
+                        @Html.ValidationMessageFor(model => model.Partner, "", new { @class = "text-danger" })
+                        <input type="button" value="Filter" class="btn btn-primary" id="filter" />
+                    </div>
+                  <br>
+                </div>
+               
+                </div>
+            <div class="row">
                 <div class="col-lg-12">
                     <div class='custom-header'>
                         <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
                             <li><a href='#' id='select-all' style="color:white">Unassociated Terminals </a></li>
-                           
+
                         </ol>
                     </div>
                     <select id='select1' multiple='multiple'>
 
-                        @foreach (var item in Model)
-                        {
-                            <option value='@item.Id'>@item.Name</option>
-
-                        }
+                       
                     </select>
 
                 </div>
-                </div>
+            </div>
             <div style="text-align:center">
-            <a href="#" style="margin-right:10px"> <i class="fa fa-angle-double-down fa-3x"></i></a>
-            <a href="#" ><i class="fa fa-angle-double-up fa-3x"></i></a>
-            
+                <a href="#" style="margin-right:10px"> <i class="fa fa-angle-double-down fa-3x"></i></a>
+                <a href="#"><i class="fa fa-angle-double-up fa-3x"></i></a>
+
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -100,9 +111,9 @@
                     </div>
                     <select id='select2' multiple='multiple'>
 
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.ListAssociatedTerminals)
                         {
-                            <option value='@item.Id'>@item.Name</option>
+
 
                         }
                     </select>
@@ -123,13 +134,15 @@
     <script>
         var urlcreate ='@Url.Action("Create", "ReportGroup")';
         var urldelete = '@Url.Action("DeleteAjax", "ReportGroup")';
-</script>
+        var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlautogroup = '@Url.Action("AutoGroup")';
+        var urlselectgroup = '@Url.Action("DisplayTerminalsByGroup", "ReportGroup")';
+    </script>
 
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/selectmulti")
     @Scripts.Render("~/bundles/multiselect")
     @Scripts.Render("~/Scripts/addgroup.js")
-    
 
 }
 

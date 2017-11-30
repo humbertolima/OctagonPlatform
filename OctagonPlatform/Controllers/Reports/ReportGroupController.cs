@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.Models.FormsViewModels;
+using Newtonsoft.Json;
 
 namespace OctagonPlatform.Controllers
 {
@@ -16,15 +17,19 @@ namespace OctagonPlatform.Controllers
     public class ReportGroupController : Controller
     {
         private IReportGroup _repo;
-        public ReportGroupController(IReportGroup repo)
+        public ITerminalRepository _repotn;
+        public ReportGroupController(IReportGroup repo, ITerminalRepository repotn)
         {
             _repo = repo;
+            _repotn = repotn;
         }
         // GET: ReportGroupModels
         public ActionResult Index()
         {
             Session["businessName"] = "";
-            return View(_repo.All());
+           
+            ReportingGroupVM vmodel = new ReportingGroupVM(_repo.All());
+            return View(vmodel);
         }
 
       
@@ -87,5 +92,33 @@ namespace OctagonPlatform.Controllers
               
 
         private bool IsNameExists(string name) => _repo.FindByName(name) != null; // => este operador dice que es una funcion que va a return bool segun la expresion 
+        public ActionResult AutoGroup(string term)
+        {
+
+            IEnumerable<dynamic> list = _repo.GetAllGroup(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DisplayTerminalsByGroup(string groupSelected,string partner)
+        {
+            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected),Int32.Parse(partner));
+            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner));
+            List<List<Terminal>> list = new List<List<Terminal>>();
+            list.Add(unassoGroup);
+            list.Add(assoGroup);
+            JsonResult ll = Json(list);
+
+            
+            string result = JsonConvert.SerializeObject(list, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+
+            return Json(result);
+        }
+        
     }
 }

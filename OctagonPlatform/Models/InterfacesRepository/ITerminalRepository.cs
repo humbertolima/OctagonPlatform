@@ -21,7 +21,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
 
         Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
-
+        
         void CassettesDelete(int cassetteId);
 
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
@@ -47,5 +47,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid);
 
         IEnumerable<string> GetAllTerminalId(string value);
+
+        List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId);
+        List<Terminal> GetTerminalAssociatedGroup(int groupId, int partnerId);
     }
 }

@@ -284,6 +284,10 @@
     <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711292247322_addreportgroupid.cs" />
+    <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -307,6 +311,7 @@
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\ReportingGroupVM.cs" />
     <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
@@ -1210,6 +1215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
