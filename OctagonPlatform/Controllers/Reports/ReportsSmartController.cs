@@ -1,4 +1,7 @@
 ﻿
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 using Newtonsoft.Json;
 using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Models;
@@ -8,6 +11,7 @@ using OctagonPlatform.PersistanceRepository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -129,6 +133,20 @@ namespace OctagonPlatform.Controllers.Reports
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string html)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(html);
+                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+            }
+        }
     }
 }

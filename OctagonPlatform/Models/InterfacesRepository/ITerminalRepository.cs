@@ -53,5 +53,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> GetAllState(string term);
         IEnumerable<dynamic> GetAllCity(string term);
         List<string> GetAllZipCode(string term);
+        void EditRange(string[] list, int? groupId);
     }
 }

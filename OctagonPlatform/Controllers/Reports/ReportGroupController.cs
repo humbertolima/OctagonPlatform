@@ -116,22 +116,42 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public JsonResult DisplayTerminalsByGroup(string groupSelected,string partner,string state,string city,string zipcode)
         {
-            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected),Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city),zipcode);
+            return Json(ListTerminalFilter(groupSelected, partner, state, city, zipcode));
+        }
+        
+        [HttpPost]
+        public JsonResult AsignTerminal(string listtn,string groupSelected, string partner, string state, string city, string zipcode)
+        {
+             string[] list = listtn.Split(',');
+             _repotn.EditRange(list,Int32.Parse(groupSelected));     
+
+            return Json(ListTerminalFilter( groupSelected,  partner,  state,  city,  zipcode));
+        }
+        [HttpPost]
+        public JsonResult UnasignTerminal(string listtn, string groupSelected, string partner, string state, string city, string zipcode)
+        {
+            string[] list = listtn.Split(',');
+            _repotn.EditRange(list,null);
+
+            return Json(ListTerminalFilter(groupSelected, partner, state, city, zipcode));
+        }
+        
+        private string ListTerminalFilter(string groupSelected, string partner, string state, string city, string zipcode)
+        {
+            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode);
             List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode);
             List<List<Terminal>> list = new List<List<Terminal>>();
             list.Add(unassoGroup);
             list.Add(assoGroup);
             JsonResult ll = Json(list);
 
-            
+
             string result = JsonConvert.SerializeObject(list, Formatting.None,
                         new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         });
-
-            return Json(result);
+            return result;
         }
-        
     }
 }

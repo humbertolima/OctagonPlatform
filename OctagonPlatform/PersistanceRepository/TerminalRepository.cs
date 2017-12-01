@@ -664,5 +664,26 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
+        public void EditRange(string[] list,int? groupId)
+        {
+            try
+            {
+               
+                foreach (string item in list)
+                {                   
+                    Terminal tn = FindBy(Int32.Parse( item));
+                    tn.ReportGroupId = groupId;
+                    Edit(tn);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new NullReferenceException(e.Message);
+            }
+           
+           
+        }
     }
 }

@@ -40,3 +40,9 @@ function Export(filename, mytblId, idhead) {
     else link.click();  // other browsers
     document.body.removeChild(link);
 };
+function ExportPdf(filename, mytblId, idhead) {
+   
+        var html1 = "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+        $("input[name='html']").val(html1);
+   
+}

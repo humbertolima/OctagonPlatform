@@ -6,31 +6,29 @@
 @Styles.Render("~/bundles/selectmulticss")
 @Styles.Render("~/bundles/multiselectcss")
 
-<div class="row">
-    <div class="col-md-4" style="width: 341px;">
+<div class="row" id="row">
+    <div class="col-xs-12 col-sm-4 col-md-3">
         <figure class="highlight">
+            <a name="ancla"></a>
             <h5><b>Add Reporting Group </b></h5><hr>
 
             <p>Enter new group name and click.</p>
-            <div class="row" style="height: 565px;">
+            <div class="row" style="height: 640px;">
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-inline">
-                                <div class="form-group">     
-                                    <form id="frmgroup">
-                                    @Html.AntiForgeryToken()
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                    @Html.Editor("name", new { htmlAttributes = new { @class = "form-control", @placeholder = "Name Group" } })                                                               
-                                    <input type="button" value="Create" class="btn btn-primary" id="CreateGroup" />
-                                        @Html.ValidationMessage("", "", new { @class = "text-danger", @id = "error" })
-                                        
-                                        </form>
-                                </div>
-                            </div>
-                            <br>
+                        <div class="col-xs-12">
+
+                            <form id="frmgroup">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.Editor("name", new { htmlAttributes = new { @class = "form-control", @placeholder = "Name Group" } })
+                                <input type="button" value="Create" class="btn btn-primary" id="CreateGroup" style=" margin-top: 3px;margin-bottom: 3px;" />
+                                @Html.ValidationMessage("", "", new { @class = "text-danger", @id = "error" })
+
+                            </form>
                         </div>
                     </div>
+
                     <div id="groups">
 
 
@@ -41,7 +39,7 @@
                         </div>
                         <select id='public-methods' multiple='multiple'>
 
-                           
+
                             @foreach (var item in Model.ListGroup)
                             {
                                 <option value='@item.Id'>@item.Name</option>
@@ -56,36 +54,52 @@
             </div>
         </figure>
     </div>
-    <div class="col-md-8" style="width:73%">
+    <div class="col-xs-12 col-sm-7 col-md-9">
         <figure class="highlight">
 
             <h5><b>Reporting Group Details</b></h5><hr>
             <div class="row">
 
-                <div class="col-lg-12">
-                    <div class="form-inline">
-                        <div class="form-group">
-                        @Html.Label("Partner: ")
-                        @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner", @placeholder = "<All>" } })
-                        @Html.HiddenFor(model => model.PartId, new { @id = "partnerid" })
-                       
-                        @Html.Label("State: ")
-                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @id = "state", @placeholder = "<All>" } })
-                        @Html.HiddenFor(model => model.StateId, new { @id = "stateid" })
-
-                        @Html.Label("City: ")
-                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "city", @placeholder = "<All>" } })
-                        @Html.HiddenFor(model => model.CityId, new { @id = "cityid" })
-
-                        @Html.Label("Zip Code: ")
-                        @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @id = "zipcode", @placeholder = "<All>" } })
-                       
-                        <input type="button" value="Filter" class="btn btn-primary" id="filter" />
-                        <input type="button" value="Clear Filter" class="btn btn-primary" id="clear" />
-                            </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.Label("Partner: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.PartId, new { @id = "partnerid" })
+                        </div>
                     </div>
-                    <br>
+                    <hr>
+                    <div class="form-group">
+                        @Html.Label("State: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @id = "state", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.StateId, new { @id = "stateid" })
+                        </div>
+                    </div>
                 </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.Label("City: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "city", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.CityId, new { @id = "cityid" })
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        @Html.Label("Zip Code: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @id = "zipcode", @placeholder = "<All>" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="button" value="Filter" class="btn btn-primary col-xs-12" id="filter" /><hr>
+                    <input type="button" value="Clear Filter" class="btn btn-primary col-xs-12" id="clear" />
+
+                </div>
+
+
 
             </div>
             <div class="row">
@@ -98,15 +112,13 @@
 
                         </ol>
                     </div>
-                    <select id='select1' multiple='multiple'>
-                        
-                    </select>
+                    <select id='select1' multiple='multiple'></select>
 
                 </div>
             </div>
             <div style="text-align:center">
-                <a href="#" style="margin-right:10px" id="associated"> <i class="fa fa-angle-double-down fa-3x"></i></a>
-                <a href="#" id="unassociated"><i class="fa fa-angle-double-up fa-3x"></i></a>
+                <a id="associated" style="margin-right:10px;cursor:pointer"> <i class="fa fa-angle-double-down fa-3x"></i></a>
+                <a id="unassociated"><i class="fa fa-angle-double-up fa-3x" style="cursor:pointer"></i></a>
 
             </div>
             <div class="row">
@@ -119,10 +131,7 @@
 
                         </ol>
                     </div>
-                    <select id='select2' multiple='multiple'>
-
-                        
-                    </select>
+                    <select id='select2' multiple='multiple'></select>
 
 
                 </div>
@@ -145,6 +154,8 @@
         var urlcity = '@Url.Action("AutoCity")';
         var urlzipcode = '@Url.Action("AutoZipCode")';
         var urlselectgroup = '@Url.Action("DisplayTerminalsByGroup", "ReportGroup")';
+        var urlasign = '@Url.Action("AsignTerminal")';
+        var urlunasign = '@Url.Action("UnasignTerminal")';
     </script>
 
     @Scripts.Render("~/bundles/jqueryval")
