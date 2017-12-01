@@ -48,7 +48,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         IEnumerable<string> GetAllTerminalId(string value);
 
-        List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId);
-        List<Terminal> GetTerminalAssociatedGroup(int groupId, int partnerId);
+        List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId,int state,int city,string zipcode);
+        List<Terminal> GetTerminalAssociatedGroup(int groupId, int partnerId, int state, int city, string zipcode);
+        IEnumerable<dynamic> GetAllState(string term);
+        IEnumerable<dynamic> GetAllCity(string term);
+        List<string> GetAllZipCode(string term);
     }
 }

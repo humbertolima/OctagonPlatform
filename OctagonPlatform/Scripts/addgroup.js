@@ -1,7 +1,11 @@
-﻿$(function () {
+﻿
+$(function () {
 
-    var listid = [];
-
+    var id = "";
+    var groupselect = "";
+    Clear();
+    
+    
     $("#CreateGroup").click(function () {
       
         $.post(urlcreate, $('#frmgroup').serialize(), function (data) {
@@ -17,15 +21,22 @@
     });
     $("#DeleteGroup").click(function () {
 
-        $.post(urldelete, { Ids: listid.toString() }, function (data) {
-
-            for (var i = 0; i < data.length; i++) {
-                $("#public-methods option[value='" + data[i] + "']").remove();
-            }
+        $.post(urldelete, { Ids: id }, function (data) {
+           
+                $("#public-methods option[value='" + data + "']").remove();
+                $("#select1 option[value ^='" + data + "_']").each(function (index, value) {                  
+                    $(this).remove();
+                });
+                $("#select2 option[value ^='" + data + "_']").each(function (index, value) {
+                    $(this).remove();
+                });            
+          
+            $('#select1').selectMultiple('refresh');
+            $('#select2').selectMultiple('refresh');
             $('#public-methods').selectMultiple('refresh');
         }, 'json');
     });
-
+   
     //Select multiple
     $('#public-methods').selectMultiple({
         selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Search Group'>",
@@ -33,7 +44,7 @@
             var that = this,
                 $selectableSearch = that.$selectableUl.prev(),
                 selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable';
-
+           
             that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
                 .on('keydown', function (e) {                    
                     if (e.which === 40) { // 40 es Down arrow ,cuando presione la tecla de ir abajo que coja el foco 
@@ -43,56 +54,75 @@
                 });
         },
         afterSelect: function (values) {
-            listid.push(parseInt(values, 10));
+            id =parseInt(values, 10);
+            
+            $("#public-methods option").each(function (index, val) {
+                var value = val.value;               
+                if (values != value) {
+                    $('#public-methods').selectMultiple('deselect', value.toString());
+                }
+            });
+            groupselect = parseInt(values, 10);
             DisplayTerminalsBygroup(parseInt(values, 10));
+           
         },
         afterDeselect: function (values) {
-            var index = listid.indexOf(parseInt(values));
-            if (index > -1) {
-                listid.splice(index, 1);
-            }
-
+                groupselect = "";
+                RemoveDisplayTerminalsBygroup(values);
+            
         }
 
-    });
+    });    
     
-    $('#select-all').click(function () {
-        $('#public-methods').selectMultiple('select_all');
-        return false;
-    });
-    $('#deselect-all').click(function () {
-        $('#public-methods').selectMultiple('deselect_all');
-        return false;
-    });
-
     $('#select1').selectMultiple({
+        selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Search'>",
+        afterInit: function (ms) {
 
+            var that = this,
+                $selectableSearch = that.$selectableUl.prev(),
+                selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable';
+
+            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                .on('keydown', function (e) {
+                    if (e.which === 40) { // 40 es Down arrow ,cuando presione la tecla de ir abajo que coja el foco 
+                        that.$selectableUl.focus();
+                        return false;
+                    }
+                });
+        },
         afterSelect: function (values) {
-            listid.push(parseInt(values, 10));
+
         },
         afterDeselect: function (values) {
-            var index = listid.indexOf(parseInt(values));
-            if (index > -1) {
-                listid.splice(index, 1);
-            }
 
         }
 
     });
     $('#select2').selectMultiple({
+        selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Search'>",
+        afterInit: function (ms) {
+            var that = this,
+                $selectableSearch = that.$selectableUl.prev(),
+                selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable';
 
+            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                .on('keydown', function (e) {
+                    if (e.which === 40) { // 40 es Down arrow ,cuando presione la tecla de ir abajo que coja el foco 
+                        that.$selectableUl.focus();
+                        return false;
+                    }
+                });
+        },
         afterSelect: function (values) {
-            listid.push(parseInt(values, 10));
+
         },
         afterDeselect: function (values) {
-            var index = listid.indexOf(parseInt(values));
-            if (index > -1) {
-                listid.splice(index, 1);
-            }
+
 
         }
 
     });
+  
     //end
     
     //autocompleta
@@ -106,37 +136,125 @@
             return false;
         }
     }); 
-    $('#groupauto').autocomplete({
-        source: urlautogroup,
+    $('#state').autocomplete({
+        source: urlstate,
         select: function (event, ui) {
 
-            $("#groupauto").val(ui.item.label); // display the selected text
-            $("#groupid").val(ui.item.value); // save selected id to hidden input
+            $("#state").val(ui.item.label); // display the selected text
+            $("#stateid").val(ui.item.value); // save selected id to hidden input
+           
+            return false;
+        }
+    });
+    $('#city').autocomplete({
+        source: urlcity,
+        select: function (event, ui) {
+
+            $("#city").val(ui.item.label); // display the selected text
+            $("#cityid").val(ui.item.value); // save selected id to hidden input
+
+            return false;
+        }
+    });
+    $('#zipcode').autocomplete({
+        source: urlzipcode,
+        select: function (event, ui) {
+
+            $("#zipcode").val(ui.item.label); // display the selected text
 
             return false;
         }
     });
     //end
+    $("#associated").click(function () {
+        alert('associated');
+    });
+    $("#unassociated").click(function () {
+        alert("unassociated");
+    });
+    $('#select-all').click(function () {
+        $('#select1').selectMultiple('select_all');
+        return false;
+    });
+    $('#deselect-all').click(function () {
+        $('#select1').selectMultiple('deselect_all');
+        return false;
+    });
+    $('#select-all1').click(function () {
+        $('#select2').selectMultiple('select_all');
+        return false;
+    });
+    $('#deselect-all1').click(function () {
+        $('#select2').selectMultiple('deselect_all');
+        return false;
+    });
 
+    //Filter
+    $("#filter").click(function () {
+       
+        if (groupselect == "") alert("Select Group");
+        else {
+            RemoveDisplayTerminalsBygroup(groupselect);
+            DisplayTerminalsBygroup(groupselect);
+        }
+    });
+    $("#clear").click(function () {
+        RemoveDisplayTerminalsBygroup(groupselect);
+        Clear();
+    });
 });
-function DisplayTerminalsBygroup(groupselected,namegroup)
+
+function DisplayTerminalsBygroup(groupselected1)
 {
-  
-    $.post(urlselectgroup, { groupSelected: groupselected, partner: $("#partnerid").val() }, function (data) {
+    if ($("#partner").val() == "") $("#partnerid").val("0");
+    if ($("#state").val() == "") $("#stateid").val("0");
+    if ($("#city").val() == "") $("#cityid").val("0");
+    $.post(urlselectgroup, { groupSelected: groupselected1, partner: $("#partnerid").val(), state: $("#stateid").val(), city: $("#cityid").val(), zipcode: $("#zipcode").val() }, function (data) {
         data = JSON.parse(data);
        
         var unassoGroup = data[0];
         var assoGroup = data[1];
         $("#groupauto").val();
+        if (unassoGroup.length == 0 && assoGroup.length == 0)
+            alert("No records available");
         for (var i = 0; i < unassoGroup.length; i++) {
             var name = unassoGroup[i].TerminalId +" / "+ unassoGroup[i].LocationName +" / "+ unassoGroup[i].Partner.BusinessName;
-            $('#select1').selectMultiple('addOption', { value: unassoGroup[i].Id, text: name, index: 0 });          
+           // $('#select1').selectMultiple('addOption', { value: groupselected + "_" + unassoGroup[i].Id, text: name, index: 0 });  
+            $('#select1').append('<option value="' + groupselected1 + "_" + unassoGroup[i].Id + '" >' + name+'</option>');
+         
         }
         for (var i = 0; i < assoGroup.length; i++) {
             var name = assoGroup[i].TerminalId + " / " + assoGroup[i].LocationName + " / " + assoGroup[i].Partner.BusinessName;
-            $('#select1').selectMultiple('addOption', { value: assoGroup[i].Id, text: name, index: 0 });
+           // $('#select2').selectMultiple('addOption', { value: groupselected + "_" +assoGroup[i].Id, text: name, index: 0 });
+            $('#select2').append('<option value="' + groupselected1 + "_" + assoGroup[i].Id + '" >' + name + '</option>');
         }
+
+        
+
+        $('#select1').selectMultiple('refresh');
+        $('#select2').selectMultiple('refresh');
        
     }, 'json');
    
+}
+function RemoveDisplayTerminalsBygroup(group)
+{
+    
+    $("option[value ^='" + group + "_']").each(function (index, value) {
+        $(this).remove();
+    });
+    $('#select1').selectMultiple('refresh');
+    $('#select2').selectMultiple('refresh');
+    
+}
+function Clear()
+{
+    $("#stateid").val("0");
+    $("#partnerid").val("0");
+    $("#cityid").val("0");
+    $("#state").val("");
+    $("#partner").val("");
+    $("#city").val("");
+    $("#zipcode").val("");
+    groupselect = ""; 
 }

@@ -74,11 +74,11 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public JsonResult DeleteAjax(string Ids)
         {
-            string[] listid = Ids.Split(',');
-            _repo.DeleteRange(listid);
-            //ReportGroupModel reportGroupModel = _repo.FindBy(id);
-            // _repo.Delete(reportGroupModel);
-            return Json(listid);
+           // string[] listid = Ids.Split(',');
+           // _repo.DeleteRange(listid);          
+          
+             _repo.Delete(Int32.Parse(Ids));
+            return Json(Ids);
         }
 
         protected override void Dispose(bool disposing)
@@ -92,19 +92,32 @@ namespace OctagonPlatform.Controllers
               
 
         private bool IsNameExists(string name) => _repo.FindByName(name) != null; // => este operador dice que es una funcion que va a return bool segun la expresion 
-        public ActionResult AutoGroup(string term)
+        public ActionResult AutoState(string term)
         {
 
-            IEnumerable<dynamic> list = _repo.GetAllGroup(term);
+            IEnumerable<dynamic> list = _repotn.GetAllState(term);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost]
-        public JsonResult DisplayTerminalsByGroup(string groupSelected,string partner)
+        public ActionResult AutoCity(string term)
         {
-            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected),Int32.Parse(partner));
-            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner));
+
+            IEnumerable<dynamic> list = _repotn.GetAllCity(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AutoZipCode(string term)
+        {
+
+            List<string> list = _repotn.GetAllZipCode(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult DisplayTerminalsByGroup(string groupSelected,string partner,string state,string city,string zipcode)
+        {
+            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected),Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city),zipcode);
+            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode);
             List<List<Terminal>> list = new List<List<Terminal>>();
             list.Add(unassoGroup);
             list.Add(assoGroup);

@@ -582,14 +582,21 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId)
+        public List<Terminal> GetTerminalUnassociatedGroup(int groupId,int partnerId, int stateid, int cityid, string zipcode)
         {
             try
             {
-                if(partnerId > 0)
-                return Table.Where(b => b.ReportGroupId != groupId && b.PartnerId == partnerId).Include(x => x.Partner).ToList();
-                else
-                    return Table.Where(b => b.ReportGroupId != groupId).Include(x => x.Partner).ToList();                 
+
+                IQueryable<Terminal> all = Table.Where(b => b.ReportGroupId == null).Include(x => x.Partner);
+                if (partnerId > 0)
+                    all = all.Where(b => b.PartnerId == partnerId);
+                if (stateid > 0)
+                    all = all.Where(b => b.StateId == stateid);
+                if (cityid > 0)
+                    all = all.Where(b => b.CityId == cityid);
+                if (zipcode != "")
+                    all = all.Where(b => b.Zip.ToString() == zipcode);
+                return all.ToList();                 
                     
             }
             catch (Exception e)
@@ -598,14 +605,58 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
-        public List<Terminal> GetTerminalAssociatedGroup(int groupId,int partnerId)
+        public List<Terminal> GetTerminalAssociatedGroup(int groupId,int partnerId, int stateid, int cityid, string zipcode)
+        {
+            try
+            {           
+                IQueryable<Terminal> all = Table.Where(b => b.ReportGroupId == groupId).Include(x => x.Partner);
+                if (partnerId > 0)
+                    all = all.Where(b => b.PartnerId == partnerId);
+                if (stateid > 0)
+                    all = all.Where(b => b.StateId == stateid);
+                if (cityid > 0)
+                    all = all.Where(b => b.CityId == cityid);
+                if (zipcode != "")
+                    all = all.Where(b => b.Zip.ToString() == zipcode);
+                return all.ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+       
+        public IEnumerable<dynamic> GetAllState(string term)
         {
             try
             {
-                if (partnerId > 0)
-                    return Table.Where(b => b.ReportGroupId == groupId && b.PartnerId == partnerId).Include(x => x.Partner).ToList();
-                else
-                    return Table.Where(b => b.ReportGroupId == groupId).Include(x => x.Partner).ToList();
+                return Table.Where(b => b.State.Name.Contains(term)).Select(b => new { label = b.State.Name, value = b.State.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public IEnumerable<dynamic> GetAllCity(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.City.Name.Contains(term)).Select(b => new { label = b.City.Name, value = b.City.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public List<string> GetAllZipCode(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.Zip.ToString().Contains(term)).Select(b => b.Zip.ToString()).Distinct().ToList();
             }
             catch (Exception e)
             {

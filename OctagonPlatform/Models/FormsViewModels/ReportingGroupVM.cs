@@ -13,10 +13,15 @@ namespace OctagonPlatform.Models.FormsViewModels
         public List<Terminal> ListAssociatedTerminals  { get; set; }
         public string Partner { get; set; }
         [HiddenInput]
-        public int PartnerId { get; set; }
-        public string Group { get; set; }
+        public int PartId { get; set; }
+        public string State { get; set; }
         [HiddenInput]
-        public int GroupId { get; set; }
+        public int StateId { get; set; }
+        public string City { get; set; }
+        [HiddenInput]
+        public int CityId { get; set; }
+        public string ZipCode { get; set; }
+       
         public ReportingGroupVM(IEnumerable<ReportGroupModel> groups, List<Terminal> unassociatedTn = null, List<Terminal> associatedTn = null)
         {
             ListGroup = groups;
