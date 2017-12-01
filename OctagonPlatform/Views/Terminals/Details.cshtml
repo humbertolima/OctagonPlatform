@@ -114,7 +114,9 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-book" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "Contacts", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i>
+                    </h3>
                     <div id="getContacts" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>
@@ -125,7 +127,9 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-money" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Vault Cash", "Index", "VaultCash", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getVaultcash", LoadingElementId = "loading1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getVaultcash" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>
+                    </h3>
                     <div id="getVaultcash" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>
@@ -136,7 +140,9 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Surcharges", "Index", "Surcharge", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getSurcharge", LoadingElementId = "loading5", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getSurcharge" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>
+                    </h3>
                     <div id="getSurcharge" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>
@@ -148,7 +154,12 @@
             <div class="panel panel-default">
                 <div id="Interchanges" class="panel-heading">
 
-                    <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a class="hover"><h3 data-toggle="collapse" data-target="#getInterchange">Interchanges @Html.Partial("Sections/Interchanges", Model)</h3></a>
+                    <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a class="hover">
+                        <h3 data-toggle="collapse" data-target="#getInterchange">
+                            Interchanges
+                            @Html.Partial("Sections/Interchanges", Model)
+                        </h3>
+                    </a>
 
                     <div id="" class="panel-collapse collapse">
                         <div class="loader"></div>
@@ -186,6 +197,29 @@
     </div>
 </div>
 @section Scripts {
+
+    @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+
+    <script>
+        $(function () {
+            $("#deleteInterchange").click(function () {
+                var id = $(this).data('id');
+                $("#confirmdeleteInterchange #id").val(id);
+               
+            });
+            /*var jQuery_1_10_2 = $.noConflict(true);
+
+            jQuery_1_10_2(function () {
+                $("#interchanges").DataTable();
+            });*/
+        });
+
+
+
+    </script>
+
+
 
 }
