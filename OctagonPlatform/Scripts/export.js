@@ -41,8 +41,11 @@ function Export(filename, mytblId, idhead) {
     document.body.removeChild(link);
 };
 function ExportPdf(filename, mytblId, idhead) {
-   
-        var html1 = "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+      var css = '<style>table { border-collapse: collapse;}' +       
+        'td,th {text-align:left;border: solid #e9ecef 1pt;width: 100%; }' +
+        'th { background: #e9ecef}</style>';
+
+    var html1 = css + "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
         $("input[name='html']").val(html1);
    
 }

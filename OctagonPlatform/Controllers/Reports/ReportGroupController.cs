@@ -26,7 +26,6 @@ namespace OctagonPlatform.Controllers
         // GET: ReportGroupModels
         public ActionResult Index()
         {
-            Session["businessName"] = "";
            
             ReportingGroupVM vmodel = new ReportingGroupVM(_repo.All());
             return View(vmodel);
@@ -138,8 +137,8 @@ namespace OctagonPlatform.Controllers
         
         private string ListTerminalFilter(string groupSelected, string partner, string state, string city, string zipcode)
         {
-            List<Terminal> unassoGroup = _repotn.GetTerminalUnassociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode);
-            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(groupSelected), Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode);
+            List<Terminal> unassoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode); //terminals unassociated que tengan groupid null
+            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode, Int32.Parse(groupSelected));
             List<List<Terminal>> list = new List<List<Terminal>>();
             list.Add(unassoGroup);
             list.Add(assoGroup);

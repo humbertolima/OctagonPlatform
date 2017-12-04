@@ -41,7 +41,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashLoadViewModel model = new CashLoadViewModel();
 
-            Session["businessName"] = "";
+            
             return View(model);
         }
 
@@ -63,14 +63,14 @@ namespace OctagonPlatform.Controllers.Reports
 
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
-                //  if (listTn.Count() > 0)
-                // {            
+                  if (listTn.Count() > 0)
+                 {            
               
-                int count = 0;
+               
                     foreach (var item in list)
                     {
 
-                        string locationname = "borrar esto  kk";
+                        string locationname = "";
 
                         foreach (dynamic x in listTn)
                         {
@@ -89,7 +89,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                     }
 
-                // }
+                 }
                 #region Variables Partial
                 TempData["List"] = listaux;
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
@@ -145,7 +145,7 @@ namespace OctagonPlatform.Controllers.Reports
                 pdfDoc.Open();
                 XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                 pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+                return File(stream.ToArray(), "application/pdf", "ReportLoadCash.pdf");
             }
         }
     }

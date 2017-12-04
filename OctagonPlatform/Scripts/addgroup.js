@@ -1,6 +1,8 @@
 ﻿function callankle() {
     document.location.href = "#ancla";
 }
+var listselected1 = [];
+var listselected2 = [];
 $(function () {
     callankle();
     var id = "";
@@ -75,8 +77,7 @@ $(function () {
         }
 
     });
-    var listselected1 = [];
-    var listselected2 = [];
+   
     $('#select1').selectMultiple({
         selectableHeader: "<input type='text' class='form-control' autocomplete='off' placeholder='Search'>",
         afterInit: function (ms) {
@@ -177,6 +178,7 @@ $(function () {
     $("#associated").click(function () {
         // alert("associated");
         var listassociated = listselected1.join(); // Convert array to string dividido por ,
+       // alert(listassociated);
         if (listselected1.length > 0) {
             $.post(urlasign, { listtn: listassociated, groupSelected: groupselect, partner: $("#partnerid").val(), state: $("#stateid").val(), city: $("#cityid").val(), zipcode: $("#zipcode").val() }, function (data) {
 
@@ -190,6 +192,7 @@ $(function () {
     $("#unassociated").click(function () {
         // alert("unassociated");
         var listunassociated = listselected2.join();
+       // alert(listunassociated);
         if (listselected2.length > 0) {
             $.post(urlunasign, { listtn: listunassociated, groupSelected: groupselect, partner: $("#partnerid").val(), state: $("#stateid").val(), city: $("#cityid").val(), zipcode: $("#zipcode").val() }, function (data) {
                               
@@ -263,9 +266,8 @@ function Display(data) {
         // $('#select2').selectMultiple('addOption', { value: groupselected + "_" +assoGroup[i].Id, text: name, index: 0 });
         $('#select2').append('<option value="' + assoGroup[i].Id + '" >' + name + '</option>');
     }
-
-
-
+     listselected1 = [];
+     listselected2 = [];
     $('#select1').selectMultiple('refresh');
     $('#select2').selectMultiple('refresh');
 }
