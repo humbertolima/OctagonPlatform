@@ -503,10 +503,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        private static bool impl(bool a, bool b)
-        {
-            return !a || b;
-        }
+      
 
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {

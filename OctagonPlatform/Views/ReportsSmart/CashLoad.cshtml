@@ -100,7 +100,13 @@
 
                    return false;
                }
-          });
+        });
+           //clear id from hidden field if input is blank
+           $('#partner').blur(function () {
+               if ($('#partner').val() == '') {
+                   $('#partnerid').val('');
+               }
+           });
            ChartBar();
            ExportPdf();
              
