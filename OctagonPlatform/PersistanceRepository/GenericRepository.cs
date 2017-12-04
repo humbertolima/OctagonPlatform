@@ -71,26 +71,35 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void Delete(object id)
         {
-            var existing = Table.Find(id);
-            if (existing is ISoftDeleted)
+            try
             {
-                ((ISoftDeleted) existing).Deleted = true;
-                if (existing is IAuditEntity)
+                var existing = Table.Find(id);
+                if (existing is ISoftDeleted)
                 {
-                    var date = DateTime.UtcNow;
-                    var user = HttpContext.Current.User;
-                    var userName = user.Identity.Name;
-                    (existing as IAuditEntity).DeletedAt = date;
-                    (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
-                    (existing as IAuditEntity).DeletedByName = userName;
-                }
+                    ((ISoftDeleted)existing).Deleted = true;
+                    if (existing is IAuditEntity)
+                    {
+                        var date = DateTime.UtcNow;
+                        var user = HttpContext.Current.User;
+                        var userName = user.Identity.Name;
+                        (existing as IAuditEntity).DeletedAt = date;
+                        (existing as IAuditEntity).DeletedBy = Context.Users.Single(x => x.UserName == userName && !x.Deleted).Id;
+                        (existing as IAuditEntity).DeletedByName = userName;
+                    }
 
+                }
+                else
+                {
+                    if (existing != null) Table.Remove(existing);
+                }
+                Save();
             }
-            else
+            catch (Exception e)
             {
-                if (existing != null) Table.Remove(existing);
+
+                throw new Exception(e.Message);
             }
-            Save();
+          
         }
 
         public void Save()

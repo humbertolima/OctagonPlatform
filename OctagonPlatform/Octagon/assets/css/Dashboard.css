@@ -157,8 +157,7 @@ a {
     width: 180px;
 }
 
-.form-control {
-    width: 80%;
+.form-control {   
     display: block;
     border-radius: 0px;
     height: 34px;

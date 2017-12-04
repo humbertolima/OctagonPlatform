@@ -32,9 +32,9 @@ namespace OctagonPlatform
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-superhero.css",
-                  //    "~/Content/datatables/css/datatables.bootstrap.css",
+                      //    "~/Content/datatables/css/datatables.bootstrap.css",
                       "~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(                   
+            bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(
                      "~/Content/themes/base/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/base").Include(
@@ -51,7 +51,7 @@ namespace OctagonPlatform
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                 "~/Scripts/jquery-ui-1.12.1.js"
-                
+
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/selectmulti").Include(
@@ -61,12 +61,6 @@ namespace OctagonPlatform
             bundles.Add(new StyleBundle("~/bundles/selectmulticss").Include(
                      "~/Content/selectmulti/css/select-multiple.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/multiselect").Include(
-             "~/Content/multiselect/js/jquery.multi-select.js"
-
-             ));
-            bundles.Add(new StyleBundle("~/bundles/multiselectcss").Include(
-                     "~/Content/multiselect/css/multi-select.css"));
         }
     }
 }

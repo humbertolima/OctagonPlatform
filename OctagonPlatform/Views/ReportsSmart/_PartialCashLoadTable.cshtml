@@ -1,5 +1,4 @@
 ﻿
-
 @if (TempData["List"] != null)
 {
   <!-- Single button -->
@@ -10,11 +9,20 @@
         <ul class="dropdown-menu">
             <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>           
             <li><a href="#" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');">Word</a></li>
-            <li><a href="#">Pdf</a></li>
+            <li><a href='#' onclick="$('#pdf').click();">Pdf</a></li>
+                @using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
+                {
+                    <input type="hidden" name="html" />
+                    <input type="submit" id="pdf" onclick="ExportPdf('ReportLoadCash.pdf', 'TableLoadCash','idhead');" value="" style="display:none" />
+                   
+                }
+            
+            
         </ul>
+       
     </div>
   <div id="TableLoadCash" >
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" width="100%">
     <tr>
         <th>
            Terminal Id
@@ -78,7 +86,14 @@
 
  
     <script>
-       
+        function ExportPdf()
+        {
+            $("#btnSubmit").click(function () {
+                var html1 = "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+                $("input[name='html']").val(html1);
+            });
+        }
+
         function ChartBar() {
           
             var range = 'day';

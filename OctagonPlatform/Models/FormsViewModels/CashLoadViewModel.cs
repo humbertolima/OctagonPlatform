@@ -10,6 +10,7 @@ namespace OctagonPlatform.Models.FormsViewModels
     public class CashLoadViewModel
     {
         public string TerminalId { get; set; }
+
         public string Partner { get; set; }
         [HiddenInput]
         public int PartnerId { get; set; }

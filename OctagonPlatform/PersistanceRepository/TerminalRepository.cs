@@ -58,7 +58,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Table.FirstOrDefault(x =>x.TerminalId == terminalId);
+                var terminal = Table.FirstOrDefault(x => x.TerminalId == terminalId);
                 return terminal;
             }
             catch (Exception ex)
@@ -502,84 +502,123 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
+
+        private static bool impl(bool a, bool b)
+        {
+            return !a || b;
+        }
+
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                IEnumerable<dynamic> cashlist = null;
-                if (partnerid == -1)
-                {
-                    if (status != StatusType.Status.All)
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                    else
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                }
-                else
-                {
-                    if (status != StatusType.Status.All)
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status && terminal.PartnerId == partnerid
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                    else
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId)  && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                }
-                return cashlist;
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerid == -1 || b.PartnerId == partnerid)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : (terminalIds.Contains(b.TerminalId) && b.Status == status))
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
             }
             catch (Exception e)
             {
 
-                throw new Exception("Error database "+e.Message);
+                throw new Exception("Error database " + e.Message);
             }
-            
-            
+
         }
 
         public IEnumerable<string> GetAllTerminalId(string value)
         {
             try
             {
-                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();  
+                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();
             }
             catch (Exception e)
             {
 
                 throw new Exception(e.Message);
             }
+        }
+
+
+        public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int stateid, int cityid, string zipcode, int? groupId = null)
+        {
+
+            try
+            {
+                return Table.Where(b => b.ReportGroupId == groupId)
+              .Where(b => partnerId == 0 || b.PartnerId == partnerId)
+              .Where(b => stateid == 0 || b.StateId == stateid)
+              .Where(b => cityid == 0 || b.CityId == cityid)
+              .Where(b => zipcode == "" || b.Zip.ToString() == zipcode)
+              .Include(x => x.Partner).ToList();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public IEnumerable<dynamic> GetAllState(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.State.Name.Contains(term)).Select(b => new { label = b.State.Name, value = b.State.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public IEnumerable<dynamic> GetAllCity(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.City.Name.Contains(term)).Select(b => new { label = b.City.Name, value = b.City.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public List<string> GetAllZipCode(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.Zip.ToString().Contains(term)).Select(b => b.Zip.ToString()).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+        public void EditRange(string[] list, int? groupId)
+        {
+            try
+            {
+
+                foreach (string item in list)
+                {
+                    Terminal tn = FindBy(Int32.Parse(item));
+                    tn.ReportGroupId = groupId;
+                    Edit(tn);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new NullReferenceException(e.Message);
+            }
+
+
         }
     }
 }

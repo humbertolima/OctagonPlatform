@@ -10,5 +10,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         void DeleteRange(string[] ids);
         object FindByName(string name);
+       
     }
 }

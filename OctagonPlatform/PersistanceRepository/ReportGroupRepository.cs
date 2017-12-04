@@ -19,5 +19,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Where(c => c.Name.Equals( name,System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
         }
+
+       
     }
 }

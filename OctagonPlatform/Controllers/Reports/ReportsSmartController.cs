@@ -1,4 +1,7 @@
 ﻿
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 using Newtonsoft.Json;
 using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Models;
@@ -8,6 +11,7 @@ using OctagonPlatform.PersistanceRepository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -37,7 +41,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashLoadViewModel model = new CashLoadViewModel();
 
-            Session["businessName"] = "";
+            
             return View(model);
         }
 
@@ -59,14 +63,14 @@ namespace OctagonPlatform.Controllers.Reports
 
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
-                //  if (listTn.Count() > 0)
-                // {            
+                  if (listTn.Count() > 0)
+                 {            
               
-                int count = 0;
+               
                     foreach (var item in list)
                     {
 
-                        string locationname = "borrar esto  kk";
+                        string locationname = "";
 
                         foreach (dynamic x in listTn)
                         {
@@ -85,7 +89,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                     }
 
-                // }
+                 }
                 #region Variables Partial
                 TempData["List"] = listaux;
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
@@ -105,7 +109,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult AutoTerminal(string term)
         {
 
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
+           IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -129,6 +133,20 @@ namespace OctagonPlatform.Controllers.Reports
         {
             return View();
         }
-
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string html)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(html);
+                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "ReportLoadCash.pdf");
+            }
+        }
     }
 }

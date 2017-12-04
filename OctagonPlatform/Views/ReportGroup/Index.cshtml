@@ -1,92 +1,166 @@
-﻿@model IEnumerable<OctagonPlatform.Models.ReportGroupModel>
+﻿@model OctagonPlatform.Models.FormsViewModels.ReportingGroupVM
 
 @{
     ViewBag.Title = "Index";
 }
 @Styles.Render("~/bundles/selectmulticss")
 @Styles.Render("~/bundles/multiselectcss")
-<div class="row">
-    <div class="col-md-4">
+
+<div class="row" id="row">
+    <div class="col-xs-12 col-sm-4 col-md-3">
         <figure class="highlight">
-          
-            <p><b>Reporting Groups</b></p>
+            <a name="ancla"></a>
+            <h5><b>Add Reporting Group </b></h5><hr>
+
             <p>Enter new group name and click.</p>
-            <div class="row">
-                <div class="col-lg-8">
-                    <form id="frmgroup">
-                        @Html.AntiForgeryToken()
+            <div class="row" style="height: 640px;">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-12">
 
-                        <div class="form-horizontal">
+                            <form id="frmgroup">
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.Editor("name", new { htmlAttributes = new { @class = "form-control", @placeholder = "Name Group" } })
+                                <input type="button" value="Create" class="btn btn-primary" id="CreateGroup" style=" margin-top: 3px;margin-bottom: 3px;" />
+                                @Html.ValidationMessage("", "", new { @class = "text-danger", @id = "error" })
 
-
-                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-
-                                <div class="col-md-12">
-                                    @Html.Editor("name", new { htmlAttributes = new { @class = "form-control" ,@placeholder = "Name Group",@style="width:100%" } })
-                                    @Html.ValidationMessage("", "", new { @class = "text-danger",@id ="error" })
-                                </div>
-                            </div>
-
-
+                            </form>
                         </div>
-                    </form>
+                    </div>
+
                     <div id="groups">
 
 
                         <div class='custom-header'>
                             <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
-                                <li><a href='#' id='select-all' style="color:white">Select All</a></li>
-                                <li><a href='#' id='deselect-all' style="color:white">None </a></li>
                                 <li><a href='#' id='DeleteGroup' style="color:white">Delete </a></li>
                             </ol>
                         </div>
                         <select id='public-methods' multiple='multiple'>
 
-                            @foreach (var item in Model)
-                                        {
-                        <option value='@item.Id'>@item.Name</option>
 
-                                        }
+                            @foreach (var item in Model.ListGroup)
+                            {
+                                <option value='@item.Id'>@item.Name</option>
+
+                            }
                         </select>
 
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <input type="button" value="Create" class="btn btn-primary" id="CreateGroup" />
-                        </div>
-                    </div>
 
-                </div>
+
             </div>
         </figure>
     </div>
-    <div class="col-md-8">
+    <div class="col-xs-12 col-sm-7 col-md-9">
         <figure class="highlight">
-            Asignar terminales a un grupo
-            <select id='callbacks' multiple='multiple'>
-                <option value='elem_1'>elem 1</option>
-                <option value='elem_2'>elem 2</option>
-                <option value='elem_3'>elem 3</option>
-                <option value='elem_4'>elem 4</option>               
-                <option value='elem_100'>elem 100</option>
-            </select>
+
+            <h5><b>Reporting Group Details</b></h5><hr>
+            <div class="row">
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.Label("Partner: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.PartId, new { @id = "partnerid" })
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        @Html.Label("State: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control", @id = "state", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.StateId, new { @id = "stateid" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        @Html.Label("City: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "city", @placeholder = "<All>" } })
+                            @Html.HiddenFor(model => model.CityId, new { @id = "cityid" })
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        @Html.Label("Zip Code: ", new { @class = "col-sm-2 control-label" })
+                        <div class="col-sm-10">
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @id = "zipcode", @placeholder = "<All>" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="button" value="Filter" class="btn btn-primary col-xs-12" id="filter" /><hr>
+                    <input type="button" value="Clear Filter" class="btn btn-primary col-xs-12" id="clear" />
+
+                </div>
+
+
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class='custom-header'>
+                        <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
+                            <li><a href='#' id='' style="color:white">Unassociated Terminals </a></li>
+                            <li><a href='#' id='select-all' style="color:white">Select All </a></li>
+                            <li><a href='#' id='deselect-all' style="color:white">Deselect All</a></li>
+
+                        </ol>
+                    </div>
+                    <select id='select1' multiple='multiple'></select>
+
+                </div>
+            </div>
+            <div style="text-align:center">
+                <a id="associated" style="margin-right:10px;cursor:pointer"> <i class="fa fa-angle-double-down fa-3x"></i></a>
+                <a id="unassociated"><i class="fa fa-angle-double-up fa-3x" style="cursor:pointer"></i></a>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class='custom-header'>
+                        <ol class="breadcrumb" style="margin:0;background-color: #00a8e1;border-radius: 0;">
+                            <li><a href='#' id='' style="color:white">Associated Terminals </a></li>
+                            <li><a href='#' id='select-all1' style="color:white">Select All </a></li>
+                            <li><a href='#' id='deselect-all1' style="color:white">Deselect All</a></li>
+
+                        </ol>
+                    </div>
+                    <select id='select2' multiple='multiple'></select>
+
+
+                </div>
+
+            </div>
+
+
         </figure>
     </div>
 
 </div>
 
 
-
 @section Scripts {
+    <script>
+        var urlcreate ='@Url.Action("Create", "ReportGroup")';
+        var urldelete = '@Url.Action("DeleteAjax", "ReportGroup")';
+        var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlstate = '@Url.Action("AutoState")';
+        var urlcity = '@Url.Action("AutoCity")';
+        var urlzipcode = '@Url.Action("AutoZipCode")';
+        var urlselectgroup = '@Url.Action("DisplayTerminalsByGroup", "ReportGroup")';
+        var urlasign = '@Url.Action("AsignTerminal")';
+        var urlunasign = '@Url.Action("UnasignTerminal")';
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/selectmulti")
-    @Scripts.Render("~/bundles/multiselect")
     @Scripts.Render("~/Scripts/addgroup.js")
-
- 
 
 }
 
