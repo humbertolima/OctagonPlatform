@@ -515,7 +515,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 return Table.Where(b => terminalIds.Contains(b.TerminalId))
                 .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : (terminalIds.Contains(b.TerminalId) && b.Status == status))
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) :  b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
 
