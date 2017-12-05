@@ -4,18 +4,20 @@
 
 
 }
+<p></p>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Filter Report Cash Load</h3>
+    </div>
+    <div class="panel-body">
 
-<figure class="highlight">
-
-    <h2>Report Cash Load</h2>
-    <hr />
-    @using (Html.BeginForm())
-    {
+        @using (Html.BeginForm())
+        {
         @Html.AntiForgeryToken()
         <div class="row">
             <div class="form-horizontal">
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(model => model.TerminalId, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,28 +75,36 @@
                     </div>
                 </div>
 
-              
+
             </div>
         </div>
-    }
-
-</figure>
-<figure class="highlight">
-    @Html.Partial("_PartialCashLoadTable")
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+        }
 
     </div>
-</figure>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")       
-      
-        <script>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <h3 class="panel-title">List Cash Load</h3>       
+    </div>
+    <div class="panel-body">
+        @Html.Partial("_PartialCashLoadTable")
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
 
     $(function () {
         $("#tablecash").DataTable();
-          
+
 
         $("#EndDate").datepicker({
             dateFormat: "mm/dd/yy"
@@ -139,15 +149,15 @@
                }
            });
         //end
-            ChartBar(); 
+            ChartBar();
             ExportPdf();
 
 
 
         });
 
-        </script>
+    </script>
 
-    }
+}
 
 
