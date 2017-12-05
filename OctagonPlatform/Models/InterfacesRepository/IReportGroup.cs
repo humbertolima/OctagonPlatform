@@ -10,6 +10,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         void DeleteRange(string[] ids);
         object FindByName(string name);
-       
+        IEnumerable<dynamic> GetAllGroup(string term);
+        ReportGroupModel GetGroupById(int id);
     }
 }

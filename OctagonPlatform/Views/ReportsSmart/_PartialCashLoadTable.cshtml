@@ -7,76 +7,95 @@
             Export <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>           
+            <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>
             <li><a href="#" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');">Word</a></li>
             <li><a href='#' onclick="$('#pdf').click();">Pdf</a></li>
-                @using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
-                {
-                    <input type="hidden" name="html" />
+            @using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
+            {
+                <input type="hidden" name="html" />
                     <input type="submit" id="pdf" onclick="ExportPdf('ReportLoadCash.pdf', 'TableLoadCash','idhead');" value="" style="display:none" />
-                   
-                }
-            
-            
+
+            }
+
+
         </ul>
-       
+
     </div>
-  <div id="TableLoadCash" >
-<table class="table table-bordered table-striped" width="100%">
-    <tr>
-        <th>
-           Terminal Id
-        </th>
-        <th>
-           Location
-        </th>
-        <th>
-          Date
-        </th>
-        <th>
-          Previous Balance
-        </th>
-        <th>
-          Load Amount
-        </th>
-        <th>
-          New Balance
-        </th>      
-    
-    </tr>
+    <div id="TableLoadCash">
+        <table class="table table-bordered table-striped" width="100%" id="tablecash">
+            <thead>
+                <tr style="background:#e9f3fb;">
 
-@foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TerminalId)
-        </td>
+                    <th>
+                        Terminal Id
+                    </th>
+                    <th>
+                        Location
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Previous Balance
+                    </th>
+                    <th>
+                        Load Amount
+                    </th>
+                    <th>
+                        New Balance
+                    </th>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Locationname)
-          
-        </td>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int sumload = 0;}
+            @foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
+            {
+                sumload += item.AmountLoad; 
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TerminalId)
+                    </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountPrevius)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountLoad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AmountCurrent)
-        </td>
-      
-      
-    </tr>
-}
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Locationname)
 
-</table>
-  </div>
-<div id="myfirstchart" style="height: 100%;width:100%"></div>
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.AmountPrevius)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.AmountLoad)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.AmountCurrent)
+                    </td>
+
+
+                </tr>
+            }
+               
+           </tbody>
+            <tfoot>
+                <tr style="background:#e9f3fb;">
+
+                    <th colspan="4">
+
+                    </th>
+               
+                    <th colspan="2">
+                        Total :  $@sumload
+                    </th>
+
+                </tr>
+                </tfoot>
+        </table>
+    </div>
+    <div id="myfirstchart" style="height: 100%;width:100%"></div>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <div style="display:none" id="idhead">
@@ -84,8 +103,8 @@
     </div>
 }
 
- 
-    <script>
+
+<script>
         function ExportPdf()
         {
             $("#btnSubmit").click(function () {
@@ -95,7 +114,7 @@
         }
 
         function ChartBar() {
-          
+
             var range = 'day';
             var days = days_between($("#StartDate").val(), $("#EndDate").val());
             if (days > 15 && days < 93)
@@ -103,7 +122,7 @@
             else
                 if (days > 92)
                     range = 'month';
-           
+
             new Morris.Line({
                 // ID of the element in which to draw the chart.
                 element: 'myfirstchart',
@@ -118,13 +137,13 @@
                 xLabels: range,
                 xLabelAngle: 45,
                 lineColors: ['#00a8e1', '#FF6541'],
-                xLabelFormat: function (d) {                 
+                xLabelFormat: function (d) {
                     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                     if (range == 'month')
                         return d.getFullYear()+" - "+months[d.getMonth()];
                     else
                     return  ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getFullYear())).slice(-2);
-                     
+
                 },
                 resize:true
             });
@@ -138,5 +157,5 @@
            return diffDays;
 
         }
-    </script>
+</script>
 

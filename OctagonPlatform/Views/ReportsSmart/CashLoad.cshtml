@@ -1,87 +1,101 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.CashLoadViewModel
 @{
     ViewBag.Title = "CashLoad";
-    
-    
+
+
 }
 
-<h2>CashLoad</h2>
+<figure class="highlight">
 
+    <h2>Report Cash Load</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-horizontal">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TerminalId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.TerminalId, new { htmlAttributes = new { @class = "form-control", @id = "terminal", @placeholder = "< All >" } })
+                            @Html.ValidationMessageFor(model => model.TerminalId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Partner, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner", @placeholder = "< All >" } })
+                            @Html.HiddenFor(model => model.PartnerId, new { id = "partnerid" })
+                            @Html.ValidationMessageFor(model => model.Partner, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Group, new { htmlAttributes = new { @class = "form-control", @id = "group", @placeholder = "< All >" } })
+                            @Html.HiddenFor(model => model.GroupId, new { id = "groupid" })
+                            @Html.ValidationMessageFor(model => model.Group, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EnumDropDownListFor(b => b.Status, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @id = "StartDate", @readonly = "" } })
+                            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @id = "EndDate", @readonly = "" } })
+                            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>reportModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.TerminalId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TerminalId, new { htmlAttributes = new { @class = "form-control", @id = "terminal" ,@placeholder = "< All >"} })
-                @Html.ValidationMessageFor(model => model.TerminalId, "", new { @class = "text-danger" })
+              
             </div>
         </div>
-    
-        <div class="form-group">
-            @Html.LabelFor(model => model.Partner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Partner, new { htmlAttributes = new { @class = "form-control", @id = "partner" } })
-                @Html.HiddenFor(model => model.PartnerId, new { id = "partnerid" })
-                @Html.ValidationMessageFor(model => model.Partner, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EnumDropDownListFor(b => b.Status, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-       
+</figure>
+<figure class="highlight">
+    @Html.Partial("_PartialCashLoadTable")
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control",@id = "StartDate",@readonly =""} })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @id = "EndDate", @readonly = "" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
 
-    
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
     </div>
-}
-@Html.Partial("_PartialCashLoadTable")
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-   
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-   
-<script>
-   
+</figure>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")       
+      
+        <script>
 
     $(function () {
+        $("#tablecash").DataTable();
+          
 
-       
         $("#EndDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
@@ -107,14 +121,33 @@
                    $('#partnerid').val('');
                }
            });
-           ChartBar();
-           ExportPdf();
-             
-          
-    });
+        //Auto group
+          $('#group').autocomplete({
+               source: '@Url.Action("AutoGroup")',
+               select: function (event, ui) {
 
-</script>
+                   $("#group").val(ui.item.label); // display the selected text
+                   $("#groupid").val(ui.item.value); // save selected id to hidden input
 
-}
+                   return false;
+               }
+        });
+           //clear id from hidden field if input is blank
+           $('#group').blur(function () {
+               if ($('#group').val() == '') {
+                   $('#groupid').val('');
+               }
+           });
+        //end
+            ChartBar(); 
+            ExportPdf();
+
+
+
+        });
+
+        </script>
+
+    }
 
 
