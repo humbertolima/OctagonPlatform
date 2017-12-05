@@ -25,11 +25,13 @@ namespace OctagonPlatform.Controllers.Reports
         private IReports _repo;
         private ITerminalRepository repo_terminal;
         private IPartnerRepository repo_partner;
-        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner)
+        private IReportGroup repo_group;
+        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
         {
             _repo = repo;
             repo_terminal = repoterminal;
             repo_partner = repopartner;
+            repo_group = repogroup;
         }
         // GET: reportModels
         public ActionResult Index()
@@ -40,14 +42,15 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult CashLoad()
         {
             CashLoadViewModel model = new CashLoadViewModel();
+            TempData["Chart"] = "[]";
 
-            
+
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId")] CashLoadViewModel vmodel)
+        public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId,Group,GroupId")] CashLoadViewModel vmodel)
         {
 
             if (ModelState.IsValid)
@@ -59,7 +62,10 @@ namespace OctagonPlatform.Controllers.Reports
 
                 DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                list = await api.CashLoad(start, end, vmodel.TerminalId);
+
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);    
+
+                list = await api.CashLoad(start, end, vmodel.TerminalId, listtn);
 
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status,vmodel.PartnerId);
 
@@ -105,6 +111,31 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("Index");
         }
 
+        private string[] ListTerminalByGroup(int groupId)
+        {
+            try
+            {
+                string[] listtn = null;
+                if (groupId != -1)
+                {
+                    ReportGroupModel modelg = repo_group.GetGroupById(groupId);
+                    IEnumerable<Terminal> listterminal = modelg.Terminals;
+                    listtn = new string[modelg.Terminals.Count()];
+                    int i = 0;
+                    foreach (var item in listterminal)
+                    {
+                        listtn[i++] = item.TerminalId;
+                    }
+                }
+                return listtn;
+            }
+            catch (Exception e)
+            {
+
+                throw new NullReferenceException(e.Message);
+            }
+          
+        }
 
         public ActionResult AutoTerminal(string term)
         {
@@ -117,6 +148,13 @@ namespace OctagonPlatform.Controllers.Reports
         {
 
             IEnumerable<dynamic> list = repo_partner.GetAllPartner(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AutoGroup(string term)
+        {
+
+            IEnumerable<dynamic> list = repo_group.GetAllGroup(term);
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

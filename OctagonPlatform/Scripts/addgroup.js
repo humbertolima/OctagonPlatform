@@ -134,7 +134,7 @@ $(function () {
 
     //end
 
-    //autocompleta
+    //autocomplete
     $('#partner').autocomplete({
         source: urlautopartner,
         select: function (event, ui) {
@@ -143,6 +143,12 @@ $(function () {
             $("#partnerid").val(ui.item.value); // save selected id to hidden input
 
             return false;
+        }
+    });
+    //clear id from hidden field if input is blank
+    $('#partner').blur(function () {
+        if ($('#partner').val() == '') {
+            $('#partnerid').val('');
         }
     });
     $('#state').autocomplete({
@@ -155,6 +161,12 @@ $(function () {
             return false;
         }
     });
+    //clear id from hidden field if input is blank
+    $('#state').blur(function () {
+        if ($('#state').val() == '') {
+            $('#stateid').val('');
+        }
+    });
     $('#city').autocomplete({
         source: urlcity,
         select: function (event, ui) {
@@ -163,6 +175,12 @@ $(function () {
             $("#cityid").val(ui.item.value); // save selected id to hidden input
 
             return false;
+        }
+    });
+    //clear id from hidden field if input is blank
+    $('#city').blur(function () {
+        if ($('#city').val() == '') {
+            $('#cityid').val('');
         }
     });
     $('#zipcode').autocomplete({
@@ -174,6 +192,7 @@ $(function () {
             return false;
         }
     });
+  
     //end
     $("#associated").click(function () {
         // alert("associated");
