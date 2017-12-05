@@ -2,24 +2,18 @@
 @if (TempData["List"] != null)
 {
   <!-- Single button -->
-    <div class="btn-group" style="margin-bottom:5px">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Export <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="#" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');">Excel</a></li>
-            <li><a href="#" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');">Word</a></li>
-            <li><a href='#' onclick="$('#pdf').click();">Pdf</a></li>
-            @using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
-            {
-                <input type="hidden" name="html" />
-                    <input type="submit" id="pdf" onclick="ExportPdf('ReportLoadCash.pdf', 'TableLoadCash','idhead');" value="" style="display:none" />
 
-            }
+    <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-2">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default" onclick="$('#pdf').click();" style="border-radius: 0px;">PDF</button>
+                <button type="button" class="btn btn-default" onclick="Export('ReportLoadCash.xls', 'TableLoadCash','idhead');" style="border-radius: 0px;">XLS</button>
+                <button type="button" class="btn btn-default" onclick="Export('ReportLoadCash.doc', 'TableLoadCash','idhead');" style="border-radius: 0px;">DOC</button>
 
-
-        </ul>
-
+            </div>
+            <p></p>
+        </div>
     </div>
     <div id="TableLoadCash">
         <table class="table table-bordered table-striped" width="100%" id="tablecash">
@@ -49,9 +43,9 @@
             </thead>
             <tbody>
                 @{ int sumload = 0;}
-            @foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
-            {
-                sumload += item.AmountLoad; 
+                @foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.JsonLoadCashReport>)TempData["List"])
+                {
+                    sumload += item.AmountLoad;
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.TerminalId)
@@ -77,32 +71,37 @@
 
 
                 </tr>
-            }
-               
-           </tbody>
+                }
+
+            </tbody>
             <tfoot>
                 <tr style="background:#e9f3fb;">
 
                     <th colspan="4">
 
                     </th>
-               
+
                     <th colspan="2">
                         Total :  $@sumload
                     </th>
 
                 </tr>
-                </tfoot>
+            </tfoot>
         </table>
     </div>
     <div id="myfirstchart" style="height: 100%;width:100%"></div>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <div style="display:none" id="idhead">
-        @Html.Partial("_PartialExcelHead")
-    </div>
-}
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <div style="display:none" id="idhead">
+            @Html.Partial("_PartialExcelHead")
+        </div>
+                    }
+@using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
+{
+    <input type="hidden" name="html" />
+    <input type="submit" id="pdf" onclick="ExportPdf('ReportLoadCash.pdf', 'TableLoadCash','idhead');" value="" style="display:none" />
 
+}
 
 <script>
         function ExportPdf()
