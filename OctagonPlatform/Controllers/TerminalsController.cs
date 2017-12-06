@@ -2,6 +2,7 @@
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -56,6 +57,14 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
+        }
+
+        [HttpPost]
+        public ActionResult SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
+        {
+            Models.Terminal terminal = new Models.Terminal();
+
+            return PartialView("Details", terminal);
         }
 
         [HttpPost]

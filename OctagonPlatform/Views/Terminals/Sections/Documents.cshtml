@@ -1,1 +1,182 @@
-﻿<h3>Documents</h3>
+﻿@model OctagonPlatform.Models.Terminal
+
+<h3 data-toggle="collapse" data-target="#getDocuments">Documents</h3>
+
+<div id="getDocuments" class="panel-collapse collapse">
+    <div>
+        @using (Html.BeginForm("Create", "DisputeRepresents", FormMethod.Post,
+                                          new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            
+            <table>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Documents)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Id
+                                </td>
+                                <td>
+                                    <input type="text" id="DocumentsValues_@item.Id" name="DocumentsValues" value="@item.Name">
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.Category
+                                </td>
+                                <td>
+                                    <button type="button" class="DocumentsEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalDocumentsEdit">Edit</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="DocumentsDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteNoteModal">Delete</button>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>Select File : </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Documents.FirstOrDefault().FileForm, new { type = "file" })
+                                @Html.ValidationMessage("CustomError")
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+            <input type="submit" value="Create" class="btn btn-default" />
+
+                        }
+
+
+
+        @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
+        <div id="" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit</h3>
+
+                    @using (Html.BeginForm("SetDocuments", "Terminals"))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" id="IndexTerminalId" name="IndexTerminalId" value="@Model.Id">
+                        <input type="hidden" id="noteId" name="noteId" value="">
+
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                        <div class="form-group">
+                            <input type="text" id="notes" name="notes" value="">
+                        </div>
+                        <div class="form-group">
+                            @*@Html.CheckBox("AutoRecord")Auto Record
+                                @Html.ValidationMessage("AutoRecord")*@
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="myModaDocumentsAdd" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+
+                    <h3 class="alert-info">Edit</h3>
+
+                    @using (Html.BeginForm("SetDocuments", "Terminals"))
+                    {
+                        @Model
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" id="indexTerminalId" name="IndexTerminalId" value="@Model.Id">
+
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                        <div class="form-group">
+                            <input type="text" id="notes" name="notes" value="">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div id="DeleteCassetteModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Delete Cassette</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this cassette? </p>
+                    </div>
+                    <div class="modal-footer">
+                        @using (Html.BeginForm("CassetteDelete", "Terminals", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("noteId")
+                            <input type="hidden" id="itemId" name="id" value="" />
+                            <div class="form-group">
+                                <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                                <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+<script>
+
+    $(document).on("click", ".DocumentsEdit", function () {
+        var passedID = $(this).data('id');
+        var passedValue = $("#DocumentsValues_" + passedID).val();
+        alert(passedValue);
+        $("#myModalDocumentsEdit #notes").val(passedValue);
+    });
+
+    $(document).on("click", ".DocumentsEdit", function () {
+        var passedID = $(this).data('id');
+        $("#myModalDocumentsEdit #noteId").val(passedID);
+    });
+
+    $(document).on("click", ".DocumentsDelete", function () {
+        var passedID = $(this).data('id');
+        $("#DeleteNoteModal #noteId").val(passedID);
+    });
+</script>
+
+
+
+
+

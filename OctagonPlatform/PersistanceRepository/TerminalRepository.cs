@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -478,6 +479,17 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 throw new Exception(e.Message + "Terminal not found.");
             }
+        }
+
+        public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (documentId ==null || documentId == 0)
+            {
+
+            }
+            return terminal;
         }
 
         public Terminal SetNotes(int indexTerminalId, string note, int? noteId)

@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -282,6 +283,10 @@
     <Compile Include="Migrations\201711291452285_addreportinggroup.cs" />
     <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061559346_alterDocuments.cs" />
+    <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
+      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1205,6 +1210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
+      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

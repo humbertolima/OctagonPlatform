@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Controllers.Reports.JSON;
 using System;
+using System.Web;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -20,7 +21,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
-        
+
+        Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
+
         Terminal SetNotes(int indexTerminalId, string note, int? noteId);
 
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
