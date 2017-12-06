@@ -67,6 +67,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
+
         public Terminal GetTerminal(string terminalId)
         {
             try
@@ -80,6 +81,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
@@ -305,6 +307,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
+
         public void CassettesDelete(int cassetteId)
         {
             try
@@ -328,7 +331,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
-
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {
@@ -443,6 +445,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message + "Terminal not found.");
             }
         }
+
         public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
 
@@ -477,6 +480,28 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (noteId == null || noteId == 0)
+            {
+                if (terminal != null)
+                {
+                    terminal.Notes.Add(new Note { Nota = note });
+                    Save();
+                }
+            }
+            else
+            {
+                terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
+                Edit(terminal);
+            }
+
+            return terminal;
+        }
+
+
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
@@ -495,6 +520,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
         {
             try

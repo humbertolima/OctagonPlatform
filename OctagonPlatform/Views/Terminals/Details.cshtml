@@ -22,16 +22,6 @@
 <div class="row" id="detailterminal">
 
     <div class="col-md-6">
-        @*<div class="panel-group" style="width: 100%;">
-                <div class="panel panel-default">
-                    <div id="PartnerDetailButtons" class="panel-heading">
-                        <h3 class="texth3"><i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
-                        <div id="getConfigNotification" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
 
@@ -72,38 +62,24 @@
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
+                <h3 class="texth3">
+                    @Html.Partial("Sections/Cassettes", Model)
+                </h3>
+            </div>
+        </div>
 
-                        @Html.Partial("Sections/Cassettes", Model)
-                    </h3>
-
+        <div class="panel-group" style="width: 100%;">
+            <div class="panel panel-default">
+                <div id="notes">
+                    @Html.Partial("Sections/Notes", Model)
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <div id="documents">
-                        @Html.Partial("Sections/Documents", Model)
-                        <div id="getGeneralInfo" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel-group" style="width: 100%;">
-            <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <div id="notes">
-                        @Html.Partial("Sections/Notes", Model)
-                        <div id="getGeneralInfo" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
+                <div id="documents">
+                    @Html.Partial("Sections/Documents", Model)
                 </div>
             </div>
         </div>
@@ -207,7 +183,7 @@
             $("#deleteInterchange").click(function () {
                 var id = $(this).data('id');
                 $("#confirmdeleteInterchange #id").val(id);
-               
+
             });
             /*var jQuery_1_10_2 = $.noConflict(true);
 

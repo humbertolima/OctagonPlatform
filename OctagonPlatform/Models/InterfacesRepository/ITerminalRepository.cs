@@ -20,6 +20,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
+        
+        Terminal SetNotes(int indexTerminalId, string note, int? noteId);
 
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
 

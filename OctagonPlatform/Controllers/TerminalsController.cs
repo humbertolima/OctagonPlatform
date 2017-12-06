@@ -17,16 +17,16 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-        public  ActionResult CashManagement(string terminalId)
+        public ActionResult CashManagement(string terminalId)
         {
             DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-            var result =  _repository.GetCashLoad(start, end, terminalId);
+            var result = _repository.GetCashLoad(start, end, terminalId);
 
             foreach (var item in result.Result)
             {
-                
+
             }
             return PartialView("Sections/CashManagements", result.Result);
         }
@@ -56,6 +56,23 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
+        }
+
+        [HttpPost]
+        public PartialViewResult SetNotes(int indexTerminalId, string notes, int? noteId)
+        {
+            Models.Terminal terminal = new Models.Terminal();
+
+            if (noteId != null && noteId > 0)
+            {
+                terminal = _repository.SetNotes(indexTerminalId, notes, Convert.ToInt32(noteId));
+            }
+            else
+            {
+                terminal = _repository.SetNotes(indexTerminalId, notes, null);
+            }
+
+            return PartialView("Details", terminal);
         }
 
         [HttpPost]
