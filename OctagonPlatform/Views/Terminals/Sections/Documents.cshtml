@@ -4,11 +4,12 @@
 
 <div id="getDocuments" class="panel-collapse collapse">
     <div>
-        @using (Html.BeginForm("Create", "DisputeRepresents", FormMethod.Post,
+        @using (Html.BeginForm("SetDocuments", "Terminals", FormMethod.Post,
                                           new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-            
+            <input type="hidden" id="indexTerminalId" name="IndexTerminalId" value="@Model.Id">
+
             <table>
                 <tbody>
                     @{
@@ -19,17 +20,13 @@
                                     @item.Id
                                 </td>
                                 <td>
-                                    <input type="text" id="DocumentsValues_@item.Id" name="DocumentsValues" value="@item.Name">
-                                    @item.Name
+                                     @item.Name
                                 </td>
                                 <td>
                                     @item.Category
                                 </td>
                                 <td>
-                                    <button type="button" class="DocumentsEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalDocumentsEdit">Edit</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="DocumentsDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteNoteModal">Delete</button>
+                                    <button type="button" class="DocumentsDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteDocumentModal">Delete</button>
                                 </td>
                             </tr>
                         }
@@ -46,7 +43,7 @@
                 </tbody>
             </table>
 
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Add" class="btn btn-default" />
 
                         }
 
@@ -125,22 +122,23 @@
             </div>
         </div>
 
-        <div id="DeleteCassetteModal" class="modal">
+        <div id="DeleteDocumentModal" class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Delete Cassette</h4>
+                        <h4 class="modal-title">Delete Document</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to delete this cassette? </p>
+                        <p>Are you sure you want to delete this document? </p>
                     </div>
                     <div class="modal-footer">
-                        @using (Html.BeginForm("CassetteDelete", "Terminals", FormMethod.Post))
+                        @using (Html.BeginForm("DocumentDelete", "Terminals", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("noteId")
-                            <input type="hidden" id="itemId" name="id" value="" />
+                            <input type="hidden" id="indexTerminalId" name="indexTerminalId" value="@Model.Id">
+                            <input type="hidden" id="documentId" name="documentId" value="" />
+
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
@@ -157,22 +155,9 @@
 @Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
 <script>
-
-    $(document).on("click", ".DocumentsEdit", function () {
-        var passedID = $(this).data('id');
-        var passedValue = $("#DocumentsValues_" + passedID).val();
-        alert(passedValue);
-        $("#myModalDocumentsEdit #notes").val(passedValue);
-    });
-
-    $(document).on("click", ".DocumentsEdit", function () {
-        var passedID = $(this).data('id');
-        $("#myModalDocumentsEdit #noteId").val(passedID);
-    });
-
     $(document).on("click", ".DocumentsDelete", function () {
         var passedID = $(this).data('id');
-        $("#DeleteNoteModal #noteId").val(passedID);
+        $("#DeleteDocumentModal #documentId").val(passedID);
     });
 </script>
 

@@ -24,6 +24,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
+        Terminal DocumentDelete(int indexTerminalId, int documentId);
+
         Terminal SetNotes(int indexTerminalId, string note, int? noteId);
 
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);

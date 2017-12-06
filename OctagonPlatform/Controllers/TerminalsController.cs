@@ -60,11 +60,20 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
+        public ViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
         {
             Models.Terminal terminal = new Models.Terminal();
 
-            return PartialView("Details", terminal);
+            if (documentId == null || documentId == 0)
+            {   //addicionar
+                terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
+            }
+            else
+            {   //editar porque viene un id de documents
+
+            }
+
+            return View("Details", terminal);
         }
 
         [HttpPost]
@@ -284,6 +293,7 @@ namespace OctagonPlatform.Controllers
         }
         //======================
         // POST: Terminals/Delete/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CassetteDelete(int? cassetteId)
@@ -305,6 +315,31 @@ namespace OctagonPlatform.Controllers
             }
         }
         //======================
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DocumentDelete(int indexTerminalId, int? documentId)
+        {
+            try
+            {
+                if (documentId == null || documentId <= 0)
+                {
+                    ViewBag.Error = "Document not found. ";
+                    return View("Error");
+                }
+                Models.Terminal terminal = _repository.DocumentDelete(indexTerminalId, Convert.ToInt32(documentId));
+
+                return RedirectToAction("Details",new {id = terminal.Id });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+
 
         [HttpPost]
         public ActionResult Search(string search)

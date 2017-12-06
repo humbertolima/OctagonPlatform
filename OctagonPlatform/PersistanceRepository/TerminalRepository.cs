@@ -485,13 +485,28 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Terminal terminal = TerminalDetails(indexTerminalId);
 
-            if (documentId ==null || documentId == 0)
+            if (documentId == null || documentId == 0)
             {
-
+                terminal.Documents.Add(new Document {
+                    Name= archive.FileName,               
+                    Archive = Helpers.ConvertTo.DocumentToByteArray(archive),
+                });
+                Save();
             }
             return terminal;
         }
 
+        public Terminal DocumentDelete(int indexTerminalId, int documentId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (documentId > 0)
+            {
+                Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
         public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
         {
             Terminal terminal = TerminalDetails(indexTerminalId);
