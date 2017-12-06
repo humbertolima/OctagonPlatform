@@ -617,5 +617,24 @@ namespace OctagonPlatform.PersistanceRepository
 
 
         }
+
+        public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+        }
     }
 }

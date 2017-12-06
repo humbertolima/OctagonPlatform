@@ -53,5 +53,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> GetAllCity(string term);
         List<string> GetAllZipCode(string term);
         void EditRange(string[] list, int? groupId);
+        IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
     }
 }
