@@ -173,27 +173,20 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementVM vmodel)
         {
-
             if (ModelState.IsValid)
             {
                 List<JsonCashManagementReport> listaux = new List<JsonCashManagementReport>();
                 List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
                 List<JsonCashManagement> list = new List<JsonCashManagement>();
                 ApiATM api = new ApiATM();
-
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-
                 list = await api.CashManagement(vmodel.TerminalId, listtn);
-
                 IEnumerable<dynamic> listTn = repo_terminal.LoadCashMngList(list, vmodel.Status, vmodel.PartnerId);
-
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in list)
                     {
-
                         string locationname = "";
-
                         foreach (dynamic x in listTn)
                         {
                             if (x.TerminalId == item.TerminalId)
@@ -237,9 +230,7 @@ namespace OctagonPlatform.Controllers.Reports
             DateTime LastLoadDate = DateTime.Now;
             int PreviousBalance = 0;
             int CashLoadAmount = 0;
-            int NewBalance = 0;
-            int i = 0;
-            int aux = 0;
+            int NewBalance = 0;     
             CashManagementReport obj = null;
             foreach (var item in listaux)
             {
@@ -257,6 +248,11 @@ namespace OctagonPlatform.Controllers.Reports
                     // Difference in days, hours, and minutes.
                     TimeSpan ts = LastLoadDate - repeat.Last().Date;
                     DaysUntilCashLoad = ts.Days;
+                }
+                else
+                {
+                     CurrentCashBalance = 0;
+                     DaysUntilCashLoad = 0;
                 }
 
                 if (!list.Exists(b => b.TerminalId == item.TerminalId))
