@@ -483,15 +483,24 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
-
-            if (documentId == null || documentId == 0)
+            Terminal terminal = new Terminal();
+            if (archive != null)
             {
-                terminal.Documents.Add(new Document {
-                    Name= archive.FileName,               
-                    Archive = Helpers.ConvertTo.DocumentToByteArray(archive),
-                });
-                Save();
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (documentId == null || documentId == 0)
+                {
+                    terminal.Documents.Add(new Document
+                    {
+                        Name = archive.FileName,
+                        Archive = Helpers.ConvertTo.DocumentToByteArray(archive),
+                    });
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
             }
             return terminal;
         }
