@@ -294,6 +294,10 @@
     <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
       <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -324,6 +328,8 @@
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalTableViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
@@ -830,6 +836,7 @@
     <Content Include="Octagon\assets\vendor\raphael\raphael.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.min.js" />
     <Content Include="Scripts\addgroup.js" />
+    <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1186,14 +1193,12 @@
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
-    <Content Include="Views\ReportGroup\Create.cshtml" />
-    <Content Include="Views\ReportGroup\Delete.cshtml" />
-    <Content Include="Views\ReportGroup\Details.cshtml" />
-    <Content Include="Views\ReportGroup\Edit.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialCashManagementTable.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTerminalTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1226,6 +1231,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
       <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072009044_AdddateCreatedterminal.resx">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -636,5 +636,31 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
+
+        public IEnumerable<dynamic> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
+        {
+            try
+            {               
+                return Table.Where(b => listtn == null || listtn.Contains(b.TerminalId))
+                .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
+                .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
+                .Where(b => vmodel.AccountId == -1 || b.Partner.BankAccounts.Where(z => z.Id == vmodel.AccountId).Count() > 0)
+                .Where(b => vmodel.TerminalId == "" || b.TerminalId == vmodel.TerminalId)
+                .Where(b => vmodel.CityId == -1 || b.CityId == vmodel.CityId)
+                .Where(b => vmodel.StateId == -1 || b.CityId == vmodel.StateId)
+                .Where(b => vmodel.ZipCode == "" || b.Zip == Int32.Parse( vmodel.ZipCode))
+                .Where(b => vmodel.ConectionType == CommunicationType.Communication.All ? (b.CommunicationType == CommunicationType.Communication.PhoneLine || b.CommunicationType == CommunicationType.Communication.TcpIp) : b.CommunicationType == vmodel.ConectionType)
+                //.Where(b => vmodel.StartDate == "" || b. == vmodel.StateId)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+            // throw new NotImplementedException();
+        }
     }
 }

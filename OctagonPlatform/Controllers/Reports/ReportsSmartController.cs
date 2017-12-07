@@ -156,7 +156,7 @@ namespace OctagonPlatform.Controllers.Reports
             IEnumerable<dynamic> list = repo_group.GetAllGroup(term);
 
             return Json(list, JsonRequestBehavior.AllowGet);
-        }
+        }        
 
         public ActionResult CashBalanceatClose()
         {
@@ -230,7 +230,7 @@ namespace OctagonPlatform.Controllers.Reports
             DateTime LastLoadDate = DateTime.Now;
             int PreviousBalance = 0;
             int CashLoadAmount = 0;
-            int NewBalance = 0;     
+            int NewBalance = 0;
             CashManagementReport obj = null;
             foreach (var item in listaux)
             {
@@ -251,8 +251,8 @@ namespace OctagonPlatform.Controllers.Reports
                 }
                 else
                 {
-                     CurrentCashBalance = 0;
-                     DaysUntilCashLoad = 0;
+                    CurrentCashBalance = 0;
+                    DaysUntilCashLoad = 0;
                 }
 
                 if (!list.Exists(b => b.TerminalId == item.TerminalId))
@@ -260,7 +260,7 @@ namespace OctagonPlatform.Controllers.Reports
                     obj = new CashManagementReport(TerminalId, Locationname, CurrentCashBalance, DaysUntilCashLoad, LastLoadDate, PreviousBalance, CashLoadAmount, NewBalance);
                     list.Add(obj);
                 }
-            
+
             }
             return list;
         }
@@ -283,6 +283,25 @@ namespace OctagonPlatform.Controllers.Reports
                 pdfDoc.Close();
                 return File(stream.ToArray(), "application/pdf", "ReportLoadCash.pdf");
             }
+        }
+        public ActionResult TerminalList()
+        {
+            TerminalListViewModel model = new TerminalListViewModel();          
+
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TerminalList([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,Account,AccountId,StartDate,EndDate,ConectionType,State,StateId,City,CityId,ZipCode")] TerminalListViewModel vmodel)
+        {
+            if (ModelState.IsValid)
+            {
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
+                IEnumerable<dynamic> list = repo_terminal.GetTerminalsReport(vmodel, listtn);
+
+                return View();
+            }
+            return RedirectToAction("Index");
         }
     }
 }
