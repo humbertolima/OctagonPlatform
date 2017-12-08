@@ -294,6 +294,10 @@
     <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711292247322_addreportgroupid.cs" />
+    <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201712061559346_alterDocuments.cs" />
     <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
@@ -305,6 +309,10 @@
     <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
     <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
       <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
+    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -326,7 +334,6 @@
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
@@ -1243,6 +1250,9 @@
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
     </EmbeddedResource>
@@ -1251,6 +1261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712072009044_AdddateCreatedterminal.resx">
       <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
