@@ -281,6 +281,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
                     .Include(x => x.WorkingHours)
+                    .Include(x => x.Pictures)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -481,6 +482,31 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId)
+        {
+            Terminal terminal = new Terminal();
+            if (archive != null)
+            {
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (pictureId == null || pictureId == 0)
+                {
+                    terminal.Pictures.Add(new Picture
+                    {
+                        Name = archive.FileName,
+                        Archive = ConvertTo.ImageToByteArray(archive),
+                    });
+
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
+            }
+            return terminal;
+        }
+
         public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
         {
             Terminal terminal = new Terminal();
@@ -505,6 +531,18 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
+        public Terminal PictureDelete(int indexTerminalId, int pictureId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (pictureId > 0)
+            {
+                Context.Pictures.Remove(terminal.Pictures.FirstOrDefault(c => c.Id == pictureId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
+
         public Terminal DocumentDelete(int indexTerminalId, int documentId)
         {
             Terminal terminal = TerminalDetails(indexTerminalId);
@@ -516,6 +554,8 @@ namespace OctagonPlatform.PersistanceRepository
             }
             return terminal;
         }
+
+
         public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
         {
             Terminal terminal = TerminalDetails(indexTerminalId);
@@ -536,8 +576,7 @@ namespace OctagonPlatform.PersistanceRepository
 
             return terminal;
         }
-
-
+        
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
@@ -577,6 +616,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try

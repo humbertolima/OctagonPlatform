@@ -31,10 +31,7 @@ namespace OctagonPlatform.Controllers
             }
             return PartialView("Sections/CashManagements", result.Result);
         }
-
-
-
-
+        
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -58,6 +55,24 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
+
+        [HttpPost]
+        public ViewResult SetPictures(int indexTerminalId, HttpPostedFileBase FileForm, int? pictureId)
+        {
+            Models.Terminal terminal = new Models.Terminal();
+
+            if (pictureId == null || pictureId == 0)
+            {   //addicionar
+                terminal = _repository.SetPictures(indexTerminalId, FileForm, null);
+            }
+            else
+            {   //editar porque viene un id de pictures
+
+            }
+
+            return View("Details", terminal);
+        }
+
 
         [HttpPost]
         public ViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
@@ -315,6 +330,28 @@ namespace OctagonPlatform.Controllers
             }
         }
         //======================
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PictureDelete(int indexTerminalId, int? pictureId)
+        {
+            try
+            {
+                if (pictureId == null || pictureId <= 0)
+                {
+                    ViewBag.Error = "Picture not found. ";
+                    return View("Error");
+                }
+                Models.Terminal terminal = _repository.PictureDelete(indexTerminalId, Convert.ToInt32(pictureId));
+
+                return RedirectToAction("Details", new { id = terminal.Id });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
 
 
         [HttpPost]

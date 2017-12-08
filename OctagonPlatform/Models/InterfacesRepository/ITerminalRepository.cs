@@ -24,6 +24,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
+        Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId);
+
+        Terminal PictureDelete(int indexTerminalId, int pictureId);
+
         Terminal DocumentDelete(int indexTerminalId, int documentId);
 
         Terminal SetNotes(int indexTerminalId, string note, int? noteId);

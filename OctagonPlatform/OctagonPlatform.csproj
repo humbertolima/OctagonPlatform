@@ -289,6 +289,10 @@
     <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712071542433_addPictures.cs" />
+    <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
+      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -351,6 +355,7 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
@@ -1188,6 +1193,7 @@
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
+    <Content Include="Views\Terminals\Sections\Pictures.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1214,6 +1220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712071542433_addPictures.resx">
+      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
