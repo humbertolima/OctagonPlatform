@@ -176,8 +176,9 @@ namespace OctagonPlatform.Models
         [Required]
         public string LocationName { get; set; }
 
-        public ReportGroupModel ReportGroupModel { get; set; }
-        
+        public int? ReportGroupId { get; set; }
+        public ReportGroupModel ReportGroup { get; set; }
+        public DateTime? DateCreated { get; set; }
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();

@@ -3,6 +3,7 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -195,6 +196,13 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
+        }
+        public ActionResult AutoAccount(string term)
+        {
+
+            IEnumerable<dynamic> list = _bAccountRepository.GetAllAccount(term);
+
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
     }
 }

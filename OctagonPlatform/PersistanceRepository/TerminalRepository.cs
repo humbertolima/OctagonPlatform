@@ -8,6 +8,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -616,71 +617,23 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                IEnumerable<dynamic> cashlist = null;
-                if (partnerid == -1)
-                {
-                    if (status != StatusType.Status.All)
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                    else
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                }
-                else
-                {
-                    if (status != StatusType.Status.All)
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && terminal.Status == status && terminal.PartnerId == partnerid
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                    else
-                    {
-                        cashlist = (from terminal in Table
-                                    where terminalIds.Contains(terminal.TerminalId) && terminal.PartnerId == partnerid && (terminal.Status == StatusType.Status.Active || terminal.Status == StatusType.Status.Inactive || terminal.Status == StatusType.Status.Incomplete)
-                                    select new
-                                    {
-                                        terminal.TerminalId,
-                                        terminal.LocationName,
-                                        terminal.Status
-                                    }).ToList();
-                    }
-                }
-                return cashlist;
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerid == -1 || b.PartnerId == partnerid)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) :  b.Status == status)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
             }
             catch (Exception e)
             {
 
                 throw new Exception("Error database " + e.Message);
             }
-
 
         }
 
@@ -695,6 +648,144 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new Exception(e.Message);
             }
+        }
+
+
+        public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int stateid, int cityid, string zipcode, int? groupId = null)
+        {
+
+            try
+            {
+                return Table.Where(b => b.ReportGroupId == groupId)
+              .Where(b => partnerId == 0 || b.PartnerId == partnerId)
+              .Where(b => stateid == 0 || b.StateId == stateid)
+              .Where(b => cityid == 0 || b.CityId == cityid)
+              .Where(b => zipcode == "" || b.Zip.ToString() == zipcode)
+              .Include(x => x.Partner).ToList();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+
+
+        public IEnumerable<dynamic> GetAllState(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.State.Name.Contains(term)).Select(b => new { label = b.State.Name, value = b.State.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public IEnumerable<dynamic> GetAllCity(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.City.Name.Contains(term)).Select(b => new { label = b.City.Name, value = b.City.Id }).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+        public List<string> GetAllZipCode(string term)
+        {
+            try
+            {
+                return Table.Where(b => b.Zip.ToString().Contains(term)).Select(b => b.Zip.ToString()).Distinct().ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+            
+            
+        }
+
+        public void EditRange(string[] list, int? groupId)
+        {
+            try
+            {
+
+                foreach (string item in list)
+                {
+                    Terminal tn = FindBy(Int32.Parse(item));
+                    tn.ReportGroupId = groupId;
+                    Edit(tn);
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new NullReferenceException(e.Message);
+            }
+
+
+        }
+
+        public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+        }
+
+        public List<Terminal> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
+        {
+            DateTime? start = null;
+            DateTime? end = null;
+            if(vmodel.StartDate != null ) start =  DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture) ;
+            if (vmodel.EndDate != null) end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            bool groupfilter = listtn == null ? false: true;
+            string[] aux = { "0" };
+            listtn = listtn ?? aux ;
+            int zip =Int32.Parse( vmodel.ZipCode ?? "0");
+            try
+            {               
+                return Table.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))
+                .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
+                .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
+                .Where(b => vmodel.AccountId == -1 || b.Partner.BankAccounts.Where(z => z.Id == vmodel.AccountId).Count() > 0)
+                .Where(b => vmodel.TerminalId == null || b.TerminalId == vmodel.TerminalId)
+                .Where(b => vmodel.CityId == -1 || b.CityId == vmodel.CityId)
+                .Where(b => vmodel.StateId == -1 || b.CityId == vmodel.StateId)
+                .Where(b => vmodel.ZipCode == null || b.Zip == zip)
+                .Where(b => vmodel.ConectionType == CommunicationType.Communication.All ? (b.CommunicationType == CommunicationType.Communication.PhoneLine || b.CommunicationType == CommunicationType.Communication.TcpIp) : b.CommunicationType == vmodel.ConectionType)
+                .Where(b => vmodel.StartDate == null || b.DateCreated >= start)
+                .Where(b => vmodel.EndDate == null || b.DateCreated <= end)
+                .Include(b => b.TerminalContacts)
+                .Include(b => b.Make)
+                .Include(b => b.Model)
+                .ToList();             
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+            // throw new NotImplementedException();
         }
     }
 }

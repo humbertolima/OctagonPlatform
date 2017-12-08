@@ -62,6 +62,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.12\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.12\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -285,6 +294,10 @@
     <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711292247322_addreportgroupid.cs" />
+    <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201712061559346_alterDocuments.cs" />
     <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
@@ -292,6 +305,14 @@
     <Compile Include="Migrations\201712071542433_addPictures.cs" />
     <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
       <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
+    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -311,17 +332,20 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
+    <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\ReportingGroupVM.cs" />
     <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalTableViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
@@ -390,6 +414,7 @@
     <Compile Include="PersistanceRepository\UserRepository.cs" />
     <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\TerminalListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
@@ -645,6 +670,7 @@
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Gridmvc.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -829,6 +855,7 @@
     <Content Include="Octagon\assets\vendor\raphael\raphael.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.min.js" />
     <Content Include="Scripts\addgroup.js" />
+    <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -968,6 +995,7 @@
     <Content Include="Octagon\assets\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Grid.mvc.readme" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1034,6 +1062,9 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\export.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -1185,13 +1216,14 @@
     <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
-    <Content Include="Views\ReportGroup\Create.cshtml" />
-    <Content Include="Views\ReportGroup\Delete.cshtml" />
-    <Content Include="Views\ReportGroup\Details.cshtml" />
-    <Content Include="Views\ReportGroup\Edit.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialCashManagementTable.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTerminalTable.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
     <Content Include="Views\Terminals\Sections\Pictures.cshtml" />
   </ItemGroup>
@@ -1215,14 +1247,26 @@
     <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
       <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
       <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712071542433_addPictures.resx">
       <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072009044_AdddateCreatedterminal.resx">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

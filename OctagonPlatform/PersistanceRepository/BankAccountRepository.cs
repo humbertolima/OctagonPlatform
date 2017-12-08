@@ -188,5 +188,19 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Bank account not found. ");
             }
         }
+
+        public IEnumerable<dynamic> GetAllAccount(string term)
+        {
+            try
+            {
+                return Table.Where(b => (b.BankName.Contains(term) || b.AccountNumber.Contains(term) || b.RoutingNumber.Contains(term) || b.NameOnCheck.Contains(term))).Select(b => new { label = b.NickName+" - "+b.RoutingNumber+" / "+b.AccountNumber.Substring(b.AccountNumber.Length-4, 4), value = b.Id }).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+       
     }
 }

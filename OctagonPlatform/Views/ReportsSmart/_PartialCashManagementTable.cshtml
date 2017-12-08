@@ -1,0 +1,170 @@
+﻿
+@if (TempData["List"] != null)
+{
+  <!-- Single button -->
+
+    <div class="row">
+        <div class="col-sm-9"></div>
+        <div class="col-sm-3" style="text-align: right;">
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-danger" onclick="$('#pdf').click();" style="border-radius: 0px;"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i> PDF</button>
+                <button type="button" class="btn btn-success" onclick="Export('ReportCashManagement.xls', 'TableExport','idhead');" style="border-radius: 0px;"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i> XLS</button>
+                <button type="button" class="btn btn-primary" onclick="Export('ReportCashManagement.doc', 'TableExport','idhead');" style="border-radius: 0px;"><i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> DOC</button>
+
+            </div>
+            <p></p>
+        </div>
+    </div>
+    <div id="TableExport">
+        <table class="table table-bordered table-striped" width="100%" id="tablecash">
+            <thead>
+                <tr style="background:#e9f3fb;">
+                 
+                    <th>
+                        Terminal Id
+                    </th>
+                    <th>
+                        Location Name
+                    </th>
+                    <th>
+                        Current Cash Balance
+                    </th>
+                    <th>
+                        Days Until Cash Load
+                    </th>
+                    <th>
+                        Last Load Date
+                    </th>
+                    <th>
+                        Previous Balance
+                    </th>
+                    <th>
+                        Cash Load Amount
+                    </th>
+                    <th>
+                        New Balance
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{ int sumload = 0;}
+                @foreach (var item in (List<OctagonPlatform.Controllers.Reports.JSON.CashManagementReport>)TempData["List"])
+                {
+                    sumload += item.CashLoadAmount;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TerminalId)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Locationname)
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentCashBalance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DaysUntilCashLoad)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.LastLoadDate)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.PreviousBalance)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.CashLoadAmount)
+                    </td>
+                    <td>
+                        $@Html.DisplayFor(modelItem => item.NewBalance)
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr style="background:#e9f3fb;">
+
+                    <th colspan="6">
+
+                    </th>
+
+                    <th colspan="2">
+                        Total :  $@sumload
+                    </th>
+
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div id="myfirstchart" style="height: 100%;width:100%"></div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <div style="display:none" id="idhead">
+            @Html.Partial("_PartialExcelHead")
+        </div>
+                    }
+@using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
+{
+    <input type="hidden" name="html" />
+    <input type="submit" id="pdf" onclick="ExportPdf('ReportCashManagement.pdf', 'TableExport','idhead');" value="" style="display:none" />
+
+}
+
+<script>
+        function ExportPdf()
+        {
+            $("#btnSubmit").click(function () {
+                var html1 = "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+                $("input[name='html']").val(html1);
+            });
+        }
+
+        function ChartBar() {
+
+            var range = 'day';
+            var days = days_between($("#StartDate").val(), $("#EndDate").val());
+            if (days > 15 && days < 93)
+                range = 'week';
+            else
+                if (days > 92)
+                    range = 'month';
+
+            new Morris.Line({
+                // ID of the element in which to draw the chart.
+                element: 'myfirstchart',
+                data: @Html.Raw(@TempData["Chart"]),
+                // The name of the data record attribute that contains x-values.
+                xkey: 'Date',
+                // A list of names of data record attributes that contain y-values.
+                ykeys: ['AmountPrevius', 'AmountLoad'],
+                // Labels for the ykeys -- will be displayed when you hover over the
+                // chart.
+                labels: ['Previus', 'Load'],
+                xLabels: range,
+                xLabelAngle: 45,
+                lineColors: ['#00a8e1', '#FF6541'],
+                xLabelFormat: function (d) {
+                    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    if (range == 'month')
+                        return d.getFullYear()+" - "+months[d.getMonth()];
+                    else
+                    return  ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getFullYear())).slice(-2);
+
+                },
+                resize:true
+            });
+
+        }
+        function days_between(date1, date2) {
+            var date1 = new Date(date1);
+            var date2 = new Date(date2);
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+           return diffDays;
+
+        }
+</script>
+

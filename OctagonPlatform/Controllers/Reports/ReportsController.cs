@@ -24,7 +24,7 @@ namespace OctagonPlatform.Controllers.Reports
         // GET: reportModels
         public ActionResult Index()
         {
-            Session["businessName"] = "";
+          
             return View(_repo.All());
         }      
 

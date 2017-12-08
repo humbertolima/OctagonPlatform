@@ -18,6 +18,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteBankAccount(int id);
 
         IEnumerable<BankAccount> Search(string search, int partnerId);
-
+        IEnumerable<dynamic> GetAllAccount(string term);
     }
 }

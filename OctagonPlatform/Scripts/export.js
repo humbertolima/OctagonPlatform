@@ -1,8 +1,9 @@
 ﻿
 function Export(filename, mytblId, idhead) {
 
-    var html, link, blob, url, css,cssexcel,headw;
-    html = "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+    var html, link, blob, url, css, cssexcel, headw;
+    var ahtml = $('<div></div>').append($("#" + mytblId + " table").clone()).html();
+    html = "<div id = 'table'>" + ahtml + "</div>";
     headw = "<div id = 'head'>" + $("#" + idhead).html() + "</div>";
     cssexcel = '#table table { border-collapse: collapse;}'+
          '#table td, #table th {text-align:left } ' +
@@ -40,3 +41,15 @@ function Export(filename, mytblId, idhead) {
     else link.click();  // other browsers
     document.body.removeChild(link);
 };
+function ExportPdf(filename, mytblId, idhead) {
+    
+      var css = '<style>table { border-collapse: collapse;}' +       
+        'td,th {text-align:left;border: solid #e9ecef 1pt;width: 100%; }' +
+        'th { background: #e9ecef}</style>';
+      var ahtml = $('<div></div>').append($("#" + mytblId + " table").clone()).html();
+     
+    var html1 = css + "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + ahtml + "</div>";
+    
+    $("input[name='html']").val(html1);
+   
+}
