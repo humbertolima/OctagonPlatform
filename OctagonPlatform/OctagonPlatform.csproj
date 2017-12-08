@@ -1226,6 +1226,7 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
     <Content Include="Views\Terminals\Sections\Pictures.cshtml" />
+    <Content Include="Views\Terminals\Sections\VaultCash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

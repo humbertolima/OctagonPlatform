@@ -40,19 +40,19 @@
                 <h3 class="texth3">
                     <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
                     @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id },
-                   new AjaxOptions
-                   {
-                       UpdateTargetId = "getGeneralInfo",
-                       LoadingElementId = "loading3",
-                       InsertionMode = InsertionMode.Replace,
-                       HttpMethod = "Post"
-                   },
-                   htmlAttributes: new
-                   {
-                       @class = "link",
-                       data_toggle = "collapse",
-                       data_target = "#getGeneralInfo"
-                   })
+    new AjaxOptions
+    {
+        UpdateTargetId = "getGeneralInfo",
+        LoadingElementId = "loading3",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "Post"
+    },
+    htmlAttributes: new
+    {
+        @class = "link",
+        data_toggle = "collapse",
+        data_target = "#getGeneralInfo"
+    })
                 </h3>
                 <div id="getGeneralInfo" class="panel-collapse collapse">
                     <div class="loader"></div>
@@ -99,20 +99,18 @@
                     <h3 class="texth3" data-toggle="collapse" data-target="#getContacts">
                         <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i>Contacts
                     </h3>
-                        @Html.Partial("Sections/Contacts",Model)
-                    
+                    @Html.Partial("Sections/Contacts", Model)
+
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
-                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Vault Cash
-                    </h3>
-                    <a href="~/Views/VaultCash/Index.cshtml">Valut Cash</a>
-                </div>
+                <h3 class="texth3" data-toggle="collapse" data-target="#getVaultCash">
+                    <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Vault Cash
+                </h3>
+                @Html.Partial("Sections/VaultCash", Model)
             </div>
         </div>
 
@@ -123,7 +121,7 @@
                         <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>Surcharge
                     </h3>
                     <div id="getSurcharge" class="panel-collapse collapse">
-                        
+
                     </div>
                 </div>
             </div>

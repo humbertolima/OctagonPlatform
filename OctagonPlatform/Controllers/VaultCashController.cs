@@ -16,7 +16,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: VaultCash
-        [HttpPost]
+        
         public PartialViewResult Index(int? terminalId)
         {
             try
