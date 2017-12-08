@@ -27,6 +27,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DisplayName("Create To")]
         public string EndDate { get; set; }
         public StatusType.Status Status { get; set; }
+        [DisplayName("Conection Type")]
         public CommunicationType.Communication ConectionType { get; set; }
         public string State { get; set; }
         [HiddenInput]
