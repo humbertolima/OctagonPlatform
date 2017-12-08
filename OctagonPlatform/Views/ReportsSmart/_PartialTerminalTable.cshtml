@@ -1,4 +1,4 @@
-﻿
+﻿@using GridMvc.Html
 @if (TempData["List"] != null)
 {
   <!-- Single button -->
@@ -123,6 +123,25 @@
     <input type="submit" id="pdf" onclick="ExportPdf('ReportTerminalList.pdf', 'TableExport','idhead');" value="" style="display:none" />
 
 }
+
+
+
+
+<p>&nbsp;</p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">List Users</h3>
+    </div>
+    <div class="panel-body" id="grid">
+
+        @Html.Grid((List<OctagonPlatform.Models.Terminal>)TempData["List"]).AutoGenerateColumns().WithPaging(5)
+       
+    </div>
+</div>
+
+
+
+
 
 <script>
     function ExportPdf() {

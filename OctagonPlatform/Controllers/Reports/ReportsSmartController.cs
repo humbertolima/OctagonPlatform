@@ -286,8 +286,8 @@ namespace OctagonPlatform.Controllers.Reports
         }
         public ActionResult TerminalList()
         {
-            TerminalListViewModel model = new TerminalListViewModel();          
-
+            TerminalListViewModel model = new TerminalListViewModel();
+            TempData["List"] = new List<Terminal>();
             return View(model);
         }
         [HttpPost]

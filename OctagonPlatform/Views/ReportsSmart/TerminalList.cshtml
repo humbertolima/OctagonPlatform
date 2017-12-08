@@ -146,8 +146,8 @@
         var urlautoaccount = '@Url.Action("AutoAccount", "BankAccount")';
         $(function () {
             $("#tablecash").DataTable();
-
-
+            $('#grid').find('table.table-striped.grid-table').first().attr('id', 'NewGridT');
+            $("#NewGridT").DataTable();
             $("#EndDate").datepicker({
                 dateFormat: "mm/dd/yy"
             });
