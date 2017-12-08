@@ -96,12 +96,11 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getContacts">
                         <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i>Contacts
                     </h3>
-                    <div id="getContacts" class="panel-collapse collapse">
-                        
-                    </div>
+                        @Html.Partial("Sections/Contacts",Model)
+                    
                 </div>
             </div>
         </div>
