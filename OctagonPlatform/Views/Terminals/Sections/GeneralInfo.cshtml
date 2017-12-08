@@ -1,101 +1,105 @@
 ﻿@model OctagonPlatform.Models.Terminal
 
-<table class="table table-striped table-hover ">
-    <tbody>
-        <tr class="info">
 
-            <th>Business Name: </th>
-            <th>@Model.Partner.BusinessName</th>
-        </tr>
-        <tr class="info">
+<div id="getGeneralInfo" class="panel-collapse collapse">
 
-            <th>Location Name:</th>
-            <th>@Model.LocationName</th>
-        </tr>
-        <tr class="info">
+    <table class="table table-striped table-hover ">
+        <tbody>
+            <tr class="info">
 
-            <th>Location Type:</th>
-            <th>@Model.LocationType.Name</th>
-        </tr>
-        <tr class="info">
+                <th>Business Name: </th>
+                <th>@Model.Partner.BusinessName</th>
+            </tr>
+            <tr class="info">
 
-            <th>Address1:</th>
-            <th>@Model.Address1</th>
-        </tr>
-        <tr class="info">
+                <th>Location Name:</th>
+                <th>@Model.LocationName</th>
+            </tr>
+            <tr class="info">
 
-            <th>Address2:</th>
-            <th>@Model.Address2</th>
-        </tr>
-        <tr class="info">
+                <th>Location Type:</th>
+                <th>@Model.LocationType.Name</th>
+            </tr>
+            <tr class="info">
 
-            <th>Country:</th>
-            <th>@Model.Country.Name</th>
-        </tr>
-        <tr class="info">
+                <th>Address1:</th>
+                <th>@Model.Address1</th>
+            </tr>
+            <tr class="info">
 
-            <th>State:</th>
-            <th>@Model.State.Name</th>
-        </tr>
-        @if (Model.City != null)
-        {
+                <th>Address2:</th>
+                <th>@Model.Address2</th>
+            </tr>
+            <tr class="info">
+
+                <th>Country:</th>
+                <th>@Model.Country.Name</th>
+            </tr>
+            <tr class="info">
+
+                <th>State:</th>
+                <th>@Model.State.Name</th>
+            </tr>
+            @if (Model.City != null)
+            {
             <tr class="info">
 
                 <th>City:</th>
                 <th>@Model.City.Name</th>
             </tr>
-        }
-    <tr class="info">
+            }
+            <tr class="info">
 
-        <th>Surcharged By:</th>
-        <th>@Model.SurchargeType</th>
-    </tr>
-    <tr class="info">
+                <th>Surcharged By:</th>
+                <th>@Model.SurchargeType</th>
+            </tr>
+            <tr class="info">
 
-        <th>Surcharge Amount Fee:</th>
-        <th>@Model.SurchargeAmountFee</th>
-    </tr>
-    <tr class="info">
+                <th>Surcharge Amount Fee:</th>
+                <th>@Model.SurchargeAmountFee</th>
+            </tr>
+            <tr class="info">
 
-        <th>Surcharge Percentage Fee:</th>
-        <th>@Model.SurchargePercentageFee%</th>
-    </tr>
-        <tr class="info">
+                <th>Surcharge Percentage Fee:</th>
+                <th>@Model.SurchargePercentageFee%</th>
+            </tr>
+            <tr class="info">
 
-            <th>Created At:</th>
-            <th>@Model.CreatedAt</th>
-        </tr>
-        <tr class="info">
+                <th>Created At:</th>
+                <th>@Model.CreatedAt</th>
+            </tr>
+            <tr class="info">
 
-            <th>Created By:</th>
-            <th>@Model.CreatedByName</th>
-        </tr>
-        <tr class="info">
+                <th>Created By:</th>
+                <th>@Model.CreatedByName</th>
+            </tr>
+            <tr class="info">
 
-            <th>Status:</th>
-            <th>@Model.Status</th>
-        </tr>
-        <tr class="info">
+                <th>Status:</th>
+                <th>@Model.Status</th>
+            </tr>
+            <tr class="info">
 
-            <th>Make:</th>
-            <th>@Model.Make.Name</th>
-        </tr>
-        <tr class="info">
+                <th>Make:</th>
+                <th>@Model.Make.Name</th>
+            </tr>
+            <tr class="info">
 
-            <th>Model:</th>
-            <th>@Model.Model.Name</th>
-        </tr>
-        <tr class="info">
+                <th>Model:</th>
+                <th>@Model.Model.Name</th>
+            </tr>
+            <tr class="info">
 
-            <th>Balance:</th>
-            <th>@Model.Balance</th>
-        </tr>
-    </tbody>
-</table>
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-        <li>
-            @Html.ActionLink(
+                <th>Balance:</th>
+                <th>@Model.Balance</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                @Html.ActionLink(
                 linkText: "Edit",
                 actionName: "Edit",
                 controllerName: "Terminals",
@@ -105,10 +109,7 @@
                 },
                 htmlAttributes: new { @class = "btn btn-primary" }
                 )
-        </li>
-
-
-    </ul>
-
+            </li>
+        </ul>
+    </div>
 </div>
-

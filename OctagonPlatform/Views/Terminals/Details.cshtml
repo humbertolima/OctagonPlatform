@@ -24,53 +24,43 @@
     <div class="col-md-6">
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-
-                <a class="texth3" data-toggle="collapse" href="#getConfigNotification">
-                    <i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i>Config Notification
-                </a>
-
-                <div id="getConfigNotification" class="panel-collapse collapse">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getConfigurations">
+                        <i class="fa fa-sun-o" style="font-size:25px;color:#4776a1"></i>Configuration
+                    </h3>
                     @Html.Partial("Sections/ConfigNotification", Model)
                 </div>
-
             </div>
         </div>
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <h3 class="texth3">
-                    <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
-                    @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id },
-    new AjaxOptions
-    {
-        UpdateTargetId = "getGeneralInfo",
-        LoadingElementId = "loading3",
-        InsertionMode = InsertionMode.Replace,
-        HttpMethod = "Post"
-    },
-    htmlAttributes: new
-    {
-        @class = "link",
-        data_toggle = "collapse",
-        data_target = "#getGeneralInfo"
-    })
-                </h3>
-                <div id="getGeneralInfo" class="panel-collapse collapse">
-                    <div class="loader"></div>
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getGeneralInfo">
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1"></i>General Info
+                    </h3>
+                    @Html.Partial("Sections/GeneralInfo", Model)
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <h3 class="texth3">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getCassettes">
+                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Cassettes
+                    </h3>
                     @Html.Partial("Sections/Cassettes", Model)
-                </h3>
+                </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="notes">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getNotes">
+                        <i class="fa fa-sticky-note-o" style="font-size:25px;color:#4776a1"></i>Notes
+                    </h3>
                     @Html.Partial("Sections/Notes", Model)
                 </div>
             </div>
@@ -78,14 +68,20 @@
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="documents">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getDocumnents">
+                        <i class="fa fa-file-text" style="font-size:25px;color:#4776a1"></i>Documents
+                    </h3>
                     @Html.Partial("Sections/Documents", Model)
                 </div>
             </div>
         </div>
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="documents">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getPictures">
+                        <i class="fa fa-picture-o" style="font-size:25px;color:#4776a1"></i>Pictures
+                    </h3>
                     @Html.Partial("Sections/Pictures", Model)
                 </div>
             </div>
@@ -95,7 +91,7 @@
     <div class="col-md-6">
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
+                <div class="panel-heading">
                     <h3 class="texth3" data-toggle="collapse" data-target="#getContacts">
                         <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i>Contacts
                     </h3>
@@ -107,50 +103,44 @@
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <h3 class="texth3" data-toggle="collapse" data-target="#getVaultCash">
-                    <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Vault Cash
-                </h3>
-                @Html.Partial("Sections/VaultCash", Model)
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getVaultCash">
+                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Vault Cash
+                    </h3>
+                    @Html.Partial("Sections/VaultCash", Model)
+                </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getSurcharge">
                         <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>Surcharge
                     </h3>
-                    <div id="getSurcharge" class="panel-collapse collapse">
-
-                    </div>
+                    @Html.Partial("Sections/Surcharge", Model)
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="Interchanges" class="panel-heading">
-
-                    <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a class="hover">
-                        <h3 data-toggle="collapse" data-target="#getInterchange">
-                            Interchanges
-                            @Html.Partial("Sections/Interchanges", Model)
-                        </h3>
-                    </a>
-                    <div id="" class="panel-collapse collapse">
-                        <div class="loader"></div>
-                    </div>
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getInterchange">
+                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>Interchanges
+                    </h3>
+                    @Html.Partial("Sections/Interchanges", Model)
                 </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="panel-group" style="width: 100%;">
-        <div class="panel panel-default">
-            <h3 class="texth3">
-                <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
-                @Ajax.ActionLink("Cash Management", "CashManagement", "Terminals", new { terminalId = Model.TerminalId },
+        <div class="panel-group" style="width: 100%;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getCashManagement">
+                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>Cash Management
+                    </h3>
+                    @Ajax.ActionLink("Cash Management", "CashManagement", "Terminals", new { terminalId = Model.TerminalId },
                    new AjaxOptions
                    {
                        UpdateTargetId = "getCashManagement",
@@ -164,38 +154,37 @@
                        data_toggle = "collapse",
                        data_target = "#getCashManagement"
                    })
-            </h3>
-
-            <div id="getCashManagement" class="panel-collapse collapse">
-                <div class="loader"></div>
+                    <div id="getCashManagement" class="panel-collapse collapse">
+                        <div class="loader"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-@section Scripts {
+    @section Scripts {
 
-    @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
-    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+        @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
 
-    <script>
-        $(function () {
-            $("#deleteInterchange").click(function () {
-                var id = $(this).data('id');
-                $("#confirmdeleteInterchange #id").val(id);
+        <script>
+            $(function () {
+                $("#deleteInterchange").click(function () {
+                    var id = $(this).data('id');
+                    $("#confirmdeleteInterchange #id").val(id);
 
+                });
+                /*var jQuery_1_10_2 = $.noConflict(true);
+
+                jQuery_1_10_2(function () {
+                    $("#interchanges").DataTable();
+                });*/
             });
-            /*var jQuery_1_10_2 = $.noConflict(true);
-
-            jQuery_1_10_2(function () {
-                $("#interchanges").DataTable();
-            });*/
-        });
 
 
 
-    </script>
+        </script>
 
 
 
-}
+    }

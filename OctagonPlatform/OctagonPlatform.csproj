@@ -1227,6 +1227,7 @@
     <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
     <Content Include="Views\Terminals\Sections\Pictures.cshtml" />
     <Content Include="Views\Terminals\Sections\VaultCash.cshtml" />
+    <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
