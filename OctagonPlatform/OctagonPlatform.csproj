@@ -1247,6 +1247,9 @@
     <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
       <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
       <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
     </EmbeddedResource>
