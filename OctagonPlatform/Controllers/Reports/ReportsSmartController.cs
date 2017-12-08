@@ -297,8 +297,11 @@ namespace OctagonPlatform.Controllers.Reports
             if (ModelState.IsValid)
             {
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                IEnumerable<dynamic> list = repo_terminal.GetTerminalsReport(vmodel, listtn);
+                List<Terminal> list = repo_terminal.GetTerminalsReport(vmodel, listtn);
+               
 
+               
+                TempData["List"] = list;
                 return View();
             }
             return RedirectToAction("Index");

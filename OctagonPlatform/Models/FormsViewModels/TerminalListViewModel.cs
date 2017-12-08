@@ -38,8 +38,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         public TerminalListViewModel()
         {
             //TerminalId = "TR024019";// "NH061617";
-            StartDate = DateTime.Now.ToString("MM/dd/yyyy");
-            EndDate = DateTime.Now.ToString("MM/dd/yyyy");
+           // StartDate = DateTime.Now.ToString("MM/dd/yyyy");
+           // EndDate = DateTime.Now.ToString("MM/dd/yyyy");
             PartnerId = -1;
             GroupId = -1;
             AccountId = -1;
