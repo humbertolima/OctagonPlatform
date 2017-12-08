@@ -40,6 +40,7 @@ namespace OctagonPlatform.Models
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
         public DbSet<ReportModel> Reports { get; set; }
         public DbSet<ReportGroupModel> ReportGroups { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")

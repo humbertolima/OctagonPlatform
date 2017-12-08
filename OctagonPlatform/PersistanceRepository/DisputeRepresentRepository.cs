@@ -15,10 +15,7 @@ namespace OctagonPlatform.PersistanceRepository
     {
         public DisputeRepresent AddRepresent(DisputeRepresentVM viewModel)
         {
-            
-            Image img = Image.FromStream(viewModel.File.InputStream, true, true);
-
-            viewModel.Image = ImageToByteArray(img);
+            viewModel.Image =Helpers.ConvertTo.ImageToByteArray(viewModel.File);
 
             var disputeRepresent = Mapper.Map<DisputeRepresentVM, DisputeRepresent>(viewModel);
             //disputeRepresent.AttachData = data;
@@ -27,16 +24,6 @@ namespace OctagonPlatform.PersistanceRepository
             return disputeRepresent;
 
         }
-
-        private byte[] ImageToByteArray(System.Drawing.Image imageIn)
-        {
-            MemoryStream ms = new MemoryStream();
-            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-            return ms.ToArray();
-        }
-
-
-
 
         public IEnumerable<DisputeRepresent> GetAllDispute()
         {

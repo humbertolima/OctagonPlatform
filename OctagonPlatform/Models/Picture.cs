@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OctagonPlatform.Models
 {
-    public class Document: ISoftDeleted, IAuditEntity
+    public class Picture : ISoftDeleted, IAuditEntity
     {
         [Key]
         public int Id { get; set; }
@@ -19,9 +19,7 @@ namespace OctagonPlatform.Models
 
         [NotMapped]
         public HttpPostedFileBase FileForm { get; set; }
-
-        public string Category { get; set; }
-
+        
         public bool Privacy { get; set; }
 
         [Required]

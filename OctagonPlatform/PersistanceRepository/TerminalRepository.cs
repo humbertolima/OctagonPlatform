@@ -10,11 +10,25 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
+
+        public async Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId)
+        {
+            List<JsonLoadCash> list = new List<JsonLoadCash>();
+            ApiATM api = new ApiATM();
+
+            list = await api.CashLoad(start, end, terminalId);
+
+            return list;
+        }
+
+
 
         public KeyManager GetKey(string messagesId)
         {
@@ -54,6 +68,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
+
         public Terminal GetTerminal(string terminalId)
         {
             try
@@ -67,6 +82,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
@@ -265,6 +281,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
                     .Include(x => x.WorkingHours)
+                    .Include(x => x.Pictures)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -292,6 +309,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
+
         public void CassettesDelete(int cassetteId)
         {
             try
@@ -315,7 +333,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
-
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {
@@ -430,6 +447,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message + "Terminal not found.");
             }
         }
+
         public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
 
@@ -464,6 +482,101 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId)
+        {
+            Terminal terminal = new Terminal();
+            if (archive != null)
+            {
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (pictureId == null || pictureId == 0)
+                {
+                    terminal.Pictures.Add(new Picture
+                    {
+                        Name = archive.FileName,
+                        Archive = ConvertTo.ImageToByteArray(archive),
+                    });
+
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
+            }
+            return terminal;
+        }
+
+        public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
+        {
+            Terminal terminal = new Terminal();
+            if (archive != null)
+            {
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (documentId == null || documentId == 0)
+                {
+                    terminal.Documents.Add(new Document
+                    {
+                        Name = archive.FileName,
+                        Archive = Helpers.ConvertTo.DocumentToByteArray(archive),
+                    });
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
+            }
+            return terminal;
+        }
+
+        public Terminal PictureDelete(int indexTerminalId, int pictureId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (pictureId > 0)
+            {
+                Context.Pictures.Remove(terminal.Pictures.FirstOrDefault(c => c.Id == pictureId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
+
+        public Terminal DocumentDelete(int indexTerminalId, int documentId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (documentId > 0)
+            {
+                Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
+
+
+        public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (noteId == null || noteId == 0)
+            {
+                if (terminal != null)
+                {
+                    terminal.Notes.Add(new Note { Nota = note });
+                    Save();
+                }
+            }
+            else
+            {
+                terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
+                Edit(terminal);
+            }
+
+            return terminal;
+        }
+        
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
@@ -482,6 +595,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
         {
             try
@@ -502,10 +616,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-
-      
-
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
         {
             try
             {
@@ -593,8 +704,10 @@ namespace OctagonPlatform.PersistanceRepository
             catch (Exception e)
             {
 
-                throw new Exception(e.Message);
+                throw new Exception("Error database " + e.Message);
             }
+            
+            
         }
 
         public void EditRange(string[] list, int? groupId)

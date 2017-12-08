@@ -22,96 +22,85 @@
 <div class="row" id="detailterminal">
 
     <div class="col-md-6">
-        @*<div class="panel-group" style="width: 100%;">
-            <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Config Notification", "ConfigNotification", "Terminals", new { id = Model.Id }, new AjaxOptions { UpdateTargetId = "getConfigNotification", LoadingElementId = "loading4", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getConfigNotification" })</h3>
-                    <div id="getConfigNotification" class="panel-collapse collapse">
-                        <div class="loader"></div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i>
-                        @Html.Partial("Sections/ConfigNotification", Model)
-                    </h3>
 
+                <a class="texth3" data-toggle="collapse" href="#getConfigNotification">
+                    <i class="fa fa-cogs" style="font-size:25px;color:#4776a1"></i>Config Notification
+                </a>
+
+                <div id="getConfigNotification" class="panel-collapse collapse">
+                    @Html.Partial("Sections/ConfigNotification", Model)
                 </div>
+
             </div>
         </div>
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
-                        <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
-                        @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id },
-                   new AjaxOptions {
+                <h3 class="texth3">
+                    <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
+                    @Ajax.ActionLink("General Info", "GeneralInfo", "Terminals", new { terminalId = Model.Id },
+                   new AjaxOptions
+                   {
                        UpdateTargetId = "getGeneralInfo",
                        LoadingElementId = "loading3",
                        InsertionMode = InsertionMode.Replace,
-                       HttpMethod = "Post" },
-                   htmlAttributes: new {
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
                        @class = "link",
                        data_toggle = "collapse",
-                       data_target = "#getGeneralInfo" })
-                    </h3>
-                    <div id="getGeneralInfo" class="panel-collapse collapse">
-                        <div class="loader"></div>
-                    </div>
+                       data_target = "#getGeneralInfo"
+                   })
+                </h3>
+                <div id="getGeneralInfo" class="panel-collapse collapse">
+                    <div class="loader"></div>
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3">
-                        
-                        @Html.Partial("Sections/Cassettes", Model)
-                    </h3>
-                    
+                <h3 class="texth3">
+                    @Html.Partial("Sections/Cassettes", Model)
+                </h3>
+            </div>
+        </div>
+
+        <div class="panel-group" style="width: 100%;">
+            <div class="panel panel-default">
+                <div id="notes">
+                    @Html.Partial("Sections/Notes", Model)
                 </div>
             </div>
         </div>
 
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <div id="documents">
-                        @Html.Partial("Sections/Documents", Model)
-                        <div id="getGeneralInfo" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
+                <div id="documents">
+                    @Html.Partial("Sections/Documents", Model)
                 </div>
             </div>
         </div>
-
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
-                <div id="PartnerDetailButtons" class="panel-heading">
-                    <div id="notes">
-                        @Html.Partial("Sections/Notes", Model)
-                        <div id="getGeneralInfo" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-                    </div>
+                <div id="documents">
+                    @Html.Partial("Sections/Pictures", Model)
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="col-md-6">
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-book" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "Contacts", "Terminals", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i>Contacts
+                    </h3>
                     <div id="getContacts" class="panel-collapse collapse">
-                        <div class="loader"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -120,10 +109,10 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-money" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Vault Cash", "Index", "VaultCash", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getVaultcash", LoadingElementId = "loading1", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getVaultcash" })</h3>
-                    <div id="getVaultcash" class="panel-collapse collapse">
-                        <div class="loader"></div>
-                    </div>
+                    <h3 class="texth3">
+                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i>Vault Cash
+                    </h3>
+                    <a href="~/Views/VaultCash/Index.cshtml">Valut Cash</a>
                 </div>
             </div>
         </div>
@@ -131,9 +120,11 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Surcharges", "Index", "Surcharge", new { terminalId = Model.Id }, new AjaxOptions { UpdateTargetId = "getSurcharge", LoadingElementId = "loading5", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getSurcharge" })</h3>
+                    <h3 class="texth3">
+                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>Surcharge
+                    </h3>
                     <div id="getSurcharge" class="panel-collapse collapse">
-                        <div class="loader"></div>
+                        
                     </div>
                 </div>
             </div>
@@ -142,19 +133,72 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="Interchanges" class="panel-heading">
-                    
-                    <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a class="hover"><h3 data-toggle="collapse" data-target="#getInterchange">Interchanges @Html.Partial("Sections/Interchanges", Model)</h3></a>
-                 
-                        <div id="" class="panel-collapse collapse">
-                            <div class="loader"></div>
-                        </div>
-</div>
+
+                    <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a class="hover">
+                        <h3 data-toggle="collapse" data-target="#getInterchange">
+                            Interchanges
+                            @Html.Partial("Sections/Interchanges", Model)
+                        </h3>
+                    </a>
+                    <div id="" class="panel-collapse collapse">
+                        <div class="loader"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </div>
+
+    <div class="panel-group" style="width: 100%;">
+        <div class="panel panel-default">
+            <h3 class="texth3">
+                <i class="fa fa-globe" style="font-size:25px;color:#4776a1"></i>
+                @Ajax.ActionLink("Cash Management", "CashManagement", "Terminals", new { terminalId = Model.TerminalId },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getCashManagement",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getCashManagement"
+                   })
+            </h3>
+
+            <div id="getCashManagement" class="panel-collapse collapse">
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts {
+
+    @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+
+    <script>
+        $(function () {
+            $("#deleteInterchange").click(function () {
+                var id = $(this).data('id');
+                $("#confirmdeleteInterchange #id").val(id);
+
+            });
+            /*var jQuery_1_10_2 = $.noConflict(true);
+
+            jQuery_1_10_2(function () {
+                $("#interchanges").DataTable();
+            });*/
+        });
+
+
+
+    </script>
+
+
 
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,6 +21,11 @@ namespace OctagonPlatform
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
+        }
+        //Para eliminar error en mozilla de Firefox en el console.
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
         }
     }
 }
