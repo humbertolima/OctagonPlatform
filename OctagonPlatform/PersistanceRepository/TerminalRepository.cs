@@ -8,6 +8,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -729,6 +730,62 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
 
+        }
+
+        public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+        }
+
+        public List<Terminal> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
+        {
+            DateTime? start = null;
+            DateTime? end = null;
+            if(vmodel.StartDate != null ) start =  DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture) ;
+            if (vmodel.EndDate != null) end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            bool groupfilter = listtn == null ? false: true;
+            string[] aux = { "0" };
+            listtn = listtn ?? aux ;
+            int zip =Int32.Parse( vmodel.ZipCode ?? "0");
+            try
+            {               
+                return Table.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))
+                .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
+                .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
+                .Where(b => vmodel.AccountId == -1 || b.Partner.BankAccounts.Where(z => z.Id == vmodel.AccountId).Count() > 0)
+                .Where(b => vmodel.TerminalId == null || b.TerminalId == vmodel.TerminalId)
+                .Where(b => vmodel.CityId == -1 || b.CityId == vmodel.CityId)
+                .Where(b => vmodel.StateId == -1 || b.CityId == vmodel.StateId)
+                .Where(b => vmodel.ZipCode == null || b.Zip == zip)
+                .Where(b => vmodel.ConectionType == CommunicationType.Communication.All ? (b.CommunicationType == CommunicationType.Communication.PhoneLine || b.CommunicationType == CommunicationType.Communication.TcpIp) : b.CommunicationType == vmodel.ConectionType)
+                .Where(b => vmodel.StartDate == null || b.DateCreated >= start)
+                .Where(b => vmodel.EndDate == null || b.DateCreated <= end)
+                .Include(b => b.TerminalContacts)
+                .Include(b => b.Make)
+                .Include(b => b.Model)
+                .ToList();             
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+            // throw new NotImplementedException();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿
 function Export(filename, mytblId, idhead) {
 
-    var html, link, blob, url, css,cssexcel,headw;
-    html = "<div id = 'table'>" + $("#" + mytblId).html() + "</div>";
+    var html, link, blob, url, css, cssexcel, headw;
+    var ahtml = $('<div></div>').append($("#" + mytblId + " table").clone()).html();
+    html = "<div id = 'table'>" + ahtml + "</div>";
     headw = "<div id = 'head'>" + $("#" + idhead).html() + "</div>";
     cssexcel = '#table table { border-collapse: collapse;}'+
          '#table td, #table th {text-align:left } ' +

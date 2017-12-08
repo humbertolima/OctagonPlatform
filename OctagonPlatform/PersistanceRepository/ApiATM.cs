@@ -32,26 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
                 string listtn2 = listtn !=null ? string.Join(",", listtn) : "0";
                 tn = tn ?? "0";
                 response = await client.GetAsync(uri + "cash/" + tn + "/" + _start + "/" + _end + "/" + listtn2);
-            }
-
-
-          /*  if (listtn == null)
-            {
-                if (tn != "" && start != null && end != null)
-                {
-                    string _start = start.Value.ToString("yyyyMMdd");
-                    string _end = end.Value.ToString("yyyyMMdd");
-                    response = await client.GetAsync(uri + "cash/" + tn + "/" + _start + "/" + _end);
-                }
-                if (tn == "" && start != null && end != null)
-                {
-                    string _start = start.Value.ToString("yyyyMMdd");
-                    string _end = end.Value.ToString("yyyyMMdd");
-                    response = await client.GetAsync(uri + "cash/" + _start + "/" + _end);
-                }
-            }*/
-            
-           
+            }           
            
             List<JsonLoadCash> list = new List<JsonLoadCash>();
             //Checking the response is successful or not which is sent using HttpClient  
@@ -68,7 +49,31 @@ namespace OctagonPlatform.PersistanceRepository
             return list;
 
         }
+        public async Task<List<JsonCashManagement>> CashManagement(string tn = "", string[] listtn = null)
+        {
 
+            HttpResponseMessage response = null;          
+
+                string listtn2 = listtn != null ? string.Join(",", listtn) : "0";
+                tn = tn ?? "0";
+                response = await client.GetAsync(uri + "cash/management/" + tn + "/" + listtn2);
+           
+
+            List<JsonCashManagement> list = new List<JsonCashManagement>();
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var cash = await response.Content.ReadAsStringAsync();
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                list = JsonConvert.DeserializeObject<List<JsonCashManagement>>(cash);
+
+            }
+          
+               
+            return list;
+
+        }
 
     }
 

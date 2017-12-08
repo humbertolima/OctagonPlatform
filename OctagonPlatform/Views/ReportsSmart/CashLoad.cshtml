@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Filter" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>
@@ -99,8 +99,15 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/Scripts/autocomplete.js")
     <script>
+
+        var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlstate = '@Url.Action("AutoState", "ReportGroup")';
+        var urlcity = '@Url.Action("AutoCity", "ReportGroup")';
+        var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
+        var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
+        var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
 
     $(function () {
         $("#tablecash").DataTable();
@@ -112,42 +119,7 @@
         $("#StartDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
-        $('#terminal').autocomplete({
-            source: '@Url.Action("AutoTerminal")'
-          });
-           $('#partner').autocomplete({
-               source: '@Url.Action("AutoPartner")',
-               select: function (event, ui) {
 
-                   $("#partner").val(ui.item.label); // display the selected text
-                   $("#partnerid").val(ui.item.value); // save selected id to hidden input
-
-                   return false;
-               }
-        });
-           //clear id from hidden field if input is blank
-           $('#partner').blur(function () {
-               if ($('#partner').val() == '') {
-                   $('#partnerid').val('');
-               }
-           });
-        //Auto group
-          $('#group').autocomplete({
-               source: '@Url.Action("AutoGroup")',
-               select: function (event, ui) {
-
-                   $("#group").val(ui.item.label); // display the selected text
-                   $("#groupid").val(ui.item.value); // save selected id to hidden input
-
-                   return false;
-               }
-        });
-           //clear id from hidden field if input is blank
-           $('#group').blur(function () {
-               if ($('#group').val() == '') {
-                   $('#groupid').val('');
-               }
-           });
         //end
             ChartBar();
             ExportPdf();
@@ -157,6 +129,7 @@
         });
 
     </script>
+
 
 }
 
