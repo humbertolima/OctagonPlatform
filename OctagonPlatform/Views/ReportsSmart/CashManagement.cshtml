@@ -75,7 +75,7 @@
         <h3 class="panel-title">List Cash Management</h3>
     </div>
     <div class="panel-body">
-        @Html.Partial("_PartialCashManagementTable")
+        @Html.Partial("_PartialTableMorris")
 
         <div>
             @Html.ActionLink("Back to List", "Index")
@@ -100,7 +100,7 @@
         $("#tablecash").DataTable();
       
             ChartBar();
-            ExportPdf();
+            Createdatatable();
 
         });
 

@@ -14,6 +14,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string TerminalId { get; set; }
 
         public string Partner { get; set; }
+
         [HiddenInput]
         public int PartnerId { get; set; }
         public string Account { get; set; }

@@ -3,6 +3,8 @@ using OctagonPlatform.PersistanceRepository;
 using System.Collections.Generic;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Controllers.Reports.JSON;
+using OctagonPlatform.Views.ReportsSmart.ViewModels;
+using System;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -54,6 +56,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         List<string> GetAllZipCode(string term);
         void EditRange(string[] list, int? groupId);
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
-        List<Terminal> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
+        IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
     }
 }

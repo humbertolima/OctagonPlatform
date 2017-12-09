@@ -332,7 +332,6 @@
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\TerminalTableViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
@@ -398,9 +397,12 @@
     <Compile Include="PersistanceRepository\TerminalContactRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalRepository.cs" />
     <Compile Include="PersistanceRepository\UserRepository.cs" />
+    <Compile Include="PersistanceRepository\Utils.cs" />
     <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\ReportsSmart\ViewModels\TerminalListViewModel.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\CashLoadTableVM.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\CashManagementTableVM.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\TerminalTableVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
@@ -1195,7 +1197,6 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
-    <Content Include="Views\ReportsSmart\_PartialCashLoadTable.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
     <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
@@ -1205,11 +1206,11 @@
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
-    <Content Include="Views\ReportsSmart\_PartialCashManagementTable.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
-    <Content Include="Views\ReportsSmart\_PartialTerminalTable.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTableNoMorris.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTableMorris.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

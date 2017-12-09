@@ -8,11 +8,15 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.PersistanceRepository;
+using OctagonPlatform.Views.ReportsSmart.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -51,10 +55,12 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId,Group,GroupId")] CashLoadViewModel vmodel)
         {
-
+            ModelState.Remove("PartnerId");          
+            ModelState.Remove("GroupId");
+            ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
-                List<JsonLoadCashReport> listaux = new List<JsonLoadCashReport>();
+                List<CashLoadTableVM> listaux = new List<CashLoadTableVM>();
                 List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
                 List<JsonLoadCash> list = new List<JsonLoadCash>();
                 ApiATM api = new ApiATM();
@@ -87,7 +93,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                         if (locationname != "")
                         {
-                            JsonLoadCashReport obj = new JsonLoadCashReport(locationname, item.Date, item.AmountPrevius, item.AmountLoad, item.AmountCurrent, item.TerminalId);
+                            CashLoadTableVM obj = new CashLoadTableVM(item.TerminalId,locationname, item.AmountPrevius.ToString(), item.AmountLoad.ToString(), item.AmountCurrent.ToString(), item.Date);
                             JsonLoadCashChart objchart = new JsonLoadCashChart(item.Date.ToString("yyyy-MM-dd"), item.AmountPrevius, item.AmountLoad);
                             listchart.Add(objchart);
                             listaux.Add(obj);
@@ -95,8 +101,9 @@ namespace OctagonPlatform.Controllers.Reports
                     }
 
                 }
+              
                 #region Variables Partial
-                TempData["List"] = listaux;
+                TempData["List"] = Utils.ToDataTable<CashLoadTableVM>(listaux); 
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
@@ -164,15 +171,15 @@ namespace OctagonPlatform.Controllers.Reports
         }
         public ActionResult CashManagement()
         {
-            CashManagementVM model = new CashManagementVM();
-            TempData["Chart"] = "[]";
-
-            return View(model);
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementVM vmodel)
         {
+            ModelState.Remove("PartnerId");
+            ModelState.Remove("GroupId"); 
+            ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
                 List<JsonCashManagementReport> listaux = new List<JsonCashManagementReport>();
@@ -205,9 +212,11 @@ namespace OctagonPlatform.Controllers.Reports
                     }
 
                 }
-                List<CashManagementReport> listcash = GenerateCashManagementReport(listaux);
+                List<CashManagementTableVM> listcash = GenerateCashManagementReport(listaux);
+                DataTable tb = Utils.ToDataTable<CashManagementTableVM>(listcash);
+
                 #region Variables Partial
-                TempData["List"] = listcash;
+                TempData["List"] = tb;
                 TempData["Chart"] = JsonConvert.SerializeObject(listchart);
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
@@ -219,9 +228,9 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("Index");
         }
 
-        private List<CashManagementReport> GenerateCashManagementReport(List<JsonCashManagementReport> listaux)
+        private List<CashManagementTableVM> GenerateCashManagementReport(List<JsonCashManagementReport> listaux)
         {
-            List<CashManagementReport> list = new List<CashManagementReport>();
+            List<CashManagementTableVM> list = new List<CashManagementTableVM>();
 
             string TerminalId = "";
             string Locationname = "";
@@ -231,7 +240,7 @@ namespace OctagonPlatform.Controllers.Reports
             int PreviousBalance = 0;
             int CashLoadAmount = 0;
             int NewBalance = 0;
-            CashManagementReport obj = null;
+            CashManagementTableVM obj = null;
             foreach (var item in listaux)
             {
                 List<JsonCashManagementReport> repeat = listaux.FindAll(b => b.TerminalId == item.TerminalId);
@@ -255,9 +264,9 @@ namespace OctagonPlatform.Controllers.Reports
                     DaysUntilCashLoad = 0;
                 }
 
-                if (!list.Exists(b => b.TerminalId == item.TerminalId))
+                if (!list.Exists(b => b.TerminalID == item.TerminalId))
                 {
-                    obj = new CashManagementReport(TerminalId, Locationname, CurrentCashBalance, DaysUntilCashLoad, LastLoadDate, PreviousBalance, CashLoadAmount, NewBalance);
+                    obj = new CashManagementTableVM(TerminalId, Locationname, CurrentCashBalance.ToString(), DaysUntilCashLoad.ToString(), LastLoadDate.ToString(), PreviousBalance.ToString(), CashLoadAmount.ToString(), NewBalance.ToString());
                     list.Add(obj);
                 }
 
@@ -271,7 +280,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         [HttpPost]
         [ValidateInput(false)]
-        public FileResult Export(string html)
+        public FileResult Export(string html,string filename)
         {
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
@@ -281,30 +290,34 @@ namespace OctagonPlatform.Controllers.Reports
                 pdfDoc.Open();
                 XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                 pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", "ReportLoadCash.pdf");
+                return File(stream.ToArray(), "application/pdf", filename);
             }
         }
         public ActionResult TerminalList()
         {
-            TerminalListViewModel model = new TerminalListViewModel();
-            TempData["List"] = new List<Terminal>();
-            return View(model);
+           
+           
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult TerminalList([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,Account,AccountId,StartDate,EndDate,ConectionType,State,StateId,City,CityId,ZipCode")] TerminalListViewModel vmodel)
         {
+            ModelState.Remove("PartnerId");
+            ModelState.Remove("AccountId");
+            ModelState.Remove("GroupId");
+            ModelState.Remove("StateId");
+            ModelState.Remove("CityId");
             if (ModelState.IsValid)
             {
-                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                List<Terminal> list = repo_terminal.GetTerminalsReport(vmodel, listtn);
-               
-
-               
-                TempData["List"] = list;
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);               
+                IEnumerable<TerminalTableVM> listvm =repo_terminal.GetTerminalsReport(vmodel, listtn);
+                DataTable tb = Utils.ToDataTable<TerminalTableVM>(listvm);
+                TempData["List"] = tb;
                 return View();
             }
             return RedirectToAction("Index");
         }
+       
     }
 }

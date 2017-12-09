@@ -123,7 +123,7 @@
         <h3 class="panel-title">List Cash Load</h3>
     </div>
     <div class="panel-body">
-        @Html.Partial("_PartialTerminalTable")
+        @Html.Partial("_PartialTableMorris")
 
         <div>
             @Html.ActionLink("Back to List", "Index")
@@ -145,9 +145,8 @@
         var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
         var urlautoaccount = '@Url.Action("AutoAccount", "BankAccount")';
         $(function () {
-            $("#tablecash").DataTable();
-            $('#grid').find('table.table-striped.grid-table').first().attr('id', 'NewGridT');
-            $("#NewGridT").DataTable();
+           
+           
             $("#EndDate").datepicker({
                 dateFormat: "mm/dd/yy"
             });
@@ -155,8 +154,8 @@
                 dateFormat: "mm/dd/yy"
             });
 
-
-            ExportPdf();
+            Createdatatable();
+           
 
 
 
