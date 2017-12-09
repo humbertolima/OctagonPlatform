@@ -8,7 +8,7 @@ function Export(filename, mytblId, idhead,idtable) {
     cssexcel = '#table table { border-collapse: collapse;}'+
          '#table td, #table th {text-align:left } ' +
         '#table tr td,#table tr th {border: solid #e9ecef 1pt;width: 93.5pt; }' +
-        '#table tr th { background: #e9ecef}'
+        '#table tr th { background: #e9ecef}a{color:black;text-decoration: none !important}'
 
         ;
     css = (
@@ -45,7 +45,7 @@ function ExportPdf(idhead,idtable) {
     
       var css = '<style>table { border-collapse: collapse;}' +       
         'td,th {text-align:left;border: solid #e9ecef 1pt;width: 100%; }' +
-        'th { background: #e9ecef}</style>';
+        'th { background: #e9ecef} a{color:black;text-decoration: none !important}</style>';
       var ahtml = $('<div></div>').append($("#" + idtable).clone()).html();
     
     var html1 = css + "<div id = 'head'>" + $("#" + idhead).html() + "</div>" + "<div id = 'table'>" + ahtml + "</div>";
