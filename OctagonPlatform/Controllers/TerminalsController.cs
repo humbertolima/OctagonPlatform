@@ -437,6 +437,14 @@ namespace OctagonPlatform.Controllers
 
             return RedirectToAction("Details/" + terminal.Id);
         }
+
+        [HttpPost]
+        public ActionResult DeleteWorkingHours(string terminalId, int WorkingHoursId)
+        {
+            var terminal = _repository.DeteteWorkingHours(terminalId, WorkingHoursId);
+
+            return RedirectToAction("Details/" + terminal.Id);
+        }
         #endregion
 
     }

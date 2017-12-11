@@ -41,7 +41,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
-        
+
+        Terminal DeteteWorkingHours(string terminalId, int WorkingHoursId);
+
         Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
         
         IEnumerable<Terminal> Search(string search, int partnerId);
