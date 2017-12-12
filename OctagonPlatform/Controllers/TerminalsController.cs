@@ -413,8 +413,7 @@ namespace OctagonPlatform.Controllers
             var configNotification = _repository.GetConfigNotification(id);
             return PartialView("Sections/ConfigNotification", configNotification);
         }
-
-
+        
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
         public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
