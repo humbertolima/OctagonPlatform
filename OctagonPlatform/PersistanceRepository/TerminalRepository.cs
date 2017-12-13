@@ -505,7 +505,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-      
+
 
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
@@ -514,7 +514,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 return Table.Where(b => terminalIds.Contains(b.TerminalId))
                 .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) :  b.Status == status)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
 
@@ -638,7 +638,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
-       
+
         public IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
         {
 
@@ -663,10 +663,10 @@ namespace OctagonPlatform.PersistanceRepository
                 .Where(b => vmodel.ConectionType == CommunicationType.Communication.All ? (b.CommunicationType == CommunicationType.Communication.PhoneLine || b.CommunicationType == CommunicationType.Communication.TcpIp) : b.CommunicationType == vmodel.ConectionType)
                 .Where(b => vmodel.StartDate == null || b.DateCreated >= start)
                 .Where(b => vmodel.EndDate == null || b.DateCreated <= end)
-                .Select(b => new TerminalTableVM{ TerminalID = b.TerminalId, LocationName = b.LocationName, Address = b.Address1 + b.Address2, City = b.City.Name, State = b.State.Name, PostalCode = b.Zip.ToString(), ContactName = b.TerminalContacts.FirstOrDefault().Name, ContactPhone = b.TerminalContacts.FirstOrDefault().Phone, ATMType = b.Make.Name + " " + b.Model.Name, Connection = b.CommunicationType.ToString(), SurchargeAmount = b.SurchargeAmountFee.ToString(), CreationDate = b.DateCreated.ToString(), EMVStatus = "falta por hacer", DCCStatus = "falta por hacer" })
+                .Select(b => new TerminalTableVM { TerminalID = b.TerminalId, LocationName = b.LocationName, Address = b.Address1 + b.Address2, City = b.City.Name, State = b.State.Name, PostalCode = b.Zip.ToString(), ContactName = b.TerminalContacts.FirstOrDefault().Name, ContactPhone = b.TerminalContacts.FirstOrDefault().Phone, ATMType = b.Make.Name + " " + b.Model.Name, Connection = b.CommunicationType.ToString(), SurchargeAmount = b.SurchargeAmountFee.ToString(), CreationDate = b.DateCreated.ToString(), EMVStatus = "falta por hacer", DCCStatus = "falta por hacer" })
                 .ToList();
 
-                return list ;
+                return list;
             }
             catch (Exception e)
             {
@@ -676,5 +676,25 @@ namespace OctagonPlatform.PersistanceRepository
             // throw new NotImplementedException();
         }
 
+        public IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int cityid, int stateid, string zipcode)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                .Where(b => stateid == 0 || b.StateId == stateid)
+                .Where(b => cityid == 0 || b.CityId == cityid)
+                .Where(b => zipcode == null || b.Zip.ToString() == zipcode)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
+                .Select(b => new { b.TerminalId, b.LocationName, b.Status, b.TerminalContacts.FirstOrDefault().Name, b.TerminalContacts.FirstOrDefault().Phone }).ToList();
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+        }
     }
 }

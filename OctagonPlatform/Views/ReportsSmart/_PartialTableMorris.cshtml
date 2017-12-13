@@ -44,21 +44,27 @@
            )
         </div>
         <div id="myfirstchart" style="height: 100%;width:100%"></div>
-        <p>&nbsp;</p>
+       
+
+   
+    <p> &nbsp;</p>
         <p>&nbsp;</p>
         <div style="display:none" id="idhead">
             @Html.Partial("_PartialExcelHead")
         </div>
-}
-@using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
-{
-    <input type="hidden" name="html" />
-        <input type="hidden" name="filename" value="Report.pdf" />
-        <input type="submit" id="pdf" onclick="ExportPdf('idhead','grid');" value="" style="display:none" />
+        using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
+        {
+            <input type="hidden" name="html" />
+            <input type="hidden" name="filename" value="Report.pdf" />
+            <input type="submit" id="pdf" onclick="ExportPdf('idhead','grid');" value="" style="display:none" />
+
+        }
 
 }
+
 
 <script>
+
 
     function Createdatatable() {
 
@@ -67,20 +73,20 @@
         });
     }
 
-     function ChartBar() {
+    function ChartBar() {
 
-            var range = 'day';
-            var days = days_between($("#StartDate").val(), $("#EndDate").val());
-            if (days > 15 && days < 93)
-                range = 'week';
-            else
-                if (days > 92)
-                    range = 'month';
+        var range = 'day';
+        var days = days_between($("#StartDate").val(), $("#EndDate").val());
+        if (days > 15 && days < 93)
+            range = 'week';
+        else
+            if (days > 92)
+                range = 'month';
 
-            new Morris.Line({
-                // ID of the element in which to draw the chart.
-                element: 'myfirstchart',
-                data: @Html.Raw(@TempData["Chart"]),
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            data: @Html.Raw(@TempData["Chart"]),
                 // The name of the data record attribute that contains x-values.
                 xkey: 'Date',
                 // A list of names of data record attributes that contain y-values.
@@ -110,6 +116,27 @@
             var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
            return diffDays;
 
+    }
+  
+     function ChartBarStatus() {
+       
+             new Morris.Bar({
+                element: 'myfirstchart',
+                data: @Html.Raw(@TempData["Chart"]),
+                xkey: 'TerminalId',
+                ykeys: ['CashBalance'],
+                labels: ['Cash Balance'],
+                resize: true,
+                barColors: function (row, series, type) {
+                    if (type === 'bar') {
+                        var red = Math.ceil(255 * row.y / this.ymax);
+                        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+                    }
+                    else {
+                        return '#000';
+                    }
+                }
+            });
         }
 </script>
 

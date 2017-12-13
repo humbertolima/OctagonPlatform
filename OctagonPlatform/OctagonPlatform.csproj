@@ -319,6 +319,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalStatusFormFilterVM.cs" />
     <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
@@ -402,6 +403,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\CashLoadTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\CashManagementTableVM.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\TerminalStatusTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TerminalTableVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1211,6 +1213,7 @@
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMorris.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -74,6 +74,22 @@ namespace OctagonPlatform.PersistanceRepository
             return list;
 
         }
+        public async Task<List<JsonTerminalStatusReport>> TerminalStatus(string[] listtn = null)
+        {
+            HttpResponseMessage response = null;
+            string listtn2 = listtn != null ? string.Join(",", listtn) : "0";            
+            response = await client.GetAsync(uri + "request/terminalstatus/" + listtn2);
+            List<JsonTerminalStatusReport> list = new List<JsonTerminalStatusReport>();
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var status = await response.Content.ReadAsStringAsync();
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                list = JsonConvert.DeserializeObject<List<JsonTerminalStatusReport>>(status);
+            }
+            return list;
+        }
 
     }
 
