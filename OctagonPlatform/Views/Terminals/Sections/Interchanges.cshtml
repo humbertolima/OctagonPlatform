@@ -19,6 +19,20 @@
             <strong>@ViewBag.Error</strong>
         </p>
     *@
+    @Ajax.ActionLink("ADD", "Create", "InterChange", new { terminalId = ViewData["terminalId"]?.ToString() },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "AddInterchange",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Get"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "modal",
+                       data_target = "#AddInterchange"
+                   })
 
     <table id="interchanges" class="table table-striped table-hover table-bordered">
         <thead class="thead-blue">
@@ -46,68 +60,45 @@
                         <td>@item.StartDate.ToShortDateString()</td>
                         <td>@item.StopDate.ToShortDateString()</td>
                         <td>
-                            <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i>@Html.ActionLink(
-                                                                    linkText: "Edit",
-                                                                    actionName: "Edit",
-                                                                    controllerName: "InterChange",
-                                                                    routeValues: new
-                                                                    {
-                                                                        id = item.Id
-                                                                    },
-                                                                    htmlAttributes: null
-                                                                    )
+                            <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i>
+                            @Ajax.ActionLink("Edit", "Edit", "InterChange",
+                           new { Id = item.Id },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "AddInterchange",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Get"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "modal",
+                       data_target = "#AddInterchange"
+                   })
                         </td>
                         <td>
-                            <i class="fa fa-trash" style="color: red; font-size: 16px;"></i><button type="button" style="margin: -2px;" data-id="@item.Id" id="deleteInterchange" class="btn-link" data-toggle="modal" data-target="#confirmdeleteInterchange">Delete</button>
+                            <i class="fa fa-trash" style="color: red; font-size: 16px;"></i>
+                            <button type="button" style="margin: -2px;" data-id="@item.Id"
+                                    id="deleteInterchange" class="btn-link" data-toggle="modal"
+                                    data-target="#confirmdeleteInterchange">
+                                Delete
+                            </button>
                         </td>
 
                     </tr>
-
-
                 </tbody>
-
             }
         }
-
-
-
     </table>
 
     @*=========== MODAL =============*@
-
     @*ADD*@
-    @*<div id="AddInterchange" class="modal fade" role="dialog">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                    <h3 class="alert-info">Edit Config Alert</h3>
-                </div>
-
-                @using (Html.BeginForm("", "Terminals"))
-            {
-                    @Model
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.)
-
-                    @Html.DropDownListFor(m => m.Partner.BankAccounts.FirstOrDefault().Id, new SelectList(Model.Partner.BankAccounts, "Id", "NickName"));
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                }
-
-            </div>
-        </div>
-    </div>*@
 
 
+    
     @*DELETE*@
-    @*<div id="confirmdeleteInterchange" class="modal">
+    <div id="confirmdeleteInterchange" class="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,22 +111,26 @@
                 <div class="modal-footer">
                     @using (Html.BeginForm("Delete", "InterChange", FormMethod.Post))
                     {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("terminalId", Model.Id)
-                    @Html.Hidden("id")
-                    <div class="form-group">
-                        <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
-                        <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
-                    </div>
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("terminalId", ViewData["terminalId"]?.ToString())
+                        <input type="hidden" id="id" name="id">
+
+                        <div class="form-group">
+                            <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
                     }
                 </div>
             </div>
         </div>
-    </div>*@
+    </div>
 </div>
 
 
-
-
-
+<script>
+    $(document).on("click", ".deleteInterchange", function () {
+        var passedID = $(this).data('id');
+        $("#confirmdeleteInterchange #Id").val(passedID);
+    });
+</script>
 

@@ -47,8 +47,8 @@ namespace OctagonPlatform.Controllers
                     ViewBag.Error = "InterChange not found. ";
                     return View("Error");
                 }
-                var model = _repository.InterChangeToEdit((int) id);
-                if (model != null) return View("InterChangeForm", model);
+                var viewModel = _repository.InterChangeToEdit((int) id);
+                if (viewModel != null) return PartialView("Modal/AddInterChange", viewModel); ;
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
             }
@@ -69,8 +69,8 @@ namespace OctagonPlatform.Controllers
                     ViewBag.Error = "InterChange not found. ";
                     return View("Error");
                 }
-                var model = _repository.RenderInterChangeFormViewModel((int) terminalId);
-                if (model != null) return View("InterChangeForm", model);
+                var viewModel = _repository.RenderInterChangeFormViewModel((int) terminalId);
+                if (viewModel != null) return PartialView("Modal/AddInterChange", viewModel);
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
             }

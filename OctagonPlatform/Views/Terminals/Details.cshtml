@@ -129,7 +129,7 @@
                     <h3 class="texth3" data-toggle="collapse" data-target="#getInterchange">
                         <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getInterchange">Interchanges</a>
                     </h3>
-                    @Html.Partial("Sections/Interchanges",Model.InterChanges, new ViewDataDictionary() { { "terminalId", Model.Id } })
+                    @Html.Partial("Sections/Interchanges", Model.InterChanges, new ViewDataDictionary() { { "terminalId", Model.Id } })
                 </div>
             </div>
         </div>
@@ -160,6 +160,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="AddInterchange" class="modal fade" role="dialog">
     </div>
     @section Scripts {
 
