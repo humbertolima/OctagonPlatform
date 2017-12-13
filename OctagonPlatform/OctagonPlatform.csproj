@@ -1229,6 +1229,9 @@
     <Content Include="Views\Terminals\Sections\VaultCash.cshtml" />
     <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
     <Content Include="Views\InterChange\Modal\AddInterChange.cshtml" />
+    <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
+    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
+    <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

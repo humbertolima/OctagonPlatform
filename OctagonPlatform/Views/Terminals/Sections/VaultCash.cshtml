@@ -1,6 +1,21 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model OctagonPlatform.Models.VaultCash
+
 
 <div id="getVaultCash" class="panel-collapse collapse">
+    @Ajax.ActionLink("ADD", "Create", "VaultCash", new { terminalId = ViewData["terminalId"]?.ToString() },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "AddVaultCash",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Get"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "modal",
+                       data_target = "#AddVaultCash"
+                   })
     <table id="vaultcash" class="table table-striped table-hover table-bordered">
         <thead class="thead-blue">
             <tr>
@@ -10,14 +25,14 @@
                 <th>Stop Date</th>
             </tr>
         </thead>
-        @if (Model.VaultCash != null)
+        @if (Model != null)
         {
             <tbody>
                 <tr>
-                    <td>@Model.VaultCash.BankAccount.NickName</td>
-                    <td>@Model.VaultCash.BankAccount.BankName</td>
-                    <td>@Model.VaultCash.StartDate.ToShortDateString()</td>
-                    <td>@Model.VaultCash.StopDate.ToShortDateString()</td>
+                    <td>@Model.BankAccount.NickName</td>
+                    <td>@Model.BankAccount.BankName</td>
+                    <td>@Model.StartDate.ToShortDateString()</td>
+                    <td>@Model.StopDate.ToShortDateString()</td>
                 </tr>
             </tbody>
         }

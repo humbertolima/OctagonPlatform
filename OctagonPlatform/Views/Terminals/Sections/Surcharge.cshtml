@@ -1,4 +1,19 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model IEnumerable<OctagonPlatform.Models.Surcharge>
+
+@Ajax.ActionLink("ADD", "Create", "Surcharge", new { terminalId = ViewData["terminalId"]?.ToString() },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "AddSurcharge",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Get"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "modal",
+                       data_target = "#AddSurcharge"
+                   })
 
 <div id="getSurcharge" class="panel-collapse collapse">
     <table id="surcharges" class="table table-striped table-hover table-bordered">
@@ -13,10 +28,10 @@
             </tr>
         </thead>
 
-        @if (Model.Surcharges != null)
+        @if (Model != null)
         {
 
-            foreach (var item in Model.Surcharges)
+            foreach (var item in Model)
             {
                 <tbody>
                     <tr>
