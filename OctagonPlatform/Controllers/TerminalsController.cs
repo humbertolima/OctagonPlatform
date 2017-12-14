@@ -31,7 +31,7 @@ namespace OctagonPlatform.Controllers
             }
             return PartialView("Sections/CashManagements", result.Result);
         }
-        
+
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -107,6 +107,20 @@ namespace OctagonPlatform.Controllers
 
             return PartialView("Details", terminal);
         }
+
+        [HttpPost]
+        public PartialViewResult DeleteNotes(int indexTerminalId, int noteId)
+        {
+            Models.Terminal terminal = new Models.Terminal();
+
+            if (noteId > 0)
+            {
+                terminal = _repository.DeleteNotes(indexTerminalId, noteId);
+            }
+
+            return PartialView("Details", terminal);
+        }
+
 
         [HttpPost]
         public PartialViewResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
@@ -367,7 +381,7 @@ namespace OctagonPlatform.Controllers
                 }
                 Models.Terminal terminal = _repository.DocumentDelete(indexTerminalId, Convert.ToInt32(documentId));
 
-                return RedirectToAction("Details",new {id = terminal.Id });
+                return RedirectToAction("Details", new { id = terminal.Id });
             }
             catch (Exception ex)
             {
@@ -413,7 +427,7 @@ namespace OctagonPlatform.Controllers
             var configNotification = _repository.GetConfigNotification(id);
             return PartialView("Sections/ConfigNotification", configNotification);
         }
-        
+
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
         public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {

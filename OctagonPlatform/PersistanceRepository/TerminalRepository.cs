@@ -491,12 +491,12 @@ namespace OctagonPlatform.PersistanceRepository
             //no lo puedo controlar si el usuario tiene acceso a eliminarlo o no.
             try
             {
-                var terminal = Table.Include(c=>c.WorkingHours)
+                var terminal = Table.Include(c => c.WorkingHours)
                        .FirstOrDefault(c => c.TerminalId == terminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
-                terminal.WorkingHours.Remove(terminal.WorkingHours.FirstOrDefault(c=>c.Id== WorkingHoursId));
+                terminal.WorkingHours.Remove(terminal.WorkingHours.FirstOrDefault(c => c.Id == WorkingHoursId));
                 Edit(terminal);
 
                 return terminal;
@@ -601,7 +601,21 @@ namespace OctagonPlatform.PersistanceRepository
 
             return terminal;
         }
-        
+
+
+        public Terminal DeleteNotes(int indexTerminalId, int noteId)
+        {
+
+            if (indexTerminalId > 0 || noteId > 0)
+            {
+               Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
+
+                Context.SaveChanges();
+            }
+
+            return TerminalDetails(indexTerminalId);
+        }
+
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
@@ -641,14 +655,14 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 return Table.Where(b => terminalIds.Contains(b.TerminalId))
                 .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) :  b.Status == status)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
 
@@ -731,8 +745,8 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new Exception("Error database " + e.Message);
             }
-            
-            
+
+
         }
 
         public void EditRange(string[] list, int? groupId)
@@ -779,14 +793,14 @@ namespace OctagonPlatform.PersistanceRepository
         {
             DateTime? start = null;
             DateTime? end = null;
-            if(vmodel.StartDate != null ) start =  DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture) ;
+            if (vmodel.StartDate != null) start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             if (vmodel.EndDate != null) end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            bool groupfilter = listtn == null ? false: true;
+            bool groupfilter = listtn == null ? false : true;
             string[] aux = { "0" };
-            listtn = listtn ?? aux ;
-            int zip =Int32.Parse( vmodel.ZipCode ?? "0");
+            listtn = listtn ?? aux;
+            int zip = Int32.Parse(vmodel.ZipCode ?? "0");
             try
-            {               
+            {
                 return Table.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))
                 .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
                 .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
@@ -801,7 +815,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(b => b.TerminalContacts)
                 .Include(b => b.Make)
                 .Include(b => b.Model)
-                .ToList();             
+                .ToList();
 
             }
             catch (Exception e)
@@ -811,5 +825,6 @@ namespace OctagonPlatform.PersistanceRepository
             }
             // throw new NotImplementedException();
         }
+
     }
 }
