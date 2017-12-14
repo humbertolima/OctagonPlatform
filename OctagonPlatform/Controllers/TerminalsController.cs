@@ -433,7 +433,7 @@ namespace OctagonPlatform.Controllers
         {
             var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
 
-            return RedirectToAction("Details/" + terminal.Id);
+            return RedirectToAction("Details", new { id = terminal.Id });
         }
 
         [HttpPost]

@@ -378,7 +378,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
 
                 terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
+                terminalAlertConfigViewModel.TerminalId = terminal.Id;
 
                 return terminalAlertConfigViewModel;
             }
@@ -397,7 +397,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.TerminalAlertConfigs = terminalAlertConfig;
@@ -423,7 +423,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -460,7 +460,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
                 var terminal = Table
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
