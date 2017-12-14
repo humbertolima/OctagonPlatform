@@ -14,13 +14,13 @@ namespace OctagonPlatform.Controllers
         {
             _terminalContactRepository = repository;
         }
-        
+
 
         public ActionResult Details(int? id)
         {
             try
             {
-                if (id != null) return View(_terminalContactRepository.Details((int) id));
+                if (id != null) return View(_terminalContactRepository.Details((int)id));
                 ViewBag.Error = "Contact not found. ";
                 return View("Error");
             }
@@ -32,12 +32,17 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: TerminalContacts/Create
+        [HttpGet]
         public ActionResult Create(int? terminalId)
         {
             try
             {
                 if (terminalId != null)
-                    return View(_terminalContactRepository.RenderTerminalContactFormViewModel((int)terminalId));
+                {
+                    var model = _terminalContactRepository.RenderTerminalContactFormViewModel((int)terminalId);
+                    return PartialView("Modal/AddTerminalContact", model);
+                }
+
                 ViewBag.Error = "Contact not found. ";
                 return View("Error");
             }
@@ -48,7 +53,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalContactFormViewModel terminalContactFormViewModel)
@@ -62,7 +67,7 @@ namespace OctagonPlatform.Controllers
                 }
 
                 _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Save");
-                return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
+                return RedirectToAction("Details", "Terminals", new { id = terminalContactFormViewModel.TerminalId });
 
 
             }
@@ -101,7 +106,7 @@ namespace OctagonPlatform.Controllers
                     return View(_terminalContactRepository.TerminalContactToEdit(terminalContactFormViewModel.Id));
                 }
                 _terminalContactRepository.SaveTerminalContact(terminalContactFormViewModel, "Edit");
-                return RedirectToAction("Details", "Terminals", new {id = terminalContactFormViewModel.TerminalId});
+                return RedirectToAction("Details", "Terminals", new { id = terminalContactFormViewModel.TerminalId });
             }
             catch (Exception ex)
             {
@@ -147,7 +152,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-       
+
 
     }
 }

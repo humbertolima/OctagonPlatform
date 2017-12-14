@@ -95,8 +95,7 @@
                     <h3 class="texth3" data-toggle="collapse" data-target="#getContacts">
                         <i class="fa fa-book" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getContacts">Contacts</a>
                     </h3>
-                    @Html.Partial("Sections/Contacts", Model)
-
+                    @Html.Partial("Sections/Contacts", Model.TerminalContacts, new ViewDataDictionary() { { "terminalId", Model.Id } }))
                 </div>
             </div>
         </div>
@@ -171,6 +170,11 @@
     <div id="AddVaultCash" class="modal fade" role="dialog">
         <div class="loader"></div>
     </div>
+    <div id="AddContact" class="modal fade" role="dialog">
+        <div class="loader"></div>
+    </div>
+    
+
     @section Scripts {
 
         @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@

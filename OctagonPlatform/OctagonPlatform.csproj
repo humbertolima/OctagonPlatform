@@ -1232,6 +1232,8 @@
     <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
     <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
+    <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
+    <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
