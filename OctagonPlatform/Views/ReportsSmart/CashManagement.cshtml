@@ -100,7 +100,63 @@
         $("#tablecash").DataTable();
       
             ChartBar();
-            Createdatatable();
+            $('#grid').append("<tfoot align='right'><tr><th colspan = 2 style='text-align: right;'>  </th><th > </th><th ></th><th ></th><th ></th><th ></th><th ></th></tr></tfoot>");
+
+            $("#grid").DataTable({
+                "scrollX": true,
+                "footerCallback": function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    // converting to interger to find total
+                    var intVal = function (i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+
+                    // computing column Total of the complete result 
+                    var monTotal = api
+                        .column(2)
+                        .data()
+                        .reduce(function (a, b) {
+
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    var monTotal1 = api
+                        .column(5)
+                        .data()
+                        .reduce(function (a, b) {
+
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    var monTotal2 = api
+                        .column(6)
+                        .data()
+                        .reduce(function (a, b) {
+
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    var monTotal3 = api
+                        .column(7)
+                        .data()
+                        .reduce(function (a, b) {
+
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Update footer by showing the total with the reference of the column index 
+                    $(api.column(0).footer()).html('Totals:');
+                    $(api.column(2).footer()).html("$" + monTotal);
+                    $(api.column(5).footer()).html("$" + monTotal1);
+                    $(api.column(6).footer()).html("$" + monTotal2);
+                    $(api.column(7).footer()).html("$" + monTotal3);
+
+                }
+            });
+            $("#grid tr").find('td:eq(2), td:eq(5), td:eq(6), td:eq(7)').each(function (index, val) {
+                $(this).html("$" + $(this).html());
+            });
 
         });
 

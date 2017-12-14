@@ -93,7 +93,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                         if (locationname != "")
                         {
-                            CashLoadTableVM obj = new CashLoadTableVM(item.TerminalId, locationname, item.AmountPrevius.ToString(), item.AmountLoad.ToString(), item.AmountCurrent.ToString(), item.Date);
+                            CashLoadTableVM obj = new CashLoadTableVM(item.TerminalId, locationname, item.Date, item.AmountPrevius.ToString(), item.AmountLoad.ToString(), item.AmountCurrent.ToString());
                             JsonLoadCashChart objchart = new JsonLoadCashChart(item.Date.ToString("yyyy-MM-dd"), item.AmountPrevius, item.AmountLoad);
                             listchart.Add(objchart);
                             listaux.Add(obj);
