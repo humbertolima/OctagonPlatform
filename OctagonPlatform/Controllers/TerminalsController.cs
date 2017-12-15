@@ -139,6 +139,7 @@ namespace OctagonPlatform.Controllers
             {
                 terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
             }
+
             return PartialView("Details", terminal);
         }
 
@@ -244,6 +245,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             try

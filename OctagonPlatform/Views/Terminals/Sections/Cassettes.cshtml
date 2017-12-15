@@ -1,11 +1,11 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model  IEnumerable<OctagonPlatform.Models.Cassette>
 
 <div id="getCassettes" class="panel-collapse collapse">
     <div>
         <table>
             <tbody>
                 @{
-                    foreach (var item in Model.Cassettes)
+                    foreach (var item in Model)
                     {
                         <tr>
                             <td>
@@ -44,16 +44,14 @@
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.Hidden("cassetteId")
-                        <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
-
-                        <input type="hidden" id="cassetteId" name="cassetteId">
-
+                        @Html.Hidden("cassetteId",Model.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Id)
+                        @Html.Hidden("terminalId",ViewData["terminalId"]?.ToString())
+                        
                         <p class="alert alert-danger">
                             @ViewBag.Error
                         </p>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Cassettes.FirstOrDefault(x => x.TerminalId == Model.Id).Denomination)
+                                @Html.TextBoxFor(m => m.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Denomination)
                             </div>
                             <div class="form-group">
                                 @Html.CheckBox("AutoRecord")Auto Record
@@ -84,7 +82,7 @@
                     {
                         @Model
                         @Html.AntiForgeryToken()
-                        <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
+                        <input type="hidden" id="terminalId" name="TerminalId" value="@ViewData["terminalId"].ToString()">
 
                         <p class="alert alert-danger">
                             @ViewBag.Error
