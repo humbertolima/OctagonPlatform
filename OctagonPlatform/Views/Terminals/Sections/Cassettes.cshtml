@@ -9,12 +9,6 @@
                     {
                         <tr>
                             <td>
-                                @item.Id
-                            </td>
-                            <td>
-                                @item.AutoRecord
-                            </td>
-                            <td>
                                 @item.Denomination
                             </td>
                             <td>
@@ -121,7 +115,8 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("cassetteId")
-                            <input type="hidden" id="itemId" name="id" value="" />
+                        @Html.Hidden("terminalId")
+                            <input type="hidden" id="terminalId" name="terminalId" value="@ViewData["terminalId"]?.toString()" />
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>

@@ -123,7 +123,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
-        public PartialViewResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
+        public ActionResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
         {
             bool isAutoRecord;
 
@@ -140,7 +140,7 @@ namespace OctagonPlatform.Controllers
                 terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
             }
 
-            return PartialView("Details", terminal);
+            return View("Details", terminal);
         }
 
 
@@ -327,7 +327,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CassetteDelete(int? cassetteId)
+        public ActionResult CassetteDelete(int? cassetteId, int terminalId)
         {
             try
             {
@@ -337,12 +337,14 @@ namespace OctagonPlatform.Controllers
                     return View("Error");
                 }
                 _repository.CassettesDelete(Convert.ToInt32(cassetteId));
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = terminalId });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = terminalId });
             }
         }
         //======================

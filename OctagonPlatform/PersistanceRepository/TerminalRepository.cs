@@ -620,7 +620,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
@@ -639,7 +639,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
