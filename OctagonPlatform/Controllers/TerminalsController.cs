@@ -47,7 +47,7 @@ namespace OctagonPlatform.Controllers
                     TerminalId = ""
                 };
 
-                return View("Sections/BindKey", viewModel);
+                return PartialView("Sections/BindKey", viewModel);
             }
             catch (Exception ex)
             {

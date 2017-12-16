@@ -13,12 +13,6 @@
     terminalId = Model.TerminalId
 }, htmlAttributes: null)
 
-@Html.ActionLink(linkText: "Bind Key", actionName: "GetKey", controllerName: "Terminals", routeValues: new
-{
-    terminalId = Model.TerminalId
-}, htmlAttributes: null)
-
-
 <div class="row" id="detailterminal">
 
     <div class="col-md-6">
@@ -160,6 +154,34 @@
                 </div>
             </div>
         </div>
+
+        <div class="panel-group" style="width: 100%;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="texth3" data-toggle="collapse" data-target="#getBindKey">
+                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i>
+                        <a data-toggle="collapse" href="#getBindKey">Get Bind Key</a>
+                    </h3>
+                    @Ajax.ActionLink("Bind Key", "GetKey", "Terminals", new { terminalId = Model.TerminalId },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getBindKey",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getBindKey"
+                   })
+                    <div id="getBindKey" class="panel-collapse collapse">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -182,9 +204,7 @@
 
 @section Scripts {
 
-    @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-
 
     <script>
         $(function () {
@@ -193,11 +213,6 @@
                 $("#confirmdeleteInterchange #id").val(id);
 
             });
-            /*var jQuery_1_10_2 = $.noConflict(true);
-
-            jQuery_1_10_2(function () {
-                $("#interchanges").DataTable();
-            });*/
         });
 
 
