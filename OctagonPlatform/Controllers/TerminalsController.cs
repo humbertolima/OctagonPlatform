@@ -53,7 +53,7 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View("Error");
-            }
+            } 
         }
 
         [HttpPost]
