@@ -314,6 +314,10 @@
     <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
       <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
+    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1275,6 +1279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
       <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
