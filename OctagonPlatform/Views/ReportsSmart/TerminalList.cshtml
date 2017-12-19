@@ -117,13 +117,14 @@
 
     </div>
 </div>
+
 <div class="panel panel-primary">
     <div class="panel-heading">
 
-        <h3 class="panel-title">List Cash Load</h3>
+        <h3 class="panel-title">Terminal List</h3>
     </div>
     <div class="panel-body">
-        @Html.Partial("_PartialTableMorris")
+        @Html.Partial("_PartialTable")
 
         <div>
             @Html.ActionLink("Back to List", "Index")
@@ -154,10 +155,7 @@
                 dateFormat: "mm/dd/yy"
             });
           
-            $("#grid").DataTable({
-                "scrollX": true
           
-            });
             $("#grid tr").find('td:eq(12)').each(function (index, val) {
                 $(this).html("$" + $(this).html());
             });

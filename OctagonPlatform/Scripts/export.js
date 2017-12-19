@@ -2,7 +2,8 @@
 function Export(filename, mytblId, idhead,idtable) {
 
     var html, link, blob, url, css, cssexcel, headw;
-    var ahtml = $('<div></div>').append($("#" +idtable).clone()).html();
+    var ahtml = $('<div></div>').append($("#" + idtable).clone()).html();
+    
     html = "<div id = 'table'>" + ahtml + "</div>";
     headw = "<div id = 'head'>" + $("#" + idhead).html() + "</div>";
     cssexcel = '#table table { border-collapse: collapse;}'+
@@ -52,4 +53,7 @@ function ExportPdf(idhead,idtable) {
    
     $("input[name='html']").val(html1);
    
+}
+function callankle() {
+    document.location.href = "#ancla";
 }

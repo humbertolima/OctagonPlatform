@@ -46,8 +46,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult CashLoad()
         {
             CashLoadViewModel model = new CashLoadViewModel();
-            TempData["Chart"] = "[]";
-
+            TempData["Chart"] = null;
             return View(model);
         }
 
@@ -105,13 +104,14 @@ namespace OctagonPlatform.Controllers.Reports
                 #region Variables Partial
 
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashLoadTableVM>(listaux) : null;
-                TempData["Chart"] = JsonConvert.SerializeObject(listchart);
+                TempData["filename"] = "CashLoad";
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
                 TempData["from"] = vmodel.StartDate;
                 TempData["to"] = vmodel.EndDate;
                 #endregion
-                Session["businessName"] = "";
+                
                 return View();
             }
 
@@ -172,6 +172,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         public ActionResult CashManagement()
         {
+            TempData["Chart"] = null;
             return View();
         }
         [HttpPost]
@@ -215,7 +216,8 @@ namespace OctagonPlatform.Controllers.Reports
 
                 #region Variables Partial
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashManagementTableVM>(listaux) : null;
-                TempData["Chart"] = JsonConvert.SerializeObject(listchart);
+                TempData["filename"] = "CashManagement";
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
                 #endregion
@@ -264,6 +266,7 @@ namespace OctagonPlatform.Controllers.Reports
                 IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn);
 
                 TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
+                TempData["filename"] = "TerminalList";
                 return View();
             }
             return RedirectToAction("Index");
@@ -271,6 +274,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         public ActionResult TerminalStatus()
         {
+            TempData["Chart"] = null;
             return View();
         }
         [HttpPost]
@@ -318,8 +322,8 @@ namespace OctagonPlatform.Controllers.Reports
 
                 #region Variables Partial
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<TerminalStatusTableVM>(listaux) : null;
-                TempData["Chart"] = JsonConvert.SerializeObject(listchart);
-
+                TempData["filename"] = "TerminalStatus";
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null; 
                 #endregion
 
                 return View();
@@ -330,7 +334,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult DailyTransactionSummary()
         {
             TransDailyViewModel model = new TransDailyViewModel();
-            TempData["Chart"] = "[]";
+            TempData["Chart"] = null;
 
             return View(model);
         }
@@ -387,7 +391,8 @@ namespace OctagonPlatform.Controllers.Reports
                 #region Variables Partial
                
                 TempData["List"] = listaux.Count() > 0 ? listaux : null;
-                TempData["Chart"] = "";
+                TempData["filename"] = "DailyTransactionSummary";
+                TempData["Chart"] = null;
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
                 TempData["from"] = start?.ToString("MMMM d, yyyy");

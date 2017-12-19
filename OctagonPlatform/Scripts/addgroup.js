@@ -1,6 +1,4 @@
-﻿function callankle() {
-    document.location.href = "#ancla";
-}
+﻿
 var listselected1 = [];
 var listselected2 = [];
 $(function () {

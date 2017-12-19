@@ -69,13 +69,22 @@
 
     </div>
 </div>
+<div class="panel panel-primary" style="padding:0px;">
+    <div class="panel-heading">
+
+        <h3 class="panel-title">Chart Cash Management</h3>
+    </div>
+    <div class="panel-body">
+        @Html.Partial("_PartialMorrisChart")
+    </div>
+</div>
 <div class="panel panel-primary">
     <div class="panel-heading">
 
         <h3 class="panel-title">List Cash Management</h3>
     </div>
     <div class="panel-body">
-        @Html.Partial("_PartialTableMorris")
+        @Html.Partial("_PartialTable")
 
         <div>
             @Html.ActionLink("Back to List", "Index")
@@ -97,63 +106,29 @@
         var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
 
     $(function () {
-        $("#tablecash").DataTable();
+       
       
             ChartBar();
-            $('#grid').append("<tfoot align='right'><tr><th colspan = 2 style='text-align: right;'>  </th><th > </th><th ></th><th ></th><th ></th><th ></th><th ></th></tr></tfoot>");
+          
+            var sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+            $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
 
-            $("#grid").DataTable({
-                "scrollX": true,
-                "footerCallback": function (row, data, start, end, display) {
-                    var api = this.api(), data;
-
-                    // converting to interger to find total
-                    var intVal = function (i) {
-                        return typeof i === 'string' ?
-                            i.replace(/[\$,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                                i : 0;
-                    };
-
-                    // computing column Total of the complete result 
-                    var monTotal = api
-                        .column(2)
-                        .data()
-                        .reduce(function (a, b) {
-
-                            return intVal(a) + intVal(b);
-                        }, 0);
-                    var monTotal1 = api
-                        .column(5)
-                        .data()
-                        .reduce(function (a, b) {
-
-                            return intVal(a) + intVal(b);
-                        }, 0);
-                    var monTotal2 = api
-                        .column(6)
-                        .data()
-                        .reduce(function (a, b) {
-
-                            return intVal(a) + intVal(b);
-                        }, 0);
-                    var monTotal3 = api
-                        .column(7)
-                        .data()
-                        .reduce(function (a, b) {
-
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Update footer by showing the total with the reference of the column index 
-                    $(api.column(0).footer()).html('Totals:');
-                    $(api.column(2).footer()).html("$" + monTotal);
-                    $(api.column(5).footer()).html("$" + monTotal1);
-                    $(api.column(6).footer()).html("$" + monTotal2);
-                    $(api.column(7).footer()).html("$" + monTotal3);
-
-                }
+                sum1 += $(this).html() * 1;
             });
+            $("#grid tbody tr").find('td:eq(5)').each(function (index, val) {
+
+                sum2 += $(this).html() * 1;
+            });
+            $("#grid tbody tr").find('td:eq(6)').each(function (index, val) {
+
+                sum3 += $(this).html() * 1;
+            });
+            $("#grid tbody tr").find('td:eq(7)').each(function (index, val) {
+
+                sum4 += $(this).html() * 1;
+            });
+            $('#grid').append("<tr align='right'><th colspan = 2 style='text-align: right;'> Totals: </th><th > $" + sum1 + "</th><th ></th><th ></th><th >$" + sum2 + "</th><th >$" + sum3 + "</th><th >$" + sum4 + "</th></tr>");
+
             $("#grid tr").find('td:eq(2), td:eq(5), td:eq(6), td:eq(7)').each(function (index, val) {
                 $(this).html("$" + $(this).html());
             });

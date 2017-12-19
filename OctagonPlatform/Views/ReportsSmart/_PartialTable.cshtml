@@ -18,7 +18,7 @@
             }
             model.Add(obj);
         }
-        grid = new WebGrid(model);
+        grid = new WebGrid(model, canSort: false);
     }
  }  
 
@@ -31,14 +31,14 @@
             <div class="col-sm-3" style="text-align: right;">
                 <div class="btn-group" role="group" aria-label="...">
                     <button type="button" class="btn btn-danger" onclick="$('#pdf').click();" style="border-radius: 0px;"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i> PDF</button>
-                    <button type="button" class="btn btn-success" onclick="Export('Report.xls', 'TableExport','idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i> XLS</button>
-                    <button type="button" class="btn btn-primary" onclick="Export('Report.doc', 'TableExport','idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> DOC</button>
+                    <button type="button" class="btn btn-success" onclick="Export('@(TempData["filename"]+".xls")' , 'TableExport' ,'idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i> XLS</button>
+                    <button type="button" class="btn btn-primary" onclick="Export('@(TempData["filename"]+".doc")' , 'TableExport' ,'idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> DOC</button>
 
                 </div>
                 <p></p>
             </div>
         </div>
-        <div id="TableExport" class="row">
+        <div id="TableExport" class="row" style="overflow-y: scroll; height:600px;">
             @grid.GetHtml(
           tableStyle: "table table-striped",
           htmlAttributes: new { id = "grid", width = "100%" }
@@ -54,7 +54,7 @@
     @using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
     {
         <input type="hidden" name="html" />
-        <input type="hidden" name="filename" value="Report.pdf" />
+        <input type="hidden" name="filename" value="@(TempData["filename"]+".pdf")" />
         <input type="submit" id="pdf" onclick="ExportPdf('idhead','grid');" value="" style="display:none" />
 
     }

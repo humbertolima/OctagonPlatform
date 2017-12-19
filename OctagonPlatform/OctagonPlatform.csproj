@@ -1201,23 +1201,21 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
-    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
     <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
-    <Content Include="Views\ReportsSmart\CashManagementByReportGroup.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
-    <Content Include="Views\ReportsSmart\_PartialTableNoMorris.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTable.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\ReportsSmart\_PartialTableMorris.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
     <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

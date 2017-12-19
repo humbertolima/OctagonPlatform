@@ -85,13 +85,22 @@
 
     </div>
 </div>
+<div class="panel panel-primary" style="padding:0px;">
+    <div class="panel-heading">
+
+        <h3 class="panel-title">Chart Terminal Status</h3>
+    </div>
+    <div class="panel-body">
+        @Html.Partial("_PartialMorrisChart")
+    </div>
+</div>
 <div class="panel panel-primary">
     <div class="panel-heading">
 
         <h3 class="panel-title">List Terminal Status</h3>
     </div>
     <div class="panel-body">
-        @Html.Partial("_PartialTableMorris")
+        @Html.Partial("_PartialTable")
 
         <div>
             @Html.ActionLink("Back to List", "Index")
@@ -115,8 +124,7 @@
     $(function () {
 
        
-        $('#grid').append("<tfoot align='right'><tr><th colspan = 2 style='text-align: right;'>  </th><th > </th><th colspan = 7></th></tr></tfoot>");
-
+      
         $("#EndDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
@@ -126,38 +134,15 @@
 
         //end
         ChartBarStatus();
-        //Create datatble
-   
-         $("#grid").DataTable({
-             "scrollX": true,
-             "footerCallback": function (row, data, start, end, display) {
-                 var api = this.api(), data;
-               
-                 // converting to interger to find total
-                 var intVal = function (i) {
-                     return typeof i === 'string' ?
-                         i.replace(/[\$,]/g, '') * 1 :
-                         typeof i === 'number' ?
-                             i : 0;
-                 };
+      
+         var sum1 = 0;
+         $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
 
-                 // computing column Total of the complete result 
-                 var monTotal = api
-                     .column(2)
-                     .data()
-                     .reduce(function (a, b) {
-                        
-                         return intVal(a) + intVal(b);
-                     }, 0);               
+             sum1 += $(this).html() * 1;
+         });
+      
+         $('#grid').append("<tr align='right'><th colspan = 2 style='text-align: right;'> Total Cash Balance: </th><th >$" + sum1 + " </th><th colspan = 7></th></tr>");
 
-
-                 // Update footer by showing the total with the reference of the column index 
-                 $(api.column(0).footer()).html('Total Cash Balance:');
-                 $(api.column(2).footer()).html("$" + monTotal);
-               
-                
-             }
-        });
          $("#grid tr").find('td:eq(2)').each(function (index, val) {
              $(this).html("$" + $(this).html());
          });

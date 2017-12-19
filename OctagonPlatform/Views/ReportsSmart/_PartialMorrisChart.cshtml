@@ -1,72 +1,8 @@
-﻿@using GridMvc.Html
-@using System.Dynamic
-@using System.Reflection;
-@using System.Data;
-
-@{
-    WebGrid grid = null;
-    if (TempData["List"] != null) {
-        DataTable dt = (DataTable)TempData["List"];
-        var model = new List<dynamic>(dt.Rows.Count);
-        foreach (DataRow dr in dt.Rows)
-        {
-            var obj = (IDictionary<string, object>)new ExpandoObject();
-            foreach (DataColumn dc in dt.Columns)
-            {
-                obj.Add(dc.ColumnName, dr[dc.ColumnName] ?? "");
-            }
-            model.Add(obj);
-        }
-        grid = new WebGrid(model);
-    }
-    }
-
-@if (TempData["List"] != null)
-{
-  <!-- Single button -->
-
-    <div class="row">
-        <div class="col-sm-9"></div>
-        <div class="col-sm-3" style="text-align: right;">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-danger" onclick="$('#pdf').click();" style="border-radius: 0px;"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i> PDF</button>
-                <button type="button" class="btn btn-success" onclick="Export('Report.xls', 'TableExport','idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i> XLS</button>
-                <button type="button" class="btn btn-primary" onclick="Export('Report.doc', 'TableExport','idhead','grid');" style="border-radius: 0px;"><i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> DOC</button>
-
-            </div>
-            <p></p>
-        </div>
-    </div>
-        <div id="TableExport" >
-            @grid.GetHtml(
-          tableStyle: "table table-striped",
-          htmlAttributes: new { id = "grid",width = "100%" }
-           )
-        </div>
-        <div id="myfirstchart" style="height: 100%;width:100%"></div>
-       
-
-   
-    <p> &nbsp;</p>
-        <p>&nbsp;</p>
-        <div style="display:none" id="idhead">
-            @Html.Partial("_PartialExcelHead")
-        </div>
-        using (Html.BeginForm("Export", "ReportsSmart", FormMethod.Post))
-        {
-            <input type="hidden" name="html" />
-            <input type="hidden" name="filename" value="Report.pdf" />
-            <input type="submit" id="pdf" onclick="ExportPdf('idhead','grid');" value="" style="display:none" />
-
-        }
-
-}
+﻿
+    <div id="myfirstchart" style="height: 100%;width:100%"></div>
 
 
 <script>
-
-
-   
 
     function ChartBar() {
 
@@ -112,9 +48,9 @@
            return diffDays;
 
     }
-  
+
      function ChartBarStatus() {
-       
+
              new Morris.Bar({
                 element: 'myfirstchart',
                 data: @Html.Raw(@TempData["Chart"]),
@@ -134,5 +70,3 @@
             });
         }
 </script>
-
-
