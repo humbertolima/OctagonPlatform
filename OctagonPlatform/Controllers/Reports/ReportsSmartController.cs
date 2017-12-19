@@ -327,6 +327,78 @@ namespace OctagonPlatform.Controllers.Reports
 
             return RedirectToAction("Index");
         }
+        public ActionResult DailyTransactionSummary()
+        {
+            TransDailyViewModel model = new TransDailyViewModel();
+            TempData["Chart"] = "[]";
 
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId")] TransDailyViewModel vmodel)
+        {
+            ModelState.Remove("PartnerId");
+            ModelState.Remove("GroupId");
+            ModelState.Remove("TerminalId");
+            if (ModelState.IsValid)
+            {
+                List<TransDailyTableVM> listaux = new List<TransDailyTableVM>();              
+                List<JsonDailyTransactionSummary> list = new List<JsonDailyTransactionSummary>();
+                ApiATM api = new ApiATM();
+
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
+
+                list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn);
+
+                IEnumerable<dynamic> listTn = repo_terminal.TransDailyList(list, vmodel.PartnerId);
+
+                if (listTn.Count() > 0)
+                {
+
+
+                    foreach (var item in list)
+                    {
+
+                        string locationname = "";
+
+                        foreach (dynamic x in listTn)
+                        {
+                            if (x.TerminalId == item.TerminalId)
+                            {
+                                locationname = x.LocationName;
+                                break;
+                            }
+                        }
+                        if (locationname != "")
+                        {
+                            TransDailyTableVM obj = new TransDailyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals,item.OtherApproved,item.Reversed,item.SurchargeAmount,item.TotalTransaction);
+                           
+                            listaux.Add(obj);
+                        }
+                    }
+
+                }
+
+                #region Variables Partial
+               
+                TempData["List"] = listaux.Count() > 0 ? listaux : null;
+                TempData["Chart"] = "";
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = start?.ToString("MMMM d, yyyy");
+                TempData["to"] = end?.ToString("MMMM d, yyyy");
+               
+                #endregion
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

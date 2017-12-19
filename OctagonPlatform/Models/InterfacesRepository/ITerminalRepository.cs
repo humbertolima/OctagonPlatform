@@ -58,5 +58,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
         IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
         IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city,int state, string zipcode);
+        IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid);
+
     }
 }

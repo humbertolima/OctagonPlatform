@@ -43,7 +43,7 @@ function Export(filename, mytblId, idhead,idtable) {
 };
 function ExportPdf(idhead,idtable) {
     
-      var css = '<style>table { border-collapse: collapse;}' +       
+      var css = '<style>table { border-collapse: collapse; width:100%}' +       
         'td,th {text-align:left;border: solid #e9ecef 1pt;width: 100%; }' +
         'th { background: #e9ecef} a{color:black;text-decoration: none !important}</style>';
       var ahtml = $('<div></div>').append($("#" + idtable).clone()).html();
