@@ -57,3 +57,6 @@ function ExportPdf(idhead,idtable) {
 function callankle() {
     document.location.href = "#ancla";
 }
+function callankle2() {
+    document.location.href = "#ancla2";
+}

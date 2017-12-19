@@ -8,6 +8,7 @@
 <p></p>
 <div class="panel panel-primary">
     <div class="panel-heading">
+        <a name="ancla"></a>
         <h3 class="panel-title">Filter Report Terminal Status</h3>
     </div>
     <div class="panel-body">
@@ -38,8 +39,8 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4">
-                      
-                       
+
+
                         <div class="form-group">
                             @Html.Label("City: ", new { @class = "col-sm-2 control-label" })
                             <div class="col-sm-10">
@@ -54,7 +55,7 @@
                                 @Html.HiddenFor(model => model.StateId, new { @id = "stateid" })
                             </div>
                         </div>
-                      
+
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4">
                         <div class="form-group">
@@ -85,30 +86,38 @@
 
     </div>
 </div>
-<div class="panel panel-primary" style="padding:0px;">
-    <div class="panel-heading">
-
-        <h3 class="panel-title">Chart Terminal Status</h3>
-    </div>
-    <div class="panel-body">
-        @Html.Partial("_PartialMorrisChart")
-    </div>
-</div>
-<div class="panel panel-primary">
-    <div class="panel-heading">
-
-        <h3 class="panel-title">List Terminal Status</h3>
-    </div>
-    <div class="panel-body">
-        @Html.Partial("_PartialTable")
-
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-
+@if (TempData["List"] != null)
+{
+    <div class="panel panel-primary" style="padding:0px;">
+        <div class="panel-heading">
+            <a name="ancla2"></a>
+            <h3 class="panel-title">Chart Terminal Status</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_PartialMorrisChart")
         </div>
     </div>
-</div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
 
+            <h3 class="panel-title">List Terminal Status</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_PartialTable")
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+        <strong>Warning!</strong> Not Record Available.
+    </div>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/autocomplete.js")
@@ -123,31 +132,34 @@
         var urlautoaccount;
     $(function () {
 
-       
-      
+
+
         $("#EndDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
         $("#StartDate").datepicker({
             dateFormat: "mm/dd/yy"
         });
+          callankle();
+          var tempdataval = '@TempData["List"]';
+          if (tempdataval != null && tempdataval != '') {
+              callankle2();
+              //end
+              ChartBarStatus();
 
-        //end
-        ChartBarStatus();
-      
-         var sum1 = 0;
-         $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
+              var sum1 = 0;
+              $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
 
-             sum1 += $(this).html() * 1;
-         });
-      
-         $('#grid').append("<tr align='right'><th colspan = 2 style='text-align: right;'> Total Cash Balance: </th><th >$" + sum1 + " </th><th colspan = 7></th></tr>");
+                  sum1 += $(this).html() * 1;
+              });
 
-         $("#grid tr").find('td:eq(2)').each(function (index, val) {
-             $(this).html("$" + $(this).html());
-         });
-       
+              $('#grid').append("<tr align='right'><th colspan = 2 style='text-align: right;'> Total Cash Balance: </th><th >$" + sum1 + " </th><th colspan = 7></th></tr>");
 
+              $("#grid tr").find('td:eq(2)').each(function (index, val) {
+                  $(this).html("$" + $(this).html());
+              });
+
+          }
 
         });
 
