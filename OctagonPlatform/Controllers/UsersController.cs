@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
@@ -33,54 +35,49 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        
+
         [HttpGet]
         public ActionResult Create(int? partnerId)
         {
             try
             {
-                if (partnerId != null) return View(_userRepository.RenderUserFormViewModel((int) partnerId));
+                UserFormViewModel userFormVM = _userRepository.RenderUserFormViewModel((int)partnerId);
+
+                if (partnerId != null)
+                {
+                    return View(userFormVM);
+                }
+
                 ViewBag.Error = "User not found. ";
                 return View("Error");
             }
-            
+
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
-         
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserFormViewModel viewModel, string[] permissions1)
+        public ActionResult Create(UserFormViewModel viewModel, string[] allSetOfPermissions, string[] permissions1)
         {
             if (!ModelState.IsValid)
             {
-                ////Create error en helper
-                //#region Create error messages       
-                //viewModel.Error = "Validation Error. ";
-                //foreach (var item in ModelState.Values)
-                //{
-                //    if (item.Errors.Count > 0)
-                //    {
-                //        for (int i = 0; i < item.Errors.Count; i++)
-                //        {
-                //            viewModel.Error += item.Errors[i].ErrorMessage.ToString() + ". ";
-                //        }
-                //    }
-                //}
-                //#endregion  
+              
                 ViewBag.Error = "Please check the entered values. ";
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             try
             {
+                //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
                 viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
+                                    
 
                 _userRepository.SaveUser(viewModel, "Create");
-                return RedirectToAction("Details", "Partners", new{id = viewModel.PartnerId});
+                return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
             catch (Exception ex)
             {
@@ -159,7 +156,7 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
-            
+
         }
 
         [HttpGet]
@@ -167,7 +164,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_userRepository.UserToEdit((int) id));
+                if (id != null) return View(_userRepository.UserToEdit((int)id));
                 ViewBag.Error = "User not found.";
                 return View("Error");
             }
@@ -248,12 +245,12 @@ namespace OctagonPlatform.Controllers
 
         public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
-   
+
 
             ViewBag.assigned = toAttach;
 
             var bankAccounts = _userRepository.GetAllBankAccount(userId, toAttach);
-            
+
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
     }

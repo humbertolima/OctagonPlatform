@@ -66,10 +66,13 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var permissionList = new List<Permission>();
+
                 if (permissions == null) return permissionList;
+
                 permissionList.AddRange(permissions.Select(t => Convert.ToInt32(t))
                     .Select(convertId => Context.Permissions
                     .FirstOrDefault(c => c.Id == convertId)));
+
                 //si viene null se envia la instancia vacia.
                 return permissionList;
             }
