@@ -21,8 +21,8 @@ namespace OctagonPlatform.PersistanceRepository
                 if (parent == null) throw new Exception("Parent not found. ");
 
                 return Table.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
-                    //.Include(x => x.Alerts)
-                    //.Include(x => x.Reports)
+                                                                                //.Include(x => x.Alerts)
+                                                                                //.Include(x => x.Reports)
                     .Include(x => x.Partner)
                     .ToList();
             }
@@ -91,7 +91,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partner)
                     .Single(c => c.Id == id);
 
-                
+
 
                 if (result == null) throw new Exception("User not found. ");
                 {
@@ -141,7 +141,7 @@ namespace OctagonPlatform.PersistanceRepository
                     var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id && !c.Deleted);
 
                     if (user == null) throw new Exception("User does not exist in our records");
-                    
+
                     {
                         user.Email = viewModel.Email.Trim();
                         user.LastName = viewModel.LastName.Trim();
@@ -165,12 +165,12 @@ namespace OctagonPlatform.PersistanceRepository
                         Edit(user);
                     }
 
-                    
+
                 }
                 else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
-                    
+
                     var key = Cryptography.GenerateKey();
                     var hash = Cryptography.EncodePassword(viewModel.Password, key);
 
@@ -186,7 +186,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Status = viewModel.Status,
                         UserName = viewModel.UserName.Trim(),
                         IsLocked = viewModel.IsLocked
-                        
+
                     };
                     if (viewModel.Permissions != null)
                         userResult.Permissions = viewModel.Permissions;
@@ -211,11 +211,12 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var userDetails = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Partner)
+                    .Include(x => x.Partner.Terminals)  //para mostrar en user Details las terminales de los partner
                     .Include(x => x.Permissions)
                     .Include(x => x.BankAccounts)
-                    .Include(x => x.Terminals)
+                    .Include(x => x.Terminals)          //para mostrar las terminales que tiene asignada el usuario.
                     .FirstOrDefault();
-                if(userDetails == null) throw new Exception("User not found. ");
+                if (userDetails == null) throw new Exception("User not found. ");
                 return userDetails;
             }
             catch (Exception ex)
@@ -229,7 +230,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var user = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
-                if(user == null) throw new Exception("User not found. ");
+                if (user == null) throw new Exception("User not found. ");
                 Delete(id);
             }
             catch (Exception ex)
@@ -256,7 +257,7 @@ namespace OctagonPlatform.PersistanceRepository
                     Name = viewModel.Name,
                     PartnerId = viewModel.PartnerId,
                     Partner = Context.Partners.SingleOrDefault(x => x.Id == viewModel.PartnerId),
-                    Partners = Context.Partners.Where(x =>(x.Id == viewModel.PartnerId || x.ParentId == viewModel.PartnerId) && !x.Deleted).ToList(),
+                    Partners = Context.Partners.Where(x => (x.Id == viewModel.PartnerId || x.ParentId == viewModel.PartnerId) && !x.Deleted).ToList(),
                     Phone = viewModel.Phone,
                     Status = viewModel.Status,
                     UserName = viewModel.UserName,
@@ -346,12 +347,73 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public List<Terminal> AddTerminalToUser(int terminalId, int userId)
+        {
+            User user = Table
+                .Include(m => m.Terminals)
+                .Include(m=>m.Partner)
+                .Single(c => c.Id == userId);
+
+            try
+            {
+                user.Terminals.Single(c => c.Id == terminalId);
+            }
+            catch (InvalidOperationException)       //si la secuencia esta vacia lo que hace le single es lanzar una exception de este tipo.
+            {
+                //si no tiene la terminal asignada el usario, la asigno.
+
+                Terminal terminal = GetTerminalById(terminalId);
+                user.Terminals.Add(terminal);
+                Edit(user);
+
+            }
+
+            return user.Terminals.ToList();
+        }
+
+        public List<Terminal> DeleteTerminalToUser(int terminalId, int userId)
+        {
+            User user = Table
+                .Include(m => m.Terminals)
+                .Include(m => m.Partner)
+                .Single(c => c.Id == userId);
+
+            try
+            {
+                user.Terminals.Single(c => c.Id == terminalId);
+
+                Terminal terminal = GetTerminalById(terminalId);
+                user.Terminals.Remove(terminal);
+                Edit(user);
+            }
+            catch (InvalidOperationException)       //si la secuencia esta vacia lo que hace le single es lanzar una exception de este tipo.
+            {
+                throw new Exception("terminal not assigned");
+            }
+
+            return user.Terminals.ToList();
+        }
+
+        private Terminal GetTerminalById(int terminalId)
+        {
+            try
+            {
+                Terminal terminal = Context.Terminals.Single(c => c.Id == terminalId && !c.Deleted);
+                if (terminal == null) throw new Exception("Bank account not found. ");
+                return terminal;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "User not found. ");
+            }
+        }
+
         private BankAccount GetBankAccountById(int bankAccountId)
         {
             try
             {
                 var ba = Context.BankAccounts.Single(c => c.Id == bankAccountId && !c.Deleted);
-                if(ba == null) throw new Exception("Bank account not found. ");
+                if (ba == null) throw new Exception("Bank account not found. ");
                 return ba;
             }
             catch (Exception ex)

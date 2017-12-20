@@ -66,7 +66,7 @@ namespace OctagonPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-              
+
                 ViewBag.Error = "Please check the entered values. ";
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
@@ -74,7 +74,7 @@ namespace OctagonPlatform.Controllers
             {
                 //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
                 viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
-                                    
+
 
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
@@ -147,7 +147,9 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_userRepository.UserDetails(Convert.ToInt32(id)));
+                User user = _userRepository.UserDetails(Convert.ToInt32(id));
+
+                if (id != null) return View(user);
                 ViewBag.Error = "User not found. ";
                 return View("Error");
             }
@@ -243,10 +245,27 @@ namespace OctagonPlatform.Controllers
             return PartialView("Sections/BankAccounts", userBaViewModel);
         }
 
+        public ActionResult AddTerminalToUSer(string terminalId, string userId)
+        {
+            int userIdConvert = Convert.ToInt32(userId);
+            int terminalConvert = Convert.ToInt32(terminalId);
+
+            List<Terminal> terminals = _userRepository.AddTerminalToUser(terminalConvert, userIdConvert);
+            return PartialView("Sections/TerminalsUser", terminals);
+        }
+
+        public ActionResult DeleteTerminalToUser(int terminalId, int userId)
+        {
+            int userIdConvert = Convert.ToInt32(userId);
+            int terminalConvert = Convert.ToInt32(terminalId);
+
+            List<Terminal> terminals = _userRepository.DeleteTerminalToUser(terminalConvert, userIdConvert);
+
+            return PartialView("Sections/TerminalsUser", terminals);
+        }
+
         public PartialViewResult GetAllBankAccount(string userId, bool toAttach)
         {
-
-
             ViewBag.assigned = toAttach;
 
             var bankAccounts = _userRepository.GetAllBankAccount(userId, toAttach);

@@ -1125,7 +1125,7 @@
     <Content Include="Views\Users\Sections\BankAccounts.cshtml" />
     <Content Include="Views\Users\Sections\GenralInfo.cshtml" />
     <Content Include="Views\Users\Sections\Reports.cshtml" />
-    <Content Include="Views\Users\Sections\Terminals.cshtml" />
+    <Content Include="Views\Users\Sections\TerminalsUser.cshtml" />
     <Content Include="Views\Partners\Sections\GeneralInfo.cshtml" />
     <Content Include="Views\Logos\Index.cshtml" />
     <Content Include="Views\Partners\Search.cshtml" />
@@ -1238,6 +1238,7 @@
     <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
+    <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
