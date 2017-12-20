@@ -323,7 +323,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var bankAccountIdConvert = Convert.ToInt32(bankAccountId);
 
                 if (!string.IsNullOrEmpty(userId) && (userIdConvert > 0) &&
-                    (!string.IsNullOrEmpty(bankAccountId))) //VALIDO QUE NO ESTE VACIO  
+                    (!string.IsNullOrEmpty(bankAccountId))) //VALÍDO QUE NO ESTE VACIO  
                 {
                     user = Table
                         .Include(c => c.BankAccounts)
@@ -420,6 +420,13 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "User not found. ");
             }
         }
+
+
+
+
+
+
+
         //public List<UserBAViewModel> GetBAOfUser()
         //{
         //    var bankAccounts = Context.BankAccounts.ToList();
