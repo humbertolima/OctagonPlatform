@@ -24,7 +24,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string StartDate { get; set; }
         [DisplayName("To")]
         public string EndDate { get; set; }
-       
+        public bool Surcharge { get; set; }
+        public bool Dispensed { get; set; }
         public TransDailyViewModel()
         {
             //TerminalId = "TR024019";// "NH061617";

@@ -126,7 +126,13 @@
             <h3 class="panel-title">Terminal List</h3>
         </div>
         <div class="panel-body">
-            @Html.Partial("_PartialTable")
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
+
+            </div>
+            @Html.Partial("_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+
+         
 
             <div>
                 @Html.ActionLink("Back to List", "Index")

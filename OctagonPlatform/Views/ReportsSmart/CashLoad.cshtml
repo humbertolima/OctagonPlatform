@@ -98,10 +98,16 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-
-            <h3 class="panel-title">List Cash Load</h3>
+          
+            <span class="panel-title" >List Cash Load</span>
+            <span class="panel-title" style="float:right">Date: @DateTime.Now</span>
+           
         </div>
         <div class="panel-body">
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash load" } })
+               
+            </div>
             @Html.Partial("_PartialTable")
 
             <div>
@@ -157,7 +163,7 @@ else
 
                 sum3 += $(this).html() * 1;
             });
-            $('#grid tbody').append("<tr align='right'><th colspan = 3 style='text-align: right;'> Totals: </th><th >$" + sum1 + " </th><th >$" + sum2 + "</th><th >$" + sum3 + "</th></tr>");
+            $('#grid tbody').append("<tr ><th></th><th></th><th>  </th><th >$" + sum1 + " </th><th >$" + sum2 + "</th><th >$" + sum3 + "</th></tr>");
 
             $("#grid tr").find('td:eq(3), td:eq(4), td:eq(5)').each(function (index, val) {
                 $(this).html("$" + $(this).html());

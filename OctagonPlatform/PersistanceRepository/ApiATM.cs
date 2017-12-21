@@ -90,7 +90,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             return list;
         }
-        public async Task<List<JsonDailyTransactionSummary>> DailyTransactionSummary(DateTime? start = null, DateTime? end = null, string tn = "", string[] listtn = null)
+        public async Task<List<JsonDailyTransactionSummary>> DailyTransactionSummary(DateTime? start , DateTime? end, string tn , string[] listtn ,bool surcharge,bool dispensed)
         {
 
             HttpResponseMessage response = null;
@@ -101,7 +101,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 string listtn2 = listtn != null ? string.Join(",", listtn) : "0";
                 tn = tn ?? "0";
-                response = await client.GetAsync(uri + "request/transdailysum/" + tn + "/" + _start + "/" + _end + "/" + listtn2);
+                response = await client.GetAsync(uri + "request/transdailysum/" + tn + "/" + _start + "/" + _end + "/" + listtn2 + "/" + surcharge + "/" + dispensed);
             }
 
             List<JsonDailyTransactionSummary> list = new List<JsonDailyTransactionSummary>();

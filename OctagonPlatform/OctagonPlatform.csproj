@@ -1216,6 +1216,7 @@
     <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialHead.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

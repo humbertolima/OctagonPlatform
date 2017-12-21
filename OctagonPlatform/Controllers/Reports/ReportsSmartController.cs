@@ -232,14 +232,16 @@ namespace OctagonPlatform.Controllers.Reports
 
         [HttpPost]
         [ValidateInput(false)]
-        public FileResult Export(string html, string filename)
+        public FileResult Export(string html, string filename,string orientation)
         {
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
+                Rectangle pageSize = orientation == "Landscape" ? PageSize.LETTER.Rotate() : PageSize.LETTER;
                 StringReader sr = new StringReader(html);
-                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(pageSize, 20f, 20f, 20f, 20f);
                 PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                 pdfDoc.Open();
+               
                 XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                 pdfDoc.Close();
                 return File(stream.ToArray(), "application/pdf", filename);
@@ -341,7 +343,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId")] TransDailyViewModel vmodel)
+        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] TransDailyViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -357,7 +359,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
 
-                list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn);
+                list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn,vmodel.Surcharge,vmodel.Dispensed);
 
                 IEnumerable<dynamic> listTn = repo_terminal.TransDailyList(list, vmodel.PartnerId);
 
@@ -380,7 +382,7 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                         if (locationname != "")
                         {
-                            TransDailyTableVM obj = new TransDailyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals,item.OtherApproved,item.Reversed,item.SurchargeAmount,item.TotalTransaction);
+                            TransDailyTableVM obj = new TransDailyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals,item.OtherApproved,item.Reversed,item.SurchargeAmount,item.TotalTransaction,item.Surcharge,item.Dispensed);
                            
                             listaux.Add(obj);
                         }
@@ -397,7 +399,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["partner"] = vmodel.Partner;
                 TempData["from"] = start?.ToString("MMMM d, yyyy");
                 TempData["to"] = end?.ToString("MMMM d, yyyy");
-               
+                TempData["model"] = vmodel;
                 #endregion
 
                 return View();

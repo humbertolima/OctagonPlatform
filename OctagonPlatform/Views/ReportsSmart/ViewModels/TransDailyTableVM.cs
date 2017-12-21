@@ -11,7 +11,7 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
    
     public class TransDailyTableVM
     {
-        public TransDailyTableVM(string terminalId, string locationName, DateTime date, int? approvedWithdrawals, int? declined, int? surchargableWithdrawals, int? otherApproved, int? reversed, double? surchargeAmount, int? totalTransaction)
+        public TransDailyTableVM(string terminalId, string locationName, DateTime date, int? approvedWithdrawals, int? declined, int? surchargableWithdrawals, int? otherApproved, int? reversed, double? surchargeAmount, int? totalTransaction, double? surcharge, double? dispensed)
         {
             TerminalId = terminalId;
             LocationName = locationName;
@@ -23,6 +23,8 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
             Reversed = reversed;
             SurchargeAmount = surchargeAmount;
             TotalTransaction = totalTransaction;
+            Surcharge = surcharge;
+            Dispensed = dispensed;
         }
 
         [GridColumn(Title = "Terminal Id")]
@@ -45,9 +47,12 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
         public double? SurchargeAmount { get; set; }
         [GridColumn(Title = "Total Transaction")]
         public int? TotalTransaction { get; set; }
+        [GridColumn(Title = "Surcharge")]
+        public double? Surcharge { get; set; }
+        [GridColumn(Title = "Dispensed")]
+        public double? Dispensed { get; set; }
 
-       
-      
+
     }
    
 }

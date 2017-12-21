@@ -115,7 +115,8 @@ namespace OctagonPlatform.Controllers.Reports.JSON
         public int? Reversed { get; set; }
         public double? SurchargeAmount { get; set; }
         public int? TotalTransaction { get; set; }
-
+        public double? Surcharge { get; set; }
+        public double? Dispensed { get; set; }
 
     }
 }
