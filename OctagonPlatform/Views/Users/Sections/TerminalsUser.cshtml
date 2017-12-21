@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<OctagonPlatform.Models.Terminal>
+
+<p class="alert alert-info">
+    <strong>@ViewBag.Error</strong>
+</p>
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>Terminal ID</th>
+            <th>Partner</th>
+            <th>Address</th>
+            <th>Zip</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Cash Balance</th>
+        </tr>
+    </thead>
+
+    <tbody id="listOfTerminals">
+        
+        @foreach (var item in Model)
+        {
+            if (!item.Deleted)
+            {
+                <tr class="info">
+                    <td>@item.TerminalId</td>
+                    <td>@item.Partner.BusinessName</td>
+                    <td>@item.Address1</td>
+                    <td>@item.Zip</td>
+                    <td>@item.Status</td>
+                    
+                    <td>
+                        <div>
+                            @Ajax.ActionLink("De-Attach", "DeleteTerminalToUser", "Users",
+                           new { terminalId = item.Id, userId = ViewData["userId"] },
+                           new AjaxOptions { UpdateTargetId = "terminalsUserAssigned", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#terminalsUserAssigned" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+</table>

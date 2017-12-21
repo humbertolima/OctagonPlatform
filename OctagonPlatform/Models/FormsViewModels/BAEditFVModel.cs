@@ -22,6 +22,10 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         [StringLength(50)]
+        public string BankName { get; set; }
+
+        [Required]
+        [StringLength(50)]
         [StringValidation(ErrorMessage = "Routing Number must be only numbers, with no spaces. ")]
         public string RoutingNumber { get; set; }
 

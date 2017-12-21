@@ -19,6 +19,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserBAViewModel AddBankAccountToUser(string userId, string bankAccountId);
 
+        List<Terminal> AddTerminalToUser(int terminalId, int userId);
+
+        List<Terminal> DeleteTerminalToUser(int terminalId, int userId);
+
         UserBAViewModel DeAttachBankAccountToUser(int userId, int bankAccountId);
 
         void SaveUser(UserFormViewModel viewModel, string action);

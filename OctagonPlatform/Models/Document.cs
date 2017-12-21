@@ -1,6 +1,8 @@
 ﻿using OctagonPlatform.Helpers;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web;
 
 namespace OctagonPlatform.Models
 {
@@ -13,14 +15,17 @@ namespace OctagonPlatform.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
+        public byte[] Archive { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase FileForm { get; set; }
+
         public string Category { get; set; }
 
         public bool Privacy { get; set; }
 
         [Required]
         public int TerminalId { get; set; }
-
         public Terminal Terminal { get; set; }
 
         public bool Deleted { get; set; }

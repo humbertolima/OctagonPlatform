@@ -1,0 +1,18 @@
+﻿@model IEnumerable<OctagonPlatform.Models.ReportModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reports</h2>
+
+
+@foreach (var item in Model)
+{
+    var name = item.Name.Replace(" ",string.Empty);
+    @Html.ActionLink(item.Name, name)
+   <br>
+   
+}
+
+

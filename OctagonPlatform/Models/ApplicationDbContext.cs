@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace OctagonPlatform.Models
 {
@@ -32,7 +33,14 @@ namespace OctagonPlatform.Models
         public DbSet<Cassette> Cassettes { get; set; }
         public DbSet<BindedKey> BindedKeys { get; set; }
         public DbSet<Dispute> Disputes { get; set; }
+        public DbSet<DisputeRepresent> DisputeRepresents { get; set; }
         public DbSet<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
+        public DbSet<TerminalAlert> TerminalAlerts{ get; set; }
+        public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
+        public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
+        public DbSet<ReportModel> Reports { get; set; }
+        public DbSet<ReportGroupModel> ReportGroups { get; set; }
+        public DbSet<Picture> Pictures { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
@@ -45,10 +53,12 @@ namespace OctagonPlatform.Models
             return new ApplicationDbContext();
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
 
+            //modelBuilder.Entity<>
         }
 
         

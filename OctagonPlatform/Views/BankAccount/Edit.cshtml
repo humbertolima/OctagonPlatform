@@ -14,12 +14,17 @@
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
         @ViewBag.Error
-        @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     </p>
     <div class="form-group">
         @Html.LabelFor(m => m.NickName)
         @Html.TextBoxFor(m => m.NickName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Nick Name" })
         @Html.ValidationMessageFor(m => m.NickName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BankName)
+        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control", autofocus = "autofocus", placeholder = "Bank Name" })
+        @Html.ValidationMessageFor(m => m.BankName)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.RoutingNumber)

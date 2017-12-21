@@ -34,8 +34,6 @@ namespace OctagonPlatform
             CreateMap<BankAccount, UserBAViewModel>();
             #endregion
 
-
-
             #region Partner Mapping
 
             CreateMap<Partner, PartnerFormViewModel>();
@@ -45,8 +43,6 @@ namespace OctagonPlatform
             CreateMap<PartnerFormViewModel, Partner>();
 
             #endregion
-
-
 
             #region PartnerContact Mapping
 
@@ -58,19 +54,23 @@ namespace OctagonPlatform
 
             #endregion
 
-
-
             #region Terminal Mapping
 
             CreateMap<Terminal, TerminalFormViewModel>();
 
-            CreateMap<TerminalFormViewModel, TerminalFormViewModel>();
+            //CreateMap<TerminalFormViewModel, TerminalFormViewModel>();
             //Dto to Domain
             CreateMap<TerminalFormViewModel, Terminal>().ForMember(c => c.Id, opt => opt.Ignore());
 
             #endregion
 
+            #region Terminal Alert Ignnored Mapped
 
+            CreateMap<TerminalAlertConfig, TerminalAlertIngnoredViewModel>();
+
+            CreateMap<TerminalAlertIngnoredViewModel, TerminalAlertConfig>();
+            //Dto to Domain
+            #endregion
 
             #region TerminalContact Mapping
 
@@ -82,16 +82,68 @@ namespace OctagonPlatform
 
             #endregion
 
-
             #region VaultCash Mapping
 
             CreateMap<VaultCash, VaultCashFormViewModel>();
 
             CreateMap<VaultCashFormViewModel, VaultCashFormViewModel>();
             //Dto to Domain
-            CreateMap<VaultCashFormViewModel, VaultCash>().ForMember(c => c.Id, opt => opt.Ignore());
+            CreateMap<VaultCashFormViewModel, VaultCash>();
 
             #endregion
+
+            #region Surcharge Mapping
+
+            CreateMap<Surcharge, SurchargeFormViewModel>();
+
+            CreateMap<SurchargeFormViewModel, SurchargeFormViewModel>();
+            //Dto to Domain
+            CreateMap<SurchargeFormViewModel, Surcharge>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
+
+
+            #region InterChange Mapping
+
+            CreateMap<InterChange, InterChangeFormViewModel>();
+
+            CreateMap<InterChangeFormViewModel, InterChangeFormViewModel>();
+            //Dto to Domain
+            CreateMap<InterChangeFormViewModel, InterChange>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
+
+            #region Dispute
+
+            CreateMap<Dispute, DisputeViewModel>();
+
+            CreateMap<DisputeViewModel, Dispute>();
+            //Dto to Domain
+            //CreateMap<InterChangeFormViewModel, InterChange>().ForMember(c => c.Id, opt => opt.Ignore());
+
+            #endregion
+
+            #region Dispute Represents
+
+            CreateMap<DisputeRepresent, DisputeRepresentVM>();
+
+            CreateMap<DisputeRepresentVM, DisputeRepresent>();
+            #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         }
 

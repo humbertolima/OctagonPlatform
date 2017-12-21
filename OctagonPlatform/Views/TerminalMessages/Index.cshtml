@@ -1,0 +1,38 @@
+﻿@model IEnumerable<OctagonPlatform.Models.TerminalMessage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Terminal.TerminalId)
+        </th>
+    </tr>
+
+</table>
+@foreach (var item in Model)
+{
+    <div class="panel-group" style="width: 100%; ">
+        <div class="panel panel-default">
+            @Ajax.ActionLink(Html.DisplayFor(modelItem => item.Id).ToHtmlString(), "MessagesDetail", "TerminalMessages", new { messagesId = item.Id, direction = item.Direction }, new AjaxOptions { UpdateTargetId = item.Id.ToString(), LoadingElementId = "loading3", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#" + @item.Id.ToString() })
+            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.Direction)
+
+            <div id="@item.Id.ToString()" class="panel-collapse collapse">
+                <div class="loader"></div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+}

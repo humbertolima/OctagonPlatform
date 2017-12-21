@@ -1,7 +1,5 @@
 ﻿using OctagonPlatform.Helpers;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +28,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         [Display(Name = "State")]
         public int StateId { get; set; }
-
         public State State { get; set; }
 
         public ICollection<State> States { get; set; }  
@@ -49,6 +46,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         public LocationType LocationType { get; set; }
 
         public ICollection<LocationType> LocationTypes { get; set; }
+
+        [Required]
+        public string LocationName { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
@@ -82,23 +82,20 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Address")]
         public string Address1 { get; set; }
 
+        [Display(Name = "Cont.")]
         public string Address2 { get; set; }
 
         [Required(ErrorMessage = "The zip code is required")]
-        [Display(Name = "Zip Code")]
+        [Display(Name = "Zip")]
         public int Zip { get; set; }
 
         [Required]
-        [Display(Name = "Emv")]
-        public bool EmvReady { get; set; }
-
-        [Required]
-        [Display(Name = "Serial Number")]
+        [Display(Name = "Serial")]
         [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
-        [Display(Name = "Veep Serial number")]
+        [Display(Name = "Veep Serial")]
         public string VeppSerialNumber { get; set; }
 
         [Display(Name = "Software Version")]
@@ -107,46 +104,29 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Fimware Version")]
         public string FimwareVersion { get; set; }
 
-        [Required]
-        [Display(Name = "Surcharged Type")]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
 
         [Required]
         [Display(Name = "Surcharge Amount")]
-        public double SurchargeAmount { get; set; }
-
-        [Display(AutoGenerateField = true, Prompt = "Test", Name = "Fix Surcharge")]
-        public double FixSurcharge { get; set; }
+        public double SurchargeAmountFee { get; set; }
 
         [Required]
-        [Display(Name = "Percent Surcharge Amount")]
-        public double SurchargeByPercent { get; set; }
+        [Display(Name = "Surcharge Percentage")]
+        public double SurchargePercentageFee { get; set; }
 
         [Required]
-        [Display(Name = "Recolection Type")]
-        public Settled.SettledType SettledType { get; set; }
+        [Display(Name = "Surcharge Logic")]
+        public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
-        [Display(Name = "Who Initiates Day Closed")]
-        public Initiate.Who WhoInitiates { get; set; }
+
+        [Display(Name = "Day Closed")]
+        public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
 
         [Required]
-        [Display(Name = "Percent Charge By CryptoTransaction")]
+        [Display(Name = "Cryptocurrency Fee")]
         public double CryptoPercentChargeAmount { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Installation Date")]
-        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
-        public DateTime? InstalledDate { get; set; }
-
-        [Display(Name = "Loaded By?")]
-        public string LoadedBy { get; set; }
 
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }
-
-        [DataType(DataType.Currency)]
-        [Display(Name = "Minimun Chash Balance")]
-        public double? MinAmmountCash { get; set; }
+        
     }
 }

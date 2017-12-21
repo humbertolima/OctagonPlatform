@@ -10,35 +10,25 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalContactRepository: GenericRepository<TerminalContact>, ITerminalContactRepository
     {
-        //public IEnumerable<TerminalContact> GetAllTerminalContacts(int partnerId)
-        //{
-        //    try
-        //    {
-        //        var terminals = Context.Terminals.Where(x => x.PartnerId == partnerId && !x.Deleted)
-        //            .Include(x => x.TerminalContacts).ToList();
-        //        return terminals
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+        
 
         public TerminalContact Details(int id)
         {
             try
             {
-                return Table.Where(x => x.Id == id && !x.Deleted)
+                var contact = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Terminal)
                     .Include(x => x.Country)
                     .Include(x => x.State)
                     .Include(x => x.City)
                     .Include(x => x.ContactType)
                     .SingleOrDefault();
+                if (contact == null) throw new Exception("Contact not found. ");
+                return contact;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -62,10 +52,12 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted);
+                if (terminal == null) throw new Exception("Terminal for this contact not found. ");
                 return new TerminalContactFormViewModel()
                 {
                     TerminalId = terminalId,
-                    Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId),
+                    Terminal = terminal,
                     ContactTypes = Context.ContactTypes.ToList(),
                     ContactTypeId = 4,
                     Countries = Context.Countries.ToList(),
@@ -75,7 +67,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -90,7 +82,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.City)
                     .Include(x => x.Terminal)
                     .SingleOrDefault();
-                if (terminalContact == null) throw new Exception("Contact does not exist in our records!!!");
+                if (terminalContact == null) throw new Exception("Contact does not exist in our records.");
                 {
 
                     return new TerminalContactFormViewModel()
@@ -120,7 +112,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Contact not found. ");
             }
 
         }
@@ -129,31 +121,44 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var terminalContact = Table.SingleOrDefault(x => (string.Equals(x.Name.Trim().ToLower(),
+                                                                      viewModel.Name.Trim().ToLower()) &&
+                                                                  string.Equals(x.LastName.Trim().ToLower(),
+                                                                      viewModel.LastName.Trim().ToLower()) || x.Email == viewModel.Email || x.Phone == viewModel.Phone));
                 if (action == "Edit")
                 {
                     var terminalContactToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
 
                     if (terminalContactToEdit == null) throw new Exception("Contact does not exist in our records!!!");
+                    if (terminalContact != null)
+                    {
+                        if(!terminalContact.Deleted && terminalContactToEdit.Id != terminalContact.Id)
+                            throw new Exception("Contact already exists. ");
+                       
+
+                    }
 
                     Mapper.Map(viewModel, terminalContactToEdit);
                     Edit(terminalContactToEdit);
                 }
                 else
                 {
-                    var terminalContactNew = Table.SingleOrDefault(x => (x.Name == viewModel.Name && x.LastName == viewModel.LastName) || x.Email == viewModel.Email);
 
-                    if(terminalContactNew != null && !terminalContactNew.Deleted)
-                        throw new Exception("Contact already exists!!!");
 
-                    if (terminalContactNew != null && terminalContactNew.Deleted)
-                        Table.Remove(terminalContactNew);
+                    if (terminalContact != null)
+                    {
+                        if (!terminalContact.Deleted)
+                            throw new Exception("Contact already exists. ");
+                   
+
+                    }
 
                     Add(Mapper.Map<TerminalContactFormViewModel, TerminalContact>(viewModel));
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
 
@@ -161,11 +166,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var contact = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if(contact == null) throw new Exception("Contact not found. ");
                 Delete(id);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
 
@@ -173,6 +180,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found. ");
                 var terminalContactFormViewModel =
                     Mapper.Map<TerminalContactFormViewModel, TerminalContactFormViewModel>(viewModel);
                 terminalContactFormViewModel.ContactTypes = Context.ContactTypes.ToList();
@@ -185,7 +193,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Contact not found. ");
             }
         }
     }

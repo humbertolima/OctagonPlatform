@@ -22,10 +22,12 @@ namespace OctagonPlatform.Models
         public BankAccount BankAccount { get; set; }
 
         [Required]
-        [Display(Name = "Inter Change Ammount")]
-        public double Ammount { get; set; }
+        [Display(Name = "Split Ammount")]
+        [DataType(DataType.Currency)]
+        public double SplitAmount { get; set; }
 
-        public string CalculationMethod { get; set; }
+        [Required]
+        public CalculationMethod.Method CalculationMethod { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]

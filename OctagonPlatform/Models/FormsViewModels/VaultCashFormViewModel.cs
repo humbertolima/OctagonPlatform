@@ -1,5 +1,4 @@
-﻿using OctagonPlatform.Helpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -10,11 +9,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Key]
         [Required]
         [Display(Name = "Terminal")]
-        public int TerminalId { get; set; }
+        public int Id { get; set; }
 
         public Terminal Terminal { get; set; }
-
-        public IEnumerable<Terminal> Terminals { get; set; }    
 
         [Required]
         [Display(Name = "Bank Account")]
@@ -25,17 +22,19 @@ namespace OctagonPlatform.Models.FormsViewModels
         public IEnumerable<BankAccount> BankAccounts { get; set; }
 
         [Required]
-        [Display(Name = "Settled...")]
-        public Settled.SettledType SettledType { get; set; }
-
-        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Starts on")]
+        [DisplayFormat(DataFormatString =
+                "{0:d MMM yyyy}",
+            ApplyFormatInEditMode = true)]
         public DateTime StartDate { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         [Display(Name = "Stops on")]
+        [DisplayFormat(DataFormatString =
+                "{0:d MMM yyyy}",
+            ApplyFormatInEditMode = true)]
         public DateTime StopDate { get; set; }
     }
 }

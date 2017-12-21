@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.UI.WebControls;
+
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -17,15 +17,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var parent = Table.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 return Table.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
-                    //.Include(x => x.Alerts)
-                    //.Include(x => x.Reports)
+                                                                                //.Include(x => x.Alerts)
+                                                                                //.Include(x => x.Reports)
                     .Include(x => x.Partner)
                     .ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "Users not found.");
             }
         }
 
@@ -38,12 +41,15 @@ namespace OctagonPlatform.PersistanceRepository
             //alertas y notificaciones.
             try
             {
+                var parent = Context.Partners.SingleOrDefault(x => x.Id == parentId && !x.Deleted);
+                if (parent == null) throw new Exception("Parent not found. ");
+
                 var viewModel = new UserFormViewModel()
                 {
 
-                    Partners = Context.Partners.ToList(),
+                    Partners = Context.Partners.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     Status = StatusType.Status.Active,
-                    Partner = Context.Partners.SingleOrDefault(x => x.Id == parentId),
+                    Partner = parent,
                     SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
                 };
 
@@ -51,7 +57,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -60,18 +66,19 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var permissionList = new List<Permission>();
+
                 if (permissions == null) return permissionList;
-                foreach (var t in permissions)
-                {
-                    var convertId = Convert.ToInt32(t);
-                    permissionList.Add(Context.Permissions.FirstOrDefault(c => c.Id == convertId));
-                }
+
+                permissionList.AddRange(permissions.Select(t => Convert.ToInt32(t))
+                    .Select(convertId => Context.Permissions
+                    .FirstOrDefault(c => c.Id == convertId)));
+
                 //si viene null se envia la instancia vacia.
                 return permissionList;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -84,11 +91,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partner)
                     .Single(c => c.Id == id);
 
-                var mapping = new MappingProfile();
 
-                //mapping.CreateMap(result, userEdit);
 
-                if (result == null) throw new System.Exception("User don't exist. ");
+                if (result == null) throw new Exception("User not found. ");
                 {
                     var userEdit = new UserEditFormViewModel()
                     {
@@ -99,7 +104,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Name = result.Name,
                         PartnerId = result.PartnerId,
                         Partner = result.Partner,
-                        Partners = Context.Partners,
+                        Partners = Context.Partners.Where(x => (x.Id == result.PartnerId || x.ParentId == result.PartnerId) && !x.Deleted).ToList(),
                         Permissions = result.Permissions,
                         Phone = result.Phone,
                         Status = result.Status,
@@ -109,30 +114,12 @@ namespace OctagonPlatform.PersistanceRepository
                     };
 
 
-                    //foreach (var setPerm in userEdit.PermissionsAll)
-                    //{
-                    //    PermissionAssigned permissionA = new PermissionAssigned();
-
-                    //    permissionA.Selected = false;
-                    //    permissionA.Type = setPerm.Type;
-                    //    permissionA.Text = setPerm.Name;
-                    //    permissionA.Value = setPerm.Id.ToString();
-
-                    //    Permission permiso = userEdit.Permissions.FirstOrDefault(c => c.Id == setPerm.Id);
-
-                    //    if (permiso != null) { permissionA.Selected = true; }
-
-                    //    permissionA.Group = new SelectListGroup { Name = setPerm.SetOfPermissionId.ToString()}; //el setOf permiso seria las filas en el view de permisos
-
-                    //    userEdit.PermissionsAssigned.Add(permissionA);
-                    //};
-
                     return userEdit;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -140,12 +127,21 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var currrentuser = Table.SingleOrDefault(
+                    x => string.Equals(x.UserName.Trim().ToLower(), viewModel.UserName.Trim().ToLower()) || x.Email == viewModel.Email);
+                if (currrentuser != null)
+                {
+                    if (currrentuser.Id != viewModel.Id)
+                        throw new Exception("User already exists. ");
+
+                }
 
                 if (action == "Edit")
                 {
                     var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id && !c.Deleted);
 
                     if (user == null) throw new Exception("User does not exist in our records");
+
                     {
                         user.Email = viewModel.Email.Trim();
                         user.LastName = viewModel.LastName.Trim();
@@ -157,29 +153,28 @@ namespace OctagonPlatform.PersistanceRepository
                         user.PartnerId = viewModel.PartnerId;
 
                         if (!string.IsNullOrEmpty(viewModel.Password))
-                            user.Password = viewModel.Password.Trim();
-
-                        user.Permissions = viewModel.Permissions;
+                        {
+                            var key = Cryptography.GenerateKey();
+                            var hash = Cryptography.EncodePassword(viewModel.Password, key);
+                            user.Password = hash;
+                            user.Key = key;
+                        }
+                        if (viewModel.Permissions != null)
+                            user.Permissions = viewModel.Permissions;
 
                         Edit(user);
                     }
 
-                    
+
                 }
                 else
                 {
                     //pongo en single y con el delete = false para que cuando se seleccione un userName y existe dos usuarios iguales con delete true, el single da un Exception por venir mas de dos. 
-                    var user = Table.SingleOrDefault(
-                        x => x.UserName == viewModel.UserName || x.Email == viewModel.Email);
-                    if (user != null && !user.Deleted) throw new Exception("User already exists in our records!!!");
-
-                    if (user != null && user.Deleted)
-                        Table.Remove(user);
 
                     var key = Cryptography.GenerateKey();
                     var hash = Cryptography.EncodePassword(viewModel.Password, key);
 
-                    user = new User()
+                    var userResult = new User()
                     {
                         PartnerId = viewModel.PartnerId,
                         Email = viewModel.Email.Trim(),
@@ -190,11 +185,12 @@ namespace OctagonPlatform.PersistanceRepository
                         Phone = viewModel.Phone.Trim(),
                         Status = viewModel.Status,
                         UserName = viewModel.UserName.Trim(),
-                        IsLocked = viewModel.IsLocked,
-                        Permissions = viewModel.Permissions,
-                    };
+                        IsLocked = viewModel.IsLocked
 
-                    Add(user);
+                    };
+                    if (viewModel.Permissions != null)
+                        userResult.Permissions = viewModel.Permissions;
+                    Add(userResult);
 
 
 
@@ -205,7 +201,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message + "Error Creating or Editing User");
+                throw new Exception(ex.Message + "Please check the entered values. ");
             }
         }
 
@@ -215,16 +211,17 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 var userDetails = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.Partner)
+                    .Include(x => x.Partner.Terminals)  //para mostrar en user Details las terminales de los partner
                     .Include(x => x.Permissions)
                     .Include(x => x.BankAccounts)
-                    .Include(x => x.Terminals)
+                    .Include(x => x.Terminals)          //para mostrar las terminales que tiene asignada el usuario.
                     .FirstOrDefault();
-
+                if (userDetails == null) throw new Exception("User not found. ");
                 return userDetails;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -232,11 +229,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                var user = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
+                if (user == null) throw new Exception("User not found. ");
                 Delete(id);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -244,6 +243,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                if (viewModel == null) throw new Exception("Model not found.");
                 if (viewModel.SetOfPermissions == null)
                 {
                     viewModel.SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList();
@@ -257,17 +257,18 @@ namespace OctagonPlatform.PersistanceRepository
                     Name = viewModel.Name,
                     PartnerId = viewModel.PartnerId,
                     Partner = Context.Partners.SingleOrDefault(x => x.Id == viewModel.PartnerId),
-                    Partners = Context.Partners,
+                    Partners = Context.Partners.Where(x => (x.Id == viewModel.PartnerId || x.ParentId == viewModel.PartnerId) && !x.Deleted).ToList(),
                     Phone = viewModel.Phone,
                     Status = viewModel.Status,
                     UserName = viewModel.UserName,
                     SetOfPermissions = viewModel.SetOfPermissions,
-                    Error = viewModel.Error,
+                    Permissions = new List<Permission>(),
+                    Error = viewModel.Error
                 };
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -291,7 +292,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -299,18 +300,18 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                List<BankAccount> bankAccountList = new List<BankAccount>();
+                var bankAccountList = new List<BankAccount>();
                 if (bankAccounts == null) return bankAccountList;
-                foreach (var t in bankAccounts)
-                {
-                    var convertId = Convert.ToInt32(t);
-                    bankAccountList.Add(Context.BankAccounts.FirstOrDefault(c => c.Id == convertId));
-                }
+
+                bankAccountList.AddRange(bankAccounts.Select(t => Convert.ToInt32(t))
+                    .Select(convertId => Context.BankAccounts
+                    .FirstOrDefault(c => c.Id == convertId)));
+
                 return bankAccountList;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -318,18 +319,17 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                UserBAViewModel userBAViewModel = new UserBAViewModel();
-                User user = new User();
+                var user = new User();
                 var userIdConvert = Convert.ToInt32(userId);
                 var bankAccountIdConvert = Convert.ToInt32(bankAccountId);
 
                 if (!string.IsNullOrEmpty(userId) && (userIdConvert > 0) &&
-                    (!string.IsNullOrEmpty(bankAccountId))) //VALIDO QUE NO ESTE VACIO  
+                    (!string.IsNullOrEmpty(bankAccountId))) //VALÍDO QUE NO ESTE VACIO  
                 {
                     user = Table
                         .Include(c => c.BankAccounts)
                         .Single(c => c.Id == userIdConvert);
-                    BankAccount bankAccount = GetBankAccountById(bankAccountIdConvert);
+                    var bankAccount = GetBankAccountById(bankAccountIdConvert);
                     if (!user.BankAccounts.Contains(bankAccount)
                     ) //si el usario no contiene esa cuenta de banco se la add.
                     {
@@ -337,13 +337,74 @@ namespace OctagonPlatform.PersistanceRepository
                         Edit(user);
                     }
                 }
-                userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
-                userBAViewModel.UserId = userIdConvert;
-                return userBAViewModel;
+                var userBaViewModel = Mapper.Map<User, UserBAViewModel>(user);
+                userBaViewModel.UserId = userIdConvert;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
+            }
+        }
+
+        public List<Terminal> AddTerminalToUser(int terminalId, int userId)
+        {
+            User user = Table
+                .Include(m => m.Terminals)
+                .Include(m=>m.Partner)
+                .Single(c => c.Id == userId);
+
+            try
+            {
+                user.Terminals.Single(c => c.Id == terminalId);
+            }
+            catch (InvalidOperationException)       //si la secuencia esta vacia lo que hace le single es lanzar una exception de este tipo.
+            {
+                //si no tiene la terminal asignada el usario, la asigno.
+
+                Terminal terminal = GetTerminalById(terminalId);
+                user.Terminals.Add(terminal);
+                Edit(user);
+
+            }
+
+            return user.Terminals.ToList();
+        }
+
+        public List<Terminal> DeleteTerminalToUser(int terminalId, int userId)
+        {
+            User user = Table
+                .Include(m => m.Terminals)
+                .Include(m => m.Partner)
+                .Single(c => c.Id == userId);
+
+            try
+            {
+                user.Terminals.Single(c => c.Id == terminalId);
+
+                Terminal terminal = GetTerminalById(terminalId);
+                user.Terminals.Remove(terminal);
+                Edit(user);
+            }
+            catch (InvalidOperationException)       //si la secuencia esta vacia lo que hace le single es lanzar una exception de este tipo.
+            {
+                throw new Exception("terminal not assigned");
+            }
+
+            return user.Terminals.ToList();
+        }
+
+        private Terminal GetTerminalById(int terminalId)
+        {
+            try
+            {
+                Terminal terminal = Context.Terminals.Single(c => c.Id == terminalId && !c.Deleted);
+                if (terminal == null) throw new Exception("Bank account not found. ");
+                return terminal;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -351,11 +412,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                return Context.BankAccounts.Single(c => c.Id == bankAccountId);
+                var ba = Context.BankAccounts.Single(c => c.Id == bankAccountId && !c.Deleted);
+                if (ba == null) throw new Exception("Bank account not found. ");
+                return ba;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -363,13 +426,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                List<BankAccount> bankAccounts = new List<BankAccount>();
-                UserBAViewModel userBAViewModel = new UserBAViewModel();
+                List<BankAccount> bankAccounts;
+                var userBaViewModel = new UserBAViewModel();
 
                 if (toAttach) //selecciono cuentas de bancos para usuarios
                 {
-                    int userIdConverted = Convert.ToInt32(userId);
-                    User user = Table
+                    var userIdConverted = Convert.ToInt32(userId);
+                    var user = Table
                         .Include(c => c.BankAccounts)
                         .Single(c => c.Id == userIdConverted);
 
@@ -381,14 +444,14 @@ namespace OctagonPlatform.PersistanceRepository
                         .Where(c => c.Deleted == false).ToList();
                 }
                 //Mapeo que se le hace a los dos casos.
-                userBAViewModel.UserId = Convert.ToInt32(userId);
-                userBAViewModel.BankAccounts = bankAccounts;
+                userBaViewModel.UserId = Convert.ToInt32(userId);
+                userBaViewModel.BankAccounts = bankAccounts;
 
-                return userBAViewModel;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
 
@@ -398,7 +461,7 @@ namespace OctagonPlatform.PersistanceRepository
             //List<BankAccount> bankAccountsList = CreateListBankAccount(bankAccounts).ToList();
             try
             {
-                User user = Table
+                var user = Table
                     .Include(c => c.BankAccounts)
                     .Single(c => c.Id == userId);
 
@@ -409,16 +472,23 @@ namespace OctagonPlatform.PersistanceRepository
                     Edit(user);
                 }
 
-                UserBAViewModel userBAViewModel = Mapper.Map<User, UserBAViewModel>(user);
-                userBAViewModel.UserId = userId;
+                var userBaViewModel = Mapper.Map<User, UserBAViewModel>(user);
+                userBaViewModel.UserId = userId;
 
-                return userBAViewModel;
+                return userBaViewModel;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(ex.Message + "User not found. ");
             }
         }
+
+
+
+
+
+
+
         //public List<UserBAViewModel> GetBAOfUser()
         //{
         //    var bankAccounts = Context.BankAccounts.ToList();

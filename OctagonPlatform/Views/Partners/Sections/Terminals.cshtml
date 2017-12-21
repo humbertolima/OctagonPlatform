@@ -35,8 +35,6 @@
         <th>Phone</th>
         <th>Status</th>
         <th>Cash Balance</th>
-        <th>Last Transaction</th>
-        <th>Last Transaction Type</th>
     </tr>
     </thead>
     
@@ -47,24 +45,14 @@
         if (!item.Deleted)
         {
             <tr class="info">
-                <td>@item.Id</td>
+                <td>@item.TerminalId</td>
                 <td>@item.Partner.BusinessName</td>
                 <td>@item.Address1</td>
                 <td>@item.Zip</td>
                 <td>@item.Phone</td>
                 <td>@item.Status</td>
                 <td>@item.Balance</td>
-                @if (item.LastTransactionId != null)
-                {
-                    <td>@item.LastTransactionDate</td>
-                    <td>@item.LastTransaction.TransactionType</td>
-                }
-                else
-                {
-                    <td>
-                    </td>
-                    <td></td>
-                }
+                
                 <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                                                                 linkText: "Edit",
                                                                 actionName: "Edit",

@@ -1,7 +1,6 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
-using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -25,20 +24,25 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
         [HttpGet]
-        public ActionResult Create(int partnerId)
+        public ActionResult Create(int? partnerId)
         {
             try
             {
-                return View(_partnerContactRepository.RenderPartnerContactFormViewModel(partnerId));
+                if (partnerId != null)
+                    return View(_partnerContactRepository.RenderPartnerContactFormViewModel((int)partnerId));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -50,43 +54,35 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Model not valid, please check the entered values. ";
+                    return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
+                }
 
-                    return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
-                }
-                try
-                {
-                    _partnerContactRepository.SavePartner(viewModel, "Create");
-                    return RedirectToAction("Details", "Partners", new {id = viewModel.PartnerId});
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error creating Contact " + exDb.Message +
-                                    " The email must be unique, make sure that is not already in use";
-                    return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error creating Contact " + ex.Message +
-                                    " The email must be unique, make sure that is not already in use";
-                    return View(_partnerContactRepository.InitializeNewFormViewModel(viewModel));
-                }
+                _partnerContactRepository.SavePartner(viewModel, "Create");
+                return RedirectToAction("Details", "Partners", new {id = viewModel.PartnerId});
+
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View(_partnerContactRepository.RenderPartnerContactFormViewModel(viewModel.PartnerId));
             }
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.PartnerContactToEdit(id));
+                if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -98,69 +94,56 @@ namespace OctagonPlatform.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Error = "Model not valid, please check the entered values. ";
                     return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
                 }
-                try
-                {
-                    _partnerContactRepository.SavePartner(viewModel, "Edit");
-                    return RedirectToAction("Details", "Partners", new {id = viewModel.PartnerId});
-                }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error editing Contact " + exDb.Message +
-                                    " The email phone must be unique, make sure that is not already in use";
-                    return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error editing Contact " + ex.Message +
-                                    " The email must be unique, make sure that is not already in use";
-                    return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
-                }
+
+                _partnerContactRepository.SavePartner(viewModel, "Edit");
+                return RedirectToAction("Details", "Partners", new {id = viewModel.PartnerId});
+
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View(_partnerContactRepository.PartnerContactToEdit(viewModel.Id));
             }
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.PartnerContactToEdit(id));
+                if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int? id, int? partnerId)
         {
             try
             {
-                try
+                if (id == null || partnerId == null)
                 {
-                    _partnerContactRepository.DeletePartner(id);
-                    return RedirectToAction("Index");
+                    ViewBag.Error = "Contact not found. ";
+                    return View("Error");
                 }
-                catch (DbEntityValidationException exDb)
-                {
-                    ViewBag.Error = "Validation error deleting Contact" + exDb.Message;
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Validation error deleting Contact" + ex.Message;
-                    return RedirectToAction("Index");
-                }
+
+                _partnerContactRepository.DeletePartner((int)id);
+                return RedirectToAction("Details", "Partners", new {id = partnerId});
+                
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
@@ -173,19 +156,23 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
-                return View(_partnerContactRepository.Details(id));
+                if (id != null) return View(_partnerContactRepository.Details((int)id));
+                ViewBag.Error = "Contact not found. ";
+                return View("Error");
             }
             catch (Exception ex)
             {
-                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
     }

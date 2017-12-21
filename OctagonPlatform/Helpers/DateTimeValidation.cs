@@ -8,7 +8,7 @@ namespace OctagonPlatform.Helpers
         public override bool IsValid(object value)
         {
             var d = Convert.ToDateTime(value);
-            return d <= DateTime.Now;
+            return d <= DateTime.UtcNow;
 
         }
     }

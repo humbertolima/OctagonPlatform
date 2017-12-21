@@ -1,0 +1,84 @@
+﻿@model OctagonPlatform.Models.Terminal
+
+<div id="getPictures" class="panel-collapse collapse">
+    <div>
+        @using (Html.BeginForm("SetPictures", "Terminals", FormMethod.Post,
+                                                  new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="indexTerminalId" name="IndexTerminalId" value="@Model.Id">
+
+            <table>
+                <tbody>
+                    @{
+                        foreach (var item in Model.Pictures)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    <button type="button" class="PicturesDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeletePictureModal">Delete</button>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>Select File : </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.Pictures.FirstOrDefault().FileForm, new { type = "file" })
+                                @Html.ValidationMessage("CustomError")
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+
+            <input type="submit" value="Add" class="btn btn-default" />
+
+                        }
+
+        <div id="DeletePictureModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Delete Picture</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this Picture? </p>
+                    </div>
+                    <div class="modal-footer">
+                        @using (Html.BeginForm("PictureDelete", "Terminals", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="indexTerminalId" name="indexTerminalId" value="@Model.Id">
+                            <input type="hidden" id="pictureId" name="pictureId" value="" />
+
+                            <div class="form-group">
+                                <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                                <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+
+<script>
+    $(document).on("click", ".DocumentsDelete", function () {
+        var passedID = $(this).data('id');
+        $("#DeletePictureModal #pictureId").val(passedID);
+    });
+</script>
+
+
+
+
+

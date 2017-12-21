@@ -2,24 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
-    public class Terminal: IAuditEntity, ISoftDeleted
+    public class Terminal : IAuditEntity, ISoftDeleted
     {
         [Key]
         public int Id { get; set; }
-   
+
+        [Required]
+        [Display(Name = "Terminal Id")]
+        public string TerminalId { get; set; }
+
+
         [Required]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
         public Partner Partner { get; set; }
 
+        public ICollection<TerminalMessage> TerminalMessages { get; set; }
+
+        public ICollection<TerminalAlert> TerminalAlerts { get; set; }
+
         public ICollection<TerminalContact> TerminalContacts { get; set; }
+
+        public ICollection<TerminalWorkingHours> WorkingHours { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
@@ -79,12 +88,7 @@ namespace OctagonPlatform.Models
         public ICollection<User> Users { get; set; }
 
         [Required]
-        [Display(Name = "Emv is Ready")]
-        public bool EmvReady { get; set; }
-
-        [Required]
         [Display(Name = "Machine Serial Number")]
-        [Index(IsUnique = true)]
         [StringLength(50)]
         public string MachineSerialNumber { get; set; }
 
@@ -108,40 +112,10 @@ namespace OctagonPlatform.Models
         public string DeletedByName { get; set; }
         public bool Deleted { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        [DisplayName("Installation Date")]
-        [DateTimeValidation(ErrorMessage = "Invalid Date Time")]
-        public DateTime? InstalledDate { get; set; }
-
-        [Display(Name = "Charged By?")]
-        public string LoadedBy { get; set; }
-
-        [DataType(DataType.DateTime)]
-        [Display(Name = "The Communication Date")]
-        public DateTime? LastCommunicationDate { get; set; }
-
         [Display(Name = "Terminal Balance")]
         public double? Balance { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [Display(Name = "Last Transaction Date")]
-        public DateTime? LastTransactionDate { get; set; }
-
-        [DataType(DataType.Currency)]
-        [Display(Name = "Minimun Chash Balance")]
-        public double? MinAmmountCash { get; set; }
-
-        public bool Offline { get; set; }
-
-        public bool BindedKeys { get; set; }
-
         public BindedKey BindedKey { get; set; }
-
-        [Display(Name = "Default Bank Account")]
-        public int? BankAccountId { get; set; }
-
-        public BankAccount DefaultBankAccount { get; set; }
 
         public ICollection<TerminalPicture> TerminalPictures { get; set; }
 
@@ -151,11 +125,13 @@ namespace OctagonPlatform.Models
 
         public ICollection<Document> Documents { get; set; }
 
+        public ICollection<Picture> Pictures{ get; set; }
+
         public ICollection<LoadCash> LoadCashs { get; set; }
 
         public ICollection<TransactionStatistic> TransactionStatistics { get; set; }
 
-        public int? LastTransactionId { get; set; }  
+        public int? LastTransactionId { get; set; }
 
         public TransactionStatistic LastTransaction { get; set; }
 
@@ -163,29 +139,24 @@ namespace OctagonPlatform.Models
 
         public ICollection<Cassette> Cassettes { get; set; }
 
+
         [Display(Name = "Who Initiates Day Closed")]
-        public Initiate.Who WhoInitiates { get; set; }
+        public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
 
         public VaultCash VaultCash { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge Amount")]
-        public double SurchargeAmount { get; set; }
+        [Display(Name = "Surcharge Fee")]
+        [DataType(DataType.Currency)]
+        public double SurchargeAmountFee { get; set; }
 
         [Required]
-        [Display(Name = "Surcharge by Percent")]
-        public double SurchargeByPercent { get; set; }
+        [Display(Name = "Percent Surcharge Fee")]
+        public double SurchargePercentageFee { get; set; }
 
         [Required]
-        public SurchargeType.SurchargeTypes SurchargeType { get; set; }
-
-        [Display(Name = "Fix Surcharge")]
-        public double FixSurcharge { get; set; }
-
-        [Required]
-        [Display(Name = "Recolection Type")]
-        public Settled.SettledType SettledType { get; set; }
-
+        [Display(Name = "Surcharged Type")]
+        public SurchargedBy.SurchargeTypes SurchargeType { get; set; }
 
         public ICollection<Surcharge> Surcharges { get; set; }
 
@@ -203,6 +174,12 @@ namespace OctagonPlatform.Models
 
         public TerminalAlertConfig TerminalAlertConfigs { get; set; }
 
+        [Required]
+        public string LocationName { get; set; }
+
+        public int? ReportGroupId { get; set; }
+        public ReportGroupModel ReportGroup { get; set; }
+        public DateTime? DateCreated { get; set; }
         public Terminal()
         {
             TerminalContacts = new Collection<TerminalContact>();
@@ -220,6 +197,10 @@ namespace OctagonPlatform.Models
             CryptoChargeAccounts = new Collection<CryptoChargeAccount>();
             CryptoCurrencyTransactions = new Collection<CryptoCurrencyTransaction>();
             Disputes = new Collection<Dispute>();
+            TerminalAlerts = new Collection<TerminalAlert>();
+            TerminalMessages = new Collection<TerminalMessage>();
+            WorkingHours = new Collection<TerminalWorkingHours>();
+            Pictures = new Collection<Picture>();
         }
     }
 }

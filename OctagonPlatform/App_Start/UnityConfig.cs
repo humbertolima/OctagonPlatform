@@ -39,6 +39,22 @@ namespace OctagonPlatform
             container.RegisterType<IBankAccountRepository, BankAccountRepository>();
 
             container.RegisterType<IVaultCashRepository, VaultCashRespository>();
+
+            container.RegisterType<ISurchargeRepository, SurchargeRepository>();
+
+            container.RegisterType<ITerminalAlertRepositoryAPI, TerminalAlertRepository>();
+
+            container.RegisterType<IInterChangeRepository, InterChangeRepository>();
+
+            container.RegisterType<IDisputeRepository, DisputeRepository>();
+
+            container.RegisterType<IReports, ReportsRepository>();
+
+
+            container.RegisterType<IDisputeRepresentRepository, DisputeRepresentRepository>();
+
+            container.RegisterType<IReportGroup, ReportGroupRepository>();
+
         }
     }
 }

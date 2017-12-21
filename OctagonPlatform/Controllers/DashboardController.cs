@@ -12,11 +12,11 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                ViewBag.priceBTC = "BTC " + GetBitcoinPrice(1);
+                ViewBag.priceBTC = GetBitcoinPrice(1);
                 Session["BTC"] = ViewBag.priceBTC;
-                ViewBag.priceETH = "ETH " + GetBitcoinPrice(2);
+                ViewBag.priceETH = GetBitcoinPrice(2);
                 Session["ETH"] = ViewBag.priceETH;
-                ViewBag.priceLTC = "LTC " + GetBitcoinPrice(3);
+                ViewBag.priceLTC = GetBitcoinPrice(3);
                 Session["LTC"] = ViewBag.priceLTC;
                 return View();
             }
@@ -32,9 +32,9 @@ namespace OctagonPlatform.Controllers
             {
                 var price = " ";
 
-                var URL = "http://buywidget220170913030514.azurewebsites.net/api/ticker/" + i;
+                var url = "http://buywidget220170913030514.azurewebsites.net/api/ticker/" + i;
 
-                var json = new WebClient().DownloadString(URL);
+                var json = new WebClient().DownloadString(url);
                 json = json.Replace("\"", "");
                 price = price + json;
 
