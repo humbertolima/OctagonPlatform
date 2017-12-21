@@ -1,36 +1,33 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model OctagonPlatform.Models.TerminalAlertConfig
 
-
+<div id="getConfigurations" class="panel-collapse collapse">
     <table class="table table-striped table-hover ">
-
         <tr class="info">
-
-            <th data-toggle="collapse" data-target="#demo">
-                Inactive Period: @Model.TerminalAlertConfigs.IgnoreHoursInactive
-                <div id="demo" class="collapse">
+            <th data-toggle="collapse" data-target="#collapse1">
+                <a data-toggle="collapse" href="#collapse1">Inactive Period: @Model.IgnoreHoursInactive</a>
+                <div id="collapse1" class="collapse">
                     <table>
                         <tbody>
-                            @{
-                                foreach (var item in Model.WorkingHours)
+                            @{ foreach (var item in Model.Terminal.WorkingHours)
                                 {
                                     <tr>
+                                        <td>@item.Day</td>
+                                        <td>@item.StartTime</td>
+                                        <td>@item.EndTime</td>
                                         <td>
-                                            @item.Day
-                                            @item.StartTime
-                                            - @item.EndTime
+                                            <button type="button" class="btn btn-info btn-microsoft WorkingHoursEdit" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
                                         </td>
                                         <td>
-                                            <button type="button" class="WorkingHoursEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
+                                            <button type="button" class="btn btn-info btn-microsoft DeleteWorkingHours" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
                                         </td>
                                     </tr>
                                 }
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
-                                    </td>
-                                </tr>
-                            }
+                                }
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
@@ -42,36 +39,37 @@
         <tr class="info">
 
             <th>Low Cash 1:</th>
-            <th>@Model.TerminalAlertConfigs.LowCach1</th>
+            <th>@Model.LowCach1</th>
         </tr>
         <tr class="info">
 
             <th>Low Cash 2:</th>
-            <th>@Model.TerminalAlertConfigs.LowCash2</th>
+            <th>@Model.LowCash2</th>
         </tr>
         <tr class="info">
 
             <th>Low Cash 3:</th>
-            <th>@Model.TerminalAlertConfigs.LowCash3</th>
+            <th>@Model.LowCash3</th>
         </tr>
         <tbody></tbody>
     </table>
     Ignored Alerts <br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreBillDispenserNeedAttention, new { @disabled = "disabled" }) Bill dispenser needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCardReaderNeedAttention, new { @disabled = "disabled" }) Card reader needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCassetteNotes, new { @disabled = "disabled" }) Cassette notes are out<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreChestDoorOpen, new { @disabled = "disabled" }) Chest door is open<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCommNeedAttention, new { @disabled = "disabled" }) Comm system needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalNeedAttention, new { @disabled = "disabled" }) Journal printer needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalPaper, new { @disabled = "disabled" }) Journal printer paper is low/out<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalRibbon, new { @disabled = "disabled" }) Journal printer ribbon is low/out<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptNeedAttention, new { @disabled = "disabled" }) Receipt printer need attention or out of service<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
-    @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
+    @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention, new { @disabled = "disabled" }) Bill dispenser needs attention or out of service<br />
+    @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention, new { @disabled = "disabled" }) Card reader needs attention or out of service<br />
+    @Html.CheckBoxFor(m => m.IgnoreCassetteNotes, new { @disabled = "disabled" }) Cassette notes are out<br />
+    @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen, new { @disabled = "disabled" }) Chest door is open<br />
+    @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention, new { @disabled = "disabled" }) Comm system needs attention or out of service<br />
+    @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention, new { @disabled = "disabled" }) Journal printer needs attention or out of service<br />
+    @Html.CheckBoxFor(m => m.IgnoreJournalPaper, new { @disabled = "disabled" }) Journal printer paper is low/out<br />
+    @Html.CheckBoxFor(m => m.IgnoreJournalRibbon, new { @disabled = "disabled" }) Journal printer ribbon is low/out<br />
+    @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention, new { @disabled = "disabled" }) Receipt printer need attention or out of service<br />
+    @Html.CheckBoxFor(m => m.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
+    @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
+    @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
 
     <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
-
+    
+    @*========= Modal =========*@
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -86,46 +84,47 @@
             {
                     @Model
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.TerminalId)
+                    @Html.Hidden("terminalId",Model.Id)
+
                     <p class="alert alert-danger">
                         All fields are <strong>required.</strong>
                         @ViewBag.Error
                         @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
                     </p>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.TerminalAlertConfigs.IgnoreHoursInactive)
-                        @Html.TextBoxFor(m => m.TerminalAlertConfigs.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "1 Jan 2000", @type = "date" })
-                        @Html.ValidationMessageFor(m => m.TerminalAlertConfigs.IgnoreHoursInactive)
+                        @Html.LabelFor(m => m.IgnoreHoursInactive)
+                        @Html.TextBoxFor(m => m.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "48", @type = "" })
+                        @Html.ValidationMessageFor(m => m.IgnoreHoursInactive)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.TerminalAlertConfigs.LowCach1)
-                        @Html.TextBoxFor(m => m.TerminalAlertConfigs.LowCach1, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.TerminalAlertConfigs.LowCach1)
+                        @Html.LabelFor(m => m.LowCach1)
+                        @Html.TextBoxFor(m => m.LowCach1, new { @class = "form-control", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.LowCach1)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.TerminalAlertConfigs.LowCash2)
-                        @Html.TextBoxFor(m => m.TerminalAlertConfigs.LowCash2, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.TerminalAlertConfigs.LowCash2)
+                        @Html.LabelFor(m => m.LowCash2)
+                        @Html.TextBoxFor(m => m.LowCash2, new { @class = "form-control", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.LowCash2)
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.TerminalAlertConfigs.LowCash3)
-                        @Html.TextBoxFor(m => m.TerminalAlertConfigs.LowCash3, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.TerminalAlertConfigs.LowCash3)
+                        @Html.LabelFor(m => m.LowCash3)
+                        @Html.TextBoxFor(m => m.LowCash3, new { @class = "form-control", autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(m => m.LowCash3)
                     </div>
                     <div class="form-group">
                         Ignored Alerts <br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreBillDispenserNeedAttention) Bill dispenser needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCardReaderNeedAttention) Card reader needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCassetteNotes) Cassette notes are out<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreChestDoorOpen) Chest door is open<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreCommNeedAttention) Comm system needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalNeedAttention) Journal printer needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalPaper) Journal printer paper is low/out<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreJournalRibbon) Journal printer ribbon is low/out<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptNeedAttention) Receipt printer need attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptPaper) Receipt printer paper is low/out<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreReceiptRibbon) Receipt printer ribbon is low/out<br />
-                        @Html.CheckBoxFor(m => m.TerminalAlertConfigs.IgnoreTopDoorOpen) Top door is Open<br />
+                        @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention) Bill dispenser needs attention or out of service<br />
+                        @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention) Card reader needs attention or out of service<br />
+                        @Html.CheckBoxFor(m => m.IgnoreCassetteNotes) Cassette notes are out<br />
+                        @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen) Chest door is open<br />
+                        @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention) Comm system needs attention or out of service<br />
+                        @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention) Journal printer needs attention or out of service<br />
+                        @Html.CheckBoxFor(m => m.IgnoreJournalPaper) Journal printer paper is low/out<br />
+                        @Html.CheckBoxFor(m => m.IgnoreJournalRibbon) Journal printer ribbon is low/out<br />
+                        @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention) Receipt printer need attention or out of service<br />
+                        @Html.CheckBoxFor(m => m.IgnoreReceiptPaper) Receipt printer paper is low/out<br />
+                        @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon) Receipt printer ribbon is low/out<br />
+                        @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen) Top door is Open<br />
                     </div>
 
                     <div class="form-group">
@@ -139,6 +138,7 @@
         </div>
     </div>
 
+    @*EDIT*@
     <div id="myModalWorkingHours" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -150,11 +150,13 @@
 
                 @using (Html.BeginForm("SetWorkingHours", "Terminals"))
             {
-                    @Model
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.TerminalId)
-                    @Html.Hidden("WorkingHoursEdit")
+                    @Html.HiddenFor(m => m.Id)
+                    
+                    @Html.Hidden("TerminalId", Model.Terminal.Id)
+
                     <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+
                     @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
@@ -192,7 +194,6 @@
                     new SelectListItem{ Text="23:00", Value = "23" },
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
-
                     @Html.DropDownList("EndTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
@@ -231,6 +232,7 @@
         </div>
     </div>
 
+    @*ADD*@
     <div id="ModalAddWorkingHours" class="modal fade" role="dialog">
 
         <div class="modal-dialog">
@@ -242,10 +244,11 @@
                 </div>
 
                 @using (Html.BeginForm("AddWorkingHours", "Terminals"))
-            {
-                    @Model
+                {
+
+                    @Html.Hidden("TerminalId", Model.Terminal.Id)
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.TerminalId)
+                    @Html.HiddenFor(m => m.Id)
                     @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
@@ -324,11 +327,48 @@
         </div>
     </div>
 
+    @*DELETE*@
+    <div id="DeleteWorkingHours" class="modal fade" role="dialog">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Working Hours</h4>
+                    <h3 class="alert-info">Delete</h3>
+                </div>
+
+                @using (Html.BeginForm("DeleteWorkingHours", "Terminals"))
+            {
+                    @Html.Hidden("terminalId", Model.Terminal.Id)
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("WorkingHoursId")
+                    <input type="hidden" id="workingHoursId" name="workingHoursId" value="">
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+
 @Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
-    <script>
-        $(document).on("click", ".WorkingHoursEdit", function () {
-            var myBookId = $(this).data('id');
-            $("#myModalWorkingHours #WorkingHoursEdit").val(myBookId);
-        });
-    </script>
+<script>
+    $(document).on("click", ".WorkingHoursEdit", function () {
+        var myBookId = $(this).data('id');
+        $("#myModalWorkingHours #WorkingHoursEdit").val(myBookId);
+    });
+</script>
+
+<script>
+    $(document).on("click", ".DeleteWorkingHours", function () {
+        var myBookId = $(this).data('id');
+        $("#DeleteWorkingHours #WorkingHoursId").val(myBookId);
+    });
+</script>

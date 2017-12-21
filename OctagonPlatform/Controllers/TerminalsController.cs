@@ -31,7 +31,7 @@ namespace OctagonPlatform.Controllers
             }
             return PartialView("Sections/CashManagements", result.Result);
         }
-        
+
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -47,7 +47,7 @@ namespace OctagonPlatform.Controllers
                     TerminalId = ""
                 };
 
-                return View("Sections/BindKey", viewModel);
+                return PartialView("Sections/BindKey", viewModel);
             }
             catch (Exception ex)
             {
@@ -109,7 +109,21 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
+        public PartialViewResult DeleteNotes(int indexTerminalId, int noteId)
+        {
+            Models.Terminal terminal = new Models.Terminal();
+
+            if (noteId > 0)
+            {
+                terminal = _repository.DeleteNotes(indexTerminalId, noteId);
+            }
+
+            return PartialView("Details", terminal);
+        }
+
+
+        [HttpPost]
+        public ActionResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
         {
             bool isAutoRecord;
 
@@ -125,7 +139,8 @@ namespace OctagonPlatform.Controllers
             {
                 terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
             }
-            return PartialView("Details", terminal);
+
+            return View("Details", terminal);
         }
 
 
@@ -230,6 +245,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             try
@@ -288,7 +304,7 @@ namespace OctagonPlatform.Controllers
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, string WorkingHoursId)
         {
             try
             {
@@ -311,7 +327,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CassetteDelete(int? cassetteId)
+        public ActionResult CassetteDelete(int? cassetteId, int terminalId)
         {
             try
             {
@@ -321,12 +337,14 @@ namespace OctagonPlatform.Controllers
                     return View("Error");
                 }
                 _repository.CassettesDelete(Convert.ToInt32(cassetteId));
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = terminalId });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = terminalId });
             }
         }
         //======================
@@ -367,7 +385,7 @@ namespace OctagonPlatform.Controllers
                 }
                 Models.Terminal terminal = _repository.DocumentDelete(indexTerminalId, Convert.ToInt32(documentId));
 
-                return RedirectToAction("Details",new {id = terminal.Id });
+                return RedirectToAction("Details", new { id = terminal.Id });
             }
             catch (Exception ex)
             {
@@ -414,13 +432,12 @@ namespace OctagonPlatform.Controllers
             return PartialView("Sections/ConfigNotification", configNotification);
         }
 
-
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
         public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
             var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
 
-            return RedirectToAction("Details/" + terminal.Id);
+            return RedirectToAction("Details", new { id = terminal.Id });
         }
 
         [HttpPost]
@@ -434,6 +451,27 @@ namespace OctagonPlatform.Controllers
         public ActionResult AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
             var terminal = _repository.AddWorkingHours(terminalAlertIngnoredViewModel);
+
+            return RedirectToAction("Details/" + terminal.Id);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteWorkingHours(string terminalId, string workingHoursId)
+        {
+            int workingHoursIdConvert = 0;
+            int terminalIdConvert = 0;
+
+            if (!String.IsNullOrEmpty(workingHoursId) || (!String.IsNullOrEmpty(terminalId)))
+            {
+                workingHoursIdConvert = Convert.ToInt32(workingHoursId);
+                terminalIdConvert = Convert.ToInt32(terminalId);
+            }
+            else
+            {
+                throw new Exception(" Terminal Id or WorkingHours Id is null or empty");
+            }
+
+            var terminal = _repository.DeteteWorkingHours(terminalIdConvert, workingHoursIdConvert);
 
             return RedirectToAction("Details/" + terminal.Id);
         }

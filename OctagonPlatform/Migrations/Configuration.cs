@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace OctagonPlatform.Migrations
 {
@@ -57,16 +59,86 @@ namespace OctagonPlatform.Migrations
                 new Models.Model { Name = "Siri Atm", MakeId = 1 }
                 );
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+
+
+            #region SetOfPermissions
+
+            string terminalsName = "Terminals";
+            context.SetOfPermissions.AddOrUpdate(p => p.Name,
+                new Models.SetOfPermission { Name = terminalsName });
+
+            string partnerName = "Partners";
+            context.SetOfPermissions.AddOrUpdate(p => p.Name,
+                new Models.SetOfPermission { Name = partnerName });
+
+            context.SaveChanges();  //importante. para poder tomar el Id de DB y setearlo en los Id de los campos de la tabla permissions
+            #endregion
+
+            #region Terminal Permissions
+
+            //segun documentacion si se usa el Find en vez de FirtOrDefault, no hay que darle SaveChanges().
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "TerminalView",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "TerminalCreate",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "TerminalEdit",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "TerminalDelete",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+
+            });
+            #endregion
+
+            #region Partner Permissions
+
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "PartnerView",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "PartnerCreate",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "PartnerEdit",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+
+            });
+
+            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            {
+                Name = "PartnerDelete",
+                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+
+            });
+            #endregion
+
         }
     }
 }

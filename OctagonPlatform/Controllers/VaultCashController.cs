@@ -16,7 +16,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: VaultCash
-        [HttpPost]
+
         public PartialViewResult Index(int? terminalId)
         {
             try
@@ -42,7 +42,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_vaultCashRepository.GetVaultCash((int) id));
+                if (id != null) return View(_vaultCashRepository.GetVaultCash((int)id));
                 ViewBag.Error = "Vaultcash not found. ";
                 return PartialView("Error");
             }
@@ -57,7 +57,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int) id));
+                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int)id));
                 ViewBag.Error = "Vaultcash not found. ";
                 return PartialView("Error");
             }
@@ -80,12 +80,12 @@ namespace OctagonPlatform.Controllers
             try
             {
                 _vaultCashRepository.SaveVaultCash(viewModel, "Edit");
-                return RedirectToAction("Details", "Terminals", new {id = viewModel.Id});
+                return RedirectToAction("Details", "Terminals", new { id = viewModel.Id });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                
+
                 return View(_vaultCashRepository.VaultCashToEdit(viewModel.Id));
             }
         }
@@ -95,8 +95,13 @@ namespace OctagonPlatform.Controllers
             try
             {
                 if (terminalId != null)
-                    return View(_vaultCashRepository.RenderVaultCashFormViewModel((int) terminalId));
-
+                {
+                    var model = _vaultCashRepository.RenderVaultCashFormViewModel((int)terminalId);
+                    //devuelvo el partialView siempre porque siempre se solicida desde el details y se mostrara como modal
+                    //si se quiere devolver en el View("create") seria validar quien lo solicito para devolver. 
+                    //se puede usar el mismo formulario si en vairas vistas.
+                    return PartialView("Modal/AddVaultCash", model);
+                }
                 ViewBag.Error = "Vaultcash not found. ";
                 return PartialView("Error");
             }
@@ -132,7 +137,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int) id));
+                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int)id));
 
                 ViewBag.Error = "Vaultcash not found. ";
                 return PartialView("Error");

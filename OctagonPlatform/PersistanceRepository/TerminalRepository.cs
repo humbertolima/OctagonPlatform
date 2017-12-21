@@ -274,6 +274,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Model)
                     .Include(x => x.Users)
                     .Include(x => x.VaultCash)
+                    .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
                     .Include(x => x.Notes)
                     .Include(x => x.TerminalContacts)
@@ -377,7 +378,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
 
                 terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
+                terminalAlertConfigViewModel.TerminalId = terminal.Id;
 
                 return terminalAlertConfigViewModel;
             }
@@ -396,7 +397,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.TerminalAlertConfigs = terminalAlertConfig;
@@ -422,7 +423,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -459,7 +460,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
                 var terminal = Table
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -475,6 +476,28 @@ namespace OctagonPlatform.PersistanceRepository
                 };
 
                 Save();
+                return terminal;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message + "Terminal not found.");
+            }
+        }
+
+        public Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId)
+        {
+            //pendiente. manipulo la terminal porqur a la hora de aplicar permisos, tengo que validar los permisos que tiene
+            //ese usuario para borrar o editar la terminal y los campos que tiene esa terminal. en este caso, workingHours 
+            //no lo puedo controlar si el usuario tiene acceso a eliminarlo o no.
+            try
+            {
+                Terminal terminal = TerminalDetails(terminalId);
+
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                terminal.WorkingHours.Remove(terminal.WorkingHours.FirstOrDefault(c => c.Id == WorkingHoursId));
+                Edit(terminal);
+
                 return terminal;
             }
             catch (Exception e)
@@ -577,12 +600,26 @@ namespace OctagonPlatform.PersistanceRepository
 
             return terminal;
         }
-        
+
+
+        public Terminal DeleteNotes(int indexTerminalId, int noteId)
+        {
+
+            if (indexTerminalId > 0 || noteId > 0)
+            {
+               Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
+
+                Context.SaveChanges();
+            }
+
+            return TerminalDetails(indexTerminalId);
+        }
+
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
@@ -601,7 +638,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
@@ -617,14 +654,14 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list,StatusType.Status status,int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 return Table.Where(b => terminalIds.Contains(b.TerminalId))
                 .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) :  b.Status == status)
+                .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
 
@@ -707,8 +744,8 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new Exception("Error database " + e.Message);
             }
-            
-            
+
+
         }
 
         public void EditRange(string[] list, int? groupId)
@@ -755,14 +792,14 @@ namespace OctagonPlatform.PersistanceRepository
         {
             DateTime? start = null;
             DateTime? end = null;
-            if(vmodel.StartDate != null ) start =  DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture) ;
+            if (vmodel.StartDate != null) start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             if (vmodel.EndDate != null) end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-            bool groupfilter = listtn == null ? false: true;
+            bool groupfilter = listtn == null ? false : true;
             string[] aux = { "0" };
-            listtn = listtn ?? aux ;
-            int zip =Int32.Parse( vmodel.ZipCode ?? "0");
+            listtn = listtn ?? aux;
+            int zip = Int32.Parse(vmodel.ZipCode ?? "0");
             try
-            {               
+            {
                 return Table.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))
                 .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
                 .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
@@ -777,7 +814,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Include(b => b.TerminalContacts)
                 .Include(b => b.Make)
                 .Include(b => b.Model)
-                .ToList();             
+                .ToList();
 
             }
             catch (Exception e)
@@ -787,5 +824,6 @@ namespace OctagonPlatform.PersistanceRepository
             }
             // throw new NotImplementedException();
         }
+
     }
 }

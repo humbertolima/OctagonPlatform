@@ -314,6 +314,10 @@
     <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
       <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
+    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1121,7 +1125,7 @@
     <Content Include="Views\Users\Sections\BankAccounts.cshtml" />
     <Content Include="Views\Users\Sections\GenralInfo.cshtml" />
     <Content Include="Views\Users\Sections\Reports.cshtml" />
-    <Content Include="Views\Users\Sections\Terminals.cshtml" />
+    <Content Include="Views\Users\Sections\TerminalsUser.cshtml" />
     <Content Include="Views\Partners\Sections\GeneralInfo.cshtml" />
     <Content Include="Views\Logos\Index.cshtml" />
     <Content Include="Views\Partners\Search.cshtml" />
@@ -1226,6 +1230,15 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\Terminals\Sections\CashManagements.cshtml" />
     <Content Include="Views\Terminals\Sections\Pictures.cshtml" />
+    <Content Include="Views\Terminals\Sections\VaultCash.cshtml" />
+    <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
+    <Content Include="Views\InterChange\Modal\AddInterChange.cshtml" />
+    <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
+    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
+    <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
+    <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
+    <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
+    <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1267,6 +1280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
       <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,5 @@
 ﻿@model OctagonPlatform.Models.Terminal
 
-<h3 data-toggle="collapse" data-target="#getPictures">Pictures</h3>
-
 <div id="getPictures" class="panel-collapse collapse">
     <div>
         @using (Html.BeginForm("SetPictures", "Terminals", FormMethod.Post,
@@ -16,9 +14,6 @@
                         foreach (var item in Model.Pictures)
                         {
                             <tr>
-                                <td>
-                                    @item.Id
-                                </td>
                                 <td>
                                     @item.Name
                                 </td>

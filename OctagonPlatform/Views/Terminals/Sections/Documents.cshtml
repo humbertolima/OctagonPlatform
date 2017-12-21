@@ -1,7 +1,5 @@
 ﻿@model OctagonPlatform.Models.Terminal
 
-<h3 data-toggle="collapse" data-target="#getDocuments">Documents</h3>
-
 <div id="getDocuments" class="panel-collapse collapse">
     <div>
         @using (Html.BeginForm("SetDocuments", "Terminals", FormMethod.Post,
@@ -16,9 +14,6 @@
                         foreach (var item in Model.Documents)
                         {
                             <tr>
-                                <td>
-                                    @item.Id
-                                </td>
                                 <td>
                                      @item.Name
                                 </td>

@@ -32,6 +32,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal SetNotes(int indexTerminalId, string note, int? noteId);
 
+        Terminal DeleteNotes(int indexTerminalId, int noteId);
+
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
 
         Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
@@ -41,7 +43,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
-        
+
+        Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
+
         Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
         
         IEnumerable<Terminal> Search(string search, int partnerId);
@@ -63,11 +67,17 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<string> GetAllTerminalId(string value);
         
         List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId=null);
+
         IEnumerable<dynamic> GetAllState(string term);
+
         IEnumerable<dynamic> GetAllCity(string term);
+
         List<string> GetAllZipCode(string term);
+
         void EditRange(string[] list, int? groupId);
+
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
+
         List<Terminal> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
     }
 }
