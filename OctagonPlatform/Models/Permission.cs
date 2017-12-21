@@ -13,8 +13,10 @@ namespace OctagonPlatform.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
-        public string Type { get; set; }
+        public bool View { get; set; }
+        public bool Create { get; set; }
+        public bool Edit { get; set; }
+        public bool Delete { get; set; }
 
         [Required]
         [ForeignKey("SetOfPermission")]

@@ -69,7 +69,7 @@ namespace OctagonPlatform.Controllers
                     return View("Error");
                 }
                 var model = _surchargeRepository.RenderSurchargeFormViewModel((int)terminalId);
-                if (model != null) return View("SurchargeForm", model);
+                if (model != null) return PartialView("Modal/AddSurCharge", model);
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
             }

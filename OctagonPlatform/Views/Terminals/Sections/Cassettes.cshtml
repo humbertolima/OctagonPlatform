@@ -1,21 +1,13 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model  IEnumerable<OctagonPlatform.Models.Cassette>
 
-<h3 data-toggle="collapse" data-target="#getCassetes">Cassettes dw Info</h3>
-<div id="getCassetes" class="panel-collapse collapse">
+<div id="getCassettes" class="panel-collapse collapse">
     <div>
-
         <table>
             <tbody>
                 @{
-                    foreach (var item in Model.Cassettes)
+                    foreach (var item in Model)
                     {
                         <tr>
-                            <td>
-                                @item.Id
-                            </td>
-                            <td>
-                                @item.AutoRecord
-                            </td>
                             <td>
                                 @item.Denomination
                             </td>
@@ -30,7 +22,6 @@
                 }
             </tbody>
         </table>
-
 
         <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
         @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
@@ -47,16 +38,14 @@
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.Hidden("cassetteId")
-                        <input type="hidden" id="TerminalId" name="TerminalId" value="@Model.Id">
-
-                        <input type="hidden" id="cassetteId" name="cassetteId">
-
+                        @Html.Hidden("cassetteId",Model.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Id)
+                        @Html.Hidden("terminalId",ViewData["terminalId"]?.ToString())
+                        
                         <p class="alert alert-danger">
                             @ViewBag.Error
                         </p>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Cassettes.FirstOrDefault(x => x.TerminalId == Model.Id).Denomination)
+                                @Html.TextBoxFor(m => m.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Denomination)
                             </div>
                             <div class="form-group">
                                 @Html.CheckBox("AutoRecord")Auto Record
@@ -87,7 +76,7 @@
                     {
                         @Model
                         @Html.AntiForgeryToken()
-                        <input type="hidden" id="terminalId" name="TerminalId" value="@Model.Id">
+                        <input type="hidden" id="terminalId" name="TerminalId" value="@ViewData["terminalId"].ToString()">
 
                         <p class="alert alert-danger">
                             @ViewBag.Error
@@ -126,7 +115,8 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("cassetteId")
-                            <input type="hidden" id="itemId" name="id" value="" />
+                        @Html.Hidden("terminalId")
+                            <input type="hidden" id="terminalId" name="terminalId" value="@ViewData["terminalId"]?.toString()" />
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>

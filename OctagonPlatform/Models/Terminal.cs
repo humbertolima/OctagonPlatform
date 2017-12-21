@@ -125,6 +125,8 @@ namespace OctagonPlatform.Models
 
         public ICollection<Document> Documents { get; set; }
 
+        public ICollection<Picture> Pictures{ get; set; }
+
         public ICollection<LoadCash> LoadCashs { get; set; }
 
         public ICollection<TransactionStatistic> TransactionStatistics { get; set; }
@@ -198,6 +200,7 @@ namespace OctagonPlatform.Models
             TerminalAlerts = new Collection<TerminalAlert>();
             TerminalMessages = new Collection<TerminalMessage>();
             WorkingHours = new Collection<TerminalWorkingHours>();
+            Pictures = new Collection<Picture>();
         }
     }
 }

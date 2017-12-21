@@ -34,7 +34,10 @@
             <h4 class="panel-title">
                 All Bank Accounts to asign
             </h4>
-            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users", new { toAttach = false, userId = Model.Id.ToString() }, new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
+            @Ajax.ActionLink("Show Bank Accounts", "GetAllBankAccount", "Users",
+           new { toAttach = false, userId = Model.Id.ToString() },
+           new AjaxOptions { UpdateTargetId = "bankAccounts", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" },
+           htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#bankAccounts" })
 
             <div id="bankAccounts" class="panel-collapse collapse">
 
@@ -42,15 +45,57 @@
         </div>
     </div>
 </div>
-<br />
+
 <hr />
-<br />
-<div id="terminals">
-    @Html.Partial("Sections/Terminals")
+
+<div class="row">
+
+    <div class="panel-group  col-md-6">
+
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse1">Partner's Terminals</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div id="terminalsUser">
+                            @Html.Partial("Sections/TerminalsPartner", Model) @*mando el modelo user porque necesito los datos de las terminales del PARTNER.*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group  col-md-6">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#terminalAssigned">Terminal Assigned</a>
+                    </h4>
+                </div>
+                <div id="terminalAssigned" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div id="terminalsUserAssigned">
+                            @Html.Partial("Sections/TerminalsUser", Model.Terminals, new ViewDataDictionary() { { "userId", Model.Id } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-<br />
+
+
+
+
 <hr />
-<br />
+
 <div id="reports">
     @Html.Partial("Sections/Reports")
 </div>

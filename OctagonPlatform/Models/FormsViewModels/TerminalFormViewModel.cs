@@ -28,7 +28,6 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         [Display(Name = "State")]
         public int StateId { get; set; }
-
         public State State { get; set; }
 
         public ICollection<State> States { get; set; }  
@@ -47,6 +46,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         public LocationType LocationType { get; set; }
 
         public ICollection<LocationType> LocationTypes { get; set; }
+
+        [Required]
+        public string LocationName { get; set; }
 
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]

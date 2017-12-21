@@ -12,11 +12,25 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
+using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
+
+        public async Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId)
+        {
+            List<JsonLoadCash> list = new List<JsonLoadCash>();
+            ApiATM api = new ApiATM();
+
+            list = await api.CashLoad(start, end, terminalId);
+
+            return list;
+        }
+
+
 
         public KeyManager GetKey(string messagesId)
         {
@@ -56,6 +70,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
+
         public Terminal GetTerminal(string terminalId)
         {
             try
@@ -69,6 +84,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<Terminal> GetAllTerminals(int partnerId)
         {
             try
@@ -254,11 +270,12 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Cassettes)
                     .Include(x => x.Contracts)
                     .Include(x => x.Documents)
-                    .Include(x => x.InterChanges)
+                    //.Include(x => x.InterChanges)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
                     .Include(x => x.VaultCash)
+                    .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
                     .Include(x => x.Notes)
                     .Include(x => x.TerminalContacts)
@@ -267,6 +284,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Disputes)
                     .Include(x => x.TerminalAlertConfigs)
                     .Include(x => x.WorkingHours)
+                    .Include(x => x.Pictures)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -294,6 +312,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
+
         public void CassettesDelete(int cassetteId)
         {
             try
@@ -317,7 +336,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Terminal not found.");
             }
         }
-
 
         public TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel)
         {
@@ -361,7 +379,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
 
                 terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
+                terminalAlertConfigViewModel.TerminalId = terminal.Id;
 
                 return terminalAlertConfigViewModel;
             }
@@ -380,7 +398,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.TerminalAlertConfigs = terminalAlertConfig;
@@ -406,7 +424,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 var terminal = Table
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -432,6 +450,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message + "Terminal not found.");
             }
         }
+
         public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
         {
 
@@ -442,7 +461,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
 
                 var terminal = Table
-                    .FirstOrDefault(c => c.TerminalId == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -466,11 +485,142 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId)
+        {
+            //pendiente. manipulo la terminal porqur a la hora de aplicar permisos, tengo que validar los permisos que tiene
+            //ese usuario para borrar o editar la terminal y los campos que tiene esa terminal. en este caso, workingHours 
+            //no lo puedo controlar si el usuario tiene acceso a eliminarlo o no.
+            try
+            {
+                Terminal terminal = TerminalDetails(terminalId);
+
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                terminal.WorkingHours.Remove(terminal.WorkingHours.FirstOrDefault(c => c.Id == WorkingHoursId));
+                Edit(terminal);
+
+                return terminal;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message + "Terminal not found.");
+            }
+        }
+
+        public Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId)
+        {
+            Terminal terminal = new Terminal();
+            if (archive != null)
+            {
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (pictureId == null || pictureId == 0)
+                {
+                    terminal.Pictures.Add(new Picture
+                    {
+                        Name = archive.FileName,
+                        Archive = ConvertTo.ImageToByteArray(archive),
+                    });
+
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
+            }
+            return terminal;
+        }
+
+        public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
+        {
+            Terminal terminal = new Terminal();
+            if (archive != null)
+            {
+                terminal = TerminalDetails(indexTerminalId);
+
+                if (documentId == null || documentId == 0)
+                {
+                    terminal.Documents.Add(new Document
+                    {
+                        Name = archive.FileName,
+                        Archive = Helpers.ConvertTo.DocumentToByteArray(archive),
+                    });
+                    Save();
+                }
+            }
+            else
+            {
+                throw new Exception("Need document Attach");
+            }
+            return terminal;
+        }
+
+        public Terminal PictureDelete(int indexTerminalId, int pictureId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (pictureId > 0)
+            {
+                Context.Pictures.Remove(terminal.Pictures.FirstOrDefault(c => c.Id == pictureId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
+
+        public Terminal DocumentDelete(int indexTerminalId, int documentId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (documentId > 0)
+            {
+                Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
+                Context.SaveChanges();
+            }
+            return terminal;
+        }
+
+
+        public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
+        {
+            Terminal terminal = TerminalDetails(indexTerminalId);
+
+            if (noteId == null || noteId == 0)
+            {
+                if (terminal != null)
+                {
+                    terminal.Notes.Add(new Note { Nota = note });
+                    Save();
+                }
+            }
+            else
+            {
+                terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
+                Edit(terminal);
+            }
+
+            return terminal;
+        }
+
+
+        public Terminal DeleteNotes(int indexTerminalId, int noteId)
+        {
+
+            if (indexTerminalId > 0 || noteId > 0)
+            {
+               Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
+
+                Context.SaveChanges();
+            }
+
+            return TerminalDetails(indexTerminalId);
+        }
+
         public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
@@ -484,11 +634,12 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
         {
             try
             {
-                var terminal = Table.Include("Cassettes").FirstOrDefault(c => c.Id == terminalId);
+                var terminal = TerminalDetails(terminalId);
                 if (terminal != null)
                 {
                     terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
@@ -504,9 +655,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
-
-
-
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
@@ -595,8 +743,10 @@ namespace OctagonPlatform.PersistanceRepository
             catch (Exception e)
             {
 
-                throw new Exception(e.Message);
+                throw new Exception("Error database " + e.Message);
             }
+
+
         }
 
         public void EditRange(string[] list, int? groupId)

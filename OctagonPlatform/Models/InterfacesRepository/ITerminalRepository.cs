@@ -5,11 +5,14 @@ using OctagonPlatform.Helpers;
 using OctagonPlatform.Controllers.Reports.JSON;
 using OctagonPlatform.Views.ReportsSmart.ViewModels;
 using System;
+using System.Web;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalRepository : IGenericRepository<Terminal>
     {
+       System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
+
         Terminal GetTerminal(string terminalId);
 
         IEnumerable<Terminal> GetAllTerminals(int partnerId);
@@ -20,6 +23,18 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
 
+        Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
+
+        Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId);
+
+        Terminal PictureDelete(int indexTerminalId, int pictureId);
+
+        Terminal DocumentDelete(int indexTerminalId, int documentId);
+
+        Terminal SetNotes(int indexTerminalId, string note, int? noteId);
+
+        Terminal DeleteNotes(int indexTerminalId, int noteId);
+
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
 
         Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
@@ -29,7 +44,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
-        
+
+        Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
+
         Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
         
         IEnumerable<Terminal> Search(string search, int partnerId);
@@ -51,10 +68,15 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<string> GetAllTerminalId(string value);
         
         List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId=null);
+
         IEnumerable<dynamic> GetAllState(string term);
+
         IEnumerable<dynamic> GetAllCity(string term);
+
         List<string> GetAllZipCode(string term);
+
         void EditRange(string[] list, int? groupId);
+
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
         IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
         IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city,int state, string zipcode);
