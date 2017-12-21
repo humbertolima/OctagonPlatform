@@ -1,0 +1,72 @@
+﻿
+    <div id="myfirstchart" style="height: 100%;width:100%"></div>
+
+
+<script>
+
+    function ChartBar() {
+
+        var range = 'day';
+        var days = days_between($("#StartDate").val(), $("#EndDate").val());
+        if (days > 15 && days < 93)
+            range = 'week';
+        else
+            if (days > 92)
+                range = 'month';
+
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            data: @Html.Raw(@TempData["Chart"]),
+                // The name of the data record attribute that contains x-values.
+                xkey: 'Date',
+                // A list of names of data record attributes that contain y-values.
+                ykeys: ['AmountPrevius', 'AmountLoad'],
+                // Labels for the ykeys -- will be displayed when you hover over the
+                // chart.
+                labels: ['Previus', 'Load'],
+                xLabels: range,
+                xLabelAngle: 45,
+                lineColors: ['#00a8e1', '#FF6541'],
+                xLabelFormat: function (d) {
+                    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    if (range == 'month')
+                        return d.getFullYear()+" - "+months[d.getMonth()];
+                    else
+                    return  ("0" + (d.getMonth() + 1)).slice(-2) + '-' + ("0" + (d.getDate())).slice(-2) + '-' + ("0" + (d.getFullYear())).slice(-2);
+
+                },
+                resize:true
+            });
+
+        }
+        function days_between(date1, date2) {
+            var date1 = new Date(date1);
+            var date2 = new Date(date2);
+            var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+           return diffDays;
+
+    }
+
+     function ChartBarStatus() {
+
+             new Morris.Bar({
+                element: 'myfirstchart',
+                data: @Html.Raw(@TempData["Chart"]),
+                xkey: 'TerminalId',
+                ykeys: ['CashBalance'],
+                labels: ['Cash Balance'],
+                resize: true,
+                barColors: function (row, series, type) {
+                    if (type === 'bar') {
+                        var red = Math.ceil(255 * row.y / this.ymax);
+                        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+                    }
+                    else {
+                        return '#000';
+                    }
+                }
+            });
+        }
+</script>
