@@ -484,15 +484,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal DeteteWorkingHours(string terminalId, int WorkingHoursId)
+        public Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId)
         {
             //pendiente. manipulo la terminal porqur a la hora de aplicar permisos, tengo que validar los permisos que tiene
             //ese usuario para borrar o editar la terminal y los campos que tiene esa terminal. en este caso, workingHours 
             //no lo puedo controlar si el usuario tiene acceso a eliminarlo o no.
             try
             {
-                var terminal = Table.Include(c => c.WorkingHours)
-                       .FirstOrDefault(c => c.TerminalId == terminalId);
+                Terminal terminal = TerminalDetails(terminalId);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 

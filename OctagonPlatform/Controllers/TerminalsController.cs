@@ -53,7 +53,7 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = ex.Message;
                 return View("Error");
-            } 
+            }
         }
 
         [HttpPost]
@@ -304,7 +304,7 @@ namespace OctagonPlatform.Controllers
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int? id)
+        public ActionResult DeleteConfirmed(int? id, string WorkingHoursId)
         {
             try
             {
@@ -456,9 +456,22 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteWorkingHours(string terminalId, int WorkingHoursId)
+        public ActionResult DeleteWorkingHours(string terminalId, string workingHoursId)
         {
-            var terminal = _repository.DeteteWorkingHours(terminalId, WorkingHoursId);
+            int workingHoursIdConvert = 0;
+            int terminalIdConvert = 0;
+
+            if (!String.IsNullOrEmpty(workingHoursId) || (!String.IsNullOrEmpty(terminalId)))
+            {
+                workingHoursIdConvert = Convert.ToInt32(workingHoursId);
+                terminalIdConvert = Convert.ToInt32(terminalId);
+            }
+            else
+            {
+                throw new Exception(" Terminal Id or WorkingHours Id is null or empty");
+            }
+
+            var terminal = _repository.DeteteWorkingHours(terminalIdConvert, workingHoursIdConvert);
 
             return RedirectToAction("Details/" + terminal.Id);
         }

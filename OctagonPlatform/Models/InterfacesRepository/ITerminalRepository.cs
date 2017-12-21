@@ -44,7 +44,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
 
-        Terminal DeteteWorkingHours(string terminalId, int WorkingHoursId);
+        Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
 
         Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
         

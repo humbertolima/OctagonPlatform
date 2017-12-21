@@ -8,30 +8,26 @@
                 <div id="collapse1" class="collapse">
                     <table>
                         <tbody>
-                            @*@{
-                                foreach (var item in Model.WorkingHours)
+                            @{ foreach (var item in Model.Terminal.WorkingHours)
                                 {
+                                    <tr>
+                                        <td>@item.Day</td>
+                                        <td>@item.StartTime</td>
+                                        <td>@item.EndTime</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-microsoft WorkingHoursEdit" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-microsoft DeleteWorkingHours" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                                }
                             <tr>
-                                <td>
-                                    @item.Day
-                                    @item.StartTime
-                                    - @item.EndTime
-                                </td>
-                                <td>
-                                    <button type="button" class="WorkingHoursEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
-                                </td>
-                                <td>
-                                    <button type="button" class="WorkingHoursDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
-                                </td>
-                            </tr>
-                                }*@
-                            <tr>
-                                <td></td>
                                 <td>
                                     <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
                                 </td>
                             </tr>
-                            }
                         </tbody>
                     </table>
 
@@ -154,11 +150,13 @@
 
                 @using (Html.BeginForm("SetWorkingHours", "Terminals"))
             {
-                    @Model
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
-                    @Html.Hidden("WorkingHoursEdit")
+                    
+                    @Html.Hidden("TerminalId", Model.Terminal.Id)
+
                     <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+
                     @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
@@ -246,8 +244,9 @@
                 </div>
 
                 @using (Html.BeginForm("AddWorkingHours", "Terminals"))
-            {
-                    @Model
+                {
+
+                    @Html.Hidden("TerminalId", Model.Terminal.Id)
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(m => m.Id)
                     @Html.DropDownList("Days", new List<SelectListItem>
@@ -341,9 +340,10 @@
 
                 @using (Html.BeginForm("DeleteWorkingHours", "Terminals"))
             {
+                    @Html.Hidden("terminalId", Model.Terminal.Id)
                     @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
-                    <input type="hidden" id="WorkingHoursId" name="WorkingHoursId" value="">
+                    @Html.Hidden("WorkingHoursId")
+                    <input type="hidden" id="workingHoursId" name="workingHoursId" value="">
 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
@@ -367,7 +367,7 @@
 </script>
 
 <script>
-    $(document).on("click", ".WorkingHoursDelete", function () {
+    $(document).on("click", ".DeleteWorkingHours", function () {
         var myBookId = $(this).data('id');
         $("#DeleteWorkingHours #WorkingHoursId").val(myBookId);
     });
