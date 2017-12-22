@@ -7,17 +7,17 @@
                 @{
                     foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @item.Denomination
-                            </td>
-                            <td>
-                                <button type="button" class="CassettesEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
-                            </td>
-                            <td>
-                                <button type="button" class="CassettesDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteCassetteModal">Delete</button>
-                            </td>
-                        </tr>
+                <tr>
+                    <td>
+                        @item.Denomination
+                    </td>
+                    <td>
+                        <button type="button" class="CassettesEdit btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="CassettesDelete btn btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteCassetteModal">Delete</button>
+                    </td>
+                </tr>
                     }
                 }
             </tbody>
@@ -38,15 +38,19 @@
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.Hidden("cassetteId",Model.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Id)
-                        @Html.Hidden("terminalId",ViewData["terminalId"]?.ToString())
-                        
+                        if (Model.Count() > 0)
+                        {
+                            @Html.Hidden("cassetteId", Model.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Id)
+                            @Html.Hidden("terminalId", ViewData["terminalId"]?.ToString())
+                        }
+
+
                         <p class="alert alert-danger">
                             @ViewBag.Error
                         </p>
-                            <div class="form-group">
-                                @Html.TextBoxFor(m => m.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Denomination)
-                            </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Denomination)
+                        </div>
                             <div class="form-group">
                                 @Html.CheckBox("AutoRecord")Auto Record
                                 @Html.ValidationMessage("AutoRecord")
@@ -81,20 +85,20 @@
                         <p class="alert alert-danger">
                             @ViewBag.Error
                         </p>
-                            <div class="form-group">
-                                <input type="text" id="denomination" name="denomination" value="">
+                        <div class="form-group">
+                            <input type="text" id="denomination" name="denomination" value="">
 
-                            </div>
+                        </div>
                             <div class="form-group">
                                 <input type="checkbox" id="autoRecord" name="autoRecord">
 
                             </div>
-                                <div class="form-group">
-                                    <div class="col-lg-10 col-lg-offset-2">
-                                        <button type="reset" class="btn btn-default">Cancel</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
+                            </div>
                     }
                 </div>
             </div>
@@ -115,7 +119,7 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.Hidden("cassetteId")
-                        @Html.Hidden("terminalId")
+                            @Html.Hidden("terminalId")
                             <input type="hidden" id="terminalId" name="terminalId" value="@ViewData["terminalId"]?.toString()" />
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />

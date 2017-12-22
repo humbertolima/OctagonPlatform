@@ -20,6 +20,7 @@ namespace OctagonPlatform.Controllers
         public ActionResult Index()
         {
             var disputes = _DisputeRepository.GetAllDispute();
+            
             return View(disputes);
         }
 
