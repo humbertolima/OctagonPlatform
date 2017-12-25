@@ -41,7 +41,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         
         void CassettesDelete(int cassetteId);
 
-        Terminal SetConfigNotification(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
+        TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigViewModel);
 
         Terminal SetWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
 

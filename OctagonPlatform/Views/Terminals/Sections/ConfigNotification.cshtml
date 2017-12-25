@@ -79,11 +79,12 @@
 
                 <h3 class="alert-info">Edit Config Alert</h3>
 
-                @using (Html.BeginForm("SetConfigNotification", "Terminals"))
+                @using (Html.BeginForm("SetConfiguration", "Terminals"))
             {
                     @Model
                     @Html.AntiForgeryToken()
-                    @Html.Hidden("terminalId",Model.Id)
+                    @Html.Hidden("id",Model.Id)
+                    @Html.Hidden("terminalId", Model.TerminalId)
 
                     <p class="alert alert-danger">
                         All fields are <strong>required.</strong>

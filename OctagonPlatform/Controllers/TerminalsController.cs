@@ -452,12 +452,12 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
-        public ActionResult SetConfigNotification(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel)
+        [HttpPost]
+        public ActionResult SetConfiguration(TerminalConfigViewModel terminalConfigViewModel)
         {
-            var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
+            TerminalConfigViewModel configViewModel = _repository.SetConfiguration(terminalConfigViewModel);
 
-            return RedirectToAction("Details", new { id = terminal.Id });
+            return RedirectToAction("Details", new { id = configViewModel.Id });
         }
 
         [HttpPost]

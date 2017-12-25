@@ -391,15 +391,15 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public Terminal SetConfigNotification(TerminalConfigViewModel terminalAlertIngnoredViewModel)
+        public TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigVM)
         {
             try
             {
-                var terminalAlertConfig = Mapper.Map<TerminalConfigViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
+                var terminalAlertConfig = Mapper.Map<TerminalConfigViewModel, TerminalAlertConfig>(terminalConfigVM);
 
                 Terminal terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.Id);
+                    .FirstOrDefault(c => c.Id == terminalConfigVM.Id);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -407,12 +407,13 @@ namespace OctagonPlatform.PersistanceRepository
 
                 Edit(terminal);
 
+                TerminalConfigViewModel viewModel = GetConfigNotification(terminal.Id);
 
-                return terminal;
+                return viewModel;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message + "Terminal not found.");
+                throw new Exception(e.Message);
             }
 
         }
