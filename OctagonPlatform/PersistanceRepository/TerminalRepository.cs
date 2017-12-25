@@ -363,11 +363,11 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public TerminalAlertIngnoredViewModel GetConfigNotification(int id)
+        public TerminalConfigViewModel GetConfigNotification(int id)
         {
             try
             {
-                var terminal = Table
+                Terminal terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
                     .Include(c => c.WorkingHours)
                     .FirstOrDefault(c => c.Id == id);
@@ -376,10 +376,11 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     terminal.TerminalAlertConfigs = new TerminalAlertConfig();
                 }
-                var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
+                var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalConfigViewModel>(terminal.TerminalAlertConfigs);
 
                 terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-                terminalAlertConfigViewModel.TerminalId = terminal.Id;
+                terminalAlertConfigViewModel.Id = terminal.Id;
+                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
 
                 return terminalAlertConfigViewModel;
             }
@@ -390,15 +391,16 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public Terminal SetConfigNotification(TerminalConfigViewModel terminalAlertIngnoredViewModel)
         {
             try
             {
-                var terminalAlertConfig = Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
+                var terminalAlertConfig = Mapper.Map<TerminalConfigViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
 
-                var terminal = Table
+                Terminal terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.Id);
+
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.TerminalAlertConfigs = terminalAlertConfig;
@@ -415,16 +417,16 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string workingHoursEdit)
+        public Terminal SetWorkingHours(TerminalConfigViewModel terminalConfigViewModel, string workingHoursEdit)
         {
             try
             {
-                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+                var startTime = new TimeSpan(terminalConfigViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalConfigViewModel.EndTime, 00, 00);
 
                 var terminal = Table
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalConfigViewModel.Id);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -438,7 +440,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var workingHours = terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(workingHoursEdit));
                 if (workingHours != null)
                     workingHours.Day =
-                        terminalAlertIngnoredViewModel.Days;
+                        terminalConfigViewModel.Days;
 
                 Edit(terminal);
 
@@ -451,17 +453,17 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public Terminal AddWorkingHours(TerminalConfigViewModel terminalConfigViewModel)
         {
 
 
             try
             {
-                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+                var startTime = new TimeSpan(terminalConfigViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalConfigViewModel.EndTime, 00, 00);
 
                 var terminal = Table
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalConfigViewModel.Id);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -469,7 +471,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     new TerminalWorkingHours
                     {
-                        Day = terminalAlertIngnoredViewModel.Days,
+                        Day = terminalConfigViewModel.Days,
                         StartTime = startTime,
                         EndTime = endTime,
                         TerminalId = terminal.TerminalId
@@ -655,6 +657,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
@@ -688,7 +691,6 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-
         public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int stateid, int cityid, string zipcode, int? groupId = null)
         {
 
@@ -708,8 +710,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
-
-
+        
         public IEnumerable<dynamic> GetAllState(string term)
         {
             try
@@ -722,6 +723,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
         public IEnumerable<dynamic> GetAllCity(string term)
         {
             try
@@ -734,6 +736,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
         public List<string> GetAllZipCode(string term)
         {
             try

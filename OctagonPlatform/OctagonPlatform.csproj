@@ -347,7 +347,7 @@
     <Compile Include="Models\FormsViewModels\ReportingGroupVM.cs" />
     <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalConfigViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />

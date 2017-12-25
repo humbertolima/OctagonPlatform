@@ -66,9 +66,9 @@ namespace OctagonPlatform
 
             #region Terminal Alert Ignnored Mapped
 
-            CreateMap<TerminalAlertConfig, TerminalAlertIngnoredViewModel>();
+            CreateMap<TerminalAlertConfig, TerminalConfigViewModel>();
 
-            CreateMap<TerminalAlertIngnoredViewModel, TerminalAlertConfig>();
+            CreateMap<TerminalConfigViewModel, TerminalAlertConfig>();
             //Dto to Domain
             #endregion
 

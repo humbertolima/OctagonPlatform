@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Threading.Tasks;
@@ -75,20 +76,27 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
-        public ViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
+        public PartialViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
         {
-            Models.Terminal terminal = new Models.Terminal();
+            Terminal terminal = new Terminal();
 
-            if (documentId == null || documentId == 0)
-            {   //addicionar
-                terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
+            if (FileForm != null)
+            {
+                if (documentId == null || documentId == 0)
+                {   //addicionar
+                    terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
+                }
+                else
+                {   //editar porque viene un id de documents
+
+                }
+
+                return PartialView("Details", terminal);
             }
             else
-            {   //editar porque viene un id de documents
-
+            {
+                return PartialView("Details", terminal);
             }
-
-            return View("Details", terminal);
         }
 
         [HttpPost]
@@ -426,14 +434,26 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult ConfigNotification(int id)
+        public PartialViewResult GetConfiguration(string id)
         {
-            var configNotification = _repository.GetConfigNotification(id);
-            return PartialView("Sections/ConfigNotification", configNotification);
+            try
+            {
+                TerminalConfigViewModel configViewModel = new TerminalConfigViewModel();
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    configViewModel = _repository.GetConfigNotification(Convert.ToInt32(id));
+                }
+                return PartialView("Sections/ConfigNotification", configViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Get Configuration error. "+ ex.Message);
+            }
         }
 
         [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
-        public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public ActionResult SetConfigNotification(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel)
         {
             var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
 
@@ -441,14 +461,14 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        public ActionResult SetWorkingHours(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
         {
             var terminal = _repository.SetWorkingHours(terminalAlertIngnoredViewModel, WorkingHoursEdit);
 
             return RedirectToAction("Details/" + terminal.Id);
         }
         [HttpPost]
-        public ActionResult AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public ActionResult AddWorkingHours(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel)
         {
             var terminal = _repository.AddWorkingHours(terminalAlertIngnoredViewModel);
 

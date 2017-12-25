@@ -21,7 +21,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
-        TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
+        TerminalConfigViewModel GetConfigNotification(int terminalId);
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
@@ -41,13 +41,13 @@ namespace OctagonPlatform.Models.InterfacesRepository
         
         void CassettesDelete(int cassetteId);
 
-        Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
+        Terminal SetConfigNotification(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
 
-        Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
+        Terminal SetWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
 
         Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
 
-        Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
+        Terminal AddWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
         
         IEnumerable<Terminal> Search(string search, int partnerId);
 
