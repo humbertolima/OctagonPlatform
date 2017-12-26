@@ -117,7 +117,7 @@ namespace OctagonPlatform.Controllers
             Models.Terminal terminal;
             try
             {
-                if (documentId < 0)
+                if (documentId > 0)
                 {
                     terminal = _repository.DocumentDelete(viewModel.Id, Convert.ToInt32(documentId));
                 }

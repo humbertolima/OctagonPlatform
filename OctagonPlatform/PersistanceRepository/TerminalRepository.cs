@@ -586,16 +586,24 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
-        public Terminal DocumentDelete(int indexTerminalId, int documentId)
+        public Terminal DocumentDelete(int id, int documentId)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
-
-            if (documentId > 0)
+            try
             {
-                Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
-                Context.SaveChanges();
+                Terminal terminal = Table.Include(m => m.Documents).FirstOrDefault(m => m.Id == id);
+
+                if (documentId > 0)
+                {
+                    Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
+                    Context.SaveChanges();
+                }
+                return terminal;
             }
-            return terminal;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public TerminalNotesVM GetNotes(int id)
