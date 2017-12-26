@@ -166,10 +166,7 @@ namespace OctagonPlatform.Controllers.Reports
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CashBalanceatClose()
-        {
-            return View();
-        }
+       
         public ActionResult CashManagement()
         {
             TempData["Chart"] = null;
@@ -476,6 +473,54 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["model"] = vmodel;
                 #endregion
 
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+       
+        public ActionResult CashBalanceatClose()
+        {
+            TempData["Chart"] = null;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceAtCloseVM vmodel)
+        {
+            ModelState.Remove("PartnerId");
+            ModelState.Remove("GroupId");
+          
+            if (ModelState.IsValid)
+            {
+                List<CashBalanceAtCloseTableVM> listaux = new List<CashBalanceAtCloseTableVM>();              
+                List<JsonCashBalanceClose> list = new List<JsonCashBalanceClose>();
+                ApiATM api = new ApiATM();
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
+
+                list = await api.CashBalanceClose(vmodel.StartDate, listtn);
+                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId);
+                if (listTn.Count() > 0)
+                {
+                    foreach (var item in listTn)
+                    {
+                        int? cashBalance = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.CashBalance).FirstOrDefault();
+                        string time = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.Time).FirstOrDefault();
+                        CashBalanceAtCloseTableVM obj = new CashBalanceAtCloseTableVM(item.TerminalId, item.LocationName,time, cashBalance.ToString());
+                        listaux.Add(obj);
+
+                    }
+
+                }
+
+
+                #region Variables Partial
+                TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashBalanceAtCloseTableVM>(listaux) : null;
+                TempData["filename"] = "CashManagement";
+                TempData["Chart"] =  null;               
+                TempData["partner"] = vmodel.Partner;
+                #endregion
+                Session["businessName"] = "";
                 return View();
             }
 

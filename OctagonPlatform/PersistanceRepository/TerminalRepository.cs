@@ -882,5 +882,23 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
+
+        public IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId)
+        {
+            try
+            {
+                var terminalIds = list.Select(s => s.TerminalId).ToList();
+                return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                .Select(b => new { b.TerminalId, b.LocationName }).ToList();
+
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception("Error database " + e.Message);
+            }
+        }
     }
 }

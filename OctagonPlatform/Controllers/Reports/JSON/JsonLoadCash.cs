@@ -54,8 +54,21 @@ namespace OctagonPlatform.Controllers.Reports.JSON
         }
     }
 
-    
- 
+    public class JsonCashBalanceClose
+    {
+        public JsonCashBalanceClose(string terminalId, string time, int? cashBalance)
+        {
+            TerminalId = terminalId;
+            Time = time;
+            CashBalance = cashBalance;
+        }
+
+        public string TerminalId { get; set; }
+        public string Time { get; set; }
+        public int? CashBalance { get; set; }
+
+    }
+
     public class JsonTerminalStatusReport
     {
         public JsonTerminalStatusReport()

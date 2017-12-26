@@ -148,6 +148,35 @@ namespace OctagonPlatform.PersistanceRepository
             return list;
 
         }
+        public async Task<List<JsonCashBalanceClose>> CashBalanceClose(DateTime? start, string[] listtn)
+        {
+
+            HttpResponseMessage response = null;
+
+            if (start != null )
+            {
+                string _start = start.Value.ToString("yyyyMMdd");              
+
+                string listtn2 = listtn != null ? string.Join(",", listtn) : "0";
+                response = await client.GetAsync(uri + "cash/atclose/" + listtn2 + "/" + _start);
+             }          
+
+
+            List<JsonCashBalanceClose> list = new List<JsonCashBalanceClose>();
+            //Checking the response is successful or not which is sent using HttpClient  
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                //Storing the response details recieved from web api   
+                var cash = await response.Content.ReadAsStringAsync();
+                //Deserializing the response recieved from web api and storing into the Employee list  
+                list = JsonConvert.DeserializeObject<List<JsonCashBalanceClose>>(cash);
+
+            }
+
+
+            return list;
+
+        }
 
     }
 

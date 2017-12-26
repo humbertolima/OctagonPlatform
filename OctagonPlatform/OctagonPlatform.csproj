@@ -336,6 +336,7 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
     <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TransDailyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalStatusFormFilterVM.cs" />
@@ -421,6 +422,7 @@
     <Compile Include="PersistanceRepository\Utils.cs" />
     <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\CashBalanceAtCloseTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TransMonthlyTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TransDailyTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\CashLoadTableVM.cs" />
@@ -1250,6 +1252,7 @@
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
