@@ -268,7 +268,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.City)
                     .Include(x => x.LocationType)
                     .Include(x => x.Contracts)
-                    .Include(x => x.Documents)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
@@ -529,6 +528,28 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
+        public TerminalDocumentsVM GetDocuments(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.Documents).FirstOrDefault(m => m.Id == id);
+                    TerminalDocumentsVM viewModel = Mapper.Map<Terminal, TerminalDocumentsVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalDocumentsVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
         {
             Terminal terminal = new Terminal();
@@ -676,37 +697,30 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
+        
 
-
-        public Terminal CassettesSet(bool autoRecord, int denomination, int id)
+        public Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId)
         {
             try
             {
-                var terminal = Table.FirstOrDefault(c => c.Id == id);
-                if (terminal != null)
+                Terminal terminal;
+                if (cassetteId != null || cassetteId > 0)
                 {
-                    terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = id });
-                    Save();
-                }
-                return terminal;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message + " in CassetteSet");
-            }
-        }
+                      terminal = Table.Include(m => m.Cassettes).FirstOrDefault(m => m.Id == id);
 
-        public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
-        {
-            try
-            {
-                var terminal = TerminalDetails(terminalId);
-                if (terminal != null)
-                {
-                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
-                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).AutoRecord = autoRecord;
-
+                    terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).Denomination = denomination;
+                    terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).AutoRecord = autoRecord;
                     Edit(terminal);
+                }
+                else
+                {
+                    terminal = Table.FirstOrDefault(m => m.Id == id);
+
+                    if (terminal !=null)
+                    {
+                        terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = id });
+                        Save();
+                    }
                 }
                 return terminal;
             }
@@ -926,5 +940,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
+
     }
 }

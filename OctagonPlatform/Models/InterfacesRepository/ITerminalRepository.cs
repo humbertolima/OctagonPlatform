@@ -23,6 +23,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalConfigViewModel GetConfigNotification(int terminalId);
 
+        TerminalDocumentsVM GetDocuments(int id);
+
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
         Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId);
@@ -39,9 +41,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalCassetteVM GetCassettes(int id);
         
-        Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
-
-        Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
+        Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId);
         
         void CassettesDelete(int cassetteId);
 

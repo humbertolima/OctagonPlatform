@@ -1,5 +1,4 @@
-﻿using OctagonPlatform.Models;
-using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
@@ -75,11 +74,22 @@ namespace OctagonPlatform.Controllers
             return View("Details", terminal);
         }
 
+        [HttpPost]
+        public PartialViewResult GetDocuments(TerminalDocumentsVM viewModel)
+        {
+            if (viewModel.Id > 0)
+            {
+                viewModel = _repository.GetDocuments(viewModel.Id);
+
+            }
+            return PartialView("Sections/Documents", viewModel);
+        }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public PartialViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
         {
-            Terminal terminal = new Terminal();
+            Models.Terminal terminal = new Models.Terminal();
 
             if (FileForm != null)
             {
@@ -101,12 +111,39 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult DocumentDelete(TerminalDocumentsVM viewModel, int documentId)
+        {
+            Models.Terminal terminal;
+            try
+            {
+                if (documentId < 0)
+                {
+                    terminal = _repository.DocumentDelete(viewModel.Id, Convert.ToInt32(documentId));
+                }
+                else
+                {   //creo el objeto terminal con los datos del viewmodel.
+                    terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel);
+                    ViewBag.Error = " not value to Id";
+                }
+
+                return PartialView("Details", terminal);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
+            }
+        }
+
+
+        [HttpPost]
         public PartialViewResult GetNotes(int id)
         {
             TerminalNotesVM viewModel;
-            if ( id > 0)
+            if (id > 0)
             {
-                 viewModel = _repository.GetNotes(id);
+                viewModel = _repository.GetNotes(id);
             }
             else
             {
@@ -120,7 +157,7 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult SetNotes(int id, string notes, int? noteId)
         {
-            Terminal terminal;
+            Models.Terminal terminal;
 
             if (noteId != null && noteId > 0)
             {
@@ -152,7 +189,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-               TerminalCassetteVM viewModel = new TerminalCassetteVM();
+                TerminalCassetteVM viewModel = new TerminalCassetteVM();
 
                 if (!string.IsNullOrEmpty(id))
                 {
@@ -181,7 +218,7 @@ namespace OctagonPlatform.Controllers
             }
             else
             {
-                terminal = _repository.CassettesSet(isAutoRecord, denomination, id);
+                terminal = _repository.CassettesEdit(isAutoRecord, denomination, id, null);
             }
 
             return View("Details", terminal);
@@ -415,31 +452,6 @@ namespace OctagonPlatform.Controllers
         }
 
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DocumentDelete(int indexTerminalId, int? documentId)
-        {
-            try
-            {
-                if (documentId == null || documentId <= 0)
-                {
-                    ViewBag.Error = "Document not found. ";
-                    return View("Error");
-                }
-                Models.Terminal terminal = _repository.DocumentDelete(indexTerminalId, Convert.ToInt32(documentId));
-
-                return RedirectToAction("Details", new { id = terminal.Id });
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = "Validation error deleting Document" + ex.Message;
-                return RedirectToAction("Index");
-            }
-        }
-
-
-
         [HttpPost]
         public ActionResult Search(string search)
         {
@@ -484,7 +496,7 @@ namespace OctagonPlatform.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception("Get Configuration error. "+ ex.Message);
+                throw new Exception("Get Configuration error. " + ex.Message);
             }
         }
 

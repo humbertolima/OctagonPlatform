@@ -144,6 +144,13 @@ namespace OctagonPlatform
             CreateMap<TerminalNotesVM, Terminal>();
             #endregion
 
+            #region Terminals Documents
+
+            CreateMap<Terminal, TerminalDocumentsVM>();
+
+            CreateMap<TerminalDocumentsVM, Terminal>();
+            #endregion
+
 
 
 

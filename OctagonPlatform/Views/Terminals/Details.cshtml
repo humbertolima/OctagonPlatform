@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-
+@ViewBag.Error
 <h3>Terminal: <strong>@Model.TerminalId</strong></h3>
 
 <hr />
@@ -120,13 +120,32 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="texth3" data-toggle="collapse" data-target="#getDocuments">
-                        <i class="fa fa-file-text" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getDocuments">Documents</a>
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
+                        </i> @Ajax.ActionLink("Documents", "GetDocuments", "Terminals", new { id = Model.Id },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getDocuments",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getDocuments"
+                   })
                     </h3>
-                    @Html.Partial("Sections/Documents", Model)
+                </div>
+                <div id="getDocuments" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">

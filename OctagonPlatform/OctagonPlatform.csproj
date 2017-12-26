@@ -337,6 +337,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalCassetteVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalDocumentsVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalNotesVM.cs" />
     <Compile Include="Models\FormsViewModels\TransDailyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalStatusFormFilterVM.cs" />
