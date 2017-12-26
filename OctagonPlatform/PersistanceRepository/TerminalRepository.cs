@@ -275,10 +275,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
                     .Include(x => x.TerminalContacts)
-                    .Include(x => x.TerminalPictures)
                     .Include(x => x.Disputes)
-                    .Include(x => x.Pictures)
                     .FirstOrDefault();
+
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.InterChanges = Context.InterChanges.Where(x => x.TerminalId == terminal.Id && !x.Deleted)
@@ -503,12 +502,34 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId)
+        public TerminalPicturesVM GetPictures(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m => m.Id == id);
+                    TerminalPicturesVM viewModel = Mapper.Map<Terminal, TerminalPicturesVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalPicturesVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Terminal SetPictures(int id, HttpPostedFileBase archive, int? pictureId)
         {
             Terminal terminal = new Terminal();
             if (archive != null)
             {
-                terminal = TerminalDetails(indexTerminalId);
+                terminal = TerminalDetails(id);
 
                 if (pictureId == null || pictureId == 0)
                 {
@@ -574,9 +595,9 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
-        public Terminal PictureDelete(int indexTerminalId, int pictureId)
+        public Terminal PictureDelete(int id, int pictureId)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
+            Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m=>m.Id == id);
 
             if (pictureId > 0)
             {

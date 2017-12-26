@@ -102,7 +102,6 @@ namespace OctagonPlatform
 
             #endregion
 
-
             #region InterChange Mapping
 
             CreateMap<InterChange, InterChangeFormViewModel>();
@@ -151,6 +150,12 @@ namespace OctagonPlatform
             CreateMap<TerminalDocumentsVM, Terminal>();
             #endregion
 
+            #region Terminals Pictures
+            
+            CreateMap<Terminal, TerminalPicturesVM>();
+
+            CreateMap<TerminalPicturesVM, Terminal>();
+            #endregion
 
 
 

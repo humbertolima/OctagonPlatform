@@ -58,6 +58,21 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        public PartialViewResult GetPictures( TerminalPicturesVM viewModel)
+        {
+            if (viewModel.Id > 0)
+            {
+                viewModel = _repository.GetPictures(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = " parameter not recived";
+            }
+
+            return PartialView("Sections/Pictures", viewModel);
+        }
+
+        [HttpPost]
         public ViewResult SetPictures(int indexTerminalId, HttpPostedFileBase FileForm, int? pictureId)
         {
             Models.Terminal terminal = new Models.Terminal();
@@ -80,8 +95,8 @@ namespace OctagonPlatform.Controllers
             if (viewModel.Id > 0)
             {
                 viewModel = _repository.GetDocuments(viewModel.Id);
-
             }
+
             return PartialView("Sections/Documents", viewModel);
         }
 
@@ -431,7 +446,7 @@ namespace OctagonPlatform.Controllers
         //======================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PictureDelete(int indexTerminalId, int? pictureId)
+        public ActionResult PictureDelete(int id, int? pictureId)
         {
             try
             {
@@ -440,7 +455,7 @@ namespace OctagonPlatform.Controllers
                     ViewBag.Error = "Picture not found. ";
                     return View("Error");
                 }
-                Models.Terminal terminal = _repository.PictureDelete(indexTerminalId, Convert.ToInt32(pictureId));
+                Models.Terminal terminal = _repository.PictureDelete(id, Convert.ToInt32(pictureId));
 
                 return RedirectToAction("Details", new { id = terminal.Id });
             }
