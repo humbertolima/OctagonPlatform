@@ -137,6 +137,13 @@ namespace OctagonPlatform
             CreateMap<TerminalCassetteVM, Cassette>();
             #endregion
 
+            #region Terminals Notes
+
+            CreateMap<Terminal, TerminalNotesVM>();
+
+            CreateMap<TerminalNotesVM, Terminal>();
+            #endregion
+
 
 
 

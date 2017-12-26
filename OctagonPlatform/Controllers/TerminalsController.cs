@@ -101,17 +101,34 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SetNotes(int indexTerminalId, string notes, int? noteId)
+        public PartialViewResult GetNotes(int id)
         {
-            Models.Terminal terminal = new Models.Terminal();
-
-            if (noteId != null && noteId > 0)
+            TerminalNotesVM viewModel;
+            if ( id > 0)
             {
-                terminal = _repository.SetNotes(indexTerminalId, notes, Convert.ToInt32(noteId));
+                 viewModel = _repository.GetNotes(id);
             }
             else
             {
-                terminal = _repository.SetNotes(indexTerminalId, notes, null);
+                viewModel = new TerminalNotesVM();
+            }
+
+            return PartialView("Sections/Notes", viewModel);
+        }
+
+
+        [HttpPost]
+        public PartialViewResult SetNotes(int id, string notes, int? noteId)
+        {
+            Terminal terminal;
+
+            if (noteId != null && noteId > 0)
+            {
+                terminal = _repository.SetNotes(id, notes, Convert.ToInt32(noteId));
+            }
+            else
+            {
+                terminal = _repository.SetNotes(id, notes, null);
             }
 
             return PartialView("Details", terminal);

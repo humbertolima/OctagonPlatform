@@ -6,15 +6,14 @@ using System.Web;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class TerminalCassetteVM
+    public class TerminalNotesVM
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]
         public string TerminalId { get; set; }
         
-        public List<Cassette> Cassettes { get; set; }
 
+        public List<Note> Notes { get; set; }
     }
 }

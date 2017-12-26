@@ -267,23 +267,17 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.State)
                     .Include(x => x.City)
                     .Include(x => x.LocationType)
-                    .Include(x => x.Cassettes)
                     .Include(x => x.Contracts)
                     .Include(x => x.Documents)
-                    //.Include(x => x.InterChanges)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
                     .Include(x => x.VaultCash)
                     .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
-                    .Include(x => x.Notes)
                     .Include(x => x.TerminalContacts)
                     .Include(x => x.TerminalPictures)
-                    .Include(x => x.Cassettes)
                     .Include(x => x.Disputes)
-                    .Include(x => x.TerminalAlertConfigs)
-                    .Include(x => x.WorkingHours)
                     .Include(x => x.Pictures)
                     .FirstOrDefault();
                 if (terminal == null) throw new Exception("Terminal not found. ");
@@ -583,26 +577,59 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
-
-        public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
+        public TerminalNotesVM GetNotes(int id)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
-
-            if (noteId == null || noteId == 0)
+            try
             {
-                if (terminal != null)
+                Terminal terminal;
+                if (id > 0)
                 {
-                    terminal.Notes.Add(new Note { Nota = note });
-                    Save();
+                    terminal = Table
+                        .Include(m => m.Notes)
+                        .FirstOrDefault(m => m.Id == id);
                 }
-            }
-            else
-            {
-                terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
-                Edit(terminal);
-            }
+                else
+                {
+                    terminal = new Terminal();
+                }
 
-            return terminal;
+                TerminalNotesVM viewModel = Mapper.Map<Terminal, TerminalNotesVM>(terminal);
+
+                return viewModel;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public Terminal SetNotes(int id, string note, int? noteId)
+        {
+            try
+            {
+                Terminal terminal = Table.Include(m => m.Notes).FirstOrDefault(m => m.Id == id);
+
+                if (noteId == null || noteId == 0)
+                {
+                    if (terminal != null)
+                    {
+                        terminal.Notes.Add(new Note { Nota = note });
+                        Save();
+                    }
+                }
+                else
+                {
+                    terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
+                    Edit(terminal);
+                }
+
+                return terminal;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -611,7 +638,7 @@ namespace OctagonPlatform.PersistanceRepository
 
             if (indexTerminalId > 0 || noteId > 0)
             {
-               Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
+                Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
 
                 Context.SaveChanges();
             }
@@ -621,7 +648,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public TerminalCassetteVM GetCassettes(int id)
         {
-            TerminalCassetteVM viewModel ;
+            TerminalCassetteVM viewModel;
 
             try
             {
@@ -665,7 +692,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message +" in CassetteSet");
+                throw new Exception(ex.Message + " in CassetteSet");
             }
         }
 
@@ -742,7 +769,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
-        
+
         public IEnumerable<dynamic> GetAllState(string term)
         {
             try
