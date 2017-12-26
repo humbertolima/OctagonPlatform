@@ -60,8 +60,8 @@ function ExportPdf(idhead,idtable) {
    
 }
 function callankle() {
-    document.location.href = "#ancla";
+    document.location.href = "#ankle";
 }
 function callankle2() {
-    document.location.href = "#ancla2";
+    document.location.href = "#ankle2";
 }

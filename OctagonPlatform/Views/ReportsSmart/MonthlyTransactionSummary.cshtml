@@ -1,6 +1,7 @@
-﻿@model OctagonPlatform.Models.FormsViewModels.CashLoadViewModel
+﻿
+@model OctagonPlatform.Models.FormsViewModels.TransMonthlyViewModel
 @{
-    ViewBag.Title = "CashLoad";
+    ViewBag.Title = "Monthly Transaction Summary";
 
 
 }
@@ -8,7 +9,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <a name="ankle"></a>
-        <h3 class="panel-title">Filter Report Cash Load</h3>
+        <h3 class="panel-title">Filter Monthly Transaction Summary</h3>
     </div>
     <div class="panel-body">
 
@@ -37,23 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-4 col-md-4">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Group, new { htmlAttributes = new { @class = "form-control", @id = "group", @placeholder = "< All >" } })
-                                @Html.HiddenFor(model => model.GroupId, new { id = "groupid" })
-                                @Html.ValidationMessageFor(model => model.Group, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EnumDropDownListFor(b => b.Status, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-xs-12 col-sm-4 col-md-4">
                         <div class="form-group">
                             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -69,14 +54,33 @@
                                 @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                             </div>
                         </div>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4 col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Group, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Group, new { htmlAttributes = new { @class = "form-control", @id = "group", @placeholder = "< All >" } })
+                                @Html.HiddenFor(model => model.GroupId, new { id = "groupid" })
+                                @Html.ValidationMessageFor(model => model.Group, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Surcharge)
+                            @Html.CheckBoxFor(model => model.Surcharge, true)
+                          
+                           
+                            @Html.ValidationMessageFor(model => model.Surcharge, "", new { @class = "text-danger" })
+
+                        </div>
+
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10" style="text-align: right;">
                                 <input type="submit" value="Filter" class="btn btn-primary" />
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         }
@@ -85,30 +89,19 @@
 </div>
 @if (TempData["List"] != null)
 {
-    <div class="panel panel-primary" style="padding:0px;">
-        <div class="panel-heading">
-            <a name="ankle2"></a>
-            <h3 class="panel-title">Chart Cash Load</h3>
-        </div>
-        <div class="panel-body">
-            @Html.Partial("_PartialMorrisChart")
-           
-        </div>
-    </div>
-
     <div class="panel panel-primary">
         <div class="panel-heading">
-          
-            <span class="panel-title" >List Cash Load</span>
-            <span class="panel-title" style="float:right">Date: @DateTime.Now</span>
-           
+            <a name="ankle2"></a>
+            <h3 class="panel-title">Report Monthly Transaction Summary</h3>
         </div>
         <div class="panel-body">
             <div style="display:none" id="idhead">
-                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash load" } })
-               
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Monthly Transaction Summary" }, { "from", @TempData["from"] }, { "to", @TempData["to"] } })
+
             </div>
-            @Html.Partial("_PartialTable")
+            @Html.Partial("_PartialTableMonthlyTransaction", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+
+
 
             <div>
                 @Html.ActionLink("Back to List", "Index")
@@ -123,9 +116,9 @@ else
         <strong>Warning!</strong> Not Record Available.
     </div>
 }
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/Scripts/autocomplete.js")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/autocomplete.js")
     <script>
 
         var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
@@ -134,50 +127,36 @@ else
         var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
         var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
         var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
-        var urlautoaccount = "";
 
     $(function () {
 
+
+        var yeacurrent = (new Date()).getFullYear();
+        var yearold = yeacurrent - 5;
         $("#EndDate").datepicker({
-            dateFormat: "mm/dd/yy"
+            dateFormat: "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: yearold + ":" + yeacurrent
         });
         $("#StartDate").datepicker({
-            dateFormat: "mm/dd/yy"
+            dateFormat: "mm/dd/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: yearold + ":" + yeacurrent
         });
-        callankle();
-        var tempdataval = '@TempData["List"]';
-        if (tempdataval != null && tempdataval != '') {
-            callankle2();
-            ChartBar();        
+          callankle();
+          var tempdataval = '@TempData["List"]';
+          if (tempdataval != null && tempdataval != '') {
+              callankle2();
 
-            var sum1 = 0, sum2 = 0, sum3 = 0;
-            $("#grid tbody tr").find('td:eq(3)').each(function (index, val) {
+          }
 
-                sum1 += $(this).html() * 1;
-            });
-            $("#grid tbody tr").find('td:eq(4)').each(function (index, val) {
-
-                sum2 += $(this).html() * 1;
-            });
-            $("#grid tbody tr").find('td:eq(5)').each(function (index, val) {
-
-                sum3 += $(this).html() * 1;
-            });
-            $('#grid tbody').append("<tr ><th></th><th></th><th>  </th><th >$" + sum1 + " </th><th >$" + sum2 + "</th><th >$" + sum3 + "</th></tr>");
-
-            $("#grid tr").find('td:eq(3), td:eq(4), td:eq(5)').each(function (index, val) {
-                $(this).html("$" + $(this).html());
-            });
-       
-           
-        } 
-
-    });
-     
+        });
 
     </script>
 
 
-    }
+}
 
 

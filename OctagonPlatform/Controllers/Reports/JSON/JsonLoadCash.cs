@@ -54,8 +54,21 @@ namespace OctagonPlatform.Controllers.Reports.JSON
         }
     }
 
-    
- 
+    public class JsonCashBalanceClose
+    {
+        public JsonCashBalanceClose(string terminalId, string time, int? cashBalance)
+        {
+            TerminalId = terminalId;
+            Time = time;
+            CashBalance = cashBalance;
+        }
+
+        public string TerminalId { get; set; }
+        public string Time { get; set; }
+        public int? CashBalance { get; set; }
+
+    }
+
     public class JsonTerminalStatusReport
     {
         public JsonTerminalStatusReport()
@@ -117,6 +130,20 @@ namespace OctagonPlatform.Controllers.Reports.JSON
         public int? TotalTransaction { get; set; }
         public double? Surcharge { get; set; }
         public double? Dispensed { get; set; }
+
+    }
+    public class JsonMonthlyTransactionSummary
+    {
+        public string TerminalId { get; set; }
+        public string Date { get; set; }
+        public int? ApprovedWithdrawals { get; set; }
+        public int? Declined { get; set; }
+        public int? SurchargableWithdrawals { get; set; }
+        public int? OtherApproved { get; set; }
+        public int? Reversed { get; set; }
+        public double? SurchargeAmount { get; set; }
+        public int? TotalTransaction { get; set; }
+        public double? Surcharge { get; set; }
 
     }
 }
