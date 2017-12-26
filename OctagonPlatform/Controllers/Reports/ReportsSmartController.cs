@@ -481,8 +481,9 @@ namespace OctagonPlatform.Controllers.Reports
        
         public ActionResult CashBalanceatClose()
         {
+            CashBalanceAtCloseVM vmodel = new CashBalanceAtCloseVM();
             TempData["Chart"] = null;
-            return View();
+            return View(vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
