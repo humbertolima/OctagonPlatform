@@ -619,22 +619,53 @@ namespace OctagonPlatform.PersistanceRepository
             return TerminalDetails(indexTerminalId);
         }
 
-        public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
+        public TerminalCassetteVM GetCassettes(int id)
+        {
+            TerminalCassetteVM viewModel ;
+
+            try
+            {
+                Terminal terminal = Table
+                    .Include(c => c.Cassettes)
+                    .FirstOrDefault(c => c.Id == id);
+
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                if (terminal.Cassettes == null)
+                {
+                    viewModel = new TerminalCassetteVM();
+                }
+                else
+                {
+                    viewModel = Mapper.Map<Terminal, TerminalCassetteVM>(terminal);
+
+                }
+
+                return viewModel;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
+
+        public Terminal CassettesSet(bool autoRecord, int denomination, int id)
         {
             try
             {
-                var terminal = TerminalDetails(terminalId);
+                var terminal = Table.FirstOrDefault(c => c.Id == id);
                 if (terminal != null)
                 {
-                    terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
+                    terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = id });
                     Save();
                 }
                 return terminal;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //pendiente
-                throw;
+                throw new Exception(ex.Message +" in CassetteSet");
             }
         }
 

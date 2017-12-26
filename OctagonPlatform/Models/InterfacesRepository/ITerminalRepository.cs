@@ -35,6 +35,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal DeleteNotes(int indexTerminalId, int noteId);
 
+        TerminalCassetteVM GetCassettes(int indexTerminalId);
+              
         Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
 
         Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);

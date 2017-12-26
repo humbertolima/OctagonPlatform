@@ -130,6 +130,15 @@ namespace OctagonPlatform
             CreateMap<DisputeRepresentVM, DisputeRepresent>();
             #endregion
 
+            #region Terminals Cassettes
+
+            CreateMap<Terminal, TerminalCassetteVM>();
+
+            CreateMap<TerminalCassetteVM, Cassette>();
+            #endregion
+
+
+
 
 
 

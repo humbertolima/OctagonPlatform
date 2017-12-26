@@ -2,6 +2,7 @@
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -129,9 +130,27 @@ namespace OctagonPlatform.Controllers
             return PartialView("Details", terminal);
         }
 
+        [HttpPost]
+        public PartialViewResult GetCassettes(string id)
+        {
+            try
+            {
+               TerminalCassetteVM viewModel = new TerminalCassetteVM();
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    viewModel = _repository.GetCassettes(Convert.ToInt32(id));
+                }
+                return PartialView("Sections/Cassettes", viewModel);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Get Configuration error. " + ex.Message);
+            }
+        }
 
         [HttpPost]
-        public ActionResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
+        public ActionResult SetCassettes(string autoRecord, int denomination, int id, int? cassetteId)
         {
             bool isAutoRecord;
 
@@ -141,11 +160,11 @@ namespace OctagonPlatform.Controllers
 
             if (cassetteId != null && cassetteId > 0)    //si viene el ID del cassette es porque se le dio al boton editar.
             {
-                terminal = _repository.CassettesEdit(isAutoRecord, denomination, terminalId, Convert.ToInt32(cassetteId));
+                terminal = _repository.CassettesEdit(isAutoRecord, denomination, id, Convert.ToInt32(cassetteId));
             }
             else
             {
-                terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
+                terminal = _repository.CassettesSet(isAutoRecord, denomination, id);
             }
 
             return View("Details", terminal);
@@ -335,7 +354,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CassetteDelete(int? cassetteId, int terminalId)
+        public ActionResult CassetteDelete(int? cassetteId, int id)
         {
             try
             {
@@ -346,13 +365,13 @@ namespace OctagonPlatform.Controllers
                 }
                 _repository.CassettesDelete(Convert.ToInt32(cassetteId));
 
-                return RedirectToAction("Details", new { id = terminalId });
+                return RedirectToAction("Details", new { id = id });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
 
-                return RedirectToAction("Details", new { id = terminalId });
+                return RedirectToAction("Details", new { id = id });
             }
         }
         //======================

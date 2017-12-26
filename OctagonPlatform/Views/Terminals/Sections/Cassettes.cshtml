@@ -1,14 +1,15 @@
-﻿@model  IEnumerable<OctagonPlatform.Models.Cassette>
+﻿@model  OctagonPlatform.Models.FormsViewModels.TerminalCassetteVM
 
-<div id="getCassettes" class="panel-collapse collapse">
+
     <div>
         <table>
             <tbody>
                 @{
-                    foreach (var item in Model)
+                    foreach (var item in Model.Cassettes)
                     {
                         <tr>
                             <td>
+                               <input type="hidden" id="DenominationValues_@item.Id" name="denomination" value="@item.Denomination"/> 
                                 @item.Denomination
                             </td>
                             <td>
@@ -24,6 +25,7 @@
         </table>
 
         <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
+
         @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
         <div id="myModalCassettesEdit" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -38,18 +40,14 @@
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
                     {
                         @Html.AntiForgeryToken()
-                        if (Model.Count() > 0)
-                        {
-                            @Html.Hidden("cassetteId", Model.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Id)
-                            @Html.Hidden("terminalId", ViewData["terminalId"]?.ToString())
-                        }
-
-
+                       
                         <p class="alert alert-danger">
                             @ViewBag.Error
                         </p>
+                        @Html.Hidden("id", Model.Id)
+                        @Html.Hidden("cassetteId")
                         <div class="form-group">
-                            @Html.TextBoxFor(m => m.FirstOrDefault(x => x.TerminalId == Convert.ToInt32(ViewData["terminalId"].ToString())).Denomination)
+                            <input class="denominationEdit" id="denominationEdit" name="denomination" value="" placeholder="denomination" />
                         </div>
                         <div class="form-group">
                             @Html.CheckBox("AutoRecord")Auto Record
@@ -74,11 +72,13 @@
                         <h4 class="modal-title">Add Cassette</h4>
                     </div>
                     <div class="panel-body">
+                       
 
                         @using (Html.BeginForm("SetCassettes", "Terminals"))
                         {
                             @Html.AntiForgeryToken()
-                            <input type="hidden" id="terminalId" name="TerminalId" value="@ViewData["terminalId"].ToString()">
+                            @Html.Hidden("id", Model.Id)
+                            @Html.Hidden("cassetteId")      //toma el valor por Javacripts
 
                             <p class="alert alert-danger">
                                 @ViewBag.Error
@@ -127,9 +127,9 @@
                         @using (Html.BeginForm("CassetteDelete", "Terminals", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.Hidden("cassetteId")
-                            @Html.Hidden("terminalId")
-                            <input type="hidden" id="terminalId" name="terminalId" value="@ViewData["terminalId"]?.toString()" />
+                            
+                            <input type="hidden" id="cassetteId" name="cassetteId" value="" />
+                            <input type="hidden" id="Id" name="Id" value="@Model.Id" />
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
@@ -140,7 +140,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 @Scripts.Render("~/Scripts/jquery-1.10.2.js")
@@ -148,6 +147,8 @@
 <script>
     $(document).on("click", ".CassettesEdit", function () {
         var passedID = $(this).data('id');
+        var passedValue = $("#DenominationValues_" + passedID).val();
+        $("#myModalCassettesEdit #denominationEdit").val(passedValue);
         $("#myModalCassettesEdit #cassetteId").val(passedID);
     });
 </script>

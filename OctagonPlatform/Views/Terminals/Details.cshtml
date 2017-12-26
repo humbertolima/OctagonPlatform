@@ -51,7 +51,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="texth3" data-toggle="collapse" data-target="#getGeneralInfo">
-                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getGeneralInfo">General Info</a>
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
+                            </i><a data-toggle="collapse" href="#getGeneralInfo">General Info</a>
                     </h3>
                     @Html.Partial("Sections/GeneralInfo", Model)
                 </div>
@@ -61,10 +62,27 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="texth3" data-toggle="collapse" data-target="#getCassettes">
-                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getCassettes">Cassettes</a>
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
+                        @Ajax.ActionLink("Cassettes", "GetCassettes", "Terminals", new { id = Model.Id },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getCassettes",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getCassettes"
+                   })
                     </h3>
-                    @Html.Partial("Sections/Cassettes", Model.Cassettes, new ViewDataDictionary() { { "terminalId", Model.Id } })
+                </div>
+                <div id="getCassettes" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </div>
