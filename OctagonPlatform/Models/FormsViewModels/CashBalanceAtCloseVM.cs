@@ -19,11 +19,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         [HiddenInput]
         public int GroupId { get; set; }
        
-        public DateTime? StartDate { get; set; }
+        public string StartDate { get; set; }
         public CashBalanceAtCloseVM()
         {
             //TerminalId = "TR024019";// "NH061617";
-            StartDate = DateTime.Today;
+            StartDate = DateTime.Now.ToString("MM/dd/yyyy");
             PartnerId = -1;
             GroupId = -1;
         }

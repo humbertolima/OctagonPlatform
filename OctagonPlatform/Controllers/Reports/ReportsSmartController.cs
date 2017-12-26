@@ -497,8 +497,8 @@ namespace OctagonPlatform.Controllers.Reports
                 List<JsonCashBalanceClose> list = new List<JsonCashBalanceClose>();
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-
-                list = await api.CashBalanceClose(vmodel.StartDate, listtn);
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                list = await api.CashBalanceClose(start, listtn);
                 IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId);
                 if (listTn.Count() > 0)
                 {
