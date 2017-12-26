@@ -19,7 +19,7 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
         {
             TerminalID = terminalID;
             LocationName = locationName;
-            Time = time;
+            Time = time+" 02:00 PM";
             CashBalance = cashBalance;
         }
 

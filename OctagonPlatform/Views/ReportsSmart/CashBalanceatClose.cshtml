@@ -114,28 +114,17 @@ else
           var tempdataval = '@TempData["List"]';
           if (tempdataval != null && tempdataval != '') {
               callankle2();
-              ChartBar();
+             
 
-              var sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
-              $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
+              var sum1 = 0;
+              $("#grid tbody tr").find('td:eq(3)').each(function (index, val) {
 
                   sum1 += $(this).html() * 1;
               });
-              $("#grid tbody tr").find('td:eq(5)').each(function (index, val) {
+            
+              $('#grid').append("<tr ><th></th><th >  </th><th ></th><th > $" + sum1 + "</th></tr>");
 
-                  sum2 += $(this).html() * 1;
-              });
-              $("#grid tbody tr").find('td:eq(6)').each(function (index, val) {
-
-                  sum3 += $(this).html() * 1;
-              });
-              $("#grid tbody tr").find('td:eq(7)').each(function (index, val) {
-
-                  sum4 += $(this).html() * 1;
-              });
-              $('#grid').append("<tr align='right'><th></th><th >  </th><th > $" + sum1 + "</th><th ></th><th ></th><th >$" + sum2 + "</th><th >$" + sum3 + "</th><th >$" + sum4 + "</th></tr>");
-
-              $("#grid tr").find('td:eq(2), td:eq(5), td:eq(6), td:eq(7)').each(function (index, val) {
+              $("#grid tr").find('td:eq(3)').each(function (index, val) {
                   $(this).html("$" + $(this).html());
               });
           }

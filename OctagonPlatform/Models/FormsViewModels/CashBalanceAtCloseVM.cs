@@ -23,7 +23,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public CashBalanceAtCloseVM()
         {
             //TerminalId = "TR024019";// "NH061617";
-          
+            StartDate = DateTime.Today;
             PartnerId = -1;
             GroupId = -1;
         }
