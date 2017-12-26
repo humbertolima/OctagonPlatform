@@ -1,6 +1,5 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalNotesVM
 
-<div id="getNotes" class="panel-collapse collapse">
     <div>
         <table>
             <tbody>
@@ -16,7 +15,7 @@
                                 @item.CreatedAt
                             </td>
                             <td>
-                                <button type="button" class="NotesEdit link" data-toggle="modal" data-id="@item.Id" data-target="#myModalNotesEdit"><i class="fa fa-pencil" style="color: darkblue; font-size: 16px;">Edit</i></button>
+                                <button type="button" class="NotesEdit link" data-toggle="modal" data-id="@item.Id" data-target="#myModaNotesAdd"><i class="fa fa-pencil" style="color: darkblue; font-size: 16px;">Edit</i></button>
                             </td>
                             <td>
                                 <button type="button" class="NotesDelete link" data-toggle="modal" data-id="@item.Id" data-target="#DeleteNoteModal">Delete</button>
@@ -28,75 +27,36 @@
         </table>
         <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModaNotesAdd">Add</button>
 
-        @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
-        <div id="myModalNotesEdit" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
-                    </div>
-
-                    <h3 class="alert-info">Edit</h3>
-
-                    @using (Html.BeginForm("SetNotes", "Terminals"))
-                    {
-                    @Html.AntiForgeryToken()
-
-                    <input type="hidden" id="IndexTerminalId" name="IndexTerminalId" value="@Model.Id">
-                    <input type="hidden" id="noteId" name="noteId" value="">
-
-                    <p class="alert alert-danger">
-                        @ViewBag.Error
-                    </p>
-                    <div class="form-group">
-                        <input type="text" id="notes" name="notes" value="">
-                    </div>
-                    <div class="form-group">
-                        @*@Html.CheckBox("AutoRecord")Auto Record
-                            @Html.ValidationMessage("AutoRecord")*@
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
-                    }
-                </div>
-            </div>
-        </div>
-
         <div id="myModaNotesAdd" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Add note</h4>
                     </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("SetNotes", "Terminals"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" id="id" name="id" value="@Model.Id">
+                            <input type="hidden" id="noteId" name="noteId" value="">
 
-                    <h3 class="alert-info">Edit</h3>
-
-                    @using (Html.BeginForm("SetNotes", "Terminals"))
-                    {
-                        @Model
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" id="indexTerminalId" name="IndexTerminalId" value="@Model.Id">
-
-                        <p class="alert alert-danger">
-                            @ViewBag.Error
-                        </p>
-                        <div class="form-group">
-                            <input type="text" id="notes" name="notes" value="">
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                            <p class="alert alert-danger">
+                                @ViewBag.Error
+                            </p>
+                            <div class="form-group">
+                                <label for="comment">Note:</label>
+                                <textarea class="form-control" rows="5" id="notes" name="notes"></textarea>
                             </div>
-                        </div>
-                    }
+
+                            <div class="form-group">
+                                <div class="col-lg-10 col-lg-offset-2">
+                                    <button type="reset" class="btn btn-default">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,7 +77,7 @@
                             @Html.AntiForgeryToken()
                             @Html.Hidden("noteId")
                             <input type="hidden" id="indexTerminalId" name="indexTerminalId" value="@Model.Id" />
-                            
+
                             <div class="form-group">
                                 <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
                                 <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
@@ -128,7 +88,6 @@
             </div>
         </div>
     </div>
-</div>
 
 
 @Scripts.Render("~/Scripts/jquery-1.10.2.js")
@@ -138,13 +97,7 @@
     $(document).on("click", ".NotesEdit", function () {
         var passedID = $(this).data('id');
         var passedValue = $("#NotesValues_" + passedID).val();
-        alert(passedValue);
-        $("#myModalNotesEdit #notes").val(passedValue);
-    });
-
-    $(document).on("click", ".NotesEdit", function () {
-        var passedID = $(this).data('id');
-        $("#myModalNotesEdit #noteId").val(passedID);
+        $("#myModaNotesAdd #notes").val(passedValue);
     });
 
     $(document).on("click", ".NotesDelete", function () {

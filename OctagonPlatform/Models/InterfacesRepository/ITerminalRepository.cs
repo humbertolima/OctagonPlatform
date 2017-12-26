@@ -21,11 +21,15 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
-        TerminalAlertIngnoredViewModel GetConfigNotification(int terminalId);
+        TerminalConfigViewModel GetConfigNotification(int terminalId);
+
+        TerminalDocumentsVM GetDocuments(int id);
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
-        Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId);
+        TerminalPicturesVM GetPictures(int id);
+
+        Terminal SetPictures(int id, HttpPostedFileBase archive, int? pictureId);
 
         Terminal PictureDelete(int indexTerminalId, int pictureId);
 
@@ -35,19 +39,21 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal DeleteNotes(int indexTerminalId, int noteId);
 
-        Terminal CassettesSet(bool autoRecord, int denomination, int terminalId);
+        TerminalNotesVM GetNotes(int id);
 
-        Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId);
+        TerminalCassetteVM GetCassettes(int id);
+        
+        Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId);
         
         void CassettesDelete(int cassetteId);
 
-        Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
+        TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigViewModel);
 
-        Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
+        Terminal SetWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit);
 
         Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
 
-        Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel);
+        Terminal AddWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
         
         IEnumerable<Terminal> Search(string search, int partnerId);
 

@@ -66,9 +66,9 @@ namespace OctagonPlatform
 
             #region Terminal Alert Ignnored Mapped
 
-            CreateMap<TerminalAlertConfig, TerminalAlertIngnoredViewModel>();
+            CreateMap<TerminalAlertConfig, TerminalConfigViewModel>();
 
-            CreateMap<TerminalAlertIngnoredViewModel, TerminalAlertConfig>();
+            CreateMap<TerminalConfigViewModel, TerminalAlertConfig>();
             //Dto to Domain
             #endregion
 
@@ -102,7 +102,6 @@ namespace OctagonPlatform
 
             #endregion
 
-
             #region InterChange Mapping
 
             CreateMap<InterChange, InterChangeFormViewModel>();
@@ -129,6 +128,35 @@ namespace OctagonPlatform
 
             CreateMap<DisputeRepresentVM, DisputeRepresent>();
             #endregion
+
+            #region Terminals Cassettes
+
+            CreateMap<Terminal, TerminalCassetteVM>();
+
+            CreateMap<TerminalCassetteVM, Cassette>();
+            #endregion
+
+            #region Terminals Notes
+
+            CreateMap<Terminal, TerminalNotesVM>();
+
+            CreateMap<TerminalNotesVM, Terminal>();
+            #endregion
+
+            #region Terminals Documents
+
+            CreateMap<Terminal, TerminalDocumentsVM>();
+
+            CreateMap<TerminalDocumentsVM, Terminal>();
+            #endregion
+
+            #region Terminals Pictures
+            
+            CreateMap<Terminal, TerminalPicturesVM>();
+
+            CreateMap<TerminalPicturesVM, Terminal>();
+            #endregion
+
 
 
 

@@ -267,25 +267,17 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.State)
                     .Include(x => x.City)
                     .Include(x => x.LocationType)
-                    .Include(x => x.Cassettes)
                     .Include(x => x.Contracts)
-                    .Include(x => x.Documents)
-                    //.Include(x => x.InterChanges)
                     .Include(x => x.Make)
                     .Include(x => x.Model)
                     .Include(x => x.Users)
                     .Include(x => x.VaultCash)
                     .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
-                    .Include(x => x.Notes)
                     .Include(x => x.TerminalContacts)
-                    .Include(x => x.TerminalPictures)
-                    .Include(x => x.Cassettes)
                     .Include(x => x.Disputes)
-                    .Include(x => x.TerminalAlertConfigs)
-                    .Include(x => x.WorkingHours)
-                    .Include(x => x.Pictures)
                     .FirstOrDefault();
+
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.InterChanges = Context.InterChanges.Where(x => x.TerminalId == terminal.Id && !x.Deleted)
@@ -363,11 +355,11 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public TerminalAlertIngnoredViewModel GetConfigNotification(int id)
+        public TerminalConfigViewModel GetConfigNotification(int id)
         {
             try
             {
-                var terminal = Table
+                Terminal terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
                     .Include(c => c.WorkingHours)
                     .FirstOrDefault(c => c.Id == id);
@@ -376,10 +368,11 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     terminal.TerminalAlertConfigs = new TerminalAlertConfig();
                 }
-                var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalAlertIngnoredViewModel>(terminal.TerminalAlertConfigs);
+                var terminalAlertConfigViewModel = Mapper.Map<TerminalAlertConfig, TerminalConfigViewModel>(terminal.TerminalAlertConfigs);
 
                 terminalAlertConfigViewModel.WorkingHours = terminal.WorkingHours;
-                terminalAlertConfigViewModel.TerminalId = terminal.Id;
+                terminalAlertConfigViewModel.Id = terminal.Id;
+                terminalAlertConfigViewModel.TerminalId = terminal.TerminalId;
 
                 return terminalAlertConfigViewModel;
             }
@@ -390,41 +383,43 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public Terminal SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigVM)
         {
             try
             {
-                var terminalAlertConfig = Mapper.Map<TerminalAlertIngnoredViewModel, TerminalAlertConfig>(terminalAlertIngnoredViewModel);
+                var terminalAlertConfig = Mapper.Map<TerminalConfigViewModel, TerminalAlertConfig>(terminalConfigVM);
 
-                var terminal = Table
+                Terminal terminal = Table
                     .Include(c => c.TerminalAlertConfigs)
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalConfigVM.Id);
+
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
                 terminal.TerminalAlertConfigs = terminalAlertConfig;
 
                 Edit(terminal);
 
+                TerminalConfigViewModel viewModel = GetConfigNotification(terminal.Id);
 
-                return terminal;
+                return viewModel;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message + "Terminal not found.");
+                throw new Exception(e.Message);
             }
 
         }
 
-        public Terminal SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string workingHoursEdit)
+        public Terminal SetWorkingHours(TerminalConfigViewModel terminalConfigViewModel, string workingHoursEdit)
         {
             try
             {
-                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+                var startTime = new TimeSpan(terminalConfigViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalConfigViewModel.EndTime, 00, 00);
 
                 var terminal = Table
                     .Include(c => c.WorkingHours)
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalConfigViewModel.Id);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -438,7 +433,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var workingHours = terminal.WorkingHours.FirstOrDefault(c => c.Id == Convert.ToInt32(workingHoursEdit));
                 if (workingHours != null)
                     workingHours.Day =
-                        terminalAlertIngnoredViewModel.Days;
+                        terminalConfigViewModel.Days;
 
                 Edit(terminal);
 
@@ -451,17 +446,17 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public Terminal AddWorkingHours(TerminalConfigViewModel terminalConfigViewModel)
         {
 
 
             try
             {
-                var startTime = new TimeSpan(terminalAlertIngnoredViewModel.StartTime, 00, 00);
-                var endTime = new TimeSpan(terminalAlertIngnoredViewModel.EndTime, 00, 00);
+                var startTime = new TimeSpan(terminalConfigViewModel.StartTime, 00, 00);
+                var endTime = new TimeSpan(terminalConfigViewModel.EndTime, 00, 00);
 
                 var terminal = Table
-                    .FirstOrDefault(c => c.Id == terminalAlertIngnoredViewModel.TerminalId);
+                    .FirstOrDefault(c => c.Id == terminalConfigViewModel.Id);
 
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
@@ -469,7 +464,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     new TerminalWorkingHours
                     {
-                        Day = terminalAlertIngnoredViewModel.Days,
+                        Day = terminalConfigViewModel.Days,
                         StartTime = startTime,
                         EndTime = endTime,
                         TerminalId = terminal.TerminalId
@@ -507,12 +502,34 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public Terminal SetPictures(int indexTerminalId, HttpPostedFileBase archive, int? pictureId)
+        public TerminalPicturesVM GetPictures(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m => m.Id == id);
+                    TerminalPicturesVM viewModel = Mapper.Map<Terminal, TerminalPicturesVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalPicturesVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Terminal SetPictures(int id, HttpPostedFileBase archive, int? pictureId)
         {
             Terminal terminal = new Terminal();
             if (archive != null)
             {
-                terminal = TerminalDetails(indexTerminalId);
+                terminal = TerminalDetails(id);
 
                 if (pictureId == null || pictureId == 0)
                 {
@@ -530,6 +547,28 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Need document Attach");
             }
             return terminal;
+        }
+
+        public TerminalDocumentsVM GetDocuments(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.Documents).FirstOrDefault(m => m.Id == id);
+                    TerminalDocumentsVM viewModel = Mapper.Map<Terminal, TerminalDocumentsVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalDocumentsVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId)
@@ -556,9 +595,9 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
-        public Terminal PictureDelete(int indexTerminalId, int pictureId)
+        public Terminal PictureDelete(int id, int pictureId)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
+            Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m=>m.Id == id);
 
             if (pictureId > 0)
             {
@@ -568,38 +607,79 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
-        public Terminal DocumentDelete(int indexTerminalId, int documentId)
+        public Terminal DocumentDelete(int id, int documentId)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
-
-            if (documentId > 0)
+            try
             {
-                Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
-                Context.SaveChanges();
+                Terminal terminal = Table.Include(m => m.Documents).FirstOrDefault(m => m.Id == id);
+
+                if (documentId > 0)
+                {
+                    Context.Documents.Remove(terminal.Documents.FirstOrDefault(c => c.Id == documentId));
+                    Context.SaveChanges();
+                }
+                return terminal;
             }
-            return terminal;
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-
-        public Terminal SetNotes(int indexTerminalId, string note, int? noteId)
+        public TerminalNotesVM GetNotes(int id)
         {
-            Terminal terminal = TerminalDetails(indexTerminalId);
-
-            if (noteId == null || noteId == 0)
+            try
             {
-                if (terminal != null)
+                Terminal terminal;
+                if (id > 0)
                 {
-                    terminal.Notes.Add(new Note { Nota = note });
-                    Save();
+                    terminal = Table
+                        .Include(m => m.Notes)
+                        .FirstOrDefault(m => m.Id == id);
                 }
-            }
-            else
-            {
-                terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
-                Edit(terminal);
-            }
+                else
+                {
+                    terminal = new Terminal();
+                }
 
-            return terminal;
+                TerminalNotesVM viewModel = Mapper.Map<Terminal, TerminalNotesVM>(terminal);
+
+                return viewModel;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public Terminal SetNotes(int id, string note, int? noteId)
+        {
+            try
+            {
+                Terminal terminal = Table.Include(m => m.Notes).FirstOrDefault(m => m.Id == id);
+
+                if (noteId == null || noteId == 0)
+                {
+                    if (terminal != null)
+                    {
+                        terminal.Notes.Add(new Note { Nota = note });
+                        Save();
+                    }
+                }
+                else
+                {
+                    terminal.Notes.FirstOrDefault(c => c.Id == noteId).Nota = note;
+                    Edit(terminal);
+                }
+
+                return terminal;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -608,7 +688,7 @@ namespace OctagonPlatform.PersistanceRepository
 
             if (indexTerminalId > 0 || noteId > 0)
             {
-               Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
+                Note note = Context.Notes.Remove(Context.Notes.FirstOrDefault(c => c.Id == noteId));
 
                 Context.SaveChanges();
             }
@@ -616,37 +696,61 @@ namespace OctagonPlatform.PersistanceRepository
             return TerminalDetails(indexTerminalId);
         }
 
-        public Terminal CassettesSet(bool autoRecord, int denomination, int terminalId)
+        public TerminalCassetteVM GetCassettes(int id)
         {
+            TerminalCassetteVM viewModel;
+
             try
             {
-                var terminal = TerminalDetails(terminalId);
-                if (terminal != null)
+                Terminal terminal = Table
+                    .Include(c => c.Cassettes)
+                    .FirstOrDefault(c => c.Id == id);
+
+                if (terminal == null) throw new Exception("Terminal not found. ");
+
+                if (terminal.Cassettes == null)
                 {
-                    terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = terminalId });
-                    Save();
+                    viewModel = new TerminalCassetteVM();
                 }
-                return terminal;
-            }
-            catch (Exception)
-            {
-                //pendiente
-                throw;
-            }
-        }
+                else
+                {
+                    viewModel = Mapper.Map<Terminal, TerminalCassetteVM>(terminal);
 
-        public Terminal CassettesEdit(bool autoRecord, int denomination, int terminalId, int cassetteId)
+                }
+
+                return viewModel;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+        
+
+        public Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId)
         {
             try
             {
-                var terminal = TerminalDetails(terminalId);
-                if (terminal != null)
+                Terminal terminal;
+                if (cassetteId != null || cassetteId > 0)
                 {
-                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).Denomination = denomination;
-                    terminal.Cassettes.FirstOrDefault(c => c.Id == cassetteId).AutoRecord = autoRecord;
+                      terminal = Table.Include(m => m.Cassettes).FirstOrDefault(m => m.Id == id);
 
+                    terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).Denomination = denomination;
+                    terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).AutoRecord = autoRecord;
                     Edit(terminal);
                 }
+                else
+                {
+                    terminal = Table.FirstOrDefault(m => m.Id == id);
+
+                    if (terminal !=null)
+                    {
+                        terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = id });
+                        Save();
+                    }
+                }
                 return terminal;
             }
             catch (Exception)
@@ -655,6 +759,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw;
             }
         }
+
         public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
         {
             try
@@ -688,7 +793,6 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-
         public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int stateid, int cityid, string zipcode, int? groupId = null)
         {
 
@@ -709,7 +813,6 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-
         public IEnumerable<dynamic> GetAllState(string term)
         {
             try
@@ -722,6 +825,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
         public IEnumerable<dynamic> GetAllCity(string term)
         {
             try
@@ -734,6 +838,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
         public List<string> GetAllZipCode(string term)
         {
             try

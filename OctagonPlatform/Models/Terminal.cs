@@ -137,8 +137,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Contract> Contracts { get; set; }
 
-        public ICollection<Cassette> Cassettes { get; set; }
-
+        public List<Cassette> Cassettes { get; set; }           //modificado a IList para poder hacer el mapperAuto al viewModel. Ver metodo getCassette en repositorio de terminal.
 
         [Display(Name = "Who Initiates Day Closed")]
         public WhoInitiateDayClsed.Who WhoInitiates { get; set; }
@@ -191,7 +190,7 @@ namespace OctagonPlatform.Models
             LoadCashs = new Collection<LoadCash>();
             TransactionStatistics = new Collection<TransactionStatistic>();
             Contracts = new Collection<Contract>();
-            Cassettes = new Collection<Cassette>();
+            Cassettes = new List<Cassette>();       //modificado para poder hacer mapper Auto en metodo getCassette del repositorio de Terminal.
             Surcharges = new Collection<Surcharge>();
             InterChanges = new Collection<InterChange>();
             CryptoChargeAccounts = new Collection<CryptoChargeAccount>();
