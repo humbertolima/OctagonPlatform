@@ -119,4 +119,18 @@ namespace OctagonPlatform.Controllers.Reports.JSON
         public double? Dispensed { get; set; }
 
     }
+    public class JsonMonthlyTransactionSummary
+    {
+        public string TerminalId { get; set; }
+        public string Date { get; set; }
+        public int? ApprovedWithdrawals { get; set; }
+        public int? Declined { get; set; }
+        public int? SurchargableWithdrawals { get; set; }
+        public int? OtherApproved { get; set; }
+        public int? Reversed { get; set; }
+        public double? SurchargeAmount { get; set; }
+        public int? TotalTransaction { get; set; }
+        public double? Surcharge { get; set; }
+
+    }
 }

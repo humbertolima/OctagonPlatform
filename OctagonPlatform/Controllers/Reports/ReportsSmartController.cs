@@ -111,7 +111,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["from"] = vmodel.StartDate;
                 TempData["to"] = vmodel.EndDate;
                 #endregion
-                
+
                 return View();
             }
 
@@ -201,18 +201,18 @@ namespace OctagonPlatform.Controllers.Reports
                         int? amountCurrent = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.AmountCurrent).FirstOrDefault();
                         int? dayuntilcashload = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.Dayuntilcashload).FirstOrDefault();
                         DateTime? lastLoad = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.LastLoad).FirstOrDefault();
-                       
-      
 
-        CashManagementTableVM obj = new CashManagementTableVM(item.TerminalId,item.LocationName, cashBalance.ToString(), dayuntilcashload.ToString(), lastLoad.ToString(), amountPrevius.ToString(), amountLoad.ToString(), amountCurrent.ToString());
-                            JsonLoadCashChart objchart = new JsonLoadCashChart(lastLoad?.ToString("yyyy-MM-dd"), amountPrevius, amountLoad);
-                            listchart.Add(objchart);
-                            listaux.Add(obj);
-                        
+
+
+                        CashManagementTableVM obj = new CashManagementTableVM(item.TerminalId, item.LocationName, cashBalance.ToString(), dayuntilcashload.ToString(), lastLoad.ToString(), amountPrevius.ToString(), amountLoad.ToString(), amountCurrent.ToString());
+                        JsonLoadCashChart objchart = new JsonLoadCashChart(lastLoad?.ToString("yyyy-MM-dd"), amountPrevius, amountLoad);
+                        listchart.Add(objchart);
+                        listaux.Add(obj);
+
                     }
 
                 }
-             
+
 
                 #region Variables Partial
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashManagementTableVM>(listaux) : null;
@@ -228,11 +228,11 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("Index");
         }
 
-      
+
 
         [HttpPost]
         [ValidateInput(false)]
-        public FileResult Export(string html, string filename,string orientation)
+        public FileResult Export(string html, string filename, string orientation)
         {
             using (MemoryStream stream = new System.IO.MemoryStream())
             {
@@ -241,7 +241,7 @@ namespace OctagonPlatform.Controllers.Reports
                 iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(pageSize, 20f, 20f, 20f, 20f);
                 PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
                 pdfDoc.Open();
-               
+
                 XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
                 pdfDoc.Close();
                 return File(stream.ToArray(), "application/pdf", filename);
@@ -325,7 +325,7 @@ namespace OctagonPlatform.Controllers.Reports
                 #region Variables Partial
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<TerminalStatusTableVM>(listaux) : null;
                 TempData["filename"] = "TerminalStatus";
-                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null; 
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 #endregion
 
                 return View();
@@ -350,7 +350,7 @@ namespace OctagonPlatform.Controllers.Reports
             ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
-                List<TransDailyTableVM> listaux = new List<TransDailyTableVM>();              
+                List<TransDailyTableVM> listaux = new List<TransDailyTableVM>();
                 List<JsonDailyTransactionSummary> list = new List<JsonDailyTransactionSummary>();
                 ApiATM api = new ApiATM();
 
@@ -359,7 +359,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
 
-                list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn,vmodel.Surcharge,vmodel.Dispensed);
+                list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn, vmodel.Surcharge, vmodel.Dispensed);
 
                 IEnumerable<dynamic> listTn = repo_terminal.TransDailyList(list, vmodel.PartnerId);
 
@@ -382,8 +382,8 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                         if (locationname != "")
                         {
-                            TransDailyTableVM obj = new TransDailyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals,item.OtherApproved,item.Reversed,item.SurchargeAmount,item.TotalTransaction,item.Surcharge,item.Dispensed);
-                           
+                            TransDailyTableVM obj = new TransDailyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals, item.OtherApproved, item.Reversed, item.SurchargeAmount, item.TotalTransaction, item.Surcharge, item.Dispensed);
+
                             listaux.Add(obj);
                         }
                     }
@@ -391,7 +391,7 @@ namespace OctagonPlatform.Controllers.Reports
                 }
 
                 #region Variables Partial
-               
+
                 TempData["List"] = listaux.Count() > 0 ? listaux : null;
                 TempData["filename"] = "DailyTransactionSummary";
                 TempData["Chart"] = null;
@@ -407,5 +407,81 @@ namespace OctagonPlatform.Controllers.Reports
 
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult MonthlyTransactionSummary()
+        {
+            TransMonthlyViewModel model = new TransMonthlyViewModel();
+            TempData["Chart"] = null;
+
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] TransMonthlyViewModel vmodel)
+        {
+            ModelState.Remove("PartnerId");
+            ModelState.Remove("GroupId");
+            ModelState.Remove("TerminalId");
+            if (ModelState.IsValid)
+            {
+                List<TransMonthlyTableVM> listaux = new List<TransMonthlyTableVM>();
+                List<JsonMonthlyTransactionSummary> list = new List<JsonMonthlyTransactionSummary>();
+                ApiATM api = new ApiATM();
+
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
+
+                list = await api.MonthlyTransactionSummary(start, end, vmodel.TerminalId, listtn, vmodel.Surcharge);
+
+                IEnumerable<dynamic> listTn = repo_terminal.TransMonthlyList(list, vmodel.PartnerId);
+
+                if (listTn.Count() > 0)
+                {
+
+
+                    foreach (var item in list)
+                    {
+
+                        string locationname = "";
+
+                        foreach (dynamic x in listTn)
+                        {
+                            if (x.TerminalId == item.TerminalId)
+                            {
+                                locationname = x.LocationName;
+                                break;
+                            }
+                        }
+                        if (locationname != "")
+                        {
+                            TransMonthlyTableVM obj = new TransMonthlyTableVM(item.TerminalId, locationname, item.Date, item.ApprovedWithdrawals, item.Declined, item.SurchargableWithdrawals, item.OtherApproved, item.Reversed, item.SurchargeAmount, item.TotalTransaction, item.Surcharge);
+                            listaux.Add(obj);
+                        }
+                    }
+
+                }
+
+                #region Variables Partial
+
+                TempData["List"] = listaux.Count() > 0 ? listaux : null;
+                TempData["filename"] = "MonthlyTransactionSummary";
+                TempData["Chart"] = null;
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = start?.ToString("MMMM , yyyy");
+                TempData["to"] = end?.ToString("MMMM , yyyy");
+                TempData["model"] = vmodel;
+                #endregion
+
+                return View();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 }
