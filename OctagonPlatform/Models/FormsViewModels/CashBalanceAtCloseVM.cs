@@ -9,11 +9,8 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class CashManagementVM 
+    public class CashBalanceAtCloseVM
     {
-
-        [DisplayName("Terminal Id")]
-        public string TerminalId { get; set; }
 
         public string Partner { get; set; }
         [HiddenInput]
@@ -21,12 +18,12 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Group { get; set; }
         [HiddenInput]
         public int GroupId { get; set; }
-
-        public StatusType.Status Status { get; set; }
-
-
-        public CashManagementVM()
-        {           
+       
+        public string StartDate { get; set; }
+        public CashBalanceAtCloseVM()
+        {
+            //TerminalId = "TR024019";// "NH061617";
+            StartDate = DateTime.Now.ToString("MM/dd/yyyy");
             PartnerId = -1;
             GroupId = -1;
         }
