@@ -58,6 +58,22 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        public PartialViewResult GetInterchanges(TerminalInterchangeVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetInterchanges(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Interchanges", viewModel);
+        }
+
+
+        [HttpPost]
         public PartialViewResult GetSurcharges(TerminalSurchargeVM viewModel)
         {
             if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.

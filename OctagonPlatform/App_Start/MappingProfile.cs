@@ -20,6 +20,17 @@ namespace OctagonPlatform
 
             CreateMap<User, UserBAViewModel>();
 
+
+
+
+            #region Terminal Interchanges
+
+            CreateMap<Terminal, TerminalInterchangeVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalInterchangeVM, Terminal>();
+
+            #endregion
+
+
             #region Terminal Sourcharge
 
             CreateMap<Terminal, TerminalSurchargeVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));

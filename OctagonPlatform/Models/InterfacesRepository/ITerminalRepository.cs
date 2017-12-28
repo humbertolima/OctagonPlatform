@@ -29,6 +29,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
+        TerminalInterchangeVM GetInterchanges(int id);
+
         TerminalContactVM GetContacts(int id);
 
         TerminalPicturesVM GetPictures(int id);

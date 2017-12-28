@@ -550,6 +550,33 @@ namespace OctagonPlatform.PersistanceRepository
         }
 
 
+        public TerminalInterchangeVM GetInterchanges(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table
+                        .Include(m => m.InterChanges)
+                        .Include(m => m.InterChanges.Select(s => s.BankAccount))
+                        .FirstOrDefault(m => m.Id == id);
+
+                    TerminalInterchangeVM viewModel = Mapper.Map<Terminal, TerminalInterchangeVM>(terminal);
+
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalInterchangeVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public TerminalSurchargeVM GetSurcharges(int id)
         {
             try
