@@ -210,10 +210,28 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="texth3" data-toggle="collapse" data-target="#getVaultCash">
-                        <i class="fa fa-money" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getVaultCash">Vault Cash</a>
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
+                        </i> @Ajax.ActionLink("Vault Cash", "GetVaultCash", "Terminals", new { id = Model.Id, terminalId = Model.TerminalId },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getVaultCash",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getVaultCash"
+                   })
                     </h3>
-                    @Html.Partial("Sections/VaultCash", Model.VaultCash, new ViewDataDictionary() { { "terminalId", Model.Id } })
+                </div>
+                <div id="getVaultCash" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </div>

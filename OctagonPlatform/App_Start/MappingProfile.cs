@@ -88,6 +88,13 @@ namespace OctagonPlatform
 
             #endregion
 
+            #region Terminal VaultCash
+
+            CreateMap<Terminal, TerminalVaultCashVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalVaultCashVM, Terminal>();
+
+            #endregion
+
             #region VaultCash Mapping
 
             CreateMap<VaultCash, VaultCashFormViewModel>();

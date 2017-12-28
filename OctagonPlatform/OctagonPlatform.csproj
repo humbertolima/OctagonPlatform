@@ -339,6 +339,7 @@
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
     <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalCassetteVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalDocumentsVM.cs" />

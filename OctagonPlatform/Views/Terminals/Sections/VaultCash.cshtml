@@ -1,8 +1,17 @@
-﻿@model OctagonPlatform.Models.VaultCash
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalVaultCashVM
+@{
+    if (ViewBag.Error != null)
+    {
+        <p class="alert alert-danger">
+            <strong>Error: @ViewBag.Error</strong>
+        </p>
+    }
+}
 
-
-<div id="getVaultCash" class="panel-collapse collapse">
-    @Ajax.ActionLink("ADD", "Create", "VaultCash", new { terminalId = ViewData["terminalId"]?.ToString() },
+@if (Model.VaultCash == null)
+{       //pendiente validar en el contralador que el usuario no pueda add un vaultcash mas a la terminal.
+    <p>
+        @Ajax.ActionLink("ADD", "Create", "VaultCash", new { id = Model.Id },
                    new AjaxOptions
                    {
                        UpdateTargetId = "AddVaultCash",
@@ -16,6 +25,9 @@
                        data_toggle = "modal",
                        data_target = "#AddVaultCash"
                    })
+    </p>
+}
+
     <table id="vaultcash" class="table table-striped table-hover table-bordered">
         <thead class="thead-blue">
             <tr>
@@ -25,14 +37,14 @@
                 <th>Stop Date</th>
             </tr>
         </thead>
-        @if (Model != null)
+        @if (Model.VaultCash != null)
         {
             <tbody>
                 <tr>
-                    <td>@Model.BankAccount.NickName</td>
-                    <td>@Model.BankAccount.BankName</td>
-                    <td>@Model.StartDate.ToShortDateString()</td>
-                    <td>@Model.StopDate.ToShortDateString()</td>
+                    <td>@Model.VaultCash.BankAccount.NickName</td>
+                    <td>@Model.VaultCash.BankAccount.BankName</td>
+                    <td>@Model.VaultCash.StartDate.ToShortDateString()</td>
+                    <td>@Model.VaultCash.StopDate.ToShortDateString()</td>
                 </tr>
             </tbody>
         }

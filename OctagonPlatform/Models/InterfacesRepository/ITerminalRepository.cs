@@ -31,6 +31,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalPicturesVM GetPictures(int id);
 
+        TerminalVaultCashVM GetVaultCash(int id);
+
         Terminal SetPictures(int id, HttpPostedFileBase archive, int? pictureId);
 
         Terminal PictureDelete(int indexTerminalId, int pictureId);

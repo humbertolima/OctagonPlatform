@@ -549,6 +549,31 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
+        public TerminalVaultCashVM GetVaultCash(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table
+                        .Include(m => m.VaultCash)
+                        .Include(m=> m .VaultCash.BankAccount)
+                        .FirstOrDefault(m => m.Id == id);
+                    TerminalVaultCashVM viewModel = Mapper.Map<Terminal, TerminalVaultCashVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalVaultCashVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public TerminalContactVM GetContacts(int id)
         {
             try

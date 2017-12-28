@@ -57,6 +57,22 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+
+        [HttpPost]
+        public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetVaultCash(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/VaultCash", viewModel);
+        }
+
         [HttpPost]
         public PartialViewResult GetContacts(TerminalContactVM viewModel)
         {
