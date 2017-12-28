@@ -19,20 +19,7 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-        public ActionResult CashManagement(string terminalId)
-        {
-            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-            var result = _repository.GetCashLoad(start, end, terminalId);
-
-            foreach (var item in result.Result)
-            {
-
-            }
-            return PartialView("Sections/CashManagements", result.Result);
-        }
-
+       
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -56,6 +43,19 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
+        
+        
+        public async Task<PartialViewResult> GetCashManagement(int id,string terminalId)
+        {
+            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+            var result = await _repository.GetCashLoad(start, end, terminalId);
+
+           
+            return PartialView("Sections/CashManagements", result);
+        }
+
 
         [HttpPost]
         public PartialViewResult GetInterchanges(TerminalInterchangeVM viewModel)

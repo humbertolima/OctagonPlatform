@@ -11,14 +11,20 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class CashManagementVM 
     {
+        [Required]
+        public int Id { get; set; }
 
+        [Required]
         [DisplayName("Terminal Id")]
         public string TerminalId { get; set; }
 
         public string Partner { get; set; }
+
         [HiddenInput]
         public int PartnerId { get; set; }
+
         public string Group { get; set; }
+
         [HiddenInput]
         public int GroupId { get; set; }
 

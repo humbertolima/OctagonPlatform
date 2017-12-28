@@ -992,6 +992,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+
         public IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
         {
 

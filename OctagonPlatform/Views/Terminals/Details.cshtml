@@ -52,7 +52,7 @@
                 <div class="panel-heading">
                     <h3 class="texth3" data-toggle="collapse" data-target="#getGeneralInfo">
                         <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
-                            </i><a data-toggle="collapse" href="#getGeneralInfo">General Info</a>
+                        </i><a data-toggle="collapse" href="#getGeneralInfo">General Info</a>
                     </h3>
                     @Html.Partial("Sections/GeneralInfo", Model)
                 </div>
@@ -297,16 +297,18 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="texth3" data-toggle="collapse" data-target="#getCashManagement">
-                        <i class="fa fa-bank" style="font-size:25px;color:#4776a1"></i><a data-toggle="collapse" href="#getCashManagement">Cash Management</a>
-                    </h3>
-                    @Ajax.ActionLink("Cash Management", "CashManagement", "Terminals", new { terminalId = Model.TerminalId },
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
+                        </i>
+                        <a id="apiterminals">prueba</a>
+                        @Ajax.ActionLink("Cash Management", "GetCashManagement", "Terminals", new { id = Model.Id, terminalId = Model.TerminalId },
                    new AjaxOptions
                    {
-                       UpdateTargetId = "getCashManagement",
+                      
                        LoadingElementId = "loading3",
                        InsertionMode = InsertionMode.Replace,
-                       HttpMethod = "Post"
+                       HttpMethod = "Post",
+                       OnSuccess = "Success"
                    },
                    htmlAttributes: new
                    {
@@ -314,7 +316,10 @@
                        data_toggle = "collapse",
                        data_target = "#getCashManagement"
                    })
-                    <div id="getCashManagement" class="panel-collapse collapse">
+                    </h3>
+                </div>
+                <div id="getCashManagement" class="panel-collapse collapse">
+                    <div class="panel-body">
                         <div class="loader"></div>
                     </div>
                 </div>
@@ -373,15 +378,42 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 
     <script>
+      
+        var url = '@Url.Action("GetCashManagement", "Terminals")';
         $(function () {
+
             $("#deleteInterchange").click(function () {
                 var id = $(this).data('id');
                 $("#confirmdeleteInterchange #id").val(id);
 
             });
+            $("#apiterminals").click(function () {
+               
+                $.post(url, { id: 2, terminalId: 'NH061617' }, function (data) {
+                    alert(data);
+                });
+            });
+
         });
 
+        function Complete() {
+            $("#loader").addClass("hidden");
+        }
 
+        function Success(data) {
+            alert("estoy en el success");
+            $(".msg").show(300);
+            if (data.Status == "0") {
+
+                $(".msg").addClass("alert-success");
+                location.href = "../Home/Index";
+
+            } else {
+                $(".msg").removeClass("alert-success");
+                $(".msg").addClass("alert-danger");
+                $(".msg").html(data.Message);
+            }
+        }
 
     </script>
 
