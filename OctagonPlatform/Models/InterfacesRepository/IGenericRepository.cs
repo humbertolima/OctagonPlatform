@@ -14,7 +14,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void Dispose();
         void Save();
         IEnumerable<Partner> GetPartnerByParentId(int parentId);
-        IEnumerable<Terminal> GetTerminalsByParentId(int parentId);
+       
     }
     
 }

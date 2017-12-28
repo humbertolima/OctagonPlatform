@@ -993,19 +993,10 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                IEnumerable<Terminal> listTn;
-                if (partnerId == -1)
-                    listTn = GetTerminalsByParentId(parentId); //terminales del usuario logueado
-                else
-                    listTn = GetTerminalsByParentId(partnerId); //terminales del parnet especifico del filtro
-
-               var result = listTn.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName }).ToList();
-                return result;
-              
-
-                //return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                //.Where(b => partnerId == -1 || b.PartnerId == partnerId)
-                //.Select(b => new { b.TerminalId, b.LocationName }).ToList();
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+                return list4.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName }).ToList();
+             
 
 
             }
