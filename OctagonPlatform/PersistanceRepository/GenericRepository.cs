@@ -4,6 +4,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -112,6 +113,48 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Context.Dispose();
         }
+        public IEnumerable<Partner> GetPartnerByParentId(int parentId)
+        {
+            string sql = @"WITH MyTest as
+                            (
+                              SELECT P.*
+                              FROM Partners P
+                              WHERE P.Id = @parentId
 
+                              UNION ALL
+
+                              SELECT P1.*
+                              FROM Partners P1  
+                              INNER JOIN MyTest M
+                              ON M.Id = P1.ParentId
+                             )
+                            SELECT * From MyTest";
+            SqlParameter[] parameters = new SqlParameter[1] {
+                new SqlParameter("@parentId", parentId)
+            };
+            return Context.Database.SqlQuery<Partner>(sql, parameters).ToList();
+        }
+        public IEnumerable<Terminal> GetTerminalsByParentId(int parentId)
+        {
+            string sql = @"WITH MyTest as
+                            (
+                              SELECT P.Id, P.ParentId
+                              FROM Partners P
+                              WHERE P.Id = @parentId
+
+                              UNION ALL
+
+                              SELECT P1.Id, P1.ParentId
+                              FROM Partners P1  
+                              INNER JOIN MyTest M
+                              ON M.Id = P1.ParentId
+                             )
+                            SELECT T.* From MyTest AS TB2 inner join Terminals as T on TB2.Id = T.PartnerId";
+            SqlParameter[] parameters = new SqlParameter[1] {
+                new SqlParameter("@parentId", parentId)
+            };
+            return Context.Database.SqlQuery<Terminal>(sql, parameters).ToList();
+        }
     }
+    
 }

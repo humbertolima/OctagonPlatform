@@ -988,14 +988,24 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId)
+        public IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId, int parentId)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
-                .Select(b => new { b.TerminalId, b.LocationName }).ToList();
+                IEnumerable<Terminal> listTn;
+                if (partnerId == -1)
+                    listTn = GetTerminalsByParentId(parentId); //terminales del usuario logueado
+                else
+                    listTn = GetTerminalsByParentId(partnerId); //terminales del parnet especifico del filtro
+
+               var result = listTn.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName }).ToList();
+                return result;
+              
+
+                //return Table.Where(b => terminalIds.Contains(b.TerminalId))
+                //.Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                //.Select(b => new { b.TerminalId, b.LocationName }).ToList();
 
 
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OctagonPlatform.PersistanceRepository;
+using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -12,5 +13,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void Delete(object id);
         void Dispose();
         void Save();
+        IEnumerable<Partner> GetPartnerByParentId(int parentId);
+        IEnumerable<Terminal> GetTerminalsByParentId(int parentId);
     }
+    
 }

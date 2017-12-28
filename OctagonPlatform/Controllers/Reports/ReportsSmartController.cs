@@ -500,7 +500,7 @@ namespace OctagonPlatform.Controllers.Reports
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 list = await api.CashBalanceClose(start, listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId, Convert.ToInt32( Session["partnerId"]));
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)

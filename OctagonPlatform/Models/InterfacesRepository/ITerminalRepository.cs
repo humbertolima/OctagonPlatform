@@ -88,6 +88,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city,int state, string zipcode);
         IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid);
         IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid);
-        IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId);
+        IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId, int parentId);
     }
 }

@@ -318,6 +318,10 @@
     <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
       <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
+    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1300,6 +1304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
       <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
