@@ -20,6 +20,13 @@ namespace OctagonPlatform
 
             CreateMap<User, UserBAViewModel>();
 
+            #region Terminal Sourcharge
+
+            CreateMap<Terminal, TerminalSurchargeVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalSurchargeVM, Terminal>();
+
+            #endregion
+
             #region BankAccount Mapping
 
             // Domain to Dto

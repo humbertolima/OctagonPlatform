@@ -57,6 +57,20 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+        [HttpPost]
+        public PartialViewResult GetSurcharges(TerminalSurchargeVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetSurcharges(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Surcharge", viewModel);
+        }
 
         [HttpPost]
         public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)

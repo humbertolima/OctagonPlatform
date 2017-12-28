@@ -23,6 +23,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalConfigViewModel GetConfigNotification(int terminalId);
 
+        TerminalSurchargeVM GetSurcharges(int id);
+
         TerminalDocumentsVM GetDocuments(int id);
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
