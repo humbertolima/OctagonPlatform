@@ -75,10 +75,16 @@ namespace OctagonPlatform
             #region TerminalContact Mapping
 
             CreateMap<TerminalContact, TerminalContactFormViewModel>();
-
             CreateMap<TerminalContactFormViewModel, TerminalContactFormViewModel>();
             //Dto to Domain
             CreateMap<TerminalContactFormViewModel, TerminalContact>().ForMember(c => c.Id, opt => opt.Ignore());
+          
+            #endregion
+
+            #region Terminal Contacts
+
+            CreateMap<Terminal, TerminalContactVM>().ForMember( c=> c.Contacts, opt => opt.MapFrom(m=> m.TerminalContacts));
+            CreateMap<TerminalContactVM, Terminal>();
 
             #endregion
 
@@ -151,7 +157,7 @@ namespace OctagonPlatform
             #endregion
 
             #region Terminals Pictures
-            
+
             CreateMap<Terminal, TerminalPicturesVM>();
 
             CreateMap<TerminalPicturesVM, Terminal>();

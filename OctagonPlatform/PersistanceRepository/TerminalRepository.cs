@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -274,7 +275,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.VaultCash)
                     .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
-                    .Include(x => x.TerminalContacts)
                     .Include(x => x.Disputes)
                     .FirstOrDefault();
 
@@ -547,6 +547,28 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Need document Attach");
             }
             return terminal;
+        }
+
+        public TerminalContactVM GetContacts(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.TerminalContacts).FirstOrDefault(m => m.Id == id);
+                    TerminalContactVM viewModel = Mapper.Map<Terminal, TerminalContactVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalContactVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public TerminalDocumentsVM GetDocuments(int id)
@@ -850,8 +872,6 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new Exception("Error database " + e.Message);
             }
-
-
         }
 
         public void EditRange(string[] list, int? groupId)
@@ -871,8 +891,6 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new NullReferenceException(e.Message);
             }
-
-
         }
 
         public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId)
@@ -1005,5 +1023,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
+
     }
 }

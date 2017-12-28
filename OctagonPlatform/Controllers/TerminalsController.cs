@@ -58,6 +58,21 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        public PartialViewResult GetContacts(TerminalContactVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetContacts(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Contacts", viewModel);
+        }
+
+        [HttpPost]
         public PartialViewResult GetPictures( TerminalPicturesVM viewModel)
         {
             if (viewModel.Id > 0)

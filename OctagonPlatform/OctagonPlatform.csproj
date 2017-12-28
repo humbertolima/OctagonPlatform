@@ -250,6 +250,7 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
@@ -337,6 +338,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
     <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalCassetteVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalDocumentsVM.cs" />

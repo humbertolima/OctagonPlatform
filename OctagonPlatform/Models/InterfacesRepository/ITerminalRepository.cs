@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalRepository : IGenericRepository<Terminal>
     {
-       System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
+        System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
 
         Terminal GetTerminal(string terminalId);
 
@@ -26,6 +26,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         TerminalDocumentsVM GetDocuments(int id);
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
+
+        TerminalContactVM GetContacts(int id);
 
         TerminalPicturesVM GetPictures(int id);
 
@@ -42,9 +44,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         TerminalNotesVM GetNotes(int id);
 
         TerminalCassetteVM GetCassettes(int id);
-        
+
         Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId);
-        
+
         void CassettesDelete(int cassetteId);
 
         TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigViewModel);
@@ -54,7 +56,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
 
         Terminal AddWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
-        
+
         IEnumerable<Terminal> Search(string search, int partnerId);
 
         TerminalFormViewModel RenderTerminalFormViewModel(int partnerId);
@@ -72,8 +74,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid);
 
         IEnumerable<string> GetAllTerminalId(string value);
-        
-        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId=null);
+
+        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId = null);
 
         IEnumerable<dynamic> GetAllState(string term);
 
@@ -85,7 +87,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
         IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
-        IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city,int state, string zipcode);
+        IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city, int state, string zipcode);
         IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid);
         IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid);
         IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId);
