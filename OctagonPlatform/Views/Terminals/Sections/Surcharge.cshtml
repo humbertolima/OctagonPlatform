@@ -1,7 +1,14 @@
-﻿@model IEnumerable<OctagonPlatform.Models.Surcharge>
-
-<div id="getSurcharge" class="panel-collapse collapse">
-    @Ajax.ActionLink("ADD", "Create", "Surcharge", new { terminalId = ViewData["terminalId"]?.ToString() },
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalSurchargeVM
+@{
+    if (ViewBag.Error != null)
+    {
+        <p class="alert alert-danger">
+            <strong>Error: @ViewBag.Error</strong>
+        </p>
+    }
+}
+<p>
+    @Ajax.ActionLink("ADD", "Create", "Surcharge", new { Model },
                    new AjaxOptions
                    {
                        UpdateTargetId = "AddSurcharge",
@@ -15,6 +22,7 @@
                        data_toggle = "modal",
                        data_target = "#AddSurcharge"
                    })
+</p>
 
     <table id="surcharges" class="table table-striped table-hover table-bordered">
         <thead class="thead-blue">
@@ -28,10 +36,9 @@
             </tr>
         </thead>
 
-        @if (Model != null)
+        @if (Model.Surcharges != null)
         {
-
-            foreach (var item in Model)
+            foreach (var item in Model.Surcharges)
             {
                 <tbody>
                     <tr>
@@ -74,4 +81,3 @@
         }
 
     </table>
-</div>
