@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -274,7 +275,6 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.VaultCash)
                     .Include(x => x.VaultCash.BankAccount)
                     .Include(x => x.Surcharges)
-                    .Include(x => x.TerminalContacts)
                     .Include(x => x.Disputes)
                     .FirstOrDefault();
 
@@ -549,6 +549,108 @@ namespace OctagonPlatform.PersistanceRepository
             return terminal;
         }
 
+
+        public TerminalInterchangeVM GetInterchanges(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table
+                        .Include(m => m.InterChanges)
+                        .Include(m => m.InterChanges.Select(s => s.BankAccount))
+                        .FirstOrDefault(m => m.Id == id);
+
+                    TerminalInterchangeVM viewModel = Mapper.Map<Terminal, TerminalInterchangeVM>(terminal);
+
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalInterchangeVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public TerminalSurchargeVM GetSurcharges(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table
+                        .Include(m => m.Surcharges)
+                        .Include(m => m.Surcharges.Select(s => s.BankAccount))     //buenisismo este ejemplo para incluir listas de otra lista en el include
+                        .FirstOrDefault(m => m.Id == id);
+
+                    TerminalSurchargeVM viewModel = Mapper.Map<Terminal, TerminalSurchargeVM>(terminal);
+
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalSurchargeVM();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public TerminalVaultCashVM GetVaultCash(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table
+                        .Include(m => m.VaultCash)
+                        .Include(m => m.VaultCash.BankAccount)
+                        .FirstOrDefault(m => m.Id == id);
+                    TerminalVaultCashVM viewModel = Mapper.Map<Terminal, TerminalVaultCashVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalVaultCashVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public TerminalContactVM GetContacts(int id)
+        {
+            try
+            {
+                if (id > 0)
+                {
+                    Terminal terminal = Table.Include(m => m.TerminalContacts).FirstOrDefault(m => m.Id == id);
+                    TerminalContactVM viewModel = Mapper.Map<Terminal, TerminalContactVM>(terminal);
+                    return viewModel;
+                }
+                else
+                {
+                    return new TerminalContactVM();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public TerminalDocumentsVM GetDocuments(int id)
         {
             try
@@ -597,7 +699,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public Terminal PictureDelete(int id, int pictureId)
         {
-            Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m=>m.Id == id);
+            Terminal terminal = Table.Include(m => m.Pictures).FirstOrDefault(m => m.Id == id);
 
             if (pictureId > 0)
             {
@@ -726,7 +828,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
         }
-        
+
 
         public Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId)
         {
@@ -735,7 +837,7 @@ namespace OctagonPlatform.PersistanceRepository
                 Terminal terminal;
                 if (cassetteId != null || cassetteId > 0)
                 {
-                      terminal = Table.Include(m => m.Cassettes).FirstOrDefault(m => m.Id == id);
+                    terminal = Table.Include(m => m.Cassettes).FirstOrDefault(m => m.Id == id);
 
                     terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).Denomination = denomination;
                     terminal.Cassettes.FirstOrDefault(m => m.Id == cassetteId).AutoRecord = autoRecord;
@@ -745,7 +847,7 @@ namespace OctagonPlatform.PersistanceRepository
                 {
                     terminal = Table.FirstOrDefault(m => m.Id == id);
 
-                    if (terminal !=null)
+                    if (terminal != null)
                     {
                         terminal.Cassettes.Add(new Cassette { AutoRecord = autoRecord, Denomination = denomination, TerminalId = id });
                         Save();
@@ -851,8 +953,6 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new Exception("Error database " + e.Message);
             }
-
-
         }
 
         public void EditRange(string[] list, int? groupId)
@@ -872,8 +972,6 @@ namespace OctagonPlatform.PersistanceRepository
 
                 throw new NullReferenceException(e.Message);
             }
-
-
         }
 
         public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId)
@@ -1013,5 +1111,6 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
+
     }
 }

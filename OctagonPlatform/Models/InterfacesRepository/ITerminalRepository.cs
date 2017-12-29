@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface ITerminalRepository : IGenericRepository<Terminal>
     {
-       System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
+        System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
 
         Terminal GetTerminal(string terminalId);
 
@@ -23,11 +23,19 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalConfigViewModel GetConfigNotification(int terminalId);
 
+        TerminalSurchargeVM GetSurcharges(int id);
+
         TerminalDocumentsVM GetDocuments(int id);
 
         Terminal SetDocuments(int indexTerminalId, HttpPostedFileBase archive, int? documentId);
 
+        TerminalInterchangeVM GetInterchanges(int id);
+
+        TerminalContactVM GetContacts(int id);
+
         TerminalPicturesVM GetPictures(int id);
+
+        TerminalVaultCashVM GetVaultCash(int id);
 
         Terminal SetPictures(int id, HttpPostedFileBase archive, int? pictureId);
 
@@ -42,9 +50,9 @@ namespace OctagonPlatform.Models.InterfacesRepository
         TerminalNotesVM GetNotes(int id);
 
         TerminalCassetteVM GetCassettes(int id);
-        
+
         Terminal CassettesEdit(bool autoRecord, int denomination, int id, int? cassetteId);
-        
+
         void CassettesDelete(int cassetteId);
 
         TerminalConfigViewModel SetConfiguration(TerminalConfigViewModel terminalConfigViewModel);
@@ -54,7 +62,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         Terminal DeteteWorkingHours(int terminalId, int WorkingHoursId);
 
         Terminal AddWorkingHours(FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel);
-        
+
         IEnumerable<Terminal> Search(string search, int partnerId);
 
         TerminalFormViewModel RenderTerminalFormViewModel(int partnerId);
@@ -72,8 +80,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid,int parentId);
 
         IEnumerable<string> GetAllTerminalId(string value);
-        
-        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId=null);
+
+        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId = null);
 
         IEnumerable<dynamic> GetAllState(string term);
 
