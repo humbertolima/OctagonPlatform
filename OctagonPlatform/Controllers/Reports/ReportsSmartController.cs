@@ -71,7 +71,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 list = await api.CashLoad(start, end, vmodel.TerminalId, listtn);
 
-                IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
 
                 if (listTn.Count() > 0)
                 {
@@ -187,7 +187,7 @@ namespace OctagonPlatform.Controllers.Reports
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 list = await api.CashManagement(vmodel.TerminalId, listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.LoadCashMngList(list, vmodel.Status, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.LoadCashMngList(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)
@@ -262,7 +262,7 @@ namespace OctagonPlatform.Controllers.Reports
             if (ModelState.IsValid)
             {
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn);
+                IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn, Convert.ToInt32(Session["partnerId"]));
 
                 TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
                 TempData["filename"] = "TerminalList";
@@ -293,7 +293,7 @@ namespace OctagonPlatform.Controllers.Reports
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 list = await api.TerminalStatus(listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.TerminalStatus(list, vmodel.Status, vmodel.PartnerId, vmodel.CityId, vmodel.StateId, vmodel.ZipCode);
+                IEnumerable<dynamic> listTn = repo_terminal.TerminalStatus(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]), vmodel.CityId, vmodel.StateId, vmodel.ZipCode);
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)
@@ -358,7 +358,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 list = await api.DailyTransactionSummary(start, end, vmodel.TerminalId, listtn, vmodel.Surcharge, vmodel.Dispensed);
 
-                IEnumerable<dynamic> listTn = repo_terminal.TransDailyList(list, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.TransDailyList(list, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
 
                 if (listTn.Count() > 0)
                 {
@@ -433,7 +433,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 list = await api.MonthlyTransactionSummary(start, end, vmodel.TerminalId, listtn, vmodel.Surcharge);
 
-                IEnumerable<dynamic> listTn = repo_terminal.TransMonthlyList(list, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.TransMonthlyList(list, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
 
                 if (listTn.Count() > 0)
                 {
@@ -500,7 +500,7 @@ namespace OctagonPlatform.Controllers.Reports
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 list = await api.CashBalanceClose(start, listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId);
+                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId, Convert.ToInt32( Session["partnerId"]));
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)

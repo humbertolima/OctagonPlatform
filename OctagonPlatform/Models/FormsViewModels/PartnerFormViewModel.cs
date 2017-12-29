@@ -10,7 +10,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required(ErrorMessage = "The parent partner is required")]
         [Display(Name = "Parent")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         public Partner Parent { get; set; }
 

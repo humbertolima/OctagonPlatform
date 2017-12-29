@@ -57,6 +57,7 @@ namespace OctagonPlatform.Models
         {
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<Partner>().Property(c => c.ParentId).IsOptional();
 
             //modelBuilder.Entity<>
         }
