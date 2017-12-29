@@ -1,4 +1,5 @@
 ﻿using GridMvc.DataAnnotations;
+using OctagonPlatform.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
         {
         }
 
-        public TerminalTableVM(string terminalID, string locationName, string address, string city, string state, string postalCode, string contactName, string contactPhone, string aTMType, string connection, string eMVStatus, string dCCStatus, string surchargeAmount, string creationDate)
+        public TerminalTableVM(string terminalID, string locationName, string address, string city, string state, string postalCode, string contactname,string contacphone, Make maketype, string connection, string eMVStatus, string dCCStatus, string surchargeAmount, string creationDate)
         {
             TerminalID = terminalID;
             LocationName = locationName;
@@ -23,9 +24,9 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
             City = city;
             State = state;
             PostalCode = postalCode;
-            ContactName = contactName;
-            ContactPhone = contactPhone;
-            ATMType = aTMType;
+            ContactName = contactname;
+            ContactPhone = contacphone;
+            ATMType = maketype.Name != null ? maketype.Name + " " + maketype.Name : string.Empty;
             Connection = connection;
             EMVStatus = eMVStatus;
             DCCStatus = dCCStatus;
@@ -61,5 +62,8 @@ namespace OctagonPlatform.Views.ReportsSmart.ViewModels
         public string SurchargeAmount { get; set; }
         [GridColumn(Title = "Creation Date")]
         public string CreationDate { get; set; }
+
+       
+       
     }
 }

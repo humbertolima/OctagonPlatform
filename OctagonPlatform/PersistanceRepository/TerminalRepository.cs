@@ -760,13 +760,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid)
+        public IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerId,int parentId)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerid == -1 || b.PartnerId == partnerid)
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+                return list4.Where(b => terminalIds.Contains(b.TerminalId))               
                 .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
@@ -875,13 +876,15 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId)
+        public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+
+                return list4.Where(b => terminalIds.Contains(b.TerminalId))               
                 .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
@@ -894,7 +897,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn)
+        public IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn, int parentId)
         {
 
             DateTime? start = null;
@@ -905,10 +908,15 @@ namespace OctagonPlatform.PersistanceRepository
             string[] aux = { "0" };
             listtn = listtn ?? aux;
             int zip = Int32.Parse(vmodel.ZipCode ?? "0");
+
+            IEnumerable<Partner> listpartner = vmodel.PartnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(vmodel.PartnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+
+
+            IEnumerable<Terminal> list4 = ( from p in listpartner join m in Table.Include(b => b.TerminalContacts).Include(b => b.Make).Include(b => b.City).Include(b => b.State) on p.Id equals m.PartnerId select m).ToList(); 
+                       
             try
             {
-                var list = Table.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))
-                .Where(b => vmodel.PartnerId == -1 || b.PartnerId == vmodel.PartnerId)
+                var list = list4.Where(b => groupfilter == false || listtn.Contains(b.TerminalId))                
                 .Where(b => vmodel.Status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == vmodel.Status)
                 .Where(b => vmodel.AccountId == -1 || b.Partner.BankAccounts.Where(z => z.Id == vmodel.AccountId).Count() > 0)
                 .Where(b => vmodel.TerminalId == null || b.TerminalId == vmodel.TerminalId)
@@ -918,7 +926,8 @@ namespace OctagonPlatform.PersistanceRepository
                 .Where(b => vmodel.ConectionType == CommunicationType.Communication.All ? (b.CommunicationType == CommunicationType.Communication.PhoneLine || b.CommunicationType == CommunicationType.Communication.TcpIp) : b.CommunicationType == vmodel.ConectionType)
                 .Where(b => vmodel.StartDate == null || b.DateCreated >= start)
                 .Where(b => vmodel.EndDate == null || b.DateCreated <= end)
-                .Select(b => new TerminalTableVM { TerminalID = b.TerminalId, LocationName = b.LocationName, Address = b.Address1 + b.Address2, City = b.City.Name, State = b.State.Name, PostalCode = b.Zip.ToString(), ContactName = b.TerminalContacts.FirstOrDefault().Name, ContactPhone = b.TerminalContacts.FirstOrDefault().Phone, ATMType = b.Make.Name + " " + b.Model.Name, Connection = b.CommunicationType.ToString(), SurchargeAmount = b.SurchargeAmountFee.ToString(), CreationDate = b.DateCreated.ToString(), EMVStatus = "falta por hacer", DCCStatus = "falta por hacer" })
+                .Where(b => b.TerminalContacts.FirstOrDefault() != null && b.Make != null)               
+                .Select(b => new TerminalTableVM { TerminalID = b.TerminalId, LocationName = b.LocationName, Address = b.Address1+b.Address2, City = b.City.Name, State = b.State.Name, PostalCode = b.Zip.ToString(), ContactName = b.TerminalContacts.First().Name, ContactPhone = b.TerminalContacts.First().Phone, ATMType = b.Make.Name + " " + b.Make.Name, Connection = b.CommunicationType.ToString(), SurchargeAmount = b.SurchargeAmountFee.ToString(), CreationDate = b.DateCreated.ToString(), EMVStatus = "falta por hacer", DCCStatus = "falta por hacer" })
                 .ToList();
 
                 return list;
@@ -931,17 +940,21 @@ namespace OctagonPlatform.PersistanceRepository
             // throw new NotImplementedException();
         }
 
-        public IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int cityid, int stateid, string zipcode)
+        public IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int parentId, int cityid, int stateid, string zipcode)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerId == -1 || b.PartnerId == partnerId)
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+               
+                IEnumerable<Terminal> list4 = (from p in listpartner join m in Table.Include(b => b.TerminalContacts) on p.Id equals m.PartnerId select m).ToList();
+
+                return list4.Where(b => terminalIds.Contains(b.TerminalId))               
                 .Where(b => stateid == 0 || b.StateId == stateid)
                 .Where(b => cityid == 0 || b.CityId == cityid)
                 .Where(b => zipcode == null || b.Zip.ToString() == zipcode)
                 .Where(b => status == StatusType.Status.All ? (b.Status == StatusType.Status.Active || b.Status == StatusType.Status.Inactive || b.Status == StatusType.Status.Incomplete) : b.Status == status)
+                .Where(b => b.TerminalContacts.FirstOrDefault() != null)
                 .Select(b => new { b.TerminalId, b.LocationName, b.Status, b.TerminalContacts.FirstOrDefault().Name, b.TerminalContacts.FirstOrDefault().Phone }).ToList();
 
             }
@@ -952,15 +965,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid)
+        public IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerId, int parentId)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
-
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+                return list4.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
 
             }
             catch (Exception e)
@@ -970,16 +982,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid)
+        public IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerId,int parentId)
         {
             try
             {
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
-                return Table.Where(b => terminalIds.Contains(b.TerminalId))
-                .Where(b => partnerid == -1 || b.PartnerId == partnerid)
-                .Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
-
-
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+                return list4.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName, b.Status }).ToList();
             }
             catch (Exception e)
             {
@@ -995,10 +1005,7 @@ namespace OctagonPlatform.PersistanceRepository
                 var terminalIds = list.Select(s => s.TerminalId).ToList();
                 IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
                 var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
-                return list4.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName }).ToList();
-             
-
-
+                return list4.Where(b => terminalIds.Contains(b.TerminalId)).Select(b => new { b.TerminalId, b.LocationName }).ToList(); 
             }
             catch (Exception e)
             {
