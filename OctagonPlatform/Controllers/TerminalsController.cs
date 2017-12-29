@@ -19,20 +19,7 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-        public ActionResult CashManagement(string terminalId)
-        {
-            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-
-            var result = _repository.GetCashLoad(start, end, terminalId);
-
-            foreach (var item in result.Result)
-            {
-
-            }
-            return PartialView("Sections/CashManagements", result.Result);
-        }
-
+       
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -55,6 +42,79 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = ex.Message;
                 return View("Error");
             }
+        }
+
+        public async Task<PartialViewResult> GetCashManagement(int id, string terminalId)
+        {
+            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+            var result = await _repository.GetCashLoad(start, end, terminalId);
+
+           
+            return PartialView("Sections/CashManagements", result);
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetInterchanges(TerminalInterchangeVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetInterchanges(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Interchanges", viewModel);
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetSurcharges(TerminalSurchargeVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetSurcharges(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Surcharge", viewModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetVaultCash(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/VaultCash", viewModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult GetContacts(TerminalContactVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetContacts(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Contacts", viewModel);
         }
 
         [HttpPost]
