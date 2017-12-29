@@ -43,9 +43,8 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
-        
-        
-        public async Task<PartialViewResult> GetCashManagement(int id,string terminalId)
+
+        public async Task<PartialViewResult> GetCashManagement(int id, string terminalId)
         {
             DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
