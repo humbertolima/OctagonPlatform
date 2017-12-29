@@ -14,7 +14,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int Id { get; set; }
 
-        [Required]
+        
         [DisplayName("Terminal Id")]
         public string TerminalId { get; set; }
 
