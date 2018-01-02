@@ -21,6 +21,16 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        
+        public ActionResult Cryptoxone()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
     }
 }
