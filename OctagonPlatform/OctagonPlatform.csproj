@@ -447,6 +447,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Content\adminsb\data\demmoney-data.js" />
     <Content Include="Content\adminsb\data\morris-data.js" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.css" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.min.css" />
