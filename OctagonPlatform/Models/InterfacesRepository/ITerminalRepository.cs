@@ -77,7 +77,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel);
 
-        IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid);
+        IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid,int parentId);
 
         IEnumerable<string> GetAllTerminalId(string value);
 
@@ -91,11 +91,11 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         void EditRange(string[] list, int? groupId);
 
-        IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId);
-        IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn);
-        IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int city, int state, string zipcode);
-        IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid);
-        IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid);
-        IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId);
+        IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId);
+        IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn, int parentId);
+        IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int parentId, int city,int state, string zipcode);
+        IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid, int parentId);
+        IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid, int parentId);
+        IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId, int parentId);
     }
 }

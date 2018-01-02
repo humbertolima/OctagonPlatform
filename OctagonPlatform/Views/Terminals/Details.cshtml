@@ -22,8 +22,9 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
-                        @Ajax.ActionLink("Configuration", "GetConfiguration", "Terminals", new { id = Model.Id },
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
+                        <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
+                        </i> @Ajax.ActionLink("Configuration", "GetConfiguration", "Terminals", new { id = Model.Id },
                    new AjaxOptions
                    {
                        UpdateTargetId = "getConfiguration",
@@ -37,7 +38,7 @@
                        data_toggle = "collapse",
                        data_target = "#getConfiguration"
                    })
-                    </h4>
+                    </h3>
                 </div>
                 <div id="getConfiguration" class="panel-collapse collapse">
                     <div class="panel-body">

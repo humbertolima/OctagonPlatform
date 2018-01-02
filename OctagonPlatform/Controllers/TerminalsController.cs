@@ -46,13 +46,24 @@ namespace OctagonPlatform.Controllers
 
         public async Task<PartialViewResult> GetCashManagement(int id, string terminalId)
         {
-            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                string date1 = DateTime.Now.AddDays(-30).ToString("MM/dd/yyy");
+                string date2 = DateTime.Now.ToString("MM/dd/yyy");
 
-            var result = await _repository.GetCashLoad(start, end, terminalId);
+                DateTime start = DateTime.ParseExact(date1, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime end = DateTime.ParseExact(date2, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-           
-            return PartialView("Sections/CashManagements", result);
+                var result = await _repository.GetCashLoad(start, end, terminalId);
+
+
+                return PartialView("Sections/CashManagements", result);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return PartialView("Sections/CashManagements");
+            }
         }
 
 
