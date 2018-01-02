@@ -232,6 +232,7 @@
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
+    <Compile Include="Controllers\Reports\ScheduleController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\Schedule.cs" />
     <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
@@ -323,6 +325,14 @@
     <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
       <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801020156003_AddSchedule.cs" />
+    <Compile Include="Migrations\201801020156003_AddSchedule.Designer.cs">
+      <DependentUpon>201801020156003_AddSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801022136578_AddSchedule2.cs" />
+    <Compile Include="Migrations\201801022136578_AddSchedule2.Designer.cs">
+      <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -342,6 +352,7 @@
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
+    <Compile Include="Models\FormsViewModels\ScheduleViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalInterchangeVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
@@ -374,6 +385,7 @@
     <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
+    <Compile Include="Models\InterfacesRepository\ISchedule.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
@@ -400,6 +412,7 @@
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
@@ -421,6 +434,7 @@
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
+    <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
@@ -1265,6 +1279,10 @@
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Schedule\Create.cshtml" />
+    <Content Include="Views\Schedule\Delete.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
+    <Content Include="Views\Schedule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1312,6 +1330,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
       <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801020156003_AddSchedule.resx">
+      <DependentUpon>201801020156003_AddSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801022136578_AddSchedule2.resx">
+      <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

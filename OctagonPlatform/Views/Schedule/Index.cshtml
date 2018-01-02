@@ -1,0 +1,143 @@
+﻿@model IEnumerable<OctagonPlatform.Models.Schedule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+
+    @Ajax.ActionLink("Create", // <-- Text to display
+
+                                     "Create", // <-- Action Method Name
+                                     new AjaxOptions
+                                     {
+                                         UpdateTargetId = "ScheduleForm", // <-- DOM element ID to update
+                                         InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                         HttpMethod = "GET", // <-- HTTP method
+                                         OnSuccess = "Success"
+                                     })
+
+</p>
+<div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Repeats)
+        </th>
+        <th>
+           Recurrence
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repeats)
+        </td>
+        <td>
+           calcular
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+    }
+
+</table>
+
+@section Scripts {
+
+    <script>
+        function Success() {
+            $("#StartDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+            $("#StopDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+            $("#btn").click(function () {
+               
+                var str = "";
+                $("input:checked").each(function () {
+                   
+                    str += $(this).val() + "_";
+                });
+                str = str.substr(0, str.length - 1);
+                $("#RepeatOnDaysWeeks").val(str);
+            });
+            $("#Repeats").change(function () {
+                var val = $(this).val();
+                $("#RepeatsSelected").val(val);
+                $("#Repeats").val(val);
+                if (val == 1) {
+                    $("#time").css("display", "block");
+                    $("#daily").css("display", "none");
+                    $("#monthly").css("display", "none");
+                    $("#weekly").css("display", "none");
+                    $("#monthlyRelative").css("display", "none");
+                    $("#Stop").css("display", "none");
+                } else {
+                    if (val == 2) {
+                        $("#time").css("display", "block");
+                        $("#daily").css("display", "block");
+                        $("#monthly").css("display", "none");
+                        $("#weekly").css("display", "none");
+                        $("#monthlyRelative").css("display", "none");
+                        $("#Stop").css("display", "block");
+                    } else {
+                        if (val == 3) {
+                            $("#time").css("display", "block");
+                            $("#daily").css("display", "none");
+                            $("#monthly").css("display", "none");
+                            $("#weekly").css("display", "block");
+                            $("#monthlyRelative").css("display", "none");
+                            $("#Stop").css("display", "block");
+                        } else {
+                            if (val == 4) {
+                                $("#time").css("display", "block");
+                                $("#daily").css("display", "none");
+                                $("#monthly").css("display", "block");
+                                $("#weekly").css("display", "none");
+                                $("#monthlyRelative").css("display", "none");
+                                $("#Stop").css("display", "block");
+                            } else {
+                                if (val == 5) {
+                                    $("#time").css("display", "block");
+                                    $("#daily").css("display", "none");
+                                    $("#monthly").css("display", "none");
+                                    $("#weekly").css("display", "none");
+                                    $("#monthlyRelative").css("display", "block");
+                                    $("#Stop").css("display", "block");
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }    
+
+
+    </script>
+
+
+}
