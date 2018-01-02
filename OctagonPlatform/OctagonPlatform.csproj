@@ -218,6 +218,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\OctagonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
@@ -1266,6 +1267,11 @@
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Octagon\AMS.cshtml" />
+    <Content Include="Views\Shared\_LayoutOctagonDashboard.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonNavBar.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonSidebar.cshtml" />
+    <Content Include="Views\Octagon\Cryptoxone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
