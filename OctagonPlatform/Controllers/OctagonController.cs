@@ -21,7 +21,79 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+        public ActionResult BeComm()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
         public ActionResult Cryptoxone()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        public ActionResult AVT()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        public ActionResult DemMoney()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        public ActionResult CashEverywhere()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        public ActionResult VendBot()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return HttpNotFound(ex.Message + ", Page Not Found!!!");
+            }
+        }
+
+        public ActionResult MicroLoans()
         {
             try
             {
