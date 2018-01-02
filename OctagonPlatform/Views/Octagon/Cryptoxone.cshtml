@@ -136,22 +136,17 @@
         new Morris.Line({
             // ID of the element in which to draw the chart.
             element: 'myfirstchart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
             data: [
-                { year: '2013', value: 0.13 },
-                { year: '2014', value: 350 },
-                { year: '2015', value: 780 },
-                { year: '2016', value: 1000 },
-                { year: '2017', value: 14000 }
+                { y: '2013', a: 0.13, b: 0.050, c: 0.001 },
+                { y: '2014', a: 35,  b: 1, c: 0.20 },
+                { y: '2015', a: 150,  b: 15, c: 2 },
+                { y: '2016', a: 350,  b: 20, c: 10 },
+                { y: '2017', a: 13000,  b: 800, c: 400 },
+                { y: '2018', a: 12000,  b: 750, c: 250 }
             ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['Value'],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c'],
+            labels: ['Bitcoin', 'Ethereum', 'Litecoin'],
             resize: true
 
         });
