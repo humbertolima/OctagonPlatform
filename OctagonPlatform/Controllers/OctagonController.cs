@@ -33,10 +33,11 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Cryptoxone()
+        public ActionResult CryptoXone()
         {
             try
             {
+                
                 return View();
             }
             catch (Exception ex)
