@@ -4,4 +4,184 @@
     Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
 }
 
-<h2>title</h2>
+<div class="row">
+    <a href="@Url.Action("Index", "Dashboard", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+        <div class="col-lg-12" style="width: 500px">
+            <h1 class="page-header" style="color: #859298; font-size: 30px;">
+                <i class="fa fa-dashboard" style="font-size: 25px; color: #859298"></i> Cryptoxone
+            </h1>
+        </div>
+    </a>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Bitcoin Historical Price
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="myfirstchart" style="height: 250px;"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    @*<div class="col-lg-4">
+                        
+                    </div>*@
+
+                    <div class="col-lg-12">
+                        <div id="bar-example"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+
+        <!-- /.panel -->
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="donut-example"></div>
+                <a href="#" class="btn btn-default btn-block">View Details</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <!-- /.panel .chat-panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+
+@section scripts {
+    <script>
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: [
+                { year: '2013', value: 0.13 },
+                { year: '2014', value: 350 },
+                { year: '2015', value: 780 },
+                { year: '2016', value: 1000 },
+                { year: '2017', value: 14000 }
+            ],
+            // The name of the data record attribute that contains x-values.
+            xkey: 'year',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['Value'],
+            resize: true
+
+        });
+    </script>
+    <script>
+        new Morris.Donut({
+            element: 'donut-example',
+            data: [
+                { label: "Total", value: 50 },
+                { label: "Buy", value: 40 },
+                { label: "Sell", value: 10 }
+            ],
+            resize: true
+        });
+    </script>
+    <script>
+       new Morris.Bar({
+            element: 'bar-example',
+            data: [
+                { y: '2006', a: 100, b: 90 },
+                { y: '2007', a: 75,  b: 65 },
+                { y: '2008', a: 50,  b: 40 },
+                { y: '2009', a: 75,  b: 65 },
+                { y: '2010', a: 50,  b: 40 },
+                { y: '2011', a: 75,  b: 65 },
+                { y: '2012', a: 100, b: 90 }
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Series A', 'Series B']
+        });
+    </script>
+}
