@@ -3,8 +3,14 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}@{
+    if (ViewBag.Error != null)
+    {
+        <p class="alert alert-danger">
+            <strong>Error: @ViewBag.Error</strong>
+        </p>
+    }
 }
-@ViewBag.Error
 <h3>Terminal: <strong>@Model.TerminalId</strong></h3>
 
 <hr />

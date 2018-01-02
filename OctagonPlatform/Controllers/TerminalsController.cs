@@ -19,7 +19,7 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-       
+
         public ActionResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -129,7 +129,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult GetPictures( TerminalPicturesVM viewModel)
+        public PartialViewResult GetPictures(TerminalPicturesVM viewModel)
         {
             if (viewModel.Id > 0)
             {
@@ -173,26 +173,19 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
+        public PartialViewResult SetDocuments( TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
         {
-            Models.Terminal terminal = new Models.Terminal();
-
+            Models.Terminal terminal;
             if (FileForm != null)
             {
-                if (documentId == null || documentId == 0)
-                {   //addicionar
-                    terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
-                }
-                else
-                {   //editar porque viene un id de documents
-
-                }
+                terminal = _repository.SetDocuments(viewModel.Id, FileForm, null);
 
                 return PartialView("Details", terminal);
             }
             else
             {
-                return PartialView("Details", terminal);
+                ViewBag.Error = "Documents required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
             }
         }
 
@@ -244,7 +237,7 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = "Error: " + ex.Message;
                 return PartialView("Sections/Error");
-               
+
             }
         }
 
