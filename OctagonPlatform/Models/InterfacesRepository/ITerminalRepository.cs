@@ -21,6 +21,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         BindKeyViewModel SetBindKey(string messagesId, string serial1, string serial2);
 
+        TerminalGeneralVM GetGeneralInfo(int id);
+
         TerminalConfigViewModel GetConfigNotification(int terminalId);
 
         TerminalSurchargeVM GetSurcharges(int id);

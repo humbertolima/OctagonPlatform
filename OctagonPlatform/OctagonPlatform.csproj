@@ -343,6 +343,7 @@
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalGeneralVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalInterchangeVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
     <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
@@ -1265,6 +1266,7 @@
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Terminals\Sections\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -224,6 +224,32 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
+        public PartialViewResult GetGeneralInfo(int id)
+        {
+            try
+            {
+                TerminalGeneralVM viewModel;
+                if (id > 0)
+                {
+                    viewModel = _repository.GetGeneralInfo(id);
+                }
+                else
+                {
+                    viewModel = new TerminalGeneralVM();
+                }
+
+                return PartialView("Sections/GeneralInfo", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+                return PartialView("Sections/Error");
+               
+            }
+        }
+
+
+        [HttpPost]
         public PartialViewResult GetNotes(int id)
         {
             TerminalNotesVM viewModel;

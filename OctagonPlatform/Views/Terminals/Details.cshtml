@@ -51,11 +51,28 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="texth3" data-toggle="collapse" data-target="#getGeneralInfo">
+                    <h3 class="panel-title texth3" style="font-size:25px;color:#4776a1">
                         <i class="fa fa-info-circle" style="font-size:25px;color:#4776a1">
-                        </i><a data-toggle="collapse" href="#getGeneralInfo">General Info</a>
+                        </i> @Ajax.ActionLink("General Info", "GetGeneralInfo", "Terminals", new { id = Model.Id },
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "getGeneralInfo",
+                       LoadingElementId = "loading3",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "Post"
+                   },
+                   htmlAttributes: new
+                   {
+                       @class = "link",
+                       data_toggle = "collapse",
+                       data_target = "#getGeneralInfo"
+                   })
                     </h3>
-                    @Html.Partial("Sections/GeneralInfo", Model)
+                </div>
+                <div id="getGeneralInfo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="loader"></div>
+                    </div>
                 </div>
             </div>
         </div>
