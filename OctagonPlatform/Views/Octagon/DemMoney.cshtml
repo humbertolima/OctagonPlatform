@@ -6,7 +6,7 @@
 @*@Styles.Render("~/Content/bootstrap-lumen.css")*@
 
 <div class="row">
-    <a href="@Url.Action("DemMoney", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+    <a href="http://democraticmoney.azurewebsites.net" target="_blank">
         <div class="col-lg-12" style="width: 500px">
             <h1 class="page-header" style="color: #859298; font-size: 30px;">
                  Democratic Money
@@ -35,17 +35,7 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-
-
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div id="demmoney-bar-chart"></div>
-                    </div>
-                    <!-- /.col-lg-8 (nested) -->
-                </div>
+                <div id="demmoney-bar-chart"></div>
                 <!-- /.row -->
             </div>
             <!-- /.panel-body -->
@@ -63,7 +53,7 @@
             </div>
             <div class="panel-body">
                 <div id="demmoney-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                
             </div>
             <!-- /.panel-body -->
         </div>
