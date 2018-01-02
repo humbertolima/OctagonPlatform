@@ -1265,6 +1265,7 @@
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\AMS\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
