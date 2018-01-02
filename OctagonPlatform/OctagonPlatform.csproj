@@ -1271,6 +1271,12 @@
     <Content Include="Views\Shared\Sections\OctagonNavBar.cshtml" />
     <Content Include="Views\Shared\Sections\OctagonSidebar.cshtml" />
     <Content Include="Views\Octagon\Cryptoxone.cshtml" />
+    <Content Include="Views\Octagon\BeComm.cshtml" />
+    <Content Include="Views\Octagon\AVT.cshtml" />
+    <Content Include="Views\Octagon\DemMoney.cshtml" />
+    <Content Include="Views\Octagon\CashEverywhere.cshtml" />
+    <Content Include="Views\Octagon\VendBot.cshtml" />
+    <Content Include="Views\Octagon\MicroLoans.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
