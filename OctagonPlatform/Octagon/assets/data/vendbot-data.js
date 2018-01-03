@@ -1,7 +1,7 @@
 $(function() {
 
     Morris.Area({
-        element: 'cew-transactions-chart',
+        element: 'vendbot-transactions-chart',
         data: [{
             period: '2015 Q1',
             transactions: 2666
@@ -44,7 +44,7 @@ $(function() {
     });
 
     Morris.Bar({
-        element: 'cew-transactionsbyTerminal-chart',
+        element: 'vendbot-transactions-location-chart',
         data: [{
             y: '2015 Q2',
             transactions: 100
@@ -72,29 +72,29 @@ $(function() {
     });
 
     Morris.Bar({
-        element: 'cew-transactionsbyCountry-chart',
+        element: 'vendbot-product-sales-chart',
         data: [{
             y: '2015 Q2',
-            transactions: 100
+            sales: 100
         }, {
             y: '2015 Q4',
-            transactions: 75
+            sales: 75
         }, {
             y: '2016 Q2',
-            transactions: 50
+            sales: 50
         }, {
             y: '2016 Q4',
-            transactions: 75
+            sales: 75
         }, {
             y: '2017 Q2',
-            transactions: 50
+            sales: 50
         }, {
             y: '2017 Q4',
-            transactions: 75
+            sales: 75
         }],
         xkey: 'y',
-        ykeys: ['transactions'],
-        labels: ['Transactions'],
+        ykeys: ['sales'],
+        labels: ['Sales'],
         hideHover: 'auto',
         resize: true
     });
