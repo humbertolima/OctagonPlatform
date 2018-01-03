@@ -1,12 +1,23 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.TerminalNotesVM
 
-    <div>
+    <div style="margin: 20px;">
         <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">No.</th>
+                    <th style="width: 65%;">Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody>
                 @{
-                    foreach (var item in Model.Notes)
-                    {
+                        int i = 0;
+                        foreach (var item in Model.Notes)
+                        {
+                        i++;
                         <tr>
+                            <td>@i</td>
                             <td>
                                 <input type="hidden" id="NotesValues_@item.Id" name="NotesValues" value="@item.Nota">
                                 @item.Nota
@@ -15,10 +26,10 @@
                                 @item.CreatedAt
                             </td>
                             <td>
-                                <button type="button" class="NotesEdit link" data-toggle="modal" data-id="@item.Id" data-target="#myModaNotesAdd"><i class="fa fa-pencil" style="color: darkblue; font-size: 16px;">Edit</i></button>
+                                <button type="button" class="NotesEdit btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModaNotesAdd"><i class="fa fa-pencil" style="color: darkblue; font-size: 16px;">Edit</i></button>
                             </td>
                             <td>
-                                <button type="button" class="NotesDelete link" data-toggle="modal" data-id="@item.Id" data-target="#DeleteNoteModal">Delete</button>
+                                <button type="button" class="NotesDelete btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteNoteModal">Delete</button>
                             </td>
                         </tr>
                     }
@@ -32,7 +43,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Add note</h4>
+                        <h4 class="modal-title">Terminal Note</h4>
                     </div>
                     <div class="panel-body">
                         @using (Html.BeginForm("SetNotes", "Terminals"))
@@ -40,10 +51,7 @@
                             @Html.AntiForgeryToken()
                             <input type="hidden" id="id" name="id" value="@Model.Id">
                             <input type="hidden" id="noteId" name="noteId" value="">
-
-                            <p class="alert alert-danger">
-                                @ViewBag.Error
-                            </p>
+                            
                             <div class="form-group">
                                 <label for="comment">Note:</label>
                                 <textarea class="form-control" rows="5" id="notes" name="notes"></textarea>

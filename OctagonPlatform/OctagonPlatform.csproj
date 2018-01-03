@@ -323,6 +323,10 @@
     <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
       <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801032107211_schedule.cs" />
+    <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -343,6 +347,7 @@
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalGeneralVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalInterchangeVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
     <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
@@ -1257,7 +1262,6 @@
     <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
     <Content Include="Views\InterChange\Modal\AddInterChange.cshtml" />
     <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
-    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
@@ -1265,6 +1269,8 @@
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Terminals\Sections\Error.cshtml" />
+    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1312,6 +1318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
       <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801032107211_schedule.resx">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

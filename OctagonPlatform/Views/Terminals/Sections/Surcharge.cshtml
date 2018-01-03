@@ -8,7 +8,7 @@
     }
 }
 <p>
-    @Ajax.ActionLink("ADD", "Create", "Surcharge", new { Model },
+    @Ajax.ActionLink("ADD", "Create", "Surcharge", new { id = Model.Id },
                    new AjaxOptions
                    {
                        UpdateTargetId = "AddSurcharge",
@@ -49,7 +49,7 @@
                         <td>@item.StartDate.ToShortDateString()</td>
                         <td>@item.StopDate.ToShortDateString()</td>
                         <td>
-                            <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+                            <i class="glyphicon glyphicon-edit"></i> @Html.ActionLink(
                                                                 linkText: "Edit",
                                                                 actionName: "Edit",
                                                                 controllerName: "Surcharge",
@@ -61,15 +61,10 @@
                                                                 )
                         </td>
                         <td>
-                            <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
-                                                                 linkText: "Delete",
-                                                                 actionName: "Delete",
-                                                                 controllerName: "Surcharge",
-                                                                 routeValues: new
-                                                                 {
-                                                                     id = item.Id
-                                                                 },
-                                                                 htmlAttributes: null)
+                            <button type="button" class="btn link"
+                                    data-toggle="modal" id="DeleteSurchage" data-id="@item.Id" data-target="#DeleteSurcharge">
+                                Delete
+                            </button>
                         </td>
 
                     </tr>
@@ -81,3 +76,37 @@
         }
 
     </table>
+
+<div id="DeleteSurcharge" class="modal fade" role="dialog">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Vault Cash</h4>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete Surcharge? </p>
+                </div>
+                <div class="modal-footer">
+                    @using (Html.BeginForm("Delete", "Surcharge", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" id="Id" name="Id" value="" />
+                        <div class="form-group">
+                            <input type="submit" value="Delete" class="btn btn-danger" id="confirm" />
+                            <button type="reset" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).on("click", "#DeleteSurchage", function () {
+        var passedID = $(this).data('id');
+        alert(passedID);
+        $("#DeleteSurcharge #Id").val(passedID);
+    });
+</script>
