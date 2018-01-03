@@ -38,7 +38,7 @@ $(function() {
         labels: ['Transactions'],
         pointSize: 2,
         hideHover: 'auto',
-        lineColors: ['#0580ff'],
+        lineColors: ['gold'],
         fillOpacity: '0.5',
         resize: true
     });
