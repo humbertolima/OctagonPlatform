@@ -82,7 +82,7 @@ $(function() {
         }],
         xkey: 'y',
         ykeys: ['a'],
-        labels: ['Series A'],
+        labels: ['Revenue'],
         hideHover: 'auto',
         resize: true
     });
