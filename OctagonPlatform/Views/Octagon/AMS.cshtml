@@ -3,71 +3,334 @@
     Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
 }
 
-@*@Styles.Render("~/Content/bootstrap-lumen.css")*@
 
 <div class="row">
     <a href="@Url.Action("Index", "Dashboard", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})" target="_blank">
         <div class="col-lg-12" style="width: 500px">
             <h1 class="page-header" style="color: #859298; font-size: 30px;">
-                 ATM Management Studio
+                ATM Management Studio
             </h1>
         </div>
     </a>
-        <!-- /.col-lg-12 -->
 </div>
-   <div class="row">
-    <div class="col-lg-8">
+
+
+<div class="row">
+    <!-- TRANSACTIONS -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
-                
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-area-chart"></div>
+                <div id="transactions-chart"></div>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
+    </div>
+    <!-- END TRANSACTIONS -->
+    <!--/////////////////////////////-->
+    <!-- TRANSACTIONS BY TERMINAL -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions By Terminal
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Terminal
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Terminal 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div id="morris-bar-chart"></div>
+                        <div id="transactions-terminal-chart"></div>
                     </div>
-                    <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-
     </div>
-    <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
+    <!-- END TRANSACTIONS BY TERMINAL -->
+</div>
+<div class="row">
+    <!-- CASH LOADS -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart
+                <i class="fa fa-bar-chart-o fa-fw"></i> Cash Loads
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="panel-body">
-                <div id="morris-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                <div id="cash-load-chart"></div>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
     </div>
-    <!-- /.col-lg-4 -->
+    <!-- END CASH LOADS -->
+    <!--/////////////////////////////-->
+    <!-- CASH LOADS BY TERMINAL -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Cash Loads by Terminal
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Terminal
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Terminal 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="cash-loads-terminal-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END CASH LOADS BY TERMINAL -->
 </div>
 
-    <!-- /.row -->
+<div class="row">
+    <!-- SURCHARGES -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Surcharges
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="surcharges-chart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END SURCHARGES -->
+    <!--/////////////////////////////-->
+    <!-- INTERXCHANGE -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> InterXchange
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="interxchange-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END INTERXCHANGE -->
+</div>
 
-<!-- /#page-wrapper -->
+<!-- ALERTS -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Alerts
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Period
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Daily</a>
+                    </li>
+                    <li>
+                        <a href="#">Weekly</a>
+                    </li>
+                    <li>
+                        <a href="#">Monthly</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="alerts-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
