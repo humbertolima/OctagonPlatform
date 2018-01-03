@@ -22,7 +22,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Bitcoin Historical Price
@@ -42,68 +42,26 @@
                             <li>
                                 <a href="#">Monthly</a>
                             </li>
-
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="myfirstchart" style="height: 250px;"></div>
+                <div id="myfirstchart"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
-                <div class="pull-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Period
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#">Daily</a>
-                            </li>
-                            <li>
-                                <a href="#">Weekly</a>
-                            </li>
-                            <li>
-                                <a href="#">Monthly</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="row">
-                    @*<div class="col-lg-4">
-                        
-                    </div>*@
-
-                    <div class="col-lg-12">
-                        <div id="bar-example"></div>
-                    </div>
-                    <!-- /.col-lg-8 (nested) -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-
     </div>
     <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
-        <div class="panel panel-default" >
+    <div class="col-lg-6">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Payment Method
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -120,7 +78,9 @@
                             <li>
                                 <a href="#">Monthly</a>
                             </li>
-
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="btn-group">
@@ -141,38 +101,57 @@
                             <li>
                                 <a href="#">Terminal 4</a>
                             </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="donut-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
                             <li>
-                                <a href="#">Terminal 5</a>
+                                <a href="#">Daily</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 6</a>
+                                <a href="#">Weekly</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 7</a>
+                                <a href="#">Monthly</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 8</a>
-                            </li>
-                            <li>
-                                <a href="#">Terminal 9</a>
-                            </li>
-                            <li>
-                                <a href="#">Terminal 10</a>
+                                <a href="#">Yearly</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="donut-example"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                <div id="bar-example"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
     </div>
-    <!-- /.col-lg-4 -->
 </div>
 
 @section scripts {
