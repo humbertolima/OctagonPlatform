@@ -15,34 +15,92 @@
     </a>
         <!-- /.col-lg-12 -->
 </div>
-   <div class="row">
-    <div class="col-lg-8">
+<div class="row">
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
-                
+                <i class="fa fa-bar-chart-o fa-fw"></i> Profit by Location
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-area-chart"></div>
+                <div id="bar-example"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart
+                <i class="fa fa-bar-chart-o fa-fw"></i> Earnings By Campaign
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Unit
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Campaign 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Campaign 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Campaign 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-4">
-
-
-                    </div>
-
-                    <div class="col-lg-8">
-                        <div id="morris-bar-chart"></div>
+                    <div class="col-lg-12">
+                        <div id="area-example"></div>
                     </div>
                     <!-- /.col-lg-8 (nested) -->
                 </div>
@@ -51,28 +109,187 @@
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-
     </div>
     <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart
+                <i class="fa fa-bar-chart-o fa-fw"></i> Earnings
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                <div id="line-example"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Face Recognition Data
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Unit
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Unit 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="area-example2"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
     </div>
-    <!-- /.col-lg-4 -->
 </div>
-
     <!-- /.row -->
 
 <!-- /#page-wrapper -->
+
+@section scripts
+{
+    <script>
+        new Morris.Bar({
+            element: 'bar-example',
+            data: [
+                { y: 'Bogota', a: 1000 },
+                { y: 'Dallas', a: 2500 },
+                { y: 'Miami', a: 2750 },
+                { y: 'London', a: 2400 },
+                { y: 'Tampa', a: 3000 },
+                { y: 'Ontario', a: 2900 },
+                { y: 'Seatle', a: 3200 }
+            ],
+            xLabelAngle: 35,
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+
+    <script>
+       new Morris.Area({
+            element: 'area-example',
+            data: [
+                { y: '2006', a: 1250 },
+                { y: '2007', a: 1500 },
+                { y: '2008', a: 1000 },
+                { y: '2009', a: 1900 },
+                { y: '2010', a: 2000 },
+                { y: '2011', a: 1950 },
+                { y: '2012', a: 2200 }
+            ],
+            lineColors: ['Green'],
+            xkey: 'y',
+            ykeys: ['a'],
+            fillOpacity: 0.6,
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+
+    <script>
+        new Morris.Line({
+            element: 'line-example',
+            data: [
+                { y: '2008', a: 25 },
+                { y: '2009', a: 75 },
+                { y: '2010', a: 65 },
+                { y: '2011', a: 75 },
+                { y: '2012', a: 50 },
+                { y: '2013', a: 75 },
+                { y: '2014', a: 100 }
+            ],
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Total'],
+            resize: true
+        });
+    </script>
+
+    <script>
+        new Morris.Area({
+            element: 'area-example2',
+            data: [
+                { y: '2006', a: 15 },
+                { y: '2007', a: 30 },
+                { y: '2008', a: 25 },
+                { y: '2009', a: 32 },
+                { y: '2010', a: 28 },
+                { y: '2011', a: 49 },
+                { y: '2012', a: 43 }
+            ],
+            lineColors: ['Grey'],
+            xkey: 'y',
+            ykeys: ['a'],
+            fillOpacity: 0.6,
+            labels: ['Total'],
+            resize: true
+        });
+    </script>
+}
