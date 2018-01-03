@@ -101,16 +101,26 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)
         {
-            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            try
             {
-                viewModel = _repository.GetVaultCash(viewModel.Id);
-            }
-            else
-            {
-                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
-            }
+                if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+                {
+                    TerminalVaultCashVM result = _repository.GetVaultCash(viewModel.Id);
+                    if (result != null) viewModel = result;
+                }
+                else
+                {
+                    ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+                }
 
-            return PartialView("Sections/VaultCash", viewModel);
+                return PartialView("Sections/VaultCash", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return PartialView("Sections/VaultCash", viewModel);
+
+            }
         }
 
         [HttpPost]

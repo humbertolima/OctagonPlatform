@@ -96,13 +96,13 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Create(int? terminalId)
+        public ActionResult Create(int id)
         {
             try
             {
-                if (terminalId != null)
+                if (id > 0)
                 {
-                    VaultCashFormViewModel model = _vaultCashRepository.RenderVaultCashFormViewModel((int)terminalId);
+                    VaultCashFormViewModel model = _vaultCashRepository.RenderVaultCashFormViewModel(id);
                     //devuelvo el partialView siempre porque siempre se solicida desde el details y se mostrara como modal
                     //si se quiere devolver en el View("create") seria validar quien lo solicito para devolver. 
                     //se puede usar el mismo formulario si en vairas vistas.
@@ -139,21 +139,6 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id != null) return View(_vaultCashRepository.VaultCashToEdit((int)id));
-
-                ViewBag.Error = "Vaultcash not found. ";
-                return PartialView("Error");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
-        }
 
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]

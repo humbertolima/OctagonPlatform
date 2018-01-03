@@ -591,19 +591,20 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
+                TerminalVaultCashVM viewModel;
                 if (id > 0)
                 {
                     Terminal terminal = Table
                         .Include(m => m.VaultCash)
                         .Include(m => m.VaultCash.BankAccount)
-                        .FirstOrDefault(m => m.Id == id);
-                    TerminalVaultCashVM viewModel = Mapper.Map<Terminal, TerminalVaultCashVM>(terminal);
-                    return viewModel;
+                        .FirstOrDefault(m => m.Id == id && !m.VaultCash.Deleted);
+                    if (terminal != null)
+                    {
+                        viewModel = Mapper.Map<Terminal, TerminalVaultCashVM>(terminal);
+                        return viewModel;
+                    }
                 }
-                else
-                {
-                    return new TerminalVaultCashVM();
-                }
+                return null;
             }
             catch (Exception)
             {
