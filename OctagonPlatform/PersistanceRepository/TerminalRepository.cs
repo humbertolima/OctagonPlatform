@@ -568,9 +568,9 @@ namespace OctagonPlatform.PersistanceRepository
                 if (id > 0)
                 {
                     Terminal terminal = Table
-                        .Include(m => m.Surcharges)
-                        .Include(m => m.Surcharges.Select(s => s.BankAccount))     //buenisismo este ejemplo para incluir listas de otra lista en el include
-                        .FirstOrDefault(m => m.Id == id);
+                        .Include(m => m.Surcharges)                 //.Where(a => a.Deleted != false) //para traer los que no estan borrados con soft delete. me da error porque si viene vacio, da error en el bank acount que le sigue
+                        .Include(m => m.Surcharges.Select(s => s.BankAccount))      //buenisismo este ejemplo para incluir listas de otra lista en el include
+                        .FirstOrDefault(m => m.Id == id && !m.Deleted);
 
                     TerminalSurchargeVM viewModel = Mapper.Map<Terminal, TerminalSurchargeVM>(terminal);
 
@@ -581,7 +581,7 @@ namespace OctagonPlatform.PersistanceRepository
                     return new TerminalSurchargeVM();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
