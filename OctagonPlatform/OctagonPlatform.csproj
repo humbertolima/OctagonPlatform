@@ -447,6 +447,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
     <Content Include="Octagon\assets\data\demmoney-data.js" />
     <Content Include="Content\adminsb\data\morris-data.js" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.css" />
@@ -774,6 +775,7 @@
     <Content Include="Octagon\assets\img\2.jpg" />
     <Content Include="Octagon\assets\img\3.jpg" />
     <Content Include="Octagon\assets\img\404.jpg" />
+    <Content Include="Octagon\assets\img\banner2-1.jpg" />
     <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
     <Content Include="Octagon\assets\img\eth-16x16.png" />
