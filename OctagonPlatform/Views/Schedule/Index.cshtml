@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<OctagonPlatform.Models.Schedule>
-
+@using OctagonPlatform.Models
 @{
     ViewBag.Title = "Index";
 }
@@ -20,7 +20,7 @@
                                      })
 
 </p>
-<div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+
 <table class="table">
     <tr>
 
@@ -30,11 +30,18 @@
         <th>
             @Html.DisplayNameFor(model => model.Repeats)
         </th>
+      
         <th>
-           Recurrence
+            Recurrence
+        </th>
+        <th>
+            Time(CST)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+           Stop Date
         </th>
         <th></th>
     </tr>
@@ -49,22 +56,92 @@
         <td>
             @Html.DisplayFor(modelItem => item.Repeats)
         </td>
+       
         <td>
-           calcular
+            @if (item.GetType() == typeof(ScheduleDaily))
+    {
+        <p> Every @(((ScheduleDaily)item).RepeatOn) Day(s)</p>
+}
+            @if (item.GetType() == typeof(ScheduleWeekly))
+    {
+        <p> Every @(((ScheduleWeekly)item).RepeatOnWeeks) Week(s)</p>
+        <p> @(((ScheduleWeekly)item).RepeatOnDaysWeeks) </p>
+}
+            @if (item.GetType() == typeof(ScheduleMonthly))
+    {
+        <p> Day @(((ScheduleMonthly)item).RepeatOnDay) Every @(((ScheduleMonthly)item).RepeatOnMonth) Month(s)</p>
+}
+            @if (item.GetType() == typeof(ScheduleMonthlyRelative))
+    {
+        <p> The @(((ScheduleMonthlyRelative)item).RepeatOnFirst) @(((ScheduleMonthlyRelative)item).RepeatOnDay) Every  @(((ScheduleMonthlyRelative)item).RepeatOnMonth) Month(s)</p>
+}
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
+            @if (item.GetType() == typeof(ScheduleDaily))
+    {
+        <p> @(((ScheduleDaily)item).Time)</p>
+}
+            @if (item.GetType() == typeof(ScheduleWeekly))
+    {
+        <p> @(((ScheduleWeekly)item).Time)</p>
+
+}
+            @if (item.GetType() == typeof(ScheduleMonthly))
+    {
+        <p> @(((ScheduleMonthly)item).Time) </p>
+}
+            @if (item.GetType() == typeof(ScheduleMonthlyRelative))
+    {
+        <p> @(((ScheduleMonthlyRelative)item).Time) </p>
+}
+            @if (item.GetType() == typeof(ScheduleOnce))
+    {
+        <p> @(((ScheduleOnce)item).Time) </p>
+}
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @item.StartDate.ToShortDateString()
+        </td>
+        <td>
+            @if (item.GetType() == typeof(ScheduleDaily))
+    {
+        <p> @(((ScheduleDaily)item).StopDate)</p>
+}
+            @if (item.GetType() == typeof(ScheduleWeekly))
+    {
+        <p> @(((ScheduleWeekly)item).StopDate)</p>
+
+}
+            @if (item.GetType() == typeof(ScheduleMonthly))
+    {
+        <p> @(((ScheduleMonthly)item).StopDate) </p>
+}
+            @if (item.GetType() == typeof(ScheduleMonthlyRelative))
+    {
+        <p> @(((ScheduleMonthlyRelative)item).StopDate) </p>
+}
+        
+        </td>
+        <td>
+          
+            @Ajax.ActionLink("Edit", // <-- Text to display
+
+                                 "Edit", // <-- Action Method Name
+                                  new { id = item.ID },
+                                 new AjaxOptions
+                                 {
+                                     UpdateTargetId = "ScheduleForm", // <-- DOM element ID to update
+                             InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                             HttpMethod = "GET", // <-- HTTP method
+                             OnSuccess = "Success"
+                                 })|
             @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
     }
 
 </table>
-
+<div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
 @section Scripts {
 
     <script>

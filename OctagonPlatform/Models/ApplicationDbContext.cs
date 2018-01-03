@@ -35,7 +35,7 @@ namespace OctagonPlatform.Models
         public DbSet<Dispute> Disputes { get; set; }
         public DbSet<DisputeRepresent> DisputeRepresents { get; set; }
         public DbSet<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
-        public DbSet<TerminalAlert> TerminalAlerts{ get; set; }
+        public DbSet<TerminalAlert> TerminalAlerts { get; set; }
         public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
         public DbSet<ReportModel> Reports { get; set; }
@@ -58,10 +58,15 @@ namespace OctagonPlatform.Models
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Entity<Partner>().Property(c => c.ParentId).IsOptional();
-
+            modelBuilder.Entity<Schedule>()
+               .Map<ScheduleDaily>(m => m.Requires("Discriminator").HasValue("ScheduleDaily"))
+               .Map<ScheduleMonthly>(m => m.Requires("Discriminator").HasValue("ScheduleMonthly"))
+               .Map<ScheduleMonthlyRelative>(m => m.Requires("Discriminator").HasValue("ScheduleMonthlyRelative"))
+               .Map<ScheduleOnce>(m => m.Requires("Discriminator").HasValue("ScheduleOnce"))
+               .Map<ScheduleWeekly>(m => m.Requires("Discriminator").HasValue("ScheduleWeekly"));
             //modelBuilder.Entity<>
         }
 
-        
+
     }
 }

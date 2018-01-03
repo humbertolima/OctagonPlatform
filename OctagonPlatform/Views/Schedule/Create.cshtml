@@ -37,58 +37,7 @@
                 <div class="form-group">
                     @Html.Label("Time(CST)", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-
-                        <select name="Time" id="Time" class="form-control">
-                            <option value="12:00:00 AM">12:00 AM</option>
-                            <option value="12:30:00 AM">12:30 AM</option>
-                            <option value="1:00:00 AM">1:00 AM</option>
-                            <option value="1:30:00 AM">1:30 AM</option>
-                            <option value="2:00:00 AM">2:00 AM</option>
-                            <option value="2:30:00 AM">2:30 AM</option>
-                            <option value="3:00:00 AM">3:00 AM</option>
-                            <option value="3:30:00 AM">3:30 AM</option>
-                            <option value="4:00:00 AM">4:00 AM</option>
-                            <option value="4:30:00 AM">4:30 AM</option>
-                            <option value="5:00:00 AM">5:00 AM</option>
-                            <option value="5:30:00 AM">5:30 AM</option>
-                            <option value="6:00:00 AM">6:00 AM</option>
-                            <option value="6:30:00 AM">6:30 AM</option>
-                            <option value="7:00:00 AM">7:00 AM</option>
-                            <option value="7:30:00 AM">7:30 AM</option>
-                            <option value="8:00:00 AM">8:00 AM</option>
-                            <option value="8:30:00 AM">8:30 AM</option>
-                            <option value="9:00:00 AM">9:00 AM</option>
-                            <option value="9:30:00 AM">9:30 AM</option>
-                            <option value="10:00:00 AM">10:00 AM</option>
-                            <option value="10:30:00 AM">10:30 AM</option>
-                            <option value="11:00:00 AM">11:00 AM</option>
-                            <option value="11:30:00 AM">11:30 AM</option>
-                            <option value="12:00:00 PM">12:00 PM</option>
-                            <option value="12:30:00 PM">12:30 PM</option>
-                            <option value="1:00:00 PM">1:00 PM</option>
-                            <option value="1:30:00 PM">1:30 PM</option>
-                            <option value="2:00:00 PM">2:00 PM</option>
-                            <option value="2:30:00 PM">2:30 PM</option>
-                            <option value="3:00:00 PM">3:00 PM</option>
-                            <option value="3:30:00 PM">3:30 PM</option>
-                            <option value="4:00:00 PM">4:00 PM</option>
-                            <option value="4:30:00 PM">4:30 PM</option>
-                            <option value="5:00:00 PM">5:00 PM</option>
-                            <option value="5:30:00 PM">5:30 PM</option>
-                            <option value="6:00:00 PM">6:00 PM</option>
-                            <option value="6:30:00 PM">6:30 PM</option>
-                            <option value="7:00:00 PM">7:00 PM</option>
-                            <option value="7:30:00 PM">7:30 PM</option>
-                            <option value="8:00:00 PM">8:00 PM</option>
-                            <option value="8:30:00 PM">8:30 PM</option>
-                            <option value="9:00:00 PM">9:00 PM</option>
-                            <option value="9:30:00 PM">9:30 PM</option>
-                            <option value="10:00:00 PM">10:00 PM</option>
-                            <option value="10:30:00 PM">10:30 PM</option>
-                            <option value="11:00:00 PM">11:00 PM</option>
-                            <option value="11:30:00 PM">11:30 PM</option>
-                        </select>
-
+                        @Html.DropDownListFor(model => model.Time, Model.DropDownTime, new { @class = "form-control" })                        
                         @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -98,14 +47,7 @@
                     @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <span>
-                            Every  <select name="RepeatOn" id="RepeatOn" class="form-control" style="width:20%;display:inline;">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>Day(s)
+                            Every @Html.DropDownListFor(model => model.RepeatOn, Model.DropDownRepeatOn, new { @class = "form-control" ,@style= "width:20%;display:inline;" }) Day(s)
                         </span>
 
                         @Html.ValidationMessageFor(model => model.RepeatOn, "", new { @class = "text-danger" })
@@ -118,53 +60,10 @@
                     @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <span>
-                            Day <select name="RepeatOnDay" id="RepeatOnDay" class="form-control" style="width:20%;display:inline;">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                            </select>
+                            Day @Html.DropDownListFor(model => model.RepeatOnDay, Model.DropDownRepeatOnDay, new { @class = "form-control", @style = "width:20%;display:inline;" })                           
                         </span>
                         <span>
-                            Every
-                            <select name="RepeatOnMonth" id="RepeatOnMonth" class="form-control" style="width:20%;display:inline;">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select> Month(s)
+                            Every @Html.DropDownListFor(model => model.RepeatOnMonth, Model.DropDownRepeatOnMonth, new { @class = "form-control", @style = "width:20%;display:inline;" })  Month(s)
                         </span>
                         @Html.ValidationMessageFor(model => model.RepeatOnDay, "", new { @class = "text-danger" })
                         @Html.ValidationMessageFor(model => model.RepeatOnMonth, "", new { @class = "text-danger" })
@@ -178,14 +77,7 @@
                     @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <span>
-                            Every  <select name="RepeatOnWeeks" id="RepeatOnWeeks" class="form-control" style="width:20%;display:inline;">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>Week(s)
+                            Every   @Html.DropDownListFor(model => model.RepeatOnWeeks, Model.DropDownRepeatOnWeeks, new { @class = "form-control", @style = "width:20%;display:inline;" }) Week(s)
                         </span>
 
                         @Html.ValidationMessageFor(model => model.RepeatOnWeeks, "", new { @class = "text-danger" })
@@ -210,42 +102,12 @@
                     @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <span>
-                            The <select name="RepeatOnFirst" id="RepeatOnFirst" class="form-control" style="width:20%;display:inline;">
-                                <option value="first">First</option>
-                                <option value="second">Second</option>
-                                <option value="third">Third</option>
-                                <option value="fourth">Fourth</option>
-                                <option value="last">Last</option>
-                            </select>
-                            <select name="RepeatOnDay2" id="RepeatOnDay2" class="form-control" style="width:20%;display:inline;">
-                                <option value="sunday">Sunday</option>
-                                <option value="monday">Monday</option>
-                                <option value="tuesday">Tuesday</option>
-                                <option value="wednesday">Wednesday</option>
-                                <option value="thursday">Thursday</option>
-                                <option value="friday">Friday</option>
-                                <option value="saturday">Saturday</option>
-                                <option value="day">Day</option>
-                                <option value="weekend_day">Weekend Day</option>
-                                <option value="week_day">Week Day</option>
-                            </select>
+                            The @Html.DropDownListFor(model => model.RepeatOnFirst, Model.DropDownRepeatOnFirst, new { @class = "form-control", @style = "width:20%;display:inline;" })
+                                @Html.DropDownListFor(model => model.RepeatOnDay2, Model.DropDownRepeatOnDay2, new { @class = "form-control", @style = "width:20%;display:inline;" })
+                                                      
                         </span>
                         <span>
-                            Every
-                            <select name="RepeatOnMonth2" id="RepeatOnMonth2" class="form-control" style="width:20%;display:inline;">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select> Month(s)
+                            Every   @Html.DropDownListFor(model => model.RepeatOnMonth2, Model.DropDownRepeatOnMonth2, new { @class = "form-control", @style = "width:20%;display:inline;" }) Month(s)
                         </span>
                         @Html.ValidationMessageFor(model => model.RepeatOnDay2, "", new { @class = "text-danger" })
                         @Html.ValidationMessageFor(model => model.RepeatOnMonth2, "", new { @class = "text-danger" })
