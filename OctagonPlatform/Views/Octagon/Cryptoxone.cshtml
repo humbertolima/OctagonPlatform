@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewBag.Title = "CryptoXone";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+<div class="row">
+        <a href="Http://www.cryptoxone.com" target="_blank">
+            <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+                <div style="font-size: 20px; color: #fff;">
+                    <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+                </div>
+            </div>
+        </a>
+        <div class="col-lg-6">
+            <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+                CryptoXone
+            </h1>
+        </div>
+        <div class="col-lg-3">
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Bitcoin Historical Price
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="myfirstchart" style="height: 250px;"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    @*<div class="col-lg-4">
+                        
+                    </div>*@
+
+                    <div class="col-lg-12">
+                        <div id="bar-example"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-4">
+
+        <!-- /.panel -->
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Terminals
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Terminal 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="donut-example"></div>
+                <a href="#" class="btn btn-default btn-block">View Details</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <!-- /.panel .chat-panel -->
+    </div>
+    <!-- /.col-lg-4 -->
+</div>
+
+@section scripts {
+    <script>
+        new Morris.Line({
+            // ID of the element in which to draw the chart.
+            element: 'myfirstchart',
+            data: [
+                { y: '2013', a: 0.13, b: 0.050, c: 0.001 },
+                { y: '2014', a: 35,  b: 1, c: 0.20 },
+                { y: '2015', a: 150,  b: 15, c: 2 },
+                { y: '2016', a: 350,  b: 20, c: 10 },
+                { y: '2017', a: 13000,  b: 800, c: 400 },
+                { y: '2018', a: 12000,  b: 750, c: 250 }
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b', 'c'],
+            labels: ['Bitcoin', 'Ethereum', 'Litecoin'],
+            resize: true
+
+        });
+    </script>
+    <script>
+        new Morris.Donut({
+            element: 'donut-example',
+            data: [
+                { label: "Total", value: 50 },
+                { label: "Buy", value: 40 },
+                { label: "Sell", value: 10 }
+            ],
+            resize: true
+        });
+    </script>
+    <script>
+       new Morris.Bar({
+            element: 'bar-example',
+            data: [
+                { y: '2006', a: 100, b: 90 },
+                { y: '2007', a: 75,  b: 65 },
+                { y: '2008', a: 50,  b: 40 },
+                { y: '2009', a: 75,  b: 65 },
+                { y: '2010', a: 50,  b: 40 },
+                { y: '2011', a: 75,  b: 65 },
+                { y: '2012', a: 100, b: 90 }
+            ],
+            xkey: 'y',
+            ykeys: ['a', 'b'],
+            labels: ['Buy', 'Sell'],
+            resize: true
+        });
+    </script>
+}
