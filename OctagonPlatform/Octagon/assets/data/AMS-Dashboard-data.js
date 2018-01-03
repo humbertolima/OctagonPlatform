@@ -140,6 +140,7 @@ $(function () {
         ykeys: ['loads'],
         labels: ['Loads'],
         pointSize: 2,
+        lineColors: ['grey'],
         fillOpacity: 0.5,
         hideHover: 'auto',
         resize: true
@@ -188,7 +189,7 @@ $(function () {
         ykeys: ['loads'],
         labels: ['Loads'],
         hideHover: 'auto',
-        barColors: ['green'],
+        barColors: ['grey'],
         resize: true
     });
 
