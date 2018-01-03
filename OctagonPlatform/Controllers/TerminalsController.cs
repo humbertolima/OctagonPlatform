@@ -20,7 +20,7 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        public ActionResult GetKey(string terminalId)
+        public PartialViewResult GetKey(string terminalId)
         {   // prueba de branch
             try
             {
@@ -40,7 +40,7 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View("Error");
+                return PartialView("Sections/BindKey");
             }
         }
 
