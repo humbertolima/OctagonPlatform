@@ -45,16 +45,10 @@
 
     </div>
 </div>
-<div class="panel panel-primary" style="padding:0px;">
-    <div class="panel-heading">
-        <a name="ankle2"></a>
-        <h3 class="panel-title" style="font-size: 26px;">Schedule Details</h3>
-    </div>
-    <div class="panel-body">
-        <div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+
+   <div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
         
-    </div>
-</div>
+
         @section Scripts {
 
             <script>
@@ -89,6 +83,7 @@
             $("#create").click(function () {
 
                 $.get(urlcreate, { userId: $("#userid").val() }, function (data) {
+
                     $("#ScheduleForm").html(data);
                     Success();
                     
