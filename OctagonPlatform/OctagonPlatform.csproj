@@ -628,6 +628,7 @@
     <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.material.css" />
     <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\datatables.min.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.uikit.css" />
@@ -702,6 +703,15 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\quicksearch\.gitignore" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.js" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js" />
+    <Content Include="Content\quicksearch\examples\index.html" />
+    <Content Include="Content\quicksearch\examples\loader.gif" />
+    <Content Include="Content\quicksearch\examples\style.css" />
+    <Content Include="Content\quicksearch\examples\super_table.html" />
+    <Content Include="Content\quicksearch\Gruntfile.js" />
+    <Content Include="Content\quicksearch\src\jquery.quicksearch.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -1027,6 +1037,13 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="Content\quicksearch\bower.json" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js.map" />
+    <Content Include="Content\quicksearch\examples\example.json" />
+    <Content Include="Content\quicksearch\jquery.quicksearch.jquery.json" />
+    <Content Include="Content\quicksearch\LICENSE" />
+    <Content Include="Content\quicksearch\package.json" />
+    <Content Include="Content\quicksearch\README.md" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1072,6 +1089,7 @@
     <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
     <Content Include="Scripts\DataTables\dataTables.material.js" />
     <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\datatables.min.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
     <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
