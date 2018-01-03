@@ -6,73 +6,193 @@
 @*@Styles.Render("~/Content/bootstrap-lumen.css")*@
 
 <div class="row">
-    <a href="@Url.Action("VendBot", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+    <a href="@Url.Action("VendBot", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})" target="_blank">
         <div class="col-lg-12" style="width: 500px">
             <h1 class="page-header" style="color: #859298; font-size: 30px;">
-                 VendBot
+                VendBot
             </h1>
         </div>
     </a>
-        <!-- /.col-lg-12 -->
 </div>
-   <div class="row">
-    <div class="col-lg-8">
+
+
+<div class="row">
+    <!-- TRANSACTIONS -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
-                
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="morris-area-chart"></div>
+                <div id="vendbot-transactions-chart"></div>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
+    </div>
+    <!-- END TRANSACTIONS -->
+    <!--/////////////////////////////-->
+    <!-- TRANSACTIONS BY LOCATION -->
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions By Location
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Location
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Location 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Location 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-4">
-
-
+                    <div class="col-lg-12">
+                        <div id="vendbot-transactions-location-chart"></div>
                     </div>
-
-                    <div class="col-lg-8">
-                        <div id="morris-bar-chart"></div>
-                    </div>
-                    <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-
     </div>
-    <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart
-            </div>
-            <div class="panel-body">
-                <div id="morris-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
-    </div>
-    <!-- /.col-lg-4 -->
+    <!-- END TRANSACTIONS BY LOCATION -->
 </div>
 
-    <!-- /.row -->
+<!-- ALERTS -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Product
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Period
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Daily</a>
+                    </li>
+                    <li>
+                        <a href="#">Weekly</a>
+                    </li>
+                    <li>
+                        <a href="#">Monthly</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Product
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Product 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 3</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 4</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 5</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 6</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 7</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 8</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 9</a>
+                    </li>
+                    <li>
+                        <a href="#">Product 10</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="vendbot-product-sales-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- /#page-wrapper -->
+

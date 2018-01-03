@@ -101,44 +101,44 @@ $(function () {
         element: 'dashboard-surcharges-chart',
         data: [{
             period: '2015 Q1',
-            loads: 666
+            surcharge: 666
         }, {
             period: '2015 Q2',
-            loads: 778
+            surcharge: 778
         }, {
             period: '2015 Q3',
-            loads: 912
+            surcharge: 912
         }, {
             period: '2015 Q4',
-            loads: 767
+            surcharge: 767
         }, {
             period: '2016 Q1',
-            loads: 1810
+            surcharge: 1810
         }, {
             period: '2016 Q2',
-            loads: 1670
+            surcharge: 1670
         }, {
             period: '2016 Q3',
-            loads: 820
+            surcharge: 820
         }, {
             period: '2016 Q4',
-            loads: 1073
+            surcharge: 1073
         }, {
             period: '2017 Q1',
-            loads: 1687
+            surcharge: 1687
         }, {
             period: '2017 Q2',
-            loads: 1489
+            surcharge: 1489
         }, {
             period: '2017 Q3',
-            loads: 1845
+            surcharge: 1845
         }, {
             period: '2017 Q4',
-            loads: 1432
+            surcharge: 1432
         }],
         xkey: 'period',
-        ykeys: ['loads'],
-        labels: ['Loads'],
+        ykeys: ['surcharge'],
+        labels: ['Surcharge Total'],
         pointSize: 2,
         lineColors: ['grey'],
         fillOpacity: 0.5,
@@ -150,44 +150,44 @@ $(function () {
         element: 'dashboard-interxchange-chart',
         data: [{
             period: '2015 Q1',
-            loads: 166
+            interxchange: 166
         }, {
             period: '2015 Q2',
-            loads: 378
+            interxchange: 378
         }, {
             period: '2015 Q3',
-            loads: 212
+            interxchange: 212
         }, {
             period: '2015 Q4',
-            loads: 467
+            interxchange: 467
         }, {
             period: '2016 Q1',
-            loads: 510
+            interxchange: 510
         }, {
             period: '2016 Q2',
-            loads: 370
+            interxchange: 370
         }, {
             period: '2016 Q3',
-            loads: 420
+            interxchange: 420
         }, {
             period: '2016 Q4',
-            loads: 573
+            interxchange: 573
         }, {
             period: '2017 Q1',
-            loads: 487
+            interxchange: 487
         }, {
             period: '2017 Q2',
-            loads: 432
+            interxchange: 432
         }, {
             period: '2017 Q3',
-            loads: 332
+            interxchange: 332
         }, {
             period: '2017 Q4',
-            loads: 522
+            interxchange: 522
         }],
         xkey: 'period',
-        ykeys: ['loads'],
-        labels: ['Loads'],
+        ykeys: ['interxchange'],
+        labels: ['InterXchange Total'],
         hideHover: 'auto',
         barColors: ['grey'],
         resize: true

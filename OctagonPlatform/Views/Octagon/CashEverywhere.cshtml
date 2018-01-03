@@ -3,76 +3,179 @@
     Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
 }
 
-@*@Styles.Render("~/Content/bootstrap-lumen.css")*@
 
 <div class="row">
     <a href="@Url.Action("CashEverywhere", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
         <div class="col-lg-12" style="width: 500px">
             <h1 class="page-header" style="color: #859298; font-size: 30px;">
-                 Cash Everywhere
+                Cash Everywhere
             </h1>
         </div>
     </a>
-        <!-- /.col-lg-12 -->
 </div>
-   <div class="row">
-    <div class="col-lg-8">
+
+<div class="row">
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart
-                
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div id="morris-area-chart"></div>
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-4">
-
-
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="col-lg-8">
-                        <div id="morris-bar-chart"></div>
-                    </div>
-                    <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-
-    </div>
-    <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart
             </div>
             <div class="panel-body">
-                <div id="morris-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                <div id="cew-transactions-chart"></div>
             </div>
-            <!-- /.panel-body -->
         </div>
-        <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
     </div>
-    <!-- /.col-lg-4 -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions by Terminal
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Terminal
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Terminal 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="cew-transactionsbyTerminal-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions by Country
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Country
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Country 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Country 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="cew-transactionsbyCountry-chart"></div>
+            </div>
+        </div>
+    </div>
 </div>
-
-    <!-- /.row -->
-
-<!-- /#page-wrapper -->
