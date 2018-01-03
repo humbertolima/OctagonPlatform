@@ -7,9 +7,9 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class schedule : IMigrationMetadata
+    public sealed partial class Schedule : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(schedule));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Schedule));
         
         string IMigrationMetadata.Id
         {
