@@ -144,20 +144,21 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public ViewResult SetPictures(int indexTerminalId, HttpPostedFileBase FileForm, int? pictureId)
+        public PartialViewResult SetPictures(TerminalPicturesVM viewModel, HttpPostedFileBase FileForm)
         {
-            Models.Terminal terminal = new Models.Terminal();
+            Models.Terminal terminal;
 
-            if (pictureId == null || pictureId == 0)
-            {   //addicionar
-                terminal = _repository.SetPictures(indexTerminalId, FileForm, null);
+            if (FileForm !=null)
+            {
+                terminal = _repository.SetPictures(viewModel.Id, FileForm, null);
+                return PartialView("Details", terminal);
             }
             else
-            {   //editar porque viene un id de pictures
-
+            {
+                ViewBag.Error = "Pictures required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalPicturesVM, Models.Terminal>(viewModel));
             }
-
-            return View("Details", terminal);
+            
         }
 
         [HttpPost]
