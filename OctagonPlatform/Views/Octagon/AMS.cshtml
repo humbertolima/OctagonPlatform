@@ -5,21 +5,20 @@
 
 
 <div class="row">
-    <div class="col-lg-6" style="width: 35%; padding-bottom: 9px;margin: 45px 0 20px;">
-        <div class="btn-group portal">
-            <button style="font-size: 20px;color: #5f5b5b;"> Platform <i class="fa fa-external-link"></i> </button>
+    <a href="@Url.Action("Index", "Dashboard", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})" target="_blank">
+        <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div style="font-size: 20px; color: #fff;">
+                <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+            </div>
         </div>
-    </div>
+    </a>
     <div class="col-lg-6">
         <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
             ATM Management Studio
         </h1>
     </div>
-    <div class="col-lg-3">
+        <div class="col-lg-3">
     </div>
-    <a href="@Url.Action("Index", "Dashboard", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})" target="_blank">
-
-    </a>
 </div>
 
 
