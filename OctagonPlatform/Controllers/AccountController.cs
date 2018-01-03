@@ -59,7 +59,7 @@ namespace OctagonPlatform.Controllers
                 Session["businessName"] = userToLogin.Partner.BusinessName;
 
                 if (Session["tries"] != null) Session.Remove("tries");
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("AMS", "Octagon");
             }
             catch (Exception ex)
             {

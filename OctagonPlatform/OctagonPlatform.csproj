@@ -218,6 +218,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\OctagonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
@@ -451,6 +452,9 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\data\vendbot-data.js" />
+    <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
+    <Content Include="Octagon\assets\data\demmoney-data.js" />
     <Content Include="Content\adminsb\data\morris-data.js" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.css" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.min.css" />
@@ -767,7 +771,8 @@
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
-    <Content Include="Octagon\assets\data\morris-data.js" />
+    <Content Include="Octagon\assets\data\AMS-data.js" />
+    <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
     <Content Include="Octagon\assets\fonts\font-awesome.min.css" />
     <Content Include="Octagon\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Octagon\assets\fonts\simple-line-icons.min.css" />
@@ -776,9 +781,9 @@
     <Content Include="Octagon\assets\img\2.jpg" />
     <Content Include="Octagon\assets\img\3.jpg" />
     <Content Include="Octagon\assets\img\404.jpg" />
+    <Content Include="Octagon\assets\img\banner2-1.jpg" />
+    <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
-    <Content Include="Octagon\assets\img\carousel2.jpg" />
-    <Content Include="Octagon\assets\img\carousel3.jpg" />
     <Content Include="Octagon\assets\img\eth-16x16.png" />
     <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
@@ -786,7 +791,6 @@
     <Content Include="Octagon\assets\img\logo.png" />
     <Content Include="Octagon\assets\img\ltc-16x16.png" />
     <Content Include="Octagon\assets\img\ltc-32x32.png" />
-    <Content Include="Octagon\assets\img\map.jpg" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
@@ -1271,6 +1275,17 @@
     <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
     <Content Include="Views\Terminals\Sections\Error.cshtml" />
     <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
+    <Content Include="Views\Octagon\AMS.cshtml" />
+    <Content Include="Views\Shared\_LayoutOctagonDashboard.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonNavBar.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonSidebar.cshtml" />
+    <Content Include="Views\Octagon\CryptoXone.cshtml" />
+    <Content Include="Views\Octagon\BeComm.cshtml" />
+    <Content Include="Views\Octagon\AVT.cshtml" />
+    <Content Include="Views\Octagon\DemMoney.cshtml" />
+    <Content Include="Views\Octagon\CashEverywhere.cshtml" />
+    <Content Include="Views\Octagon\VendBot.cshtml" />
+    <Content Include="Views\Octagon\MicroLoans.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

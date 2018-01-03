@@ -1,0 +1,211 @@
+﻿@{
+    ViewBag.Title = "Money For People";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+@*@Styles.Render("~/Content/bootstrap-lumen.css")*@
+
+<div class="row">
+    <a href="@Url.Action("MicroLoans", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+        <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div style="font-size: 20px; color: #fff;">
+                <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+            </div>
+        </div>
+    </a>
+    <div class="col-lg-6">
+        <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+            Money 4 People
+        </h1>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By Country
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="bar-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-8 -->
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By Unit
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Units
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Unit 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 3</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="line-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Total Requests
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="area-example"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>
+<!-- /.row -->
+
+<!-- /#page-wrapper -->
+@section scripts
+{
+    <script>
+        new Morris.Bar({
+            element: 'bar-example',
+            data: [
+                { y: 'USA', a: 30000 },
+                { y: 'Mexico', a: 10000 },
+                { y: 'Argentina', a: 13450 },
+                { y: 'Colombia', a: 7500 },
+                { y: 'Spain', a: 8000 },
+                { y: 'Brasil', a: 20000 },
+                { y: 'Peru', a: 24000 },
+                { y: 'Bolivia', a: 5000 },
+                { y: 'Panama', a: 9000 }
+            ],
+            xLabelAngle: 35,
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+
+    <script>
+        new Morris.Area({
+            element: 'area-example',
+            data: [
+                { y: '2006', a: 1250 },
+                { y: '2007', a: 1500 },
+                { y: '2008', a: 1000 },
+                { y: '2009', a: 1900 },
+                { y: '2010', a: 2000 },
+                { y: '2011', a: 1950 },
+                { y: '2012', a: 2200 },
+                { y: '2013', a: 2600 },
+                { y: '2014', a: 2500 },
+                { y: '2015', a: 2850 },
+                { y: '2016', a: 3250 },
+                { y: '2017', a: 3000 },
+                { y: '2018', a: 3400 }
+
+            ],
+            lineColors: ['blue'],
+            xkey: 'y',
+            ykeys: ['a'],
+            fillOpacity: 0.6,
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+
+    <script>
+        new Morris.Line({
+            element: 'line-example',
+            data: [
+                { y: '2008', a: 100 },
+                { y: '2009', a: 200 },
+                { y: '2010', a: 150 },
+                { y: '2011', a: 350 },
+                { y: '2012', a: 300 },
+                { y: '2013', a: 450 },
+                { y: '2014', a: 525 }
+            ],
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Total'],
+            resize: true
+        });
+    </script>
+}

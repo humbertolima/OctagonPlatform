@@ -8,7 +8,7 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
 
 }
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#ffffff;font-size:15px;padding:0px;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background-color:#ffffff;font-size:15px;padding:12px;">
     <div class="container">
 
         <div class="nav navbar-nav navbar-right">
@@ -59,12 +59,11 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
                     <div class="container">
                         <div class="navbar-header">
                             <button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggle collapsed" style="width: 45px;"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                            <a href="#" class="navbar-brand navbar-link" style="font-size: 35px; color: #222222; margin: -29px; height: 0px; padding: 28px; width: 238px;"><img src="~/Octagon/assets/img/favicon-32x32.png" id="logo"/><strong>Octagon </strong></a>
+                           <a href="#" class="navbar-brand navbar-link" style="font-size: 35px; color: #222222; margin: -14px; height: 0px; padding: 28px; width: 238px;"><img src="~/Octagon/assets/img/favicon-32x32.png" id="logo"/><strong>Octagon </strong></a>
 
                         </div>
                         <div class="collapse navbar-collapse" id="navcol-1">
                             <ul class="nav navbar-nav navbar-right">
-
                                 <li role="presentation"><a href="#contact" style="color: rgb(57, 65, 69);">Contact Us</a></li>
                                 <li role="presentation"><a href="#" style="color: rgb(57, 65, 69);" onclick="document.getElementById('id01').style.display = 'block'">Login</a></li>
                                 @* @Html.Partial("_LoginPartial") *@
@@ -86,42 +85,43 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
     <div class="jumbotron">
         <h1 style="color:rgb(120, 214, 249);">OCTAGON </h1>
         <p style="font-family:Helvetica, 'Helvetica Neue'">The whole world in your hands</p>
-        <p></p><a class="btn btn-default" role="button" href="#">Learn more</a>
+        
     </div>
 </div>
 <hr>
-<div class="container site-section" id="middle">
-    <div class="row" style="background-color:rgba(255,255,255,0.247059);">
+<div class="container site-section" style="padding-bottom: 20px; padding-left:0; padding-right:0;" id="middle">
+    <div class="row">
         <div class="col-md-4">
-            <a href="">
-                <img src="~/Octagon/assets/img/1.jpg" id="team" /> 
+            <a>
+                <img src="~/Octagon/assets/img/1.jpg" id="team" style="width: 100%;"> 
                 <!--<h2 style="color:rgb(129,124,124);">TEAM</h2> <p>&nbsp;</p>-->
             </a>
         </div>
 
         <div class="col-md-4">
-            <a href="">
-                <img src="~/Octagon/assets/img/2.jpg" id="vision" style="color:rgb(129,124,124);" />
+            <a> 
+                <img src="~/Octagon/assets/img/2.jpg" id="vision" style="width: 100%;">
                 <!--<h2 style="color:rgb(129,124,124);">VISION</h2> <p>&nbsp;</p>-->
             </a>
         </div>
         <div class="col-md-4">
-            <a href="">
-                <img src="~/Octagon/assets/img/3.jpg" id="innovation" /> 
+            <a>
+                <img src="~/Octagon/assets/img/3.jpg" id="innovation" style="width: 100%;"> 
                 <!--<h2 style="color:rgb(129,124,124);">INNOVATION</h2> <p>&nbsp;</p>-->
             </a>
         </div>
     </div>
 </div>
+
 <div class="container-fluid" id="container-fluid">
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MtCMtC50gwY" id="video" style="margin:17px;padding:-7px;background-color:#6bb1f2;"></iframe>
+    <div >
+        <img src="~/Octagon/assets/img/banner2-1.jpg" style="width: 100%;"/> 
     </div>
 
     <br>
     <br>
     <div class="container">
-        <a id="contact"> </a>
+        
         <div class="modal fade" role="dialog" tabindex="-1" id="modal1">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -159,23 +159,23 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
                     <fieldset>
                         <legend><i class="fa fa-envelope"></i> Contact Us</legend>
                     </fieldset>
-                    <div class="form-group has-feedback">
+                    <div class="form-group has-feedback"style="margin-left: 0px;">
                         <label class="control-label" for="from_name">Name</label>
                         <input class="form-control" type="text" name="from_name" required placeholder="Full Name" id="from_name" tabindex="-1" />
                     </div>
-                    <div class="form-group has-feedback">
+                    <div class="form-group has-feedback"style="margin-left: 0px;">
                         <label class="control-label" for="from_email">Email</label>
                         <input class="form-control" type="email" name="from_email" required placeholder="Email Address" id="from_email" />
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group has-feedback">
+                            <div class="form-group has-feedback"style="margin-left: 0px;">
                                 <label class="control-label" for="from_phone">Phone</label>
                                 <input class="form-control" type="text" name="from_phone" placeholder="Primary Phone" id="from_phone" />
                             </div>
                         </div>
                         <div class="col-sm-6" style="padding-top: 8px;">
-                            <div class="form-group">
+                            <div class="form-group"style="margin-left: 0px;">
                                 <label class="control-label" for="calltime">Best Time to Call</label>
                                 <select class="form-control" name="Call Time" id="calltime">
                                     <option value="Morning" selected>Morning</option>
@@ -185,11 +185,11 @@ Layout = "~/Views/Shared/_LayoutOctagon.cshtml";
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"style="margin-left: 0px;">
                         <label class="control-label" for="comments">Comments</label>
                         <textarea class="form-control" rows="5" name="Comments" placeholder="Enter comments here" id="comments"></textarea>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"style="margin-left: 0px;">
                         <button class="btn btn-primary btn-block" type="submit">Send <i class="fa fa-chevron-circle-right"></i></button>
                     </div>
                     <hr class="visible-xs-block visible-sm-block" />
