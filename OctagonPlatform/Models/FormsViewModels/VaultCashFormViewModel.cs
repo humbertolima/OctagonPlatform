@@ -14,6 +14,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         public Terminal Terminal { get; set; }
 
         [Required]
+        public string Action { get; set; }
+
+        [Required]
         [Display(Name = "Bank Account")]
         public int BankAccountId { get; set; }
 

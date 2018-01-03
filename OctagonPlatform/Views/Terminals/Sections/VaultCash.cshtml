@@ -11,7 +11,7 @@
 @if (Model.VaultCash == null)
 {       //pendiente validar en el contralador que el usuario no pueda add un vaultcash mas a la terminal.
     <p>
-        @Ajax.ActionLink("ADD", "Create", "VaultCash", new { id = Model.Id },
+        @Ajax.ActionLink("Add", "Create", "VaultCash", new { id = Model.Id },
                    new AjaxOptions
                    {
                        UpdateTargetId = "AddVaultCash",
@@ -45,6 +45,34 @@
                     <td>@Model.VaultCash.BankAccount.BankName</td>
                     <td>@Model.VaultCash.StartDate.ToShortDateString()</td>
                     <td>@Model.VaultCash.StopDate.ToShortDateString()</td>
+                    <td>
+                        <i class="glyphicon glyphicon-edit"></i> @Ajax.ActionLink("Edit", "Edit", "VaultCash",
+                                                                 new { id = Model.VaultCash.Id },
+                           new AjaxOptions
+                           {
+                               UpdateTargetId = "AddVaultCash",
+                               LoadingElementId = "loading3",
+                               InsertionMode = InsertionMode.Replace,
+                               HttpMethod = "Get"
+                           },
+                           htmlAttributes: new
+                           {
+                               @class = "btn link",
+                               data_toggle = "modal",
+                               data_target = "#AddVaultCash"
+                           })
+                    </td>
+                    <td>
+                        <i class="glyphicon glyphicon-trash"></i> @Html.ActionLink(
+                                                                 linkText: "Delete",
+                                                                 actionName: "Delete",
+                                                                 controllerName: "VaultCash",
+                                                                 routeValues: new
+                                                                 {
+                                                                     id = Model.VaultCash.Id
+                                                                 },
+                                                                 htmlAttributes: null)
+                    </td>
                 </tr>
             </tbody>
         }

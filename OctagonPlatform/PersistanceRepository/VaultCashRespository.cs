@@ -58,7 +58,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var vaultcash = Table.Where(x => x.Id == id && !x.Deleted)
+                VaultCash vaultcash = Table.Where(x => x.Id == id && !x.Deleted)
                     .Include(x => x.BankAccount)
                     .Include(x => x.Terminal)
                     .SingleOrDefault();
