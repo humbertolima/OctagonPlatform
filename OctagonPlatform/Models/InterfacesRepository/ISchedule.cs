@@ -7,9 +7,9 @@ using System.Web;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-   public interface ISchedule : IGenericRepository<Schedule>
+    public interface ISchedule : IGenericRepository<Schedule>
     {
-       
+        IEnumerable<Schedule> GetScheduleByUser(int userId, int partnerId);
     }
 
 }

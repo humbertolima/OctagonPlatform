@@ -10,27 +10,48 @@ using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.Views.Schedule;
 
 namespace OctagonPlatform.Controllers.Reports
 {
     public class ScheduleController : Controller
     {
         private ISchedule _repo;
-        public ScheduleController(ISchedule repo)
+        private readonly IUserRepository _userRepository;
+        public ScheduleController(ISchedule repo, IUserRepository userRepository)
         {
             _repo = repo;
+            _userRepository = userRepository;
         }
 
         // GET: ScheduleOnces
         public ActionResult Index()
         {
-            return View(_repo.All());
-        }       
-
+            
+            ScheduleVM vmodel = new ScheduleVM();
+            vmodel.List = _repo.GetScheduleByUser(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(Session["partnerId"]));
+            vmodel.User = Session["userName"]+" - "+ Session["Name"] +" - "+ Session["businessName"].ToString();
+            vmodel.UserId =Convert.ToInt32( Session["UserId"]);
+            return View(vmodel);
+        }
         // GET: ScheduleOnces/Create
-        public PartialViewResult Create()
+        public PartialViewResult List(string userId)
+        {
+            IEnumerable<Schedule> List = null;
+            if (Convert.ToInt32(userId) > 0)
+            {
+                User user = _userRepository.FindBy(Convert.ToInt32(userId));
+                List = _repo.GetScheduleByUser(user.Id, user.PartnerId);
+            }
+            else
+                List = _repo.All();
+            return PartialView("List",List);
+        }
+        // GET: ScheduleOnces/Create
+        public PartialViewResult Create(string userId)
         {
             ScheduleViewModel vmodel = new ScheduleViewModel();
+            vmodel.UserId = userId;
             return PartialView(vmodel);
         }
 
@@ -39,7 +60,7 @@ namespace OctagonPlatform.Controllers.Reports
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Repeats,RepeatsSelected,StartDate,Time,RepeatOn,StopDate,RepeatOnWeeks,RepeatOnDaysWeeks,RepeatOnDay,RepeatOnMonth,RepeatOnFirst,RepeatOnDay2,RepeatOnMonth2")] ScheduleViewModel vmodel)
+        public ActionResult Create([Bind(Include = "UserId,Name,Repeats,RepeatsSelected,StartDate,Time,RepeatOn,StopDate,RepeatOnWeeks,RepeatOnDaysWeeks,RepeatOnDay,RepeatOnMonth,RepeatOnFirst,RepeatOnDay2,RepeatOnMonth2")] ScheduleViewModel vmodel)
         {
             if(vmodel.RepeatsSelected != -1)
                 ModelState.Remove("Repeats");
@@ -78,6 +99,8 @@ namespace OctagonPlatform.Controllers.Reports
                         }
                     }
                 }
+                User user =_userRepository.FindBy(Convert.ToInt32(vmodel.UserId));
+                model.PartnerId = user.PartnerId;
                 _repo.Add(model);               
                 return RedirectToAction("Index");
             }

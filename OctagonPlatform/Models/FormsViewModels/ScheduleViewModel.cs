@@ -12,7 +12,7 @@ namespace OctagonPlatform.Models.FormsViewModels
     {
         public ScheduleViewModel()
         {
-           
+            
             List<SelectListItem> list = new List<SelectListItem>();
             #region AddSelectItem Time
             list.Add(new SelectListItem { Value = "12:00:00 AM", Text = "12:00:00 AM" });
@@ -193,6 +193,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string RepeatOnDay2 { get; set; }
         public List<SelectListItem> DropDownRepeatOnMonth2 { get; set; }
         public int RepeatOnMonth2 { get; set; }
-
+        public string UserId { get; set; }
+       
     }
 }

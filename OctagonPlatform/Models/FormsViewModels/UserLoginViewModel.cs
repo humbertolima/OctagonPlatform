@@ -24,5 +24,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [DataType(DataType.ImageUrl)]
         public string Logo { get; set; }
+        public string Name { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -333,6 +333,10 @@
     <Compile Include="Migrations\201801022136578_AddSchedule2.Designer.cs">
       <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801031559041_AddRelationPartnerSchedule.cs" />
+    <Compile Include="Migrations\201801031559041_AddRelationPartnerSchedule.Designer.cs">
+      <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -455,6 +459,7 @@
     <Compile Include="Views\ReportsSmart\ViewModels\CashManagementTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TerminalStatusTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TerminalTableVM.cs" />
+    <Compile Include="Views\Schedule\ScheduleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
@@ -1283,6 +1288,7 @@
     <Content Include="Views\Schedule\Delete.cshtml" />
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
+    <Content Include="Views\Schedule\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1336,6 +1342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801022136578_AddSchedule2.resx">
       <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031559041_AddRelationPartnerSchedule.resx">
+      <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

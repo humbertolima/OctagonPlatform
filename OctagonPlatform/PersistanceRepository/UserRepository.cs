@@ -483,6 +483,22 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public IEnumerable<dynamic> GetAllUser(string term,int partnerId)
+        {
+            try
+            {
+                
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner join m in Table.Include(b => b.Partner) on q.Id equals m.PartnerId select m).ToList();               
+                return list4.Where(b => b.Name.Contains(term)).Select(b => new { label = b.UserName+" - "+b.Name+" - "+b.Partner.BusinessName, value = b.Id }).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+     
 
 
 

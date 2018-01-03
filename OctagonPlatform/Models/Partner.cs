@@ -88,7 +88,8 @@ namespace OctagonPlatform.Models
         [Required]
         public double Interchange { get; set; }
 
-             
+        public ICollection<Schedule> Schedules { get; set; }
+
         public Partner()
         {
             Users = new Collection<User>();

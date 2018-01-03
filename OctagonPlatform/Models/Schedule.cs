@@ -32,6 +32,9 @@ namespace OctagonPlatform.Models
         public ScheduleType.RepeatsEnum Repeats { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
+        [Required]
+        public int PartnerId { get; set; }
+        public virtual Partner Partner { get; set; }
 
     }
    

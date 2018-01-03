@@ -9,8 +9,18 @@ using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class ScheduleRepository : GenericRepository<Schedule>, ISchedule               
+    public class ScheduleRepository : GenericRepository<Schedule>, ISchedule
     {
-       
+        public IEnumerable<Schedule> GetScheduleByUser(int userId, int partnerId)
+        {
+            IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+            var list4 = (from q in listpartner
+                         join m in Table on q.Id equals m.PartnerId
+                         join u in Context.Users on q.Id equals u.PartnerId
+                         where u.PartnerId == partnerId && u.Id == userId
+                         select m).ToList();
+
+            return list4;
+        }
     }
 }

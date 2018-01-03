@@ -29,7 +29,9 @@ namespace OctagonPlatform.PersistanceRepository
                             UserName = userLogin.UserName,
                             Logo = user.Partner.Logo,
                             Partner = user.Partner,
-                            BusinessName = user.Partner.BusinessName
+                            BusinessName = user.Partner.BusinessName,
+                            Name = user.Name,
+                            UserId = user.Id
                         };
                     }
                 }

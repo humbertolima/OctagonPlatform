@@ -57,7 +57,9 @@ namespace OctagonPlatform.Controllers
                 Session["logo"] = userToLogin.Partner.Logo;
                 Session["partnerId"] = userToLogin.Partner.Id;
                 Session["businessName"] = userToLogin.Partner.BusinessName;
-
+                Session["userName"] = userToLogin.UserName;
+                Session["Name"] = userToLogin.Name;
+                Session["UserId"] = userToLogin.UserId;
                 if (Session["tries"] != null) Session.Remove("tries");
                 return RedirectToAction("Index", "Dashboard");
             }
