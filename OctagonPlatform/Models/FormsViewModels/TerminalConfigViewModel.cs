@@ -6,10 +6,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class TerminalAlertIngnoredViewModel
+    public class TerminalConfigViewModel
     {
         [Required]
-        public int TerminalId { get; set; }
+        public int Id { get; set; }
+
+        public string TerminalId { get; set; }
 
         public Week.Day Days { get; set; }
 

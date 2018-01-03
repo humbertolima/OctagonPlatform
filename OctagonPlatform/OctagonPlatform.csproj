@@ -250,6 +250,7 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
     <Compile Include="Helpers\CustomRoleProvider.cs" />
@@ -318,6 +319,14 @@
     <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
       <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
+    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801032107211_schedule.cs" />
+    <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -336,18 +345,27 @@
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalGeneralVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalInterchangeVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
+    <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalCassetteVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalDocumentsVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalNotesVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalPicturesVM.cs" />
     <Compile Include="Models\FormsViewModels\TransDailyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalStatusFormFilterVM.cs" />
     <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CassetteViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
     <Compile Include="Models\FormsViewModels\InterChangeFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\ReportingGroupVM.cs" />
     <Compile Include="Models\FormsViewModels\ReportsViewModel.cs" />
     <Compile Include="Models\FormsViewModels\SurchargeFormViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\TerminalAlertIngnoredViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalConfigViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
@@ -396,6 +414,7 @@
     <Compile Include="Models\TerminalContact.cs" />
     <Compile Include="Models\TerminalMessage.cs" />
     <Compile Include="Models\TerminalPicture.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalSurchargeVM.cs" />
     <Compile Include="Models\TerminalWorkingHours.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\TransactionStatistic.cs" />
@@ -420,6 +439,8 @@
     <Compile Include="PersistanceRepository\Utils.cs" />
     <Compile Include="PersistanceRepository\VaultCashRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\CashBalanceAtCloseTableVM.cs" />
+    <Compile Include="Views\ReportsSmart\ViewModels\TransMonthlyTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TransDailyTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\CashLoadTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\CashManagementTableVM.cs" />
@@ -1241,11 +1262,15 @@
     <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
     <Content Include="Views\InterChange\Modal\AddInterChange.cshtml" />
     <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
-    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
+    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
+    <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Terminals\Sections\Error.cshtml" />
+    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1290,6 +1315,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
       <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801032107211_schedule.resx">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

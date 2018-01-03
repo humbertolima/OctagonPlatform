@@ -4,7 +4,9 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
@@ -112,6 +114,26 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Context.Dispose();
         }
+        public IEnumerable<Partner> GetPartnerByParentId(int parentId)
+        {
+            string sql = @"WITH MyTest as
+                            (
+                              SELECT P.*
+                              FROM Partners P
+                              WHERE P.Id = @parentId
 
+                              UNION ALL
+
+                              SELECT P1.*
+                              FROM Partners P1  
+                              INNER JOIN MyTest M
+                              ON M.Id = P1.ParentId
+                             )
+                            SELECT * From MyTest";
+           
+            return Context.Database.SqlQuery<Partner>(sql, new SqlParameter("@parentId", parentId)).ToList();
+        }
+       
     }
+    
 }

@@ -1,6 +1,7 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -18,21 +19,8 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-        public ActionResult CashManagement(string terminalId)
-        {
-            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-            var result = _repository.GetCashLoad(start, end, terminalId);
-
-            foreach (var item in result.Result)
-            {
-
-            }
-            return PartialView("Sections/CashManagements", result.Result);
-        }
-
-        public ActionResult GetKey(string terminalId)
+        public PartialViewResult GetKey(string terminalId)
         {   // prueba de branch
             try
             {
@@ -52,57 +40,248 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View("Error");
+                return PartialView("Sections/BindKey");
             }
         }
 
-        [HttpPost]
-        public ViewResult SetPictures(int indexTerminalId, HttpPostedFileBase FileForm, int? pictureId)
+        public async Task<PartialViewResult> GetCashManagement(int id, string terminalId)
         {
-            Models.Terminal terminal = new Models.Terminal();
+            try
+            {
+                string date1 = DateTime.Now.AddDays(-30).ToString("MM/dd/yyy");
+                string date2 = DateTime.Now.ToString("MM/dd/yyy");
 
-            if (pictureId == null || pictureId == 0)
-            {   //addicionar
-                terminal = _repository.SetPictures(indexTerminalId, FileForm, null);
+                DateTime start = DateTime.ParseExact(date1, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime end = DateTime.ParseExact(date2, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+                var result = await _repository.GetCashLoad(start, end, terminalId);
+
+
+                return PartialView("Sections/CashManagements", result);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return PartialView("Sections/CashManagements");
+            }
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetInterchanges(TerminalInterchangeVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetInterchanges(viewModel.Id);
             }
             else
-            {   //editar porque viene un id de pictures
-
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
             }
 
-            return View("Details", terminal);
+            return PartialView("Sections/Interchanges", viewModel);
         }
 
 
         [HttpPost]
-        public ViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
+        public PartialViewResult GetSurcharges(TerminalSurchargeVM viewModel)
         {
-            Models.Terminal terminal = new Models.Terminal();
-
-            if (documentId == null || documentId == 0)
-            {   //addicionar
-                terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetSurcharges(viewModel.Id);
             }
             else
-            {   //editar porque viene un id de documents
-
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
             }
 
-            return View("Details", terminal);
+            return PartialView("Sections/Surcharge", viewModel);
         }
 
         [HttpPost]
-        public PartialViewResult SetNotes(int indexTerminalId, string notes, int? noteId)
+        public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)
         {
-            Models.Terminal terminal = new Models.Terminal();
+            try
+            {
+                if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+                {
+                    TerminalVaultCashVM result = _repository.GetVaultCash(viewModel.Id);
+                    if (result != null) viewModel = result;
+                }
+                else
+                {
+                    ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+                }
+
+                return PartialView("Sections/VaultCash", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return PartialView("Sections/VaultCash", viewModel);
+
+            }
+        }
+
+        [HttpPost]
+        public PartialViewResult GetContacts(TerminalContactVM viewModel)
+        {
+            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            {
+                viewModel = _repository.GetContacts(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+            }
+
+            return PartialView("Sections/Contacts", viewModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult GetPictures(TerminalPicturesVM viewModel)
+        {
+            if (viewModel.Id > 0)
+            {
+                viewModel = _repository.GetPictures(viewModel.Id);
+            }
+            else
+            {
+                ViewBag.Error = " parameter not recived";
+            }
+
+            return PartialView("Sections/Pictures", viewModel);
+        }
+
+        [HttpPost]
+        public PartialViewResult SetPictures(TerminalPicturesVM viewModel, HttpPostedFileBase FileForm)
+        {
+            Models.Terminal terminal;
+
+            if (FileForm !=null)
+            {
+                terminal = _repository.SetPictures(viewModel.Id, FileForm, null);
+                return PartialView("Details", terminal);
+            }
+            else
+            {
+                ViewBag.Error = "Pictures required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalPicturesVM, Models.Terminal>(viewModel));
+            }
+            
+        }
+
+        [HttpPost]
+        public PartialViewResult GetDocuments(TerminalDocumentsVM viewModel)
+        {
+            if (viewModel.Id > 0)
+            {
+                viewModel = _repository.GetDocuments(viewModel.Id);
+            }
+
+            return PartialView("Sections/Documents", viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult SetDocuments( TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
+        {
+            Models.Terminal terminal;
+            if (FileForm != null)
+            {
+                terminal = _repository.SetDocuments(viewModel.Id, FileForm, null);
+
+                return PartialView("Details", terminal);
+            }
+            else
+            {
+                ViewBag.Error = "Documents required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult DocumentDelete(TerminalDocumentsVM viewModel, int documentId)
+        {
+            Models.Terminal terminal;
+            try
+            {
+                if (documentId > 0)
+                {
+                    terminal = _repository.DocumentDelete(viewModel.Id, Convert.ToInt32(documentId));
+                }
+                else
+                {   //creo el objeto terminal con los datos del viewmodel.
+                    terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel);
+                    ViewBag.Error = " not value to Id";
+                }
+
+                return PartialView("Details", terminal);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
+            }
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetGeneralInfo(int id)
+        {
+            try
+            {
+                TerminalGeneralVM viewModel;
+                if (id > 0)
+                {
+                    viewModel = _repository.GetGeneralInfo(id);
+                }
+                else
+                {
+                    viewModel = new TerminalGeneralVM();
+                }
+
+                return PartialView("Sections/GeneralInfo", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+                return PartialView("Sections/Error");
+
+            }
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetNotes(int id)
+        {
+            TerminalNotesVM viewModel;
+            if (id > 0)
+            {
+                viewModel = _repository.GetNotes(id);
+            }
+            else
+            {
+                viewModel = new TerminalNotesVM();
+            }
+
+            return PartialView("Sections/Notes", viewModel);
+        }
+
+
+        [HttpPost]
+        public PartialViewResult SetNotes(int id, string notes, int? noteId)
+        {
+            Models.Terminal terminal;
 
             if (noteId != null && noteId > 0)
             {
-                terminal = _repository.SetNotes(indexTerminalId, notes, Convert.ToInt32(noteId));
+                terminal = _repository.SetNotes(id, notes, Convert.ToInt32(noteId));
             }
             else
             {
-                terminal = _repository.SetNotes(indexTerminalId, notes, null);
+                terminal = _repository.SetNotes(id, notes, null);
             }
 
             return PartialView("Details", terminal);
@@ -121,9 +300,27 @@ namespace OctagonPlatform.Controllers
             return PartialView("Details", terminal);
         }
 
+        [HttpPost]
+        public PartialViewResult GetCassettes(string id)
+        {
+            try
+            {
+                TerminalCassetteVM viewModel = new TerminalCassetteVM();
+
+                if (!string.IsNullOrEmpty(id))
+                {
+                    viewModel = _repository.GetCassettes(Convert.ToInt32(id));
+                }
+                return PartialView("Sections/Cassettes", viewModel);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Get Configuration error. " + ex.Message);
+            }
+        }
 
         [HttpPost]
-        public ActionResult SetCassettes(string autoRecord, int denomination, int terminalId, int? cassetteId)
+        public ActionResult SetCassettes(string autoRecord, int denomination, int id, int? cassetteId)
         {
             bool isAutoRecord;
 
@@ -133,11 +330,11 @@ namespace OctagonPlatform.Controllers
 
             if (cassetteId != null && cassetteId > 0)    //si viene el ID del cassette es porque se le dio al boton editar.
             {
-                terminal = _repository.CassettesEdit(isAutoRecord, denomination, terminalId, Convert.ToInt32(cassetteId));
+                terminal = _repository.CassettesEdit(isAutoRecord, denomination, id, Convert.ToInt32(cassetteId));
             }
             else
             {
-                terminal = _repository.CassettesSet(isAutoRecord, denomination, terminalId);
+                terminal = _repository.CassettesEdit(isAutoRecord, denomination, id, null);
             }
 
             return View("Details", terminal);
@@ -327,7 +524,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CassetteDelete(int? cassetteId, int terminalId)
+        public ActionResult CassetteDelete(int? cassetteId, int id)
         {
             try
             {
@@ -338,19 +535,19 @@ namespace OctagonPlatform.Controllers
                 }
                 _repository.CassettesDelete(Convert.ToInt32(cassetteId));
 
-                return RedirectToAction("Details", new { id = terminalId });
+                return RedirectToAction("Details", new { id = id });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting Terminal" + ex.Message;
 
-                return RedirectToAction("Details", new { id = terminalId });
+                return RedirectToAction("Details", new { id = id });
             }
         }
         //======================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PictureDelete(int indexTerminalId, int? pictureId)
+        public ActionResult PictureDelete(int id, int? pictureId)
         {
             try
             {
@@ -359,7 +556,7 @@ namespace OctagonPlatform.Controllers
                     ViewBag.Error = "Picture not found. ";
                     return View("Error");
                 }
-                Models.Terminal terminal = _repository.PictureDelete(indexTerminalId, Convert.ToInt32(pictureId));
+                Models.Terminal terminal = _repository.PictureDelete(id, Convert.ToInt32(pictureId));
 
                 return RedirectToAction("Details", new { id = terminal.Id });
             }
@@ -369,31 +566,6 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index");
             }
         }
-
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DocumentDelete(int indexTerminalId, int? documentId)
-        {
-            try
-            {
-                if (documentId == null || documentId <= 0)
-                {
-                    ViewBag.Error = "Document not found. ";
-                    return View("Error");
-                }
-                Models.Terminal terminal = _repository.DocumentDelete(indexTerminalId, Convert.ToInt32(documentId));
-
-                return RedirectToAction("Details", new { id = terminal.Id });
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = "Validation error deleting Document" + ex.Message;
-                return RedirectToAction("Index");
-            }
-        }
-
 
 
         [HttpPost]
@@ -426,29 +598,41 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult ConfigNotification(int id)
+        public PartialViewResult GetConfiguration(string id)
         {
-            var configNotification = _repository.GetConfigNotification(id);
-            return PartialView("Sections/ConfigNotification", configNotification);
-        }
+            try
+            {
+                TerminalConfigViewModel configViewModel = new TerminalConfigViewModel();
 
-        [HttpPost]      //pendiente quitar este tipo de dato por un viewModel
-        public ActionResult SetConfigNotification(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
-        {
-            var terminal = _repository.SetConfigNotification(terminalAlertIngnoredViewModel);
-
-            return RedirectToAction("Details", new { id = terminal.Id });
+                if (!string.IsNullOrEmpty(id))
+                {
+                    configViewModel = _repository.GetConfigNotification(Convert.ToInt32(id));
+                }
+                return PartialView("Sections/ConfigNotification", configViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Get Configuration error. " + ex.Message);
+            }
         }
 
         [HttpPost]
-        public ActionResult SetWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        public ActionResult SetConfiguration(TerminalConfigViewModel terminalConfigViewModel)
+        {
+            TerminalConfigViewModel configViewModel = _repository.SetConfiguration(terminalConfigViewModel);
+
+            return RedirectToAction("Details", new { id = configViewModel.Id });
+        }
+
+        [HttpPost]
+        public ActionResult SetWorkingHours(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
         {
             var terminal = _repository.SetWorkingHours(terminalAlertIngnoredViewModel, WorkingHoursEdit);
 
             return RedirectToAction("Details/" + terminal.Id);
         }
         [HttpPost]
-        public ActionResult AddWorkingHours(TerminalAlertIngnoredViewModel terminalAlertIngnoredViewModel)
+        public ActionResult AddWorkingHours(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel)
         {
             var terminal = _repository.AddWorkingHours(terminalAlertIngnoredViewModel);
 

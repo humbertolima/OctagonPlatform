@@ -20,6 +20,27 @@ namespace OctagonPlatform
 
             CreateMap<User, UserBAViewModel>();
 
+            #region Terminal General Info
+
+            CreateMap<Terminal, TerminalGeneralVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalGeneralVM, Terminal>();
+
+            #endregion
+
+            #region Terminal Interchanges
+
+            CreateMap<Terminal, TerminalInterchangeVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalInterchangeVM, Terminal>();
+
+            #endregion
+
+            #region Terminal Sourcharge
+
+            CreateMap<Terminal, TerminalSurchargeVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalSurchargeVM, Terminal>();
+
+            #endregion
+
             #region BankAccount Mapping
 
             // Domain to Dto
@@ -66,19 +87,32 @@ namespace OctagonPlatform
 
             #region Terminal Alert Ignnored Mapped
 
-            CreateMap<TerminalAlertConfig, TerminalAlertIngnoredViewModel>();
+            CreateMap<TerminalAlertConfig, TerminalConfigViewModel>();
 
-            CreateMap<TerminalAlertIngnoredViewModel, TerminalAlertConfig>();
+            CreateMap<TerminalConfigViewModel, TerminalAlertConfig>();
             //Dto to Domain
             #endregion
 
             #region TerminalContact Mapping
 
             CreateMap<TerminalContact, TerminalContactFormViewModel>();
-
             CreateMap<TerminalContactFormViewModel, TerminalContactFormViewModel>();
             //Dto to Domain
             CreateMap<TerminalContactFormViewModel, TerminalContact>().ForMember(c => c.Id, opt => opt.Ignore());
+          
+            #endregion
+
+            #region Terminal Contacts
+
+            CreateMap<Terminal, TerminalContactVM>().ForMember( c=> c.Contacts, opt => opt.MapFrom(m=> m.TerminalContacts));
+            CreateMap<TerminalContactVM, Terminal>();
+
+            #endregion
+
+            #region Terminal VaultCash
+
+            CreateMap<Terminal, TerminalVaultCashVM>(); //.ForMember(c => c.Contacts, opt => opt.MapFrom(m => m.TerminalContacts));
+            CreateMap<TerminalVaultCashVM, Terminal>();
 
             #endregion
 
@@ -101,7 +135,6 @@ namespace OctagonPlatform
             CreateMap<SurchargeFormViewModel, Surcharge>().ForMember(c => c.Id, opt => opt.Ignore());
 
             #endregion
-
 
             #region InterChange Mapping
 
@@ -129,6 +162,35 @@ namespace OctagonPlatform
 
             CreateMap<DisputeRepresentVM, DisputeRepresent>();
             #endregion
+
+            #region Terminals Cassettes
+
+            CreateMap<Terminal, TerminalCassetteVM>();
+
+            CreateMap<TerminalCassetteVM, Cassette>();
+            #endregion
+
+            #region Terminals Notes
+
+            CreateMap<Terminal, TerminalNotesVM>();
+
+            CreateMap<TerminalNotesVM, Terminal>();
+            #endregion
+
+            #region Terminals Documents
+
+            CreateMap<Terminal, TerminalDocumentsVM>();
+
+            CreateMap<TerminalDocumentsVM, Terminal>();
+            #endregion
+
+            #region Terminals Pictures
+
+            CreateMap<Terminal, TerminalPicturesVM>();
+
+            CreateMap<TerminalPicturesVM, Terminal>();
+            #endregion
+
 
 
 
