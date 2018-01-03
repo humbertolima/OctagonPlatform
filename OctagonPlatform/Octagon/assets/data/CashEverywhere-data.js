@@ -73,27 +73,20 @@ $(function() {
 
     Morris.Bar({
         element: 'cew-transactionsbyCountry-chart',
-        data: [{
-            y: '2015 Q2',
-            transactions: 100
-        }, {
-            y: '2015 Q4',
-            transactions: 75
-        }, {
-            y: '2016 Q2',
-            transactions: 50
-        }, {
-            y: '2016 Q4',
-            transactions: 75
-        }, {
-            y: '2017 Q2',
-            transactions: 50
-        }, {
-            y: '2017 Q4',
-            transactions: 75
-        }],
+        data: [
+            { y: 'USA', a: 30000 },
+            { y: 'Mexico', a: 10000 },
+            { y: 'Argentina', a: 13450 },
+            { y: 'Colombia', a: 7500 },
+            { y: 'Spain', a: 8000 },
+            { y: 'Brasil', a: 20000 },
+            { y: 'Peru', a: 24000 },
+            { y: 'Bolivia', a: 5000 },
+            { y: 'Panama', a: 9000 }
+        ],
+        xLabelAngle: 35,
         xkey: 'y',
-        ykeys: ['transactions'],
+        ykeys: ['a'],
         labels: ['Transactions'],
         hideHover: 'auto',
         resize: true
