@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Democratic Money";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+<div class="row">
+        <a href="http://democraticmoney.azurewebsites.net" target="_blank">
+            <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+                <div style="font-size: 20px; color: #fff;">
+                    <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+                </div>
+            </div>
+        </a>
+        <div class="col-lg-6">
+            <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+                Democratic Money
+            </h1>
+        </div>
+        <div class="col-lg-3">
+        </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Investments
+            </div>
+            <div class="panel-body">
+                <div id="demmoney-area-chart"></div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Revenues
+            </div>
+            <div class="panel-body">
+                <div id="demmoney-bar-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Trades
+            </div>
+            <div class="panel-body">
+                <div id="demmoney-donut-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
