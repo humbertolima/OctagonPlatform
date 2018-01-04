@@ -272,11 +272,13 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> GetAllPartner(string term)
+        public IEnumerable<dynamic> GetAllPartner(string term, int partnerId)
         {
             try
-            {              
-               return Table.Where(b => b.BusinessName.Contains(term)).Select(b => new { label = b.BusinessName, value = b.Id }).ToList();
+            {
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = listpartner.ToList();              
+                return list4.Where(b => b.BusinessName.ToLower().Contains(term.ToLower())).Select(b => new { label = b.BusinessName, value = b.Id }).ToList();
             }
             catch (Exception e)
             {

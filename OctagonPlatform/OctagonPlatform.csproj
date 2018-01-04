@@ -337,6 +337,10 @@
     <Compile Include="Migrations\201801031559041_AddRelationPartnerSchedule.Designer.cs">
       <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801041722432_AddrelationReportGroupToPartner.cs" />
+    <Compile Include="Migrations\201801041722432_AddrelationReportGroupToPartner.Designer.cs">
+      <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1345,6 +1349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801031559041_AddRelationPartnerSchedule.resx">
       <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041722432_AddrelationReportGroupToPartner.resx">
+      <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,9 @@ namespace OctagonPlatform.Models
         public int Id { get; set; }
         [StringLength(200)]
         [Required]      
-        public string Name { get; set; }       
+        public string Name { get; set; }
+        public int PartnerId { get; set; }
+        public virtual Partner Partner { get; set; }
         public ICollection<Terminal> Terminals { get; set; }
        
     }

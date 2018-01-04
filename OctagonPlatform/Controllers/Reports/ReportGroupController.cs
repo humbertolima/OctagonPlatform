@@ -49,6 +49,7 @@ namespace OctagonPlatform.Controllers
          //quitar esto
             if (ModelState.IsValid && !IsNameExists(reportGroupModel.Name))
             {
+                reportGroupModel.PartnerId = Convert.ToInt32(Session["partnerId"]);
                 _repo.Add(reportGroupModel);
                 return Json(reportGroupModel);
             }

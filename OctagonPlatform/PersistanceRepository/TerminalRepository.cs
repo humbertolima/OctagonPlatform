@@ -883,11 +883,14 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public IEnumerable<string> GetAllTerminalId(string value)
+        public IEnumerable<string> GetAllTerminalId(string value,int partnerId)
         {
             try
             {
-                return Table.Where(b => b.TerminalId.Contains(value)).Select(b => b.TerminalId).ToList();
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+
+                return list4.Where(b => b.TerminalId.ToLower().Contains(value.ToLower())).Select(b => b.TerminalId).ToList();
             }
             catch (Exception e)
             {

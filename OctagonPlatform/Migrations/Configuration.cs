@@ -17,7 +17,7 @@ namespace OctagonPlatform.Migrations
 
             context.Partners.AddOrUpdate(p => p.BusinessName, new Models.Partner
             {
-                ParentId = 1,
+                ParentId = null,
                 BusinessName = "Odyssey Group",
                 Status = Helpers.StatusType.Status.Active,
                 Address1 = "753 Shotgum RD",

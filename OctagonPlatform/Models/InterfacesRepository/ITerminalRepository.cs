@@ -78,8 +78,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         TerminalFormViewModel InitializeNewFormViewModel(TerminalFormViewModel viewModel);
 
         IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid,int parentId);
-
-        IEnumerable<string> GetAllTerminalId(string value);
+       
 
         List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId = null);
 
@@ -97,5 +96,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid, int parentId);
         IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid, int parentId);
         IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId, int parentId);
+        IEnumerable<string> GetAllTerminalId(string term, int partnerid);
     }
 }

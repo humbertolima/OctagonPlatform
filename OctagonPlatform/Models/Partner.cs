@@ -18,7 +18,7 @@ namespace OctagonPlatform.Models
         public virtual Partner Parent { get; set; }
 
         public ICollection<Partner> Partners { get; set; }
-
+       
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]
@@ -90,6 +90,7 @@ namespace OctagonPlatform.Models
 
         public ICollection<Schedule> Schedules { get; set; }
 
+        public ICollection<ReportGroupModel> ReportGroups { get; set; }
         public Partner()
         {
             Users = new Collection<User>();

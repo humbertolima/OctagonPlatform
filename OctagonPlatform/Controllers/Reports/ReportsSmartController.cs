@@ -147,21 +147,21 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult AutoTerminal(string term)
         {
 
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
+            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term, Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AutoPartner(string term)
         {
 
-            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term);
+            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term, Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AutoGroup(string term)
         {
 
-            IEnumerable<dynamic> list = repo_group.GetAllGroup(term);
+            IEnumerable<dynamic> list = repo_group.GetAllGroup(term,Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

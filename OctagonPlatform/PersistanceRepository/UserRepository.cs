@@ -490,7 +490,7 @@ namespace OctagonPlatform.PersistanceRepository
                 
                 IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
                 var list4 = (from q in listpartner join m in Table.Include(b => b.Partner) on q.Id equals m.PartnerId select m).ToList();               
-                return list4.Where(b => b.Name.Contains(term)).Select(b => new { label = b.UserName+" - "+b.Name+" - "+b.Partner.BusinessName, value = b.Id }).ToList();
+                return list4.Where(b => b.Name.ToLower().Contains(term.ToLower())).Select(b => new { label = b.UserName+" - "+b.Name+" - "+b.Partner.BusinessName, value = b.Id }).ToList();
             }
             catch (Exception e)
             {
