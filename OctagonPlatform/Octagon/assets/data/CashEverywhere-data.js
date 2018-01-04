@@ -72,17 +72,17 @@ $(function() {
     });
 
     Morris.Bar({
-        element: 'cew-transactionsbyCountry-chart',
+        element: 'cew-transactionsbyCity-chart',
         data: [
-            { y: 'USA', a: 30000 },
-            { y: 'Mexico', a: 10000 },
-            { y: 'Argentina', a: 13450 },
-            { y: 'Colombia', a: 7500 },
-            { y: 'Spain', a: 8000 },
-            { y: 'Brasil', a: 20000 },
-            { y: 'Peru', a: 24000 },
-            { y: 'Bolivia', a: 5000 },
-            { y: 'Panama', a: 9000 }
+            { y: 'South Florida', a: 30000 },
+            { y: 'Los Amgeles', a: 10000 },
+            { y: 'New York', a: 13450 },
+            { y: 'Atlanta', a: 7500 },
+            { y: 'Chicago', a: 8000 },
+            { y: 'Buenos Aires', a: 20000 },
+            { y: 'Rosario', a: 24000 },
+            { y: 'Stgo de Chile', a: 5000 },
+            { y: 'Mexico DF', a: 9000 }
         ],
         xLabelAngle: 35,
         xkey: 'y',
