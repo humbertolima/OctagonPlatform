@@ -57,7 +57,12 @@
         <tbody>
             <tr>
                 <td>@Html.ActionLink(Model.BusinessName, "Details", routeValues: new { id = Model.Id })</td>
-                <td>@Model.Parent.BusinessName</td>
+                <td>
+                    @if (@Model.Parent != null)
+                    {
+                        <div>@Model.Parent.BusinessName</div>
+                    }
+                </td>
                 <td>@Model.Address1</td>
                 <td>@Model.Mobile</td>
                 <td>@Model.Email</td>

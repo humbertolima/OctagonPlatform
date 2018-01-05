@@ -328,6 +328,14 @@
     <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
       <DependentUpon>201801032107211_schedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.cs" />
+    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.Designer.cs">
+      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.cs" />
+    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.Designer.cs">
+      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -403,6 +411,7 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
+    <Compile Include="Models\PermissionSubGroup.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
@@ -1354,6 +1363,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801032107211_schedule.resx">
       <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051425166_addPermissionSubGroup.resx">
+      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051454525_addPermissionSubGroup1.resx">
+      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

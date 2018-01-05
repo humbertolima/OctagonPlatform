@@ -14,9 +14,12 @@ namespace OctagonPlatform.Models
 
         public ICollection<Permission> Permissions { get; set; }
 
+        public ICollection<PermissionSubGroup> PermissionSubGroups { get; set; }
+
         public SetOfPermission()
         {
             Permissions = new Collection<Permission>();
+            PermissionSubGroups = new Collection<PermissionSubGroup>();
         }
     }
 }

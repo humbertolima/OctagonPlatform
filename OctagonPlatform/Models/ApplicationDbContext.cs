@@ -41,7 +41,9 @@ namespace OctagonPlatform.Models
         public DbSet<ReportModel> Reports { get; set; }
         public DbSet<ReportGroupModel> ReportGroups { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<PermissionSubGroup> PermissionSubGroups { get; set; }
 
+    
         public ApplicationDbContext()
             : base("LocalConection")
         {

@@ -7,9 +7,10 @@ namespace OctagonPlatform.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Schedules", "PartnerId", "dbo.Partners");
-            DropIndex("dbo.Schedules", new[] { "PartnerId" });
-            DropTable("dbo.Schedules");
+            
+            //DropForeignKey("dbo.Schedules", "PartnerId", "dbo.Partners");
+            //DropIndex("dbo.Schedules", new[] { "PartnerId" });
+            //DropTable("dbo.Schedules");
         }
         
         public override void Down()

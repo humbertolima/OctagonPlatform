@@ -21,8 +21,12 @@ namespace OctagonPlatform.Models
         [Required]
         [ForeignKey("SetOfPermission")]
         public int SetOfPermissionId { get; set; }
-
         public virtual SetOfPermission SetOfPermission { get; set; }
+
+        [Required]
+        [ForeignKey("PermissionSubGroup")]
+        public int PermissionSubGroupId { get; set; }
+        public PermissionSubGroup PermissionSubGroup { get; set; }
 
         public ICollection<User> Users { get; set; }
 

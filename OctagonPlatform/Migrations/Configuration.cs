@@ -17,16 +17,17 @@ namespace OctagonPlatform.Migrations
 
             context.Partners.AddOrUpdate(p => p.BusinessName, new Models.Partner
             {
-                ParentId = null,
-                BusinessName = "Odyssey Group",
-                Status = Helpers.StatusType.Status.Active,
-                Address1 = "753 Shotgum RD",
-                CountryId = 1,
-                StateId = 1,
+                ParentId = 1,
+                 BusinessName = "Odyssey Group",
+                 Status = Helpers.StatusType.Status.Active,
+                 Address1 = "753 Shotgum RD",
+                 CountryId = 1,
+                 StateId = 1,
                 CityId = 1,
-                Email = "admin@xyncro.net",
-                Mobile = "7867921950",
-                Deleted = false,
+                 Email = "admin@xyncro.net",
+                 Mobile = "7867921950",
+                 Interchange =0,
+                 Deleted = false,
             });
 
             context.Users.AddOrUpdate(u => u.Name, new Models.User
@@ -74,70 +75,70 @@ namespace OctagonPlatform.Migrations
             context.SaveChanges();  //importante. para poder tomar el Id de DB y setearlo en los Id de los campos de la tabla permissions
             #endregion
 
-            #region Terminal Permissions
+            //#region Terminal Permissions
 
-            //segun documentacion si se usa el Find en vez de FirtOrDefault, no hay que darle SaveChanges().
+            ////segun documentacion si se usa el Find en vez de FirtOrDefault, no hay que darle SaveChanges().
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "TerminalView",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "TerminalView",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "TerminalCreate",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "TerminalCreate",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "TerminalEdit",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "TerminalEdit",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "TerminalDelete",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "TerminalDelete",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == terminalsName).Id
 
-            });
-            #endregion
+            //});
+            //#endregion
 
-            #region Partner Permissions
+            //#region Partner Permissions
 
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "PartnerView",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "PartnerView",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "PartnerCreate",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "PartnerCreate",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "PartnerEdit",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "PartnerEdit",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
 
-            });
+            //});
 
-            context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
-            {
-                Name = "PartnerDelete",
-                SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
+            //context.Permissions.AddOrUpdate(p => p.Name, new Models.Permission
+            //{
+            //    Name = "PartnerDelete",
+            //    SetOfPermissionId = context.SetOfPermissions.FirstOrDefault(f => f.Name == partnerName).Id
 
-            });
-            #endregion
+            //});
+            //#endregion
 
         }
     }
