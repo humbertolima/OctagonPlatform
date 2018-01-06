@@ -170,7 +170,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult CashManagement()
         {
             TempData["Chart"] = null;
-            return View();
+            return View("CashManagement/CashManagement");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -219,7 +219,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["partner"] = vmodel.Partner;
                 #endregion
                 Session["businessName"] = "";
-                return View();
+                return View("CashManagement/CashManagement");
             }
 
             return RedirectToAction("Index");
@@ -248,7 +248,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
 
 
-            return View();
+            return View("TerminalList/TerminalList");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -266,7 +266,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
                 TempData["filename"] = "TerminalList";
-                return View();
+                return View("TerminalList/TerminalList");
             }
             return RedirectToAction("Index");
         }
@@ -274,7 +274,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult TerminalStatus()
         {
             TempData["Chart"] = null;
-            return View();
+            return View("TerminalStatus/TerminalStatus");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -325,7 +325,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 #endregion
 
-                return View();
+                return View("TerminalStatus/TerminalStatus");
             }
 
             return RedirectToAction("Index");
@@ -335,7 +335,7 @@ namespace OctagonPlatform.Controllers.Reports
             TransDailyViewModel model = new TransDailyViewModel();
             TempData["Chart"] = null;
 
-            return View(model);
+            return View("DailyTransactionSummary/DailyTransactionSummary", model);
         }
 
         [HttpPost]
@@ -399,7 +399,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["model"] = vmodel;
                 #endregion
 
-                return View();
+                return View("DailyTransactionSummary/DailyTransactionSummary");
             }
 
             return RedirectToAction("Index");
@@ -411,7 +411,7 @@ namespace OctagonPlatform.Controllers.Reports
             TransMonthlyViewModel model = new TransMonthlyViewModel();
             TempData["Chart"] = null;
 
-            return View(model);
+            return View("MonthlyTransactionSummary/MonthlyTransactionSummary", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -473,7 +473,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["model"] = vmodel;
                 #endregion
 
-                return View();
+                return View("MonthlyTransactionSummary/MonthlyTransactionSummary");
             }
 
             return RedirectToAction("Index");
@@ -483,7 +483,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashBalanceAtCloseVM vmodel = new CashBalanceAtCloseVM();
             TempData["Chart"] = null;
-            return View(vmodel);
+            return View("CashBalanceatClose/CashBalanceatClose", vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -522,7 +522,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["partner"] = vmodel.Partner;
                 #endregion
                 Session["businessName"] = "";
-                return View();
+                return View("CashBalanceatClose/CashBalanceatClose");
             }
 
             return RedirectToAction("Index");

@@ -1,0 +1,97 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalListViewModel
+@{
+    ViewBag.Title = "Report Terminal List";
+
+
+}
+<p></p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a name="ankle"></a>
+        <h3 class="panel-title">Filter Report Cash Load</h3>
+    </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+         @Html.Partial("TerminalList/_PartialForm", Model)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </div>
+}
+
+    </div>
+</div>
+@if (TempData["List"] != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <a name="ankle2"></a>
+            <h3 class="panel-title">Terminal List</h3>
+        </div>
+        <div class="panel-body">
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
+
+            </div>
+            @Html.Partial("_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+
+         
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+        <strong>Warning!</strong> Not Record Available.
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/autocomplete.js")
+    <script>
+
+      var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlstate = '@Url.Action("AutoState", "ReportGroup")';
+        var urlcity = '@Url.Action("AutoCity", "ReportGroup")';
+        var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
+        var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
+        var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
+        var urlautoaccount = '@Url.Action("AutoAccount", "BankAccount")';
+        $(function () {
+
+
+            $("#EndDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+            $("#StartDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+
+         callankle();
+          var tempdataval = '@TempData["List"]';
+          if (tempdataval != null && tempdataval != '') {
+              callankle2();
+              $("#grid tr").find('td:eq(12)').each(function (index, val) {
+                  $(this).html("$" + $(this).html());
+              });
+          }
+
+
+
+        });
+
+    </script>
+
+}
+
+

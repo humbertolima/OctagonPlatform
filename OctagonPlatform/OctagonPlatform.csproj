@@ -1259,18 +1259,18 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
     <Content Include="Views\ReportsSmart\CashLoad\CashLoad.cshtml" />
-    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList\TerminalList.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTable.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
-    <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalStatus\TerminalStatus.cshtml" />
+    <Content Include="Views\ReportsSmart\DailyTransactionSummary\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialHead.cshtml" />
@@ -1285,15 +1285,21 @@
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
-    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
+    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
-    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose\CashBalanceatClose.cshtml" />
     <Content Include="Views\Schedule\Create.cshtml" />
     <Content Include="Views\Schedule\Delete.cshtml" />
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Schedule\List.cshtml" />
     <Content Include="Views\ReportsSmart\CashLoad\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalStatus\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\DailyTransactionSummary\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose\_PartialForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
