@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The parent partner is required")]
+       
         [Display(Name = "Parent")]
         public int? ParentId { get; set; }
 

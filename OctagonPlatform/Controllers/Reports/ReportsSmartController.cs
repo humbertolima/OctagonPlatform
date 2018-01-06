@@ -47,7 +47,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashLoadViewModel model = new CashLoadViewModel();
             TempData["Chart"] = null;
-            return View(model);
+            return View("CashLoad/CashLoad",model);
         }
 
         [HttpPost]
@@ -112,7 +112,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["to"] = vmodel.EndDate;
                 #endregion
 
-                return View();
+                return View("CashLoad/CashLoad");
             }
 
             return RedirectToAction("Index");

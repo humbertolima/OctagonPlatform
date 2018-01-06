@@ -1258,7 +1258,7 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
-    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad\CashLoad.cshtml" />
     <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
@@ -1293,6 +1293,7 @@
     <Content Include="Views\Schedule\Edit.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
     <Content Include="Views\Schedule\List.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad\_PartialForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
