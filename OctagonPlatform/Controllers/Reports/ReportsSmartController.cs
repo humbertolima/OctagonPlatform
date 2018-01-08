@@ -50,6 +50,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashLoadViewModel model = new CashLoadViewModel();
             TempData["Chart"] = null;
+            TempData["Sub"] = false;
             return View("CashLoad/CashLoad",model);
         }
 
@@ -113,6 +114,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["partner"] = vmodel.Partner;
                 TempData["from"] = vmodel.StartDate;
                 TempData["to"] = vmodel.EndDate;
+                TempData["Sub"] = false;
                 #endregion
 
                 return View("CashLoad/CashLoad");
@@ -220,6 +222,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
+                TempData["Sub"] = false;
                 #endregion
                 Session["businessName"] = "";
                 return View("CashManagement/CashManagement");

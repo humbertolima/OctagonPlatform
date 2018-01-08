@@ -155,6 +155,14 @@ namespace OctagonPlatform.Controllers.Reports
             string name = report.Name.Replace(" ", string.Empty);
             
             object handle = Activator.CreateInstance(Type.GetType("OctagonPlatform.Models.FormsViewModels." + name + "ViewModel"));
+            List<int> days = new List<int>();
+            for (int i = 0; i < 32; i++)
+            {
+                days.Add(i);
+            }
+           
+            TempData["StartDate"] = new SelectList(days);
+            TempData["Sub"] = true;
             return PartialView("../ReportsSmart/"+name + "/" + "_PartialForm", handle);
          
         }
