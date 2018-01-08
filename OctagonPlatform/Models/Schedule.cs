@@ -35,7 +35,7 @@ namespace OctagonPlatform.Models
         [Required]
         public int PartnerId { get; set; }
         public virtual Partner Partner { get; set; }
-
+        public virtual ICollection<SubscriptionModel> Subscriptions { get; set; }
     }
    
     public class ScheduleOnce : Schedule

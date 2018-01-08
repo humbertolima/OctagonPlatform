@@ -356,6 +356,7 @@
     <Compile Include="Models\DisputeRepresent.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\SuscriptionModel.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
@@ -419,6 +420,7 @@
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
+    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\SetOfPermission.cs" />

@@ -90,7 +90,10 @@ namespace OctagonPlatform.Models
 
         public ICollection<Schedule> Schedules { get; set; }
 
-        public ICollection<ReportGroupModel> ReportGroups { get; set; }
+        public ICollection<ReportGroupModel> ReportGroups { get; set; }        
+
+        public virtual ICollection<SubscriptionModel> Subscriptions { get; set; }
+
         public Partner()
         {
             Users = new Collection<User>();
