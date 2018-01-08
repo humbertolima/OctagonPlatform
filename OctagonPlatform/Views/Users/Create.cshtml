@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Add User";
-    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+  
 }
 <div class="container" style="padding-bottom: 20px; padding-top: 20px;">
     <h3 class="alert-info">Create User</h3>
@@ -72,6 +72,7 @@
             @Html.ValidationMessageFor(m => m.IsLocked)
         </div>
 
+        @Html.Partial("Sections/PermissionTree")
         <table class="table table-striped table-hover ">
             <thead>
                 <tr>
@@ -113,6 +114,14 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
+
+
+<script>
+    $(function () {
+        $("#demo1").jstree({
+            "plugins": ["themes", "html_data", 'checkbox', "types"]
+        });
+    });
+</script>
 }

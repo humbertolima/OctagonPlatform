@@ -1313,6 +1313,7 @@
     <Content Include="Views\Octagon\CashEverywhere.cshtml" />
     <Content Include="Views\Octagon\VendBot.cshtml" />
     <Content Include="Views\Octagon\MicroLoans.cshtml" />
+    <Content Include="Views\Users\Sections\PermissionTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

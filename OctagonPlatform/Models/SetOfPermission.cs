@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,8 +13,10 @@ namespace OctagonPlatform.Models
         [Required]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public ICollection<Permission> Permissions { get; set; }
 
+        [JsonIgnore]
         public ICollection<PermissionSubGroup> PermissionSubGroups { get; set; }
 
         public SetOfPermission()

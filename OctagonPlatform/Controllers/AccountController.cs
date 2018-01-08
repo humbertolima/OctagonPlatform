@@ -57,8 +57,10 @@ namespace OctagonPlatform.Controllers
                 Session["logo"] = userToLogin.Partner.Logo;
                 Session["partnerId"] = userToLogin.Partner.Id;
                 Session["businessName"] = userToLogin.Partner.BusinessName;
+                Session["Permissions"] = _accountRepository.GetPermissions(userToLogin.Id);
 
                 if (Session["tries"] != null) Session.Remove("tries");
+
                 return RedirectToAction("AMS", "Octagon");
             }
             catch (Exception ex)
@@ -67,6 +69,7 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index", "Home", viewModel);
             }
         }
+
         [Authorize]
         [HttpGet]
         public ActionResult Logout()
@@ -82,6 +85,8 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
+        
 
         //Implementacion
     }

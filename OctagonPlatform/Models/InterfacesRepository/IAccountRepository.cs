@@ -6,6 +6,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         UserLoginViewModel Login(UserLoginViewModel userLogin);
 
+        string GetPermissions(int userId);
+
         void Logout();
     }
 }

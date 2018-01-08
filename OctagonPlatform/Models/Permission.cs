@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OctagonPlatform.Models
 {
+    
     public class Permission
     {
         [Key]
@@ -21,6 +23,7 @@ namespace OctagonPlatform.Models
         [Required]
         [ForeignKey("SetOfPermission")]
         public int SetOfPermissionId { get; set; }
+        
         public virtual SetOfPermission SetOfPermission { get; set; }
 
         [Required]

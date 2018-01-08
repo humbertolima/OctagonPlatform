@@ -1,0 +1,35 @@
+﻿
+<h3>Este es el partial de Tree </h3>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+<div id="demo1">
+    <ul>
+        <li>
+            <a>Categories</a>
+            <ul>
+                <li>
+                    <a>Category 1</a>
+                    <ul>
+                        <li><a>Product A</a></li>
+                        <li><a>Product B</a></li>
+                        <li><a>Product C</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>Category 2</a>
+                    <ul>
+                        <li><a>Product D</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+@section Scripts {
+
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
+
+}
