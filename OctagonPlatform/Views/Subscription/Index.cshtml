@@ -77,39 +77,30 @@
                     @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div id="PartialFilter"> </div>      
+            <div id="PartialFilter"> </div>
         </div>
         <div class="col-md-6">
             <h3>Scheduling</h3>   <hr />
             @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.Partial("Create", Model)
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                <input type="submit" value="Filter" class="btn btn-primary" />
-            </div>
-        </div>
-}
+            {
+                @Html.AntiForgeryToken()
+                @Html.Partial("Create", Model)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                        <input type="submit" value="Filter" class="btn btn-primary" />
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </figure>
 
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/autocomplete.js")
-<script>
 
-        var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
-        var urlstate = '@Url.Action("AutoState", "ReportGroup")';
-        var urlcity = '@Url.Action("AutoCity", "ReportGroup")';
-        var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
-        var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
-        var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
-        var urlautoaccount = "";
-         var urlautoschedule = '@Url.Action("AutoScheduled", "Schedule")';
-         var urluser = '@Url.Action("AutoUser", "Users")';
+    @Scripts.Render("~/Scripts/autocomplete.js")
+    <script>
+
 
     $(function () {
 
@@ -117,16 +108,18 @@
         // callankle();
         $("#ReportId").change(function () {
             var idreport = $(this).val();
+            $("#PartialFilter").html("<div class='loader'></div>");
             $.get('@Url.Action("FilterReport", "Subscription")', { id: idreport }, function (data) {
-                alert(data);
-                $("#PartialFilter").html(data);
+
+            $("#PartialFilter").html(data);
+
             });
-        });
+            });
 
-    });
+            });
 
 
-</script>
+    </script>
 
 
 }

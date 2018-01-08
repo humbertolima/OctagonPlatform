@@ -170,7 +170,7 @@ namespace OctagonPlatform.Controllers.Reports
            
             return RedirectToAction("CheckReports");
         }
-      
+     
 
     }
 }

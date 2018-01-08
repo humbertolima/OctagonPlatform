@@ -133,21 +133,5 @@
 
     });
 
-    $('#report').autocomplete({
-        source: urlautoreport,
-        select: function (event, ui) {
 
-            $("#report").val(ui.item.label); // display the selected text
-            $("#reportid").val(ui.item.value); // save selected id to hidden input
-
-            return false;
-        }
-    });
-    $('#report').blur(function () {
-        if ($('#report').val() == "") {
-            $('#reportid').val('');
-
-        }
-
-    });
 });

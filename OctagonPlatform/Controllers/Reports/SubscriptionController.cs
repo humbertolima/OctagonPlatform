@@ -152,8 +152,11 @@ namespace OctagonPlatform.Controllers.Reports
         public PartialViewResult FilterReport(string id)
         {
             ReportModel report = _repoReport.FindBy(Convert.ToInt32(id));
-            string name = "ReportsSmart/"+report.Name.Replace(" ", string.Empty);
-            return PartialView(name+"/_PartialForm");
+            string name = report.Name.Replace(" ", string.Empty);
+            
+            object handle = Activator.CreateInstance(Type.GetType("OctagonPlatform.Models.FormsViewModels." + name + "ViewModel"));
+            return PartialView("../ReportsSmart/"+name + "/" + "_PartialForm", handle);
+         
         }
     }
 }
