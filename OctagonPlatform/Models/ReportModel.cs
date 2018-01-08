@@ -16,6 +16,8 @@ namespace OctagonPlatform.Models
         public string Description { get; set; }
         public bool IsShowDashboard { get; set; }
         public virtual ICollection<ReportFilter> ReportFilters { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
     [Table("ReportFilters")]
     public class ReportFilter

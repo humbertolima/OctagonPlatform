@@ -55,6 +55,8 @@ namespace OctagonPlatform
 
             container.RegisterType<IReportGroup, ReportGroupRepository>();
             container.RegisterType<ISchedule, ScheduleRepository>();
+            container.RegisterType<ISubscription, SubscriptionRepository>();
+            container.RegisterType<IReportFilter, ReportFilterRepository>();
 
         }
     }

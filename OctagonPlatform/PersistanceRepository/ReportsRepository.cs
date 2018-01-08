@@ -20,5 +20,23 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Where(b => b.IsShowDashboard == true).ToList();
         }
+        public IEnumerable<ReportModel> GetAllReports( int partnerId, int userId)
+        {
+            try
+            {
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner                            
+                             join u in Context.Users on q.Id equals u.PartnerId
+                             join m in Table on q.Id equals m.UserId
+                             where  u.Id == userId
+                             select m).ToList();
+                return list4;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

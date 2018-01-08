@@ -74,7 +74,17 @@ namespace OctagonPlatform.Migrations
                 new Models.Model { Name = "Siri Atm", MakeId = 1 }
                 );
 
-
+            context.Filters.AddOrUpdate(l => l.Name,
+                new Models.FilterModel { Name = "TerminalId" },
+                new Models.FilterModel { Name = "ReportingGroup" },
+                new Models.FilterModel { Name = "Status" },
+                new Models.FilterModel { Name = "StartDate" },
+                new Models.FilterModel { Name = "StopDate" },
+                new Models.FilterModel { Name = "Account" },
+                new Models.FilterModel { Name = "SurchargeOverrideAmount" },
+                new Models.FilterModel { Name = "SurchargeOverride" },
+                new Models.FilterModel { Name = "PartnerId" }
+                );
 
             #region SetOfPermissions
 

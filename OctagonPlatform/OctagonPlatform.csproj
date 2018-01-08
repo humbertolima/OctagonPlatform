@@ -233,6 +233,7 @@
     <Compile Include="Controllers\Reports\ReportsController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
     <Compile Include="Controllers\Reports\ScheduleController.cs" />
+    <Compile Include="Controllers\Reports\SubscriptionController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
@@ -341,6 +342,14 @@
     <Compile Include="Migrations\201801041722432_AddrelationReportGroupToPartner.Designer.cs">
       <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801081542486_AddSubscription.cs" />
+    <Compile Include="Migrations\201801081542486_AddSubscription.Designer.cs">
+      <DependentUpon>201801081542486_AddSubscription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801081900505_AddRelationReportuser.cs" />
+    <Compile Include="Migrations\201801081900505_AddRelationReportuser.Designer.cs">
+      <DependentUpon>201801081900505_AddRelationReportuser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -356,6 +365,9 @@
     <Compile Include="Models\DisputeRepresent.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\FormsViewModels\SubscriptionVM.cs" />
+    <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
+    <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\SuscriptionModel.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
@@ -443,7 +455,9 @@
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
@@ -1302,6 +1316,11 @@
     <Content Include="Views\ReportsSmart\DailyTransactionSummary\_PartialForm.cshtml" />
     <Content Include="Views\ReportsSmart\MonthlyTransactionSummary\_PartialForm.cshtml" />
     <Content Include="Views\ReportsSmart\CashBalanceatClose\_PartialForm.cshtml" />
+    <Content Include="Views\Subscription\Create.cshtml" />
+    <Content Include="Views\Subscription\Delete.cshtml" />
+    <Content Include="Views\Subscription\Details.cshtml" />
+    <Content Include="Views\Subscription\Edit.cshtml" />
+    <Content Include="Views\Subscription\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1361,6 +1380,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801041722432_AddrelationReportGroupToPartner.resx">
       <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801081542486_AddSubscription.resx">
+      <DependentUpon>201801081542486_AddSubscription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801081900505_AddRelationReportuser.resx">
+      <DependentUpon>201801081900505_AddRelationReportuser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -255,5 +255,14 @@ namespace OctagonPlatform.Controllers.Reports
             }
             base.Dispose(disposing);
         }
+
+        
+              public ActionResult AutoScheduled(string term)
+        {
+
+            IEnumerable<string> list = _repo.GetAllSchedule(term, Convert.ToInt32(Session["partnerId"]), Convert.ToInt32(Session["UserId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }
