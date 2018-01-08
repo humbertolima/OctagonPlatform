@@ -9,8 +9,9 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class TerminalStatusFormFilterVM
+    public class CashBalanceatCloseViewModel
     {
+
         public string Partner { get; set; }
         [HiddenInput]
         public int PartnerId { get; set; }
@@ -18,16 +19,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         [HiddenInput]
         public int GroupId { get; set; }
        
-        public StatusType.Status Status { get; set; }
-        public string State { get; set; }
-        [HiddenInput]
-        public int StateId { get; set; }
-        public string City { get; set; }
-        [HiddenInput]
-        public int CityId { get; set; }
-        public string ZipCode { get; set; }
-        public TerminalStatusFormFilterVM()
-        {            
+        public string StartDate { get; set; }
+        public CashBalanceatCloseViewModel()
+        {
+            //TerminalId = "TR024019";// "NH061617";
+            StartDate = DateTime.Now.ToString("MM/dd/yyyy");
             PartnerId = -1;
             GroupId = -1;
         }

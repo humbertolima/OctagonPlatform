@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class TransMonthlyViewModel
+    public class DailyTransactionSummaryViewModel
     {
         [DisplayName("Terminal Id")]
         public string TerminalId { get; set; }
@@ -25,7 +25,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [DisplayName("To")]
         public string EndDate { get; set; }
         public bool Surcharge { get; set; }
-        public TransMonthlyViewModel()
+        public bool Dispensed { get; set; }
+        public DailyTransactionSummaryViewModel()
         {
             //TerminalId = "TR024019";// "NH061617";
             StartDate = DateTime.Now.ToString("MM/dd/yyyy");

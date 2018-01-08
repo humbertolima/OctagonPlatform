@@ -30,12 +30,14 @@ namespace OctagonPlatform.Controllers.Reports
         private ITerminalRepository repo_terminal;
         private IPartnerRepository repo_partner;
         private IReportGroup repo_group;
+       
         public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
         {
             _repo = repo;
             repo_terminal = repoterminal;
             repo_partner = repopartner;
             repo_group = repogroup;
+          
         }
         // GET: reportModels
         public ActionResult Index()
@@ -174,7 +176,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementVM vmodel)
+        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -278,7 +280,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusFormFilterVM vmodel)
+        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -332,7 +334,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         public ActionResult DailyTransactionSummary()
         {
-            TransDailyViewModel model = new TransDailyViewModel();
+            DailyTransactionSummaryViewModel model = new DailyTransactionSummaryViewModel();
             TempData["Chart"] = null;
 
             return View("DailyTransactionSummary/DailyTransactionSummary", model);
@@ -340,7 +342,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] TransDailyViewModel vmodel)
+        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] DailyTransactionSummaryViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -408,14 +410,14 @@ namespace OctagonPlatform.Controllers.Reports
 
         public ActionResult MonthlyTransactionSummary()
         {
-            TransMonthlyViewModel model = new TransMonthlyViewModel();
+            MonthlyTransactionSummaryViewModel model = new MonthlyTransactionSummaryViewModel();
             TempData["Chart"] = null;
 
             return View("MonthlyTransactionSummary/MonthlyTransactionSummary", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] TransMonthlyViewModel vmodel)
+        public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] MonthlyTransactionSummaryViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -481,13 +483,13 @@ namespace OctagonPlatform.Controllers.Reports
        
         public ActionResult CashBalanceatClose()
         {
-            CashBalanceAtCloseVM vmodel = new CashBalanceAtCloseVM();
+            CashBalanceatCloseViewModel vmodel = new CashBalanceatCloseViewModel();
             TempData["Chart"] = null;
             return View("CashBalanceatClose/CashBalanceatClose", vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceAtCloseVM vmodel)
+        public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceatCloseViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");

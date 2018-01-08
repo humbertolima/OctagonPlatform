@@ -118,6 +118,7 @@
         $("#ReportId").change(function () {
             var idreport = $(this).val();
             $.get('@Url.Action("FilterReport", "Subscription")', { id: idreport }, function (data) {
+                alert(data);
                 $("#PartialFilter").html(data);
             });
         });
