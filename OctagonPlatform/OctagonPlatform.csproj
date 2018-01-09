@@ -130,9 +130,8 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.15.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -274,82 +273,6 @@
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargedBy.cs" />
     <Compile Include="Helpers\TerminalIdGenerator.cs" />
-    <Compile Include="Migrations\201711221558077_Initial.cs" />
-    <Compile Include="Migrations\201711221558077_Initial.Designer.cs">
-      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221625432_AddCountries.cs" />
-    <Compile Include="Migrations\201711221625432_AddCountries.Designer.cs">
-      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221627296_AddStates.cs" />
-    <Compile Include="Migrations\201711221627296_AddStates.Designer.cs">
-      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221632000_AddCities.cs" />
-    <Compile Include="Migrations\201711221632000_AddCities.Designer.cs">
-      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.cs" />
-    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
-      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711291452285_addreportinggroup.cs" />
-    <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
-      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711292247322_addreportgroupid.cs" />
-    <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
-      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712061559346_alterDocuments.cs" />
-    <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
-      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712071542433_addPictures.cs" />
-    <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
-      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
-    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
-      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
-    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
-      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
-    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
-      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
-    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
-      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801020156003_AddSchedule.cs" />
-    <Compile Include="Migrations\201801020156003_AddSchedule.Designer.cs">
-      <DependentUpon>201801020156003_AddSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801022136578_AddSchedule2.cs" />
-    <Compile Include="Migrations\201801022136578_AddSchedule2.Designer.cs">
-      <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801031559041_AddRelationPartnerSchedule.cs" />
-    <Compile Include="Migrations\201801031559041_AddRelationPartnerSchedule.Designer.cs">
-      <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801041722432_AddrelationReportGroupToPartner.cs" />
-    <Compile Include="Migrations\201801041722432_AddrelationReportGroupToPartner.Designer.cs">
-      <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801081542486_AddSubscription.cs" />
-    <Compile Include="Migrations\201801081542486_AddSubscription.Designer.cs">
-      <DependentUpon>201801081542486_AddSubscription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801081900505_AddRelationReportuser.cs" />
-    <Compile Include="Migrations\201801081900505_AddRelationReportuser.Designer.cs">
-      <DependentUpon>201801081900505_AddRelationReportuser.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -366,6 +289,7 @@
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\FormsViewModels\SubscriptionVM.cs" />
+    <Compile Include="Models\InterfacesRepository\IFilter.cs" />
     <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\SuscriptionModel.cs" />
@@ -455,6 +379,7 @@
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\FilterRepository.cs" />
     <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
@@ -1137,6 +1062,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.serializeObject.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1328,65 +1254,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711221558077_Initial.resx">
-      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221625432_AddCountries.resx">
-      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221627296_AddStates.resx">
-      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
-      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
-      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
-      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
-      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
-      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712071542433_addPictures.resx">
-      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712072009044_AdddateCreatedterminal.resx">
-      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
-      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
-      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
-      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801020156003_AddSchedule.resx">
-      <DependentUpon>201801020156003_AddSchedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801022136578_AddSchedule2.resx">
-      <DependentUpon>201801022136578_AddSchedule2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801031559041_AddRelationPartnerSchedule.resx">
-      <DependentUpon>201801031559041_AddRelationPartnerSchedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801041722432_AddrelationReportGroupToPartner.resx">
-      <DependentUpon>201801041722432_AddrelationReportGroupToPartner.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801081542486_AddSubscription.resx">
-      <DependentUpon>201801081542486_AddSubscription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801081900505_AddRelationReportuser.resx">
-      <DependentUpon>201801081900505_AddRelationReportuser.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

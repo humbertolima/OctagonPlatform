@@ -24,13 +24,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+               /* IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
                 var list4 = (from q in listpartner                            
                              join u in Context.Users on q.Id equals u.PartnerId
                              join m in Table on q.Id equals m.UserId
                              where  u.Id == userId
-                             select m).ToList();
-                return list4;
+                             select m).ToList();*/
+                return Table.Where(m => m.Users.Any(p=>p.Id == userId));
             }
             catch (Exception e)
             {

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -17,11 +19,13 @@ namespace OctagonPlatform.Controllers.Reports
         private ISubscription _repo;
         private ISchedule _repoScheduled;
         private IReports _repoReport;
-        public SubscriptionController(ISubscription repo, ISchedule reposchedule, IReports repoReport)
+        private IFilter _repoFilter;
+        public SubscriptionController(ISubscription repo, ISchedule reposchedule, IReports repoReport, IFilter repoFilter)
         {
             _repo = repo;
             _repoScheduled = reposchedule;
             _repoReport = repoReport;
+            _repoFilter = repoFilter;
         }
         // GET: SubscriptionModels
         public ActionResult Index()
@@ -68,19 +72,21 @@ namespace OctagonPlatform.Controllers.Reports
         // POST: SubscriptionModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,Description,EmailComment,ScheduledId,PartnerId")] SubscriptionModel subscriptionModel)
+        [HttpPost]       
+        public ActionResult Create(FormCollection model)
         {
             if (ModelState.IsValid)
             {
-                _repo.Add(subscriptionModel);
-
+                int reportId = Convert.ToInt32(model.GetValue("ReportId").ToString());
+              
+                // _repo.Add(subscriptionModel);
+                
+               // dynamic foo = JObject.Parse(model);
                 return RedirectToAction("Index");
             }
 
 
-            return View(subscriptionModel);
+            return View(model);
         }
 
         // GET: SubscriptionModels/Edit/5

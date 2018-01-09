@@ -14,8 +14,8 @@ namespace OctagonPlatform.Models
         public string Email { get; set; }
         public string Description { get; set; }
         public string EmailComment { get; set; }
-
-        public int ScheduledId { get; set; }
+        [ForeignKey("Schedule")]
+        public int ScheduleId { get; set; }
         public virtual Schedule Schedule { get; set; }
         public int PartnerId { get; set; }
         public virtual Partner Partner { get; set; }

@@ -175,6 +175,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult CashManagement()
         {
             TempData["Chart"] = null;
+            TempData["sub"] = false;
             return View("CashManagement/CashManagement");
         }
         [HttpPost]
@@ -253,7 +254,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult TerminalList()
         {
 
-
+            TempData["sub"] = false;
             return View("TerminalList/TerminalList");
         }
         [HttpPost]
@@ -272,6 +273,7 @@ namespace OctagonPlatform.Controllers.Reports
 
                 TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
                 TempData["filename"] = "TerminalList";
+                TempData["sub"] = false;
                 return View("TerminalList/TerminalList");
             }
             return RedirectToAction("Index");
@@ -280,6 +282,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult TerminalStatus()
         {
             TempData["Chart"] = null;
+            TempData["sub"] = false;
             return View("TerminalStatus/TerminalStatus");
         }
         [HttpPost]
@@ -329,6 +332,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<TerminalStatusTableVM>(listaux) : null;
                 TempData["filename"] = "TerminalStatus";
                 TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
+                TempData["sub"] = false;
                 #endregion
 
                 return View("TerminalStatus/TerminalStatus");
@@ -340,7 +344,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             DailyTransactionSummaryViewModel model = new DailyTransactionSummaryViewModel();
             TempData["Chart"] = null;
-
+            TempData["sub"] = false;
             return View("DailyTransactionSummary/DailyTransactionSummary", model);
         }
 
@@ -403,6 +407,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["from"] = start?.ToString("MMMM d, yyyy");
                 TempData["to"] = end?.ToString("MMMM d, yyyy");
                 TempData["model"] = vmodel;
+                TempData["sub"] = false;
                 #endregion
 
                 return View("DailyTransactionSummary/DailyTransactionSummary");
@@ -416,7 +421,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             MonthlyTransactionSummaryViewModel model = new MonthlyTransactionSummaryViewModel();
             TempData["Chart"] = null;
-
+            TempData["sub"] = false;
             return View("MonthlyTransactionSummary/MonthlyTransactionSummary", model);
         }
         [HttpPost]
@@ -477,6 +482,7 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["from"] = start?.ToString("MMMM , yyyy");
                 TempData["to"] = end?.ToString("MMMM , yyyy");
                 TempData["model"] = vmodel;
+                TempData["sub"] = false;
                 #endregion
 
                 return View("MonthlyTransactionSummary/MonthlyTransactionSummary");
@@ -489,6 +495,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashBalanceatCloseViewModel vmodel = new CashBalanceatCloseViewModel();
             TempData["Chart"] = null;
+            TempData["sub"] = false;
             return View("CashBalanceatClose/CashBalanceatClose", vmodel);
         }
         [HttpPost]
@@ -526,8 +533,9 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["filename"] = "CashManagement";
                 TempData["Chart"] =  null;               
                 TempData["partner"] = vmodel.Partner;
+                TempData["sub"] = false;
                 #endregion
-                Session["businessName"] = "";
+               
                 return View("CashBalanceatClose/CashBalanceatClose");
             }
 

@@ -66,7 +66,9 @@
 </table>
 
 <figure class="highlight">
-
+    @using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
+    {
+        @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-6">
             <h3>Report Selection</h3>  <hr />
@@ -81,25 +83,25 @@
         </div>
         <div class="col-md-6">
             <h3>Scheduling</h3>   <hr />
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                @Html.Partial("Create", Model)
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                        <input type="submit" value="Filter" class="btn btn-primary" />
-                    </div>
+
+           
+            @Html.Partial("Create", Model)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
-            }
+            </div>
+          
         </div>
     </div>
+}
 </figure>
 
 
 @section Scripts {
 
     @Scripts.Render("~/Scripts/autocomplete.js")
-    <script>
+<script>
 
 
     $(function () {
@@ -109,17 +111,39 @@
         $("#ReportId").change(function () {
             var idreport = $(this).val();
             $("#PartialFilter").html("<div class='loader'></div>");
-            $.get('@Url.Action("FilterReport", "Subscription")', { id: idreport }, function (data) {
+                $.get('@Url.Action("FilterReport", "Subscription")', { id: idreport }, function (data) {
 
-            $("#PartialFilter").html(data);
+                $("#PartialFilter").html(data);
 
+                });
             });
-            });
+     
 
-            });
+            $('#FormSub').submit(function () {
+               // var formData = $('#FormSub').serializeObject();
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),                   
+                    success: function (result) {
+                        alert(result);
+                    },
+                    error: function (xhr, status, error) {
+                        // Show the error
+                      alert(xhr.responseText);
+
+                    }
+                });
+         
+       
+        return false;
+    });
 
 
-    </script>
+    });
+
+
+</script>
 
 
 }
