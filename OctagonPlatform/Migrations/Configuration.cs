@@ -33,7 +33,7 @@ namespace OctagonPlatform.Migrations
             {
                 UserName = "admin02",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 1,
+                PartnerId = 6,
                 IsLocked = false,
                 Email = "admin@xyncro.net",
                 Name = "Administrator",
@@ -46,7 +46,7 @@ namespace OctagonPlatform.Migrations
             {
                 UserName = "admin03",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 1,
+                PartnerId = 6,
                 IsLocked = false,
                 Email = "admin@xyncro.net",
                 Name = "Administrator3",
@@ -70,8 +70,8 @@ namespace OctagonPlatform.Migrations
                 );
 
             context.Models.AddOrUpdate(m => m.Name,
-                new Models.Model { Name = "Mini ATM", MakeId = 1 },
-                new Models.Model { Name = "Siri Atm", MakeId = 1 }
+                new Models.Model { Name = "Mini ATM", MakeId = 19 },
+                new Models.Model { Name = "Siri Atm", MakeId = 20 }
                 );
 
             context.Filters.AddOrUpdate(l => l.Name,
