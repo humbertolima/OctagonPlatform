@@ -1,0 +1,413 @@
+﻿@{
+    ViewBag.Title = "AVT";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+@*@Styles.Render("~/Content/bootstrap-lumen.css")*@
+
+<div class="row">
+    <a href="@Url.Action("AVT", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+        <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div style="font-size: 20px; color: #fff;">
+                <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+            </div>
+        </div>
+    </a>
+    <div class="col-lg-6">
+        <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+            American Vending Technologies
+        </h1>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+   <div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Sales Per Location
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="bar-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Sales
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Unit
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Unit 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Unit 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="area-example"></div>
+                    </div>
+                    <!-- /.col-lg-8 (nested) -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Products
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="donut-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+
+    </div>
+    <!-- /.col-lg-8 -->
+       <div class="col-lg-6">
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <i class="fa fa-bar-chart-o fa-fw"></i> Restock Per Location
+                   <div class="pull-right">
+                       <div class="btn-group">
+                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                               Period
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu pull-right" role="menu">
+                               <li>
+                                   <a href="#">Daily</a>
+                               </li>
+                               <li>
+                                   <a href="#">Weekly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Monthly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Yearly</a>
+                               </li>
+                           </ul>
+                       </div>
+                       <div class="btn-group">
+                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                               Location
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu pull-right" role="menu">
+                               <li>
+                                   <a href="#">Miami</a>
+                               </li>
+                               <li>
+                                   <a href="#">Dallas</a>
+                               </li>
+                               <li>
+                                   <a href="#">Las Vegas</a>
+                               </li>
+
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+               <!-- /.panel-heading -->
+               <div class="panel-body">
+                   <div id="line-example"></div>
+               </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <i class="fa fa-bar-chart-o fa-fw"></i> Restock
+                   <div class="pull-right">
+                       <div class="btn-group">
+                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                               Period
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu pull-right" role="menu">
+                               <li>
+                                   <a href="#">Daily</a>
+                               </li>
+                               <li>
+                                   <a href="#">Weekly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Monthly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Yearly</a>
+                               </li>
+                           </ul>
+                       </div>
+                       <div class="btn-group">
+                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                               Unit
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu pull-right" role="menu">
+                               <li>
+                                   <a href="#">Unit 1</a>
+                               </li>
+                               <li>
+                                   <a href="#">Unit 2</a>
+                               </li>
+                               <li>
+                                   <a href="#">Unit 3</a>
+                               </li>
+                               <li>
+                                   <a href="#">Unit 4</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+               <!-- /.panel-heading -->
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-lg-12">
+                           <div id="area-example2"></div>
+                       </div>
+                       <!-- /.col-lg-8 (nested) -->
+                   </div>
+                   <!-- /.row -->
+               </div>
+               <!-- /.panel-body -->
+           </div>
+           <!-- /.panel -->
+           <!-- /.panel -->
+           <div class="panel panel-default">
+               <div class="panel-heading">
+                   <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Payment Method
+                   <div class="pull-right">
+                       <div class="btn-group">
+                           <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                               Period
+                               <span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu pull-right" role="menu">
+                               <li>
+                                   <a href="#">Daily</a>
+                               </li>
+                               <li>
+                                   <a href="#">Weekly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Monthly</a>
+                               </li>
+                               <li>
+                                   <a href="#">Yearly</a>
+                               </li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+               <!-- /.panel-heading -->
+               <div class="panel-body">
+                   <div id="donut-example2"></div>
+               </div>
+               <!-- /.panel-body -->
+           </div>
+
+       </div>
+</div>
+
+    <!-- /.row -->
+
+<!-- /#page-wrapper -->
+
+@section scripts
+{
+    <script>
+        new Morris.Bar({
+            element: 'bar-example',
+            data: [
+                { y: 'Dolphin Mall', a: 2000 },
+                { y: 'Sawgrass Mills', a: 3500 },
+                { y: 'Merryck Park', a: 1750 },
+                { y: 'Lincoln Rd', a: 1250 },
+                { y: 'Aventura Mall', a: 750 },
+                { y: 'City Place', a: 1600 },
+                { y: 'Epcot Center', a: 2500 }
+            ],
+            xLabelAngle: 35,
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+    
+    <script>
+       new Morris.Area({
+            element: 'area-example',
+            data: [
+                { y: '2012', a: 1250 },
+                { y: '2013', a: 1500 },
+                { y: '2014', a: 1000 },
+                { y: '2015', a: 1900 },
+                { y: '2016', a: 2000 },
+                { y: '2017', a: 1950 },
+                { y: '2018', a: 2200 }
+            ],
+            lineColors: ['Green'],
+            xkey: 'y',
+            ykeys: ['a'],
+            fillOpacity: 0.6,
+            labels: ['Amount'],
+            resize: true
+        });
+    </script>
+    
+    <script>
+        new Morris.Line({
+            element: 'line-example',
+            data: [
+                { y: '2012', a: 25 },
+                { y: '2013', a: 75 },
+                { y: '2014', a: 65 },
+                { y: '2015', a: 75 },
+                { y: '2016', a: 50 },
+                { y: '2017', a: 75 },
+                { y: '2018', a: 100 }
+            ],
+            xkey: 'y',
+            ykeys: ['a'],
+            labels: ['Total'],
+            resize: true
+        });
+    </script>
+    
+    <script>
+        new Morris.Area({
+            element: 'area-example2',
+            data: [
+                { y: '2012', a: 15 },
+                { y: '2013', a: 30 },
+                { y: '2014', a: 25 },
+                { y: '2015', a: 32 },
+                { y: '2016', a: 28 },
+                { y: '2017', a: 49 },
+                { y: '2018', a: 43 }
+            ],
+            lineColors: ['Grey'],
+            xkey: 'y',
+            ykeys: ['a'],
+            fillOpacity: 0.6,
+            labels: ['Total'],
+            resize: true
+        });
+    </script>
+    
+    <script>
+        new Morris.Donut({
+            element: 'donut-example',
+            data: [
+                {label: "Coca-Cola", value: 49},
+                {label: "Doritos", value: 25},
+                {label: "Protein", value: 20 },
+                { label: "Water", value: 30 },
+                {label: "Fritos", value: 8}
+            ],
+            resize: true
+        });
+    </script>
+    
+    <script>
+        new Morris.Donut({
+            element: 'donut-example2',
+            data: [
+                { label: "Credit", value: 1057 },
+                {label: "Cash", value: 650}
+            ],
+            colors: ['#ff0000','#ff7f7f'],
+            resize: true
+        });
+    </script>
+}

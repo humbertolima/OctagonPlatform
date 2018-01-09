@@ -57,21 +57,20 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
-        
+
         [HttpGet]
-        public ActionResult Create(int? terminalId)
+        public ActionResult Create(int id)
         {
             try
             {
-                if (terminalId == null)
+                if (id > 0)
                 {
-                    ViewBag.Error = "Surcharge not found. ";
-                    return View("Error");
+                    SurchargeFormViewModel viewModel = _surchargeRepository.RenderSurchargeFormViewModel(id);
+                    if (viewModel != null) return PartialView("Modal/AddSurCharge", viewModel);
+                    ViewBag.Error = "Model not found. ";
+
                 }
-                var model = _surchargeRepository.RenderSurchargeFormViewModel((int)terminalId);
-                if (model != null) return PartialView("Modal/AddSurCharge", model);
-                ViewBag.Error = "Model not found. ";
-                return View("Error");
+                return PartialView("Modal/AddSurCharge", null);
             }
             catch (Exception ex)
             {
@@ -102,15 +101,12 @@ namespace OctagonPlatform.Controllers
 
                 _surchargeRepository.SaveSurcharge(viewModel, viewModel.Id == 0 ? "Create" : "Edit");
 
-                return RedirectToAction("Details", "Terminals", new {id = viewModel.TerminalId});
+                return RedirectToAction("Details", "Terminals", new { id = viewModel.TerminalId });
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message + ", Please check the entered values. ";
-                return View("SurchargeForm",
-                    viewModel.Id == 0
-                        ? _surchargeRepository.InitializeNewSurchargeFormViewModel(viewModel)
-                        : _surchargeRepository.SurchargeToEdit(viewModel.Id));
+                return RedirectToAction("Details", "Terminals", new { id = viewModel.Id });
             }
         }
 
@@ -118,7 +114,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_surchargeRepository.SurchargeToEdit((int) id));
+                if (id != null) return View(_surchargeRepository.SurchargeToEdit((int)id));
                 ViewBag.Error = "Surcharge not found. ";
                 return View("Error");
             }
@@ -135,18 +131,18 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (terminalId == null || id == null)
+                if (id == null)
                 {
                     ViewBag.Error = "Surcharge not found. ";
                     return View("Error");
                 }
                 _surchargeRepository.DeleteSurcharge((int)id);
-                return RedirectToAction("Details", "Terminals", new { id = terminalId });
+                return RedirectToAction("Details", "Terminals", new { id = id});
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting Surcharge" + ex.Message;
-                return RedirectToAction("Details", "Terminals", new { id = terminalId});
+                return RedirectToAction("Details", "Terminals", new { id = id });
             }
         }
     }

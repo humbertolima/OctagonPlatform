@@ -1,18 +1,29 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.TerminalPicturesVM
 
-<div>
+<div style="margin: 20px;">
     @using (Html.BeginForm("SetPictures", "Terminals", FormMethod.Post,
                                                           new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        @Html.Hidden("id", Model.Id)
+        @Html.HiddenFor(m=> m.Id)
+        @Html.HiddenFor( m =>m .TerminalId)
 
         <table>
+            <thead>
+                <tr>
+                    <th style="width: 10%;">No.</th>
+                    <th  style="width: 60%;">Picture</th>
+                    <th></th>
+                </tr>
+            </thead>
             <tbody>
                 @{
-                    foreach (var item in Model.Pictures)
-                    {
+                        int i = 0;
+                        foreach (var item in Model.Pictures)
+                        {
+                        i++;
                         <tr>
+                            <td>@i</td>
                             <td>
                                 @item.Name
                             </td>
@@ -70,7 +81,7 @@
 @Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
 <script>
-    $(document).on("click", ".DocumentsDelete", function () {
+    $(document).on("click", ".PicturesDelete", function () {
         var passedID = $(this).data('id');
         $("#DeletePictureModal #pictureId").val(passedID);
     });

@@ -19,8 +19,8 @@ namespace OctagonPlatform.Controllers
             _repository = repository;
         }
 
-       
-        public ActionResult GetKey(string terminalId)
+
+        public PartialViewResult GetKey(string terminalId)
         {   // prueba de branch
             try
             {
@@ -40,19 +40,30 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View("Error");
+                return PartialView("Sections/BindKey");
             }
         }
 
         public async Task<PartialViewResult> GetCashManagement(int id, string terminalId)
         {
-            DateTime start = DateTime.ParseExact(DateTime.Now.AddDays(-30).ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime end = DateTime.ParseExact(DateTime.Now.ToShortDateString(), "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+                string date1 = DateTime.Now.AddDays(-30).ToString("MM/dd/yyy");
+                string date2 = DateTime.Now.ToString("MM/dd/yyy");
 
-            var result = await _repository.GetCashLoad(start, end, terminalId);
+                DateTime start = DateTime.ParseExact(date1, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime end = DateTime.ParseExact(date2, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-           
-            return PartialView("Sections/CashManagements", result);
+                var result = await _repository.GetCashLoad(start, end, terminalId);
+
+
+                return PartialView("Sections/CashManagements", result);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return PartialView("Sections/CashManagements");
+            }
         }
 
 
@@ -90,16 +101,26 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult GetVaultCash(TerminalVaultCashVM viewModel)
         {
-            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            try
             {
-                viewModel = _repository.GetVaultCash(viewModel.Id);
-            }
-            else
-            {
-                ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
-            }
+                if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+                {
+                    TerminalVaultCashVM result = _repository.GetVaultCash(viewModel.Id);
+                    if (result != null) viewModel = result;
+                }
+                else
+                {
+                    ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
+                }
 
-            return PartialView("Sections/VaultCash", viewModel);
+                return PartialView("Sections/VaultCash", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Validation error deleting Document" + ex.Message;
+                return PartialView("Sections/VaultCash", viewModel);
+
+            }
         }
 
         [HttpPost]
@@ -118,7 +139,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult GetPictures( TerminalPicturesVM viewModel)
+        public PartialViewResult GetPictures(TerminalPicturesVM viewModel)
         {
             if (viewModel.Id > 0)
             {
@@ -133,20 +154,21 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        public ViewResult SetPictures(int indexTerminalId, HttpPostedFileBase FileForm, int? pictureId)
+        public PartialViewResult SetPictures(TerminalPicturesVM viewModel, HttpPostedFileBase FileForm)
         {
-            Models.Terminal terminal = new Models.Terminal();
+            Models.Terminal terminal;
 
-            if (pictureId == null || pictureId == 0)
-            {   //addicionar
-                terminal = _repository.SetPictures(indexTerminalId, FileForm, null);
+            if (FileForm !=null)
+            {
+                terminal = _repository.SetPictures(viewModel.Id, FileForm, null);
+                return PartialView("Details", terminal);
             }
             else
-            {   //editar porque viene un id de pictures
-
+            {
+                ViewBag.Error = "Pictures required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalPicturesVM, Models.Terminal>(viewModel));
             }
-
-            return View("Details", terminal);
+            
         }
 
         [HttpPost]
@@ -162,26 +184,19 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult SetDocuments(int indexTerminalId, HttpPostedFileBase FileForm, int? documentId)
+        public PartialViewResult SetDocuments( TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
         {
-            Models.Terminal terminal = new Models.Terminal();
-
+            Models.Terminal terminal;
             if (FileForm != null)
             {
-                if (documentId == null || documentId == 0)
-                {   //addicionar
-                    terminal = _repository.SetDocuments(indexTerminalId, FileForm, null);
-                }
-                else
-                {   //editar porque viene un id de documents
-
-                }
+                terminal = _repository.SetDocuments(viewModel.Id, FileForm, null);
 
                 return PartialView("Details", terminal);
             }
             else
             {
-                return PartialView("Details", terminal);
+                ViewBag.Error = "Documents required";
+                return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
             }
         }
 
@@ -208,6 +223,32 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = "Validation error deleting Document" + ex.Message;
                 return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalDocumentsVM, Models.Terminal>(viewModel));
+            }
+        }
+
+
+        [HttpPost]
+        public PartialViewResult GetGeneralInfo(int id)
+        {
+            try
+            {
+                TerminalGeneralVM viewModel;
+                if (id > 0)
+                {
+                    viewModel = _repository.GetGeneralInfo(id);
+                }
+                else
+                {
+                    viewModel = new TerminalGeneralVM();
+                }
+
+                return PartialView("Sections/GeneralInfo", viewModel);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Error: " + ex.Message;
+                return PartialView("Sections/Error");
+
             }
         }
 

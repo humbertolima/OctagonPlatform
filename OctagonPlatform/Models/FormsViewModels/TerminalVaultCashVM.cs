@@ -14,6 +14,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public string TerminalId { get; set; }
 
+        public IEnumerable<BankAccount> BankAccounts { get; set; }
+
         public VaultCash VaultCash { get; set; }
     }
 }

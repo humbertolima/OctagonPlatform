@@ -61,7 +61,7 @@ namespace OctagonPlatform.Controllers
                 Session["Name"] = userToLogin.Name;
                 Session["UserId"] = userToLogin.UserId;
                 if (Session["tries"] != null) Session.Remove("tries");
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("AMS", "Octagon");
             }
             catch (Exception ex)
             {

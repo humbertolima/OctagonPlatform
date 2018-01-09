@@ -130,8 +130,9 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.15.0, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -217,6 +218,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\OctagonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DisputeRepresentsController.cs" />
     <Compile Include="Controllers\DisputesController.cs" />
@@ -231,8 +233,6 @@
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
-    <Compile Include="Controllers\Reports\ScheduleController.cs" />
-    <Compile Include="Controllers\Reports\SubscriptionController.cs" />
     <Compile Include="Controllers\SurchargeController.cs" />
     <Compile Include="Controllers\TerminalAlertsController.cs" />
     <Compile Include="Controllers\TerminalContactsController.cs" />
@@ -251,7 +251,6 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
-    <Compile Include="Helpers\Schedule.cs" />
     <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
     <Compile Include="Helpers\Cryptography.cs" />
@@ -273,6 +272,62 @@
     <Compile Include="Helpers\StringValidation.cs" />
     <Compile Include="Helpers\SurchargedBy.cs" />
     <Compile Include="Helpers\TerminalIdGenerator.cs" />
+    <Compile Include="Migrations\201711221558077_Initial.cs" />
+    <Compile Include="Migrations\201711221558077_Initial.Designer.cs">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221625432_AddCountries.cs" />
+    <Compile Include="Migrations\201711221625432_AddCountries.Designer.cs">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221627296_AddStates.cs" />
+    <Compile Include="Migrations\201711221627296_AddStates.Designer.cs">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711221632000_AddCities.cs" />
+    <Compile Include="Migrations\201711221632000_AddCities.Designer.cs">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.cs" />
+    <Compile Include="Migrations\201711222125212_UpdateInitialv0.1.Designer.cs">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711291452285_addreportinggroup.cs" />
+    <Compile Include="Migrations\201711291452285_addreportinggroup.Designer.cs">
+      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711292247322_addreportgroupid.cs" />
+    <Compile Include="Migrations\201711292247322_addreportgroupid.Designer.cs">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061559346_alterDocuments.cs" />
+    <Compile Include="Migrations\201712061559346_alterDocuments.Designer.cs">
+      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712071542433_addPictures.cs" />
+    <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
+      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
+    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
+    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
+    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801032107211_schedule.cs" />
+    <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -288,27 +343,22 @@
     <Compile Include="Models\DisputeRepresent.cs" />
     <Compile Include="Models\Document.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\FormsViewModels\SubscriptionVM.cs" />
-    <Compile Include="Models\InterfacesRepository\IFilter.cs" />
-    <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
-    <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
-    <Compile Include="Models\SuscriptionModel.cs" />
     <Compile Include="Models\FormsViewModels\BAccountFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BAEditFVModel.cs" />
     <Compile Include="Models\FormsViewModels\BindKeyViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CashBalanceatCloseViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\ScheduleViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\CashBalanceAtCloseVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalContactVM.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalGeneralVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalInterchangeVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalVaultCashVM.cs" />
-    <Compile Include="Models\FormsViewModels\MonthlyTransactionSummaryViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TransMonthlyViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalCassetteVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalDocumentsVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalNotesVM.cs" />
     <Compile Include="Models\FormsViewModels\TerminalPicturesVM.cs" />
-    <Compile Include="Models\FormsViewModels\DailyTransactionSummaryViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\TerminalStatusViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\CashManagementViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TransDailyViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TerminalStatusFormFilterVM.cs" />
+    <Compile Include="Models\FormsViewModels\CashManagementVM.cs" />
     <Compile Include="Models\FormsViewModels\CashLoadViewModel.cs" />
     <Compile Include="Models\FormsViewModels\DisputeRepresentVM.cs" />
     <Compile Include="Models\FormsViewModels\DisputeViewModel.cs" />
@@ -330,7 +380,6 @@
     <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
-    <Compile Include="Models\InterfacesRepository\ISchedule.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ITerminalAlertRepositoryAPI.cs" />
     <Compile Include="Models\InterfacesRepository\IBankAccountRepository.cs" />
@@ -356,9 +405,7 @@
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
-    <Compile Include="Models\FilterModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
-    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
@@ -379,11 +426,7 @@
     <Compile Include="PersistanceRepository\DisputeRepository.cs" />
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
-    <Compile Include="PersistanceRepository\FilterRepository.cs" />
-    <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
-    <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
-    <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\TerminalAlertRepository.cs" />
     <Compile Include="PersistanceRepository\BankAccountRepository.cs" />
@@ -404,12 +447,14 @@
     <Compile Include="Views\ReportsSmart\ViewModels\CashManagementTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TerminalStatusTableVM.cs" />
     <Compile Include="Views\ReportsSmart\ViewModels\TerminalTableVM.cs" />
-    <Compile Include="Views\Schedule\ScheduleVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\data\vendbot-data.js" />
+    <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
+    <Content Include="Octagon\assets\data\demmoney-data.js" />
     <Content Include="Content\adminsb\data\morris-data.js" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.css" />
     <Content Include="Content\adminsb\dist\css\sb-admin-2.min.css" />
@@ -726,7 +771,8 @@
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
-    <Content Include="Octagon\assets\data\morris-data.js" />
+    <Content Include="Octagon\assets\data\AMS-data.js" />
+    <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
     <Content Include="Octagon\assets\fonts\font-awesome.min.css" />
     <Content Include="Octagon\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Octagon\assets\fonts\simple-line-icons.min.css" />
@@ -735,17 +781,11 @@
     <Content Include="Octagon\assets\img\2.jpg" />
     <Content Include="Octagon\assets\img\3.jpg" />
     <Content Include="Octagon\assets\img\404.jpg" />
+    <Content Include="Octagon\assets\img\banner2-1.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
-    <Content Include="Octagon\assets\img\carousel2.jpg" />
-    <Content Include="Octagon\assets\img\carousel3.jpg" />
-    <Content Include="Octagon\assets\img\eth-16x16.png" />
-    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
-    <Content Include="Octagon\assets\img\ltc-16x16.png" />
-    <Content Include="Octagon\assets\img\ltc-32x32.png" />
-    <Content Include="Octagon\assets\img\map.jpg" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
@@ -1062,7 +1102,6 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
-    <Content Include="Scripts\jquery.serializeObject.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1200,19 +1239,19 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
-    <Content Include="Views\ReportsSmart\CashLoad\CashLoad.cshtml" />
-    <Content Include="Views\ReportsSmart\CashManagement\CashManagement.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalList\TerminalList.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTable.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalStatus\TerminalStatus.cshtml" />
-    <Content Include="Views\ReportsSmart\DailyTransactionSummary\DailyTransactionSummary.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
+    <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialHead.cshtml" />
@@ -1222,31 +1261,26 @@
     <Content Include="Views\Terminals\Sections\Surcharge.cshtml" />
     <Content Include="Views\InterChange\Modal\AddInterChange.cshtml" />
     <Content Include="Views\Surcharge\Modal\AddSurCharge.cshtml" />
-    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\VaultCash\VaultCashForm.cshtml" />
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
-    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary\MonthlyTransactionSummary.cshtml" />
+    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
-    <Content Include="Views\ReportsSmart\CashBalanceatClose\CashBalanceatClose.cshtml" />
-    <Content Include="Views\Schedule\Create.cshtml" />
-    <Content Include="Views\Schedule\Delete.cshtml" />
-    <Content Include="Views\Schedule\Edit.cshtml" />
-    <Content Include="Views\Schedule\Index.cshtml" />
-    <Content Include="Views\Schedule\List.cshtml" />
-    <Content Include="Views\ReportsSmart\CashLoad\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\CashManagement\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalList\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalStatus\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\DailyTransactionSummary\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\CashBalanceatClose\_PartialForm.cshtml" />
-    <Content Include="Views\Subscription\Create.cshtml" />
-    <Content Include="Views\Subscription\Delete.cshtml" />
-    <Content Include="Views\Subscription\Details.cshtml" />
-    <Content Include="Views\Subscription\Edit.cshtml" />
-    <Content Include="Views\Subscription\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
+    <Content Include="Views\Terminals\Sections\Error.cshtml" />
+    <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
+    <Content Include="Views\Octagon\AMS.cshtml" />
+    <Content Include="Views\Shared\_LayoutOctagonDashboard.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonNavBar.cshtml" />
+    <Content Include="Views\Shared\Sections\OctagonSidebar.cshtml" />
+    <Content Include="Views\Octagon\CryptoXone.cshtml" />
+    <Content Include="Views\Octagon\BeComm.cshtml" />
+    <Content Include="Views\Octagon\AVT.cshtml" />
+    <Content Include="Views\Octagon\DemMoney.cshtml" />
+    <Content Include="Views\Octagon\CashEverywhere.cshtml" />
+    <Content Include="Views\Octagon\VendBot.cshtml" />
+    <Content Include="Views\Octagon\MicroLoans.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1254,6 +1288,50 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711221558077_Initial.resx">
+      <DependentUpon>201711221558077_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221625432_AddCountries.resx">
+      <DependentUpon>201711221625432_AddCountries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221627296_AddStates.resx">
+      <DependentUpon>201711221627296_AddStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711221632000_AddCities.resx">
+      <DependentUpon>201711221632000_AddCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222125212_UpdateInitialv0.1.resx">
+      <DependentUpon>201711222125212_UpdateInitialv0.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711291452285_addreportinggroup.resx">
+      <DependentUpon>201711291452285_addreportinggroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292247322_addreportgroupid.resx">
+      <DependentUpon>201711292247322_addreportgroupid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061559346_alterDocuments.resx">
+      <DependentUpon>201712061559346_alterDocuments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712071542433_addPictures.resx">
+      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712072009044_AdddateCreatedterminal.resx">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712081657347_addPictures2.resx">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181652578_alterPermission.resx">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270518359_addintpartner.resx">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801032107211_schedule.resx">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
