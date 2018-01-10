@@ -94,6 +94,7 @@
           
         </div>
     </div>
+    <input type="hidden"  id="userId" name="userId"/>
 }
 </figure>
 
@@ -121,6 +122,7 @@
 
             $('#FormSub').submit(function () {
                // var formData = $('#FormSub').serializeObject();
+                $("#userId").val($("#userid").val());
                 $.ajax({
                     url: this.action,
                     type: this.method,

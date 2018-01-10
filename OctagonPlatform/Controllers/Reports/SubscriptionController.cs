@@ -20,12 +20,16 @@ namespace OctagonPlatform.Controllers.Reports
         private ISchedule _repoScheduled;
         private IReports _repoReport;
         private IFilter _repoFilter;
-        public SubscriptionController(ISubscription repo, ISchedule reposchedule, IReports repoReport, IFilter repoFilter)
+        private IUserRepository _repoUser;
+        private IReportFilter _repoReportfilter;
+        public SubscriptionController(ISubscription repo, ISchedule reposchedule, IReports repoReport, IFilter repoFilter, IUserRepository repoUser, IReportFilter repoReportfilter)
         {
             _repo = repo;
             _repoScheduled = reposchedule;
             _repoReport = repoReport;
             _repoFilter = repoFilter;
+            _repoUser = repoUser;
+            _repoReportfilter = repoReportfilter;
         }
         // GET: SubscriptionModels
         public ActionResult Index()
@@ -77,11 +81,42 @@ namespace OctagonPlatform.Controllers.Reports
         {
             if (ModelState.IsValid)
             {
-                int reportId = Convert.ToInt32(model.GetValue("ReportId").ToString());
-              
-                // _repo.Add(subscriptionModel);
+                int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);                
+                int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
+                string description = model.GetValue("Description").AttemptedValue;
+                string email = model.GetValue("Email").AttemptedValue;
+                string emailComment = model.GetValue("EmailComment").AttemptedValue;
+                int userid = Convert.ToInt32(model.GetValue("userId").AttemptedValue);
+                int partnerid = _repoUser.FindBy(userid).PartnerId;
+                SubscriptionModel submodel = new SubscriptionModel();
+                submodel.Description = description;
+                submodel.Email = email;
+                submodel.EmailComment = emailComment;
+                submodel.PartnerId = partnerid;
+                submodel.ScheduleId = scheduledId;               
+                _repo.Add(submodel);
+                for (int i = 0; i < model.Count; i++)
+                {
+                    string key = model.GetKey(i).ToString();
+                    FilterModel f = _repoFilter.FindAllBy(p => p.Name.Contains(key)).FirstOrDefault();
+                    if (f != null)
+                    {                       
+                        ReportFilter reportfilter = new ReportFilter()
+                        {
+                            FilterID = f.Id,
+                            ReportID = reportId,
+                            SubscriptionID =submodel.Id,
+                            Value = model.GetValue(key).AttemptedValue
+                        };
+                        _repoReportfilter.Add(reportfilter);
+                       
+                    }
+                       
+                }
+               
                 
-               // dynamic foo = JObject.Parse(model);
+
+                // dynamic foo = JObject.Parse(model);
                 return RedirectToAction("Index");
             }
 
