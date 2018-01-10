@@ -100,7 +100,7 @@ namespace OctagonPlatform.Controllers.Reports
                     }
                 }
                 User user =_userRepository.FindBy(Convert.ToInt32(vmodel.UserId));
-                model.PartnerId = user.PartnerId;
+                model.UserId = user.Id;
                 _repo.Add(model);               
                 return RedirectToAction("Index");
             }

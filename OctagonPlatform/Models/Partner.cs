@@ -88,11 +88,11 @@ namespace OctagonPlatform.Models
         [Required]
         public double Interchange { get; set; }
 
-        public ICollection<Schedule> Schedules { get; set; }
+        
 
         public ICollection<ReportGroupModel> ReportGroups { get; set; }        
 
-        public virtual ICollection<SubscriptionModel> Subscriptions { get; set; }
+       
 
         public Partner()
         {

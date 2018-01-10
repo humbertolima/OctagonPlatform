@@ -33,8 +33,8 @@ namespace OctagonPlatform.Models
         [Required]
         public DateTime StartDate { get; set; }
         [Required]
-        public int PartnerId { get; set; }
-        public virtual Partner Partner { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<SubscriptionModel> Subscriptions { get; set; }
     }
    

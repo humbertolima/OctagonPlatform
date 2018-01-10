@@ -322,9 +322,10 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public ActionResult SetCassettes(string autoRecord, int denomination, int id, int? cassetteId)
         {
-            bool isAutoRecord;
+            bool isAutoRecord  = false;
 
-            if (!String.IsNullOrEmpty(autoRecord) ? isAutoRecord = true : isAutoRecord = false) ;
+            if (!String.IsNullOrEmpty(autoRecord))
+                isAutoRecord = true ;
 
             Models.Terminal terminal = new Models.Terminal();
 

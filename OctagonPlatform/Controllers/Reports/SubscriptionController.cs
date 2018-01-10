@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -32,11 +33,12 @@ namespace OctagonPlatform.Controllers.Reports
             _repoReportfilter = repoReportfilter;
         }
         // GET: SubscriptionModels
+        
         public ActionResult Index()
         {
             int partnerId = Convert.ToInt32(Session["partnerId"]);
             int userId = Convert.ToInt32(Session["UserId"]);
-            var subscriptions = _repo.FindAllBy(s => s.PartnerId == partnerId);
+            var subscriptions = _repo.GetSubscriptionsIncluding(userId);
             IEnumerable<ReportModel> listrepost = _repoReport.GetAllReports(partnerId, userId);
             SubscriptionVM vmodel = new SubscriptionVM()
             {
@@ -48,6 +50,7 @@ namespace OctagonPlatform.Controllers.Reports
            
             IEnumerable<Schedule> listscheduled = _repoScheduled.GetScheduleByUser(userId, partnerId);
             vmodel.ScheduledId = new SelectList(listscheduled,"Id","Name");
+           
             return View(vmodel);
         }
 
@@ -81,6 +84,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             if (ModelState.IsValid)
             {
+               
                 int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);                
                 int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
                 string description = model.GetValue("Description").AttemptedValue;
@@ -88,40 +92,56 @@ namespace OctagonPlatform.Controllers.Reports
                 string emailComment = model.GetValue("EmailComment").AttemptedValue;
                 int userid = Convert.ToInt32(model.GetValue("userId").AttemptedValue);
                 int partnerid = _repoUser.FindBy(userid).PartnerId;
-                SubscriptionModel submodel = new SubscriptionModel();
-                submodel.Description = description;
-                submodel.Email = email;
-                submodel.EmailComment = emailComment;
-                submodel.PartnerId = partnerid;
-                submodel.ScheduleId = scheduledId;               
-                _repo.Add(submodel);
-                for (int i = 0; i < model.Count; i++)
+                if (scheduledId > 0 && IsValidEmail(email))
                 {
-                    string key = model.GetKey(i).ToString();
-                    FilterModel f = _repoFilter.FindAllBy(p => p.Name.Contains(key)).FirstOrDefault();
-                    if (f != null)
-                    {                       
-                        ReportFilter reportfilter = new ReportFilter()
+                    SubscriptionModel submodel = new SubscriptionModel();
+                    submodel.Description = description;
+                    submodel.Email = email;
+                    submodel.EmailComment = emailComment;
+                    submodel.UserId = userid;
+                    submodel.ScheduleId = scheduledId;
+                    _repo.Add(submodel);
+                    for (int i = 0; i < model.Count; i++)
+                    {
+                        string key = model.GetKey(i).ToString();
+                        FilterModel f = _repoFilter.FindAllBy(p => p.Name == key).FirstOrDefault();
+                        if (f != null && model.GetValue(key).AttemptedValue != string.Empty && model.GetValue(key).AttemptedValue != "-1")
                         {
-                            FilterID = f.Id,
-                            ReportID = reportId,
-                            SubscriptionID =submodel.Id,
-                            Value = model.GetValue(key).AttemptedValue
-                        };
-                        _repoReportfilter.Add(reportfilter);
-                       
+                            ReportFilter reportfilter = new ReportFilter()
+                            {
+                                FilterID = f.Id,
+                                ReportID = reportId,
+                                SubscriptionID = submodel.Id,
+                                Value = model.GetValue(key).AttemptedValue
+                            };
+                            _repoReportfilter.Add(reportfilter);
+
+                        }
+
                     }
-                       
+
+                    TempData["Success"] = "Report Subscription Created Successful";
+                    return PartialView("../Error/_PartialAlert");
                 }
-               
-                
-
-                // dynamic foo = JObject.Parse(model);
-                return RedirectToAction("Index");
+                else
+                {
+                    if (scheduledId <= 0)
+                        ModelState.AddModelError("ScheduledId", "Please Select a Schedule");
+                    if (!IsValidEmail(email))
+                        ModelState.AddModelError("ScheduledId", "Please Enter a Valid Email Address");
+                }
             }
+            string messages = string.Join("<br> ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage));
+            TempData["Danger"] = messages;
+            return PartialView("../Error/_PartialAlert");
+           // return "-1";
+        }
 
-
-            return View(model);
+        private bool IsValidEmail(string source)
+        {
+            return new EmailAddressAttribute().IsValid(source);
         }
 
         // GET: SubscriptionModels/Edit/5

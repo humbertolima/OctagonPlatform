@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OctagonPlatform.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Web;
 namespace OctagonPlatform.Models
 {
     [Table("Subscriptions")]
-    public class SubscriptionModel
+    public class SubscriptionModel : AuditEntity
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -17,9 +18,10 @@ namespace OctagonPlatform.Models
         [ForeignKey("Schedule")]
         public int ScheduleId { get; set; }
         public virtual Schedule Schedule { get; set; }
-        public int PartnerId { get; set; }
-        public virtual Partner Partner { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
         public virtual ICollection<ReportFilter> ReportFilters { get; set; }
+       
     }
 }

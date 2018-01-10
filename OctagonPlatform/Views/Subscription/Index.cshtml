@@ -20,16 +20,17 @@
 <table class="table">
     <tr>
         <th>
-            BusinessName
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+            Report
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+          
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmailComment)
+           Schedule
+        </th>
+        <th>
+            Created By
         </th>
         <th>
           
@@ -39,63 +40,74 @@
 
     @foreach (var item in Model.List)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PartnerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailComment)
-            </td>
-            <td>
-                ghfh
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @if (item.ReportFilters != null)
+        {
+            @Html.DisplayFor(modelItem => item.ReportFilters.FirstOrDefault().Report.Name)
+    }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @if (item.Schedule != null)
+                {
+                    @Html.DisplayFor(modelItem => item.Schedule.Name)
+               }
+        </td>
+
+        <td>
+           
+        @Html.DisplayFor(modelItem => item.CreatedBy)
+
+        </td>
+        <td>
+            ghfh
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>
 
 <figure class="highlight">
+
+   <div id="message"></div>
     @using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
     {
         @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Report Selection</h3>  <hr />
-            <div class="form-group">
-                @Html.LabelFor(model => model.ReportId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ReportId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Report Selection</h3>  <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ReportId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ReportId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
+                    </div>
                 </div>
+                <div id="PartialFilter"> </div>
             </div>
-            <div id="PartialFilter"> </div>
-        </div>
-        <div class="col-md-6">
-            <h3>Scheduling</h3>   <hr />
+            <div class="col-md-6">
+                <h3>Scheduling</h3>   <hr />
 
-           
-            @Html.Partial("Create", Model)
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+
+                @Html.Partial("Create", Model)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
                 </div>
+
             </div>
-          
         </div>
-    </div>
-    <input type="hidden"  id="userId" name="userId"/>
-}
+        <input type="hidden" id="userId" name="userId" />
+    }
 </figure>
 
 
@@ -118,17 +130,24 @@
 
                 });
             });
-     
+
 
             $('#FormSub').submit(function () {
                // var formData = $('#FormSub').serializeObject();
                 $("#userId").val($("#userid").val());
+                $("#message").html("<div class='loader'></div>");
                 $.ajax({
                     url: this.action,
                     type: this.method,
-                    data: $(this).serialize(),                   
+                    data: $(this).serialize(),
                     success: function (result) {
-                        alert(result);
+                        $("#message").html(result);
+                        if ($(".alert-success").html() != "") {
+                            setTimeout(function () {
+                                window.location.href = "@Url.Action("Index", "Subscription")";
+                            }, 2000);
+                        }
+
                     },
                     error: function (xhr, status, error) {
                         // Show the error
@@ -136,8 +155,8 @@
 
                     }
                 });
-         
-       
+
+
         return false;
     });
 

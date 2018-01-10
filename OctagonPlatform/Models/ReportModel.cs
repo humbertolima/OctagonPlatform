@@ -25,11 +25,13 @@ namespace OctagonPlatform.Models
         public int ReportID { get; set; }
         [Key, Column(Order = 1)]
         public int FilterID { get; set; }
+        [Key, Column(Order = 2)]
+        public int SubscriptionID { get; set; }
 
         public virtual ReportModel Report { get; set; }
         public virtual FilterModel Filter { get; set; }
 
-        public int SubscriptionID { get; set; }
+       
         public virtual SubscriptionModel Subscription { get; set; }      
 
         public string Value { get; set; }

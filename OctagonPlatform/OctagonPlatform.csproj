@@ -291,6 +291,18 @@
     <Compile Include="Migrations\201801092246103_AddCities.Designer.cs">
       <DependentUpon>201801092246103_AddCities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801100244304_addkeyreportfilter.cs" />
+    <Compile Include="Migrations\201801100244304_addkeyreportfilter.Designer.cs">
+      <DependentUpon>201801100244304_addkeyreportfilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801102114076_addusersubschedule.cs" />
+    <Compile Include="Migrations\201801102114076_addusersubschedule.Designer.cs">
+      <DependentUpon>201801102114076_addusersubschedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801102205267_auditsub.cs" />
+    <Compile Include="Migrations\201801102205267_auditsub.Designer.cs">
+      <DependentUpon>201801102205267_auditsub.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1291,6 +1303,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801092246103_AddCities.resx">
       <DependentUpon>201801092246103_AddCities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100244304_addkeyreportfilter.resx">
+      <DependentUpon>201801100244304_addkeyreportfilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801102114076_addusersubschedule.resx">
+      <DependentUpon>201801102114076_addusersubschedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801102205267_auditsub.resx">
+      <DependentUpon>201801102205267_auditsub.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
