@@ -12,24 +12,14 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class AccountRepository : GenericRepository<User>, IAccountRepository
     {
-        public string GetPermissions(int userId)
+        public List<Permission> GetPermissions(int userId)
         {
-            string jsonPermissions;
             try
             {       //pendiente validar si viene el Id
-                var permissions = Context.Permissions
-                    .Include(m => m.SetOfPermission)
-                    .Include(m => m.PermissionSubGroup)
-                    .Where(u =>u.Users.FirstOrDefault().Id== userId).ToList();
+                List<Permission> permissions = Context.Permissions.ToList();
+                    
 
-
-                if (permissions != null)
-                {
-                    jsonPermissions = Newtonsoft.Json.JsonConvert.SerializeObject(permissions);
-                    return jsonPermissions;
-                }
-
-                return null;
+                return permissions;
             }
             catch (Exception ex)
             {

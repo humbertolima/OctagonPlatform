@@ -54,13 +54,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Email { get; set; }
         
         public ICollection<Permission> Permissions { get; set; }
-
-        public IList<PermissionAssigned> PermissionsAssigned { get; set; }
-
-        public IList<SetOfPermission> SetOfPermissions { get; set; }
-
-        public ICollection<Permission> PermissionsAll { get; set; }
-
+        
         public string Error { get; set; }
     }
 }

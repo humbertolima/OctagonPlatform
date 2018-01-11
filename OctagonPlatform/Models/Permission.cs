@@ -15,21 +15,9 @@ namespace OctagonPlatform.Models
         [Required]
         public string Name { get; set; }
 
-        public bool View { get; set; }
-        public bool Create { get; set; }
-        public bool Edit { get; set; }
-        public bool Delete { get; set; }
-
-        [Required]
-        [ForeignKey("SetOfPermission")]
-        public int SetOfPermissionId { get; set; }
-        
-        public virtual SetOfPermission SetOfPermission { get; set; }
-
-        [Required]
-        [ForeignKey("PermissionSubGroup")]
-        public int PermissionSubGroupId { get; set; }
-        public PermissionSubGroup PermissionSubGroup { get; set; }
+        [ForeignKey("Parent")]
+        public int? ParentID { get; set; }
+        public virtual Permission Parent { get; set; }
 
         public ICollection<User> Users { get; set; }
 

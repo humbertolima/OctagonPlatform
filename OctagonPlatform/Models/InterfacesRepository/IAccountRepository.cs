@@ -1,4 +1,5 @@
 ﻿using OctagonPlatform.Models.FormsViewModels;
+using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -6,7 +7,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         UserLoginViewModel Login(UserLoginViewModel userLogin);
 
-        string GetPermissions(int userId);
+        List<Permission> GetPermissions(int userId);
 
         void Logout();
     }

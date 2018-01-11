@@ -13,7 +13,6 @@ namespace OctagonPlatform.Models
         public DbSet<Partner> Partners { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<SetOfPermission> SetOfPermissions { get; set; }
         public DbSet<Terminal> Terminals { get; set; }
         public DbSet<TerminalContact> TerminalContacts { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
@@ -41,8 +40,7 @@ namespace OctagonPlatform.Models
         public DbSet<ReportModel> Reports { get; set; }
         public DbSet<ReportGroupModel> ReportGroups { get; set; }
         public DbSet<Picture> Pictures { get; set; }
-        public DbSet<PermissionSubGroup> PermissionSubGroups { get; set; }
-
+        
     
         public ApplicationDbContext()
             : base("LocalConection")
@@ -60,7 +58,7 @@ namespace OctagonPlatform.Models
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Entity<Partner>().Property(c => c.ParentId).IsOptional();
-
+            modelBuilder.Entity<Permission>().Property(p => p.ParentID).IsOptional();   //haciendo opcional parent de permission para que pueda ser null.
             //modelBuilder.Entity<>
         }
 

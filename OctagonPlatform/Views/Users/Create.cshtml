@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Add User";
-  
+
 }
 <div class="container" style="padding-bottom: 20px; padding-top: 20px;">
     <h3 class="alert-info">Create User</h3>
@@ -73,35 +73,6 @@
         </div>
 
         @Html.Partial("Sections/PermissionTree")
-        <table class="table table-striped table-hover ">
-            <thead>
-                <tr>
-                    <th>SetOf</th>
-                    <th>All</th>
-                    <th>Create</th>
-                    <th>View</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.SetOfPermissions)
-                {
-                    <tr id="@item.Name">
-                        <td>@Html.Label(item.Name)</td>
-                        <td><input type="checkbox" id="allSetOfPermissions" name="allSetOfPermissions" value="@item.Id" /></td>
-                        @{
-                            foreach (var permission in item.Permissions)
-                            {
-                                <td>
-                                    <input type="checkbox" id="@permission.Id" name="permissions1" value="@permission.Id" />
-                                </td>
-                            }
-                        }
-                    </tr>
-                            }
-            </tbody>
-        </table>
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
@@ -110,18 +81,31 @@
             </div>
         </div>
 
-}
+    }
 </div>
 
 @section Scripts {
-@Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
+    @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
 
 
-<script>
-    $(function () {
-        $("#demo1").jstree({
-            "plugins": ["themes", "html_data", 'checkbox', "types"]
+    <script>
+
+        $.ajax({
+            async: true,
+            type: "post",
+            url: "/Account/PermissionToJson",
+            dataType: "json",
+            data: {"userId":"1"},
+            success: function (data) {
+                $("#demo1").jstree({
+                    core: {
+                        'data': data,
+                    },
+                    plugins: ["themes", "json_data", 'checkbox', "types"]
+                })
+            }
         });
-    });
-</script>
+
+
+    </script>
 }

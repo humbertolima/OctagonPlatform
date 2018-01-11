@@ -1,6 +1,9 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -57,7 +60,7 @@ namespace OctagonPlatform.Controllers
                 Session["logo"] = userToLogin.Partner.Logo;
                 Session["partnerId"] = userToLogin.Partner.Id;
                 Session["businessName"] = userToLogin.Partner.BusinessName;
-                Session["Permissions"] = _accountRepository.GetPermissions(userToLogin.Id);
+                Session["Permissions"] = PermissionToJson(userToLogin.Id);
 
                 if (Session["tries"] != null) Session.Remove("tries");
 
@@ -86,7 +89,35 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult PermissionToJson(int userId)
+        {
+            List<Permission> permissions = _accountRepository.GetPermissions(userId);
+
+            if (permissions != null)
+            {
+                List<TreeView> tree = new List<TreeView>();
+                foreach (var item in permissions)
+                {
+                    string temp = "#";
+                    if (!String.IsNullOrEmpty(item.ParentID.ToString()))
+                    {
+                        temp = item.ParentID.ToString();
+                    }
+                    tree.Add(new TreeView()
+                    {
+                        text = item.Name,
+                        id = item.Id.ToString(),
+                        parent = temp,
+                   
+                    });
+                }
+
+                return Json(tree, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
 
         //Implementacion
     }

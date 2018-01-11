@@ -266,7 +266,6 @@
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\NumberOfCassettes.cs" />
-    <Compile Include="Helpers\PermissionsAssigned.cs" />
     <Compile Include="Helpers\SurchargeSettled.cs" />
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Helpers\StringValidation.cs" />
@@ -336,6 +335,14 @@
     <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.Designer.cs">
       <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.cs" />
+    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.Designer.cs">
+      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091603294_addPermissionPArent.cs" />
+    <Compile Include="Migrations\201801091603294_addPermissionPArent.Designer.cs">
+      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -378,6 +385,7 @@
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TreeView.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
@@ -411,11 +419,9 @@
     <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\PartnerContact.cs" />
     <Compile Include="Models\Permission.cs" />
-    <Compile Include="Models\PermissionSubGroup.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
-    <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
     <Compile Include="Models\Terminal.cs" />
@@ -1370,6 +1376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801051454525_addPermissionSubGroup1.resx">
       <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801082337211_deleteSetAndSubgroups.resx">
+      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091603294_addPermissionPArent.resx">
+      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
