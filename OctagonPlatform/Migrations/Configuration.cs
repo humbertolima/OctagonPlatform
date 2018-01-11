@@ -63,18 +63,10 @@ namespace OctagonPlatform.Migrations
 
             #region Permission Tree Level 0
 
-            context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission { Name = "Root"});
-
-            context.SaveChanges();
-
             List<string> Level0 = new List<string>() { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
-                context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission
-                {
-                    Name = item,
-                    ParentID = context.Permissions.SingleOrDefault(perm => perm.Name == "Root").Id
-                });
+                context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission { Name = item });
             }
             context.SaveChanges();
 
@@ -116,7 +108,7 @@ namespace OctagonPlatform.Migrations
             foreach (var item in Level04)
             {
                 context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission
-                {                    
+                {
                     Name = item,
                     ParentID = context.Permissions.SingleOrDefault(perm => perm.Name == "Partners").Id
                 });
@@ -144,7 +136,7 @@ namespace OctagonPlatform.Migrations
                 });
             }
             context.SaveChanges();
-            #endregion
+             #endregion
 
             #region Permission Level 2
 
@@ -234,7 +226,7 @@ namespace OctagonPlatform.Migrations
                 context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission
                 {
                     Name = item,
-                    ParentID = context.Permissions.FirstOrDefault(perm => perm.Name == "Partner Settlement Accounts").Id
+                    ParentID = context.Permissions.SingleOrDefault(perm => perm.Name == "Partner Settlement Accounts").Id
                 });
             }
 

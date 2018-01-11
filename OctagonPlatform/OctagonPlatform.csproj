@@ -228,6 +228,7 @@
     <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
@@ -1319,7 +1320,12 @@
     <Content Include="Views\Octagon\CashEverywhere.cshtml" />
     <Content Include="Views\Octagon\VendBot.cshtml" />
     <Content Include="Views\Octagon\MicroLoans.cshtml" />
-    <Content Include="Views\Users\Sections\PermissionTree.cshtml" />
+    <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
+    <Content Include="Views\Permissions\Create.cshtml" />
+    <Content Include="Views\Permissions\Delete.cshtml" />
+    <Content Include="Views\Permissions\Details.cshtml" />
+    <Content Include="Views\Permissions\Edit.cshtml" />
+    <Content Include="Views\Permissions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
