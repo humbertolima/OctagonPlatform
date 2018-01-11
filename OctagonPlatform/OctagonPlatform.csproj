@@ -303,6 +303,10 @@
     <Compile Include="Migrations\201801102205267_auditsub.Designer.cs">
       <DependentUpon>201801102205267_auditsub.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801112141269_newmigration.cs" />
+    <Compile Include="Migrations\201801112141269_newmigration.Designer.cs">
+      <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1277,7 +1281,7 @@
     <Content Include="Views\Schedule\List.cshtml" />
     <Content Include="Views\Subscription\Create.cshtml" />
     <Content Include="Views\Subscription\Delete.cshtml" />
-    <Content Include="Views\Subscription\Details.cshtml" />
+    <Content Include="Views\Subscription\Table.cshtml" />
     <Content Include="Views\Subscription\Edit.cshtml" />
     <Content Include="Views\Subscription\Index.cshtml" />
   </ItemGroup>
@@ -1312,6 +1316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801102205267_auditsub.resx">
       <DependentUpon>201801102205267_auditsub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801112141269_newmigration.resx">
+      <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,6 @@
 ﻿
 
+using OctagonPlatform.PersistanceRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
    public interface ISubscription : IGenericRepository<SubscriptionModel>
     {
-        IEnumerable<SubscriptionModel> GetSubscriptionsIncluding(int partnerId);
+        IEnumerable<Subreport> GetSubscriptionsIncluding(int partnerId);
     }
 }

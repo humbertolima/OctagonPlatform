@@ -67,6 +67,10 @@ namespace OctagonPlatform.Models
                .Map<ScheduleMonthlyRelative>(m => m.Requires("Discriminator").HasValue("ScheduleMonthlyRelative"))
                .Map<ScheduleOnce>(m => m.Requires("Discriminator").HasValue("ScheduleOnce"))
                .Map<ScheduleWeekly>(m => m.Requires("Discriminator").HasValue("ScheduleWeekly"));
+            modelBuilder.Entity<ReportFilter>()
+           .HasRequired(b => b.Subscription)
+           .WithMany(b => b.ReportFilters)
+           .WillCascadeOnDelete(true);
             //modelBuilder.Entity<>
         }
 

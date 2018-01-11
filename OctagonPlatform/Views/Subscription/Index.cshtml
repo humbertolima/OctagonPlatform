@@ -17,67 +17,13 @@
         @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
     </div>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            Report
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-          
-        </th>
-        <th>
-           Schedule
-        </th>
-        <th>
-            Created By
-        </th>
-        <th>
-          
-        </th>
-        <th></th>
-    </tr>
+<figure class="highlight">
+    <div id="SubscriptionList">@Html.Partial("Table", Model) </div>
 
-    @foreach (var item in Model.List)
-    {
-    <tr>
-        <td>
-            @if (item.ReportFilters != null)
-        {
-            @Html.DisplayFor(modelItem => item.ReportFilters.FirstOrDefault().Report.Name)
-    }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @if (item.Schedule != null)
-                {
-                    @Html.DisplayFor(modelItem => item.Schedule.Name)
-               }
-        </td>
-
-        <td>
-           
-        @Html.DisplayFor(modelItem => item.CreatedBy)
-
-        </td>
-        <td>
-            ghfh
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-    }
-
-</table>
-
+</figure>
 <figure class="highlight">
 
-   <div id="message"></div>
+    <div id="message"></div>
     @using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
     {
         @Html.AntiForgeryToken()
@@ -114,7 +60,7 @@
 @section Scripts {
 
     @Scripts.Render("~/Scripts/autocomplete.js")
-<script>
+    <script>
 
 
     $(function () {
@@ -164,7 +110,9 @@
     });
 
 
-</script>
+    </script>
 
 
 }
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
