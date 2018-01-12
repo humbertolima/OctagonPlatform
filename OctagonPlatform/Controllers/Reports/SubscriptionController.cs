@@ -36,30 +36,72 @@ namespace OctagonPlatform.Controllers.Reports
         }
         // GET: SubscriptionModels
 
-        public ActionResult Index()
-        {           
-            return View(GetModel());
-        }
-        private SubscriptionVM GetModel()
+        public ActionResult Index(string a,string b)
         {
-            int partnerId = Convert.ToInt32(Session["partnerId"]);
-            int userId = Convert.ToInt32(Session["UserId"]);
-            IEnumerable<Subreport> subscriptions = _repo.GetSubscriptionsIncluding(userId);
+            if (a == "1")
+                TempData["Success"] = "Report Subscription Created Successful";
+            //int partnerId = Convert.ToInt32(Session["partnerId"]);
+            int userId = -1;
+            if (b == null)
+                userId = Convert.ToInt32(Session["UserId"]);
+            else
+            if (b == "")
+                userId = 0;
+            else 
+                userId = Convert.ToInt32(b); 
+            return View(GetModel( userId));
+        }
+        public PartialViewResult List(string userId)
+        {
+              int id = Convert.ToInt32(userId);
+            return PartialView("Table", GetModel(id));
+        }
+        private SubscriptionVM GetModel(int userId)
+        {
 
-            IEnumerable<ReportModel> listrepost = _repoReport.GetAllReports(partnerId, userId);
+            IEnumerable<Subreport> subscriptions = new List<Subreport>();
+            int partnerId = Convert.ToInt32(Session["partnerId"]);
+           
+            string usern = "";
+            IEnumerable<ReportModel> listrepost = _repoReport.All();
+            if (userId > 0)
+            {
+                User user = _repoUser.GetReportsUser(userId);
+                subscriptions = _repo.GetSubscriptionsIncluding(userId);
+                string bussinesname = "";
+                if (user.Partner != null)
+                    bussinesname = user.Partner.BusinessName;
+                usern = user.UserName + " - " + user.Name + " - " + bussinesname;
+               // listrepost = user.Reports.ToList();
+            }
+            else
+            {
+                usern = userId == 0 ? "" : Session["userName"] + " - " + Session["Name"] + " - " + Session["businessName"].ToString();
+               
+                subscriptions = _repo.GetSubscriptionsParent(partnerId);
+            }
+              
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
-                User = Session["userName"] + " - " + Session["Name"] + " - " + Session["businessName"].ToString(),
+                User = usern,
                 UserId = userId,
                 ReportId = new SelectList(listrepost, "Id", "Name")
             };
 
-            IEnumerable<Schedule> listscheduled = _repoScheduled.GetScheduleByUser(userId, partnerId);
+            IEnumerable<Schedule> listscheduled = userId > 0 ?_repoScheduled.GetScheduleByUser(userId):_repoScheduled.GetScheduleByParent(partnerId);
             vmodel.ScheduledId = new SelectList(listscheduled, "Id", "Name");
             return vmodel;
         }
-        private List<SubsTableViewModel> ProcessSubscription(IEnumerable<Subreport> list)
+
+        private IEnumerable< ReportModel> populate(User item)
+        {
+            foreach (ReportModel rm in item.Reports)
+                yield return rm;
+        }
+        
+
+    private List<SubsTableViewModel> ProcessSubscription(IEnumerable<Subreport> list)
         {
             List<SubsTableViewModel> aux = new List<SubsTableViewModel>();
             foreach (var item2 in list)
@@ -144,65 +186,96 @@ namespace OctagonPlatform.Controllers.Reports
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection model)
+        public JsonResult Create(FormCollection model)
         {
             if (ModelState.IsValid)
             {
-
-                int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
-                int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
-                string description = model.GetValue("Description").AttemptedValue;
+                int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);              
                 string email = model.GetValue("Email").AttemptedValue;
-                string emailComment = model.GetValue("EmailComment").AttemptedValue;
-                int userid = Convert.ToInt32(model.GetValue("userId").AttemptedValue);
-                int partnerid = _repoUser.FindBy(userid).PartnerId;
+               
                 if (scheduledId > 0 && IsValidEmail(email))
                 {
-                    SubscriptionModel submodel = new SubscriptionModel();
-                    submodel.Description = description;
-                    submodel.Email = email;
-                    submodel.EmailComment = emailComment;
-                    submodel.UserId = userid;
-                    submodel.ScheduleId = scheduledId;
-                    _repo.Add(submodel);
-                    for (int i = 0; i < model.Count; i++)
-                    {
-                        string key = model.GetKey(i).ToString();
-                        FilterModel f = _repoFilter.FindAllBy(p => p.Name == key).FirstOrDefault();
-                        if (f != null && model.GetValue(key).AttemptedValue != string.Empty && model.GetValue(key).AttemptedValue != "-1")
-                        {
-                            ReportFilter reportfilter = new ReportFilter()
-                            {
-                                FilterID = f.Id,
-                                ReportID = reportId,
-                                SubscriptionID = submodel.Id,
-                                Value = model.GetValue(key).AttemptedValue
-                            };
-                            _repoReportfilter.Add(reportfilter);
 
-                        }
-
-                    }
-
-                    TempData["Success"] = "Report Subscription Created Successful";
-                    return PartialView("../Error/_PartialAlert");
+                  return  AddSubscriptionsByUser(model);
                 }
                 else
                 {
                     if (scheduledId <= 0)
                         ModelState.AddModelError("ScheduledId", "Please Select a Schedule");
                     if (!IsValidEmail(email))
-                        ModelState.AddModelError("ScheduledId", "Please Enter a Valid Email Address");
+                        ModelState.AddModelError("Email", "Please Enter a Valid Email Address");
                 }
             }
-            string messages = string.Join("<br> ", ModelState.Values
-                                        .SelectMany(x => x.Errors)
-                                        .Select(x => x.ErrorMessage));
-            TempData["Danger"] = messages;
-            return PartialView("../Error/_PartialAlert");
+            /* string messages = string.Join("<br> ", ModelState.Values
+                                         .SelectMany(x => x.Errors)
+                                         .Select(x => x.ErrorMessage));*/
+           
+            return Json(new { success = false, errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList() }, JsonRequestBehavior.AllowGet);
+
+          //  return PartialView("../Error/_PartialAlert");
             // return "-1";
         }
+        private JsonResult AddSubscriptionsByUser(FormCollection model)
+        {
+           
+            int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
+            string description = model.GetValue("Description").AttemptedValue;
+            string email = model.GetValue("Email").AttemptedValue;
+            string emailComment = model.GetValue("EmailComment").AttemptedValue;
+            int userid = model.GetValue("userId").AttemptedValue == string.Empty ? 0 : Convert.ToInt32(model.GetValue("userId").AttemptedValue);
+           
+            int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
+            
+            try
+            {
+                if (userid > 0)
+                {
 
+                    FullAddModel(email, description, emailComment, scheduledId, userid, reportId, model);
+
+                }
+                else
+                {
+                    int partnerId = Convert.ToInt32(Session["partnerId"]);
+                    IEnumerable<User> listuser = _repoUser.GetAllUsers(partnerId);
+                    foreach (var item in listuser)
+                    {
+                        FullAddModel(email, description, emailComment, scheduledId, item.Id, reportId, model);
+                       
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }          
+
+            return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+        }
+        private void FullAddModel(string email, string description, string emailComment, int scheduleId, int userId, int reportId, FormCollection model)
+        {
+            SubscriptionModel submodel = new SubscriptionModel( email,  description,  emailComment,  scheduleId,  userId); 
+            _repo.Add(submodel);
+            for (int i = 0; i < model.Count; i++)
+            {
+                string key = model.GetKey(i).ToString();
+                FilterModel f = _repoFilter.FindAllBy(p => p.Name == key).FirstOrDefault();
+                if (f != null && model.GetValue(key).AttemptedValue != string.Empty && model.GetValue(key).AttemptedValue != "-1")
+                {
+                    ReportFilter reportfilter = new ReportFilter()
+                    {
+                        FilterID = f.Id,
+                        ReportID = reportId,
+                        SubscriptionID = submodel.Id,
+                        Value = model.GetValue(key).AttemptedValue
+                    };
+                    _repoReportfilter.Add(reportfilter);
+
+                }
+
+            }
+        }
         private bool IsValidEmail(string source)
         {
             return new EmailAddressAttribute().IsValid(source);
@@ -259,9 +332,11 @@ namespace OctagonPlatform.Controllers.Reports
         [HttpPost, ActionName("Delete")]
        // [ValidateAntiForgeryToken]
         public PartialViewResult DeleteConfirmed(int id, SubscriptionVM model)
-        {           
+        {
+            int userid = _repo.FindBy(id).UserId;
             _repo.Delete(id);
-            return PartialView("Table", GetModel());
+           
+            return PartialView("Table", GetModel(userid));
         }
 
         protected override void Dispose(bool disposing)

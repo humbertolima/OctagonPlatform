@@ -11,7 +11,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         IEnumerable<ReportModel> GetbyName(string name);
         IEnumerable<ReportModel> GetReportsDasboard();
-        IEnumerable<ReportModel> GetAllReports(int partnerId, int userId);
+       
 
     }
 }

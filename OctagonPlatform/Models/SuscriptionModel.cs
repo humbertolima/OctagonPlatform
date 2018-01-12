@@ -11,6 +11,20 @@ namespace OctagonPlatform.Models
     [Table("Subscriptions")]
     public class SubscriptionModel : AuditEntity
     {
+        public SubscriptionModel()
+        {
+        }
+
+        public SubscriptionModel(string email, string description, string emailComment, int scheduleId,  int userId)
+        {
+            Email = email;
+            Description = description;
+            EmailComment = emailComment;
+            ScheduleId = scheduleId;           
+            UserId = userId;
+           
+        }
+
         public int Id { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }

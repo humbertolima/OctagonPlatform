@@ -73,6 +73,7 @@
             $('#user').blur(function () {
                 if ($('#user').val() == "") {
                     $('#user').attr("placeholder", "< ALL >");
+                    $('#userid').val('');
                     $.get(urltable, { userId: 0 }, function (data) {
 
                         $("#List").html(data);

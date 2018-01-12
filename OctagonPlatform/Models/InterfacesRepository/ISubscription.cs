@@ -10,6 +10,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
    public interface ISubscription : IGenericRepository<SubscriptionModel>
     {
-        IEnumerable<Subreport> GetSubscriptionsIncluding(int partnerId);
+        List<Subreport> GetSubscriptionsIncluding(int partnerId);
+        List<Subreport> GetSubscriptionsParent(int partnerid);
     }
 }

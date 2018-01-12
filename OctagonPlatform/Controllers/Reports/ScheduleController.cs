@@ -29,7 +29,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             
             ScheduleVM vmodel = new ScheduleVM();
-            vmodel.List = _repo.GetScheduleByUser(Convert.ToInt32(Session["UserId"]), Convert.ToInt32(Session["partnerId"]));
+            vmodel.List = _repo.GetScheduleByUser(Convert.ToInt32(Session["UserId"]));
             vmodel.User = Session["userName"]+" - "+ Session["Name"] +" - "+ Session["businessName"].ToString();
             vmodel.UserId =Convert.ToInt32( Session["UserId"]);
             return View(vmodel);
@@ -41,7 +41,7 @@ namespace OctagonPlatform.Controllers.Reports
             if (Convert.ToInt32(userId) > 0)
             {
                 User user = _userRepository.FindBy(Convert.ToInt32(userId));
-                List = _repo.GetScheduleByUser(user.Id, user.PartnerId);
+                List = _repo.GetScheduleByUser(user.Id);
             }
             else
                 List = _repo.All();
@@ -260,7 +260,7 @@ namespace OctagonPlatform.Controllers.Reports
               public ActionResult AutoScheduled(string term)
         {
 
-            IEnumerable<string> list = _repo.GetAllSchedule(term, Convert.ToInt32(Session["partnerId"]), Convert.ToInt32(Session["UserId"]));
+            IEnumerable<string> list = _repo.GetAllSchedule(term, Convert.ToInt32(Session["UserId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

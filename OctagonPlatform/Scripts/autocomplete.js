@@ -1,4 +1,7 @@
 ﻿$(function () {
+    $('#error').fadeIn('slow', function () {
+        $('#error').fadeOut(5000);
+    });
     $('#partner').autocomplete({
         source: urlautopartner,
         select: function (event, ui) {
@@ -115,23 +118,23 @@
             $('#accountid').val('');
         }
     });
-    $('#user').autocomplete({
-        source: urluser,
-        select: function (event, ui) {
+    //$('#user').autocomplete({
+    //    source: urluser,
+    //    select: function (event, ui) {
 
-            $("#user").val(ui.item.label); // display the selected text
-            $("#userid").val(ui.item.value); // save selected id to hidden input
+    //        $("#user").val(ui.item.label); // display the selected text
+    //        $("#userid").val(ui.item.value); // save selected id to hidden input
           
-            return false;
-        }
-    });
-    $('#user').blur(function () {
-        if ($('#user').val() == "") {
-            $('#userid').val('');
+    //        return false;
+    //    }
+    //});
+    //$('#user').blur(function () {
+    //    if ($('#user').val() == "") {
+    //        $('#userid').val('');
          
-        }
+    //    }
 
-    });
+    //});
 
 
 });

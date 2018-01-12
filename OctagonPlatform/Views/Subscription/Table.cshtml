@@ -48,8 +48,7 @@
                 @Html.DisplayFor(modelItem => item.LastRunDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |               
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
                    new AjaxOptions

@@ -35,5 +35,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel);
         IEnumerable<dynamic> GetAllUser(string term,int partnerId);
+        User GetReportsUser(int Id);
     }
 }
