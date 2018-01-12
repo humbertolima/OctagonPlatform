@@ -48,19 +48,50 @@
                 @Html.DisplayFor(modelItem => item.LastRunDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |               
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-                   new AjaxOptions
-                   {
-                       HttpMethod = "POST",
-                       UpdateTargetId = "SubscriptionList",
-                       InsertionMode = InsertionMode.Replace,
-                       Confirm = "Are you Sure You Want to Delete " + @item.ReportName
-                   },
-                   new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                        new AjaxOptions
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "SubscriptionList",
+                            InsertionMode = InsertionMode.Replace,
+                            Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                        },
+                        new { @class = "btn btn-danger glyphicon glyphicon-trash" })
             </td>
         </tr>
     }
 
 </table>
+
+@using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Report Selection</h3>  <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReportId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ReportId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="PartialFilter"> </div>
+        </div>
+        <div class="col-md-6">
+            <h3>Scheduling</h3>   <hr />
+
+
+            @Html.Partial("Create", Model)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" id="userId" name="userId" />
+}
