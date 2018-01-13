@@ -13,6 +13,10 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         System.Threading.Tasks.Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId);
 
+        bool EnableLazy {
+            get; set;
+        }
+
         Terminal GetTerminal(string terminalId);
 
         IEnumerable<Terminal> GetAllTerminals(int partnerId);

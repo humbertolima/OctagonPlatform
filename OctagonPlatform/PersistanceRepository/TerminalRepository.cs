@@ -20,6 +20,11 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class TerminalRepository : GenericRepository<Terminal>, ITerminalRepository
     {
+        public bool EnableLazy
+        {
+            get { return Context.Configuration.LazyLoadingEnabled; }
+            set { Context.Configuration.LazyLoadingEnabled = value; }
+        }
 
         public async Task<List<JsonLoadCash>> GetCashLoad(DateTime start, DateTime end, string terminalId)
         {
@@ -934,6 +939,8 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
+
+        
 
         public IEnumerable<dynamic> GetAllState(string term)
         {

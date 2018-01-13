@@ -1290,6 +1290,7 @@
     <Content Include="Views\ReportsSmart\TerminalList\_PartialForm.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\TerminalStatus.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\_PartialForm.cshtml" />
+    <Content Include="Views\ReportsSmart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
