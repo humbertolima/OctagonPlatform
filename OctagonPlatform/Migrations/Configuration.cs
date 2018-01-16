@@ -9,6 +9,7 @@ namespace OctagonPlatform.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+          
         }
 
         protected override void Seed(Models.ApplicationDbContext context)
@@ -17,6 +18,7 @@ namespace OctagonPlatform.Migrations
 
             context.Partners.AddOrUpdate(p => p.BusinessName, new Models.Partner
             {
+                Id = 1,
                 ParentId = null,
                 BusinessName = "Odyssey Group",
                 Status = Helpers.StatusType.Status.Active,
@@ -31,9 +33,10 @@ namespace OctagonPlatform.Migrations
 
             context.Users.AddOrUpdate(u => u.Name, new Models.User
             {
+                Id=1,
                 UserName = "admin02",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 6,
+                PartnerId = 3,
                 IsLocked = false,
                 Email = "admin@xyncro.net",
                 Name = "Administrator",
@@ -44,9 +47,10 @@ namespace OctagonPlatform.Migrations
                 Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
             }, new Models.User
             {
+                Id= 2,
                 UserName = "admin03",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 6,
+                PartnerId = 3,
                 IsLocked = false,
                 Email = "admin@xyncro.net",
                 Name = "Administrator3",
@@ -65,13 +69,13 @@ namespace OctagonPlatform.Migrations
                 );
 
             context.Makes.AddOrUpdate(m => m.Name,
-                new Models.Make { Name = "Puloon" },
+                new Models.Make {Name = "Puloon" },
                 new Models.Make { Name = "N. Hyosung" }
                 );
 
             context.Models.AddOrUpdate(m => m.Name,
-                new Models.Model { Name = "Mini ATM", MakeId = 19 },
-                new Models.Model { Name = "Siri Atm", MakeId = 20 }
+                new Models.Model { Name = "Mini ATM", MakeId = 9 },
+                new Models.Model { Name = "Siri Atm", MakeId = 10 }
                 );
 
             context.Filters.AddOrUpdate(l => l.Name,
