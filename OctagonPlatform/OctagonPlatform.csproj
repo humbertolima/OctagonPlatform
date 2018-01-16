@@ -307,45 +307,9 @@
     <Compile Include="Migrations\201801112141269_newmigration.Designer.cs">
       <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712071542433_addPictures.cs" />
-    <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
-      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
-    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
-      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
-    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
-      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
-    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
-      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
-    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
-      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801032107211_schedule.cs" />
-    <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
-      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.cs" />
-    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.Designer.cs">
-      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.cs" />
-    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.Designer.cs">
-      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.cs" />
-    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.Designer.cs">
-      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091603294_addPermissionPArent.cs" />
-    <Compile Include="Migrations\201801091603294_addPermissionPArent.Designer.cs">
-      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
+    <Compile Include="Migrations\201801162028093_prueba.cs" />
+    <Compile Include="Migrations\201801162028093_prueba.Designer.cs">
+      <DependentUpon>201801162028093_prueba.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -434,7 +398,6 @@
     <Compile Include="Models\ReportGroupModel.cs" />
     <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\Schedule.cs" />
-    <Compile Include="Models\SetOfPermission.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Surcharge.cs" />
     <Compile Include="Models\SuscriptionModel.cs" />
@@ -1400,17 +1363,8 @@
     <EmbeddedResource Include="Migrations\201801112141269_newmigration.resx">
       <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051425166_addPermissionSubGroup.resx">
-      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051454525_addPermissionSubGroup1.resx">
-      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801082337211_deleteSetAndSubgroups.resx">
-      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091603294_addPermissionPArent.resx">
-      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801162028093_prueba.resx">
+      <DependentUpon>201801162028093_prueba.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

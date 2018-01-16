@@ -10,7 +10,7 @@ namespace OctagonPlatform.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-          
+
         }
 
         protected override void Seed(Models.ApplicationDbContext context)
@@ -35,7 +35,7 @@ namespace OctagonPlatform.Migrations
 
             context.Users.AddOrUpdate(u => u.Name, new Models.User
             {
-                Id=1,
+                Id = 1,
                 UserName = "admin02",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
                 PartnerId = 3,
@@ -49,7 +49,7 @@ namespace OctagonPlatform.Migrations
                 Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
             }, new Models.User
             {
-                Id= 2,
+                Id = 2,
                 UserName = "admin03",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
                 PartnerId = 3,
@@ -71,7 +71,7 @@ namespace OctagonPlatform.Migrations
                 );
 
             context.Makes.AddOrUpdate(m => m.Name,
-                new Models.Make {Name = "Puloon" },
+                new Models.Make { Name = "Puloon" },
                 new Models.Make { Name = "N. Hyosung" }
                 );
 
@@ -81,7 +81,7 @@ namespace OctagonPlatform.Migrations
                 );
 
 
-
+            #region despues del merge
 
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Changes", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
@@ -148,7 +148,7 @@ namespace OctagonPlatform.Migrations
                 });
             }
             context.SaveChanges();
-             #endregion
+            #endregion
 
             #region Permission Level 2
 
