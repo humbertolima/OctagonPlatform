@@ -18,7 +18,7 @@ namespace OctagonPlatform.Models
         public virtual Partner Parent { get; set; }
 
         public ICollection<Partner> Partners { get; set; }
-       
+
         [Required(ErrorMessage = "The partner business's name is required")]
         [StringLength(50)]
         [Display(Name = "Business's name")]

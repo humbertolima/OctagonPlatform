@@ -63,8 +63,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                     Partners = Context.Partners.Where(x => (x.Id == parentId || x.ParentId == parentId) && !x.Deleted).ToList(),
                     Status = StatusType.Status.Active,
-                    Partner = parent,
-                    SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList()
+                    Partner = parent
                 };
 
                 return viewModel;
@@ -75,7 +74,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public ICollection<Permission> AddPermissionToUser(string[] permissions)
+        public ICollection<Permission> GetPermissionsByArray(string[] permissions)
         {
             try
             {
@@ -122,9 +121,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Permissions = result.Permissions,
                         Phone = result.Phone,
                         Status = result.Status,
-                        UserName = result.UserName,
-                        SetOfPermissions = Context.SetOfPermissions.Include("Permissions").Select(c => c).ToList(),
-                        PermissionsAssigned = new List<PermissionAssigned>()
+                        UserName = result.UserName
                     };
 
 
@@ -258,10 +255,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 if (viewModel == null) throw new Exception("Model not found.");
-                if (viewModel.SetOfPermissions == null)
-                {
-                    viewModel.SetOfPermissions = Context.SetOfPermissions.Include("Permissions").ToList();
-                }
+               
                 return new UserFormViewModel()
                 {
                     Email = viewModel.Email,
@@ -275,7 +269,6 @@ namespace OctagonPlatform.PersistanceRepository
                     Phone = viewModel.Phone,
                     Status = viewModel.Status,
                     UserName = viewModel.UserName,
-                    SetOfPermissions = viewModel.SetOfPermissions,
                     Permissions = new List<Permission>(),
                     Error = viewModel.Error
                 };

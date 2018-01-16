@@ -48,9 +48,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public Models.State State { get; set; }                 //agregado models. porque estaba referenciando a otra State en la clase TreeView
 
-        public IEnumerable<State> States { get; set; }  
+        public IEnumerable<Models.State> States { get; set; }  
 
         [Display(Name = "City")]
         public int CityId { get; set; }
