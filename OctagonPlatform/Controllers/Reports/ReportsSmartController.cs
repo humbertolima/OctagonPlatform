@@ -17,6 +17,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -30,12 +31,14 @@ namespace OctagonPlatform.Controllers.Reports
         private ITerminalRepository repo_terminal;
         private IPartnerRepository repo_partner;
         private IReportGroup repo_group;
+       
         public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
         {
             _repo = repo;
             repo_terminal = repoterminal;
             repo_partner = repopartner;
             repo_group = repogroup;
+          
         }
         // GET: reportModels
         public ActionResult Index()
@@ -47,7 +50,8 @@ namespace OctagonPlatform.Controllers.Reports
         {
             CashLoadViewModel model = new CashLoadViewModel();
             TempData["Chart"] = null;
-            return View(model);
+            TempData["Sub"] = false;
+            return View("CashLoad/CashLoad",model);
         }
 
         [HttpPost]
@@ -110,9 +114,10 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["partner"] = vmodel.Partner;
                 TempData["from"] = vmodel.StartDate;
                 TempData["to"] = vmodel.EndDate;
+                TempData["Sub"] = false;
                 #endregion
 
-                return View();
+                return View("CashLoad/CashLoad");
             }
 
             return RedirectToAction("Index");
@@ -147,21 +152,21 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult AutoTerminal(string term)
         {
 
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term);
+            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term, Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AutoPartner(string term)
         {
 
-            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term);
+            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term, Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
         public ActionResult AutoGroup(string term)
         {
 
-            IEnumerable<dynamic> list = repo_group.GetAllGroup(term);
+            IEnumerable<dynamic> list = repo_group.GetAllGroup(term,Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
@@ -170,11 +175,12 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult CashManagement()
         {
             TempData["Chart"] = null;
-            return View();
+            TempData["sub"] = false;
+            return View("CashManagement/CashManagement");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementVM vmodel)
+        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -217,9 +223,10 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
                 TempData["terminal"] = vmodel.TerminalId;
                 TempData["partner"] = vmodel.Partner;
+                TempData["Sub"] = false;
                 #endregion
                 Session["businessName"] = "";
-                return View();
+                return View("CashManagement/CashManagement");
             }
 
             return RedirectToAction("Index");
@@ -247,8 +254,8 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult TerminalList()
         {
 
-
-            return View();
+            TempData["sub"] = false;
+            return View("TerminalList/TerminalList");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -266,7 +273,8 @@ namespace OctagonPlatform.Controllers.Reports
 
                 TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
                 TempData["filename"] = "TerminalList";
-                return View();
+                TempData["sub"] = false;
+                return View("TerminalList/TerminalList");
             }
             return RedirectToAction("Index");
         }
@@ -274,11 +282,12 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult TerminalStatus()
         {
             TempData["Chart"] = null;
-            return View();
+            TempData["sub"] = false;
+            return View("TerminalStatus/TerminalStatus");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusFormFilterVM vmodel)
+        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -323,24 +332,25 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<TerminalStatusTableVM>(listaux) : null;
                 TempData["filename"] = "TerminalStatus";
                 TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
+                TempData["sub"] = false;
                 #endregion
 
-                return View();
+                return View("TerminalStatus/TerminalStatus");
             }
 
             return RedirectToAction("Index");
         }
         public ActionResult DailyTransactionSummary()
         {
-            TransDailyViewModel model = new TransDailyViewModel();
+            DailyTransactionSummaryViewModel model = new DailyTransactionSummaryViewModel();
             TempData["Chart"] = null;
-
-            return View(model);
+            TempData["sub"] = false;
+            return View("DailyTransactionSummary/DailyTransactionSummary", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] TransDailyViewModel vmodel)
+        public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] DailyTransactionSummaryViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -397,9 +407,10 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["from"] = start?.ToString("MMMM d, yyyy");
                 TempData["to"] = end?.ToString("MMMM d, yyyy");
                 TempData["model"] = vmodel;
+                TempData["sub"] = false;
                 #endregion
 
-                return View();
+                return View("DailyTransactionSummary/DailyTransactionSummary");
             }
 
             return RedirectToAction("Index");
@@ -408,14 +419,14 @@ namespace OctagonPlatform.Controllers.Reports
 
         public ActionResult MonthlyTransactionSummary()
         {
-            TransMonthlyViewModel model = new TransMonthlyViewModel();
+            MonthlyTransactionSummaryViewModel model = new MonthlyTransactionSummaryViewModel();
             TempData["Chart"] = null;
-
-            return View(model);
+            TempData["sub"] = false;
+            return View("MonthlyTransactionSummary/MonthlyTransactionSummary", model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] TransMonthlyViewModel vmodel)
+        public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] MonthlyTransactionSummaryViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -471,9 +482,10 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["from"] = start?.ToString("MMMM , yyyy");
                 TempData["to"] = end?.ToString("MMMM , yyyy");
                 TempData["model"] = vmodel;
+                TempData["sub"] = false;
                 #endregion
 
-                return View();
+                return View("MonthlyTransactionSummary/MonthlyTransactionSummary");
             }
 
             return RedirectToAction("Index");
@@ -481,13 +493,14 @@ namespace OctagonPlatform.Controllers.Reports
        
         public ActionResult CashBalanceatClose()
         {
-            CashBalanceAtCloseVM vmodel = new CashBalanceAtCloseVM();
+            CashBalanceatCloseViewModel vmodel = new CashBalanceatCloseViewModel();
             TempData["Chart"] = null;
-            return View(vmodel);
+            TempData["sub"] = false;
+            return View("CashBalanceatClose/CashBalanceatClose", vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceAtCloseVM vmodel)
+        public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceatCloseViewModel vmodel)
         {
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
@@ -520,14 +533,15 @@ namespace OctagonPlatform.Controllers.Reports
                 TempData["filename"] = "CashManagement";
                 TempData["Chart"] =  null;               
                 TempData["partner"] = vmodel.Partner;
+                TempData["sub"] = false;
                 #endregion
-                Session["businessName"] = "";
-                return View();
+               
+                return View("CashBalanceatClose/CashBalanceatClose");
             }
 
             return RedirectToAction("Index");
         }
 
-
+       
     }
 }

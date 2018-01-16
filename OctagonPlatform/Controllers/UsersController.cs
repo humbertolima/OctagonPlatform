@@ -274,8 +274,16 @@ namespace OctagonPlatform.Controllers
 
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
+        #endregion
+        public ActionResult AutoUser(string term)
+        {
+
+            IEnumerable<dynamic> list = _userRepository.GetAllUser(term, Convert.ToInt32(Session["partnerId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
-    #endregion
+   
 
 
 }

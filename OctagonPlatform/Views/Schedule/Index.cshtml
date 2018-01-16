@@ -1,0 +1,167 @@
+﻿@model OctagonPlatform.Views.Schedule.ScheduleVM
+@using OctagonPlatform.Models
+@{
+    ViewBag.Title = "Index";
+    var list = Model.List;
+    var user = Model.User;
+}
+
+
+
+<p>   
+</p>
+<h1>Report Subscriptions </h1>
+<h3>Manage Schedules</h3>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a name="ankle"></a>
+        <div class="row">
+            <div class="col-lg-6"> <h3 class="panel-title" style="font-size: 26px;">Schedules</h3></div>
+            <div class="col-lg-6" style="text-align:right">
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+                <a href="#" id="create" style="color:white;font-size: 22px;">Add New Schedule</a>
+            </div>
+        </div>
+       
+      
+
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(model => model.User, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.User, new { htmlAttributes = new { @class = "form-control", @id = "user" } })
+                @Html.HiddenFor(model => model.UserId, new { id = "userid" })
+                @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <p>&nbsp;</p>
+       
+        <div id="List" >
+            @Html.Partial("List", list)
+
+        </div>
+
+
+    </div>
+</div>
+
+   <div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+        
+
+        @section Scripts {
+
+            <script>
+        var url = '@Url.Action("AutoUser", "Users")';
+    var urlcreate = '@Url.Action("Create", "Schedule")';
+                var urltable = '@Url.Action("List", "Schedule")';
+                callankle();
+        $(function () {
+            $('#user').autocomplete({
+                source: url,
+                select: function (event, ui) {
+
+                    $("#user").val(ui.item.label); // display the selected text
+                    $("#userid").val(ui.item.value); // save selected id to hidden input
+                    $.get(urltable, { userId: $("#userid").val() }, function (data) {
+
+                        $("#List").html(data);
+                    });
+                    return false;
+                }
+            });
+            $('#user').blur(function () {
+                if ($('#user').val() == "") {
+                    $('#user').attr("placeholder", "< ALL >");
+                    $('#userid').val('');
+                    $.get(urltable, { userId: 0 }, function (data) {
+
+                        $("#List").html(data);
+                    });
+                }
+
+            });
+            $("#create").click(function () {
+
+                $.get(urlcreate, { userId: $("#userid").val() }, function (data) {
+
+                    $("#ScheduleForm").html(data);
+                    Success();
+                    
+                });
+            });
+
+        })
+                function Success() {
+                    callankle2();
+            $("#StartDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+            $("#StopDate").datepicker({
+                dateFormat: "mm/dd/yy"
+            });
+            $("#btn").click(function () {
+
+                var str = "";
+                $("input:checked").each(function () {
+
+                    str += $(this).val() + "_";
+                });
+                str = str.substr(0, str.length - 1);
+                $("#RepeatOnDaysWeeks").val(str);
+                $("#UserId").val($("#userid").val());
+            });
+            $("#Repeats").change(function () {
+                var val = $(this).val();
+                $("#RepeatsSelected").val(val);
+                $("#Repeats").val(val);
+                if (val == 1) {
+                    $("#time").css("display", "block");
+                    $("#daily").css("display", "none");
+                    $("#monthly").css("display", "none");
+                    $("#weekly").css("display", "none");
+                    $("#monthlyRelative").css("display", "none");
+                    $("#Stop").css("display", "none");
+                } else {
+                    if (val == 2) {
+                        $("#time").css("display", "block");
+                        $("#daily").css("display", "block");
+                        $("#monthly").css("display", "none");
+                        $("#weekly").css("display", "none");
+                        $("#monthlyRelative").css("display", "none");
+                        $("#Stop").css("display", "block");
+                    } else {
+                        if (val == 3) {
+                            $("#time").css("display", "block");
+                            $("#daily").css("display", "none");
+                            $("#monthly").css("display", "none");
+                            $("#weekly").css("display", "block");
+                            $("#monthlyRelative").css("display", "none");
+                            $("#Stop").css("display", "block");
+                        } else {
+                            if (val == 4) {
+                                $("#time").css("display", "block");
+                                $("#daily").css("display", "none");
+                                $("#monthly").css("display", "block");
+                                $("#weekly").css("display", "none");
+                                $("#monthlyRelative").css("display", "none");
+                                $("#Stop").css("display", "block");
+                            } else {
+                                if (val == 5) {
+                                    $("#time").css("display", "block");
+                                    $("#daily").css("display", "none");
+                                    $("#monthly").css("display", "none");
+                                    $("#weekly").css("display", "none");
+                                    $("#monthlyRelative").css("display", "block");
+                                    $("#Stop").css("display", "block");
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+            </script>
+
+
+        }

@@ -10,7 +10,8 @@ namespace OctagonPlatform.Models
     {
         [Key]
         public int Id { get; set; }
-        
+
+       
         [Display(Name = "Parent")]
         public int? ParentId { get; set; }
 
@@ -87,7 +88,12 @@ namespace OctagonPlatform.Models
         [Required]
         public double Interchange { get; set; }
 
-             
+        
+
+        public ICollection<ReportGroupModel> ReportGroups { get; set; }        
+
+       
+
         public Partner()
         {
             Users = new Collection<User>();

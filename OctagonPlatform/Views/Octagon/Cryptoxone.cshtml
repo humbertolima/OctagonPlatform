@@ -6,7 +6,7 @@
 
 <div class="row">
         <a href="Http://www.cryptoxone.com" target="_blank">
-            <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div class="col-lg-6" style="width: 42%; padding-bottom: 9px; margin: 45px 0 20px;">
                 <div style="font-size: 20px; color: #fff;">
                     <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
                 </div>
@@ -22,7 +22,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Bitcoin Historical Price
@@ -42,68 +42,26 @@
                             <li>
                                 <a href="#">Monthly</a>
                             </li>
-
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="myfirstchart" style="height: 250px;"></div>
+                <div id="myfirstchart"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
-                <div class="pull-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Period
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li>
-                                <a href="#">Daily</a>
-                            </li>
-                            <li>
-                                <a href="#">Weekly</a>
-                            </li>
-                            <li>
-                                <a href="#">Monthly</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div class="row">
-                    @*<div class="col-lg-4">
-                        
-                    </div>*@
-
-                    <div class="col-lg-12">
-                        <div id="bar-example"></div>
-                    </div>
-                    <!-- /.col-lg-8 (nested) -->
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-
     </div>
     <!-- /.col-lg-8 -->
-    <div class="col-lg-4">
-
-        <!-- /.panel -->
-        <div class="panel panel-default" >
+    <div class="col-lg-6">
+        <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Payment Method
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -120,7 +78,9 @@
                             <li>
                                 <a href="#">Monthly</a>
                             </li>
-
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="btn-group">
@@ -141,38 +101,57 @@
                             <li>
                                 <a href="#">Terminal 4</a>
                             </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div id="donut-example"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Buy vs Sell
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
                             <li>
-                                <a href="#">Terminal 5</a>
+                                <a href="#">Daily</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 6</a>
+                                <a href="#">Weekly</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 7</a>
+                                <a href="#">Monthly</a>
                             </li>
                             <li>
-                                <a href="#">Terminal 8</a>
-                            </li>
-                            <li>
-                                <a href="#">Terminal 9</a>
-                            </li>
-                            <li>
-                                <a href="#">Terminal 10</a>
+                                <a href="#">Yearly</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
+            <!-- /.panel-heading -->
             <div class="panel-body">
-                <div id="donut-example"></div>
-                <a href="#" class="btn btn-default btn-block">View Details</a>
+                <div id="bar-example"></div>
             </div>
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
-        <!-- /.panel .chat-panel -->
     </div>
-    <!-- /.col-lg-4 -->
 </div>
 
 @section scripts {
@@ -199,9 +178,9 @@
         new Morris.Donut({
             element: 'donut-example',
             data: [
-                { label: "Total", value: 50 },
-                { label: "Buy", value: 40 },
-                { label: "Sell", value: 10 }
+                { label: "Total", value: 498 },
+                { label: "Buy", value: 413 },
+                { label: "Sell", value: 85 }
             ],
             resize: true
         });
@@ -210,13 +189,9 @@
        new Morris.Bar({
             element: 'bar-example',
             data: [
-                { y: '2006', a: 100, b: 90 },
-                { y: '2007', a: 75,  b: 65 },
-                { y: '2008', a: 50,  b: 40 },
-                { y: '2009', a: 75,  b: 65 },
-                { y: '2010', a: 50,  b: 40 },
-                { y: '2011', a: 75,  b: 65 },
-                { y: '2012', a: 100, b: 90 }
+                { y: '2016', a: 30728,  b: 21983 },
+                { y: '2017', a: 37842,  b: 23902 },
+                { y: '2018', a: 43582,  b: 28902 }
             ],
             xkey: 'y',
             ykeys: ['a', 'b'],

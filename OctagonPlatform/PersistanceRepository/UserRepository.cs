@@ -17,13 +17,15 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var parent = Table.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
-                if (parent == null) throw new Exception("Parent not found. ");
+                IEnumerable<Partner> listpartner =  GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
 
-                return Table.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
-                                                                                //.Include(x => x.Alerts)
-                                                                                //.Include(x => x.Reports)
-                    .Include(x => x.Partner)
+                IEnumerable<User> list4 = (from p in listpartner join m in Table.Include(x => x.Partner).Include(p => p.Reports) on p.Id equals m.PartnerId select m).ToList();
+
+                //var parent = list4.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                //if (parent == null) throw new Exception("Parent not found. ");
+
+                return list4.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
+                                   
                     .ToList();
             }
             catch (Exception ex)
@@ -32,6 +34,18 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public User GetReportsUser(int Id)
+        {
+            try
+            {
+                return Table.Include(p => p.Reports).Include(p => p.Partner).SingleOrDefault(u => !u.Deleted && u.Id == Id);//Seleccionar los que no esten borrados. Bloqueados sis
+                                   
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Users not found.");
+            }
+        }
 
 
         public UserFormViewModel RenderUserFormViewModel(int parentId)
@@ -476,6 +490,22 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
+        public IEnumerable<dynamic> GetAllUser(string term,int partnerId)
+        {
+            try
+            {
+                
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner join m in Table.Include(b => b.Partner) on q.Id equals m.PartnerId select m).ToList();               
+                return list4.Where(b => b.Name.ToLower().Contains(term.ToLower())).Select(b => new { label = b.UserName+" - "+b.Name+" - "+b.Partner.BusinessName, value = b.Id }).ToList();
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+        }
+     
 
 
 

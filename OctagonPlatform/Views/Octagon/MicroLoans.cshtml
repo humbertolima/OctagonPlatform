@@ -7,7 +7,7 @@
 
 <div class="row">
     <a href="@Url.Action("MicroLoans", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
-        <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+        <div class="col-lg-6" style="width: 40%; padding-bottom: 9px; margin: 45px 0 20px;">
             <div style="font-size: 20px; color: #fff;">
                 <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
             </div>
@@ -26,7 +26,7 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By Country
+                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By City
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -62,24 +62,29 @@
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By Unit
+                <i class="fa fa-bar-chart-o fa-fw"></i> Requests By Terminal
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Units
+                            Terminal
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pull-right" role="menu">
                             <li>
-                                <a href="#">Unit 1</a>
+                                <a href="#">Terminal 1</a>
                             </li>
                             <li>
-                                <a href="#">Unit 2</a>
+                                <a href="#">Terminal 2</a>
                             </li>
                             <li>
-                                <a href="#">Unit 3</a>
+                                <a href="#">Terminal 3</a>
                             </li>
-
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -144,15 +149,15 @@
         new Morris.Bar({
             element: 'bar-example',
             data: [
-                { y: 'USA', a: 30000 },
-                { y: 'Mexico', a: 10000 },
-                { y: 'Argentina', a: 13450 },
-                { y: 'Colombia', a: 7500 },
-                { y: 'Spain', a: 8000 },
-                { y: 'Brasil', a: 20000 },
-                { y: 'Peru', a: 24000 },
-                { y: 'Bolivia', a: 5000 },
-                { y: 'Panama', a: 9000 }
+                { y: 'South Florida', a: 30000 },
+                { y: 'Los Angeles', a: 10000 },
+                { y: 'New York', a: 13450 },
+                { y: 'Atlanta', a: 7500 },
+                { y: 'Chicago', a: 8000 },
+                { y: 'Buenos Aires', a: 20000 },
+                { y: 'Rosario', a: 24000 },
+                { y: 'Stgo De Chile', a: 5000 },
+                { y: 'Mexico D.F.', a: 9000 }
             ],
             xLabelAngle: 35,
             xkey: 'y',
@@ -194,13 +199,13 @@
         new Morris.Line({
             element: 'line-example',
             data: [
-                { y: '2008', a: 100 },
-                { y: '2009', a: 200 },
-                { y: '2010', a: 150 },
-                { y: '2011', a: 350 },
-                { y: '2012', a: 300 },
-                { y: '2013', a: 450 },
-                { y: '2014', a: 525 }
+                { y: '2012', a: 100 },
+                { y: '2013', a: 200 },
+                { y: '2014', a: 150 },
+                { y: '2015', a: 350 },
+                { y: '2016', a: 300 },
+                { y: '2017', a: 450 },
+                { y: '2018', a: 525 }
             ],
             xkey: 'y',
             ykeys: ['a'],

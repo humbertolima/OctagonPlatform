@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-    public interface IUserRepository
+    public interface IUserRepository : IGenericRepository<User>
     {
         IEnumerable<User> GetAllUsers(int partnerId);
 
@@ -34,6 +34,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void DeleteUser(int id);
 
         UserFormViewModel InitializeNewFormViewModel(UserFormViewModel viewModel);
-        
+        IEnumerable<dynamic> GetAllUser(string term,int partnerId);
+        User GetReportsUser(int Id);
     }
 }

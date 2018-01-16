@@ -63,6 +63,9 @@ namespace OctagonPlatform.Controllers
                 Session["businessName"] = userToLogin.Partner.BusinessName;
                 Session["Permissions"] = PermissionToJson(userToLogin.Id);
 
+                Session["userName"] = userToLogin.UserName;
+                Session["Name"] = userToLogin.Name;
+                Session["UserId"] = userToLogin.UserId;
                 if (Session["tries"] != null) Session.Remove("tries");
 
                 return RedirectToAction("AMS", "Octagon");

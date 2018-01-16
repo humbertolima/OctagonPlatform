@@ -17,9 +17,11 @@ namespace OctagonPlatform.Controllers.Reports
     {
         
         private IReports _repo;
-        public ReportsController(IReports repo)
+        private IUserRepository _repoUser;
+        public ReportsController(IReports repo, IUserRepository repoUser)
         {
             _repo = repo;
+            _repoUser = repoUser;
         }
         // GET: reportModels
         public ActionResult Index()
@@ -43,7 +45,8 @@ namespace OctagonPlatform.Controllers.Reports
         {
             if (ModelState.IsValid)
             {
-                reportModel.IsShowDashboard = false;
+                
+                 reportModel.IsShowDashboard = false;
                 _repo.Add(reportModel);               
                 return RedirectToAction("Index");
             }
@@ -170,7 +173,7 @@ namespace OctagonPlatform.Controllers.Reports
            
             return RedirectToAction("CheckReports");
         }
+     
 
-       
     }
 }

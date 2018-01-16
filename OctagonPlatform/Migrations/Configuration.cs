@@ -10,6 +10,7 @@ namespace OctagonPlatform.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+
         }
 
         protected override void Seed(Models.ApplicationDbContext context)
@@ -18,7 +19,8 @@ namespace OctagonPlatform.Migrations
 
             context.Partners.AddOrUpdate(p => p.BusinessName, new Models.Partner
             {
-                ParentId = 1,
+                Id = 1,
+                ParentId = null,
                 BusinessName = "Odyssey Group",
                 Status = Helpers.StatusType.Status.Active,
                 Address1 = "753 Shotgum RD",
@@ -33,9 +35,10 @@ namespace OctagonPlatform.Migrations
 
             context.Users.AddOrUpdate(u => u.Name, new Models.User
             {
+                Id = 1,
                 UserName = "admin02",
                 Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 1,
+                PartnerId = 3,
                 IsLocked = false,
                 Email = "admin@xyncro.net",
                 Name = "Administrator",
@@ -44,7 +47,23 @@ namespace OctagonPlatform.Migrations
                 Status = Helpers.StatusType.Status.Active,
                 Deleted = false,
                 Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
-            });
+            }, new Models.User
+            {
+                Id = 2,
+                UserName = "admin03",
+                Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
+                PartnerId = 3,
+                IsLocked = false,
+                Email = "admin@xyncro.net",
+                Name = "Administrator3",
+                LastName = "Admin3",
+                Phone = "7867921520",
+                Status = Helpers.StatusType.Status.Active,
+                Deleted = false,
+                Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
+            }
+
+            );
 
             context.LocationTypes.AddOrUpdate(l => l.Name,
                 new Models.LocationType { Name = "Restaurant" },
@@ -57,19 +76,12 @@ namespace OctagonPlatform.Migrations
                 );
 
             context.Models.AddOrUpdate(m => m.Name,
-                new Models.Model { Name = "Mini ATM", MakeId = 1 },
-                new Models.Model { Name = "Siri Atm", MakeId = 1 }
+                new Models.Model { Name = "Mini ATM", MakeId = 9 },
+                new Models.Model { Name = "Siri Atm", MakeId = 10 }
                 );
 
-            #region Permission Tree Level 0
 
-            List<string> Level0 = new List<string>() { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
-            foreach (var item in Level0)
-            {
-                context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission { Name = item });
-            }
-            context.SaveChanges();
-
+            #region despues del merge
 
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Changes", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
@@ -136,7 +148,7 @@ namespace OctagonPlatform.Migrations
                 });
             }
             context.SaveChanges();
-             #endregion
+            #endregion
 
             #region Permission Level 2
 

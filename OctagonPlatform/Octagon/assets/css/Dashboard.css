@@ -480,3 +480,51 @@ a {
         border: 0
     }
 
+.terminalId {
+    min-width: 77px;
+}
+.partner {
+    min-width: 75px;
+}
+.group {
+    min-width: 72px;
+}
+.status {
+    min-width: 72px;
+}
+.from {
+    min-width: 64px;
+}
+.to {
+    min-width: 46px;
+}
+.account {
+    min-width: 77px;
+}
+.city {
+    min-width: 61px;
+}
+.state {
+    min-width: 68px;
+}
+.zipcode {
+    min-width: 77px;
+}
+.conectionType {
+    min-width: 76px;
+
+}
+.createdafter {
+    min-width: 145px;
+}
+.createdbefore {
+    min-width: 131px;
+}
+.inactivityHours {
+    min-width: 147px;
+}
+.start {
+    min-width: 109px;
+}
+
+

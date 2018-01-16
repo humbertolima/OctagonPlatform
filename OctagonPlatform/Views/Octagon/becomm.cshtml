@@ -7,7 +7,7 @@
 
 <div class="row">
     <a href="@Url.Action("BeComm", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
-        <div class="col-lg-6" style="width: 35%; padding-bottom: 9px; margin: 45px 0 20px;">
+        <div class="col-lg-6" style="width: 45%; padding-bottom: 9px; margin: 45px 0 20px;">
             <div style="font-size: 20px; color: #fff;">
                 <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
             </div>
@@ -47,6 +47,29 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Locations
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Sawgrass Mills</a>
+                            </li>
+                            <li>
+                                <a href="#">Burger King</a>
+                            </li>
+                            <li>
+                                <a href="#">Mcdonald Hialeah</a>
+                            </li>
+                            <li>
+                                <a href="#">White House</a>
+                            </li>
+                            <li>
+                                <a href="#">Mechanic Shop</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- /.panel-heading -->
@@ -58,7 +81,7 @@
         <!-- /.panel -->
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Earnings By Campaign
+                <i class="fa fa-bar-chart-o fa-fw"></i> Profit By Campaign
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -82,7 +105,7 @@
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Unit
+                            Campaign
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pull-right" role="menu">
@@ -96,7 +119,7 @@
                                 <a href="#">Campaign 3</a>
                             </li>
                             <li>
-                                <a href="#">Unit 4</a>
+                                <a href="#">Campaign 4</a>
                             </li>
                         </ul>
                     </div>
@@ -120,7 +143,7 @@
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Earnings
+                <i class="fa fa-bar-chart-o fa-fw"></i> Profit
                 <div class="pull-right">
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -177,21 +200,21 @@
                     </div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Unit
+                            Location
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu pull-right" role="menu">
                             <li>
-                                <a href="#">Unit 1</a>
+                                <a href="#">Location 1</a>
                             </li>
                             <li>
-                                <a href="#">Unit 2</a>
+                                <a href="#">Location 2</a>
                             </li>
                             <li>
-                                <a href="#">Unit 3</a>
+                                <a href="#">Location 3</a>
                             </li>
                             <li>
-                                <a href="#">Unit 4</a>
+                                <a href="#">Location 4</a>
                             </li>
                         </ul>
                     </div>
@@ -222,13 +245,13 @@
         new Morris.Bar({
             element: 'bar-example',
             data: [
-                { y: 'Bogota', a: 1000 },
-                { y: 'Dallas', a: 2500 },
-                { y: 'Miami', a: 2750 },
-                { y: 'London', a: 2400 },
-                { y: 'Tampa', a: 3000 },
-                { y: 'Ontario', a: 2900 },
-                { y: 'Seatle', a: 3200 }
+                { y: 'Mcdonald H.', a: 1000 },
+                { y: 'Burger King', a: 2500 },
+                { y: 'Aventura Mall', a: 2750 },
+                { y: 'White House', a: 2400 },
+                { y: 'Dadeland Mall', a: 3000 },
+                { y: 'Mechanic S.', a: 2900 },
+                { y: 'Sawgrass M.', a: 3200 }
             ],
             xLabelAngle: 35,
             xkey: 'y',
@@ -242,13 +265,13 @@
        new Morris.Area({
             element: 'area-example',
             data: [
-                { y: '2006', a: 1250 },
-                { y: '2007', a: 1500 },
-                { y: '2008', a: 1000 },
-                { y: '2009', a: 1900 },
-                { y: '2010', a: 2000 },
-                { y: '2011', a: 1950 },
-                { y: '2012', a: 2200 }
+                { y: '2011', a: 1250 },
+                { y: '2012', a: 1500 },
+                { y: '2013', a: 1000 },
+                { y: '2014', a: 1900 },
+                { y: '2015', a: 2000 },
+                { y: '2016', a: 1950 },
+                { y: '2017', a: 2200 }
             ],
             lineColors: ['Green'],
             xkey: 'y',
@@ -263,13 +286,13 @@
         new Morris.Line({
             element: 'line-example',
             data: [
-                { y: '2008', a: 25 },
-                { y: '2009', a: 75 },
-                { y: '2010', a: 65 },
-                { y: '2011', a: 75 },
-                { y: '2012', a: 50 },
-                { y: '2013', a: 75 },
-                { y: '2014', a: 100 }
+                { y: '2011', a: 25 },
+                { y: '2012', a: 75 },
+                { y: '2013', a: 65 },
+                { y: '2014', a: 75 },
+                { y: '2015', a: 50 },
+                { y: '2016', a: 75 },
+                { y: '2017', a: 100 }
             ],
             xkey: 'y',
             ykeys: ['a'],
@@ -282,13 +305,13 @@
         new Morris.Area({
             element: 'area-example2',
             data: [
-                { y: '2006', a: 15 },
-                { y: '2007', a: 30 },
-                { y: '2008', a: 25 },
-                { y: '2009', a: 32 },
-                { y: '2010', a: 28 },
-                { y: '2011', a: 49 },
-                { y: '2012', a: 43 }
+                { y: '2011', a: 15 },
+                { y: '2012', a: 30 },
+                { y: '2013', a: 25 },
+                { y: '2014', a: 32 },
+                { y: '2015', a: 28 },
+                { y: '2016', a: 49 },
+                { y: '2017', a: 43 }
             ],
             lineColors: ['Grey'],
             xkey: 'y',
