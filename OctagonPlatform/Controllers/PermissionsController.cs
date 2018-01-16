@@ -13,6 +13,7 @@ namespace OctagonPlatform.Controllers
     //[Authorize]
     public class PermissionsController : Controller
     {
+        //Pendiente poner interface a permissions.
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Permissions

@@ -71,6 +71,7 @@
             @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
             @Html.ValidationMessageFor(m => m.IsLocked)
         </div>
+        <input type="hidden" id="permissions" name="permissions1" value="" />
 
         @Html.Partial("../Permissions/Sections/PermissionTree")
 
@@ -78,6 +79,8 @@
             <div class="col-lg-10 col-lg-offset-2">
                 <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
                 <button type="submit" class="btn btn-primary">Save</button>
+
+
             </div>
         </div>
 
@@ -87,7 +90,6 @@
 @section Scripts {
     @Scripts.Render("https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js")
 
-
     <script>
 
         $.ajax({
@@ -95,17 +97,29 @@
             type: "post",
             url: "/Account/PermissionToJson",
             dataType: "json",
-            data: {"userId":"1"},
+            data: { "userId": "1" },
             success: function (data) {
-                $("#demo1").jstree({
+                $("#demo1")
+                    .on('changed.jstree', function (e, data) {
+                        var i, j, r = [];
+                        for (i = 0, j = data.selected.length; i < j; i++) {
+                            r.push(data.instance.get_node(data.selected[i]).id);
+                        }
+                        var perm = r.join(', ');
+                        $("#permissions").val(perm);
+                        alert(perm);
+                        //alert(r.join(', '));
+                        //$('#event_result').html('Selected: ' + r.join(', '));
+                    })
+                    .jstree({
                     core: {
                         'data': data,
                     },
-                    plugins: ["themes", "json_data", 'checkbox', "types"]
+                    plugins: ["themes", "json_data", 'checkbox', "types"],
+
+
                 })
             }
         });
-
-
     </script>
 }

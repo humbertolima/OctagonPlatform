@@ -60,7 +60,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public ICollection<Permission> AddPermissionToUser(string[] permissions)
+        public ICollection<Permission> GetPermissionsByArray(string[] permissions)
         {
             try
             {

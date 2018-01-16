@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Linq;
 
 namespace OctagonPlatform.Controllers
 {
@@ -94,6 +95,50 @@ namespace OctagonPlatform.Controllers
         public ActionResult PermissionToJson(int userId)
         {
             List<Permission> permissions = _accountRepository.GetPermissions(userId);
+            bool isEdit = false;
+
+            if (permissions != null)
+            {
+                List<TreeView> tree = new List<TreeView>();
+
+                if ((((System.Web.HttpContext.Current.Request.UrlReferrer) != null)))       //validar de donde viene la solicitud
+                    if ((((System.Web.HttpContext.Current.Request.UrlReferrer.AbsolutePath) == "/Users/Edit/" + userId)))       //Si viene del Edit de usario, le marco select los permiso que ya tiene;
+                    {
+                        isEdit = true;
+                    }
+                User userToEdit = new Models.User() { Id = userId };
+
+                foreach (var item in permissions)
+                {
+                    string temp = "#";      //los null hay que agregarles # para que el control los vea como root
+
+                    if (!String.IsNullOrEmpty(item.ParentID.ToString()))
+                        temp = item.ParentID.ToString();
+                        
+                    bool isSelect = item.Users.FirstOrDefault(m => m.Id == userId) != null ;    //si el permiso tiene el usuario a editar devuelve true
+
+                    tree.Add(new TreeView()
+                    {
+                        text = item.Name,
+                        id = item.Id.ToString(),
+                        parent = temp,
+                        state = new Models.FormsViewModels.State { selected = isSelect },
+                    });
+
+                    if (isEdit) { }
+
+                }
+
+                return Json(tree, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult JsonToPermission(string MyTreeJson)
+        {
+            List<Permission> permissions = null;// _accountRepository.GetPermissions(userId);
 
             if (permissions != null)
             {
@@ -110,7 +155,7 @@ namespace OctagonPlatform.Controllers
                         text = item.Name,
                         id = item.Id.ToString(),
                         parent = temp,
-                   
+
                     });
                 }
 
@@ -118,6 +163,7 @@ namespace OctagonPlatform.Controllers
             }
             return null;
         }
+
 
         //Implementacion
     }

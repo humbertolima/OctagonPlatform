@@ -16,8 +16,9 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {       //pendiente validar si viene el Id
-                List<Permission> permissions = Context.Permissions.ToList();
-                    
+                    //List<Permission> permissions = Context.Permissions.ToList();
+                var permissions = Context.Permissions
+                    .Include(u=>u.Users).ToList();
 
                 return permissions;
             }
