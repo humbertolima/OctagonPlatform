@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addPermissionPArent : IMigrationMetadata
+    public sealed partial class prueba : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addPermissionPArent));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(prueba));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801091603294_addPermissionPArent"; }
+            get { return "201801162028093_prueba"; }
         }
         
         string IMigrationMetadata.Source
