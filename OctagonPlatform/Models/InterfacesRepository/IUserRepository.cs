@@ -13,7 +13,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         UserFormViewModel RenderUserFormViewModel(int parentId);
 
-        ICollection<Permission> AddPermissionToUser(string[] permissions);
+        ICollection<Permission> GetPermissionsByArray(string[] permissions);
 
         UserBAViewModel GetAllBankAccount(string userId, bool toAttach);
 

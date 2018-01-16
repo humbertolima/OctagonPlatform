@@ -228,6 +228,7 @@
     <Compile Include="Controllers\LogosController.cs" />
     <Compile Include="Controllers\PartnerContactsController.cs" />
     <Compile Include="Controllers\PartnersController.cs" />
+    <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
@@ -269,7 +270,6 @@
     <Compile Include="Helpers\ISoftDeleted.cs" />
     <Compile Include="Helpers\MapFrom.cs" />
     <Compile Include="Helpers\NumberOfCassettes.cs" />
-    <Compile Include="Helpers\PermissionsAssigned.cs" />
     <Compile Include="Helpers\SurchargeSettled.cs" />
     <Compile Include="Helpers\Status.cs" />
     <Compile Include="Helpers\StringValidation.cs" />
@@ -306,6 +306,46 @@
     <Compile Include="Migrations\201801112141269_newmigration.cs" />
     <Compile Include="Migrations\201801112141269_newmigration.Designer.cs">
       <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712071542433_addPictures.cs" />
+    <Compile Include="Migrations\201712071542433_addPictures.Designer.cs">
+      <DependentUpon>201712071542433_addPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.cs" />
+    <Compile Include="Migrations\201712072009044_AdddateCreatedterminal.Designer.cs">
+      <DependentUpon>201712072009044_AdddateCreatedterminal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712081657347_addPictures2.cs" />
+    <Compile Include="Migrations\201712081657347_addPictures2.Designer.cs">
+      <DependentUpon>201712081657347_addPictures2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712181652578_alterPermission.cs" />
+    <Compile Include="Migrations\201712181652578_alterPermission.Designer.cs">
+      <DependentUpon>201712181652578_alterPermission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270518359_addintpartner.cs" />
+    <Compile Include="Migrations\201712270518359_addintpartner.Designer.cs">
+      <DependentUpon>201712270518359_addintpartner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801032107211_schedule.cs" />
+    <Compile Include="Migrations\201801032107211_schedule.Designer.cs">
+      <DependentUpon>201801032107211_schedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.cs" />
+    <Compile Include="Migrations\201801051425166_addPermissionSubGroup.Designer.cs">
+      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.cs" />
+    <Compile Include="Migrations\201801051454525_addPermissionSubGroup1.Designer.cs">
+      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.cs" />
+    <Compile Include="Migrations\201801082337211_deleteSetAndSubgroups.Designer.cs">
+      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091603294_addPermissionPArent.cs" />
+    <Compile Include="Migrations\201801091603294_addPermissionPArent.Designer.cs">
+      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -352,6 +392,7 @@
     <Compile Include="Models\FormsViewModels\TerminalContactFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\TerminalListViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\TreeView.cs" />
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
@@ -625,6 +666,7 @@
     <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.material.css" />
     <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\datatables.min.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
     <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
     <Content Include="Content\DataTables\css\dataTables.uikit.css" />
@@ -699,6 +741,15 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\quicksearch\.gitignore" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.js" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js" />
+    <Content Include="Content\quicksearch\examples\index.html" />
+    <Content Include="Content\quicksearch\examples\loader.gif" />
+    <Content Include="Content\quicksearch\examples\style.css" />
+    <Content Include="Content\quicksearch\examples\super_table.html" />
+    <Content Include="Content\quicksearch\Gruntfile.js" />
+    <Content Include="Content\quicksearch\src\jquery.quicksearch.js" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -775,10 +826,15 @@
     <Content Include="Octagon\assets\img\3.jpg" />
     <Content Include="Octagon\assets\img\404.jpg" />
     <Content Include="Octagon\assets\img\banner2-1.jpg" />
+    <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
+    <Content Include="Octagon\assets\img\eth-16x16.png" />
+    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
+    <Content Include="Octagon\assets\img\ltc-16x16.png" />
+    <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
@@ -1019,6 +1075,13 @@
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="Content\quicksearch\bower.json" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js.map" />
+    <Content Include="Content\quicksearch\examples\example.json" />
+    <Content Include="Content\quicksearch\jquery.quicksearch.jquery.json" />
+    <Content Include="Content\quicksearch\LICENSE" />
+    <Content Include="Content\quicksearch\package.json" />
+    <Content Include="Content\quicksearch\README.md" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1064,6 +1127,7 @@
     <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
     <Content Include="Scripts\DataTables\dataTables.material.js" />
     <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\datatables.min.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
     <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
@@ -1233,13 +1297,19 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
+    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
+    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
+    <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTable.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
+    <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialHead.cshtml" />
@@ -1253,7 +1323,9 @@
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
+    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
+    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
     <Content Include="Views\Terminals\Sections\Error.cshtml" />
     <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\Octagon\AMS.cshtml" />
@@ -1328,6 +1400,21 @@
     <EmbeddedResource Include="Migrations\201801112141269_newmigration.resx">
       <DependentUpon>201801112141269_newmigration.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051425166_addPermissionSubGroup.resx">
+      <DependentUpon>201801051425166_addPermissionSubGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051454525_addPermissionSubGroup1.resx">
+      <DependentUpon>201801051454525_addPermissionSubGroup1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801082337211_deleteSetAndSubgroups.resx">
+      <DependentUpon>201801082337211_deleteSetAndSubgroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091603294_addPermissionPArent.resx">
+      <DependentUpon>201801091603294_addPermissionPArent.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,6 +7,7 @@ namespace OctagonPlatform.Migrations
     {
         public override void Up()
         {
+          
             CreateTable(
                 "dbo.BankAccounts",
                 c => new
