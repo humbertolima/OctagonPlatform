@@ -257,6 +257,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             SubscriptionModel submodel = new SubscriptionModel( email,  description,  emailComment,  scheduleId,  userId); 
             _repo.Add(submodel);
+            bool entro = false;
             for (int i = 0; i < model.Count; i++)
             {
                 string key = model.GetKey(i).ToString();
@@ -271,10 +272,24 @@ namespace OctagonPlatform.Controllers.Reports
                         Value = model.GetValue(key).AttemptedValue
                     };
                     _repoReportfilter.Add(reportfilter);
+                    entro = true;
 
                 }
 
             }
+            if (!entro)
+            {
+                FilterModel f = _repoFilter.FindAllBy(p => p.Name == "ALL").FirstOrDefault();
+                ReportFilter reportfilter = new ReportFilter()
+                {
+                    FilterID = f.Id,
+                    ReportID = reportId,
+                    SubscriptionID = submodel.Id,
+                    Value = "ALL"
+                };
+                _repoReportfilter.Add(reportfilter);
+            }
+
         }
         private bool IsValidEmail(string source)
         {

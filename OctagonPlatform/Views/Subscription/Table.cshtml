@@ -51,14 +51,14 @@
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-                        new AjaxOptions
-                        {
-                            HttpMethod = "POST",
-                            UpdateTargetId = "SubscriptionList",
-                            InsertionMode = InsertionMode.Replace,
-                            Confirm = "Are you Sure You Want to Delete " + @item.ReportName
-                        },
-                        new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                             new AjaxOptions
+                             {
+                                 HttpMethod = "POST",
+                                 UpdateTargetId = "SubscriptionList",
+                                 InsertionMode = InsertionMode.Replace,
+                                 Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                             },
+                             new { @class = "btn btn-danger glyphicon glyphicon-trash" })
             </td>
         </tr>
     }
@@ -95,3 +95,4 @@
     </div>
     <input type="hidden" id="userId" name="userId" />
 }
+@Scripts.Render("~/Scripts/Subscription.js")

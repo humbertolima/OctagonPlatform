@@ -21,14 +21,14 @@
             @Html.ValidationMessageFor(model => model.User, "", new { @class = "text-danger" })
         </div>
     </div>
-   
+
     <p>&nbsp;</p>
 </figure>
 <figure class="highlight">
 
     <div id="message"></div>
     <div id="SubscriptionList">@Html.Partial("Table", Model) </div>
-   
+
 </figure>
 
 
@@ -37,90 +37,13 @@
 
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/Scripts/Subscription.js")
 
 <script>
      var url = '@Url.Action("AutoUser", "Users")';
-
-    $(function () {
-
-
-        // callankle();
-        $("#ReportId").change(function () {
-            var idreport = $(this).val();
-            $("#PartialFilter").html("<div class='loader'></div>");
-                $.get('@Url.Action("FilterReport", "Subscription")', { id: idreport }, function (data) {
-
-                $("#PartialFilter").html(data);
-
-                });
-            });
-
-        $('#user').autocomplete({
-            source: url,
-            select: function (event, ui) {
-
-                $("#user").val(ui.item.label); // display the selected text
-                $("#userid").val(ui.item.value); // save selected id to hidden input
-                $.get('@Url.Action("List", "Subscription")', { userId: $("#userid").val() }, function (data) {
-
-                    $("#SubscriptionList").html(data);
-                });
-                return false;
-            }
-        });
-        $('#user').blur(function () {
-            if ($('#user').val() == "") {
-                $('#user').attr("placeholder", "< ALL >");
-                $('#userid').val('');
-
-               $.get('@Url.Action("List", "Subscription")', { userId: 0 }, function (data) {
-                  // alert(data);
-                    $("#SubscriptionList").html(data);
-                });
-            }
-
-        });
-            $('#FormSub').submit(function () {
-               // var formData = $('#FormSub').serializeObject();
-                $("#userId").val($("#userid").val());
-                $("#message").html("<div class='loader'></div>");
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        alert(data);
-                        var isSuccessful = (data['success']);
-                      
-                        if (isSuccessful) {
-                              var url2 = '@Url.Action("Index", "Subscription", new RouteValueDictionary(new { a = 1 }), "http", string.Empty)';
-                       
-                            window.location.href = url2 + "&b=" + $("#userid").val();
-                        }
-                        else {
-                            alert("ff");
-                            var errors = data['errors'];
-                            $("#message").html(' <div class="alert alert-danger"><strong>'+errors+'</strong> </div>');
-                        }
-
-
-
-                    },
-                    error: function (xhr, status, error) {
-                        // Show the error
-                      alert(xhr.responseText);
-
-                    }
-                });
-
-
-        return false;
-    });
-
-
-    });
-
-
+    var filterreport = '@Url.Action("FilterReport", "Subscription")';
+    var list = '@Url.Action("List", "Subscription")';
+     var url2 = '@Url.Action("Index", "Subscription", new RouteValueDictionary(new { a = 1 }), "http", string.Empty)';
 </script>
 
 
