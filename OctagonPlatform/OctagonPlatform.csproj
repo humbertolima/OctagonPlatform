@@ -788,6 +788,7 @@
     <Content Include="Octagon\assets\img\2.jpg" />
     <Content Include="Octagon\assets\img\3.jpg" />
     <Content Include="Octagon\assets\img\404.jpg" />
+    <Content Include="Octagon\assets\img\banner-octa.jpg" />
     <Content Include="Octagon\assets\img\banner2-1.jpg" />
     <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
@@ -1045,6 +1046,7 @@
     <Content Include="Content\quicksearch\LICENSE" />
     <Content Include="Content\quicksearch\package.json" />
     <Content Include="Content\quicksearch\README.md" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
