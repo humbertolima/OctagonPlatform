@@ -73,8 +73,7 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
-                string[] separator = { "," };
-                string[] ids = (permissions1.Split(separator, StringSplitOptions.RemoveEmptyEntries));
+                string[] ids = PermissionsSplit(permissions1);
 
                 //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
                 viewModel.Permissions = _userRepository.GetPermissionsByArray(ids);
@@ -88,6 +87,15 @@ namespace OctagonPlatform.Controllers
                 //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
+        }
+
+        private string[] PermissionsSplit(string permissions1)
+        {
+
+            string[] separator = { "," };
+            string[] ids = (permissions1.Split(separator, StringSplitOptions.RemoveEmptyEntries));
+
+            return ids;
         }
 
         [HttpGet]
@@ -116,7 +124,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserEditFormViewModel editViewModel, string[] permissions1)
+        public ActionResult Edit(UserEditFormViewModel editViewModel, string permissions1)
         {
             if (!ModelState.IsValid)
             {
@@ -126,9 +134,10 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
-                editViewModel.Permissions = _userRepository.GetPermissionsByArray(permissions1); //pendiente poner en el controlador de permissions
+                string[] ids = PermissionsSplit(permissions1);
 
-                //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
+                editViewModel.Permissions = _userRepository.GetPermissionsByArray(ids); //pendiente poner en el controlador de permissions
+
                 var viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
