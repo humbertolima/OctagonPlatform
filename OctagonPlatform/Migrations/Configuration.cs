@@ -22,10 +22,10 @@ namespace OctagonPlatform.Migrations
             Models.User admin02 = new Models.User() { UserName = "admin02", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator", LastName = "Admin", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
             Models.User admin03 = new Models.User() { UserName = "admin03", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator3", LastName = "Admin3", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
 
-            odyssey.Users.Add(admin02);
+            odyssey.Users.Add(admin02);                                     //notese que a oddysey le agrego los usuarios. 
             odyssey.Users.Add(admin03);
 
-            context.Partners.AddOrUpdate(m => m.BusinessName, odyssey);
+            context.Partners.AddOrUpdate(m => m.BusinessName, odyssey);     //agrego a oddysey como partner.
 
             context.LocationTypes.AddOrUpdate(l => l.Name,
                 new Models.LocationType { Name = "Restaurant" },
