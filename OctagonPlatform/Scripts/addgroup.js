@@ -139,7 +139,7 @@ $(function () {
        // alert(listassociated);
         if (listselected1.length > 0) {
             $.post(urlasign, { listtn: listassociated, groupSelected: groupselect, partner: $("#partnerid").val(), state: $("#stateid").val(), city: $("#cityid").val(), zipcode: $("#zipcode").val() }, function (data) {
-
+           //     alert(data);
                Display(data, groupselect);
 
             }, 'json');

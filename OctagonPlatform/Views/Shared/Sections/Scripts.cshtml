@@ -6,6 +6,7 @@
 
 
 @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
+
 @Scripts.Render("~/Scripts/datatables/datatables.min.js")
 
 @Scripts.Render("~/Octagon/assets/bootstrap/dist/js/bootstrap.min.js")
@@ -28,6 +29,26 @@
 @Scripts.Render("~/Content/quicksearch/dist/jquery.quicksearch.min.js")
 
 
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+@Scripts.Render("~/Scripts/jquery.serializeObject.min.js")
+<script>
+      var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlstate = '@Url.Action("AutoState", "ReportGroup")';
+        var urlcity = '@Url.Action("AutoCity", "ReportGroup")';
+        var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
+        var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
+        var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
+        var urlautoaccount = '@Url.Action("AutoAccount", "BankAccount")';
+         var urlautoschedule = '@Url.Action("AutoScheduled", "Schedule")';
+         var urluser = '@Url.Action("AutoUser", "Users")';
+
+    
+   
+
+
+
+
+</script>
 
 
 

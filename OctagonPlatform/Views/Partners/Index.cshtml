@@ -58,7 +58,7 @@
             <tr>
                 <td>@Html.ActionLink(Model.BusinessName, "Details", routeValues: new { id = Model.Id })</td>
                 <td>
-                    @if (Model.Parent != null)
+                    @if (@Model.Parent != null)
                     {
                         <div>@Model.Parent.BusinessName</div>
                     }

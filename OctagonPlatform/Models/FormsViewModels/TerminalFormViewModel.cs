@@ -28,9 +28,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         [Display(Name = "State")]
         public int StateId { get; set; }
-        public State State { get; set; }
+        public Models.State State { get; set; }
 
-        public ICollection<State> States { get; set; }  
+        public ICollection<Models.State> States { get; set; }  
 
         [Display(Name = "City")]
         public int CityId { get; set; }

@@ -49,6 +49,7 @@ namespace OctagonPlatform.Controllers
          //quitar esto
             if (ModelState.IsValid && !IsNameExists(reportGroupModel.Name))
             {
+                reportGroupModel.PartnerId = Convert.ToInt32(Session["partnerId"]);
                 _repo.Add(reportGroupModel);
                 return Json(reportGroupModel);
             }
@@ -140,16 +141,25 @@ namespace OctagonPlatform.Controllers
             List<Terminal> unassoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode); //terminals unassociated que tengan groupid null
             List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode, Int32.Parse(groupSelected));
             List<List<Terminal>> list = new List<List<Terminal>>();
-            list.Add(unassoGroup);
-            list.Add(assoGroup);
+            list.Add(new List<Terminal>(unassoGroup));
+            list.Add(new List<Terminal>(assoGroup));
             JsonResult ll = Json(list);
-
-
-            string result = JsonConvert.SerializeObject(list, Formatting.None,
-                        new JsonSerializerSettings()
-                        {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                        });
+            string result = "";
+           _repotn.EnableLazy = false;
+            try
+            {
+                result = JsonConvert.SerializeObject(list, Formatting.None,
+                      new JsonSerializerSettings()
+                      {
+                          ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                      });
+               
+            }
+            catch (Exception)
+            {
+            }
+            finally { _repotn.EnableLazy = true; }
+           
             return result;
         }
     }

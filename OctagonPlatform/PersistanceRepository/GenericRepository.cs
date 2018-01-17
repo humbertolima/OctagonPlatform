@@ -39,7 +39,17 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Find(id);
         }
-        
+        public virtual IEnumerable<T> FindAllBy(Expression<Func<T, bool>> predicate) 
+        {
+            if (predicate != null)
+            {               
+                    return Table.Where(predicate).ToList();                
+            }
+            else
+            {
+                throw new ArgumentNullException("Predicate value must be passed to FindAllBy<T>.");
+            }
+        }
         public void Add(T obj)
         {
             Table.Add(obj);

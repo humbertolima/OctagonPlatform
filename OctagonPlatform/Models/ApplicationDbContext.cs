@@ -13,7 +13,6 @@ namespace OctagonPlatform.Models
         public DbSet<Partner> Partners { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<SetOfPermission> SetOfPermissions { get; set; }
         public DbSet<Terminal> Terminals { get; set; }
         public DbSet<TerminalContact> TerminalContacts { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
@@ -35,13 +34,17 @@ namespace OctagonPlatform.Models
         public DbSet<Dispute> Disputes { get; set; }
         public DbSet<DisputeRepresent> DisputeRepresents { get; set; }
         public DbSet<TerminalAlertConfig> TerminalAlertConfigs { get; set; }
-        public DbSet<TerminalAlert> TerminalAlerts{ get; set; }
+        public DbSet<TerminalAlert> TerminalAlerts { get; set; }
         public DbSet<CryptoChargeAccount> CryptoChargeAccounts { get; set; }
         public DbSet<CryptoCurrencyTransaction> CryptoCurrencyTransactions { get; set; }
         public DbSet<ReportModel> Reports { get; set; }
         public DbSet<ReportGroupModel> ReportGroups { get; set; }
         public DbSet<Picture> Pictures { get; set; }
-
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<ReportFilter> ReportFilters { get; set; }
+        public DbSet<FilterModel> Filters { get; set; }
+        public DbSet<SubscriptionModel> Subscriptions { get; set; }
+        
         public ApplicationDbContext()
             : base("LocalConection")
         {
@@ -58,10 +61,20 @@ namespace OctagonPlatform.Models
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Entity<Partner>().Property(c => c.ParentId).IsOptional();
-
+            modelBuilder.Entity<Schedule>()
+               .Map<ScheduleDaily>(m => m.Requires("Discriminator").HasValue("ScheduleDaily"))
+               .Map<ScheduleMonthly>(m => m.Requires("Discriminator").HasValue("ScheduleMonthly"))
+               .Map<ScheduleMonthlyRelative>(m => m.Requires("Discriminator").HasValue("ScheduleMonthlyRelative"))
+               .Map<ScheduleOnce>(m => m.Requires("Discriminator").HasValue("ScheduleOnce"))
+               .Map<ScheduleWeekly>(m => m.Requires("Discriminator").HasValue("ScheduleWeekly"));
+            modelBuilder.Entity<ReportFilter>()
+           .HasRequired(b => b.Subscription)
+           .WithMany(b => b.ReportFilters)
+           .WillCascadeOnDelete(true);
+            modelBuilder.Entity<Permission>().Property(p => p.ParentID).IsOptional();   //haciendo opcional parent de permission para que pueda ser null.
             //modelBuilder.Entity<>
         }
 
-        
+
     }
 }

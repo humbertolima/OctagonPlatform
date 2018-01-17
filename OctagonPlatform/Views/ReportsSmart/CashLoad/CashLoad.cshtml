@@ -1,0 +1,118 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.CashLoadViewModel
+@{
+    ViewBag.Title = "CashLoad";
+
+
+}
+<p></p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a name="ankle"></a>
+        <h3 class="panel-title">Filter Report Cash Load</h3>
+    </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+      @Html.Partial("CashLoad/_PartialForm",Model)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </div>
+}
+
+    </div>
+</div>
+@if (TempData["List"] != null)
+{
+    <div class="panel panel-primary" style="padding:0px;">
+        <div class="panel-heading">
+            <a name="ankle2"></a>
+            <h3 class="panel-title">Chart Cash Load</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_PartialMorrisChart")
+           
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+          
+            <span class="panel-title" >List Cash Load</span>
+            <span class="panel-title" style="float:right">Date: @DateTime.Now</span>
+           
+        </div>
+        <div class="panel-body">
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash load" } })
+               
+            </div>
+            @Html.Partial("_PartialTable")
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+        <strong>Warning!</strong> Not Record Available.
+    </div>
+}
+    @section Scripts {
+        
+    <script>
+
+    
+
+    $(function () {
+
+        $("#EndDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        $("#StartDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        callankle();
+        var tempdataval = '@TempData["List"]';
+        if (tempdataval != null && tempdataval != '') {
+            callankle2();
+            ChartBar();        
+
+            var sum1 = 0, sum2 = 0, sum3 = 0;
+            $("#grid tbody tr").find('td:eq(3)').each(function (index, val) {
+
+                sum1 += $(this).html() * 1;
+            });
+            $("#grid tbody tr").find('td:eq(4)').each(function (index, val) {
+
+                sum2 += $(this).html() * 1;
+            });
+            $("#grid tbody tr").find('td:eq(5)').each(function (index, val) {
+
+                sum3 += $(this).html() * 1;
+            });
+            $('#grid tbody').append("<tr ><th></th><th></th><th>  </th><th >$" + sum1 + " </th><th >$" + sum2 + "</th><th >$" + sum3 + "</th></tr>");
+
+            $("#grid tr").find('td:eq(3), td:eq(4), td:eq(5)').each(function (index, val) {
+                $(this).html("$" + $(this).html());
+            });
+       
+           
+        } 
+
+    });
+     
+
+    </script>
+
+
+    }
+
+
