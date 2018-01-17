@@ -17,71 +17,38 @@ namespace OctagonPlatform.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            context.Partners.AddOrUpdate(p => p.BusinessName, new Models.Partner
-            {
-                Id = 1,
-                ParentId = null,
-                BusinessName = "Odyssey Group",
-                Status = Helpers.StatusType.Status.Active,
-                Address1 = "753 Shotgum RD",
-                CountryId = 1,
-                StateId = 1,
-                CityId = 1,
-                Email = "admin@xyncro.net",
-                Mobile = "7867921950",
-                Interchange = 0,
-                Deleted = false,
-            });
+            Models.Partner odyssey = new Models.Partner() { ParentId = null, BusinessName = "Odyssey Group", Status = Helpers.StatusType.Status.Active, Address1 = "753 Shotgum RD", CountryId = 1, StateId = 1, CityId = 1, Email = "admin@xyncro.net", Mobile = "7867921950", Interchange = 0, Deleted = false, };
 
-            context.Users.AddOrUpdate(u => u.Name, new Models.User
-            {
-                Id = 1,
-                UserName = "admin02",
-                Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 3,
-                IsLocked = false,
-                Email = "admin@xyncro.net",
-                Name = "Administrator",
-                LastName = "Admin",
-                Phone = "7867921520",
-                Status = Helpers.StatusType.Status.Active,
-                Deleted = false,
-                Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
-            }, new Models.User
-            {
-                Id = 2,
-                UserName = "admin03",
-                Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E",
-                PartnerId = 3,
-                IsLocked = false,
-                Email = "admin@xyncro.net",
-                Name = "Administrator3",
-                LastName = "Admin3",
-                Phone = "7867921520",
-                Status = Helpers.StatusType.Status.Active,
-                Deleted = false,
-                Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp",
-            }
+            Models.User admin02 = new Models.User() { UserName = "admin02", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator", LastName = "Admin", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
+            Models.User admin03 = new Models.User() { UserName = "admin03", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator3", LastName = "Admin3", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
 
-            );
+            odyssey.Users.Add(admin02);
+            odyssey.Users.Add(admin03);
+
+            context.Partners.AddOrUpdate(m => m.BusinessName, odyssey);
 
             context.LocationTypes.AddOrUpdate(l => l.Name,
                 new Models.LocationType { Name = "Restaurant" },
                 new Models.LocationType { Name = "Barber Shop" }
                 );
 
-            context.Makes.AddOrUpdate(m => m.Name,
-                new Models.Make { Name = "Puloon" },
-                new Models.Make { Name = "N. Hyosung" }
-                );
+            Models.Model miniATM = new Models.Model { Name = "Mini ATM", Make = new Models.Make() };
+            Models.Model SiriATM = new Models.Model { Name = "Siri ATM", Make = new Models.Make() };
 
-            context.Models.AddOrUpdate(m => m.Name,
-                new Models.Model { Name = "Mini ATM", MakeId = 9 },
-                new Models.Model { Name = "Siri Atm", MakeId = 10 }
-                );
+            Models.Make Puloon = new Models.Make() { Name = "Puloon" };
+            Models.Make Hysosung = new Models.Make() { Name = "N. Hyosung" };
 
+            Puloon.Models.Add(miniATM);
+            Hysosung.Models.Add(SiriATM);
 
             #region despues del merge
+
+            List<string> Level0 = new List<string>() { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            foreach (var item in Level0)
+            {
+                context.Permissions.AddOrUpdate(m => m.Name, new Models.Permission { Name = item });
+            }
+            context.SaveChanges();
 
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Changes", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
