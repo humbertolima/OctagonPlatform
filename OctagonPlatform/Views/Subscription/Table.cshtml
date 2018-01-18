@@ -49,27 +49,27 @@
                 @Html.DisplayFor(modelItem => item.LastRunDate)
             </td>
             <td>
-              
+
                 @Ajax.ActionLink(" ", "Edit", new { id = item.Id },
-            new AjaxOptions
-            {
-                HttpMethod = "GET",
-                UpdateTargetId = "SubscriptionList",
-                InsertionMode = InsertionMode.Replace,
-                OnSuccess = "SuccessEdit(data, "+ item.Id + ");"
-            },
-            new { @class = "btn btn-info glyphicon glyphicon-edit" })
-               
+                 new AjaxOptions
+                 {
+                     HttpMethod = "GET",
+                     UpdateTargetId = "SubscriptionList",
+                     InsertionMode = InsertionMode.Replace,
+                     OnSuccess = "SuccessEdit(data, " + item.Id + ");"
+                 },
+                 new { @class = "btn btn-info glyphicon glyphicon-edit" })
+
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-               new AjaxOptions
-               {
-                   HttpMethod = "POST",
-                   UpdateTargetId = "SubscriptionList",
-                   InsertionMode = InsertionMode.Replace,
-                   Confirm = "Are you Sure You Want to Delete " + @item.ReportName
-               },
-               new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "SubscriptionList",
+                        InsertionMode = InsertionMode.Replace,
+                        Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                    },
+                    new { @class = "btn btn-danger glyphicon glyphicon-trash" })
             </td>
         </tr>
     }
@@ -106,5 +106,6 @@
         </div>
     </div>
     <input type="hidden" id="userId" name="userId" />
+    <input type="hidden" id="subId" name="subId" />
 }
 @Scripts.Render("~/Scripts/Subscription.js")

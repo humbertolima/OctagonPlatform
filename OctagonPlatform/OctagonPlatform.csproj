@@ -1320,6 +1320,12 @@
     <Content Include="Views\ReportsSmart\TerminalList\_PartialForm.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\TerminalStatus.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\_PartialForm.cshtml" />
+    <Content Include="Views\Permissions\Create.cshtml" />
+    <Content Include="Views\Permissions\Delete.cshtml" />
+    <Content Include="Views\Permissions\Details.cshtml" />
+    <Content Include="Views\Permissions\Edit.cshtml" />
+    <Content Include="Views\Permissions\Index.cshtml" />
+    <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

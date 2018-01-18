@@ -46,7 +46,12 @@
 
 
     var list = '@Url.Action("List", "Subscription")';
-     var url2 = '@Url.Action("Index", "Subscription", new RouteValueDictionary(new { a = 1 }), "http", string.Empty)';
+    var url2 = '@Url.Action("Index", "Subscription", new RouteValueDictionary(new { a = 1 }), "http", string.Empty)';
+    $(function () {
+        $('#error').fadeIn('slow', function () {
+            $('#error').fadeOut(5000);
+        });
+    });
 </script>
 
 

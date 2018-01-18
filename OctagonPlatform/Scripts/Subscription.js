@@ -27,43 +27,46 @@
 
             $.get(list, { userId: 0 }, function (data) {
                 // alert(data);
-                $("#SubscriptionList").html(data);
+                $("#SubscriptionList").html(data); 
             });
         }
 
     });
     $('#FormSub').submit(function () {
         // var formData = $('#FormSub').serializeObject();
+       
         $("#userId").val($("#userid").val());
         $("#message").html("<div class='loader'></div>");
-        $.ajax({
-            url: this.action,
-            type: this.method,
-            data: $(this).serialize(),
-            success: function (data) {
-                //alert(data);
-                var isSuccessful = (data['success']);
+        if ($("#ReportId").val() != "") {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (data) {
+                    //alert(data);
+                    var isSuccessful = (data['success']);
 
-                if (isSuccessful) {
-                   
-                    window.location.href = url2 + "&b=" + $("#userid").val();
+                    if (isSuccessful) {
+
+                        window.location.href = url2 + "&b=" + $("#userid").val();
+                    }
+                    else {
+
+                        var errors = data['errors'];
+                        $("#message").html(' <div class="alert alert-danger"><strong>' + errors + '</strong> </div>');
+                    }
+
+
+
+                },
+                error: function (xhr, status, error) {
+                    // Show the error
+                    alert(xhr.responseText);
+
                 }
-                else {
-                    alert("ff");
-                    var errors = data['errors'];
-                    $("#message").html(' <div class="alert alert-danger"><strong>' + errors + '</strong> </div>');
-                }
-
-
-
-            },
-            error: function (xhr, status, error) {
-                // Show the error
-                alert(xhr.responseText);
-
-            }
-        });
-
+            });
+        } else
+            $("#message").html(' <div class="alert alert-danger"><strong>Please Select Report</strong> </div>');
 
         return false;
     });
@@ -71,21 +74,23 @@
 
 });
 function SuccessEdit(data, itemid) {
-    
-    
+   
+   
+    $("#subId").val(itemid);
     $("#PartialFilter").html("<div class='loader'></div>");
     $.get(filterreport2, {  idsub: itemid  }, function (data) {
         //alert(data);
         $("#PartialFilter").html(data);
-
+        $("#Start_Date").attr("name", "StartDate");
     });
     
 }
 function GetPartialFilter(idreport) {
+    
     $("#PartialFilter").html("<div class='loader'></div>");
     $.get(filterreport, { id: idreport }, function (data) {
 
         $("#PartialFilter").html(data);
-
+        $("#Start_Date").attr("name", "StartDate");
     });
 }
