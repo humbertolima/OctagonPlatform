@@ -4,12 +4,7 @@
     // callankle();
     $("#ReportId").change(function () {
         var idreport = $(this).val();
-        $("#PartialFilter").html("<div class='loader'></div>");
-        $.get(filterreport, { id: idreport }, function (data) {
-
-            $("#PartialFilter").html(data);
-
-        });
+        GetPartialFilter(idreport);
     });
 
     $('#user').autocomplete({
@@ -75,3 +70,22 @@
 
 
 });
+function SuccessEdit(data, itemid) {
+    
+    
+    $("#PartialFilter").html("<div class='loader'></div>");
+    $.get(filterreport2, {  idsub: itemid  }, function (data) {
+        //alert(data);
+        $("#PartialFilter").html(data);
+
+    });
+    
+}
+function GetPartialFilter(idreport) {
+    $("#PartialFilter").html("<div class='loader'></div>");
+    $.get(filterreport, { id: idreport }, function (data) {
+
+        $("#PartialFilter").html(data);
+
+    });
+}

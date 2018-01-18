@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -110,7 +111,9 @@ namespace OctagonPlatform.Controllers.Reports
                 if (item.ReportFilters != null && item.Schedule !=null)
                 {
                     Schedule schedule = item.Schedule;
-                    string reportname = item.ReportFilters.First().Report.Name;
+                    string reportname = "";
+                    if (item.ReportFilters != null)
+                     reportname = item.ReportFilters.First().Report.Name;
                     SubsTableViewModel obj = new SubsTableViewModel()
                     {
                         ReportName = reportname,
@@ -297,36 +300,122 @@ namespace OctagonPlatform.Controllers.Reports
         }
 
         // GET: SubscriptionModels/Edit/5
-        public ActionResult Edit(int? id)
+        public PartialViewResult Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return null;
             }
-            SubscriptionModel subscriptionModel = _repo.FindBy(id);
+            int id1 = id ?? 0;
+            SubscriptionModel subscriptionModel = _repo.GetSubscriptionById(id1);
             if (subscriptionModel == null)
             {
-                return HttpNotFound();
+                return null;
             }
+            TempData["subscription"] = subscriptionModel;        
+            
+            return PartialView("Table", GetModelEdit(subscriptionModel));
+        }
 
-            return View(subscriptionModel);
+        private SubscriptionVM GetModelEdit(SubscriptionModel subscriptionModel)
+        {
+
+            IEnumerable<Subreport> subscriptions = new List<Subreport>();
+            int partnerId = Convert.ToInt32(Session["partnerId"]);
+            int userId = subscriptionModel.User.Id;
+            string usern = "";
+            IEnumerable<ReportModel> listrepost = _repoReport.All();
+            
+                User user = subscriptionModel.User;
+                subscriptions = _repo.GetSubscriptionsIncluding(userId);
+                string bussinesname = "";
+                if (user.Partner != null)
+                    bussinesname = user.Partner.BusinessName;
+                usern = user.UserName + " - " + user.Name + " - " + bussinesname;
+            // listrepost = user.Reports.ToList();
+            ReportModel report = subscriptionModel.ReportFilters.First().Report;
+
+            SubscriptionVM vmodel = new SubscriptionVM()
+            {
+                List = ProcessSubscription(subscriptions),
+                User = usern,
+                UserId = userId,
+                ReportId = new SelectList(listrepost, "Id", "Name", report.Id)
+            };
+
+            IEnumerable<Schedule> listscheduled =  _repoScheduled.GetScheduleByUser(userId) ;
+            vmodel.ScheduledId = new SelectList(listscheduled, "Id", "Name", subscriptionModel.ScheduleId);
+            return vmodel;
         }
 
         // POST: SubscriptionModels/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,Description,EmailComment,ScheduledId,PartnerId")] SubscriptionModel subscriptionModel)
+      //  [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, SubscriptionVM vmodel)
         {
-            if (ModelState.IsValid)
-            {
+            SubscriptionModel model = _repo.GetSubscriptionById(id);
 
-                _repo.Edit(subscriptionModel);
-                return RedirectToAction("Index");
-            }
-            return View(subscriptionModel);
+            _repo.Edit(model);
+          
+            return PartialView("Table", GetModel(model.UserId));
         }
+
+        public PartialViewResult FilterReportEdit( string idsub)
+        {
+            ReportModel report = null;
+            int subId = Convert.ToInt32(idsub);
+            SubscriptionModel subscriptionModel = _repo.GetSubscriptionById(subId);
+            if (subscriptionModel.ReportFilters != null)
+            {
+                report = subscriptionModel.ReportFilters.First().Report;
+            }
+
+            string name = report.Name.Replace(" ", string.Empty);
+            Type type = Type.GetType("OctagonPlatform.Models.FormsViewModels." + name + "ViewModel");
+            object handle = Activator.CreateInstance(type);
+
+            UpdateSubReportFilter(subscriptionModel.ReportFilters, handle);
+           
+            List<int> days = new List<int>();
+            for (int i = 0; i < 32; i++)
+            {
+                days.Add(i);
+            }
+
+            TempData["StartDate"] = new SelectList(days);
+            TempData["Sub"] = true;
+            return PartialView("../ReportsSmart/" + name + "/" + "_PartialForm", handle);
+        }
+
+        private void UpdateSubReportFilter(ICollection<ReportFilter> reportFilters, object handle)
+        {
+            foreach (var item in reportFilters)
+            {
+                if (item.Report.Name != "ALL")
+                {
+                    FilterModel f = item.Filter;
+                    PropertyInfo[] collection = handle.GetType().GetProperties();
+                   
+                    foreach (var prop in collection)
+                    {
+                        var value = item.Value;
+                        if (prop.Name == f.Name)
+                        {   if (f.Name == "Status")
+                            { 
+                                int status = Convert.ToInt32(value);
+                                StatusType.Status sta = (StatusType.Status)status;
+                                handle.GetType().GetProperty(prop.Name).SetValue(handle, sta, null);
+                            }
+                            
+                            //handle.GetType().GetProperty(prop.Name).SetValue(handle, item.Value, null);
+                        }
+                    }
+                }
+            }
+        }
+
 
         // GET: SubscriptionModels/Delete/5
         public ActionResult Delete(int? id)
