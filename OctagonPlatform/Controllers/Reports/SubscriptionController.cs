@@ -312,7 +312,6 @@ namespace OctagonPlatform.Controllers.Reports
             {
                 return null;
             }
-            TempData["subscription"] = subscriptionModel;        
             
             return PartialView("Table", GetModelEdit(subscriptionModel));
         }
@@ -345,6 +344,9 @@ namespace OctagonPlatform.Controllers.Reports
 
             IEnumerable<Schedule> listscheduled =  _repoScheduled.GetScheduleByUser(userId) ;
             vmodel.ScheduledId = new SelectList(listscheduled, "Id", "Name", subscriptionModel.ScheduleId);
+            vmodel.Description = subscriptionModel.Description;
+            vmodel.Email = subscriptionModel.Email;
+            vmodel.EmailComment = subscriptionModel.EmailComment;
             return vmodel;
         }
 
@@ -376,46 +378,54 @@ namespace OctagonPlatform.Controllers.Reports
             Type type = Type.GetType("OctagonPlatform.Models.FormsViewModels." + name + "ViewModel");
             object handle = Activator.CreateInstance(type);
 
-            UpdateSubReportFilter(subscriptionModel.ReportFilters, handle);
            
             List<int> days = new List<int>();
             for (int i = 0; i < 32; i++)
             {
                 days.Add(i);
             }
-
-            TempData["StartDate"] = new SelectList(days);
-            TempData["Sub"] = true;
-            return PartialView("../ReportsSmart/" + name + "/" + "_PartialForm", handle);
-        }
-
-        private void UpdateSubReportFilter(ICollection<ReportFilter> reportFilters, object handle)
-        {
-            foreach (var item in reportFilters)
+            IEnumerable<SelectListItem> selectList = new SelectList(days);
+          //  UpdateSubReportFilter(subscriptionModel.ReportFilters, handle,days);
+            //Llenar el viewmodel
+            foreach (var item in subscriptionModel.ReportFilters)
             {
                 if (item.Report.Name != "ALL")
                 {
                     FilterModel f = item.Filter;
                     PropertyInfo[] collection = handle.GetType().GetProperties();
-                   
+
                     foreach (var prop in collection)
                     {
                         var value = item.Value;
                         if (prop.Name == f.Name)
-                        {   if (f.Name == "Status")
-                            { 
+                        {
+                            if (f.Name == "Status")
+                            {
                                 int status = Convert.ToInt32(value);
                                 StatusType.Status sta = (StatusType.Status)status;
                                 handle.GetType().GetProperty(prop.Name).SetValue(handle, sta, null);
                             }
-                            
+                            if (f.Name == "StartDate")
+                            {
+                                int val = Convert.ToInt32(value);
+                                //var aList = days.Select((x, i) => new { Value = x, Text = x }).ToList();
+                                var aList2 = days.Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString(), Selected = (i == val) });
+                                selectList = aList2;  // new SelectList(aList2);
+                            }
+
+
                             //handle.GetType().GetProperty(prop.Name).SetValue(handle, item.Value, null);
                         }
                     }
                 }
             }
+            //-----//
+            TempData["StartDate"] = selectList;
+            TempData["Sub"] = true;
+            return PartialView("../ReportsSmart/" + name + "/" + "_PartialForm", handle);
         }
 
+       
 
         // GET: SubscriptionModels/Delete/5
         public ActionResult Delete(int? id)
