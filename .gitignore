@@ -47,7 +47,7 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
-*/Web.config
+OctagonPlatform/Web.config
 
 *_i.c
 *_p.c
