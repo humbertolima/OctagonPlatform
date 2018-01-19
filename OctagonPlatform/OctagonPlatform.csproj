@@ -311,6 +311,10 @@
     <Compile Include="Migrations\201801162028093_prueba.Designer.cs">
       <DependentUpon>201801162028093_prueba.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801182242167_cascadeschedule.cs" />
+    <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
+      <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1364,6 +1368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801162028093_prueba.resx">
       <DependentUpon>201801162028093_prueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
+      <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

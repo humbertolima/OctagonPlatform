@@ -136,6 +136,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
             string datestart = schedule.StartDate.ToShortDateString();
             string daterun = "";
+            DateTime today = DateTime.Now;
             if (schedule is ScheduleOnce)
             {
                 datestart += " " + ((ScheduleOnce)schedule).Time;
@@ -145,12 +146,25 @@ namespace OctagonPlatform.Controllers.Reports
                 else
                     daterun = "One execution";
             }
+            if (schedule is ScheduleDaily)
+            {
+                datestart += " " + ((ScheduleDaily)schedule).Time;
+                DateTime dt = Convert.ToDateTime(datestart);
+                if (dt > DateTime.Now)
+                    daterun = dt.ToString();
+                else
+                {                    
+                    string nextday = today.AddDays(((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
+                    daterun = nextday +" " + ((ScheduleDaily)schedule).Time; 
+                }
+            }
             return daterun;
         }
         private string LastRunDate(Schedule schedule)
         {
             string datestart = schedule.StartDate.ToShortDateString();
             string daterun = "";
+            DateTime today = DateTime.Now;
             if (schedule is ScheduleOnce)
             {
                 datestart += " " + ((ScheduleOnce)schedule).Time;
@@ -159,6 +173,18 @@ namespace OctagonPlatform.Controllers.Reports
                     daterun = dt.ToString();
                 else
                     daterun = "Not execution yet";
+            }
+            if (schedule is ScheduleDaily)
+            {
+                datestart += " " + ((ScheduleDaily)schedule).Time;
+                DateTime dt = Convert.ToDateTime(datestart);
+                if (dt > DateTime.Now)
+                    daterun = "Not execution yet";
+                else
+                {
+                    string nextday = today.AddDays(-((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
+                    daterun = nextday + " " + ((ScheduleDaily)schedule).Time;
+                }
             }
             return daterun;
         }
@@ -226,17 +252,17 @@ namespace OctagonPlatform.Controllers.Reports
             string email = model.GetValue("Email").AttemptedValue;
             string emailComment = model.GetValue("EmailComment").AttemptedValue;
             int userid = model.GetValue("userId").AttemptedValue == string.Empty ? 0 : Convert.ToInt32(model.GetValue("userId").AttemptedValue);
-            int subId = Convert.ToInt32(model.GetValue("subId").AttemptedValue);
+            string subId = model.GetValue("subId").AttemptedValue;
             int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
             
             try
             {
                 if (userid > 0)
                 {
-                    if (subId == 0)
+                    if (subId == "")
                         FullAddModel(email, description, emailComment, scheduledId, userid, reportId, model);
                     else
-                        FullAddModel(email, description, emailComment, scheduledId, userid, reportId, model, subId);
+                        FullAddModel(email, description, emailComment, scheduledId, userid, reportId, model, Convert.ToInt32(subId));
                 }
                 else
                 {
@@ -244,10 +270,10 @@ namespace OctagonPlatform.Controllers.Reports
                     IEnumerable<User> listuser = _repoUser.GetAllUsers(partnerId);
                     foreach (var item in listuser)
                     {
-                        if (subId == 0)
+                        if (subId == "")
                             FullAddModel(email, description, emailComment, scheduledId, item.Id, reportId, model);
                         else
-                            FullAddModel(email, description, emailComment, scheduledId, item.Id, reportId, model, subId);
+                            FullAddModel(email, description, emailComment, scheduledId, item.Id, reportId, model, Convert.ToInt32(subId));
 
                     }
                 }
