@@ -1,14 +1,17 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.DynamicData;
+using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Terminals")]
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
@@ -16,10 +19,14 @@ namespace OctagonPlatform.Controllers
 
         public TerminalsController(ITerminalRepository repository)
         {
+            if (true)
+            {
+
+            }
             _repository = repository;
         }
 
-
+       
         public PartialViewResult GetKey(string terminalId)
         {   // prueba de branch
             try
@@ -401,6 +408,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Create
+        [PermissionValidation(ErrorMessage ="prueba")]
         public ActionResult Create(int? partnerId)
         {
             try
