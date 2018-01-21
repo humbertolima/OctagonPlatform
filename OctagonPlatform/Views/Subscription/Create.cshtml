@@ -10,10 +10,11 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ScheduledId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("ScheduledId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("ScheduledId", null, "-Select Schedule-", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.ScheduledId, "", new { @class = "text-danger" })
         </div>
     </div>
+    <div id="schedule_details"></div>
     <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">

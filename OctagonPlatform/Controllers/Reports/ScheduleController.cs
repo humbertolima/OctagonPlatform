@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -161,7 +162,62 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return PartialView(vmodel);
         }
+        public string Details(string id)
+        {
+            Schedule schedule = _repo.FindBy(Convert.ToInt32(id));
+            string data = "";
+            if (schedule is ScheduleDaily)
+            { ScheduleDaily model = ((ScheduleDaily)schedule);
+               
+                data += "<p>Repeats:"+ model.Repeats + "</p>";
+                data += "<p>Recurrence: Every " + model.RepeatOn + " day(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";                
+            }
+            if (schedule is ScheduleOnce)
+            {
+                ScheduleOnce model = ((ScheduleOnce)schedule);
 
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence: One Time</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+               
+            }
+            if (schedule is ScheduleWeekly)
+            {
+                ScheduleWeekly model = ((ScheduleWeekly)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence: Every " + model.RepeatOnWeeks + " weeks(s) on "+model.RepeatOnDaysWeeks+"</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+            if (schedule is ScheduleMonthly)
+            {
+                ScheduleMonthly model = ((ScheduleMonthly)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence:  Day " + model.RepeatOnDay + " every " + model.RepeatOnMonth + " month(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+            if (schedule is ScheduleMonthlyRelative)
+            {
+                ScheduleMonthlyRelative model = ((ScheduleMonthlyRelative)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence:  The " + model.RepeatOnFirst+" "+model.RepeatOnDay + " every " + model.RepeatOnMonth + " month(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+
+            return data;
+        }
         // POST: ScheduleOnces/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -217,7 +273,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         private bool EditScheduleMonthlyRelative(ScheduleViewModel vmodel, Schedule model)
         {
-            if (model.GetType() != typeof(ScheduleMonthlyRelative))
+            if (model.GetType().BaseType.FullName != typeof(ScheduleMonthlyRelative).FullName)
             {
 
                 ScheduleMonthlyRelative model1 = new ScheduleMonthlyRelative(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnFirst, vmodel.RepeatOnDay2, vmodel.RepeatOnMonth2, vmodel.StopDate);
@@ -265,7 +321,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         private bool EditScheduleMonthly(ScheduleViewModel vmodel, Schedule model)
         {
-            if (model.GetType() != typeof(ScheduleMonthly))
+            if (model.GetType().BaseType.FullName != typeof(ScheduleMonthly).FullName)
             {
                 ScheduleMonthly model1 = new ScheduleMonthly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnDay, vmodel.RepeatOnMonth, vmodel.StopDate);
                 IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
@@ -285,7 +341,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         private bool EditScheduleWeekly(ScheduleViewModel vmodel, Schedule model)
         {
-            if (model.GetType() != typeof(ScheduleWeekly))
+            if (model.GetType().BaseType.FullName != typeof(ScheduleWeekly).FullName)
             {
                 ScheduleWeekly model1 = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, vmodel.RepeatOnDaysWeeks, vmodel.StopDate);
 
@@ -305,7 +361,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         private bool EditScheduleOnce(ScheduleViewModel vmodel, Schedule model)
         {
-            if (model.GetType() != typeof(ScheduleOnce))
+            if (model.GetType().BaseType.FullName != typeof(ScheduleOnce).FullName)
             {
                 ScheduleOnce model1 = new ScheduleOnce(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time);
 
@@ -322,7 +378,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         private bool EditScheduleDaily(ScheduleViewModel vmodel, Schedule model)
         {
-            if (model.GetType() != typeof(ScheduleDaily))
+            if (model.GetType().BaseType.FullName != typeof(ScheduleDaily).FullName)
             {
                 ScheduleDaily model1 = new ScheduleDaily(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOn, vmodel.StopDate);
 
