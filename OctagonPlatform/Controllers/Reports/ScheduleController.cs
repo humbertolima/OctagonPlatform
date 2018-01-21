@@ -85,7 +85,8 @@ namespace OctagonPlatform.Controllers.Reports
                     {
                         if (vmodel.Repeats == ScheduleType.RepeatsEnum.Weekly)
                         {
-                            model = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, vmodel.RepeatOnDaysWeeks,vmodel.StopDate);
+                            string days = vmodel.RepeatOnDaysWeeks == null ? "Mon" : vmodel.RepeatOnDaysWeeks;
+                            model = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, days, vmodel.StopDate);
                         }
                         else
                         {
@@ -353,14 +354,17 @@ namespace OctagonPlatform.Controllers.Reports
             return View(schedule);
         }
 
-        // POST: ScheduleOnces/Delete/5
+      
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            _repo.Delete(id);          
-            return RedirectToAction("Index");
+        // [ValidateAntiForgeryToken]
+        public PartialViewResult DeleteConfirmed(int id)
+        {
+            int userid = _repo.FindBy(id).UserId;
+            _repo.Delete(id);
+           
+            return List(userid.ToString());
         }
+
 
         protected override void Dispose(bool disposing)
         {
