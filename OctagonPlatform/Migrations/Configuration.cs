@@ -41,6 +41,18 @@ namespace OctagonPlatform.Migrations
             Puloon.Models.Add(miniATM);
             Hysosung.Models.Add(SiriATM);
 
+            #region Insert Report
+            context.Reports.AddOrUpdate(l => l.Name,
+               new Models.ReportModel { Name = "Cash Balance at Close" },
+               new Models.ReportModel { Name = "Cash Management" },
+               new Models.ReportModel { Name = "Terminal List" },
+                new Models.ReportModel { Name = "Daily Transaction Summary" }, 
+                new Models.ReportModel { Name = "Monthly Transaction Summary" },
+               new Models.ReportModel { Name = "Terminal Status" }, 
+               new Models.ReportModel { Name = "Cash Load" }
+               );
+            #endregion
+
             #region despues del merge
 
             List<string> Level0 = new List<string>() { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
