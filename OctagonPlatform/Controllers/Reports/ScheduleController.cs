@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
@@ -18,10 +19,14 @@ namespace OctagonPlatform.Controllers.Reports
     {
         private ISchedule _repo;
         private readonly IUserRepository _userRepository;
-        public ScheduleController(ISchedule repo, IUserRepository userRepository)
+        private ISubscription _repoSub;
+        private IReportFilter _repofilter;
+        public ScheduleController(ISchedule repo, IUserRepository userRepository, ISubscription repoSub, IReportFilter repofilter)
         {
             _repo = repo;
             _userRepository = userRepository;
+            _repoSub = repoSub;
+            _repofilter = repofilter;
         }
 
         // GET: ScheduleOnces
@@ -81,7 +86,8 @@ namespace OctagonPlatform.Controllers.Reports
                     {
                         if (vmodel.Repeats == ScheduleType.RepeatsEnum.Weekly)
                         {
-                            model = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, vmodel.RepeatOnDaysWeeks,vmodel.StopDate);
+                            string days = vmodel.RepeatOnDaysWeeks == null ? "Mon" : vmodel.RepeatOnDaysWeeks;
+                            model = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, days, vmodel.StopDate);
                         }
                         else
                         {
@@ -125,29 +131,29 @@ namespace OctagonPlatform.Controllers.Reports
                 return PartialView();
             }
                
-            if (schedule.GetType() == typeof(ScheduleOnce))
+            if (schedule.GetType().BaseType.FullName == typeof(ScheduleOnce).FullName)
             {
                 vmodel.Time = ((ScheduleOnce)schedule).Time;
             }
-            if (schedule.GetType() == typeof(ScheduleDaily))
+            if (schedule.GetType().BaseType.FullName == typeof(ScheduleDaily).FullName)
             {
                vmodel.RepeatOn = ((ScheduleDaily)schedule).RepeatOn;
                vmodel.StopDate = ((ScheduleDaily)schedule).StopDate;
                vmodel.Time = ((ScheduleDaily)schedule).Time;
             }
-            if (schedule.GetType() == typeof(ScheduleWeekly))
+            if (schedule.GetType().BaseType.FullName == typeof(ScheduleWeekly).FullName)
             {
                 vmodel.RepeatOnWeeks = ((ScheduleWeekly)schedule).RepeatOnWeeks;
                 vmodel.RepeatOnDaysWeeks = ((ScheduleWeekly)schedule).RepeatOnDaysWeeks;
                 vmodel.Time = ((ScheduleWeekly)schedule).Time;
             }
-            if (schedule.GetType() == typeof(ScheduleMonthly))
+            if (schedule.GetType().BaseType.FullName == typeof(ScheduleMonthly).FullName)
             {
                 vmodel.RepeatOnDay = ((ScheduleMonthly)schedule).RepeatOnDay;
                 vmodel.RepeatOnMonth = ((ScheduleMonthly)schedule).RepeatOnMonth;
                 vmodel.Time = ((ScheduleMonthly)schedule).Time;
             }
-            if (schedule.GetType() == typeof(ScheduleMonthlyRelative))
+            if (schedule.GetType().BaseType.FullName == typeof(ScheduleMonthlyRelative).FullName)
             {
                 vmodel.RepeatOnFirst = ((ScheduleMonthlyRelative)schedule).RepeatOnFirst;
                 vmodel.RepeatOnDay2 = ((ScheduleMonthlyRelative)schedule).RepeatOnDay;
@@ -156,7 +162,62 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return PartialView(vmodel);
         }
+        public string Details(string id)
+        {
+            Schedule schedule = _repo.FindBy(Convert.ToInt32(id));
+            string data = "";
+            if (schedule is ScheduleDaily)
+            { ScheduleDaily model = ((ScheduleDaily)schedule);
+               
+                data += "<p>Repeats:"+ model.Repeats + "</p>";
+                data += "<p>Recurrence: Every " + model.RepeatOn + " day(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";                
+            }
+            if (schedule is ScheduleOnce)
+            {
+                ScheduleOnce model = ((ScheduleOnce)schedule);
 
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence: One Time</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+               
+            }
+            if (schedule is ScheduleWeekly)
+            {
+                ScheduleWeekly model = ((ScheduleWeekly)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence: Every " + model.RepeatOnWeeks + " weeks(s) on "+model.RepeatOnDaysWeeks+"</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+            if (schedule is ScheduleMonthly)
+            {
+                ScheduleMonthly model = ((ScheduleMonthly)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence:  Day " + model.RepeatOnDay + " every " + model.RepeatOnMonth + " month(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+            if (schedule is ScheduleMonthlyRelative)
+            {
+                ScheduleMonthlyRelative model = ((ScheduleMonthlyRelative)schedule);
+
+                data += "<p>Repeats:" + model.Repeats + "</p>";
+                data += "<p>Recurrence:  The " + model.RepeatOnFirst+" "+model.RepeatOnDay + " every " + model.RepeatOnMonth + " month(s)</p>";
+                data += "<p>Time:  " + model.Time + "</p>";
+                data += "<p>Start Date:  " + model.StartDate + "</p>";
+                data += "<p>Stop Date:  " + model.StopDate + "</p>";
+            }
+
+            return data;
+        }
         // POST: ScheduleOnces/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -173,45 +234,32 @@ namespace OctagonPlatform.Controllers.Reports
                 model.Repeats = vmodel.Repeats;
                 model.StartDate = vmodel.StartDate;
                 if (vmodel.Repeats == ScheduleType.RepeatsEnum.Once)
-                {                   
-                   
-                    ((ScheduleOnce)model).Time = vmodel.Time;
+                {
+                    if (!EditScheduleOnce(vmodel, model)) return RedirectToAction("Index");                  
                 }
                 else
                 {
                     if (vmodel.Repeats == ScheduleType.RepeatsEnum.Daily)
-                    {                      
-                        ((ScheduleDaily)model).Time = vmodel.Time;
-                        ((ScheduleDaily)model).RepeatOn = vmodel.RepeatOn;
-                        ((ScheduleDaily)model).StopDate = vmodel.StopDate;
+                    {
+                       if( !EditScheduleDaily(vmodel,model)) return RedirectToAction("Index"); //Si Add en lugar de edit retorna false y se redirecciona
                     }
                     else
                     {
                         if (vmodel.Repeats == ScheduleType.RepeatsEnum.Weekly)
                         {
-                            ((ScheduleWeekly)model).Time = vmodel.Time;
-                            ((ScheduleWeekly)model).RepeatOnWeeks = vmodel.RepeatOnWeeks;
-                            ((ScheduleWeekly)model).RepeatOnDaysWeeks = vmodel.RepeatOnDaysWeeks;
-                            ((ScheduleWeekly)model).StopDate = vmodel.StopDate;
+                            if (!EditScheduleWeekly(vmodel, model)) return RedirectToAction("Index");                           
                         }
                         else
                         {
                             if (vmodel.Repeats == ScheduleType.RepeatsEnum.Monthly)
                             {
-                                ((ScheduleMonthly)model).Time = vmodel.Time;
-                                ((ScheduleMonthly)model).RepeatOnDay = vmodel.RepeatOnDay;
-                                ((ScheduleMonthly)model).RepeatOnMonth = vmodel.RepeatOnMonth;
-                                ((ScheduleMonthly)model).StopDate = vmodel.StopDate;
+                                if (!EditScheduleMonthly(vmodel, model)) return RedirectToAction("Index");                                
                             }
                             else
                             {
                                 if (vmodel.Repeats == ScheduleType.RepeatsEnum.MonthlyRelative)
                                 {
-                                    ((ScheduleMonthlyRelative)model).Time = vmodel.Time;
-                                    ((ScheduleMonthlyRelative)model).RepeatOnFirst = vmodel.RepeatOnFirst;
-                                    ((ScheduleMonthlyRelative)model).RepeatOnDay = vmodel.RepeatOnDay2;
-                                    ((ScheduleMonthlyRelative)model).RepeatOnMonth = vmodel.RepeatOnMonth2;
-                                    ((ScheduleMonthlyRelative)model).StopDate = vmodel.StopDate;
+                                    if (!EditScheduleMonthlyRelative(vmodel, model)) return RedirectToAction("Index");                                                                       
                                 }
                             }
                         }
@@ -221,6 +269,130 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return RedirectToAction("Index");
 
+        }
+
+        private bool EditScheduleMonthlyRelative(ScheduleViewModel vmodel, Schedule model)
+        {
+            if (model.GetType().BaseType.FullName != typeof(ScheduleMonthlyRelative).FullName)
+            {
+
+                ScheduleMonthlyRelative model1 = new ScheduleMonthlyRelative(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnFirst, vmodel.RepeatOnDay2, vmodel.RepeatOnMonth2, vmodel.StopDate);
+                IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
+               
+                AddReportFilters(subscriptions, model1, model.UserId, model.ID);                
+               
+                return false;
+
+            }
+            else
+            {
+                ((ScheduleMonthlyRelative)model).Time = vmodel.Time;
+                ((ScheduleMonthlyRelative)model).RepeatOnFirst = vmodel.RepeatOnFirst;
+                ((ScheduleMonthlyRelative)model).RepeatOnDay = vmodel.RepeatOnDay2;
+                ((ScheduleMonthlyRelative)model).RepeatOnMonth = vmodel.RepeatOnMonth2;
+                ((ScheduleMonthlyRelative)model).StopDate = vmodel.StopDate;
+            }
+            return true;
+        }
+
+        private void AddReportFilters(IEnumerable<SubscriptionModel> subscriptions, Schedule model1,int UserId,int ID)
+        {
+            model1.UserId = UserId;
+            _repo.Add(model1);
+            foreach (var item in subscriptions)
+            {
+                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId);
+
+                _repoSub.Add(subs);
+                foreach (var filter in item.ReportFilters)
+                {
+                    ReportFilter reportfilter = new ReportFilter();
+                    reportfilter.FilterID = filter.FilterID;
+                    reportfilter.ReportID = filter.ReportID;
+                    reportfilter.SubscriptionID = subs.Id;
+                    reportfilter.Value = filter.Value;
+                    _repofilter.Add(reportfilter);
+
+                }
+            }
+            _repo.Delete(ID);
+
+        }
+
+        private bool EditScheduleMonthly(ScheduleViewModel vmodel, Schedule model)
+        {
+            if (model.GetType().BaseType.FullName != typeof(ScheduleMonthly).FullName)
+            {
+                ScheduleMonthly model1 = new ScheduleMonthly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnDay, vmodel.RepeatOnMonth, vmodel.StopDate);
+                IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
+                AddReportFilters(subscriptions, model1, model.UserId, model.ID);
+
+                return false;
+            }
+            else
+            {
+                ((ScheduleMonthly)model).Time = vmodel.Time;
+                ((ScheduleMonthly)model).RepeatOnDay = vmodel.RepeatOnDay;
+                ((ScheduleMonthly)model).RepeatOnMonth = vmodel.RepeatOnMonth;
+                ((ScheduleMonthly)model).StopDate = vmodel.StopDate;
+            }
+            return true;
+        }
+
+        private bool EditScheduleWeekly(ScheduleViewModel vmodel, Schedule model)
+        {
+            if (model.GetType().BaseType.FullName != typeof(ScheduleWeekly).FullName)
+            {
+                ScheduleWeekly model1 = new ScheduleWeekly(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOnWeeks, vmodel.RepeatOnDaysWeeks, vmodel.StopDate);
+
+                IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
+                AddReportFilters(subscriptions, model1, model.UserId, model.ID);
+                return false;
+            }
+            else
+            {
+                ((ScheduleWeekly)model).Time = vmodel.Time;
+                ((ScheduleWeekly)model).RepeatOnWeeks = vmodel.RepeatOnWeeks;
+                ((ScheduleWeekly)model).RepeatOnDaysWeeks = vmodel.RepeatOnDaysWeeks;
+                ((ScheduleWeekly)model).StopDate = vmodel.StopDate;
+            }
+            return true;
+        }
+
+        private bool EditScheduleOnce(ScheduleViewModel vmodel, Schedule model)
+        {
+            if (model.GetType().BaseType.FullName != typeof(ScheduleOnce).FullName)
+            {
+                ScheduleOnce model1 = new ScheduleOnce(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time);
+
+                IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
+                AddReportFilters(subscriptions, model1, model.UserId, model.ID);
+                return false;
+            }
+            else
+            {
+                ((ScheduleOnce)model).Time = vmodel.Time;
+            }
+            return true;
+        }
+
+        private bool EditScheduleDaily(ScheduleViewModel vmodel, Schedule model)
+        {
+            if (model.GetType().BaseType.FullName != typeof(ScheduleDaily).FullName)
+            {
+                ScheduleDaily model1 = new ScheduleDaily(vmodel.Name, vmodel.Repeats, vmodel.StartDate, vmodel.Time, vmodel.RepeatOn, vmodel.StopDate);
+
+                IEnumerable<SubscriptionModel> subscriptions = model.Subscriptions;
+                AddReportFilters(subscriptions, model1, model.UserId, model.ID);
+                return false;
+            }
+            else
+            {
+                ((ScheduleDaily)model).Time = vmodel.Time;
+                ((ScheduleDaily)model).RepeatOn = vmodel.RepeatOn;
+                ((ScheduleDaily)model).StopDate = vmodel.StopDate;
+                return true;
+            }
         }
 
         // GET: ScheduleOnces/Delete/5
@@ -238,14 +410,17 @@ namespace OctagonPlatform.Controllers.Reports
             return View(schedule);
         }
 
-        // POST: ScheduleOnces/Delete/5
+      
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            _repo.Delete(id);          
-            return RedirectToAction("Index");
+        // [ValidateAntiForgeryToken]
+        public PartialViewResult DeleteConfirmed(int id)
+        {
+            int userid = _repo.FindBy(id).UserId;
+            _repo.Delete(id);
+           
+            return List(userid.ToString());
         }
+
 
         protected override void Dispose(bool disposing)
         {

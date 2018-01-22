@@ -1,4 +1,5 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.SubscriptionVM
+@using OctagonPlatform.Models;
 
 <table class="table">
     <tr>
@@ -48,17 +49,27 @@
                 @Html.DisplayFor(modelItem => item.LastRunDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                @Ajax.ActionLink(" ", "Edit", new { id = item.Id },
+                 new AjaxOptions
+                 {
+                     HttpMethod = "GET",
+                     UpdateTargetId = "SubscriptionList",
+                     InsertionMode = InsertionMode.Replace,
+                     OnSuccess = "SuccessEdit(data, " + item.Id + ");"
+                 },
+                 new { @class = "btn btn-info glyphicon glyphicon-edit" })
+
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-                             new AjaxOptions
-                             {
-                                 HttpMethod = "POST",
-                                 UpdateTargetId = "SubscriptionList",
-                                 InsertionMode = InsertionMode.Replace,
-                                 Confirm = "Are you Sure You Want to Delete " + @item.ReportName
-                             },
-                             new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "SubscriptionList",
+                        InsertionMode = InsertionMode.Replace,
+                        Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                    },
+                    new { @class = "btn btn-danger glyphicon glyphicon-trash" })
             </td>
         </tr>
     }
@@ -74,11 +85,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ReportId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("ReportId", null, htmlAttributes: new { @class = "form-control" })
+
+                    @Html.DropDownList("ReportId", null, "-Select Report-", htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div id="PartialFilter"> </div>
+            <div id="PartialFilter"></div>
         </div>
         <div class="col-md-6">
             <h3>Scheduling</h3>   <hr />
@@ -94,5 +106,6 @@
         </div>
     </div>
     <input type="hidden" id="userId" name="userId" />
+    <input type="hidden" id="subId" name="subId" />
 }
 @Scripts.Render("~/Scripts/Subscription.js")

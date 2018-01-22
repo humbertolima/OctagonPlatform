@@ -9,8 +9,11 @@ using System.Web;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class ReportFilterRepository : GenericRepository<ReportFilter>, IReportFilter             
+    public class ReportFilterRepository : GenericRepository<ReportFilter>, IReportFilter
     {
-       
+        public void DeleteReportFilter(ReportFilter rfilter)
+        {
+            if (rfilter != null) Table.Remove(rfilter);
+        }
     }
 }

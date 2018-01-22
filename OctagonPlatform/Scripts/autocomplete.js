@@ -1,7 +1,5 @@
 ﻿$(function () {
-    $('#error').fadeIn('slow', function () {
-        $('#error').fadeOut(5000);
-    });
+   
     $('#partner').autocomplete({
         source: urlautopartner,
         select: function (event, ui) {

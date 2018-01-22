@@ -71,6 +71,12 @@ namespace OctagonPlatform.Models
            .HasRequired(b => b.Subscription)
            .WithMany(b => b.ReportFilters)
            .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<SubscriptionModel>()
+          .HasRequired(b => b.Schedule)
+          .WithMany(b => b.Subscriptions)
+          .WillCascadeOnDelete(true);
+
             modelBuilder.Entity<Permission>().Property(p => p.ParentID).IsOptional();   //haciendo opcional parent de permission para que pueda ser null.
             //modelBuilder.Entity<>
         }
