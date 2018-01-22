@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -121,7 +122,7 @@ namespace OctagonPlatform.Controllers.Reports
                         ScheduleName = item.Schedule.Name,
                         Username = item2.Username,
                         NextRunDate = NextRunDate(schedule),
-                        LastRunDate = LastRunDate(schedule),
+                        LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
                         Id = item.Id
                     };                   
                     aux.Add(obj);     
@@ -158,8 +159,41 @@ namespace OctagonPlatform.Controllers.Reports
                     daterun = nextday +" " + ((ScheduleDaily)schedule).Time; 
                 }
             }
+            if (schedule is ScheduleWeekly)
+            {
+                datestart += " " + ((ScheduleWeekly)schedule).Time;
+                DateTime dt = Convert.ToDateTime(datestart);
+                if (dt > DateTime.Now)
+                    daterun = dt.ToString();
+                else
+                {
+                    ScheduleWeekly week = ((ScheduleWeekly)schedule);
+                    string[] days = week.RepeatOnDaysWeeks.Split('_');
+                    int days_week = week.RepeatOnWeeks * 7;
+                    DateTime nextweek = today.AddDays(days_week);
+                    DateTime first_date_week = Utils.GetFirstDayOfWeek(nextweek);
+                    DateTime nextrun = GetNextRun(first_date_week, days[0]);                 
+                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
+                   
+                }
+            }
             return daterun;
         }
+
+        private DateTime GetNextRun(DateTime first_date_week, string dayrun)
+        {
+            string day = first_date_week.DayOfWeek.ToString().Substring(0, 3);
+            if (day == dayrun)
+                return first_date_week;
+            else
+            {               
+                DateTime next = first_date_week.AddDays(1);
+               return GetNextRun( next,  dayrun);                
+            }
+           
+        }
+
+        //arreglar esta funcion para que tome el tiempo real de ejecucion de la subscription
         private string LastRunDate(Schedule schedule)
         {
             string datestart = schedule.StartDate.ToShortDateString();
