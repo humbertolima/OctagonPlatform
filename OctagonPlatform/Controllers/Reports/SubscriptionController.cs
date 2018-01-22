@@ -177,6 +177,24 @@ namespace OctagonPlatform.Controllers.Reports
                    
                 }
             }
+            if (schedule is ScheduleMonthly)
+            {
+                datestart += " " + ((ScheduleMonthly)schedule).Time;
+                DateTime dt = Convert.ToDateTime(datestart);
+                if (dt > DateTime.Now)
+                    daterun = dt.ToString();
+                else
+                {
+                    ScheduleMonthly month = ((ScheduleMonthly)schedule);
+                    int day = month.RepeatOnDay;
+                    int every_month = month.RepeatOnMonth;
+
+                    DateTime next_month = today.AddMonths(every_month);
+
+                    daterun = next_month.Month + "/" + day + "/" + next_month.Year + " " + ((ScheduleMonthly)schedule).Time;
+
+                }
+            }
             return daterun;
         }
 
