@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -62,20 +63,21 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(UserFormViewModel viewModel, string[] allSetOfPermissions, string[] permissions1)
-        {
+        public ActionResult Create(UserFormViewModel viewModel, string permissions1)    //puse el 1 porque el controlador recibe un parametro "permissions" que es de tipo Models.Permission y trata de convertir el strin a este tipo de dato. por eso no puede
+        {                                                                               //llamarse permissions/. https://stackoverflow.com/questions/7983023/the-parameter-conversion-from-type-system-string-to-type-x-failed-because-n
             if (!ModelState.IsValid)
             {
 
-                ViewBag.Error = "Please check the entered values. ";
+                ViewBag.Error = ViewModelError.Get(ModelState);
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
             try
             {
+                string[] ids = PermissionsSplit(permissions1);
+
                 //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
-                viewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
-
-
+                viewModel.Permissions = _userRepository.GetPermissionsByArray(ids);
+                
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
@@ -85,7 +87,15 @@ namespace OctagonPlatform.Controllers
                 //porque el Partner en RenderUserFormViewModel se envia la primera vez que se crea el view pero para cuando retorna error, se envia un viewModel que tiene el Partner en NULL.
                 return View(_userRepository.InitializeNewFormViewModel(viewModel));
             }
+        }
 
+        private string[] PermissionsSplit(string permissions1)
+        {
+
+            string[] separator = { "," };
+            string[] ids = (permissions1.Split(separator, StringSplitOptions.RemoveEmptyEntries));
+
+            return ids;
         }
 
         [HttpGet]
@@ -114,7 +124,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(UserEditFormViewModel editViewModel, string[] permissions1)
+        public ActionResult Edit(UserEditFormViewModel editViewModel, string permissions1)
         {
             if (!ModelState.IsValid)
             {
@@ -124,9 +134,10 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
-                editViewModel.Permissions = _userRepository.AddPermissionToUser(permissions1);
+                string[] ids = PermissionsSplit(permissions1);
 
-                //viewModel = new MapFrom<UserEditFormViewModel>().ToUserFormView(editViewModel);
+                editViewModel.Permissions = _userRepository.GetPermissionsByArray(ids); //pendiente poner en el controlador de permissions
+
                 var viewModel = Mapper.Map<UserEditFormViewModel, UserFormViewModel>(editViewModel);
 
                 _userRepository.SaveUser(viewModel, "Edit");
@@ -272,8 +283,16 @@ namespace OctagonPlatform.Controllers
 
             return PartialView("Sections/BankAccounts", bankAccounts);
         }
+        #endregion
+        public ActionResult AutoUser(string term)
+        {
+
+            IEnumerable<dynamic> list = _userRepository.GetAllUser(term, Convert.ToInt32(Session["partnerId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
-    #endregion
+   
 
 
 }

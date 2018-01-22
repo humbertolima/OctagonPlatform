@@ -33,13 +33,13 @@ namespace OctagonPlatform.Controllers
 
         // GET: TerminalContacts/Create
         [HttpGet]
-        public ActionResult Create(int? terminalId)
+        public ActionResult Create(int? id)
         {
             try
             {
-                if (terminalId != null)
+                if (id != null)
                 {
-                    var model = _terminalContactRepository.RenderTerminalContactFormViewModel((int)terminalId);
+                    var model = _terminalContactRepository.RenderTerminalContactFormViewModel((int)id);
                     return PartialView("Modal/AddTerminalContact", model);
                 }
 

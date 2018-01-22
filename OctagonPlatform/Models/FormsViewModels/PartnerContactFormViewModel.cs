@@ -66,9 +66,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public Models.State State { get; set; }
 
-        public IEnumerable<State> States { get; set; }
+        public IEnumerable<Models.State> States { get; set; }
 
 
         [Display(Name = "City")]

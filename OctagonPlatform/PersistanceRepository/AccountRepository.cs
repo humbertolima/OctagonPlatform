@@ -3,14 +3,32 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Security;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class AccountRepository: GenericRepository<User>, IAccountRepository
+    public class AccountRepository : GenericRepository<User>, IAccountRepository
     {
+        public List<Permission> GetPermissions(int userId)
+        {
+            try
+            {       //pendiente validar si viene el Id
+                    //List<Permission> permissions = Context.Permissions.ToList();
+                var permissions = Context.Permissions
+                    .Include(u=>u.Users).ToList();
+
+                return permissions;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
         public UserLoginViewModel Login(UserLoginViewModel userLogin)
         {
             try
@@ -26,10 +44,13 @@ namespace OctagonPlatform.PersistanceRepository
                     {
                         return new UserLoginViewModel()
                         {
+                            Id = user.Id,
                             UserName = userLogin.UserName,
                             Logo = user.Partner.Logo,
                             Partner = user.Partner,
-                            BusinessName = user.Partner.BusinessName
+                            BusinessName = user.Partner.BusinessName,
+                            Name = user.Name,
+                            UserId = user.Id
                         };
                     }
                 }

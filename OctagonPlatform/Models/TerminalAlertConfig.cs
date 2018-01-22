@@ -14,12 +14,16 @@ namespace OctagonPlatform.Models
         public Terminal Terminal { get; set; }
 
         [Required]
+        [Display(Name = "Low Cash 1")]
         public double LowCach1 { get; set; }
 
+        [Display(Name = "Low Cash 2")]
         public double? LowCash2 { get; set; }
 
+        [Display(Name = "Low Cash 3")]
         public double? LowCash3 { get; set; }
 
+        [Display(Name = "Ignored Hours Inactive")]
         public int IgnoreHoursInactive { get; set; }
 
         public bool IgnoreChestDoorOpen { get; set; }

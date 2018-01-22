@@ -16,15 +16,16 @@ namespace OctagonPlatform.Helpers
         {
             try
             {
-                SmtpClient client = new SmtpClient();
-                client.EnableSsl = true;
-                //WebMail.EnableSsl = true;
-                client.Port = 25;
-                //WebMail.SmtpPort = 25;
-                client.UseDefaultCredentials = true;
-                client.Credentials = new NetworkCredential("luisrafael.gamez@outlook.com", "Vv19477002");
-                client.Host = "smtp.live.com";
-
+                SmtpClient client = new SmtpClient()
+                {
+                    EnableSsl = true,
+                    //WebMail.EnableSsl = true;
+                    Port = 25,
+                    //WebMail.SmtpPort = 25;
+                    UseDefaultCredentials = true,
+                    Credentials = new NetworkCredential("luisrafael.gamez@outlook.com", "Vv19477002"),
+                    Host = "smtp.live.com"
+                };
                 MailAddress from = new MailAddress("luisrafael.gamez@outlook.com");
                 MailAddress to = new MailAddress(sendTo);
 
@@ -39,17 +40,17 @@ namespace OctagonPlatform.Helpers
                 //var from = "";
                 //var cc = "";
 
-                MemoryStream stream = new MemoryStream(filesToAttach);
+                //MemoryStream stream = new MemoryStream(filesToAttach);
                 
-                Attachment attach = new Attachment(stream, "index.jpg");
+                //Attachment attach = new Attachment(stream, "index.jpg");
 
-                attach.ContentType.MediaType = MediaTypeNames.Image.Jpeg;
-                attach.TransferEncoding = TransferEncoding.Base64;
-                attach.ContentId = "myImage";
-                attach.ContentDisposition.Inline = true;
+                //attach.ContentType.MediaType = MediaTypeNames.Image.Jpeg;
+                //attach.TransferEncoding = TransferEncoding.Base64;
+                //attach.ContentId = "myImage";
+                //attach.ContentDisposition.Inline = true;
 
-                messaje.BodyTransferEncoding = TransferEncoding.Base64;
-                messaje.Attachments.Add(attach);
+                //messaje.BodyTransferEncoding = TransferEncoding.Base64;
+                //messaje.Attachments.Add(attach);
                 
 
                 //File.WriteAllBytes(@"C:\Xyncro\Octagon\OctagonPlatform\OctagonPlatform\index.jpg", item);

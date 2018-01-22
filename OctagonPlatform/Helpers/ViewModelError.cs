@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Helpers
 {
-    public static class ViewModelError
+    public static class ViewModelError              //metodo para devolver mensaje completo del error de un viewModel.
     {
         public static string Get(ModelStateDictionary state)
         {

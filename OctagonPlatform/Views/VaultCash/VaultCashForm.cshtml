@@ -1,15 +1,12 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.VaultCashFormViewModel
 
-@using (Html.BeginForm("Create", "VaultCash", FormMethod.Post))
+
+@using (Html.BeginForm(Model.Action, "VaultCash", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <p class="alert alert-danger">
-            All fields are <strong>required.</strong>
-            @ViewBag.Error
-            @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
-        </p>
+
         @Html.HiddenFor(m => m.Id)
         <div class="form-group">
             @Html.LabelFor(m => m.BankAccountId)
@@ -17,29 +14,19 @@
             @Html.ValidationMessageFor(m => m.BankAccountId)
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.StartDate)
-            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", autofocus = "autofocus", @type = "date" })
-            @Html.ValidationMessageFor(m => m.StartDate)
+            <input type="date" class="form-control" id="StartDate" name="StartDate" value="@Model.StartDate.ToString("yyyy-MM-dd")" />
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.StopDate)
-            @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control", autofocus = "autofocus", @type = "date" })
-            @Html.ValidationMessageFor(m => m.StopDate)
+            <input type="date" class="form-control" id="StopDate" name="StopDate" value="@Model.StopDate.ToString("yyyy-MM-dd")" />
         </div>
 
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
                 <button type="reset" onclick="history.back();" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">@Model.Action</button>
             </div>
         </div>
     </div>
-}
-
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 }
 
 

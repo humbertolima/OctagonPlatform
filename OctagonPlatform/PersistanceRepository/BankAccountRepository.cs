@@ -189,11 +189,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> GetAllAccount(string term)
+        public IEnumerable<dynamic> GetAllAccount(string term,int partnerId)
         {
             try
             {
-                return Table.Where(b => (b.BankName.Contains(term) || b.AccountNumber.Contains(term) || b.RoutingNumber.Contains(term) || b.NameOnCheck.Contains(term))).Select(b => new { label = b.NickName+" - "+b.RoutingNumber+" / "+b.AccountNumber.Substring(b.AccountNumber.Length-4, 4), value = b.Id }).ToList();
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+
+                return list4.Where(b => (b.BankName.ToLower().Contains(term.ToLower()) || b.AccountNumber.ToLower().Contains(term.ToLower()) || b.RoutingNumber.ToLower().Contains(term.ToLower()) || b.NameOnCheck.ToLower().Contains(term.ToLower()))).Select(b => new { label = b.NickName+" - "+b.RoutingNumber+" / "+b.AccountNumber.Substring(b.AccountNumber.Length-4, 4), value = b.Id }).ToList();
             }
             catch (Exception e)
             {

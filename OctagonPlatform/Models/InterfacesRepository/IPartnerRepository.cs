@@ -21,6 +21,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         PartnerFormViewModel InitializeNewFormViewModel(PartnerFormViewModel viewModel);
 
-        IEnumerable<dynamic> GetAllPartner(string term);
+       
+        IEnumerable<dynamic> GetAllPartner(string term, int partnerid);
     }
 }

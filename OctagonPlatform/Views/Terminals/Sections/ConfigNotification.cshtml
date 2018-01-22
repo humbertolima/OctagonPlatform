@@ -1,27 +1,27 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.TerminalConfigViewModel
-
+<div>
     <table class="table table-striped table-hover ">
         <tr class="info">
             <th data-toggle="collapse" data-target="#collapse1">
-                <a data-toggle="collapse" href="#collapse1">Inactive Period: @Model.IgnoreHoursInactive</a>
+                <a data-toggle="collapse" href="#collapse1">Inactive Period:&nbsp; &nbsp;&nbsp;@Model.IgnoreHoursInactive</a>
                 <div id="collapse1" class="collapse">
                     <table>
                         <tbody>
                             @{ foreach (var item in Model.WorkingHours)
                                 {
                                     <tr>
-                                        <td>@item.Day</td>
-                                        <td>@item.StartTime</td>
-                                        <td>@item.EndTime</td>
-                                        <td>
+                                        <td style="padding: 7px;">@item.Day</td>
+                                        <td style="padding: 7px;">@item.StartTime</td>
+                                        <td style="padding: 7px;">@item.EndTime</td>
+                                        <td style="padding: 7px;">
                                             <button type="button" class="btn btn-info btn-microsoft WorkingHoursEdit" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
                                         </td>
-                                        <td>
+                                        <td style"padding: 7px;">
                                             <button type="button" class="btn btn-info btn-microsoft DeleteWorkingHours" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
                                         </td>
                                     </tr>
                                 }
-                                }
+                            }
                             <tr>
                                 <td>
                                     <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
@@ -29,7 +29,6 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </th>
             <th></th>
@@ -37,7 +36,7 @@
 
         <tr class="info">
 
-            <th>Low Cash 1:</th>
+            <th style="width:65%">Low Cash 1:</th>
             <th>@Model.LowCach1</th>
         </tr>
         <tr class="info">
@@ -52,45 +51,48 @@
         </tr>
         <tbody></tbody>
     </table>
-    Ignored Alerts <br />
-    @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention, new { @disabled = "disabled" }) Bill dispenser needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention, new { @disabled = "disabled" }) Card reader needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.IgnoreCassetteNotes, new { @disabled = "disabled" }) Cassette notes are out<br />
-    @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen, new { @disabled = "disabled" }) Chest door is open<br />
-    @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention, new { @disabled = "disabled" }) Comm system needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention, new { @disabled = "disabled" }) Journal printer needs attention or out of service<br />
-    @Html.CheckBoxFor(m => m.IgnoreJournalPaper, new { @disabled = "disabled" }) Journal printer paper is low/out<br />
-    @Html.CheckBoxFor(m => m.IgnoreJournalRibbon, new { @disabled = "disabled" }) Journal printer ribbon is low/out<br />
-    @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention, new { @disabled = "disabled" }) Receipt printer need attention or out of service<br />
-    @Html.CheckBoxFor(m => m.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
-    @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
-    @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
+    <div style="margin: 10px;">
+        Ignored Alerts <br /> <br />
 
-    <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
-    
+        @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention, new { @disabled = "disabled" }) Bill dispenser needs attention or out of service<br />
+        @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention, new { @disabled = "disabled" }) Card reader needs attention or out of service<br />
+        @Html.CheckBoxFor(m => m.IgnoreCassetteNotes, new { @disabled = "disabled" }) Cassette notes are out<br />
+        @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen, new { @disabled = "disabled" }) Chest door is open<br />
+        @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention, new { @disabled = "disabled" }) Comm system needs attention or out of service<br />
+        @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention, new { @disabled = "disabled" }) Journal printer needs attention or out of service<br />
+        @Html.CheckBoxFor(m => m.IgnoreJournalPaper, new { @disabled = "disabled" }) Journal printer paper is low/out<br />
+        @Html.CheckBoxFor(m => m.IgnoreJournalRibbon, new { @disabled = "disabled" }) Journal printer ribbon is low/out<br />
+        @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention, new { @disabled = "disabled" }) Receipt printer need attention or out of service<br />
+        @Html.CheckBoxFor(m => m.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
+        @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
+        @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
+        <br />
+        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
+        <br />
+    </div>
+
     @*========= Modal =========*@
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content col-lg-10">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Edit configuration</h4>
                 </div>
-
-                <h3 class="alert-info">Edit Config Alert</h3>
 
                 @using (Html.BeginForm("SetConfiguration", "Terminals"))
             {
-                    @Model
                     @Html.AntiForgeryToken()
-                    @Html.Hidden("id",Model.Id)
+                    @Html.Hidden("id", Model.Id)
                     @Html.Hidden("terminalId", Model.TerminalId)
 
-                    <p class="alert alert-danger">
-                        All fields are <strong>required.</strong>
-                        @ViewBag.Error
-                        @Html.ValidationSummary(false, "Please fix the fallowing errors!!!", new { @class = "text-danger" })
-                    </p>
+                    if (ViewBag.Error != null)
+                    {
+                        <p class="alert alert-danger">
+                            @ViewBag.Error
+                        </p>
+                    }
+
                     <div class="form-group">
                         @Html.LabelFor(m => m.IgnoreHoursInactive)
                         @Html.TextBoxFor(m => m.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "48", @type = "" })
@@ -144,20 +146,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                    <h3 class="alert-info">Edit Config Alert</h3>
+                    <h4 class="modal-title">Edit configuration</h4>
                 </div>
-
-                @using (Html.BeginForm("SetWorkingHours", "Terminals"))
+                <div class="panel-body">
+                    @using (Html.BeginForm("SetWorkingHours", "Terminals"))
             {
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
-                    
-                    @Html.Hidden("TerminalId", Model.Id)
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
 
-                    <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+                        @Html.Hidden("TerminalId", Model.Id)
 
-                    @Html.DropDownList("Days", new List<SelectListItem>
+                        <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+
+                        @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
                     new SelectListItem{ Text="Tuesday", Value = "2" },
@@ -167,34 +168,8 @@
                     new SelectListItem{ Text="Saturday", Value = "6" },
                     new SelectListItem{ Text="Sunday", Value = "7" },
                  })
-                    @Html.DropDownList("StartTime", new List<SelectListItem>
-                {
-                    new SelectListItem{ Text="01:00", Value = "1" },
-                    new SelectListItem{ Text="02:00", Value = "2" },
-                    new SelectListItem{ Text="03:00", Value = "3" },
-                    new SelectListItem{ Text="04:00", Value = "4" },
-                    new SelectListItem{ Text="05:00", Value = "5" },
-                    new SelectListItem{ Text="06:00", Value = "6" },
-                    new SelectListItem{ Text="07:00", Value = "7" },
-                    new SelectListItem{ Text="08:00", Value = "8" },
-                    new SelectListItem{ Text="09:00", Value = "9" },
-                    new SelectListItem{ Text="10:00", Value = "10" },
-                    new SelectListItem{ Text="11:00", Value = "11" },
-                    new SelectListItem{ Text="12:00", Value = "12" },
-                    new SelectListItem{ Text="13:00", Value = "13" },
-                    new SelectListItem{ Text="14:00", Value = "14" },
-                    new SelectListItem{ Text="15:00", Value = "15" },
-                    new SelectListItem{ Text="16:00", Value = "16" },
-                    new SelectListItem{ Text="17:00", Value = "17" },
-                    new SelectListItem{ Text="18:00", Value = "18" },
-                    new SelectListItem{ Text="19:00", Value = "19" },
-                    new SelectListItem{ Text="20:00", Value = "20" },
-                    new SelectListItem{ Text="21:00", Value = "21" },
-                    new SelectListItem{ Text="22:00", Value = "22" },
-                    new SelectListItem{ Text="23:00", Value = "23" },
-                    new SelectListItem{ Text="24:00", Value = "24" },
-                 })
-                    @Html.DropDownList("EndTime", new List<SelectListItem>
+
+                        @Html.DropDownList("StartTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
                     new SelectListItem{ Text="02:00", Value = "2" },
@@ -222,12 +197,41 @@
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                        @Html.DropDownList("EndTime", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="01:00", Value = "1" },
+                    new SelectListItem{ Text="02:00", Value = "2" },
+                    new SelectListItem{ Text="03:00", Value = "3" },
+                    new SelectListItem{ Text="04:00", Value = "4" },
+                    new SelectListItem{ Text="05:00", Value = "5" },
+                    new SelectListItem{ Text="06:00", Value = "6" },
+                    new SelectListItem{ Text="07:00", Value = "7" },
+                    new SelectListItem{ Text="08:00", Value = "8" },
+                    new SelectListItem{ Text="09:00", Value = "9" },
+                    new SelectListItem{ Text="10:00", Value = "10" },
+                    new SelectListItem{ Text="11:00", Value = "11" },
+                    new SelectListItem{ Text="12:00", Value = "12" },
+                    new SelectListItem{ Text="13:00", Value = "13" },
+                    new SelectListItem{ Text="14:00", Value = "14" },
+                    new SelectListItem{ Text="15:00", Value = "15" },
+                    new SelectListItem{ Text="16:00", Value = "16" },
+                    new SelectListItem{ Text="17:00", Value = "17" },
+                    new SelectListItem{ Text="18:00", Value = "18" },
+                    new SelectListItem{ Text="19:00", Value = "19" },
+                    new SelectListItem{ Text="20:00", Value = "20" },
+                    new SelectListItem{ Text="21:00", Value = "21" },
+                    new SelectListItem{ Text="22:00", Value = "22" },
+                    new SelectListItem{ Text="23:00", Value = "23" },
+                    new SelectListItem{ Text="24:00", Value = "24" },
+                 })
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -237,19 +241,18 @@
 
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header alert-info">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                    <h3 class="alert-info">Edit Config Alert</h3>
+                    <h4 class="modal-title">Add inactive Period</h4>
                 </div>
-
-                @using (Html.BeginForm("AddWorkingHours", "Terminals"))
-                {
-
-                    @Html.Hidden("TerminalId", Model.Id)
-                    @Html.AntiForgeryToken()
-                    @Html.HiddenFor(m => m.Id)
-                    @Html.DropDownList("Days", new List<SelectListItem>
+                <div class="panel-body">
+                    @using (Html.BeginForm("AddWorkingHours", "Terminals"))
+            {
+                        <div class="form-group">
+                            @Html.Hidden("TerminalId", Model.Id)
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
                     new SelectListItem{ Text="Tuesday", Value = "2" },
@@ -260,7 +263,7 @@
                     new SelectListItem{ Text="Sunday", Value = "7" },
                  })
 
-                    @Html.DropDownList("StartTime", new List<SelectListItem>
+                            @Html.DropDownList("StartTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
                     new SelectListItem{ Text="02:00", Value = "2" },
@@ -288,7 +291,7 @@
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
 
-                    @Html.DropDownList("EndTime", new List<SelectListItem>
+                            @Html.DropDownList("EndTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
                     new SelectListItem{ Text="02:00", Value = "2" },
@@ -316,13 +319,14 @@
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
-                    </div>
-                }
-
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
@@ -356,18 +360,18 @@
     </div>
 
 
-@Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
-<script>
-    $(document).on("click", ".WorkingHoursEdit", function () {
-        var myBookId = $(this).data('id');
-        $("#myModalWorkingHours #WorkingHoursEdit").val(myBookId);
-    });
-</script>
+    <script>
+        $(document).on("click", ".WorkingHoursEdit", function () {
+            var myBookId = $(this).data('id');
+            $("#myModalWorkingHours #WorkingHoursEdit").val(myBookId);
+        });
+    </script>
 
-<script>
-    $(document).on("click", ".DeleteWorkingHours", function () {
-        var myBookId = $(this).data('id');
-        $("#DeleteWorkingHours #WorkingHoursId").val(myBookId);
-    });
-</script>
+    <script>
+        $(document).on("click", ".DeleteWorkingHours", function () {
+            var myBookId = $(this).data('id');
+            $("#DeleteWorkingHours #WorkingHoursId").val(myBookId);
+        });
+    </script>

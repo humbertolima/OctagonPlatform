@@ -41,7 +41,7 @@ namespace OctagonPlatform.PersistanceRepository
                 return viewModel;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -85,7 +85,7 @@ namespace OctagonPlatform.PersistanceRepository
                 Table.Add(dispute);
                 Save();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -102,7 +102,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 Edit(dispute);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
