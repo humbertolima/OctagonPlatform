@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
 }
 <h3 class="alert-info">Edit User</h3>
-@using (Html.BeginForm("Edit", "Users",FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <p class="alert alert-danger">
         All fields are <strong>required.</strong>
@@ -22,57 +22,58 @@
     }
     <div class="col-md-6">
         <div class="col-md-10">
-        <div class="form-group">
-            @Html.LabelFor(m => m.UserName)
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.UserName)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Status)
-            @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Status)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Name)
-            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Name)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.LastName)
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.LastName)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email)
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.Email)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Phone)
-            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.Phone)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.PartnerId)
-            @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.PartnerId)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password)
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword)
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.IsLocked)
-            @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(m => m.IsLocked)
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Status)
+                @Html.EnumDropDownListFor(m => m.Status, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Status)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.LastName)
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Phone)
+                @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PartnerId)
+                @Html.DropDownListFor(m => m.PartnerId, new SelectList(Model.Partners, "Id", "BusinessName"), "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PartnerId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", autofocus = "autofocus" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autofocus = "autofocus" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsLocked)
+                @Html.CheckBoxFor(m => m.IsLocked, new { @class = "form-control", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.IsLocked)
+            </div>
         </div>
     </div>
     <div class="col-md-6">
+        <input type="hidden" id="permissions" name="permissions1" value="" />
         @Html.Partial("../Permissions/Sections/PermissionTree")
     </div>
     <div class="form-group">

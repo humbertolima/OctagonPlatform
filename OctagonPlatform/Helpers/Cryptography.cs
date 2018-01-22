@@ -12,6 +12,7 @@ namespace OctagonPlatform.Helpers
             var randNum = new Random();
             var chars = new char[100];
             var allowedCharCount = allowedChars.Length;
+          
             for (var i = 0; i <= 100 - 1; i++)
             {
                 chars[i] = allowedChars[Convert.ToInt32((allowedChars.Length) * randNum.NextDouble())];
