@@ -1147,9 +1147,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LayoutAdminSB.cshtml" />
     <Content Include="Views\Shared\Sections\Header.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\NavBarOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\ScriptsOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
