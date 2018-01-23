@@ -453,6 +453,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\data\vendbot-data.js" />
     <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
     <Content Include="Octagon\assets\data\demmoney-data.js" />
@@ -802,8 +803,6 @@
     <Content Include="Octagon\assets\js\sb-admin-2.js" />
     <Content Include="Octagon\assets\js\script.min.js" />
     <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.min.js" />
