@@ -773,7 +773,6 @@
     <Content Include="Octagon\assets\css\Dashboard.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\AMS-data.js" />
