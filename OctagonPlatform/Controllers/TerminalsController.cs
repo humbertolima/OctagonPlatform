@@ -8,11 +8,10 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Terminals")]
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-
 
         public TerminalsController(ITerminalRepository repository)
         {
@@ -400,7 +399,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        // GET: Terminals/Create
+        //[Authorize(roles)]
         public ActionResult Create(int? partnerId)
         {
             try
