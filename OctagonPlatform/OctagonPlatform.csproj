@@ -770,7 +770,6 @@
     <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
     <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
     <Content Include="Octagon\assets\css\cosmo.css" />
-    <Content Include="Octagon\assets\css\Dashboard.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
