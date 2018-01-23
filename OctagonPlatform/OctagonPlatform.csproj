@@ -770,12 +770,8 @@
     <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
     <Content Include="Octagon\assets\css\cosmo.css" />
     <Content Include="Octagon\assets\css\Dashboard.css" />
-    <Content Include="Octagon\assets\css\Footer-Basic.css" />
-    <Content Include="Octagon\assets\css\Map-Clean.css" />
-    <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\sidebar.css" />
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />

@@ -1,6 +1,21 @@
 body {
     min-width: 279px;
 }
+
+
+
+/*****footer*****/
+#footer {
+    font-family: Helvetica;
+    color: white;
+    text-align: center;
+    background: gray;
+    height: 50px;
+    padding-top: 20px;
+}
+
+
+
 /******home page**********/
 
 /********navbar********/

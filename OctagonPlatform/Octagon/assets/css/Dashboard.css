@@ -53,21 +53,19 @@ a {
 .imageupload{
     float:right;
 }
+
 @media (max-width:991px){
     #imageupload{
-    
     }
 }
 
 @media (max-width:991px){
     #lingleft{
-
     }
 }
 
 @media (max-width:991px){
     .delete{
-
     }
 }
 @media (max-width:767px){
@@ -140,14 +138,7 @@ a {
     margin-bottom: 0px;
 }
 
-#footer {
-    color: white;
-    text-align: center;
-    background: gray;
 
-    height: 50px;
-    padding-top: 20px;
-}
 
 
 
@@ -248,11 +239,11 @@ a {
     border: 1px solid #e9ecef
 }
 
-    .table-bordered th, .table-bordered td {
+.table-bordered th, .table-bordered td {
         border: 1px solid #e9ecef
     }
 
-    .table-bordered thead th, .table-bordered thead td {
+.table-bordered thead th, .table-bordered thead td {
         border-bottom-width: 2px
     }
 
@@ -272,7 +263,7 @@ a {
     background-color: #adcef4
 }
 
-    .table-hover .table-primary:hover > td, .table-hover .table-primary:hover > th {
+.table-hover .table-primary:hover > td, .table-hover .table-primary:hover > th {
         background-color: #adcef4
     }
 
@@ -286,7 +277,7 @@ a {
 
     .table-hover .table-secondary:hover > td, .table-hover .table-secondary:hover > th {
         background-color: #babbbb
-    }
+ }
 
 .table-success, .table-success > th, .table-success > td {
     background-color: #c9ebbe
@@ -296,7 +287,7 @@ a {
     background-color: #b9e5ab
 }
 
-    .table-hover .table-success:hover > td, .table-hover .table-success:hover > th {
+.table-hover .table-success:hover > td, .table-hover .table-success:hover > th {
         background-color: #b9e5ab
     }
 
@@ -308,9 +299,9 @@ a {
     background-color: #d7bde5
 }
 
-    .table-hover .table-info:hover > td, .table-hover .table-info:hover > th {
+.table-hover .table-info:hover > td, .table-hover .table-info:hover > th {
         background-color: #d7bde5
-    }
+}
 
 .table-warning, .table-warning > th, .table-warning > td {
     background-color: #ffd8be
@@ -320,7 +311,7 @@ a {
     background-color: #ffc9a5
 }
 
-    .table-hover .table-warning:hover > td, .table-hover .table-warning:hover > th {
+.table-hover .table-warning:hover > td, .table-hover .table-warning:hover > th {
         background-color: #ffc9a5
     }
 
@@ -344,9 +335,9 @@ a {
     background-color: #ececf6
 }
 
-    .table-hover .table-light:hover > td, .table-hover .table-light:hover > th {
+.table-hover .table-light:hover > td, .table-hover .table-light:hover > th {
         background-color: #ececf6
-    }
+}
 
 .table-dark, .table-dark > th, .table-dark > td {
     background-color: #c7c8c8
@@ -356,7 +347,7 @@ a {
     background-color: #babbbb
 }
 
-    .table-hover .table-dark:hover > td, .table-hover .table-dark:hover > th {
+.table-hover .table-dark:hover > td, .table-hover .table-dark:hover > th {
         background-color: #babbbb
     }
 
@@ -368,9 +359,9 @@ a {
     background-color: rgba(0,0,0,0.075)
 }
 
-    .table-hover .table-active:hover > td, .table-hover .table-active:hover > th {
+.table-hover .table-active:hover > td, .table-hover .table-active:hover > th {
         background-color: rgba(0,0,0,0.075)
-    }
+}
 
 .table.dataTable .thead-dark th {
     color: #fff;
@@ -396,21 +387,22 @@ a {
     background-color: #212529
 }
 
-    .table-dark th, .table-dark td, .table-dark thead th {
+.table-dark th, .table-dark td, .table-dark thead th {
         border-color: #32383e
-    }
+ }
 
-    .table-dark.table-bordered {
+.table-dark.table-bordered {
         border: 0
-    }
+}
 
-    .table-dark.table-striped tbody tr:nth-of-type(odd) {
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
         background-color: rgba(255,255,255,0.05)
-    }
+}
 
-    .table-dark.table-hover tbody tr:hover {
+.table-dark.table-hover tbody tr:hover {
         background-color: rgba(255,255,255,0.075)
-    }
+}
+
 
 @media (max-width: 575px) {
     .table-responsive-sm {
@@ -421,7 +413,7 @@ a {
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
 
-        .table-responsive-sm.table-bordered {
+     .table-responsive-sm.table-bordered {
             border: 0
         }
 }
@@ -435,7 +427,7 @@ a {
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
 
-        .table-responsive-md.table-bordered {
+    .table-responsive-md.table-bordered {
             border: 0
         }
 }
@@ -476,7 +468,7 @@ a {
     -ms-overflow-style: -ms-autohiding-scrollbar
 }
 
-    .table-responsive.table-bordered {
+.table-responsive.table-bordered {
         border: 0
     }
 
