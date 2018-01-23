@@ -763,7 +763,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Octagon\assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
@@ -777,8 +776,6 @@
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
     <Content Include="Octagon\assets\css\sidebar.css" />
-    <Content Include="Octagon\assets\css\styles-1.css" />
-    <Content Include="Octagon\assets\css\styles.css" />
     <Content Include="Octagon\assets\css\styles.min.css" />
     <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />

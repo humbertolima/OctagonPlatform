@@ -1,128 +1,210 @@
+body {
+    min-width: 279px;
+}
+/******home page**********/
+
+/********navbar********/
+
+.navbar .navbar-default .navbar-fixed-top {
+    background-color: #ffffff;
+    font-size: 15px;
+    padding: 12px;
+}
+
+
+
 input[type=text], input[type=password] {
-  width:100%;
-  /*padding:12px 20px;*/
-  margin:8px 0;
-  display:inline-block;
-  border:1px solid #ccc;
-  box-sizing:border-box;
+    width: 100%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 button {
-  background-color:#b7bbc5;
-  color:white;
-  padding:10px 15px;
-  margin:8px 0;
-  border:none;
-  cursor:pointer;
-  width:100%;
+    background-color: #b7bbc5;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
 }
 
-body {
-  min-width:279px;
-}
 
-button:hover {
-  opacity:0.8;
-}
+
+    button:hover {
+        opacity: 0.8;
+    }
 
 .cancelbtn {
-  width:auto;
-  padding:10px 18px;
-  background-color:#f44336;
-  color: white;
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+    color: white;
 }
 
-.imgcontainer {
-  text-align:center;
-  margin:24px 0 12px 0;
-  position:relative;
+.i-container {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
 }
 
 img.avatar {
-  width:40%;
-  border-radius:50%;
+    width: 40%;
+    border-radius: 50%;
 }
 
 .container {
-  padding:0px;
+    padding: 0px;
 }
 
 .containerlogin {
-  padding:16px;
-  max-width:500px;
-  position:relative;
-  margin:auto;
-  background:#f3f3f3;
+    padding: 16px;
+    max-width: 500px;
+    position: relative;
+    margin: auto;
+    background: #f3f3f3;
 }
 
 span.psw {
-  float:right;
-  padding-top:16px;
+    float: right;
+    padding-top: 16px;
 }
 
 .modal {
-  display:none;
-  position:fixed;
-  z-index:1;
-  left:0;
-  top:0;
-  width:100%;
-  height:100%;
-  overflow:auto;
-  background-color:rgb(0,0,0);
-  background-color:rgba(0,0,0,0.4);
-  padding-top:60px;
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
 }
 
 .modal-content {
-  background-color:#fffff7;
-  margin:5% auto 15% auto;
-  border:1px solid #888;
-  width:80%;
+    background-color: #fffff7;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
 }
 
 .close {
-  position:absolute;
-  right:25px;
-  top:0;
-  color:#000;
-  font-size:35px;
-  font-weight:bold;
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
 }
 
-.close:hover, .close:focus {
-  color:red;
-  cursor:pointer;
-}
+    .close:hover, .close:focus {
+        color: red;
+        cursor: pointer;
+    }
 
 .animate {
-  -webkit-animation:animatezoom 0.6s;
-  animation:animatezoom 0.6s;
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s;
 }
 
 @keyframes animatezoom {
-  from {
-    transform:scale(0);
-  }
-  to {
-    transform:scale(1);
-  }
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
 }
 
 @media screen and (max-width: 300px) {
-  span.psw {
-    display:block;
-    float:none;
-  }
+    span.psw {
+        display: block;
+        float: none;
+    }
 }
 
 @media screen and (max-width: 300px) {
-  .cancelbtn {
-    width:100%;
-  }
+    .cancelbtn {
+        width: 100%;
+    }
 }
 
-/****** card home *********/
+@media (min-width:1200px) {
+    .navbar-default {
+        background-color: #fefdfd;
+        border-color: #fefefe;
+    }
+
+    #container-fluid {
+        width: 1200px;
+    }
+}
+
+
+/*logo navbar*/
+#logo {
+    max-height: 42px;
+    margin-right: 5px;
+    margin-top: -3px;
+    display: inline-block;
+}
+/*********end navbar*/
+
+
+
+/*****promo banner****/
+#promo {
+    text-align: center;
+    padding: 40px;
+    background: url(../../assets/img/carousel1.jpg);
+    background-size: cover;
+}
+
+    #promo .jumbotron {
+        border-radius: 20px;
+        padding: 40px;
+        background-color: rgba(255,255,255,0.25);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+
+
+@media (max-width:991px) {
+    #promo {
+        padding: 20px;
+    }
+
+    promo .jumbotron {
+        padding: 20px;
+    }
+}
+
+@media (max-width:991px) {
+    #promo {
+        padding: 20px;
+    }
+
+    promo .jumbotron {
+        padding: 20px;
+    }
+}
+
+
+
+
+/****** container site-section  imges home *********/
+.container.site-section {
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+}
 #team {
     width: 100%;
     padding: 8px;
@@ -143,12 +225,15 @@ span.psw {
     -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.18);
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.18);
 }
+/******END container site-section  imges home *********/
 
 
 
 
-/******END card home *********/
 /******Banner home*********/
+#container-fluid {
+    align-content: center;
+}
 .banner-home {
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -157,5 +242,31 @@ span.psw {
 .banner-home img {
     width: 100%;
 }
-
 /******END Banner home*********/
+
+
+
+
+
+/*****google map*/
+#map {
+    align-self: auto;
+    align-items: center;
+    align-content: flex-end;
+}
+
+/*****END google map*/
+
+
+
+
+.site-section {
+    text-align: center;
+    padding: 2px;
+}
+
+a:hover, a:focus {
+    text-decoration: none !important;
+}
+
+
