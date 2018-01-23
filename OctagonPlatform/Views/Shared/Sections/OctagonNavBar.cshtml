@@ -17,32 +17,22 @@
                 </button>
                 <div style="padding-top: 5px;padding-left: 55px;">
                     <a href="#" style="font-size: 33px; color: #222222; margin: -14px; height: 0px; width: 238px;"><img src="~/Octagon/assets/img/favicon-32x32.png" id="logo" /><strong style="margin-left: 6px;">Octagon </strong></a>
-
                 </div>
-                
         </div>
         <div class="col-md-7" style="text-align:center;">
-
             <h1 class="businessName"></h1>
         </div>
         <div class="col-md-2">
-
-
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-
                     @if (Request.IsAuthenticated)
                     {
-
                         @Html.AntiForgeryToken()
                         <a class="dropdown-toggle active" data-toggle="dropdown" href="@Url.Action("Index", "Dashboard")" aria-expanded="true">
                             <label>Hello, @User.Identity.GetUserName()</label>
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-
                         <ul class="dropdown-menu dropdown-user in">
-                            <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a> -->
-
                             <li>
                                 <a href="#" class="active"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
@@ -55,7 +45,6 @@
                             </li>
                         </ul>
 
-
                     }
                     else
                     {
@@ -65,17 +54,11 @@
                         </ul>
                     }
 
-
                 </li>
                 <!-- /.dropdown -->
             </ul>
-
         </div>
-
     </div>
-
-
-   
     <!-- /.navbar-static-side -->
 </nav>
 
