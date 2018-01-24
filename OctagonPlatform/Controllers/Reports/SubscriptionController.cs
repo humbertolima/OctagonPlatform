@@ -524,13 +524,19 @@ namespace OctagonPlatform.Controllers.Reports
                 usern = user.UserName + " - " + user.Name + " - " + bussinesname;
             // listrepost = user.Reports.ToList();
             ReportModel report = subscriptionModel.ReportFilters.First().Report;
-
+            List<SelectListItem> format = new List<SelectListItem>()
+            {
+               new SelectListItem{ Value="0",Text="Excel"},
+               new SelectListItem{ Value="1",Text="PDF"}
+            };
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
-                ReportId = new SelectList(listrepost, "Id", "Name", report.Id)
+                ReportId = new SelectList(listrepost, "Id", "Name", report.Id) ,
+                Format = new SelectList(format, "Value", "Text", subscriptionModel.Format) 
+
             };
 
             IEnumerable<Schedule> listscheduled =  _repoScheduled.GetScheduleByUser(userId) ;

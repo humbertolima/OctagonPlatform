@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801242058527_addformarSubscription.cs" />
+    <Compile Include="Migrations\201801242058527_addformarSubscription.Designer.cs">
+      <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1372,6 +1376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801242058527_addformarSubscription.resx">
+      <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
