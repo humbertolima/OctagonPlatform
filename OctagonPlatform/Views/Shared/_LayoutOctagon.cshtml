@@ -19,9 +19,14 @@
 </head>
 <body>
     @RenderBody()
+
+    <div class="footer">
+        @Html.Partial("Sections/Footer")
+    </div>
     @Scripts.Render("~/Octagon/assets/js/jquery.min.js")
     @Scripts.Render("~/Octagon/assets/bootstrap/js/bootstrap.min.js")
     @RenderSection("scripts", required: false)
+
 </body>
-@Html.Partial("Sections/Footer")
+
 </html>
