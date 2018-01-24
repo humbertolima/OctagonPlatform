@@ -82,13 +82,18 @@ namespace OctagonPlatform.Controllers.Reports
                
                 subscriptions = _repo.GetSubscriptionsParent(partnerId);
             }
-              
+            List<SelectListItem> format = new List<SelectListItem>()
+            {
+               new SelectListItem{ Value="0",Text="Excel"},
+               new SelectListItem{ Value="1",Text="Pdf"}
+            };
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
-                ReportId = new SelectList(listrepost, "Id", "Name")
+                ReportId = new SelectList(listrepost, "Id", "Name"),
+                Format = new SelectList(format, "Value", "Text")
             };
 
             IEnumerable<Schedule> listscheduled = userId > 0 ?_repoScheduled.GetScheduleByUser(userId):_repoScheduled.GetScheduleByParent(partnerId);
@@ -325,8 +330,7 @@ namespace OctagonPlatform.Controllers.Reports
             if (ModelState.IsValid)
             {
                 int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
-                int reportid = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
-               
+                int reportid = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);               
                 string email = model.GetValue("Email").AttemptedValue;
                
                 if (scheduledId > 0 && IsValidEmail(email) && reportid > 0)
@@ -359,7 +363,7 @@ namespace OctagonPlatform.Controllers.Reports
             int userid = model.GetValue("userId").AttemptedValue == string.Empty ? 0 : Convert.ToInt32(model.GetValue("userId").AttemptedValue);
             string subId = model.GetValue("subId").AttemptedValue;
             int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
-            
+           
             try
             {
                 if (userid > 0)
@@ -394,16 +398,16 @@ namespace OctagonPlatform.Controllers.Reports
         //crear el Subscription con los filters correspondientes
           private void FullAddModel(string email, string description, string emailComment, int scheduleId, int userId, int reportId, FormCollection model,int subId = 0)
         {
-
+            string format = model.GetValue("Format").AttemptedValue; // 0 es excel y 1 es pdf
             SubscriptionModel submodel = null;
             if (subId == 0) //Si es Add
             {
-                submodel = new SubscriptionModel(email, description, emailComment, scheduleId, userId);
+                submodel = new SubscriptionModel(email, description, emailComment, scheduleId, userId,format);
                 _repo.Add(submodel);
             }
             else
             {                
-                submodel = Edit(subId, email, description, emailComment, scheduleId);
+                submodel = Edit(subId, email, description, emailComment, scheduleId,format);
             }
             bool entro = false;
             for (int i = 0; i < model.Count; i++)
@@ -470,13 +474,14 @@ namespace OctagonPlatform.Controllers.Reports
             _repoReportfilter.Add(reportfilter);
         }
 
-        private SubscriptionModel Edit(int subId,string email,string description,string emailComment,int scheduleId)
+        private SubscriptionModel Edit(int subId,string email,string description,string emailComment,int scheduleId,string format)
         {
             SubscriptionModel model = _repo.GetSubscriptionById(subId);
             model.Email = email;
             model.Description = description;
             model.EmailComment = emailComment;
             model.ScheduleId = scheduleId;
+            model.Format = format;
             _repo.Edit(model);
             return model;
         }

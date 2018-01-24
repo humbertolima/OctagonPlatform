@@ -294,14 +294,14 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return true;
         }
-
+        //Add item in table reportfilter 
         private void AddReportFilters(IEnumerable<SubscriptionModel> subscriptions, Schedule model1,int UserId,int ID)
         {
             model1.UserId = UserId;
             _repo.Add(model1);
             foreach (var item in subscriptions)
             {
-                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId);
+                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId,item.Format);
 
                 _repoSub.Add(subs);
                 foreach (var filter in item.ReportFilters)

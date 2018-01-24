@@ -19,7 +19,8 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public SelectList ReportId { get; set; }
         public SelectList ScheduledId { get; set; }
-    
+        public SelectList Format { get; set; }
+
     }
     public class SubsTableViewModel
     {
