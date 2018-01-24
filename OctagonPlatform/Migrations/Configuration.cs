@@ -8,13 +8,15 @@ namespace OctagonPlatform.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<Models.ApplicationDbContext>
     {
+        private List<Permission> allPermissions;
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-
+            allPermissions = new List<Permission>();
         }
 
-        protected override void Seed(Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -53,176 +55,209 @@ namespace OctagonPlatform.Migrations
                new Models.ReportModel { Name = "Cash Load" }
                );
             #endregion
+            if (!System.Diagnostics.Debugger.IsAttached)
+                System.Diagnostics.Debugger.Launch();
 
             #region despues del merge
 
-            List<Permission> allPermissions = new List<Permission>();
-
-            List<string> Level0 = new List<string>() { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            List<string> Level0 = new List<string> { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
-                allPermissions.Add(new Permission { Name = item });
+                Permission perm = new Permission() { Name = item };
+                SavePermissions(context, perm);
             }
 
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Funds", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Alerts") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts").Id };
+                SavePermissions(context, perm);
             }
+
 
             List<string> Level02 = new List<string>() { "MobileTMS Access", "Phone Book", "ATM Error Code Lookup", "Terminal  Locator", };
             foreach (var item in Level02)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Mobile TMS") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Mobile TMS").Id };
+                SavePermissions(context, perm);
             }
+
 
             List<string> Level03 = new List<string>() { "View Shortcuts", "View Switch Talk", "View Error Code Search", "View Phone Book", "Voice TMS Access", "My profile Admin", };
             foreach (var item in Level03)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "My Profile") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "My Profile").Id };
+                SavePermissions(context, perm);
             }
 
-            List<string> Level031 = new List<string>() { "Upload Partner Logo","Save Profile", };
+            List<string> Level031 = new List<string>() { "Upload Partner Logo", "Save Profile", };
             foreach (var item in Level031)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "My profile Admin") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "My profile Admin").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level04 = new List<string>() { "Partner Admin", "BIN Suspension Groups", "Buy Rate Management", "Compliance Document", "General Info Partner", "Partner Contacts", "Partner Funding Sources", "Partner Settlement Accounts", "Partner User Management", };
             foreach (var item in Level04)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partners") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partners").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level032 = new List<string>() { "Add New Partner", "Delete Partner", };
             foreach (var item in Level032)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partner Admin") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partner Admin").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level033 = new List<string>() { "View BIN Groups", "Edit BIN Groups", "Add BIN Groups", "Delete BIN Groups", };
             foreach (var item in Level033)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "BIN Suspension Groups") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "BIN Suspension Groups").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level034 = new List<string>() { "View Buy Rates", "Edit Buy Rates", "Buy Rates", };
             foreach (var item in Level034)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Buy Rate Management") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Buy Rate Management").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level035 = new List<string>() { "View Restricted Documents", "Manage Compliance Documents Categories", };
             foreach (var item in Level035)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Compliance Document") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Compliance Document").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level036 = new List<string>() { "View General Info Partner", "Edit General Info Partner", };
             foreach (var item in Level036)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "General Info Partner") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "General Info Partner").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level037 = new List<string>() { "View Partner Contacts", "Edit Partner Contacts", "Add Partner Contacts", "Delete Partner Contacts", };
             foreach (var item in Level037)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partner Contacts") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partner Contacts").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level038 = new List<string>() { "View Funding", "Edit Funding", "Delete Funding", };
             foreach (var item in Level038)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partner Funding Sources") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partner Funding Sources").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level039 = new List<string>() { "View Settlement", "Edit Settlement", "Add Settlement", "Delete Settlement", };
             foreach (var item in Level039)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partner Settlement Accounts") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partner Settlement Accounts").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level3110 = new List<string>() { "View Users", "Edit Users", "Add Users", "Delete Users", };
             foreach (var item in Level3110)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Partner User Management") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Partner User Management").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level05 = new List<string>() { "View Reports", "Reports Admin", "Terminal Reports", "Transaction Reports", "Settlement Reports", "Merchant Reports", "Alerts Reports", };
             foreach (var item in Level05)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Reports") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Reports").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level06 = new List<string> { "View Terminal Management", "View Terminal Statistics", "Cash Management", "Terminal Admin", "Alert Settings", "Compliance Documents", "General Info Terminals", "Interchange Split", "Surcharge Split", "Terminal Contacts", "Terminal Notes", "Terminal Pictures", "Transactions", "Vault Cash Info", };
             foreach (var item in Level06)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminals") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminals").Id };
+                SavePermissions(context, perm);
             }
 
-            List<string> Level041 = new List<string>() { "Add Terminal", "Clone Terminal", "Delete Terminal", "Bind Master Key","Change Terminal Partner",};
+            List<string> Level041 = new List<string>() { "Add Terminal", "Clone Terminal", "Delete Terminal", "Bind Master Key", "Change Terminal Partner", };
             foreach (var item in Level041)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminal Admin") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Admin").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level042 = new List<string>() { "Edit Terminals Alert Settings", };
             foreach (var item in Level042)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Alert Settings") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alert Settings").Id };
+                SavePermissions(context, perm); 
             }
+
 
             List<string> Level043 = new List<string>() { "View Compliance", "Edit Compliance", };
             foreach (var item in Level043)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Compliance Documents") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Compliance Documents").Id };
+                SavePermissions(context, perm);
             }
 
-            List<string> Level044 = new List<string>() { "View General Info Terminals", "Edit General Info","Edit Terminal Status","Manage Terminal Address","View Terminal Contract Info", "View Terminal Sponsor Info", };
+            List<string> Level044 = new List<string>() { "View General Info Terminals", "Edit General Info", "Edit Terminal Status", "Manage Terminal Address", "View Terminal Contract Info", "View Terminal Sponsor Info", };
             foreach (var item in Level044)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "General Info Terminals") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "General Info Terminals").Id };
+                SavePermissions(context, perm);
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "").Id });
             }
 
             List<string> Level045 = new List<string>() { "View Interchange Split", "Add Interchange Split", "Edit Interchange Split", "Delete Interchange Split", };
             foreach (var item in Level045)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Interchange Split") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Interchange Split").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level046 = new List<string>() { "View Surcharge Split", "Add Surcharge Split", "Edit Surcharge Split", "Delete Surcharge Split", };
             foreach (var item in Level046)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Surcharge Split") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Surcharge Split").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level047 = new List<string>() { "View Terminal Contacts", "Edit Terminal Contacts", "Delete Terminal Contacts", };
             foreach (var item in Level047)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminal Contacts") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Contacts").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level048 = new List<string>() { "View Terminal Notes", "Edit Terminal Notes", };
             foreach (var item in Level048)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminal Notes") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Notes").Id };
+                SavePermissions(context, perm);
             }
+
             List<string> Level049 = new List<string>() { "View Terminal Pictures", "Edit Terminal Pictures", "Delete Terminal Pictures", };
             foreach (var item in Level049)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminal Pictures") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Pictures").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level051 = new List<string>() { "View Switch Messages", "Current Days Transaction", };
             foreach (var item in Level051)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Transactions") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Transactions").Id };
+                SavePermissions(context, perm);
             }
 
             List<string> Level052 = new List<string>() { "View Vault Cash Info", "Edit Vault Cash Info", "Add Vault Cash Info", "Delete Vault Cash Info", };
             foreach (var item in Level052)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Vault Cash Info") });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Vault Cash Info").Id };
+                SavePermissions(context, perm);
             }
 
             #endregion
@@ -232,51 +267,74 @@ namespace OctagonPlatform.Migrations
             List<string> Level121 = new List<string> { "Edit Reporting Groups", "Manage Report Subscriptions", "Display Surcharge Column on Reports", };
             foreach (var item in Level121)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Reports Admin") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Reports Admin").Id });
             }
+            context.SaveChanges();
 
             List<string> Level122 = new List<string> { "Cash Balance at Close Report", "Encryption Levels Report", "Terminal Notes Report", "Terminal Configuration Sheet", "Terminal List", "Terminal List By Partner", "Terminal Settlement Setup", "Terminal Status", "Vault Cash Projection Report", };
             foreach (var item in Level122)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Terminal Reports") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Reports").Id });
             }
+            context.SaveChanges();
 
             List<string> Level123 = new List<string> { "Daily Transaction Summary", "Transaction Analysis", "Transaction Averages Report", "Transaction Detail", "Transaction Summary", "Transactions By Network Summary", "Transactions by Network Summary Filtered", "Transactions Per Hour Graph", "Monthly Transaction Summary", "Transaction Monthly Summary", };
             foreach (var item in Level123)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Transaction Reports") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Transaction Reports").Id });
             }
+            context.SaveChanges();
+
 
             List<string> Level124 = new List<string> { "ACH Detail", "Cash Projection Summary Report", "Consolidated Settlement Report", "Disbursement Setup History", "eInvoice Authorized Accounts", "Funds Reconciliation Report", "Settlement Split List", "Settlement Split", "Monthly EBT", };
             foreach (var item in Level124)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Settlement Reports") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Settlement Reports").Id });
             }
+            context.SaveChanges();
 
             List<string> Level125 = new List<string> { "Monthly Statement", "Monthly Statement by Bank Account", "Monthly Statement with Interchange", "Monthly Statement By Terminal Profile", "Profile Transaction Summary", "User Report", "User Permissions Report", };
             foreach (var item in Level125)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Merchant Reports") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Merchant Reports").Id });
             }
+            context.SaveChanges();
 
             List<string> Level126 = new List<string> { "Dispute Email Reprints", "Dispute Status Report", "Dispute History", };
             foreach (var item in Level126)
             {
-                allPermissions.Add(new Permission { Name = item, Parent = allPermissions.Single(m => m.Name == "Alerts Reports") });
+                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts Reports").Id });
             }
+            context.SaveChanges();
+
             #endregion
 
-            foreach (var permission in allPermissions)
+
+            User userAdmin = new User();
+            userAdmin.Permissions = new List<Permission>();
+
+            using (ApplicationDbContext dbContext = new ApplicationDbContext())
             {
-                context.Permissions.AddOrUpdate(m=>m.Name, permission);
+                //traigo de BD el usuario admin con sus permisos. Hago el using par aque no de problemas con el otro context.
+                userAdmin = context.Users.Include(m => m.Permissions).Where(m => m.UserName == admin02.UserName).FirstOrDefault();
+                userAdmin = new User();
             }
+
+            foreach (var permission in context.Permissions)
+            {
+                if (!userAdmin.Permissions.Contains(permission) || (userAdmin.Permissions == null))             //valido si el permiso no esta en el usaurio.
+                {
+                    permission.Users.Add(admin02);
+                }
+                context.SaveChanges();
+            }
+        }
+
+        private void SavePermissions(ApplicationDbContext context, Permission perm)
+        {
+            context.Permissions.AddOrUpdate(m => m.Name, perm);     //comprobar si el permissions esta para guardarlo o updated
+            context.SaveChanges();                                  //salvar los cambios en DB para que me traiga el ID del permiso en DB
+            allPermissions.Add(perm);                               //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
         }
     }
 }
-
-
-
-//new Models.Permission { Name = terminal, Parent = context.Permissions.SingleOrDefault(perm => perm.Name == root) },
-//                new Models.Permission { Name = partner, Parent = context.Permissions.SingleOrDefault(perm => perm.Name == root) },
-//                new Models.Permission { Name = "General Info", Parent = context.Permissions.SingleOrDefault(perm => perm.Name == terminal) },
-//                new Models.Permission { Name = "Terminal Admin", Parent = context.Permissions.SingleOrDefault(perm => perm.Name == terminal) }
