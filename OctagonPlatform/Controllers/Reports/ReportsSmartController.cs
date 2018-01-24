@@ -27,10 +27,10 @@ namespace OctagonPlatform.Controllers.Reports
     [AllowAnonymous]
     public class ReportsSmartController : Controller
     {
-        private IReports _repo;
-        private ITerminalRepository repo_terminal;
-        private IPartnerRepository repo_partner;
-        private IReportGroup repo_group;
+        protected IReports _repo;
+        protected ITerminalRepository repo_terminal;
+        protected IPartnerRepository repo_partner;
+        protected IReportGroup repo_group;
        
         public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
         {
@@ -46,109 +46,7 @@ namespace OctagonPlatform.Controllers.Reports
             IEnumerable<ReportModel> list = _repo.GetReportsDasboard();
             return View(list);
         }
-        public ActionResult CashLoad()
-        {
-            CashLoadViewModel model = new CashLoadViewModel();
-            TempData["Chart"] = null;
-            TempData["Sub"] = false;
-            return View("CashLoad/CashLoad",model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId,Group,GroupId")] CashLoadViewModel vmodel)
-        {
-            ModelState.Remove("PartnerId");
-            ModelState.Remove("GroupId");
-            ModelState.Remove("TerminalId");
-            if (ModelState.IsValid)
-            {
-                List<CashLoadTableVM> listaux = new List<CashLoadTableVM>();
-                List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
-                List<JsonLoadCash> list = new List<JsonLoadCash>();
-                ApiATM api = new ApiATM();
-
-                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
-                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-
-                list = await api.CashLoad(start, end, vmodel.TerminalId, listtn);
-
-                IEnumerable<dynamic> listTn = repo_terminal.LoadCashList(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
-
-                if (listTn.Count() > 0)
-                {
-
-
-                    foreach (var item in list)
-                    {
-
-                        string locationname = "";
-
-                        foreach (dynamic x in listTn)
-                        {
-                            if (x.TerminalId == item.TerminalId)
-                            {
-                                locationname = x.LocationName;
-                                break;
-                            }
-                        }
-                        if (locationname != "")
-                        {
-                            CashLoadTableVM obj = new CashLoadTableVM(item.TerminalId, locationname, item.Date, item.AmountPrevius.ToString(), item.AmountLoad.ToString(), item.AmountCurrent.ToString());
-                            JsonLoadCashChart objchart = new JsonLoadCashChart(item.Date.ToString("yyyy-MM-dd"), item.AmountPrevius, item.AmountLoad);
-                            listchart.Add(objchart);
-                            listaux.Add(obj);
-                        }
-                    }
-
-                }
-
-                #region Variables Partial
-
-                TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashLoadTableVM>(listaux) : null;
-                TempData["filename"] = "CashLoad";
-                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
-                TempData["terminal"] = vmodel.TerminalId;
-                TempData["partner"] = vmodel.Partner;
-                TempData["from"] = vmodel.StartDate;
-                TempData["to"] = vmodel.EndDate;
-                TempData["Sub"] = false;
-                #endregion
-
-                return View("CashLoad/CashLoad");
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        private string[] ListTerminalByGroup(int groupId)
-        {
-            try
-            {
-                string[] listtn = null;
-                if (groupId != -1)
-                {
-                    ReportGroupModel modelg = repo_group.GetGroupById(groupId);
-                    IEnumerable<Terminal> listterminal = modelg.Terminals;
-                    listtn = new string[modelg.Terminals.Count()];
-                    int i = 0;
-                    foreach (var item in listterminal)
-                    {
-                        listtn[i++] = item.TerminalId;
-                    }
-                }
-                return listtn;
-            }
-            catch (Exception e)
-            {
-
-                throw new NullReferenceException(e.Message);
-            }
-
-        }
-
+      
         public ActionResult AutoTerminal(string term)
         {
 
@@ -542,6 +440,50 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("Index");
         }
 
-        
+        protected string[] ListTerminalByGroup(int groupId)
+        {
+            try
+            {
+                string[] listtn = null;
+                if (groupId != -1)
+                {
+                    ReportGroupModel modelg = repo_group.GetGroupById(groupId);
+                    IEnumerable<Terminal> listterminal = modelg.Terminals;
+                    listtn = new string[modelg.Terminals.Count()];
+                    int i = 0;
+                    foreach (var item in listterminal)
+                    {
+                        listtn[i++] = item.TerminalId;
+                    }
+                }
+                return listtn;
+            }
+            catch (Exception e)
+            {
+
+                throw new NullReferenceException(e.Message);
+            }
+
+        }
+
+    }
+}
+public class CustomViewEngine : RazorViewEngine
+{
+    public CustomViewEngine()
+        : base()
+    {
+
+        var viewLocations = new[] {
+            "~/Views/{1}/{0}.cshtml",
+            "~/Views/Shared/{0}.cshtml",
+            "~/Views/ReportsSmart/{1}/{0}.cshtml"
+
+        };
+
+        this.PartialViewLocationFormats = viewLocations;
+        this.ViewLocationFormats = viewLocations;
+
+
     }
 }

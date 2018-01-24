@@ -233,6 +233,7 @@
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Reports\CashLoadController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
     <Compile Include="Controllers\Reports\ScheduleController.cs" />
     <Compile Include="Controllers\Reports\SubscriptionController.cs" />

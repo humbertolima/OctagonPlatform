@@ -33,5 +33,17 @@ namespace OctagonPlatform.Models.FormsViewModels
             PartnerId = -1;
             GroupId = -1;
         }
+
+        public CashLoadViewModel(string terminalId, string partner, int partnerId, string group, int groupId, string startDate, string endDate, StatusType.Status status)
+        {
+            TerminalId = terminalId;
+            Partner = partner;
+            PartnerId = partnerId;
+            Group = group;
+            GroupId = groupId;
+            StartDate = startDate;
+            EndDate = endDate;
+            Status = status;
+        }
     }
 }

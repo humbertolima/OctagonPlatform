@@ -23,6 +23,10 @@ namespace OctagonPlatform
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             UnityConfig.RegisterComponents();
             Mapper.Initialize(c => c.AddProfile<MappingProfile>());
+
+
+            ViewEngines.Engines.Add(new CustomViewEngine());
+
         }
         //Para eliminar error en mozilla de Firefox en el console.
         protected void Application_Error(object sender, EventArgs e)
