@@ -767,12 +767,10 @@
     <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
-    <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
-    <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
     <Content Include="Octagon\assets\css\cosmo.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\styles2.css" />
+    <Content Include="Octagon\assets\css\styles.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\AMS-data.js" />
     <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
