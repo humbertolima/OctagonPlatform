@@ -89,33 +89,7 @@ namespace OctagonPlatform.Controllers.Reports
                 return File(stream.ToArray(), "application/pdf", filename);
             }
         }
-        public ActionResult TerminalList()
-        {
-
-            TempData["sub"] = false;
-            return View("TerminalList/TerminalList");
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult TerminalList([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,Account,AccountId,StartDate,EndDate,ConectionType,State,StateId,City,CityId,ZipCode")] TerminalListViewModel vmodel)
-        {
-            ModelState.Remove("PartnerId");
-            ModelState.Remove("AccountId");
-            ModelState.Remove("GroupId");
-            ModelState.Remove("StateId");
-            ModelState.Remove("CityId");
-            if (ModelState.IsValid)
-            {
-                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn, Convert.ToInt32(Session["partnerId"]));
-
-                TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
-                TempData["filename"] = "TerminalList";
-                TempData["sub"] = false;
-                return View("TerminalList/TerminalList");
-            }
-            return RedirectToAction("Index");
-        }
+        
 
         public ActionResult TerminalStatus()
         {
