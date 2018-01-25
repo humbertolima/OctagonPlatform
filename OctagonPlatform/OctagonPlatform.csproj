@@ -230,6 +230,7 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\TerminalStatusController.cs" />
     <Compile Include="Controllers\Reports\TerminalListController.cs" />
     <Compile Include="Controllers\Reports\CashManagementController.cs" />
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
