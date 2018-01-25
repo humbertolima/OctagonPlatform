@@ -15,7 +15,7 @@
         @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.Partial("CashBalanceatClose/_PartialForm", Model)
+        @Html.Partial("_PartialForm", Model)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10" style="text-align: right;">
@@ -37,10 +37,10 @@
         </div>
         <div class="panel-body">
             <div style="display:none" id="idhead">
-                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
+                @Html.Partial("../_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
 
             </div>
-            @Html.Partial("_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+            @Html.Partial("../_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
 
             <div>
                 @Html.ActionLink("Back to List", "Index")
