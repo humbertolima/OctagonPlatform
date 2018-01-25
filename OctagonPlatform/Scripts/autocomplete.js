@@ -81,7 +81,7 @@
     $('#terminal').autocomplete({
         source: urlautoterminal
     });
-   
+    
     //Auto group
     $('#group').autocomplete({
         source: urlautogroup,

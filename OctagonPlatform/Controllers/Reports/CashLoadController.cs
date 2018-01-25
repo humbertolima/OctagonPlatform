@@ -117,5 +117,12 @@ namespace OctagonPlatform.Controllers.Reports
         {
             throw new NotImplementedException();
         }
+
+      
+
+        public override Task<bool> RunReport(object aviewmodel, string format)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

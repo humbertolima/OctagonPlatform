@@ -84,8 +84,8 @@ namespace OctagonPlatform.Controllers.Reports
             }
             List<SelectListItem> format = new List<SelectListItem>()
             {
-               new SelectListItem{ Value="0",Text="Excel"},
-               new SelectListItem{ Value="1",Text="Pdf"}
+               new SelectListItem{ Value="excel",Text="Excel"},
+               new SelectListItem{ Value="pdf",Text="Pdf"}
             };
             SubscriptionVM vmodel = new SubscriptionVM()
             {
@@ -526,8 +526,8 @@ namespace OctagonPlatform.Controllers.Reports
             ReportModel report = subscriptionModel.ReportFilters.First().Report;
             List<SelectListItem> format = new List<SelectListItem>()
             {
-               new SelectListItem{ Value="0",Text="Excel"},
-               new SelectListItem{ Value="1",Text="PDF"}
+               new SelectListItem{ Value="excel",Text="Excel"},
+               new SelectListItem{ Value="pdf",Text="PDF"}
             };
             SubscriptionVM vmodel = new SubscriptionVM()
             {

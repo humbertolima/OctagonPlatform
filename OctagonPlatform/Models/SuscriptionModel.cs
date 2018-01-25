@@ -35,7 +35,7 @@ namespace OctagonPlatform.Models
         public virtual Schedule Schedule { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
-        [StringLength(1)]
+        [StringLength(10)]
         public string Format { get; set; }
         public virtual ICollection<ReportFilter> ReportFilters { get; set; }
        

@@ -71,4 +71,78 @@ namespace OctagonPlatform.Helpers
             }
         }
     }
+    public class EmailBusiness
+    {
+       
+        public MailAddress from { get; set; }       
+        private SmtpClient smtp;
+        public EmailBusiness()
+        {
+             smtp = new SmtpClient()
+            {
+                EnableSsl = true,
+                //WebMail.EnableSsl = true;
+                Port = 25,
+                //WebMail.SmtpPort = 25;
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential("luisrafael.gamez@outlook.com", "Vv19477002"),
+                Host = "smtp.live.com"
+            };
+            from = new MailAddress("luisrafael.gamez@outlook.com");
+
+        }
+        public bool ToAdmin( string sub, string body)
+        {
+            
+            var m = new MailMessage()
+            {
+
+                Subject = sub,
+                Body = body,
+                IsBodyHtml = true
+            };
+            MailAddress to = new MailAddress("21241112@dut4life.ac.za", "Administrator");
+            m.To.Add(to);
+            m.From = new MailAddress(from.ToString());
+            m.Sender = to;
+         
+            try
+            {
+                smtp.Send(m);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+        public bool ToClientAttachment(string sendTo, string sub, string body,Attachment file)
+        {
+
+            var m = new MailMessage()
+            {
+
+                Subject = sub,
+                Body = body,
+                IsBodyHtml = true
+            };
+            MailAddress to = new MailAddress(sendTo);
+            m.To.Add(to);
+            m.From = from;
+            m.Sender = to;
+            m.Attachments.Add(file);
+            try
+            {
+                smtp.Send(m);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+    }
 }

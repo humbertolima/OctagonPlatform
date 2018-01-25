@@ -326,6 +326,10 @@
     <Compile Include="Migrations\201801242058527_addformarSubscription.Designer.cs">
       <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801252010369_format.cs" />
+    <Compile Include="Migrations\201801252010369_format.Designer.cs">
+      <DependentUpon>201801252010369_format.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1386,6 +1390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801242058527_addformarSubscription.resx">
       <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801252010369_format.resx">
+      <DependentUpon>201801252010369_format.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

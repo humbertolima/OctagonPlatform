@@ -1,10 +1,15 @@
-﻿using OctagonPlatform.Models;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,18 +23,28 @@ namespace OctagonPlatform.Controllers.Reports
         
         private IReports _repo;
         private IUserRepository _repoUser;
-        public ReportsController(IReports repo, IUserRepository repoUser)
+        protected ITerminalRepository repo_terminal;
+        protected IPartnerRepository repo_partner;
+        protected IReportGroup repo_group;
+        public ReportsController(IReports repo, IUserRepository repoUser, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
         {
             _repo = repo;
             _repoUser = repoUser;
+            repo_terminal = repoterminal;
+            repo_partner = repopartner;
+            repo_group = repogroup;
         }
         // GET: reportModels
         public ActionResult Index()
         {
           
             return View(_repo.All());
-        }      
-
+        }
+        public ActionResult Selection()
+        {
+            IEnumerable<ReportModel> list = _repo.GetReportsDasboard();
+            return View("../ReportsSmart/Index",list);
+        }
         // GET: reportModels/Create
         public ActionResult Create()
         {
@@ -174,7 +189,45 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("CheckReports");
         }
 
+        public ActionResult AutoTerminal(string term)
+        {
 
+            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term, Convert.ToInt32(Session["partnerId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AutoPartner(string term)
+        {
+
+            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term, Convert.ToInt32(Session["partnerId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult AutoGroup(string term)
+        {
+
+            IEnumerable<dynamic> list = repo_group.GetAllGroup(term, Convert.ToInt32(Session["partnerId"]));
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public FileResult Export(string html, string filename, string orientation)
+        {
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                iTextSharp.text.Rectangle pageSize = orientation == "Landscape" ? PageSize.LETTER.Rotate() : PageSize.LETTER;
+                StringReader sr = new StringReader(html);
+                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(pageSize, 20f, 20f, 20f, 20f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", filename);
+            }
+        }
 
 
 

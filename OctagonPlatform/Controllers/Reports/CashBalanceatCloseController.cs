@@ -4,6 +4,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using Newtonsoft.Json;
 using OctagonPlatform.Controllers.Reports.JSON;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -17,8 +18,11 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -51,35 +55,13 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceatCloseViewModel vmodel)
         {
-            //este es el html para exportar
-           // string ahtml = await HTML("jojojjo", vmodel);
-           
+            bool envio = await RunReport(vmodel,"excel");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
 
             if (ModelState.IsValid)
             {
-                //List<CashBalanceAtCloseTableVM> listaux = new List<CashBalanceAtCloseTableVM>();
-                //List<JsonCashBalanceClose> list = new List<JsonCashBalanceClose>();
-                //ApiATM api = new ApiATM();
-                //string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                //DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                //list = await api.CashBalanceClose(start, listtn);
-                //IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
-                //if (listTn.Count() > 0)
-                //{
-                //    foreach (var item in listTn)
-                //    {
-                //        int? cashBalance = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.CashBalance).FirstOrDefault();
-                //        string time = list.Where(m => m.TerminalId == item.TerminalId).Select(m => m.Time).FirstOrDefault();
-                //        CashBalanceAtCloseTableVM obj = new CashBalanceAtCloseTableVM(item.TerminalId, item.LocationName, time, cashBalance.ToString());
-                //        listaux.Add(obj);
-
-                //    }
-
-                //}
-
-
+               
                 #region Variables Partial
                 // TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashBalanceAtCloseTableVM>(listaux) : null;
                 Tuple<IEnumerable, Type> alist = await GetList(vmodel);
@@ -135,5 +117,13 @@ namespace OctagonPlatform.Controllers.Reports
             });
 
         }
+
+        public override async Task<bool> RunReport(object aviewmodel,string format)
+        {
+           CashBalanceatCloseViewModel vmodel = aviewmodel as CashBalanceatCloseViewModel;  
+           return await SendReport(vmodel, "CashBalanceatClose", format);            
+        }
+
+       
     }
 }

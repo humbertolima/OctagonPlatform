@@ -4,6 +4,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
 using Newtonsoft.Json;
 using OctagonPlatform.Controllers.Reports.JSON;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -17,8 +18,11 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -41,60 +45,29 @@ namespace OctagonPlatform.Controllers.Reports
             repo_group = repogroup;
           
         }
-        // GET: reportModels
-        public ActionResult Index()
-        {
-            IEnumerable<ReportModel> list = _repo.GetReportsDasboard();
-            return View(list);
-        }
+         
       
-        public ActionResult AutoTerminal(string term)
-        {
-
-            IEnumerable<string> list = repo_terminal.GetAllTerminalId(term, Convert.ToInt32(Session["partnerId"]));
-
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult AutoPartner(string term)
-        {
-
-            IEnumerable<dynamic> list = repo_partner.GetAllPartner(term, Convert.ToInt32(Session["partnerId"]));
-
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-        public ActionResult AutoGroup(string term)
-        {
-
-            IEnumerable<dynamic> list = repo_group.GetAllGroup(term,Convert.ToInt32(Session["partnerId"]));
-
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
        
       
 
-        [HttpPost]
-        [ValidateInput(false)]
-        public FileResult Export(string html, string filename, string orientation)
+       
+        public MemoryStream Pdf(string html, string filename, string orientation)
         {
-            using (MemoryStream stream = new System.IO.MemoryStream())
-            {
-                Rectangle pageSize = orientation == "Landscape" ? PageSize.LETTER.Rotate() : PageSize.LETTER;
-                StringReader sr = new StringReader(html);
-                iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(pageSize, 20f, 20f, 20f, 20f);
-                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
-                pdfDoc.Open();
+            MemoryStream stream = new System.IO.MemoryStream();
 
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-                pdfDoc.Close();
-                return File(stream.ToArray(), "application/pdf", filename);
-            }
+            Rectangle pageSize = orientation == "Landscape" ? PageSize.LETTER.Rotate() : PageSize.LETTER;
+            StringReader sr = new StringReader(html);
+            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(pageSize, 20f, 20f, 20f, 20f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+            pdfDoc.Open();
+
+            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            writer.CloseStream = false;
+
+            pdfDoc.Close();
+            return stream;
         }
-        
 
-     
-      
-      
         protected string[] ListTerminalByGroup(int groupId)
         {
             try
@@ -123,7 +96,7 @@ namespace OctagonPlatform.Controllers.Reports
 
 
         public abstract Task<Tuple<IEnumerable, Type>>  GetList(object aviewmodel);
-
+        public abstract Task<bool> RunReport(object aviewmodel,string format);
         public async Task<string> HTML(string title, object aviewmodel)
         {
 
@@ -154,7 +127,35 @@ namespace OctagonPlatform.Controllers.Reports
             return html1;
 
         }
+        public async Task<bool> SendReport(object aviewmodel,string filename,string format)
+        {
+             string html = await HTML("Cash Balance at Close", aviewmodel);
+            MemoryStream stream = null;
+            Attachment file = null; 
+            if (format == "pdf")
+            {
+                stream = Pdf(html, "a.pdf", "lanscape");
+                stream.Position = 0;
+                stream.Flush();
+                file= new Attachment(stream, filename+".pdf");
+            }
+            else
+            {
 
+                stream = new MemoryStream(Encoding.UTF8.GetBytes(html ?? ""));
+                file = new Attachment(stream, filename+".xls");
+                file.ContentType = new ContentType("application/vnd.ms-excel");              
+               
+            }
+
+           
+            //Send report by email
+            EmailBusiness mail = new EmailBusiness();    
+                      
+            return await Task<bool>.Run(async () => {
+               return mail.ToClientAttachment("emileydisrodriguez@gmail.com", "prueeba", "probando", file);
+            });
+        }
 
     }
 }

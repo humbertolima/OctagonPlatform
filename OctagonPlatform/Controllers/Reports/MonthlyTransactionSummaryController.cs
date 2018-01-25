@@ -115,6 +115,11 @@ namespace OctagonPlatform.Controllers.Reports
             return RedirectToAction("Index");
         }
 
+     
 
+        public override Task<bool> RunReport(object aviewmodel, string format)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
