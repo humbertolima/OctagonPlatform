@@ -1,5 +1,5 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.DailyTransactionSummaryViewModel
-    ViewBag.Title = "Daily Transaction Summary";
+ @{   ViewBag.Title = "Daily Transaction Summary";
 
 
 }
@@ -14,7 +14,7 @@
         @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.Partial("DailyTransactionSummary/_PartialForm", Model)
+        @Html.Partial("_PartialForm", Model)
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10" style="text-align: right;">
                 <input type="submit" value="Filter" class="btn btn-primary" />
@@ -34,10 +34,10 @@
         </div>
         <div class="panel-body">
             <div style="display:none" id="idhead">
-                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Daily Transaction Summary" } , { "from",  @TempData["from"] },{ "to" , @TempData["to"] } })
+                @Html.Partial("../_PartialHead", null, new ViewDataDictionary { { "Title", "Daily Transaction Summary" } , { "from",  @TempData["from"] },{ "to" , @TempData["to"] } })
 
             </div>
-            @Html.Partial("_PartialTableDailyTransaction", null, new ViewDataDictionary { { "orientation", "Landscape" }})
+            @Html.Partial("../_PartialTableDailyTransaction", null, new ViewDataDictionary { { "orientation", "Landscape" }})
 
           
 

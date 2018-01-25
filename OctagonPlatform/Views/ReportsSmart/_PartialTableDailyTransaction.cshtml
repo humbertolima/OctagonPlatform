@@ -6,8 +6,8 @@
 
 @{
     string orientation = this.ViewData.ContainsKey("orientation") ? this.ViewData["orientation"].ToString() : "Portrait";
-    bool surcharge = ((TransDailyViewModel)TempData["model"]).Surcharge;
-    bool dispensed = ((TransDailyViewModel)TempData["model"]).Dispensed;
+    bool surcharge = ((DailyTransactionSummaryViewModel)TempData["model"]).Surcharge;
+    bool dispensed = ((DailyTransactionSummaryViewModel)TempData["model"]).Dispensed;
 
 }
 @if (TempData["List"] != null)
