@@ -10,6 +10,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.PersistanceRepository;
 using OctagonPlatform.Views.ReportsSmart.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -111,6 +112,10 @@ namespace OctagonPlatform.Controllers.Reports
 
             return RedirectToAction("Index");
         }
-       
+
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

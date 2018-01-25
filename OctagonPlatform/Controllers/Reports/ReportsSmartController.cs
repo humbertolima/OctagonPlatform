@@ -10,6 +10,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.PersistanceRepository;
 using OctagonPlatform.Views.ReportsSmart.ViewModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers.Reports
 {
     [AllowAnonymous]
-    public class ReportsSmartController : Controller
+    public abstract class ReportsSmartController : Controller
     {
         protected IReports _repo;
         protected ITerminalRepository repo_terminal;
@@ -119,6 +120,41 @@ namespace OctagonPlatform.Controllers.Reports
             }
 
         }
+
+
+        public abstract Task<Tuple<IEnumerable, Type>>  GetList(object aviewmodel);
+
+        public async Task<string> HTML(string title, object aviewmodel)
+        {
+
+            Tuple<System.Collections.IEnumerable, Type> tempList =  await GetList(aviewmodel);
+
+            IEnumerable listaux = tempList.Item1;
+            int count = listaux.Cast<Object>().Count();
+            TempData["List"] = count > 0 ? Utils.ToDataTable(listaux, tempList.Item2) : null;
+            TempData["filename"] = "CashManagement";
+           
+
+            ViewData["Title"] = title;
+            string fffff = RazorViewToString.RenderRazorViewToString(this, "../_PartialTable",null);
+            string fffff2 = RazorViewToString.RenderRazorViewToString(this, "../_PartialHead", null);
+
+
+            //string gggg = RazorViewToString.RenderViewToString("CashBalanceatClose", "../_PartialHead", new CashBalanceatCloseViewModel(), this);
+
+            string css = "<style>.mitable table { border-collapse: collapse;}" +
+  ".mitable td,.mitable  th {text-align:left } " +
+  ".mitable tr td,.mitable tr th {border-bottom:solid black 0.5pt; padding: .75pt .75pt .75pt .75pt; }" +
+  ".mitable tr td {font-size:10pt;background: white}" +
+  ".mitable tr th { background: #f9f9f9;font-size:10pt; height: 18.6pt}</style>";
+            //var ahtml = $('<div></div>').append($("#" + idtable).clone()).html();
+            string head = fffff2.Replace("logo.png\">", "logo.png\" />");
+            string html1 = css + "<div id ='head'>" + head + "</div>" + "<div id ='table' class='mitable'>" + fffff + "</div>";
+
+            return html1;
+
+        }
+
 
     }
 }
