@@ -9,6 +9,8 @@ namespace OctagonPlatform.Migrations
     internal sealed class Configuration : DbMigrationsConfiguration<Models.ApplicationDbContext>
     {
         private List<Permission> allPermissions;
+        private User admin02;
+        private User admin03;
 
         public Configuration()
         {
@@ -20,26 +22,35 @@ namespace OctagonPlatform.Migrations
         {
             //  This method will be called after migrating to the latest version.
 
-            Models.Partner odyssey = new Models.Partner() { ParentId = null, BusinessName = "Odyssey Group", Status = Helpers.StatusType.Status.Active, Address1 = "753 Shotgum RD", CountryId = 1, StateId = 1, CityId = 1, Email = "admin@xyncro.net", Mobile = "7867921950", Interchange = 0, Deleted = false, };
 
-            Models.User admin02 = new Models.User() { UserName = "admin02", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator", LastName = "Admin", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
-            Models.User admin03 = new Models.User() { UserName = "admin03", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator3", LastName = "Admin3", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
+            Models.Partner odyssey = new Partner() { ParentId = null, BusinessName = "Odyssey Group", Status = Helpers.StatusType.Status.Active, Address1 = "753 Shotgum RD", CountryId = 1, StateId = 1, CityId = 1, Email = "admin@xyncro.net", Mobile = "7867921950", Interchange = 0, Deleted = false, };
 
-            odyssey.Users.Add(admin02);                                     //notese que a oddysey le agrego los usuarios. 
-            odyssey.Users.Add(admin03);
+            admin02 = new User() { UserName = "admin02", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator", LastName = "Admin", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
+            admin03 = new User() { UserName = "admin03", Password = "0C-CD-1F-A5-42-CC-6C-67-CB-7C-3C-B8-CC-86-51-7E", IsLocked = false, Email = "admin@xyncro.net", Name = "Administrator3", LastName = "Admin3", Phone = "7867921520", Status = Helpers.StatusType.Status.Active, Deleted = false, Key = "t4RcY6PQUBjqO3R24jEYK8d7ZCNS9fuU4QooX1nDSBFJPuKTkNUdiRVv2Uoxu7SPhAw8QDgc7bgiDFsE34JxxqLo54wdO1jVV1Bp", };
+
 
             context.Partners.AddOrUpdate(m => m.BusinessName, odyssey);     //agrego a oddysey como partner.
 
+            admin02.PartnerId = odyssey.Id;
+            admin03.PartnerId = odyssey.Id;
+
+            context.Users.AddOrUpdate(m => m.UserName, admin02);
+            context.SaveChanges();
+
+            context.Users.AddOrUpdate(m => m.UserName, admin03);
+            context.SaveChanges();
+
+
             context.LocationTypes.AddOrUpdate(l => l.Name,
-                new Models.LocationType { Name = "Restaurant" },
-                new Models.LocationType { Name = "Barber Shop" }
+                new LocationType { Name = "Restaurant" },
+                new LocationType { Name = "Barber Shop" }
                 );
 
-            Models.Model miniATM = new Models.Model { Name = "Mini ATM", Make = new Models.Make() };
-            Models.Model SiriATM = new Models.Model { Name = "Siri ATM", Make = new Models.Make() };
+            Model miniATM = new Model { Name = "Mini ATM", Make = new Make() };
+            Model SiriATM = new Model { Name = "Siri ATM", Make = new Make() };
 
-            Models.Make Puloon = new Models.Make() { Name = "Puloon" };
-            Models.Make Hysosung = new Models.Make() { Name = "N. Hyosung" };
+            Make Puloon = new Make() { Name = "Puloon" };
+            Make Hysosung = new Make() { Name = "N. Hyosung" };
 
             Puloon.Models.Add(miniATM);
             Hysosung.Models.Add(SiriATM);
@@ -55,12 +66,10 @@ namespace OctagonPlatform.Migrations
                new Models.ReportModel { Name = "Cash Load" }
                );
             #endregion
-            if (!System.Diagnostics.Debugger.IsAttached)
-                System.Diagnostics.Debugger.Launch();
 
             #region despues del merge
 
-            List<string> Level0 = new List<string> { "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            List<string> Level0 = new List<string> { "Prueba2", "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
                 Permission perm = new Permission() { Name = item };
@@ -70,6 +79,9 @@ namespace OctagonPlatform.Migrations
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Funds", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
             {
+                //if (!System.Diagnostics.Debugger.IsAttached)
+                //    System.Diagnostics.Debugger.Launch();
+
                 Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts").Id };
                 SavePermissions(context, perm);
             }
@@ -192,7 +204,7 @@ namespace OctagonPlatform.Migrations
             foreach (var item in Level042)
             {
                 Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alert Settings").Id };
-                SavePermissions(context, perm); 
+                SavePermissions(context, perm);
             }
 
 
@@ -208,7 +220,6 @@ namespace OctagonPlatform.Migrations
             {
                 Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "General Info Terminals").Id };
                 SavePermissions(context, perm);
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "").Id });
             }
 
             List<string> Level045 = new List<string>() { "View Interchange Split", "Add Interchange Split", "Edit Interchange Split", "Delete Interchange Split", };
@@ -267,74 +278,85 @@ namespace OctagonPlatform.Migrations
             List<string> Level121 = new List<string> { "Edit Reporting Groups", "Manage Report Subscriptions", "Display Surcharge Column on Reports", };
             foreach (var item in Level121)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Reports Admin").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Reports Admin").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
             List<string> Level122 = new List<string> { "Cash Balance at Close Report", "Encryption Levels Report", "Terminal Notes Report", "Terminal Configuration Sheet", "Terminal List", "Terminal List By Partner", "Terminal Settlement Setup", "Terminal Status", "Vault Cash Projection Report", };
             foreach (var item in Level122)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Reports").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Terminal Reports").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
             List<string> Level123 = new List<string> { "Daily Transaction Summary", "Transaction Analysis", "Transaction Averages Report", "Transaction Detail", "Transaction Summary", "Transactions By Network Summary", "Transactions by Network Summary Filtered", "Transactions Per Hour Graph", "Monthly Transaction Summary", "Transaction Monthly Summary", };
             foreach (var item in Level123)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Transaction Reports").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Transaction Reports").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
 
             List<string> Level124 = new List<string> { "ACH Detail", "Cash Projection Summary Report", "Consolidated Settlement Report", "Disbursement Setup History", "eInvoice Authorized Accounts", "Funds Reconciliation Report", "Settlement Split List", "Settlement Split", "Monthly EBT", };
             foreach (var item in Level124)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Settlement Reports").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Settlement Reports").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
             List<string> Level125 = new List<string> { "Monthly Statement", "Monthly Statement by Bank Account", "Monthly Statement with Interchange", "Monthly Statement By Terminal Profile", "Profile Transaction Summary", "User Report", "User Permissions Report", };
             foreach (var item in Level125)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Merchant Reports").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Merchant Reports").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
             List<string> Level126 = new List<string> { "Dispute Email Reprints", "Dispute Status Report", "Dispute History", };
             foreach (var item in Level126)
             {
-                context.Permissions.AddOrUpdate(new Permission { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts Reports").Id });
+                Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts Reports").Id };
+                SavePermissions(context, perm);
             }
-            context.SaveChanges();
 
             #endregion
 
 
-            User userAdmin = new User();
-            userAdmin.Permissions = new List<Permission>();
+            User userAdmin = new User()
+            {
+                Permissions = new List<Permission>()
+            };
 
             using (ApplicationDbContext dbContext = new ApplicationDbContext())
             {
                 //traigo de BD el usuario admin con sus permisos. Hago el using par aque no de problemas con el otro context.
                 userAdmin = context.Users.Include(m => m.Permissions).Where(m => m.UserName == admin02.UserName).FirstOrDefault();
-                userAdmin = new User();
+                dbContext.Dispose();
             }
 
-            foreach (var permission in context.Permissions)
-            {
-                if (!userAdmin.Permissions.Contains(permission) || (userAdmin.Permissions == null))             //valido si el permiso no esta en el usaurio.
-                {
-                    permission.Users.Add(admin02);
-                }
-                context.SaveChanges();
-            }
+            //foreach (Permission permission in allPermissions)
+            //{
+            //    if (!userAdmin.Permissions.Contains(permission) || (userAdmin.Permissions == null))             //valido si el permiso no esta en el usaurio.
+            //    {
+            //        permission.Users.Add(admin02);
+            //    }
+            //}
         }
+
 
         private void SavePermissions(ApplicationDbContext context, Permission perm)
         {
-            context.Permissions.AddOrUpdate(m => m.Name, perm);     //comprobar si el permissions esta para guardarlo o updated
-            context.SaveChanges();                                  //salvar los cambios en DB para que me traiga el ID del permiso en DB
-            allPermissions.Add(perm);                               //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
+
+           
+            var user = context.Users.Include(m => m.Permissions).FirstOrDefault(m => m.Id == admin02.Id);
+
+            if (!user.Permissions.Contains(perm))
+            {
+                perm.Users.Add(admin02);                                                //adicionar el usaurio admin a todos los permisos.
+            }
+            context.Permissions.AddOrUpdate(m => m.Name, perm);                         //comprobar si el permissions esta para guardarlo o updated
+
+            context.SaveChanges();                                                      //salvar los cambios en DB para que me traiga el ID del permiso en DB
+            allPermissions.Add(perm);                                                   //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
         }
     }
 }
