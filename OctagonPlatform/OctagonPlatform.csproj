@@ -767,7 +767,6 @@
     <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
-    <Content Include="Octagon\assets\css\cosmo.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
     <Content Include="Octagon\assets\css\styles.css" />
