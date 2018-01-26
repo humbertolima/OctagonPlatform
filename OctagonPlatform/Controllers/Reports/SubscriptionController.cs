@@ -82,18 +82,14 @@ namespace OctagonPlatform.Controllers.Reports
                
                 subscriptions = _repo.GetSubscriptionsParent(partnerId);
             }
-            List<SelectListItem> format = new List<SelectListItem>()
-            {
-               new SelectListItem{ Value="excel",Text="Excel"},
-               new SelectListItem{ Value="pdf",Text="Pdf"}
-            };
+           
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
-                ReportId = new SelectList(listrepost, "Id", "Name"),
-                Format = new SelectList(format, "Value", "Text")
+                ReportId = new SelectList(listrepost, "Id", "Name")
+               
             };
 
             IEnumerable<Schedule> listscheduled = userId > 0 ?_repoScheduled.GetScheduleByUser(userId):_repoScheduled.GetScheduleByParent(partnerId);
@@ -524,18 +520,14 @@ namespace OctagonPlatform.Controllers.Reports
                 usern = user.UserName + " - " + user.Name + " - " + bussinesname;
             // listrepost = user.Reports.ToList();
             ReportModel report = subscriptionModel.ReportFilters.First().Report;
-            List<SelectListItem> format = new List<SelectListItem>()
-            {
-               new SelectListItem{ Value="excel",Text="Excel"},
-               new SelectListItem{ Value="pdf",Text="PDF"}
-            };
+            
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
                 ReportId = new SelectList(listrepost, "Id", "Name", report.Id) ,
-                Format = new SelectList(format, "Value", "Text", subscriptionModel.Format) 
+                Format = subscriptionModel.Format
 
             };
 

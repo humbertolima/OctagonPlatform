@@ -28,7 +28,7 @@ namespace OctagonPlatform
 
             ViewEngines.Engines.Add(new CustomViewEngine());
 
-
+            /*
             Task<bool>.Run(()=> {
 
                 DependencyResolver.Current.GetService(typeof(Controllers.Reports.CashBalanceatCloseController)) ;
@@ -44,7 +44,7 @@ namespace OctagonPlatform
 
                 return ctrl.RunReport(new Models.FormsViewModels.CashBalanceatCloseViewModel() { }, "pdf");
             }).Wait();
-
+            */
 
             
 
