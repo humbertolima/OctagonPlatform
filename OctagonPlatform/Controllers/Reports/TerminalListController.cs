@@ -36,18 +36,7 @@ namespace OctagonPlatform.Controllers.Reports
           
         }
 
-        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
-        {
-            throw new NotImplementedException();
-        }
-
-       
-
-        public override Task<bool> RunReport(object aviewmodel, string format)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         public ActionResult TerminalList()
         {
 
@@ -56,8 +45,9 @@ namespace OctagonPlatform.Controllers.Reports
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult TerminalList([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,Account,AccountId,StartDate,EndDate,ConectionType,State,StateId,City,CityId,ZipCode")] TerminalListViewModel vmodel)
+        public async Task<ActionResult> TerminalList([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,Account,AccountId,StartDate,EndDate,ConectionType,State,StateId,City,CityId,ZipCode")] TerminalListViewModel vmodel)
         {
+            bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
             ModelState.Remove("AccountId");
             ModelState.Remove("GroupId");
@@ -65,16 +55,40 @@ namespace OctagonPlatform.Controllers.Reports
             ModelState.Remove("CityId");
             if (ModelState.IsValid)
             {
-                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn, Convert.ToInt32(Session["partnerId"]));
 
-                TempData["List"] = listvm.Count() > 0 ? Utils.ToDataTable<TerminalTableVM>(listvm) : null;
+                Tuple<IEnumerable, Type> alist = await GetList(vmodel);
+                TempData["List"] = alist.Item1.Cast<Object>().Count() > 0 ? Utils.ToDataTable(alist.Item1, alist.Item2) : null;
+
                 TempData["filename"] = "TerminalList";
                 TempData["sub"] = false;
                 return View("TerminalList");
             }
             return RedirectToAction("Index");
         }
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
 
+            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+
+
+                TerminalListViewModel vmodel = aviewmodel as TerminalListViewModel;
+
+                // IEnumerable alist;
+                Type type = typeof(TerminalTableVM);               
+
+                string[] listtn = ListTerminalByGroup(vmodel.GroupId);
+                IEnumerable<TerminalTableVM> listvm = repo_terminal.GetTerminalsReport(vmodel, listtn, Convert.ToInt32(Session["partnerId"]));
+                
+                return new Tuple<IEnumerable, Type>(listvm, type);
+
+            });
+
+        }
+
+        public override async Task<bool> RunReport(object aviewmodel, string format)
+        {
+            TerminalListViewModel vmodel = aviewmodel as TerminalListViewModel;
+            return await SendReport(vmodel, "TerminalList", format, "Terminal List");
+        }
     }
 }

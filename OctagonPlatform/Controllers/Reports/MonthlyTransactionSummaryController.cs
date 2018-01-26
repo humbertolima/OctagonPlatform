@@ -28,7 +28,8 @@ namespace OctagonPlatform.Controllers.Reports
     [AllowAnonymous]
     public class MonthlyTransactionSummaryController : ReportsSmartController
     {
-       
+        private DateTime? start = null;
+        private DateTime? end = null;
         public MonthlyTransactionSummaryController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
             :base(repo, repoterminal, repopartner, repogroup)
         {           
@@ -36,10 +37,7 @@ namespace OctagonPlatform.Controllers.Reports
           
         }
 
-        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public ActionResult MonthlyTransactionSummary()
         {
@@ -52,17 +50,54 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> MonthlyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge")] MonthlyTransactionSummaryViewModel vmodel)
         {
+            bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
             ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
+
+
+                #region Variables Partial
+
+                Tuple<IEnumerable, Type> alist = await GetList(vmodel);
+                TempData["List"] = alist.Item1.Cast<Object>().Count() > 0 ? alist.Item1 : null;
+
+                TempData["filename"] = "MonthlyTransactionSummary";
+                TempData["Chart"] = null;
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = start?.ToString("MMMM , yyyy");
+                TempData["to"] = end?.ToString("MMMM , yyyy");
+                TempData["model"] = vmodel;
+                TempData["sub"] = false;
+                #endregion
+
+                return View("MonthlyTransactionSummary");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
+
+            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+
+
+                MonthlyTransactionSummaryViewModel vmodel = aviewmodel as MonthlyTransactionSummaryViewModel;
+
+                // IEnumerable alist;
+                Type type = typeof(TransMonthlyTableVM);
+
                 List<TransMonthlyTableVM> listaux = new List<TransMonthlyTableVM>();
                 List<JsonMonthlyTransactionSummary> list = new List<JsonMonthlyTransactionSummary>();
                 ApiATM api = new ApiATM();
 
-                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                 start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                 end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
 
@@ -96,30 +131,17 @@ namespace OctagonPlatform.Controllers.Reports
 
                 }
 
-                #region Variables Partial
 
-                TempData["List"] = listaux.Count() > 0 ? listaux : null;
-                TempData["filename"] = "MonthlyTransactionSummary";
-                TempData["Chart"] = null;
-                TempData["terminal"] = vmodel.TerminalId;
-                TempData["partner"] = vmodel.Partner;
-                TempData["from"] = start?.ToString("MMMM , yyyy");
-                TempData["to"] = end?.ToString("MMMM , yyyy");
-                TempData["model"] = vmodel;
-                TempData["sub"] = false;
-                #endregion
+                return new Tuple<IEnumerable, Type>(listaux, type);
 
-                return View("MonthlyTransactionSummary");
-            }
+            });
 
-            return RedirectToAction("Index");
         }
 
-     
-
-        public override Task<bool> RunReport(object aviewmodel, string format)
+        public override async Task<bool> RunReport(object aviewmodel, string format)
         {
-            throw new NotImplementedException();
+            MonthlyTransactionSummaryViewModel vmodel = aviewmodel as MonthlyTransactionSummaryViewModel;
+            return await SendReport(vmodel, "MonthlyTransactionSummaryViewModel", format, "Monthly Transaction Summary");
         }
     }
 }

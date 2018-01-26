@@ -97,7 +97,8 @@ namespace OctagonPlatform.Controllers.Reports
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 list = await api.CashBalanceClose(start, listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
+                int partnerid = 1; //Session["partnerId"]
+                IEnumerable<dynamic> listTn = repo_terminal.CashBalanceClose(list, vmodel.PartnerId, partnerid);
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)
@@ -121,7 +122,7 @@ namespace OctagonPlatform.Controllers.Reports
         public override async Task<bool> RunReport(object aviewmodel,string format)
         {
            CashBalanceatCloseViewModel vmodel = aviewmodel as CashBalanceatCloseViewModel;  
-           return await SendReport(vmodel, "CashBalanceatClose", format);            
+           return await SendReport(vmodel, "CashBalanceatClose", format, "Cash Balance at Close");            
         }
 
        

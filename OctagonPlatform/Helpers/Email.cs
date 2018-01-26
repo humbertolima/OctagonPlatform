@@ -78,7 +78,7 @@ namespace OctagonPlatform.Helpers
         private SmtpClient smtp;
         public EmailBusiness()
         {
-             smtp = new SmtpClient()
+            /* smtp = new SmtpClient()
             {
                 EnableSsl = true,
                 //WebMail.EnableSsl = true;
@@ -87,7 +87,16 @@ namespace OctagonPlatform.Helpers
                 UseDefaultCredentials = true,
                 Credentials = new NetworkCredential("luisrafael.gamez@outlook.com", "Vv19477002"),
                 Host = "smtp.live.com"
+            };*/
+            smtp = new System.Net.Mail.SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential("adiel2008@gmail.com", "83082303061")
             };
+
             from = new MailAddress("luisrafael.gamez@outlook.com");
 
         }

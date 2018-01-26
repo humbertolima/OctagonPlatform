@@ -28,7 +28,8 @@ namespace OctagonPlatform.Controllers.Reports
     [AllowAnonymous]
     public class DailyTransactionSummaryController : ReportsSmartController
     {
-       
+        private DateTime? start = null;
+        private DateTime? end = null;
         public DailyTransactionSummaryController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
             :base(repo, repoterminal, repopartner, repogroup)
         {           
@@ -48,17 +49,52 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DailyTransactionSummary([Bind(Include = "TerminalId,StartDate,EndDate,Partner,PartnerId,Group,GroupId,Surcharge,Dispensed")] DailyTransactionSummaryViewModel vmodel)
         {
+            bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
             ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
+
+
+                #region Variables Partial
+                Tuple<IEnumerable, Type> alist = await GetList(vmodel);
+                TempData["List"] = alist.Item1.Cast<Object>().Count() > 0 ? alist.Item1 : null;
+
+                //TempData["List"] = listaux.Count() > 0 ? listaux : null;
+                TempData["filename"] = "DailyTransactionSummary";
+                TempData["Chart"] = null;
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = start?.ToString("MMMM d, yyyy");
+                TempData["to"] = end?.ToString("MMMM d, yyyy");
+                TempData["model"] = vmodel;
+                TempData["sub"] = false;
+                #endregion
+
+                return View("DailyTransactionSummary");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
+
+            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+
+
+                DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
+
+                // IEnumerable alist;
+                Type type = typeof(TransDailyTableVM);
+
                 List<TransDailyTableVM> listaux = new List<TransDailyTableVM>();
                 List<JsonDailyTransactionSummary> list = new List<JsonDailyTransactionSummary>();
                 ApiATM api = new ApiATM();
 
-                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                 start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                 end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
 
@@ -93,35 +129,17 @@ namespace OctagonPlatform.Controllers.Reports
 
                 }
 
-                #region Variables Partial
 
-                TempData["List"] = listaux.Count() > 0 ? listaux : null;
-                TempData["filename"] = "DailyTransactionSummary";
-                TempData["Chart"] = null;
-                TempData["terminal"] = vmodel.TerminalId;
-                TempData["partner"] = vmodel.Partner;
-                TempData["from"] = start?.ToString("MMMM d, yyyy");
-                TempData["to"] = end?.ToString("MMMM d, yyyy");
-                TempData["model"] = vmodel;
-                TempData["sub"] = false;
-                #endregion
+                return new Tuple<IEnumerable, Type>(listaux, type);
 
-                return View("DailyTransactionSummary");
-            }
+            });
 
-            return RedirectToAction("Index");
         }
 
-        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        public override async Task<bool> RunReport(object aviewmodel, string format)
         {
-            throw new NotImplementedException();
-        }
-
-       
-
-        public override Task<bool> RunReport(object aviewmodel, string format)
-        {
-            throw new NotImplementedException();
+            DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
+            return await SendReport(vmodel, "DailyTransactionSummary", format, "Daily Transaction Summary");
         }
     }
 }

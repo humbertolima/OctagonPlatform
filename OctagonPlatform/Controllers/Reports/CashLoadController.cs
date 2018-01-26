@@ -28,12 +28,12 @@ namespace OctagonPlatform.Controllers.Reports
     [AllowAnonymous]
     public class CashLoadController : ReportsSmartController
     {
-       
+       private List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
         public CashLoadController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
             :base(repo, repoterminal, repopartner, repogroup)
-        {           
-          
-          
+        {
+
+            
         }
       
         public ActionResult CashLoad()
@@ -48,13 +48,47 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> CashLoad([Bind(Include = "TerminalId,StartDate,EndDate,Status,Partner,PartnerId,Group,GroupId")] CashLoadViewModel vmodel)
         {
+            bool envio = await RunReport(vmodel, "excel");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
             ModelState.Remove("TerminalId");
             if (ModelState.IsValid)
             {
+               
+
+                #region Variables Partial
+               
+                Tuple<IEnumerable, Type> alist = await GetList(vmodel);
+                TempData["List"] = alist.Item1.Cast<Object>().Count() > 0 ? Utils.ToDataTable(alist.Item1, alist.Item2) : null;
+
+                TempData["filename"] = "CashLoad";
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
+                TempData["terminal"] = vmodel.TerminalId;
+                TempData["partner"] = vmodel.Partner;
+                TempData["from"] = vmodel.StartDate;
+                TempData["to"] = vmodel.EndDate;
+                TempData["Sub"] = false;
+                #endregion
+
+                return View("CashLoad");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
+
+            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+
+
+                CashLoadViewModel vmodel = aviewmodel as CashLoadViewModel;
+
+                // IEnumerable alist;
+                Type type = typeof(CashLoadTableVM);
+
                 List<CashLoadTableVM> listaux = new List<CashLoadTableVM>();
-                List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
+                
                 List<JsonLoadCash> list = new List<JsonLoadCash>();
                 ApiATM api = new ApiATM();
 
@@ -95,34 +129,17 @@ namespace OctagonPlatform.Controllers.Reports
 
                 }
 
-                #region Variables Partial
 
-                TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<CashLoadTableVM>(listaux) : null;
-                TempData["filename"] = "CashLoad";
-                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
-                TempData["terminal"] = vmodel.TerminalId;
-                TempData["partner"] = vmodel.Partner;
-                TempData["from"] = vmodel.StartDate;
-                TempData["to"] = vmodel.EndDate;
-                TempData["Sub"] = false;
-                #endregion
+                return new Tuple<IEnumerable, Type>(listaux, type);
 
-                return View("CashLoad");
-            }
+            });
 
-            return RedirectToAction("Index");
         }
 
-        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        public override async Task<bool> RunReport(object aviewmodel, string format)
         {
-            throw new NotImplementedException();
-        }
-
-      
-
-        public override Task<bool> RunReport(object aviewmodel, string format)
-        {
-            throw new NotImplementedException();
+            CashLoadViewModel vmodel = aviewmodel as CashLoadViewModel;
+            return await SendReport(vmodel, "CashLoad", format, "Cash Load");
         }
     }
 }

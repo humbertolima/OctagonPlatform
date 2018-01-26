@@ -28,7 +28,7 @@ namespace OctagonPlatform.Controllers.Reports
     [AllowAnonymous]
     public class TerminalStatusController : ReportsSmartController
     {
-       
+        private List<JsonTerminalStatusChart> listchart = new List<JsonTerminalStatusChart>();
         public TerminalStatusController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
             :base(repo, repoterminal, repopartner, repogroup)
         {           
@@ -36,17 +36,7 @@ namespace OctagonPlatform.Controllers.Reports
           
         }
 
-        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
-        {
-            throw new NotImplementedException();
-        }
-
-       
-
-        public override Task<bool> RunReport(object aviewmodel, string format)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public ActionResult TerminalStatus()
         {
@@ -58,6 +48,7 @@ namespace OctagonPlatform.Controllers.Reports
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusViewModel vmodel)
         {
+            bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
             ModelState.Remove("CityId");
@@ -65,8 +56,35 @@ namespace OctagonPlatform.Controllers.Reports
 
             if (ModelState.IsValid)
             {
+               
+                #region Variables Partial
+                 Tuple<IEnumerable, Type> alist = await GetList(vmodel);
+                TempData["List"] = alist.Item1.Cast<Object>().Count() > 0 ? Utils.ToDataTable(alist.Item1, alist.Item2) : null;
+
+                TempData["filename"] = "TerminalStatus";
+                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
+                TempData["sub"] = false;
+                #endregion
+
+                return View("TerminalStatus");
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
+        {
+
+            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+
+
+                TerminalStatusViewModel vmodel = aviewmodel as TerminalStatusViewModel;
+
+                // IEnumerable alist;
+                Type type = typeof(TerminalStatusTableVM);
+               
                 List<TerminalStatusTableVM> listaux = new List<TerminalStatusTableVM>();
-                List<JsonTerminalStatusChart> listchart = new List<JsonTerminalStatusChart>();
+               
                 List<JsonTerminalStatusReport> list = new List<JsonTerminalStatusReport>();
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
@@ -97,19 +115,16 @@ namespace OctagonPlatform.Controllers.Reports
 
                 }
 
-                #region Variables Partial
-                TempData["List"] = listaux.Count() > 0 ? Utils.ToDataTable<TerminalStatusTableVM>(listaux) : null;
-                TempData["filename"] = "TerminalStatus";
-                TempData["Chart"] = listchart.Count() > 0 ? JsonConvert.SerializeObject(listchart) : null;
-                TempData["sub"] = false;
-                #endregion
+                return new Tuple<IEnumerable, Type>(listaux, type);
 
-                return View("TerminalStatus");
-            }
+            });
 
-            return RedirectToAction("Index");
         }
 
-
+        public override async Task<bool> RunReport(object aviewmodel, string format)
+        {
+            TerminalStatusViewModel vmodel = aviewmodel as TerminalStatusViewModel;
+            return await SendReport(vmodel, "TerminalStatus", format, "Terminal Status");
+        }
     }
 }

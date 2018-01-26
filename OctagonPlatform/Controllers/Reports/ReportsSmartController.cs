@@ -68,6 +68,8 @@ namespace OctagonPlatform.Controllers.Reports
             return stream;
         }
 
+
+
         protected string[] ListTerminalByGroup(int groupId)
         {
             try
@@ -104,12 +106,40 @@ namespace OctagonPlatform.Controllers.Reports
 
             IEnumerable listaux = tempList.Item1;
             int count = listaux.Cast<Object>().Count();
-            TempData["List"] = count > 0 ? Utils.ToDataTable(listaux, tempList.Item2) : null;
-            TempData["filename"] = "CashManagement";
-           
-
+            TempData["List"] = count > 0 ? Utils.ToDataTable(listaux, tempList.Item2) : null;  
             ViewData["Title"] = title;
-            string fffff = RazorViewToString.RenderRazorViewToString(this, "../_PartialTable",null);
+            string partial = "../_PartialTable";
+            if (aviewmodel is DailyTransactionSummaryViewModel)
+            {
+                TempData["List"] = count > 0 ? listaux : null;
+
+                DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
+
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+                ViewData["from"] = start?.ToString("MMMM d, yyyy");
+                ViewData["to"] = end?.ToString("MMMM d, yyyy");
+                TempData["model"] = vmodel;
+                partial = "../_PartialTableDailyTransaction";
+            }
+            if (aviewmodel is MonthlyTransactionSummaryViewModel)
+            {
+                TempData["List"] = count > 0 ? listaux : null;
+
+                MonthlyTransactionSummaryViewModel vmodel = aviewmodel as MonthlyTransactionSummaryViewModel;
+
+                DateTime? start = DateTime.ParseExact(vmodel.StartDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                DateTime? end = DateTime.ParseExact(vmodel.EndDate, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+
+                ViewData["from"] = start?.ToString("MMMM d, yyyy");
+                ViewData["to"] = end?.ToString("MMMM d, yyyy");
+                TempData["model"] = vmodel;
+                partial = "../_PartialTableMonthlyTransaction";
+            }
+              
+            string fffff = RazorViewToString.RenderRazorViewToString(this, partial,null);
+
             string fffff2 = RazorViewToString.RenderRazorViewToString(this, "../_PartialHead", null);
 
 
@@ -127,9 +157,9 @@ namespace OctagonPlatform.Controllers.Reports
             return html1;
 
         }
-        public async Task<bool> SendReport(object aviewmodel,string filename,string format)
+        public async Task<bool> SendReport(object aviewmodel,string filename,string format,string title)
         {
-             string html = await HTML("Cash Balance at Close", aviewmodel);
+             string html = await HTML(title, aviewmodel);
             MemoryStream stream = null;
             Attachment file = null; 
             if (format == "pdf")

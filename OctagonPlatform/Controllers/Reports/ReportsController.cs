@@ -51,6 +51,22 @@ namespace OctagonPlatform.Controllers.Reports
             return View();
         }
 
+        public async System.Threading.Tasks.Task<ActionResult> trash()
+        {
+
+            Controllers.Reports.ReportsSmartController ctrl = DependencyResolver.Current.GetService(typeof(Controllers.Reports.CashBalanceatCloseController)) as Controllers.Reports.CashBalanceatCloseController;
+            
+            System.Web.Routing.RouteData route = new System.Web.Routing.RouteData();
+            route.Values.Add("action", "trash56");
+            route.Values.Add("controller", "ReportsCACA");
+
+            ctrl.ControllerContext = new ControllerContext(new HttpContextWrapper(System.Web.HttpContext.Current), route, ctrl);// this.ControllerContext;
+
+            await ctrl.RunReport(new Models.FormsViewModels.CashBalanceatCloseViewModel() { }, "pdf");
+
+            return new ContentResult();
+        }
+
         // POST: reportModels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

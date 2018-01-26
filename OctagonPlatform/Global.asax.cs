@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -26,6 +27,27 @@ namespace OctagonPlatform
 
 
             ViewEngines.Engines.Add(new CustomViewEngine());
+
+
+            Task<bool>.Run(()=> {
+
+                DependencyResolver.Current.GetService(typeof(Controllers.Reports.CashBalanceatCloseController)) ;
+
+
+                Controllers.Reports.ReportsSmartController ctrl =  DependencyResolver.Current.GetService(typeof(Controllers.Reports.CashBalanceatCloseController)) as Controllers.Reports.CashBalanceatCloseController;
+
+                System.Web.Routing.RouteData route = new System.Web.Routing.RouteData();
+                route.Values.Add("action", "trash56");
+                route.Values.Add("controller", "ReportsCACA");
+
+                ctrl.ControllerContext = new ControllerContext(new System.Web.HttpContextWrapper(System.Web.HttpContext.Current), route, ctrl);// this.ControllerContext;
+
+                return ctrl.RunReport(new Models.FormsViewModels.CashBalanceatCloseViewModel() { }, "pdf");
+            }).Wait();
+
+
+            
+
 
         }
         //Para eliminar error en mozilla de Firefox en el console.
