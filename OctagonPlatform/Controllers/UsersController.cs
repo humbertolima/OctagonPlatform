@@ -6,6 +6,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -43,7 +44,18 @@ namespace OctagonPlatform.Controllers
             try
             {
                 UserFormViewModel userFormVM = _userRepository.RenderUserFormViewModel((int)partnerId);
+                var tzs = TimeZoneInfo.GetSystemTimeZones();
+                
+                IEnumerable<SelectListItem> list = tzs.Select(tz => new SelectListItem
+                {
+                    Text = tz.DisplayName,
+                    Value = tz.Id,
+                    Selected = (tz.DisplayName == TimeZoneInfo.Local.DisplayName)
+                }).ToArray();
 
+                userFormVM.TimeZoneList = new List<SelectListItem>(list);
+                userFormVM.TimeZoneInfo = TimeZoneInfo.Local.Id;
+               
                 if (partnerId != null)
                 {
                     return View(userFormVM);

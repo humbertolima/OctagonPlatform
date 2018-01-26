@@ -176,7 +176,23 @@ namespace OctagonPlatform.PersistanceRepository
             }
            
         }
+        public static DateTime ToTimeZoneTime(DateTime time, string timeZoneId = "Pacific Standard Time")
+        {
+            TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+            return ToTimeZoneTime(time,tzi);
+        }
 
+     
+        public static DateTime ToTimeZoneTime(DateTime time, TimeZoneInfo tzi)
+        {
+            var localDateTime = DateTime.SpecifyKind(time, DateTimeKind.Unspecified);
+
+            var utcDateTime = TimeZoneInfo.ConvertTimeToUtc(localDateTime, tzi);
+
+
+            
+            return utcDateTime;
+        }
     }
 
 

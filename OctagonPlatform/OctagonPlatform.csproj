@@ -330,6 +330,10 @@
     <Compile Include="Migrations\201801252010369_format.Designer.cs">
       <DependentUpon>201801252010369_format.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801261802497_usertimezone.cs" />
+    <Compile Include="Migrations\201801261802497_usertimezone.Designer.cs">
+      <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1393,6 +1397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801252010369_format.resx">
       <DependentUpon>201801252010369_format.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801261802497_usertimezone.resx">
+      <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

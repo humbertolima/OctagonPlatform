@@ -17,7 +17,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                IEnumerable<Partner> listpartner =  GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
 
                 IEnumerable<User> list4 = (from p in listpartner join m in Table.Include(x => x.Partner).Include(p => p.Reports) on p.Id equals m.PartnerId select m).ToList();
 
@@ -25,7 +25,7 @@ namespace OctagonPlatform.PersistanceRepository
                 //if (parent == null) throw new Exception("Parent not found. ");
 
                 return list4.Where(u => !u.Deleted && u.PartnerId == partnerId) //Seleccionar los que no esten borrados. Bloqueados sis
-                                   
+
                     .ToList();
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 return Table.Include(p => p.Reports).Include(p => p.Partner).SingleOrDefault(u => !u.Deleted && u.Id == Id);//Seleccionar los que no esten borrados. Bloqueados sis
-                                   
+
             }
             catch (Exception ex)
             {
@@ -104,6 +104,15 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partner)
                     .Single(c => c.Id == id);
 
+                var tzs = System.TimeZoneInfo.GetSystemTimeZones();
+
+                IEnumerable<System.Web.Mvc.SelectListItem> list = tzs.Select(tz => new System.Web.Mvc.SelectListItem
+                {
+                    Text = tz.DisplayName,
+                    Value = tz.Id,
+                    Selected = (tz.Id == result.TimeZoneInfo),
+                }).ToArray();
+
 
 
                 if (result == null) throw new Exception("User not found. ");
@@ -121,7 +130,9 @@ namespace OctagonPlatform.PersistanceRepository
                         Permissions = result.Permissions,
                         Phone = result.Phone,
                         Status = result.Status,
-                        UserName = result.UserName
+                        UserName = result.UserName,
+                        TimeZoneInfo = result.TimeZoneInfo,
+                        TimeZoneList = new List<System.Web.Mvc.SelectListItem>(list)
                     };
 
 
@@ -162,7 +173,7 @@ namespace OctagonPlatform.PersistanceRepository
                         user.UserName = viewModel.UserName.Trim();
                         user.IsLocked = viewModel.IsLocked;
                         user.PartnerId = viewModel.PartnerId;
-
+                        user.TimeZoneInfo = viewModel.TimeZoneInfo;
                         if (!string.IsNullOrEmpty(viewModel.Password))
                         {
                             var key = Cryptography.GenerateKey();
@@ -196,7 +207,8 @@ namespace OctagonPlatform.PersistanceRepository
                         Phone = viewModel.Phone.Trim(),
                         Status = viewModel.Status,
                         UserName = viewModel.UserName.Trim(),
-                        IsLocked = viewModel.IsLocked
+                        IsLocked = viewModel.IsLocked,
+                        TimeZoneInfo = viewModel.TimeZoneInfo
 
                     };
                     if (viewModel.Permissions != null)
@@ -255,7 +267,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 if (viewModel == null) throw new Exception("Model not found.");
-               
+
                 return new UserFormViewModel()
                 {
                     Email = viewModel.Email,
@@ -358,7 +370,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             User user = Table
                 .Include(m => m.Terminals)
-                .Include(m=>m.Partner)
+                .Include(m => m.Partner)
                 .Single(c => c.Id == userId);
 
             try
@@ -490,14 +502,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public IEnumerable<dynamic> GetAllUser(string term,int partnerId)
+        public IEnumerable<dynamic> GetAllUser(string term, int partnerId)
         {
             try
             {
-                
+
                 IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
-                var list4 = (from q in listpartner join m in Table.Include(b => b.Partner) on q.Id equals m.PartnerId select m).ToList();               
-                return list4.Where(b => b.Name.ToLower().Contains(term.ToLower())).Select(b => new { label = b.UserName+" - "+b.Name+" - "+b.Partner.BusinessName, value = b.Id }).ToList();
+                var list4 = (from q in listpartner join m in Table.Include(b => b.Partner) on q.Id equals m.PartnerId select m).ToList();
+                return list4.Where(b => b.Name.ToLower().Contains(term.ToLower())).Select(b => new { label = b.UserName + " - " + b.Name + " - " + b.Partner.BusinessName, value = b.Id }).ToList();
             }
             catch (Exception e)
             {
@@ -505,10 +517,15 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(e.Message);
             }
         }
-     
 
 
 
+        public IEnumerable<User> GetAllUsersSubscription()
+        {
+            return Table.Include(p => p.Subscriptions.Select(m => m.ReportFilters.AsQueryable().Include(r => r.Report).Include(r=>r.Filter)));
+             
+               
+        }
 
 
 
