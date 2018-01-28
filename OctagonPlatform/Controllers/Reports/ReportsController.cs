@@ -42,6 +42,7 @@ namespace OctagonPlatform.Controllers.Reports
         }
         public ActionResult Selection()
         {
+            var listprueba = _repoUser.GetAllUsersSubscription();
             IEnumerable<ReportModel> list = _repo.GetReportsDasboard();
             return View("../ReportsSmart/Index",list);
         }

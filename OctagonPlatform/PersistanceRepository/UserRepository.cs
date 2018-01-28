@@ -522,7 +522,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         public IEnumerable<User> GetAllUsersSubscription()
         {
-            return Table.Include(p => p.Subscriptions.Select(m => m.ReportFilters.AsQueryable().Include(r => r.Report).Include(r=>r.Filter)));
+            return Table.Include(p => p.Subscriptions.Select(m => m.ReportFilters)).ToList();
              
                
         }

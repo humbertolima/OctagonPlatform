@@ -14,7 +14,7 @@ namespace OctagonPlatform
     {
         protected void Application_Start()
         {
-          
+
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalFilters.Filters.Add(new AuthorizeAttribute());
@@ -28,6 +28,17 @@ namespace OctagonPlatform
 
             ViewEngines.Engines.Add(new CustomViewEngine());
 
+          /*  Controllers.Reports.ReportsSmartController ctrl = DependencyResolver.Current.GetService(typeof(Controllers.Reports.CashBalanceatCloseController)) as Controllers.Reports.CashBalanceatCloseController;
+
+
+            System.Web.Routing.RouteData route = new System.Web.Routing.RouteData();
+            route.Values.Add("action", "trash56");
+            route.Values.Add("controller", "ReportsCACA");
+
+            ctrl.ControllerContext = new ControllerContext(new System.Web.HttpContextWrapper(System.Web.HttpContext.Current), route, ctrl);// this.ControllerContext;
+
+            ctrl.RunReport(new Models.FormsViewModels.CashBalanceatCloseViewModel() { }, "pdf").Wait();
+            */
             /*
             Task<bool>.Run(()=> {
 
@@ -46,7 +57,7 @@ namespace OctagonPlatform
             }).Wait();
             */
 
-            
+
 
 
         }
