@@ -69,9 +69,11 @@ namespace OctagonPlatform.Migrations
 
             #region despues del merge
 
-            List<string> Level0 = new List<string> { "Prueba2", "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            List<string> Level0 = new List<string> {"Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
+                if (!System.Diagnostics.Debugger.IsAttached)
+                    System.Diagnostics.Debugger.Launch();
                 Permission perm = new Permission() { Name = item };
                 SavePermissions(context, perm);
             }
@@ -79,8 +81,6 @@ namespace OctagonPlatform.Migrations
             List<string> Level01 = new List<string>() { "View Alerts", "OffLine Terminals", "Inactive Terminals", "Incomplete Terminals", "Low Cash Balance", "Unsettled Funds", "Settlement Changes", "ACH Returns", "Pending Disputes", "Represent Pending Disputes", };
             foreach (var item in Level01)
             {
-                //if (!System.Diagnostics.Debugger.IsAttached)
-                //    System.Diagnostics.Debugger.Launch();
 
                 Permission perm = new Permission() { Name = item, ParentID = allPermissions.Single(m => m.Name == "Alerts").Id };
                 SavePermissions(context, perm);

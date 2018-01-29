@@ -1051,6 +1051,7 @@
     <Content Include="Content\quicksearch\package.json" />
     <Content Include="Content\quicksearch\README.md" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Views\Terminals\Sections\ErrorAccess.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
