@@ -37,8 +37,6 @@ namespace OctagonPlatform.Migrations
             context.Users.AddOrUpdate(m => m.UserName, admin02);
             context.SaveChanges();
 
-            context.Users.AddOrUpdate(m => m.UserName, admin03);
-            context.SaveChanges();
 
 
             context.LocationTypes.AddOrUpdate(l => l.Name,
@@ -69,11 +67,12 @@ namespace OctagonPlatform.Migrations
 
             #region despues del merge
 
-            List<string> Level0 = new List<string> {"Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            if (!System.Diagnostics.Debugger.IsAttached)
+                System.Diagnostics.Debugger.Launch();
+
+            List<string> Level0 = new List<string> { "prueba6", "prueba5", "prueba4", "prueba2", "Prueba", "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
-                if (!System.Diagnostics.Debugger.IsAttached)
-                    System.Diagnostics.Debugger.Launch();
                 Permission perm = new Permission() { Name = item };
                 SavePermissions(context, perm);
             }
@@ -345,18 +344,23 @@ namespace OctagonPlatform.Migrations
 
         private void SavePermissions(ApplicationDbContext context, Permission perm)
         {
+            context.Permissions.AddOrUpdate(m => m.Name, perm);                                     //comprobar si el permissions esta para guardarlo o updated
+            context.SaveChanges();      //para que me devuelva el ID que asigno el insertar. automaticamente perm toma el id.
+            perm = context.Permissions.Include(u => u.Users).FirstOrDefault(p => p.Name == perm.Name);
 
-           
-            var user = context.Users.Include(m => m.Permissions).FirstOrDefault(m => m.Id == admin02.Id);
+            var user = context.Users.Include(m => m.Permissions.Select(u => u.Users)).FirstOrDefault(a => a.Id == admin02.Id);
 
-            if (!user.Permissions.Contains(perm))
+            var temp = context.Users.FirstOrDefault(u => u.Id == user.Id).Permissions.Select(m => m.Users);
+
+            if (user.Permissions.Contains(perm) == false)
             {
-                perm.Users.Add(admin02);                                                //adicionar el usaurio admin a todos los permisos.
+                context.Users.FirstOrDefault(u => u.Id == user.Id).Permissions.Add(perm);
+                //perm.Users.Add(admin02);                                                      //adicionar el usaurio admin a todos los permisos.
             }
-            context.Permissions.AddOrUpdate(m => m.Name, perm);                         //comprobar si el permissions esta para guardarlo o updated
 
-            context.SaveChanges();                                                      //salvar los cambios en DB para que me traiga el ID del permiso en DB
-            allPermissions.Add(perm);                                                   //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
+
+            context.SaveChanges();                                                              //salvar los cambios en DB para que me traiga el ID del permiso en DB
+            allPermissions.Add(perm);                                                           //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
         }
     }
 }
