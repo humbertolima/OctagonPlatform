@@ -114,19 +114,20 @@ namespace OctagonPlatform.Controllers.Reports
                 {
                     Schedule schedule = item.Schedule;
                     string reportname = "";
-                    if (item.ReportFilters != null)
-                     reportname = item.ReportFilters.First().Report.Name;
-                    SubsTableViewModel obj = new SubsTableViewModel()
-                    {
-                        ReportName = reportname,
-                        Description = item.Description,
-                        ScheduleName = item.Schedule.Name,
-                        Username = item2.Username,
-                        NextRunDate = NextRunDate(schedule),
-                        LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
-                        Id = item.Id
-                    };                   
-                    aux.Add(obj);     
+                    if (item.ReportFilters != null && item.ReportFilters.Count > 0)                    
+                        reportname = item.ReportFilters.First().Report.Name;
+                        SubsTableViewModel obj = new SubsTableViewModel()
+                        {
+                            ReportName = reportname,
+                            Description = item.Description,
+                            ScheduleName = item.Schedule.Name,
+                            Username = item2.Username,
+                            NextRunDate = NextRunDate(schedule),
+                            LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
+                            Id = item.Id
+                        };
+                        aux.Add(obj);
+                  
 
                 }
 

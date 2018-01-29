@@ -97,7 +97,8 @@ namespace OctagonPlatform.Helpers
                 Credentials = new System.Net.NetworkCredential("adiel2008@gmail.com", "83082303061")
             };
 
-            from = new MailAddress("luisrafael.gamez@outlook.com");
+           // from = new MailAddress("luisrafael.gamez@outlook.com");
+            from = new MailAddress("adiel2008@gmail.com");
 
         }
         public bool ToAdmin( string sub, string body)

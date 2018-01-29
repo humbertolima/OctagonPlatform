@@ -334,6 +334,10 @@
     <Compile Include="Migrations\201801261802497_usertimezone.Designer.cs">
       <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.cs" />
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
+      <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1400,6 +1404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801261802497_usertimezone.resx">
       <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801290445427_AddTypeFilter.resx">
+      <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

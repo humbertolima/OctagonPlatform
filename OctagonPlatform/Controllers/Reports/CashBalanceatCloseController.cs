@@ -52,7 +52,7 @@ namespace OctagonPlatform.Controllers.Reports
             return View("CashBalanceatClose", vmodel);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceatCloseViewModel vmodel)
         {
             bool envio = await RunReport(vmodel,"excel");

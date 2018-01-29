@@ -196,7 +196,18 @@ namespace OctagonPlatform.PersistanceRepository
     }
 
 
+    public static  class ErrorCtrl
+    {
+        public static void save(Action action)
+        {
+            try {
+                action.Invoke();
+            } catch (Exception ex) {
 
+                Console.WriteLine(ex.ToString());
+            }
+        }
+    }
 
 
     public static class RazorViewToString
