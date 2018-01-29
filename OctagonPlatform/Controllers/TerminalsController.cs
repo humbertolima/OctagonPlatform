@@ -125,7 +125,13 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult GetContacts(TerminalContactVM viewModel)
         {
-            if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
+            if (!User.IsInRole("Terminal Contacts"))                    //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                ViewBag.Error = "Access Denied";
+                return PartialView("../Shared/ErrorWithLayout");
+            }
+
+            if (ModelState.IsValid)                                         //pendiente validar el model en todas los metodos del controladores.
             {
                 viewModel = _repository.GetContacts(viewModel.Id);
             }
@@ -140,6 +146,10 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult GetPictures(TerminalPicturesVM viewModel)
         {
+            if (!User.IsInRole("Terminal Pictures"))           //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                return PartialView("Sections/ErrorAccess");
+            }
             if (viewModel.Id > 0)
             {
                 viewModel = _repository.GetPictures(viewModel.Id);
@@ -155,6 +165,10 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult SetPictures(TerminalPicturesVM viewModel, HttpPostedFileBase FileForm)
         {
+            if (!User.IsInRole("Add Terminal Pictures"))           //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                return PartialView("Sections/ErrorAccess");
+            }
             Models.Terminal terminal;
 
             if (FileForm !=null)
@@ -173,6 +187,10 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public PartialViewResult GetDocuments(TerminalDocumentsVM viewModel)
         {
+            if (!User.IsInRole("Terminal Documents"))           //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                return PartialView("Sections/ErrorAccess");
+            }
             if (viewModel.Id > 0)
             {
                 viewModel = _repository.GetDocuments(viewModel.Id);
@@ -185,7 +203,7 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public PartialViewResult SetDocuments( TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
         {
-            if (!User.IsInRole("Add Terminal Notes"))                                   //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            if (!User.IsInRole("Add Terminal Documents"))                                   //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
             {
                 return PartialView("Sections/ErrorAccess");
             }
@@ -207,6 +225,10 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public PartialViewResult DocumentDelete(TerminalDocumentsVM viewModel, int documentId)
         {
+            if (!User.IsInRole("Delete Terminal Documents"))           //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                return PartialView("Sections/ErrorAccess");
+            }
             Models.Terminal terminal;
             try
             {
@@ -397,6 +419,11 @@ namespace OctagonPlatform.Controllers
         // GET: Terminals
         public ActionResult Index()
         {
+            if (!User.IsInRole("List All Terminals"))                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                ViewBag.Error = "Access Denied";
+                return PartialView("Sections/ErrorAccess");
+            }
             try
             {
                 return View(_repository.GetAllTerminals(int.Parse(Session["partnerId"].ToString())));
@@ -592,6 +619,10 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult PictureDelete(int id, int? pictureId)
         {
+            if (!User.IsInRole("Delete Terminal Pictures"))                 //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            {
+                return PartialView("Sections/ErrorAccess");
+            }
             try
             {
                 if (pictureId == null || pictureId <= 0)

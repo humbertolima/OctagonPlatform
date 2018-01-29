@@ -35,6 +35,12 @@ namespace OctagonPlatform.Controllers
         [HttpGet]
         public ActionResult Create(int? id)
         {
+            if (!User.IsInRole("Add Terminal Contacts"))
+            {
+                ViewBag.Error = "Access Denied";
+                return PartialView("../Shared/ErrorWithLayout");
+            }
+
             try
             {
                 if (id != null)
@@ -58,6 +64,11 @@ namespace OctagonPlatform.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalContactFormViewModel terminalContactFormViewModel)
         {
+            if (!User.IsInRole("Add Terminal Contacts"))
+            {
+                ViewBag.Error = "Access Denied";
+                return PartialView("../Shared/ErrorWithLayout");
+            }
             try
             {
                 if (!ModelState.IsValid)
