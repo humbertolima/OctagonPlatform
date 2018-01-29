@@ -107,22 +107,25 @@ namespace OctagonPlatform.Controllers.Reports
     private List<SubsTableViewModel> ProcessSubscription(IEnumerable<Subreport> list)
         {
             List<SubsTableViewModel> aux = new List<SubsTableViewModel>();
+           
             foreach (var item2 in list)
             {
                 var item = item2.Model;
                 if (item.ReportFilters != null && item.Schedule !=null)
                 {
                     Schedule schedule = item.Schedule;
+                   
                     string reportname = "";
                     if (item.ReportFilters != null && item.ReportFilters.Count > 0)                    
                         reportname = item.ReportFilters.First().Report.Name;
-                        SubsTableViewModel obj = new SubsTableViewModel()
+                   
+                    SubsTableViewModel obj = new SubsTableViewModel()
                         {
                             ReportName = reportname,
                             Description = item.Description,
                             ScheduleName = item.Schedule.Name,
                             Username = item2.Username,
-                            NextRunDate = NextRunDate(schedule),
+                            NextRunDate = Utils.NextRunDateSchedule(schedule) == null ? "One Execution": Utils.NextRunDateSchedule(schedule).ToString(),
                             LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
                             Id = item.Id
                         };
@@ -135,164 +138,13 @@ namespace OctagonPlatform.Controllers.Reports
             return aux;
         }
 
-        private string NextRunDate(Schedule schedule)
-        {
-            string datestart = schedule.StartDate.ToShortDateString();
-            string daterun = "";
-            DateTime today = DateTime.Now;
-            if (schedule is ScheduleOnce)
-            {
-                datestart += " " + ((ScheduleOnce)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                    daterun = "One execution";
-            }
-            if (schedule is ScheduleDaily)
-            {
-                datestart += " " + ((ScheduleDaily)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {                    
-                    string nextday = today.AddDays(((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
-                    daterun = nextday +" " + ((ScheduleDaily)schedule).Time; 
-                }
-            }
-            if (schedule is ScheduleWeekly)
-            {
-                datestart += " " + ((ScheduleWeekly)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleWeekly week = ((ScheduleWeekly)schedule);
-                    string[] days = week.RepeatOnDaysWeeks.Split('_');
-                    int days_week = week.RepeatOnWeeks * 7;
-                    DateTime nextweek = today.AddDays(days_week);
-                    DateTime first_date_week = Utils.GetFirstDayOfWeek(nextweek);
-                    DateTime nextrun = GetNextRun(first_date_week, days[0]);                 
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
-                   
-                }
-            }
-            if (schedule is ScheduleMonthly)
-            {
-                datestart += " " + ((ScheduleMonthly)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleMonthly month = ((ScheduleMonthly)schedule);
-                    int day = month.RepeatOnDay;
-                    int every_month = month.RepeatOnMonth;
-
-                    DateTime next_month = today.AddMonths(every_month);
-
-                    daterun = next_month.Month + "/" + day + "/" + next_month.Year + " " + ((ScheduleMonthly)schedule).Time;
-
-                }
-            }
-            if (schedule is ScheduleMonthlyRelative)
-            {
-                datestart += " " + ((ScheduleMonthlyRelative)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleMonthlyRelative month_relative = ((ScheduleMonthlyRelative)schedule);
-                    int first =Convert.ToInt32( month_relative.RepeatOnFirst); // 0 is last day
-                    string name_day = month_relative.RepeatOnDay;
-                    int every_month = month_relative.RepeatOnMonth;
-                    DateTime next_month = today.AddMonths(every_month);                   
-                    var firstDayOfMonth = new DateTime(next_month.Year, next_month.Month, 1);
-                   
-                    DateTime nextrun = new DateTime();
-                    DateTime first_date_week = firstDayOfMonth;//si es first == 1 , es la primera semana 
-                    if (first > 1)
-                    {
-                        int days_week = first * 7;
-                        DateTime nextweek = firstDayOfMonth.AddDays(days_week);
-                        first_date_week = Utils.GetFirstDayOfWeek(nextweek);
-                        
-                    }
-                    if (first == 0) //Ultimo del mes
-                    {
-                        var last_week = firstDayOfMonth.AddMonths(1).AddDays(-3);  
-                        first_date_week = Utils.GetFirstDayOfWeek(last_week);                       
-                    }
-                  
-                    nextrun = GetNextRunMonth(first_date_week, name_day);
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleMonthlyRelative)schedule).Time;
-
-                }
-            }
-            return daterun;
-        }
-
-        private DateTime GetNextRun(DateTime date_week, string dayrun)
-        {
-            if (dayrun != "Day" && dayrun != "week_day")
-            {
-                string day = date_week.DayOfWeek.ToString().Substring(0, 3);
-                dayrun = dayrun == "weekend_day" ? "Sat" : dayrun;
-                if (day == dayrun)
-                    return date_week;
-                else
-                {
-                    DateTime next = date_week.AddDays(1);
-                    return GetNextRun(next, dayrun);
-                }
-            }
-            return date_week;
-          
-
-        }
-        private DateTime GetNextRunMonth(DateTime date_week, string dayrun)
-        {
-
-            string day = date_week.DayOfWeek.ToString().Substring(0, 3);
-            if (day == dayrun)
-                return date_week;
-            else
-            {
-                DateTime next = date_week.AddDays(1);
-                return GetNextRun(next, dayrun);
-            }
-
-        }
+       
         //arreglar esta funcion para que tome el tiempo real de ejecucion de la subscription
         private string LastRunDate(Schedule schedule)
         {
             string datestart = schedule.StartDate.ToShortDateString();
             string daterun = "";
-            DateTime today = DateTime.Now;
-            if (schedule is ScheduleOnce)
-            {
-                datestart += " " + ((ScheduleOnce)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt < DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                    daterun = "Not execution yet";
-            }
-            if (schedule is ScheduleDaily)
-            {
-                datestart += " " + ((ScheduleDaily)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = "Not execution yet";
-                else
-                {
-                    string nextday = today.AddDays(-((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
-                    daterun = nextday + " " + ((ScheduleDaily)schedule).Time;
-                }
-            }
+           
             return daterun;
         }
 
