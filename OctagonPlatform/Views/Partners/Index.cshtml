@@ -9,16 +9,16 @@
     <div class="row">
         <div class="col-md-6" style="width: 200px;">
             <h1 class="page-header" style="color: #859298; font-size:30px;"> <i class="fa fa-group" style="font-size:25px;color:#859298"></i> Partners</h1>
-    @*        @Html.ActionLink(
-        "Add Partner",
-        "Create",
-        "Partners",
-        new
-        {
-            partnerId = int.Parse(Session["partnerId"].ToString())
-        },
-        new { @class = "btn btn-primary" }
-        ) *@
+            @*        @Html.ActionLink(
+                "Add Partner",
+                "Create",
+                "Partners",
+                new
+                {
+                    partnerId = int.Parse(Session["partnerId"].ToString())
+                },
+                new { @class = "btn btn-primary" }
+                ) *@
         </div>
 
         <div class="col-md-6" style="margin-top: 43px;">
@@ -72,7 +72,8 @@
                 <td>
                     <i class="fa fa-trash" style="color: red; font-size: 16px;"></i>
                     <button type="button" style="margin: -2px;" data-id="@Model.Id" id="deleteItem" class="btn-link WorkingHoursEdit2" data-toggle="modal" data-target="#DeletePartner">
-                    Delete</button>
+                        Delete
+                    </button>
                 </td>
             </tr>
             @foreach (var item in Model.Partners)
@@ -139,12 +140,12 @@
         });
     </script>
 
-<script>
-      $(document).on("click", ".WorkingHoursEdit", function () {
-          var id = $(this).data('id');
-          $("#DeletePartner #id").val(id);
-      });
-</script>
+    <script>
+        $(document).on("click", ".WorkingHoursEdit", function () {
+            var id = $(this).data('id');
+            $("#DeletePartner #id").val(id);
+        });
+    </script>
 
     <script>
         $(document).on("click", ".WorkingHoursEdit2", function () {
