@@ -422,7 +422,7 @@ namespace OctagonPlatform.Controllers
             if (!User.IsInRole("List All Terminals"))                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
             {
                 ViewBag.Error = "Access Denied";
-                return PartialView("Sections/ErrorAccess");
+                return PartialView("../Shared/Error");
             }
             try
             {
