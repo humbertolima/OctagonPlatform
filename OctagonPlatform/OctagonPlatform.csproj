@@ -338,6 +338,10 @@
     <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
       <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801301558546_merge2.cs" />
+    <Compile Include="Migrations\201801301558546_merge2.Designer.cs">
+      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -476,6 +480,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\data\vendbot-data.js" />
     <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
     <Content Include="Octagon\assets\data\demmoney-data.js" />
@@ -787,23 +792,61 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Octagon\assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Octagon\assets\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Octagon\assets\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Octagon\assets\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Octagon\assets\bootstrap\dist\js\npm.js" />
+    <Content Include="Octagon\assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Octagon\assets\bootstrap\js\affix.js" />
+    <Content Include="Octagon\assets\bootstrap\js\alert.js" />
     <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Octagon\assets\bootstrap\js\button.js" />
+    <Content Include="Octagon\assets\bootstrap\js\carousel.js" />
+    <Content Include="Octagon\assets\bootstrap\js\collapse.js" />
+    <Content Include="Octagon\assets\bootstrap\js\dropdown.js" />
+    <Content Include="Octagon\assets\bootstrap\js\modal.js" />
+    <Content Include="Octagon\assets\bootstrap\js\popover.js" />
+    <Content Include="Octagon\assets\bootstrap\js\scrollspy.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tab.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\index.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\affix.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\alert.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\button.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\carousel.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\collapse.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\dropdown.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\modal.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\phantom.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\popover.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\scrollspy.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\tab.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\tooltip.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\vendor\jquery.min.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\vendor\qunit.css" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\vendor\qunit.js" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\affix-with-sticky-footer.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\affix.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\alert.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\button.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\carousel.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\collapse.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\dropdown.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\modal.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\popover.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\scrollspy.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\tab.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\visual\tooltip.html" />
+    <Content Include="Octagon\assets\bootstrap\js\tooltip.js" />
+    <Content Include="Octagon\assets\bootstrap\js\transition.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
-    <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
-    <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
-    <Content Include="Octagon\assets\css\cosmo.css" />
-    <Content Include="Octagon\assets\css\Dashboard.css" />
-    <Content Include="Octagon\assets\css\Footer-Basic.css" />
-    <Content Include="Octagon\assets\css\Map-Clean.css" />
-    <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\sidebar.css" />
-    <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
-    <Content Include="Octagon\assets\css\styles.min.css" />
-    <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\AMS-data.js" />
     <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
@@ -817,23 +860,16 @@
     <Content Include="Octagon\assets\img\404.jpg" />
     <Content Include="Octagon\assets\img\banner-octa.jpg" />
     <Content Include="Octagon\assets\img\banner2-1.jpg" />
-    <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
-    <Content Include="Octagon\assets\img\eth-16x16.png" />
-    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
-    <Content Include="Octagon\assets\img\ltc-16x16.png" />
-    <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
     <Content Include="Octagon\assets\js\sb-admin-2.js" />
     <Content Include="Octagon\assets\js\script.min.js" />
     <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.min.js" />
@@ -910,9 +946,47 @@
     <Content Include="Octagon\assets\vendor\flot\jquery.flot.time.js" />
     <Content Include="Octagon\assets\vendor\flot\jquery.js" />
     <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.css.map" />
     <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Octagon\assets\vendor\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Octagon\assets\vendor\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\animated.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\core.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\extras.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\fixed-width.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\font-awesome.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\icons.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\larger.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\list.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\mixins.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\path.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\screen-reader.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\spinning.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\stacked.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\less\variables.less" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_animated.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_core.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_extras.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_icons.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_larger.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_list.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_mixins.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_path.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_spinning.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_stacked.scss" />
+    <Content Include="Octagon\assets\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="Octagon\assets\vendor\jquery\jquery.js" />
     <Content Include="Octagon\assets\vendor\jquery\jquery.min.js" />
     <Content Include="Octagon\assets\vendor\metisMenu\metisMenu.css" />
@@ -1025,47 +1099,105 @@
     <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Octagon\assets\vendor\datatables-responsive\dataTables.responsive.scss" />
     <Content Include="Octagon\assets\vendor\datatables\images\Sorting icons.psd" />
-    <Content Include="Octagon\assets\vendor\font-awesome\css\font-awesome.css.map" />
-    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="Octagon\assets\vendor\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Octagon\assets\vendor\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\animated.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\bordered-pulled.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\core.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\extras.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\fixed-width.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\font-awesome.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\icons.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\larger.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\list.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\mixins.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\path.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\rotated-flipped.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\screen-reader.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\spinning.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\stacked.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\less\variables.less" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\font-awesome.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_animated.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_core.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_extras.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_icons.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_larger.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_list.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_mixins.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_path.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_screen-reader.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_spinning.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_stacked.scss" />
-    <Content Include="Octagon\assets\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Grid.mvc.readme" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Octagon\assets\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Octagon\assets\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Octagon\assets\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Octagon\assets\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Octagon\assets\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Octagon\assets\bootstrap\js\.jscsrc" />
+    <Content Include="Octagon\assets\bootstrap\js\.jshintrc" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\README.md" />
+    <Content Include="Octagon\assets\bootstrap\js\tests\unit\.jshintrc" />
+    <Content Include="Octagon\assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Octagon\assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Octagon\assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Octagon\assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Octagon\assets\bootstrap\less\.csscomb.json" />
+    <Content Include="Octagon\assets\bootstrap\less\.csslintrc" />
+    <Content Include="Octagon\assets\bootstrap\less\alerts.less" />
+    <Content Include="Octagon\assets\bootstrap\less\badges.less" />
+    <Content Include="Octagon\assets\bootstrap\less\bootstrap.less" />
+    <Content Include="Octagon\assets\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Octagon\assets\bootstrap\less\button-groups.less" />
+    <Content Include="Octagon\assets\bootstrap\less\buttons.less" />
+    <Content Include="Octagon\assets\bootstrap\less\carousel.less" />
+    <Content Include="Octagon\assets\bootstrap\less\close.less" />
+    <Content Include="Octagon\assets\bootstrap\less\code.less" />
+    <Content Include="Octagon\assets\bootstrap\less\component-animations.less" />
+    <Content Include="Octagon\assets\bootstrap\less\dropdowns.less" />
+    <Content Include="Octagon\assets\bootstrap\less\forms.less" />
+    <Content Include="Octagon\assets\bootstrap\less\glyphicons.less" />
+    <Content Include="Octagon\assets\bootstrap\less\grid.less" />
+    <Content Include="Octagon\assets\bootstrap\less\input-groups.less" />
+    <Content Include="Octagon\assets\bootstrap\less\jumbotron.less" />
+    <Content Include="Octagon\assets\bootstrap\less\labels.less" />
+    <Content Include="Octagon\assets\bootstrap\less\list-group.less" />
+    <Content Include="Octagon\assets\bootstrap\less\media.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\forms.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\grid.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\image.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\labels.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\panels.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\resize.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\size.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Octagon\assets\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Octagon\assets\bootstrap\less\modals.less" />
+    <Content Include="Octagon\assets\bootstrap\less\navbar.less" />
+    <Content Include="Octagon\assets\bootstrap\less\navs.less" />
+    <Content Include="Octagon\assets\bootstrap\less\normalize.less" />
+    <Content Include="Octagon\assets\bootstrap\less\pager.less" />
+    <Content Include="Octagon\assets\bootstrap\less\pagination.less" />
+    <Content Include="Octagon\assets\bootstrap\less\panels.less" />
+    <Content Include="Octagon\assets\bootstrap\less\popovers.less" />
+    <Content Include="Octagon\assets\bootstrap\less\print.less" />
+    <Content Include="Octagon\assets\bootstrap\less\progress-bars.less" />
+    <Content Include="Octagon\assets\bootstrap\less\responsive-embed.less" />
+    <Content Include="Octagon\assets\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Octagon\assets\bootstrap\less\scaffolding.less" />
+    <Content Include="Octagon\assets\bootstrap\less\tables.less" />
+    <Content Include="Octagon\assets\bootstrap\less\theme.less" />
+    <Content Include="Octagon\assets\bootstrap\less\thumbnails.less" />
+    <Content Include="Octagon\assets\bootstrap\less\tooltip.less" />
+    <Content Include="Octagon\assets\bootstrap\less\type.less" />
+    <Content Include="Octagon\assets\bootstrap\less\utilities.less" />
+    <Content Include="Octagon\assets\bootstrap\less\variables.less" />
+    <Content Include="Octagon\assets\bootstrap\less\wells.less" />
+    <Content Include="Content\quicksearch\bower.json" />
+    <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js.map" />
+    <Content Include="Content\quicksearch\examples\example.json" />
+    <Content Include="Content\quicksearch\jquery.quicksearch.jquery.json" />
+    <Content Include="Content\quicksearch\LICENSE" />
+    <Content Include="Content\quicksearch\package.json" />
+    <Content Include="Content\quicksearch\README.md" />
     <Content Include="Content\quicksearch\bower.json" />
     <Content Include="Content\quicksearch\dist\jquery.quicksearch.min.js.map" />
     <Content Include="Content\quicksearch\examples\example.json" />
@@ -1074,6 +1206,16 @@
     <Content Include="Content\quicksearch\package.json" />
     <Content Include="Content\quicksearch\README.md" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1165,22 +1307,9 @@
     <Content Include="Scripts\Subscription.js" />
     <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdminSB.cshtml" />
     <Content Include="Views\Shared\Sections\Header.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\NavBarOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\ScriptsOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -1354,6 +1483,7 @@
     <Content Include="Views\Permissions\Edit.cshtml" />
     <Content Include="Views\Permissions\Index.cshtml" />
     <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1395,18 +1525,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801242058527_addformarSubscription.resx">
-      <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801252010369_format.resx">
-      <DependentUpon>201801252010369_format.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801261802497_usertimezone.resx">
-      <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801290445427_AddTypeFilter.resx">
-      <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
