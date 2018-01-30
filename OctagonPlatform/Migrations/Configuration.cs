@@ -344,23 +344,22 @@ namespace OctagonPlatform.Migrations
 
         private void SavePermissions(ApplicationDbContext context, Permission perm)
         {
-            context.Permissions.AddOrUpdate(m => m.Name, perm);                                     //comprobar si el permissions esta para guardarlo o updated
-            context.SaveChanges();      //para que me devuelva el ID que asigno el insertar. automaticamente perm toma el id.
-            perm = context.Permissions.Include(u => u.Users).FirstOrDefault(p => p.Name == perm.Name);
+            context.Permissions.AddOrUpdate(m => m.Name, perm);                                         //comprobar si el permissions esta para guardarlo o updated
+                                                                                                        //ideal que se le pueda hacer Include al AddOrUpdate para que ademas de que me devuelva el ID, tambiem me devuelva el USER que tiene este permiso.
+            context.SaveChanges();                                                                      //para que me devuelva el ID que asigno el insertar. automaticamente perm toma el id.
+            perm = context.Permissions.Include(u => u.Users).FirstOrDefault(p => p.Name == perm.Name);  //para poder ponerle el include de User porque perm no trae el user que lo tiene y el Contains me decia que no lo tenia.
 
             var user = context.Users.Include(m => m.Permissions.Select(u => u.Users)).FirstOrDefault(a => a.Id == admin02.Id);
-
-            var temp = context.Users.FirstOrDefault(u => u.Id == user.Id).Permissions.Select(m => m.Users);
-
+            
             if (user.Permissions.Contains(perm) == false)
             {
                 context.Users.FirstOrDefault(u => u.Id == user.Id).Permissions.Add(perm);
-                //perm.Users.Add(admin02);                                                      //adicionar el usaurio admin a todos los permisos.
+                //perm.Users.Add(admin02);                                                              //adicionar el usaurio admin a todos los permisos.
             }
 
 
-            context.SaveChanges();                                                              //salvar los cambios en DB para que me traiga el ID del permiso en DB
-            allPermissions.Add(perm);                                                           //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
+            context.SaveChanges();                                                                      //salvar los cambios en DB para que me traiga el ID del permiso en DB
+            allPermissions.Add(perm);                                                                   //guardo listado de permissos para ponerlo como Parent en el Arbol de permisos.
         }
     }
 }
