@@ -95,6 +95,8 @@
             dataType: "json",
             data: {
                 "userId": @Model.Id,
+            }, error: function (request, status, error) {
+                alert(request.responseText);
             },
             success: function (data) {
                 $("#demo1")
@@ -105,7 +107,7 @@
                         }
                         var perm = r.join(', ');
                         $("#permissions").val(perm);
-                        alert(perm);
+                       // alert(perm);
                         //alert(r.join(', '));
                         //$('#event_result').html('Selected: ' + r.join(', '));
                     })

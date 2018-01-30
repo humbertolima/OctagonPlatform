@@ -104,7 +104,9 @@
 
     $(document).on("click", ".NotesEdit", function () {
         var passedID = $(this).data('id');
-        var passedValue = $("#NotesValues_" + passedID).val();
+
+        var passedValue = $("#NotesValues_" + passedID).val(); alert(passedValue);
+        $("#myModaNotesAdd #noteId").val(passedID);
         $("#myModaNotesAdd #notes").val(passedValue);
     });
 

@@ -1,5 +1,6 @@
 ﻿using OctagonPlatform.Models;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Security;
 
@@ -20,7 +21,9 @@ namespace OctagonPlatform.Helpers
         }
         public override string[] GetRolesForUser(string username)
         {
-            var user = _context.Users.Single(x => x.UserName == username);
+            var user = _context.Users
+                .Include(m=>m.Permissions)
+                .Single(x => x.UserName == username);
 
             var permissions = user.Permissions;
 
