@@ -7,9 +7,8 @@ using System.Web;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
-   public interface IReportFilter : IGenericRepository<ReportFilter>
+    public interface IReportFilter : IGenericRepository<ReportFilter>
     {
-       
-
+        void DeleteReportFilter(ReportFilter rfilter);
     }
 }

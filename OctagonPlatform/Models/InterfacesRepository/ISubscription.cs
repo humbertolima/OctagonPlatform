@@ -12,5 +12,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
     {
         List<Subreport> GetSubscriptionsIncluding(int partnerId);
         List<Subreport> GetSubscriptionsParent(int partnerid);
+        SubscriptionModel GetSubscriptionById(int id);
+        
     }
 }

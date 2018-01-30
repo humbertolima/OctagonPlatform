@@ -48,9 +48,10 @@
                     @using (Html.BeginForm("SetCassettes", "Terminals"))
                     {
                         @Html.AntiForgeryToken()
-
                         @Html.Hidden("id", Model.Id)
+                        @Html.HiddenFor(model => model.TerminalId)
                         @Html.Hidden("cassetteId")
+
                         <div class="form-group">
                             @Html.DropDownList("Denomination", new List<SelectListItem>
                             {
@@ -74,7 +75,6 @@
                         </div>
                     }
                 </div>
-
             </div>
         </div>
     </div>
@@ -91,7 +91,8 @@
                     {
                         @Html.AntiForgeryToken()
                         @Html.Hidden("id", Model.Id)
-                        @Html.Hidden("cassetteId")      //toma el valor por Javacripts
+                        @Html.HiddenFor(model => model.TerminalId)          //importante mandarlo para cuando se retorna errores,
+                        @Html.Hidden("cassetteId")                          //toma el valor por Javacripts
 
                         <div class="form-group">
                             Denomiantion

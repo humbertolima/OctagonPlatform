@@ -254,7 +254,6 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
-    <Compile Include="Helpers\PermissionValidation.cs" />
     <Compile Include="Helpers\Schedule.cs" />
     <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
@@ -311,6 +310,10 @@
     <Compile Include="Migrations\201801162028093_prueba.cs" />
     <Compile Include="Migrations\201801162028093_prueba.Designer.cs">
       <DependentUpon>201801162028093_prueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801182242167_cascadeschedule.cs" />
+    <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
+      <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -450,7 +453,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
-    <Content Include="obj\Release\Package\PackageTmp\Octagon\assets\img\banner2-1.jpg" />
+    <Content Include="Octagon\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\data\vendbot-data.js" />
     <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
     <Content Include="Octagon\assets\data\demmoney-data.js" />
@@ -814,20 +817,9 @@
     <Content Include="Octagon\assets\bootstrap\js\transition.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
-    <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
-    <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
-    <Content Include="Octagon\assets\css\cosmo.css" />
-    <Content Include="Octagon\assets\css\Dashboard.css" />
-    <Content Include="Octagon\assets\css\Footer-Basic.css" />
-    <Content Include="Octagon\assets\css\Map-Clean.css" />
-    <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\sidebar.css" />
-    <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
-    <Content Include="Octagon\assets\css\styles.min.css" />
-    <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\AMS-data.js" />
     <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
@@ -841,18 +833,21 @@
     <Content Include="Octagon\assets\img\404.jpg" />
     <Content Include="Octagon\assets\img\banner-octa.jpg" />
     <Content Include="Octagon\assets\img\banner2-1.jpg" />
+    <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
+    <Content Include="Octagon\assets\img\eth-16x16.png" />
+    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
+    <Content Include="Octagon\assets\img\ltc-16x16.png" />
+    <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
     <Content Include="Octagon\assets\js\sb-admin-2.js" />
     <Content Include="Octagon\assets\js\script.min.js" />
     <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.min.js" />
@@ -1189,6 +1184,13 @@
     <Content Include="Content\quicksearch\package.json" />
     <Content Include="Content\quicksearch\README.md" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -1280,22 +1282,9 @@
     <Content Include="Scripts\Subscription.js" />
     <Content Include="Scripts\User.js" />
     <Content Include="Scripts\xpopulate.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdminSB.cshtml" />
     <Content Include="Views\Shared\Sections\Header.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\NavBarOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\ScriptsOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -1404,19 +1393,14 @@
     <Content Include="Views\Reports\Edit.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\RepoDashboard.cshtml" />
-    <Content Include="Views\ReportsSmart\CashLoad.cshtml" />
-    <Content Include="Views\ReportsSmart\CashManagement.cshtml" />
     <Content Include="Views\ReportsSmart\Index.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialExcelHead.cshtml" />
     <Content Include="Views\ReportGroup\Index.cshtml" />
     <Content Include="Views\DisputeRepresents\Create.cshtml" />
     <Content Include="Views\DisputeRepresents\Index.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalList.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTable.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
-    <Content Include="Views\ReportsSmart\TerminalStatus.cshtml" />
-    <Content Include="Views\ReportsSmart\DailyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableDailyTransaction.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialMorrisChart.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialHead.cshtml" />
@@ -1430,9 +1414,7 @@
     <Content Include="Views\TerminalContacts\Modal\AddTerminalContact.cshtml" />
     <Content Include="Views\TerminalContacts\ContactForm.cshtml" />
     <Content Include="Views\Users\Sections\TerminalsPartner.cshtml" />
-    <Content Include="Views\ReportsSmart\MonthlyTransactionSummary.cshtml" />
     <Content Include="Views\ReportsSmart\_PartialTableMonthlyTransaction.cshtml" />
-    <Content Include="Views\ReportsSmart\CashBalanceatClose.cshtml" />
     <Content Include="Views\Terminals\Sections\Error.cshtml" />
     <Content Include="Views\VaultCash\Modal\AddVaultCash.cshtml" />
     <Content Include="Views\Octagon\AMS.cshtml" />
@@ -1470,7 +1452,13 @@
     <Content Include="Views\ReportsSmart\TerminalList\_PartialForm.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\TerminalStatus.cshtml" />
     <Content Include="Views\ReportsSmart\TerminalStatus\_PartialForm.cshtml" />
-    <Content Include="Views\ReportsSmart\Index.cshtml" />
+    <Content Include="Views\Permissions\Create.cshtml" />
+    <Content Include="Views\Permissions\Delete.cshtml" />
+    <Content Include="Views\Permissions\Details.cshtml" />
+    <Content Include="Views\Permissions\Edit.cshtml" />
+    <Content Include="Views\Permissions\Index.cshtml" />
+    <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1509,6 +1497,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801162028093_prueba.resx">
       <DependentUpon>201801162028093_prueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
+      <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

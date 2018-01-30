@@ -12,6 +12,13 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class SubscriptionRepository : GenericRepository<SubscriptionModel>, ISubscription         
     {
+       
+        public SubscriptionModel GetSubscriptionById(int id)
+        {
+            return Table.Where(p => p.Id == id).Include(p => p.ReportFilters.Select( x => x.Report)).Include(p => p.Schedule).Include(p => p.User)
+                  .FirstOrDefault();
+        }
+
         public List<Subreport> GetSubscriptionsIncluding(int userId)
         {
             return Table.Where(p => p.UserId == userId).Include(p => p.ReportFilters).Include(p => p.Schedule).Include(p => p.User)

@@ -113,8 +113,17 @@
 
             </td>
             <td>
-           
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Ajax.ActionLink(" ", "Delete", new { id = item.ID },
+               new AjaxOptions
+               {
+                   HttpMethod = "POST",
+                   UpdateTargetId = "List",
+                   InsertionMode = InsertionMode.Replace,
+                   Confirm = "Are you Sure You Want to Delete " + @item.Name
+               },
+               new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+
+               
             </td>
         </tr>
     }
