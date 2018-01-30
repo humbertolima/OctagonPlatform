@@ -24,8 +24,16 @@
     {
         <tr>
             <td>
+                @Ajax.ActionLink(item.ReportName, "Edit", new { id = item.Id },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            UpdateTargetId = "SubscriptionList",
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "SuccessEdit(data, " + item.Id + ");"
+        })
 
-                @Html.DisplayFor(modelItem => item.ReportName)
+             
 
             </td>
             <td>
@@ -50,16 +58,7 @@
             </td>
             <td>
 
-                @Ajax.ActionLink(" ", "Edit", new { id = item.Id },
-                 new AjaxOptions
-                 {
-                     HttpMethod = "GET",
-                     UpdateTargetId = "SubscriptionList",
-                     InsertionMode = InsertionMode.Replace,
-                     OnSuccess = "SuccessEdit(data, " + item.Id + ");"
-                 },
-                 new { @class = "btn btn-info glyphicon glyphicon-edit" })
-
+              
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
                     new AjaxOptions
