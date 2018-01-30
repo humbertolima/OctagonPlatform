@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801301558546_merge2.cs" />
+    <Compile Include="Migrations\201801301558546_merge2.Designer.cs">
+      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1498,6 +1502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301558546_merge2.resx">
+      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
