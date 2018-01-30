@@ -13,6 +13,8 @@ namespace OctagonPlatform
     {
         protected void Application_Start()
         {
+          
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalFilters.Filters.Add(new AuthorizeAttribute());
             AreaRegistration.RegisterAllAreas();

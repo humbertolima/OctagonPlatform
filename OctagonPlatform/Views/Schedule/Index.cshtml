@@ -99,7 +99,8 @@
             });
             $("#StopDate").datepicker({
                 dateFormat: "mm/dd/yy"
-            });
+                });
+                    //aqui se concatenen los dias de la semana que quiere recibir el reporte 
             $("#btn").click(function () {
 
                 var str = "";
@@ -132,6 +133,7 @@
                         $("#Stop").css("display", "block");
                     } else {
                         if (val == 3) {
+                          
                             $("#time").css("display", "block");
                             $("#daily").css("display", "none");
                             $("#monthly").css("display", "none");
@@ -140,6 +142,7 @@
                             $("#Stop").css("display", "block");
                         } else {
                             if (val == 4) {
+                               
                                 $("#time").css("display", "block");
                                 $("#daily").css("display", "none");
                                 $("#monthly").css("display", "block");

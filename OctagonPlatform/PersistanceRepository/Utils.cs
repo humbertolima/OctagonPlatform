@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Web;
@@ -42,6 +43,25 @@ namespace OctagonPlatform.PersistanceRepository
             }
 
             return table;
+        }
+        public static DateTime GetFirstDayOfWeek(DateTime dayInWeek)
+        {
+            CultureInfo defaultCultureInfo = CultureInfo.CurrentCulture;
+            return GetFirstDayOfWeek(dayInWeek, defaultCultureInfo);
+        }
+
+        /// <summary>
+        /// Returns the first day of the week that the specified date 
+        /// is in. 
+        /// </summary>
+        private static DateTime GetFirstDayOfWeek(DateTime dayInWeek, CultureInfo cultureInfo)
+        {
+            DayOfWeek firstDay = cultureInfo.DateTimeFormat.FirstDayOfWeek;
+            DateTime firstDayInWeek = dayInWeek.Date;
+            while (firstDayInWeek.DayOfWeek != firstDay)
+                firstDayInWeek = firstDayInWeek.AddDays(-1);
+
+            return firstDayInWeek;
         }
     }
 }
