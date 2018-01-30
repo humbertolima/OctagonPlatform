@@ -29,11 +29,13 @@ namespace OctagonPlatform.Controllers.Reports
     public class TerminalStatusController : ReportsSmartController
     {
         private List<JsonTerminalStatusChart> listchart = new List<JsonTerminalStatusChart>();
-        public TerminalStatusController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
+        IUserRepository _repoUser;
+        public TerminalStatusController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository repoUser)
             :base(repo, repoterminal, repopartner, repogroup)
-        {           
-          
-          
+        {
+            _repoUser = repoUser;
+
+
         }
 
       
@@ -42,11 +44,13 @@ namespace OctagonPlatform.Controllers.Reports
         {
             TempData["Chart"] = null;
             TempData["sub"] = false;
-            return View("TerminalStatus");
+            TerminalStatusViewModel vmodel = new TerminalStatusViewModel();
+            vmodel.UserId = Convert.ToInt32(Session["userId"]);
+            return View("TerminalStatus",vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode")] TerminalStatusViewModel vmodel)
+        public async Task<ActionResult> TerminalStatus([Bind(Include = "Status,Partner,PartnerId,Group,GroupId,City,Cityid,State,StateId,ZipCode,UserId")] TerminalStatusViewModel vmodel)
         {
             bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
@@ -88,7 +92,11 @@ namespace OctagonPlatform.Controllers.Reports
                 List<JsonTerminalStatusReport> list = new List<JsonTerminalStatusReport>();
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
-                list = await api.TerminalStatus(listtn);
+
+                User user = _repoUser.FindBy(vmodel.UserId);
+                TimeSpan utcoffset = Utils.UtcOffset(user.TimeZoneInfo);
+                
+                list = await api.TerminalStatus( utcoffset, listtn);
                 IEnumerable<dynamic> listTn = repo_terminal.TerminalStatus(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]), vmodel.CityId, vmodel.StateId, vmodel.ZipCode);
                 if (listTn.Count() > 0)
                 {

@@ -4,6 +4,7 @@ using iTextSharp.tool.xml;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.PersistanceRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,6 +44,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult Selection()
         {
             var listprueba = _repoUser.GetAllUsersSubscription();
+         
             IEnumerable<ReportModel> list = _repo.GetReportsDasboard();
             return View("../ReportsSmart/Index",list);
         }

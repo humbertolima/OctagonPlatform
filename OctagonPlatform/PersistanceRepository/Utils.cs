@@ -190,6 +190,11 @@ namespace OctagonPlatform.PersistanceRepository
             DateTime tstTime2 = TimeZoneInfo.ConvertTime(localDateTime,  tzi);
             return tstTime2;
         }
+        public static TimeSpan UtcOffset(string timeZoneId)
+        {
+            TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+            return tzi.GetUtcOffset(DateTime.UtcNow);
+        }
         private static string NextRunDate(Schedule schedule)
         {
             string datestart = schedule.StartDate.ToShortDateString();
