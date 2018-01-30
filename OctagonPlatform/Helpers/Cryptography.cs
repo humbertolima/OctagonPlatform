@@ -12,10 +12,10 @@ namespace OctagonPlatform.Helpers
             var randNum = new Random();
             var chars = new char[100];
             var allowedCharCount = allowedChars.Length;
-          
-            for (var i = 0; i <= 100 - 1; i++)
+
+            for (var i = 0; i < 100; i++)
             {
-                chars[i] = allowedChars[Convert.ToInt32((allowedChars.Length) * randNum.NextDouble())];
+                chars[i] = allowedChars[randNum.Next(0, 60)];
             }
             return new string(chars);
         }
