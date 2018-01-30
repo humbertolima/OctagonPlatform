@@ -100,7 +100,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var result = Table.Where(x => x.Id == id)
-                    .Include("Permissions")
+                    .Include(m=>m.Permissions)
                     .Include(x => x.Partner)
                     .Single(c => c.Id == id);
 
