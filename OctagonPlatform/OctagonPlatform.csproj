@@ -453,6 +453,7 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\adminsb\.gitignore" />
     <Content Include="Content\adminsb\data\flot-data.js" />
+    <Content Include="Octagon\assets\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\data\vendbot-data.js" />
     <Content Include="Octagon\assets\data\CashEverywhere-data.js" />
     <Content Include="Octagon\assets\data\demmoney-data.js" />
@@ -763,24 +764,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Octagon\assets\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\bootstrap\js\bootstrap.min.js" />
     <Content Include="Octagon\assets\css\bootstrap.css" />
     <Content Include="Octagon\assets\css\bootstrap.min.css" />
-    <Content Include="Octagon\assets\css\Contact-Form-Clean.css" />
-    <Content Include="Octagon\assets\css\Contact-FormModal-Contact-Form-with-Google-Map.css" />
-    <Content Include="Octagon\assets\css\cosmo.css" />
-    <Content Include="Octagon\assets\css\Dashboard.css" />
-    <Content Include="Octagon\assets\css\Footer-Basic.css" />
-    <Content Include="Octagon\assets\css\Map-Clean.css" />
-    <Content Include="Octagon\assets\css\Navigation-with-Button1.css" />
     <Content Include="Octagon\assets\css\sb-admin.css" />
     <Content Include="Octagon\assets\css\sb-admin.min.css" />
-    <Content Include="Octagon\assets\css\sidebar.css" />
-    <Content Include="Octagon\assets\css\styles-1.css" />
     <Content Include="Octagon\assets\css\styles.css" />
-    <Content Include="Octagon\assets\css\styles.min.css" />
-    <Content Include="Octagon\assets\css\styles2.css" />
     <Content Include="Octagon\assets\data\flot-data.js" />
     <Content Include="Octagon\assets\data\AMS-data.js" />
     <Content Include="Octagon\assets\data\AMS-Dashboard-data.js" />
@@ -809,8 +798,6 @@
     <Content Include="Octagon\assets\js\sb-admin-2.js" />
     <Content Include="Octagon\assets\js\script.min.js" />
     <Content Include="Octagon\assets\vendor\bootstrap-social\bootstrap-social.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.css" />
-    <Content Include="Octagon\assets\vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Octagon\assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.js" />
     <Content Include="Octagon\assets\vendor\bootstrap\js\bootstrap.min.js" />
@@ -1153,11 +1140,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdminSB.cshtml" />
     <Content Include="Views\Shared\Sections\Header.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\NavBarOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\ScriptsOLD.cshtml" />
-    <Content Include="Views\Shared\Sections\Old Views\SideBarOLD.cshtml" />
     <Content Include="Views\Shared\_LayoutHome.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
