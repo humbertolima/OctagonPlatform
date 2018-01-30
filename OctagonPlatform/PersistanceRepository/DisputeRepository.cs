@@ -32,7 +32,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var dispute = Table.Include("Terminal").Include("DisputeRepresent").FirstOrDefault(m =>m.Id == id);
+                var dispute = Table.Include("Terminal").Include("DisputeRepresent").FirstOrDefault(m => m.Id == id);
 
                 var viewModel = new DisputeViewModel();
 
@@ -41,7 +41,7 @@ namespace OctagonPlatform.PersistanceRepository
                 return viewModel;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -55,14 +55,24 @@ namespace OctagonPlatform.PersistanceRepository
             var json = new WebClient().DownloadString(url);
             var transaction = JsonConvert.DeserializeObject<List<Transaction>>(json);
 
-            var viewModel = new DisputeViewModel()
-            {
-                TerminalId = transaction.FirstOrDefault().TerminalId,
-                SecuenceNumber = transaction.FirstOrDefault().SequenceNumber,
-                TransacNo = transaction.FirstOrDefault().Id,
-            };
 
-            return viewModel;
+            if (transaction.Count() > 0)
+            {
+                var viewModel = new DisputeViewModel()
+                {
+                    TerminalId = transaction.FirstOrDefault().TerminalId,
+                    SecuenceNumber = transaction.FirstOrDefault().SequenceNumber,
+                    TransacNo = transaction.FirstOrDefault().Id,
+                };
+                return viewModel;
+            }
+            else
+            {
+                return new DisputeViewModel(); 
+            }
+
+
+            
         }
 
         public void DisputeAdd(DisputeViewModel viewModel)
@@ -70,12 +80,12 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 //var dispute = new Dispute() { IndexId = viewModel.Terminal.Id };
-                var dispute  = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
+                var dispute = Mapper.Map<DisputeViewModel, Dispute>(viewModel);
 
                 Table.Add(dispute);
                 Save();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -92,7 +102,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                 Edit(dispute);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

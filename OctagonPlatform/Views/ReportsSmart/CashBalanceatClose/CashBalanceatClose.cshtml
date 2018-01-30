@@ -1,0 +1,92 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.CashBalanceatCloseViewModel
+@{
+    ViewBag.Title = "Cash Balance At Close";
+
+
+}
+<p></p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a name="ankle"></a>
+        <h3 class="panel-title">Filter Report Cash Management</h3>
+    </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("CashBalanceatClose/_PartialForm", Model)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </div>
+       
+}
+
+    </div>
+</div>
+@if (TempData["List"] != null)
+{
+  
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <h3 class="panel-title">List Cash Management</h3>
+        </div>
+        <div class="panel-body">
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
+
+            </div>
+            @Html.Partial("_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+        <strong>Warning!</strong> Not Record Available.
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/autocomplete.js")
+    <script>
+
+        
+    $(function () {
+        $("#StartDate").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+        callankle();
+          var tempdataval = '@TempData["List"]';
+          if (tempdataval != null && tempdataval != '') {
+              callankle2();
+             
+
+              var sum1 = 0;
+              $("#grid tbody tr").find('td:eq(3)').each(function (index, val) {
+
+                  sum1 += $(this).html() * 1;
+              });
+            
+              $('#grid').append("<tr ><th></th><th >  </th><th ></th><th > $" + sum1 + "</th></tr>");
+
+              $("#grid tr").find('td:eq(3)').each(function (index, val) {
+                  $(this).html("$" + $(this).html());
+              });
+          }
+        });
+
+    </script>
+
+}
+
+

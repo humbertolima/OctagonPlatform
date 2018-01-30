@@ -1,8 +1,13 @@
-﻿@model OctagonPlatform.Models.Terminal
+﻿@model OctagonPlatform.Models.FormsViewModels.TerminalGeneralVM
 
-
-<div id="getGeneralInfo" class="panel-collapse collapse">
-
+@{
+    if (ViewBag.Error != null)
+    {
+        <p class="alert alert-danger">
+            <strong>Error: @ViewBag.Error</strong>
+        </p>
+    }
+}
     <table class="table table-striped table-hover ">
         <tbody>
             <tr class="info">
@@ -107,9 +112,8 @@
                 {
                     Id = Model.Id
                 },
-                htmlAttributes: new { @class = "btn btn-primary" }
+                htmlAttributes: new { @class = "btn btn-info btn-microsoft" }
                 )
             </li>
         </ul>
     </div>
-</div>

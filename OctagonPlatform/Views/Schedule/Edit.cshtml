@@ -1,0 +1,222 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.ScheduleViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@{
+    string displayweek = "none", displaytime = "none", displayRepeatOn = "none", displayRepeatOnDay = "none", displayRepeatOnFirst = "none", displaystop = "none";
+    if (!string.IsNullOrEmpty(Model.RepeatOnDaysWeeks))
+    {
+        displayweek = "block";
+
+    }
+    if (!string.IsNullOrEmpty(Model.Time))
+    {
+        displaytime = "block";
+    }
+    if (Model.RepeatOn > 0)
+    {
+        displayRepeatOn = "block";
+    }
+    if (Model.RepeatOnDay > 0)
+    {
+        displayRepeatOnDay = "block";
+    }
+    if (!string.IsNullOrEmpty(Model.RepeatOnFirst))
+    {
+        displayRepeatOnFirst = "block";
+    }
+    if (!string.IsNullOrEmpty(Model.StopDate))
+    {
+        displaystop = "block";
+    }
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-primary" style="padding:0px;">
+        <div class="panel-heading">
+            <a name="ankle2"></a>
+            <h3 class="panel-title" style="font-size: 26px;">Schedule Details</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ID)
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Repeats, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EnumDropDownListFor(model => model.Repeats, htmlAttributes: new { @class = "form-control", @id = "Repeats" })
+                        @Html.ValidationMessageFor(model => model.Repeats, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div id="repeatsSelected">
+                  
+                    
+                        <div id="time" style="display:@displaytime">
+                            <div class="form-group">
+                                @Html.Label("Time(CST)", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@if (Model.Time != "")
+                                     {*@
+                                @Html.DropDownListFor(model => model.Time, Model.DropDownTime, new { @class = "form-control" })
+
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                                   @* }*@
+                                </div>
+                            </div>
+                        </div>
+                   
+                    
+                    
+                        <div id="daily" style="display:@displayRepeatOn">
+                            <div class="form-group">
+                                @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@if (Model.RepeatOn > 0)
+                                    {*@
+                                <span>
+                                    Every @Html.DropDownListFor(model => model.RepeatOn, Model.DropDownRepeatOn, new { @class = "form-control", @style = "width:20%;display:inline;" }) Day(s)
+                                </span>
+
+                                    @Html.ValidationMessageFor(model => model.RepeatOn, "", new { @class = "text-danger" })
+                                    @*}*@
+                                </div>
+                            </div>
+
+                        </div>
+                    
+                   
+                    
+                        <div id="monthly" style="display:@displayRepeatOnDay">
+                            <div class="form-group">
+                                @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@if (Model.RepeatOnDay > 0)
+                                    {*@
+                                <span>
+                                    Day @Html.DropDownListFor(model => model.RepeatOnDay, Model.DropDownRepeatOnDay, new { @class = "form-control", @style = "width:20%;display:inline;" })
+                                </span>
+                                    <span>
+                                        Every @Html.DropDownListFor(model => model.RepeatOnMonth, Model.DropDownRepeatOnMonth, new { @class = "form-control", @style = "width:20%;display:inline;" })  Month(s)
+                                    </span>
+                                    @Html.ValidationMessageFor(model => model.RepeatOnDay, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.RepeatOnMonth, "", new { @class = "text-danger" })
+                                    @*}*@
+                                </div>
+                            </div>
+
+                        </div>
+                    
+                   
+                    
+                        <div id="weekly" style="display:@displayweek">
+                            <div class="form-group">
+                                @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@if (Model.RepeatOnWeeks > 0)
+                                    {*@
+                                <span>
+                                    Every   @Html.DropDownListFor(model => model.RepeatOnWeeks, Model.DropDownRepeatOnWeeks, new { @class = "form-control", @style = "width:20%;display:inline;" }) Week(s)
+                                </span>
+
+                                    @Html.ValidationMessageFor(model => model.RepeatOnWeeks, "", new { @class = "text-danger" })
+                                    @*}*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @{
+                                    string daysweek = Model.RepeatOnDaysWeeks ?? "";
+                                    string[] days = daysweek.Split('_');
+
+                                }
+                                @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <label>@Html.CheckBox("Mon", @days.Contains("Mon"), new { @value = "Mon", @id = "Mon" }) Mon </label>
+                                    <label>@Html.CheckBox("Tue", @days.Contains("Tue"), new { @value = "Tue", @id = "Tue" }) Tue </label>
+                                    <label> @Html.CheckBox("Wed", @days.Contains("Wed"), new { @value = "Wed", @id = "Wed" }) Wed </label>
+                                    <label>@Html.CheckBox("Thur", @days.Contains("Thur"), new { @value = "Thur", @id = "Thur" }) Thur </label>
+                                    <label>@Html.CheckBox("Fri", @days.Contains("Fri"), new { @value = "Fri", @id = "Fri" }) Fri </label>
+                                    <label> @Html.CheckBox("Sat", @days.Contains("Sat"), new { @value = "Sat", @id = "Sat" }) Sat </label>
+                                    <label> @Html.CheckBox("Sun", @days.Contains("Sun"), new { @value = "Sun", @id = "Sun" }) Sun </label>
+                                    @Html.HiddenFor(model => model.RepeatOnDaysWeeks, new { id = "RepeatOnDaysWeeks" })
+                                </div>
+                            </div>
+                        </div>
+                    
+                    
+                    
+                        <div id="monthlyRelative" style="display:@displayRepeatOnFirst">
+                            <div class="form-group">
+                                @Html.Label("Repeat On", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @*@if (Model.RepeatOnFirst != "")
+                                    {*@
+                                <span>
+                                    The @Html.DropDownListFor(model => model.RepeatOnFirst, Model.DropDownRepeatOnFirst, new { @class = "form-control", @style = "width:20%;display:inline;" })
+                                    @Html.DropDownListFor(model => model.RepeatOnDay2, Model.DropDownRepeatOnDay2, new { @class = "form-control", @style = "width:20%;display:inline;" })
+
+                                </span>
+                                    <span>
+                                        Every   @Html.DropDownListFor(model => model.RepeatOnMonth2, Model.DropDownRepeatOnMonth2, new { @class = "form-control", @style = "width:20%;display:inline;" }) Month(s)
+                                    </span>
+                                    @Html.ValidationMessageFor(model => model.RepeatOnDay2, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.RepeatOnMonth2, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(model => model.RepeatOnFirst, "", new { @class = "text-danger" })
+
+                                    @*}*@
+
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @Value = Model.StartDate.ToShortDateString() } })
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+               
+                
+                    <div class="form-group" id="Stop" style="display:@displaystop">
+                        @Html.LabelFor(model => model.StopDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @*@if (Model.StopDate != "")
+                            {*@
+                        @Html.EditorFor(model => model.StopDate, new { htmlAttributes = new { @class = "form-control", @Value = "Continue Indefinite" } })
+                            @Html.ValidationMessageFor(model => model.StopDate, "", new { @class = "text-danger" })
+                          @*  }*@
+                        </div>
+                    </div>
+                
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+@Scripts.Render("~/Scripts/jquery.validate.min.js")
+@Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")

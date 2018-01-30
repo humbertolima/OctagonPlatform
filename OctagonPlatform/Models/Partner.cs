@@ -6,16 +6,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models
 {
-    public sealed class Partner: IAuditEntity, ISoftDeleted
+    public class Partner: IAuditEntity, ISoftDeleted
     {
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The parent partner is required")]
+       
         [Display(Name = "Parent")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
-        public Partner Parent { get; set; }
+        public virtual Partner Parent { get; set; }
 
         public ICollection<Partner> Partners { get; set; }
 
@@ -88,7 +88,12 @@ namespace OctagonPlatform.Models
         [Required]
         public double Interchange { get; set; }
 
-             
+        
+
+        public ICollection<ReportGroupModel> ReportGroups { get; set; }        
+
+       
+
         public Partner()
         {
             Users = new Collection<User>();

@@ -67,9 +67,9 @@ namespace OctagonPlatform.PersistanceRepository
                 result.BankAccounts = Context.BankAccounts.Where(x => x.PartnerId == surcharge.Terminal.PartnerId && !x.Deleted).ToList();
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception(ex.Message + "Could not open this page. ");
+                throw;
             }
         }
 
@@ -157,8 +157,10 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal).SingleOrDefault();
                 
                 if (surcharge == null) throw new Exception("Surcharge not found. ");
-                
-                Delete(id);
+
+                Table.Remove(surcharge);
+                Save();
+                //Delete(id);     //error de primary key en relation with terminal
             }
             catch (Exception ex)
             {

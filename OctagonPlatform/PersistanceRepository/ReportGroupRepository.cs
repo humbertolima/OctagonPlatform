@@ -10,6 +10,7 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class ReportGroupRepository : GenericRepository<ReportGroupModel>, IReportGroup
     {
+        
         public void DeleteRange(string[] ids)
         {
           Table.RemoveRange( Table.Where(c => ids.Contains(c.Id.ToString())).ToList());
@@ -20,11 +21,14 @@ namespace OctagonPlatform.PersistanceRepository
         {
             return Table.Where(c => c.Name.Equals( name,System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
         }
-        public IEnumerable<dynamic> GetAllGroup(string term)
+        public IEnumerable<dynamic> GetAllGroup(string term,int partnerId)
         {
             try
             {
-                return Table.Where(b => b.Name.Contains(term)).Select(b => new { label = b.Name, value = b.Id }).ToList();
+                IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.PartnerId select m).ToList();
+
+                return list4.Where(b => b.Name.ToLower().Contains(term.ToLower())).Select(b => new { label = b.Name, value = b.Id }).ToList();
             }
             catch (Exception e)
             {

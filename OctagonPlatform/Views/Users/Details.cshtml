@@ -1,7 +1,7 @@
 ﻿@model OctagonPlatform.Models.User
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutAdminSB.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <h3 class="alert-info">User: <strong class="alert-link">@Model.UserName</strong></h3>
@@ -11,9 +11,6 @@
 <div id="generalInfo">
     @Html.Partial("Sections/GenralInfo")
 </div>
-<br />
-<hr />
-<br />
 <h3>BankAccounts</h3>
 
 <div class="panel-group" style="width: 49%;float: right;">
@@ -46,8 +43,9 @@
     </div>
 </div>
 
-<hr />
 
+<hr />
+<h3>Terminals</h3>
 <div class="row">
 
     <div class="panel-group  col-md-6">
@@ -94,7 +92,7 @@
 
 
 
-<hr />
+@*<hr />
 
 <div id="reports">
     @Html.Partial("Sections/Reports")
@@ -104,7 +102,7 @@
 <br />
 <div id="alerts">
     @Html.Partial("Sections/Alerts")
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/user")

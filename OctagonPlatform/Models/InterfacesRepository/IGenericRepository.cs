@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using OctagonPlatform.PersistanceRepository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace OctagonPlatform.Models.InterfacesRepository
 {
@@ -12,5 +16,8 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void Delete(object id);
         void Dispose();
         void Save();
+        IEnumerable<Partner> GetPartnerByParentId(int parentId);
+        IEnumerable<T> FindAllBy(Expression<Func<T, bool>> predicate);
     }
+    
 }

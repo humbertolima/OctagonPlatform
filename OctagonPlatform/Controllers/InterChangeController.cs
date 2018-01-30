@@ -60,16 +60,16 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(int? terminalId)
+        public ActionResult Create(int? id)
         {
             try
             {
-                if (terminalId == null)
+                if (id == null)
                 {
                     ViewBag.Error = "InterChange not found. ";
                     return View("Error");
                 }
-                var viewModel = _repository.RenderInterChangeFormViewModel((int) terminalId);
+                var viewModel = _repository.RenderInterChangeFormViewModel((int) id);
                 if (viewModel != null) return PartialView("Modal/AddInterChange", viewModel);
                 ViewBag.Error = "Model not found. ";
                 return View("Error");
@@ -108,10 +108,7 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message + ", Please check the entered values. ";
-                return View("InterChangeForm",
-                    viewModel.Id == 0
-                        ? _repository.InitializeNewInterChangeFormViewModel(viewModel)
-                        : _repository.InterChangeToEdit(viewModel.Id));
+                return RedirectToAction("Details", "Terminals", new { id = viewModel.Id});
             }
         }
 
@@ -142,12 +139,12 @@ namespace OctagonPlatform.Controllers
                     return View("Error");
                 }
                 _repository.DeleteInterChange((int) id);
-                return RedirectToAction("Details", "Terminals", new {id = terminalId});
+                return RedirectToAction("Details", "Terminals", new {id = id});
             }
             catch (Exception ex)
             {
                 ViewBag.Error = "Validation error deleting InterChange" + ex.Message;
-                return RedirectToAction("Details", "Terminals", new {id = terminalId});
+                return RedirectToAction("Details", "Terminals", new {id = id});
             }
         }
     }

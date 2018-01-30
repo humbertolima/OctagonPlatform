@@ -10,7 +10,7 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required(ErrorMessage = "The parent partner is required")]
         [Display(Name = "Parent")]
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
 
         public Partner Parent { get; set; }
 
@@ -43,9 +43,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public Models.State State { get; set; }
 
-        public IEnumerable<State> States { get; set; }
+        public IEnumerable<Models.State> States { get; set; }
         
         [Display(Name = "City")]
         public int? CityId { get; set; }

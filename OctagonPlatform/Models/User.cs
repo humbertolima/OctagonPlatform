@@ -56,6 +56,10 @@ namespace OctagonPlatform.Models
         public ICollection<Terminal> Terminals { get; set; }
 
         public ICollection<BankAccount> BankAccounts { get; set; }
+        public ICollection<ReportModel> Reports { get; set; }
+
+        public virtual ICollection<SubscriptionModel> Subscriptions { get; set; }
+        public ICollection<Schedule> Schedules { get; set; }
 
         public bool Deleted { get; set; }
         public DateTime? CreatedAt { get; set; }

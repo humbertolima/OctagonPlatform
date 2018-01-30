@@ -1,0 +1,177 @@
+﻿@{
+    ViewBag.Title = "Cash Everywhere";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+
+<div class="row">
+    <a href="@Url.Action("CashEverywhere", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+        <div class="col-lg-6" style="width: 39%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div style="font-size: 20px; color: #fff;">
+                <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+            </div>
+        </div>
+    </a>
+    <div class="col-lg-6">
+        <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+            Cash EveryWhere
+        </h1>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">BiWeekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Quarterly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="cew-transactions-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions by Terminal
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">BiWeekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Quarterly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Terminal
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Terminal 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 4</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 5</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 6</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 7</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 8</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 9</a>
+                            </li>
+                            <li>
+                                <a href="#">Terminal 10</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="cew-transactionsbyTerminal-chart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions by City
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">BiWeekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Quarterly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="cew-transactionsbyCity-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+﻿@model  IEnumerable<OctagonPlatform.Models.Schedule>
+@using OctagonPlatform.Models
+<table class="table table-hover table-striped table-condensed" >
+    <tr>
+
+        <th>
+            Name
+        </th>
+        <th>
+            Repeats
+        </th>
+
+        <th>
+            Recurrence
+        </th>
+        <th>
+            Time(CST)
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            Stop Date
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+              
+                @Ajax.ActionLink(item.Name, // <-- Text to display
+
+                                            "Edit", // <-- Action Method Name
+                                             new { id = item.ID },
+                                            new AjaxOptions
+                                            {
+                                                UpdateTargetId = "ScheduleForm", // <-- DOM element ID to update
+                                            InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                                            HttpMethod = "GET", // <-- HTTP method
+                                            OnSuccess = "Success"
+                                            })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Repeats)
+            </td>
+
+            <td>
+                @if (item.GetType().BaseType.Name == typeof(ScheduleDaily).Name)
+                {
+                    <p> Every @(((ScheduleDaily)item).RepeatOn) Day(s)</p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleWeekly).Name)
+                {
+                    <p> Every @(((ScheduleWeekly)item).RepeatOnWeeks) Week(s)</p>
+                    <p> @(((ScheduleWeekly)item).RepeatOnDaysWeeks) </p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthly).Name)
+                {
+                    <p> Day @(((ScheduleMonthly)item).RepeatOnDay) Every @(((ScheduleMonthly)item).RepeatOnMonth) Month(s)</p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthlyRelative).Name)
+                {
+                    <p> The @(((ScheduleMonthlyRelative)item).RepeatOnFirst) @(((ScheduleMonthlyRelative)item).RepeatOnDay) Every  @(((ScheduleMonthlyRelative)item).RepeatOnMonth) Month(s)</p>
+                }
+            </td>
+            <td>
+                @if (item.GetType().BaseType.Name == typeof(ScheduleDaily).Name)
+                {
+                    <p> @(((ScheduleDaily)item).Time)</p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleWeekly).Name)
+                {
+                    <p> @(((ScheduleWeekly)item).Time)</p>
+
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthly).Name)
+                {
+                    <p> @(((ScheduleMonthly)item).Time) </p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthlyRelative).Name)
+                {
+                    <p> @(((ScheduleMonthlyRelative)item).Time) </p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleOnce).Name)
+                {
+                    <p> @(((ScheduleOnce)item).Time) </p>
+                }
+            </td>
+            <td>
+                @item.StartDate.ToShortDateString()
+            </td>
+            <td>
+                @if (item.GetType().BaseType.Name == typeof(ScheduleDaily).Name)
+                {
+                    <p> @(((ScheduleDaily)item).StopDate)</p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleWeekly).Name)
+                {
+                    <p> @(((ScheduleWeekly)item).StopDate)</p>
+
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthly).Name)
+                {
+                    <p> @(((ScheduleMonthly)item).StopDate) </p>
+                }
+                @if (item.GetType().BaseType.Name == typeof(ScheduleMonthlyRelative).Name)
+                {
+                    <p> @(((ScheduleMonthlyRelative)item).StopDate) </p>
+                }
+
+            </td>
+            <td>
+                @Ajax.ActionLink(" ", "Delete", new { id = item.ID },
+               new AjaxOptions
+               {
+                   HttpMethod = "POST",
+                   UpdateTargetId = "List",
+                   InsertionMode = InsertionMode.Replace,
+                   Confirm = "Are you Sure You Want to Delete " + @item.Name
+               },
+               new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+
+               
+            </td>
+        </tr>
+    }
+
+</table>

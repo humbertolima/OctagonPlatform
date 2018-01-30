@@ -1,0 +1,110 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.SubscriptionVM
+@using OctagonPlatform.Models;
+
+<table class="table">
+    <tr>
+        <th>
+            Report
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+
+        </th>
+        <th>
+            Schedule
+        </th>
+        <th>
+            Created By
+        </th>
+        <th>Next Run Date (CST)</th>
+        <th>Last Run Date (CST)</th>
+    </tr>
+
+    @foreach (var item in Model.List)
+    {
+        <tr>
+            <td>
+                @Ajax.ActionLink(item.ReportName, "Edit", new { id = item.Id },
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            UpdateTargetId = "SubscriptionList",
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "SuccessEdit(data, " + item.Id + ");"
+        })
+
+             
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.ScheduleName)
+
+            </td>
+
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Username)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NextRunDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastRunDate)
+            </td>
+            <td>
+
+              
+
+                @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "SubscriptionList",
+                        InsertionMode = InsertionMode.Replace,
+                        Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                    },
+                    new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Report Selection</h3>  <hr />
+            <div class="form-group">
+                @Html.LabelFor(model => model.ReportId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.DropDownList("ReportId", null, "-Select Report-", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ReportId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="PartialFilter"></div>
+        </div>
+        <div class="col-md-6">
+            <h3>Scheduling</h3>   <hr />
+
+
+            @Html.Partial("Create", Model)
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <input type="hidden" id="userId" name="userId" />
+    <input type="hidden" id="subId" name="subId" />
+}
+@Scripts.Render("~/Scripts/Subscription.js")

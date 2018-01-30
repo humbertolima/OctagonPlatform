@@ -1,5 +1,4 @@
-﻿
-  <!-- /#wrapper -->
+﻿<!-- /#wrapper -->
 
 
 
@@ -7,6 +6,7 @@
 
 
 @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
+
 @Scripts.Render("~/Scripts/datatables/datatables.min.js")
 
 @Scripts.Render("~/Octagon/assets/bootstrap/dist/js/bootstrap.min.js")
@@ -17,7 +17,11 @@
 
 @Scripts.Render("~/Octagon/assets/vendor/raphael/raphael.min.js")
 @Scripts.Render("~/Octagon/assets/vendor/morrisjs/morris.min.js")
-@Scripts.Render("~/Octagon/assets/data/morris-data.js")
+@Scripts.Render("~/Octagon/assets/data/AMS-Dashboard-data.js")
+@Scripts.Render("~/Octagon/assets/data/AMS-data.js")
+@Scripts.Render("~/Octagon/assets/data/demmoney-data.js")
+@Scripts.Render("~/Octagon/assets/data/CashEverywhere-data.js")
+@Scripts.Render("~/Octagon/assets/data/vendbot-data.js")
 @Scripts.Render("~/Octagon/assets/vendor/dist/js/sb-admin-2.js")
 
 @Scripts.Render("~/bundles/jqueryui")
@@ -25,6 +29,25 @@
 @Scripts.Render("~/Content/quicksearch/dist/jquery.quicksearch.min.js")
 
 
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+<script>
+      var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
+        var urlstate = '@Url.Action("AutoState", "ReportGroup")';
+        var urlcity = '@Url.Action("AutoCity", "ReportGroup")';
+        var urlzipcode = '@Url.Action("AutoZipCode", "ReportGroup")';
+        var urlautoterminal = '@Url.Action("AutoTerminal", "ReportsSmart")';
+        var urlautogroup = '@Url.Action("AutoGroup", "ReportsSmart")';
+        var urlautoaccount = '@Url.Action("AutoAccount", "BankAccount")';
+         var urlautoschedule = '@Url.Action("AutoScheduled", "Schedule")';
+         var urluser = '@Url.Action("AutoUser", "Users")';
+
+    
+   
+
+
+
+
+</script>
 
 
 

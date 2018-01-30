@@ -200,7 +200,7 @@ namespace OctagonPlatform.Controllers
         public ActionResult AutoAccount(string term)
         {
 
-            IEnumerable<dynamic> list = _bAccountRepository.GetAllAccount(term);
+            IEnumerable<dynamic> list = _bAccountRepository.GetAllAccount(term, Convert.ToInt32(Session["partnerId"]));
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }

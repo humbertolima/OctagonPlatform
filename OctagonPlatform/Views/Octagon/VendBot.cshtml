@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "VendBot";
+    Layout = "~/Views/Shared/_LayoutOctagonDashboard.cshtml";
+}
+
+@*@Styles.Render("~/Content/bootstrap-lumen.css")*@
+
+<div class="row">
+    <a href="@Url.Action("VendBot", "Octagon", new {logo = ViewBag.Logo, businessName = ViewBag.BusinessName})">
+        <div class="col-lg-6" style="width: 40%; padding-bottom: 9px; margin: 45px 0 20px;">
+            <div style="font-size: 20px; color: #fff;">
+                <div class="btn" style="border: 1px solid #5f5b5b; background-color: #9a989d">Platform <i class="fa fa-external-link"></i></div>
+            </div>
+        </div>
+    </a>
+    <div class="col-lg-6">
+        <h1 class="page-header" style="color: #859298; font-size: 30px; border-bottom: none;">
+            Vend Bot
+        </h1>
+    </div>
+    <div class="col-lg-3">
+    </div>
+</div>
+
+
+<div class="row">
+    <!-- TRANSACTIONS -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">BiWeekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Quarterly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="vendbot-transactions-chart"></div>
+            </div>
+        </div>
+    </div>
+    <!-- END TRANSACTIONS -->
+    <!--/////////////////////////////-->
+    <!-- TRANSACTIONS BY LOCATION -->
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Transactions By Location
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Period
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Daily</a>
+                            </li>
+                            <li>
+                                <a href="#">Weekly</a>
+                            </li>
+                            <li>
+                                <a href="#">BiWeekly</a>
+                            </li>
+                            <li>
+                                <a href="#">Monthly</a>
+                            </li>
+                            <li>
+                                <a href="#">Quarterly</a>
+                            </li>
+                            <li>
+                                <a href="#">Yearly</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                            Location
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Aventura Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">The Falls Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">International Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Dolphin Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Westland Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Dadeland Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Mall of The Americas</a>
+                            </li>
+                            <li>
+                                <a href="#">Lincoln Road Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Sunset Place Mall</a>
+                            </li>
+                            <li>
+                                <a href="#">Sawgrass Mall</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="vendbot-transactions-location-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END TRANSACTIONS BY LOCATION -->
+</div>
+
+<!-- SALES BY PRODUCT -->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-bar-chart-o fa-fw"></i> Sales By Product
+        <div class="pull-right">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Period
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Daily</a>
+                    </li>
+                    <li>
+                        <a href="#">Weekly</a>
+                    </li>
+                    <li>
+                        <a href="#">BiWeekly</a>
+                    </li>
+                    <li>
+                        <a href="#">Monthly</a>
+                    </li>
+                    <li>
+                        <a href="#">Quarterly</a>
+                    </li>
+                    <li>
+                        <a href="#">Yearly</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">
+                    Product
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right" role="menu">
+                    <li>
+                        <a href="#">Frito Lay</a>
+                    </li>
+                    <li>
+                        <a href="#">Cheetos</a>
+                    </li>
+                    <li>
+                        <a href="#">Pretzels</a>
+                    </li>
+                    <li>
+                        <a href="#">Snickers</a>
+                    </li>
+                    <li>
+                        <a href="#">M&M</a>
+                    </li>
+                    <li>
+                        <a href="#">Skittles</a>
+                    </li>
+                    <li>
+                        <a href="#">Water</a>
+                    </li>
+                    <li>
+                        <a href="#">Pepsi</a>
+                    </li>
+                    <li>
+                        <a href="#">Sprite</a>
+                    </li>
+                    <li>
+                        <a href="#">Gatorade</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="vendbot-product-sales-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

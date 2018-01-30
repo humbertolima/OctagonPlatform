@@ -8,7 +8,7 @@
 <nav class="navbar navbar-default" role="navigation" style="margin-bottom: 0">
     <!-- /.navbar-header -->
     <div class="row">
-        <div class="col-md-2" >
+        <div class="col-md-3" >
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -16,56 +16,26 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div style="padding-top: 5px;padding-left: 55px;">
-                <img src="~/Octagon/assets/img/logo.png" width="120">
+                    <a href="#" style="font-size: 33px; color: #222222; margin: -14px; height: 0px; width: 238px;">
+                        <img src="~/Octagon/assets/img/favicon-32x32.png" id="logo" />
+                        <strong style="margin-left: 6px;">Octagon </strong>
+                    </a>
                 </div>
-                
         </div>
-        <div class="col-md-8" style="text-align:center;">
-
-            <div class="row">
-                <div class="col-md-4" style="padding-top: 5px;">
-                    <a href="#">
-                        <i class="fa fa-btc fa-fw" style="font-size:20px"></i>BTC/USD:
-                    </a>
-                    USD @Session["BTC"] &nbsp;&nbsp;&nbsp;
-
-                </div>
-                <div class="col-md-4">
-
-                    <a href="#">
-                        <img src="~/Octagon/assets/img/eth-16x16.png">
-                        <i style="font-size: 20px"></i>ETH/USD:
-                    </a>
-                    USD @Session["ETH"] &nbsp;&nbsp;&nbsp;
-                </div>
-                <div class="col-md-4">
-                    <a href="#">
-                        <img src="~/Octagon/assets/img/ltc-16x16.png">
-                        <i style="font-size: 20px"></i>LTC/USD:
-                    </a>
-                    USD @Session["LTC"] &nbsp;&nbsp;&nbsp;
-                </div>
-            </div>
-            <h1 class="businessName">@Session["businessName"].ToString()</h1>
+        <div class="col-md-7" style="text-align:center;">
+            <h1 class="businessName">ATM Managment Studio</h1>
         </div>
         <div class="col-md-2">
-
-
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
-
                     @if (Request.IsAuthenticated)
                     {
-
                         @Html.AntiForgeryToken()
                         <a class="dropdown-toggle active" data-toggle="dropdown" href="@Url.Action("Index", "Dashboard")" aria-expanded="true">
                             <label>Hello, @User.Identity.GetUserName()</label>
                             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                         </a>
-
                         <ul class="dropdown-menu dropdown-user in">
-                            <!--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a> -->
-
                             <li>
                                 <a href="#" class="active"><i class="fa fa-gear fa-fw"></i> Settings</a>
                             </li>
@@ -77,8 +47,6 @@
                                 </a>
                             </li>
                         </ul>
-
-
                     }
                     else
                     {
@@ -87,36 +55,11 @@
                             <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                         </ul>
                     }
-
-
-
-                    <!--    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <label>Hello, Username</label>
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-
-                        <li>
-                            <a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-
-                    </ul>-->
-                    <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
-
         </div>
-
     </div>
-
-
-   
     <!-- /.navbar-static-side -->
 </nav>
 

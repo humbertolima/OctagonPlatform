@@ -1,0 +1,107 @@
+﻿@model OctagonPlatform.Models.FormsViewModels.CashManagementViewModel
+@{
+    ViewBag.Title = "Cash Management";
+
+
+}
+<p></p>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a name="ankle"></a>
+        <h3 class="panel-title">Filter Report Cash Management</h3>
+    </div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("CashManagement/_PartialForm", Model)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                <input type="submit" value="Filter" class="btn btn-primary" />
+            </div>
+        </div>
+}
+
+    </div>
+</div>
+@if (TempData["List"] != null)
+{
+    <div class="panel panel-primary" style="padding:0px;">
+        <div class="panel-heading">
+            <a name="ankle2"></a>
+            <h3 class="panel-title">Chart Cash Management</h3>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_PartialMorrisChart")
+        </div>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <h3 class="panel-title">List Cash Management</h3>
+        </div>
+        <div class="panel-body">
+            <div style="display:none" id="idhead">
+                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Cash Management" } })
+
+            </div>
+            @Html.Partial("_PartialTable", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+        <strong>Warning!</strong> Not Record Available.
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/autocomplete.js")
+    <script>
+
+     
+    $(function () {
+
+        callankle();
+          var tempdataval = '@TempData["List"]';
+          if (tempdataval != null && tempdataval != '') {
+              callankle2();
+              ChartBar();
+
+              var sum1 = 0, sum2 = 0, sum3 = 0, sum4 = 0;
+              $("#grid tbody tr").find('td:eq(2)').each(function (index, val) {
+
+                  sum1 += $(this).html() * 1;
+              });
+              $("#grid tbody tr").find('td:eq(5)').each(function (index, val) {
+
+                  sum2 += $(this).html() * 1;
+              });
+              $("#grid tbody tr").find('td:eq(6)').each(function (index, val) {
+
+                  sum3 += $(this).html() * 1;
+              });
+              $("#grid tbody tr").find('td:eq(7)').each(function (index, val) {
+
+                  sum4 += $(this).html() * 1;
+              });
+              $('#grid').append("<tr align='right'><th></th><th >  </th><th > $" + sum1 + "</th><th ></th><th ></th><th >$" + sum2 + "</th><th >$" + sum3 + "</th><th >$" + sum4 + "</th></tr>");
+
+              $("#grid tr").find('td:eq(2), td:eq(5), td:eq(6), td:eq(7)').each(function (index, val) {
+                  $(this).html("$" + $(this).html());
+              });
+          }
+        });
+
+    </script>
+
+}
+
+
