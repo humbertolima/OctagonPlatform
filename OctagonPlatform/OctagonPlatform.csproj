@@ -837,15 +837,10 @@
     <Content Include="Octagon\assets\img\404.jpg" />
     <Content Include="Octagon\assets\img\banner-octa.jpg" />
     <Content Include="Octagon\assets\img\banner2-1.jpg" />
-    <Content Include="Octagon\assets\img\banner2.jpg" />
     <Content Include="Octagon\assets\img\carousel1.jpg" />
-    <Content Include="Octagon\assets\img\eth-16x16.png" />
-    <Content Include="Octagon\assets\img\eth-32x32.png" />
     <Content Include="Octagon\assets\img\favicon-32x32.png" />
     <Content Include="Octagon\assets\img\logo.jpg" />
     <Content Include="Octagon\assets\img\logo.png" />
-    <Content Include="Octagon\assets\img\ltc-16x16.png" />
-    <Content Include="Octagon\assets\img\ltc-32x32.png" />
     <Content Include="Octagon\assets\js\Contact-FormModal-Contact-Form-with-Google-Map.js" />
     <Content Include="Octagon\assets\js\inputmask.js" />
     <Content Include="Octagon\assets\js\jquery.min.js" />
@@ -1189,6 +1184,9 @@
     <Content Include="Content\quicksearch\README.md" />
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
