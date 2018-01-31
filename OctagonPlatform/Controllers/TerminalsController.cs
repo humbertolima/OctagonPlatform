@@ -12,10 +12,12 @@ namespace OctagonPlatform.Controllers
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-
-        public TerminalsController(ITerminalRepository repository)
+        private readonly IAccountRepository _accountRepository;
+        
+        public TerminalsController(ITerminalRepository repository, IAccountRepository accountRepository)
         {
             _repository = repository;
+            _accountRepository = accountRepository;
         }
 
 
@@ -419,11 +421,14 @@ namespace OctagonPlatform.Controllers
         // GET: Terminals
         public ActionResult Index()
         {
+            ViewBag.Permissions = _accountRepository.GetPermissions(1);
+
             if (!User.IsInRole("List All Terminals"))                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
             {
                 ViewBag.Error = "Access Denied";
                 return PartialView("../Shared/Error");
             }
+           
             try
             {
                 return View(_repository.GetAllTerminals(int.Parse(Session["partnerId"].ToString())));
