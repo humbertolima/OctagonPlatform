@@ -218,8 +218,15 @@ namespace OctagonPlatform.PersistanceRepository
                     daterun = dt.ToString();
                 else
                 {
-                    string nextday = today.AddDays(((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
-                    daterun = nextday + " " + ((ScheduleDaily)schedule).Time;
+                    string datenow = today.ToShortDateString() + " " + ((ScheduleDaily)schedule).Time;
+                    DateTime dtn = Convert.ToDateTime(datenow);
+                    if (dtn < today)
+                    {
+                        string nextday = today.AddDays(((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
+                        daterun = nextday + " " + ((ScheduleDaily)schedule).Time;
+                    }
+                    else
+                        daterun = datenow;
                 }
             }
             if (schedule is ScheduleWeekly)
@@ -230,13 +237,20 @@ namespace OctagonPlatform.PersistanceRepository
                     daterun = dt.ToString();
                 else
                 {
-                    ScheduleWeekly week = ((ScheduleWeekly)schedule);
-                    string[] days = week.RepeatOnDaysWeeks.Split('_');
-                    int days_week = week.RepeatOnWeeks * 7;
-                    DateTime nextweek = today.AddDays(days_week);
-                    DateTime first_date_week = Utils.GetFirstDayOfWeek(nextweek);
-                    DateTime nextrun = GetNextRun(first_date_week, days[0]);
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
+                    string datenow = today.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
+                    DateTime dtn = Convert.ToDateTime(datenow);
+                    if (dtn < today)
+                    {
+                        ScheduleWeekly week = ((ScheduleWeekly)schedule);
+                        string[] days = week.RepeatOnDaysWeeks.Split('_');
+                        int days_week = week.RepeatOnWeeks * 7;
+                        DateTime nextweek = today.AddDays(days_week);
+                        DateTime first_date_week = Utils.GetFirstDayOfWeek(nextweek);
+                        DateTime nextrun = GetNextRun(first_date_week, days[0]);
+                        daterun = nextrun.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
+                    }
+                    else
+                        daterun = datenow;
 
                 }
             }
@@ -248,14 +262,20 @@ namespace OctagonPlatform.PersistanceRepository
                     daterun = dt.ToString();
                 else
                 {
-                    ScheduleMonthly month = ((ScheduleMonthly)schedule);
-                    int day = month.RepeatOnDay;
-                    int every_month = month.RepeatOnMonth;
+                    string datenow = today.ToShortDateString() + " " + ((ScheduleMonthly)schedule).Time;
+                    DateTime dtn = Convert.ToDateTime(datenow);
+                    if (dtn < today)
+                    {
+                        ScheduleMonthly month = ((ScheduleMonthly)schedule);
+                        int day = month.RepeatOnDay;
+                        int every_month = month.RepeatOnMonth;
 
-                    DateTime next_month = today.AddMonths(every_month);
+                        DateTime next_month = today.AddMonths(every_month);
 
-                    daterun = next_month.Month + "/" + day + "/" + next_month.Year + " " + ((ScheduleMonthly)schedule).Time;
-
+                        daterun = next_month.Month + "/" + day + "/" + next_month.Year + " " + ((ScheduleMonthly)schedule).Time;
+                    }
+                    else
+                        daterun = datenow;
                 }
             }
             if (schedule is ScheduleMonthlyRelative)
@@ -289,7 +309,13 @@ namespace OctagonPlatform.PersistanceRepository
                     }
 
                     nextrun = GetNextRunMonth(first_date_week, name_day);
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleMonthlyRelative)schedule).Time;
+                    string datenow = today.ToShortDateString() + " " + ((ScheduleMonthlyRelative)schedule).Time;
+                    DateTime dtn = Convert.ToDateTime(datenow);
+                    if (dtn < today)
+                    {
+                        daterun = nextrun.ToShortDateString() + " " + ((ScheduleMonthlyRelative)schedule).Time;
+                    }else
+                        daterun = datenow;
 
                 }
             }

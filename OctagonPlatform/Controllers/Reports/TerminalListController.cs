@@ -85,7 +85,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public override async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(object aviewmodel, string format)
         {
             TerminalListViewModel vmodel = aviewmodel as TerminalListViewModel;
             return await SendReport(vmodel, "TerminalList", format, "Terminal List");

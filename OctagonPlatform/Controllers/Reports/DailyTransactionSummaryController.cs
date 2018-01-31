@@ -136,7 +136,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public override async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(object aviewmodel, string format)
         {
             DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
             return await SendReport(vmodel, "DailyTransactionSummary", format, "Daily Transaction Summary");

@@ -15,8 +15,12 @@ namespace ReportExecuter
 {
     class Program
     {
+        public static DateTime time_run ;
+
         static void Main(string[] args)
         {
+            time_run = DateTime.Now;
+
             //var container = new UnityContainer();
 
             //DependencyResolver.SetResolver(new UnityDependencyResolver(container));
@@ -35,14 +39,14 @@ namespace ReportExecuter
                         {
                             string ReportName = "";
                             string email = asuscription.Email;
-                            List<KeyValuePair<string, string>> FilterNames = new List<KeyValuePair<string, string>>();
+                            List<Tuple<string, string,string>> FilterNames = new List<Tuple<string, string, string>>();
                             foreach (ReportFilter reportFilter in asuscription.ReportFilters)
                             {
                                 FilterModel fm = reportFilter.Filter;
                                 ReportModel rm = reportFilter.Report;
 
                                 ReportName = rm.Name.Replace(" ", string.Empty);
-                                FilterNames.Add(new KeyValuePair<string, string>(fm.Name, reportFilter.Value));
+                                FilterNames.Add(new Tuple<string, string, string>(fm.Name, reportFilter.Value, fm.Type));
 
                             }
 
@@ -59,14 +63,31 @@ namespace ReportExecuter
 
         private static bool NeedToBeSend(User auser, SubscriptionModel asuscription)
         {
+           DateTime? date = Utils.NextRunDateSchedule(asuscription.Schedule);
+
+            if(date == null)
+            {
+                return false;
+            }
+
+
+            //  TODO modify the date according time zone
+
+            TimeSpan span = date.Value.Subtract(time_run);
+
+            if (span.Minutes >=0 && span.Minutes < 30)
+            {
+                return true;
+            }
+
             return true;
         }
 
-        private static void ExecRunReport(string reportName, List<KeyValuePair<string, string>> filterNames, string email, User auser, SubscriptionModel asuscription)
+        private static void ExecRunReport(string reportName, List<Tuple<string, string, string>> filterNames, string email, User auser, SubscriptionModel asuscription)
         {
             string url_base = "http://localhost:51141";
 
-            string format = "pdf";
+            string format = asuscription.Format;
 
             ErrorCtrl.save( () =>
             {
@@ -75,18 +96,39 @@ namespace ReportExecuter
                 //var values = new Dictionary<string, string> { };
                 string adata = "";
 
-                foreach(KeyValuePair<string, string> pair in filterNames)
-                {                  
+                foreach(Tuple<string, string, string> pair in filterNames)
+                {
+                    string field_name = pair.Item1;
+                    string field_value = pair.Item2;
+                    string field_type = pair.Item3;
+
+                    if(field_type == "date")
+                    {
+                        //  modify de value
+                        //if (field_name == "StartDate")
+                        //{
+                            int value = Convert.ToInt32(field_value) * -1; //restarle esa cantidad de dias
+                            DateTime datetime = time_run.AddDays(value);
+                            field_value = datetime.ToString("MM/dd/yyyy");
+                       // }
+
+                    }
 
                     if (adata != "")
                         adata += "&";
 
-                    adata += pair.Key + "=" + pair.Value;
+                    adata += field_name + "=" + field_value;
                 }
+
+
+                if (adata != "")
+                    adata += "&";
+
+                adata += "format=" + format;
 
                 //values.Add("format", "pdf");
 
-                string url = url_base + "/" + reportName + "/"+ reportName;
+                string url = url_base + "/" + reportName + "/RunReport";
                 Console.WriteLine(url);
 
              

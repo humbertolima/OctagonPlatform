@@ -98,7 +98,7 @@ namespace OctagonPlatform.Controllers.Reports
 
 
         public abstract Task<Tuple<IEnumerable, Type>>  GetList(object aviewmodel);
-        public abstract Task<bool> RunReport(object aviewmodel,string format);
+       // public Task<bool> RunReport(object aviewmodel,string format);
         public async Task<string> HTML(string title, object aviewmodel)
         {
 
