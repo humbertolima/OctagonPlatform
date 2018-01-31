@@ -136,7 +136,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public override async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(object aviewmodel, string format)
         {
             CashLoadViewModel vmodel = aviewmodel as CashLoadViewModel;
             return await SendReport(vmodel, "CashLoad", format, "Cash Load");

@@ -129,7 +129,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public override async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(object aviewmodel, string format)
         {
             TerminalStatusViewModel vmodel = aviewmodel as TerminalStatusViewModel;
             return await SendReport(vmodel, "TerminalStatus", format, "Terminal Status");

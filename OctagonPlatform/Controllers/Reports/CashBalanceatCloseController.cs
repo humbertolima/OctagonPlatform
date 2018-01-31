@@ -55,7 +55,7 @@ namespace OctagonPlatform.Controllers.Reports
         //[ValidateAntiForgeryToken]
         public async Task<ActionResult> CashBalanceatClose([Bind(Include = "Partner,PartnerId,Group,GroupId,StartDate")] CashBalanceatCloseViewModel vmodel)
         {
-            bool envio = await RunReport(vmodel,"excel");
+            //bool envio = await RunReport(vmodel,"excel");
             ModelState.Remove("PartnerId");
             ModelState.Remove("GroupId");
 
@@ -119,7 +119,7 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public override async Task<bool> RunReport(object aviewmodel,string format)
+        public async Task<bool> RunReport(CashBalanceatCloseViewModel aviewmodel,string format)
         {
            CashBalanceatCloseViewModel vmodel = aviewmodel as CashBalanceatCloseViewModel;  
            return await SendReport(vmodel, "CashBalanceatClose", format, "Cash Balance at Close");            
