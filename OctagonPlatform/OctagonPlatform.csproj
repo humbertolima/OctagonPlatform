@@ -338,10 +338,6 @@
     <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
       <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801301558546_merge2.cs" />
-    <Compile Include="Migrations\201801301558546_merge2.Designer.cs">
-      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1483,7 +1479,9 @@
     <Content Include="Views\Permissions\Edit.cshtml" />
     <Content Include="Views\Permissions\Index.cshtml" />
     <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
