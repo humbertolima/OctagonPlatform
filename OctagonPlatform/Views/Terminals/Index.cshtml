@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<OctagonPlatform.Models.Terminal>
 @{
     ViewBag.Title = "Index";
-    
+
 }
 <div class="container" style="padding-bottom: 20px">
     <div class="row">
@@ -22,17 +22,24 @@
                 htmlAttributes: new { @class = "btn btn-primary" }
                 ) *@
         </div>
-        <div class="col-md-6" style="margin-top: 43px;">
-            <a type="button" href="@Url.Action("Create", "Terminals",
+     @{
+         bool temp = ViewBag.isAddTerminal;
+         if (temp)
+         {
+            <div class="col-md-6" style="margin-top: 43px;">
+                <a type="button" href="@Url.Action("Create", "Terminals",
                                        new
                                        {
                                            partnerId = int.Parse(Session["partnerId"].ToString())
                                        })"
-               class="btn btn-default btn-sm">
-                <span class="fa fa-plus-circle"></span>
-                Add
-            </a>
-        </div>
+                   class="btn btn-default btn-sm">
+                    <span class="fa fa-plus-circle"></span>
+                    Add
+                </a>
+            </div>
+         }
+    }
+        
     </div>
     <br>
 
@@ -152,14 +159,14 @@
     @Scripts.Render("~/bundles/search")
     @*@Scripts.Render("~/Scripts/jquery-1.10.2.js")
 
-    <script>
+        <script>
 
-        var jQuery_1_10_2 = $.noConflict(true);
+            var jQuery_1_10_2 = $.noConflict(true);
 
-        jQuery_1_10_2(function () {
-            $("#terminals").DataTable();
-        });
-    </script>*@
+            jQuery_1_10_2(function () {
+                $("#terminals").DataTable();
+            });
+        </script>*@
 
     <script>
         $(function () {

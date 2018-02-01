@@ -251,6 +251,7 @@
     <Compile Include="Helpers\CheckSplitAmountsEntry.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\ConvertTo.cs" />
+    <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />

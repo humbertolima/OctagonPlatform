@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
@@ -8,16 +9,14 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [Authorize(Roles = "Terminals, Add Terminal")]
+    [CustomAuthorize(Roles = "Terminals, Add Terminal11")]
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-        private readonly IAccountRepository _accountRepository;
         
-        public TerminalsController(ITerminalRepository repository, IAccountRepository accountRepository)
+        public TerminalsController(ITerminalRepository repository)
         {
             _repository = repository;
-            _accountRepository = accountRepository;
         }
 
 
@@ -419,11 +418,16 @@ namespace OctagonPlatform.Controllers
             }
         }
         // GET: Terminals
+        [CustomAuthorize(Roles = "List All Terminals")]
         public ActionResult Index()
         {
-            ViewBag.Permissions = _accountRepository.GetPermissions(1);
 
-            if (!User.IsInRole("List All Terminals"))                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            ViewBag.isListTerminal = User.IsInRole("List All Terminals");
+            ViewBag.isAddTerminal = User.IsInRole("Add Terminal");
+            ViewBag.isEditTerminal = User.IsInRole("Edit Terminal");
+            ViewBag.isDeleteTerminal = User.IsInRole("Delete Terminal");
+
+            if (!ViewBag.isListTerminal)                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
             {
                 ViewBag.Error = "Access Denied";
                 return PartialView("../Shared/Error");
