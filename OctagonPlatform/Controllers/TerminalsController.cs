@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [CustomAuthorize(Roles = "Terminals, Add Terminal11")]
+    [CustomAuthorize(Roles = Helpers.Permissions.Terminals.TerminalFull)]
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
@@ -421,7 +421,6 @@ namespace OctagonPlatform.Controllers
         [CustomAuthorize(Roles = "List All Terminals")]
         public ActionResult Index()
         {
-
             ViewBag.isListTerminal = User.IsInRole("List All Terminals");
             ViewBag.isAddTerminal = User.IsInRole("Add Terminal");
             ViewBag.isEditTerminal = User.IsInRole("Edit Terminal");

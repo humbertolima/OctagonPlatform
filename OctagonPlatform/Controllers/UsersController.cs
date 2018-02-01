@@ -6,6 +6,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -77,7 +78,6 @@ namespace OctagonPlatform.Controllers
 
                 //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
                 viewModel.Permissions = _userRepository.GetPermissionsByArray(ids);
-                
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
@@ -134,6 +134,12 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
+                if (Request.Cookies[User.Identity.Name] != null)
+                {
+                    var cookie = new HttpCookie(User.Identity.Name);
+                    cookie.Expires = DateTime.Now.AddDays(-1d);
+                    Response.Cookies.Add(cookie);
+                }
                 string[] ids = PermissionsSplit(permissions1);
 
                 editViewModel.Permissions = _userRepository.GetPermissionsByArray(ids); //pendiente poner en el controlador de permissions

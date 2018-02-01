@@ -15,6 +15,7 @@ namespace OctagonPlatform.Helpers
             public const string DetailTerminal = "Details Terminal";
             public const string ListAllTerminal = "List All Terminals";
 
+            public const string TerminalFull = AddTerminal + "," + EditTerminal + "," + DeleteTerminal + "," + DetailTerminal + "," + ListAllTerminal;
         }
     }
 }
