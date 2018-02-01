@@ -30,8 +30,8 @@ namespace OctagonPlatform.Controllers.Reports
     {
         private List<JsonTerminalStatusChart> listchart = new List<JsonTerminalStatusChart>();
         IUserRepository _repoUser;
-        public TerminalStatusController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository repoUser)
-            :base(repo, repoterminal, repopartner, repogroup)
+        public TerminalStatusController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository repoUser, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup,userrepo)
         {
             _repoUser = repoUser;
 
@@ -129,10 +129,9 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(TerminalStatusViewModel vmodel, string format)
         {
-            TerminalStatusViewModel vmodel = aviewmodel as TerminalStatusViewModel;
-            return await SendReport(vmodel, "TerminalStatus", format, "Terminal Status");
+             return await SendReport(vmodel, "TerminalStatus", format, "Terminal Status");
         }
     }
 }

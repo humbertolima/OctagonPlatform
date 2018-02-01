@@ -29,8 +29,8 @@ namespace OctagonPlatform.Controllers.Reports
     public class TerminalListController : ReportsSmartController
     {
        
-        public TerminalListController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
-            :base(repo, repoterminal, repopartner, repogroup)
+        public TerminalListController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup,userrepo)
         {           
           
           
@@ -85,9 +85,8 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(TerminalListViewModel vmodel, string format)
         {
-            TerminalListViewModel vmodel = aviewmodel as TerminalListViewModel;
             return await SendReport(vmodel, "TerminalList", format, "Terminal List");
         }
     }

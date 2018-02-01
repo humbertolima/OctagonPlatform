@@ -29,8 +29,8 @@ namespace OctagonPlatform.Controllers.Reports
     public class CashLoadController : ReportsSmartController
     {
        private List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
-        public CashLoadController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
-            :base(repo, repoterminal, repopartner, repogroup)
+        public CashLoadController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup, userrepo)
         {
 
             
@@ -136,9 +136,9 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(CashLoadViewModel vmodel, string format)
         {
-            CashLoadViewModel vmodel = aviewmodel as CashLoadViewModel;
+           
             return await SendReport(vmodel, "CashLoad", format, "Cash Load");
         }
     }

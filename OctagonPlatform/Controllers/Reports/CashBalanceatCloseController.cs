@@ -33,8 +33,8 @@ namespace OctagonPlatform.Controllers.Reports
     public class CashBalanceatCloseController : ReportsSmartController
     {
        
-        public CashBalanceatCloseController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
-            :base(repo, repoterminal, repopartner, repogroup)
+        public CashBalanceatCloseController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup,userrepo)
         {           
           
           
@@ -119,9 +119,9 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(CashBalanceatCloseViewModel aviewmodel,string format)
+        public async Task<bool> RunReport(CashBalanceatCloseViewModel vmodel,string format)
         {
-           CashBalanceatCloseViewModel vmodel = aviewmodel as CashBalanceatCloseViewModel;  
+          
            return await SendReport(vmodel, "CashBalanceatClose", format, "Cash Balance at Close");            
         }
 

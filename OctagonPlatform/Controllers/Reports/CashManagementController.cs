@@ -29,8 +29,8 @@ namespace OctagonPlatform.Controllers.Reports
     public class CashManagementController : ReportsSmartController
     {
         private List<JsonLoadCashChart> listchart = new List<JsonLoadCashChart>();
-        public CashManagementController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
-            :base(repo, repoterminal, repopartner, repogroup)
+        public CashManagementController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup,userrepo)
         {           
           
           
@@ -38,13 +38,16 @@ namespace OctagonPlatform.Controllers.Reports
 
         public ActionResult CashManagement()
         {
+            
+            CashManagementViewModel vmodel = new CashManagementViewModel();
+            vmodel.UserId =  Convert.ToInt32(Session["userId"]);
             TempData["Chart"] = null;
             TempData["sub"] = false;
-            return View("CashManagement");
+            return View("CashManagement",vmodel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId")] CashManagementViewModel vmodel)
+        public async Task<ActionResult> CashManagement([Bind(Include = "TerminalId,Status,Partner,PartnerId,Group,GroupId,UserId")] CashManagementViewModel vmodel)
         {
             bool envio = await RunReport(vmodel, "pdf");
             ModelState.Remove("PartnerId");
@@ -86,7 +89,8 @@ namespace OctagonPlatform.Controllers.Reports
                 ApiATM api = new ApiATM();
                 string[] listtn = ListTerminalByGroup(vmodel.GroupId);
                 list = await api.CashManagement(vmodel.TerminalId, listtn);
-                IEnumerable<dynamic> listTn = repo_terminal.LoadCashMngList(list, vmodel.Status, vmodel.PartnerId, Convert.ToInt32(Session["partnerId"]));
+                int partnerid = _repo_user.FindBy(vmodel.UserId).PartnerId;
+                IEnumerable <dynamic> listTn = repo_terminal.LoadCashMngList(list, vmodel.Status, vmodel.PartnerId, partnerid);
                 if (listTn.Count() > 0)
                 {
                     foreach (var item in listTn)
@@ -116,9 +120,9 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(CashManagementViewModel vmodel, string format)
         {
-            CashManagementViewModel vmodel = aviewmodel as CashManagementViewModel;
+           
             return await SendReport(vmodel, "CashManagement", format, "Cash Management");
         }
     }

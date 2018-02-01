@@ -19,7 +19,7 @@ namespace ReportExecuter
 
         static void Main(string[] args)
         {
-            time_run = DateTime.Now;
+          
 
             //var container = new UnityContainer();
 
@@ -32,7 +32,7 @@ namespace ReportExecuter
             {
                 foreach(SubscriptionModel asuscription in auser.Subscriptions)
                 {
-
+                    time_run = Utils.ToTimeZoneTime(DateTime.Now, asuscription.Schedule.User.TimeZoneInfo);
                     ErrorCtrl.save(()=> {
 
                         if(NeedToBeSend(auser, asuscription))
@@ -49,8 +49,9 @@ namespace ReportExecuter
                                 FilterNames.Add(new Tuple<string, string, string>(fm.Name, reportFilter.Value, fm.Type));
 
                             }
-
+                            Console.WriteLine("Ejecutando Report");
                             ExecRunReport(ReportName, FilterNames, email, auser, asuscription);
+                            Console.WriteLine("Termino de ejecutar Report");
                         }                        
 
                     });                   
@@ -64,36 +65,30 @@ namespace ReportExecuter
         private static bool NeedToBeSend(User auser, SubscriptionModel asuscription)
         {
            DateTime? date = Utils.NextRunDateSchedule(asuscription.Schedule);
-
             if(date == null)
             {
                 return false;
             }
 
+            TimeSpan span = date.Value - time_run;
 
-            //  TODO modify the date according time zone
-
-            TimeSpan span = date.Value.Subtract(time_run);
-
-            if (span.Minutes >=0 && span.Minutes < 30)
+            if (span.TotalMinutes >=0 && span.TotalMinutes < 30)
             {
                 return true;
             }
 
-            return true;
+            return false;
         }
 
         private static void ExecRunReport(string reportName, List<Tuple<string, string, string>> filterNames, string email, User auser, SubscriptionModel asuscription)
         {
+            //string ss = System.Web.HttpContext.Current.Server.MapPath("~/");
             string url_base = "http://localhost:51141";
-
             string format = asuscription.Format;
-
-            ErrorCtrl.save( () =>
+           
+            ErrorCtrl.Save( () =>
             {
-
-                HttpClient client = new HttpClient();
-                //var values = new Dictionary<string, string> { };
+                HttpClient client = new HttpClient();               
                 string adata = "";
 
                 foreach(Tuple<string, string, string> pair in filterNames)
@@ -103,17 +98,14 @@ namespace ReportExecuter
                     string field_type = pair.Item3;
 
                     if(field_type == "date")
-                    {
-                        //  modify de value
-                        //if (field_name == "StartDate")
-                        //{
+                    {                      
+                        
                             int value = Convert.ToInt32(field_value) * -1; //restarle esa cantidad de dias
                             DateTime datetime = time_run.AddDays(value);
-                            field_value = datetime.ToString("MM/dd/yyyy");
-                       // }
+                            field_value = datetime.ToString("MM/dd/yyyy");                      
 
                     }
-
+                    //preparar las variables del view model que hay que pasarle a RunReport
                     if (adata != "")
                         adata += "&";
 
@@ -126,7 +118,12 @@ namespace ReportExecuter
 
                 adata += "format=" + format;
 
-                //values.Add("format", "pdf");
+                if (adata != "")
+                    adata += "&";
+
+                adata += "UserId=" + asuscription.Schedule.User.Id;
+
+                #region Ejecutar RunReport
 
                 string url = url_base + "/" + reportName + "/RunReport";
                 Console.WriteLine(url);
@@ -166,9 +163,9 @@ namespace ReportExecuter
                 dataStream.Close();
                 response.Close();
 
+                #endregion
 
 
-           
 
             });
         }

@@ -199,13 +199,13 @@ namespace OctagonPlatform.PersistanceRepository
         {
             string datestart = schedule.StartDate.ToShortDateString();
             string daterun = "";
-            DateTime today = DateTime.Now;          
-          
+            DateTime today = ToTimeZoneTime( DateTime.Now,schedule.User.TimeZoneInfo);          
+            
             if (schedule is ScheduleOnce)
             {
                 datestart += " " + ((ScheduleOnce)schedule).Time;
                 DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
+                if (dt > today)
                     daterun = dt.ToString();
                 else
                     daterun = "One execution";
@@ -214,7 +214,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 datestart += " " + ((ScheduleDaily)schedule).Time;
                 DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
+                if (dt > today)
                     daterun = dt.ToString();
                 else
                 {
@@ -233,7 +233,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 datestart += " " + ((ScheduleWeekly)schedule).Time;
                 DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
+                if (dt > today)
                     daterun = dt.ToString();
                 else
                 {
@@ -258,7 +258,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 datestart += " " + ((ScheduleMonthly)schedule).Time;
                 DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
+                if (dt > today)
                     daterun = dt.ToString();
                 else
                 {
@@ -282,7 +282,7 @@ namespace OctagonPlatform.PersistanceRepository
             {
                 datestart += " " + ((ScheduleMonthlyRelative)schedule).Time;
                 DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
+                if (dt > today)
                     daterun = dt.ToString();
                 else
                 {
@@ -357,27 +357,67 @@ namespace OctagonPlatform.PersistanceRepository
         {
             string datetime = NextRunDate(schedule);
             if (datetime != "One execution")
-            {
-                DateTime timerun = Utils.ToTimeZoneTime(Convert.ToDateTime(datetime), schedule.User.TimeZoneInfo);
-                datetime = timerun.ToShortDateString() + " " + Convert.ToDateTime(datetime).ToShortTimeString();
-                return Convert.ToDateTime(datetime);
+            {               
+                return ToTimeZoneTime( datetime,  schedule);
             }
             return null;
         }
-
+        private static DateTime ToTimeZoneTime(string datetime, Schedule schedule)
+        {
+            DateTime timerun = Utils.ToTimeZoneTime(Convert.ToDateTime(datetime), schedule.User.TimeZoneInfo);
+            datetime = timerun.ToShortDateString() + " " + Convert.ToDateTime(datetime).ToShortTimeString();
+            return Convert.ToDateTime(datetime);
+        }
     }
 
 
     public static  class ErrorCtrl
     {
-        public static void save(Action action)
+        public static void Save(Action action)
         {
             try {
                 action.Invoke();
             } catch (Exception ex) {
 
                 Console.WriteLine(ex.ToString());
+                Console.ReadLine();
             }
+        }
+        public static Task<T> SaveTaskClass<T>(Func<T> method, Action<Exception> aexception) where T : class
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    T res = method.Invoke();
+                    return res;
+                }
+                catch (Exception ex)
+                {
+                    aexception.Invoke(ex);
+                    // T res = null;
+                    return null; // await Task<T>.FromResult(null);
+                }
+
+            });
+        }
+
+
+        public static Task<Tuple<T, Exception>> SaveTaskString<T>(Func<T> method) where T : struct
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    T res = method.Invoke();
+                    return new Tuple<T, Exception>(res, null);
+                }
+                catch (Exception ex)
+                {
+                   
+                    return new Tuple<T, Exception>(default(T), ex);
+                }
+            });
         }
     }
 

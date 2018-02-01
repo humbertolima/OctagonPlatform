@@ -30,8 +30,9 @@ namespace OctagonPlatform.Controllers.Reports
     {
         private DateTime? start = null;
         private DateTime? end = null;
-        public DailyTransactionSummaryController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
-            :base(repo, repoterminal, repopartner, repogroup)
+
+        public DailyTransactionSummaryController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
+            :base(repo, repoterminal, repopartner, repogroup,userrepo)
         {           
           
           
@@ -136,9 +137,9 @@ namespace OctagonPlatform.Controllers.Reports
 
         }
 
-        public async Task<bool> RunReport(object aviewmodel, string format)
+        public async Task<bool> RunReport(DailyTransactionSummaryViewModel vmodel, string format)
         {
-            DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
+           
             return await SendReport(vmodel, "DailyTransactionSummary", format, "Daily Transaction Summary");
         }
     }

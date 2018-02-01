@@ -36,14 +36,17 @@ namespace OctagonPlatform.Controllers.Reports
         protected ITerminalRepository repo_terminal;
         protected IPartnerRepository repo_partner;
         protected IReportGroup repo_group;
-       
-        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup)
+        protected IUserRepository _repo_user;
+
+        public ReportsSmartController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
         {
             _repo = repo;
             repo_terminal = repoterminal;
             repo_partner = repopartner;
             repo_group = repogroup;
-          
+            _repo_user = userrepo;
+
+
         }
          
       
