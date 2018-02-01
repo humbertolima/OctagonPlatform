@@ -134,12 +134,7 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
-                if (Request.Cookies[User.Identity.Name] != null)
-                {
-                    var cookie = new HttpCookie(User.Identity.Name);
-                    cookie.Expires = DateTime.Now.AddDays(-1d);
-                    Response.Cookies.Add(cookie);
-                }
+               
                 string[] ids = PermissionsSplit(permissions1);
 
                 editViewModel.Permissions = _userRepository.GetPermissionsByArray(ids); //pendiente poner en el controlador de permissions
