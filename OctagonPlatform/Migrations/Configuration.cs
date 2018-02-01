@@ -44,14 +44,28 @@ namespace OctagonPlatform.Migrations
                 new LocationType { Name = "Barber Shop" }
                 );
 
-            Model miniATM = new Model { Name = "Mini ATM", Make = new Make() };
-            Model SiriATM = new Model { Name = "Siri ATM", Make = new Make() };
+            Model miniATM = new Model { Name = "Mini ATM"};
+            Model SiriATM = new Model { Name = "Siri ATM"};
 
             Make Puloon = new Make() { Name = "Puloon" };
             Make Hysosung = new Make() { Name = "N. Hyosung" };
 
             Puloon.Models.Add(miniATM);
             Hysosung.Models.Add(SiriATM);
+
+            if (!System.Diagnostics.Debugger.IsAttached)
+                System.Diagnostics.Debugger.Launch();
+
+            context.Makes.AddOrUpdate(m=>m.Name, Puloon);
+            context.Makes.AddOrUpdate(m=>m.Name, Hysosung);
+            context.SaveChanges();
+
+            miniATM.MakeId = Puloon.Id;
+            SiriATM.MakeId = Hysosung.Id;
+
+            context.Models.AddOrUpdate(m => m.Name, miniATM);
+            context.Models.AddOrUpdate(m => m.Name, SiriATM);
+            context.SaveChanges();
 
             #region Insert Report
             context.Reports.AddOrUpdate(l => l.Name,
@@ -67,9 +81,7 @@ namespace OctagonPlatform.Migrations
 
             #region despues del merge
 
-            if (!System.Diagnostics.Debugger.IsAttached)
-                System.Diagnostics.Debugger.Launch();
-
+           
             List<string> Level0 = new List<string> { "prueba6", "prueba5", "prueba4", "prueba2", "Prueba", "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {

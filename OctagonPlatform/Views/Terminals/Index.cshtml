@@ -22,24 +22,24 @@
                 htmlAttributes: new { @class = "btn btn-primary" }
                 ) *@
         </div>
-     @{
-         bool temp = ViewBag.isAddTerminal;
-         if (temp)
-         {
-            <div class="col-md-6" style="margin-top: 43px;">
-                <a type="button" href="@Url.Action("Create", "Terminals",
+        @{
+            bool temp = ViewBag.isAddTerminal;
+            if (temp)
+            {
+                <div class="col-md-6" style="margin-top: 43px;">
+                    <a type="button" href="@Url.Action("Create", "Terminals",
                                        new
                                        {
                                            partnerId = int.Parse(Session["partnerId"].ToString())
                                        })"
-                   class="btn btn-default btn-sm">
-                    <span class="fa fa-plus-circle"></span>
-                    Add
-                </a>
-            </div>
-         }
-    }
-        
+                       class="btn btn-default btn-sm">
+                        <span class="fa fa-plus-circle"></span>
+                        Add
+                    </a>
+                </div>
+            }
+        }
+
     </div>
     <br>
 
@@ -111,15 +111,23 @@
                         }
                     </td>
                     <td>
-                        <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i> @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @{
+                            if (ViewBag.isEditTerminal)
+                            {
+                                <i class="fa fa-pencil" style="color: darkblue; font-size: 16px;"></i> @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                            }
+                        }
                     </td>
                     <td>
-                        @*  <i class="fa fa-trash"style="font-size:16px;color:red"></i> @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
-                        <i class="fa fa-trash" style="color: red; font-size: 16px;"></i><button type="button" style="margin: -2px;" data-id="@item.Id" id="deleteItem" class="btn-link WorkingHoursEdit2" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
+                        @{
+                            if (ViewBag.isDeleteTerminal)
+                            {
+                                <i class="fa fa-trash" style="color: red; font-size: 16px;"></i><button type="button" style="margin: -2px;" data-id="@item.Id" id="deleteItem" class="btn-link WorkingHoursEdit2" data-toggle="modal" data-target="#DeleteTerminalModal">Delete</button>
+                            }
+                        }
                     </td>
-                    @*  <td><i class="fa fa-list"style="font-size:16px;color:green"></i> @Html.ActionLink("Details", "Details", new { id = item.Id })</td> *@
                 </tr>
-            }
+                            }
         </tbody>
 
     </table>

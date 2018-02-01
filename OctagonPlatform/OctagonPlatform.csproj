@@ -255,6 +255,7 @@
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\Permissions.cs" />
     <Compile Include="Helpers\Schedule.cs" />
     <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />

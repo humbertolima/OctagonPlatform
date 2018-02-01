@@ -426,12 +426,13 @@ namespace OctagonPlatform.Controllers
             ViewBag.isAddTerminal = User.IsInRole("Add Terminal");
             ViewBag.isEditTerminal = User.IsInRole("Edit Terminal");
             ViewBag.isDeleteTerminal = User.IsInRole("Delete Terminal");
-
-            if (!ViewBag.isListTerminal)                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
-            {
-                ViewBag.Error = "Access Denied";
-                return PartialView("../Shared/Error");
-            }
+            
+            // Cometariado porque ya puse el CustomAuthorize que puedo controlar la redireccion.
+            //if (!ViewBag.isListTerminal)                               //no puse Authorize porque no puedo controlar la redireccion si no tiene el permiso. Esto l ollama un ajax y es un partial de details.
+            //{
+            //    ViewBag.Error = "Access Denied";
+            //    return PartialView("../Shared/Error");
+            //}
            
             try
             {
@@ -469,7 +470,7 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        [Authorize(Roles = "Add Terminal")]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddTerminal)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -487,7 +488,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "Add Terminal")]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddTerminal)]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TerminalFormViewModel terminalFormViewModel)
         {
@@ -514,6 +515,7 @@ namespace OctagonPlatform.Controllers
 
         // GET: Terminals/Edit/5
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditTerminal)]
         public ActionResult Edit(int? id)
         {
             try
@@ -531,6 +533,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditTerminal)]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TerminalFormViewModel terminalFormViewModel)
         {
@@ -554,6 +557,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: Terminals/Delete/5
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteTerminal)]
         public ActionResult Delete(int? id)
         {
             try
@@ -571,6 +575,7 @@ namespace OctagonPlatform.Controllers
 
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditTerminal)]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id, string WorkingHoursId)
         {
