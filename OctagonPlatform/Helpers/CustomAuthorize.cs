@@ -18,11 +18,17 @@ namespace OctagonPlatform.Helpers
             }
             else if (!this.Roles.Split(',').Any(filterContext.HttpContext.User.IsInRole))
             {
+                var temp = new TempDataDictionary
+                {
+                    { "Error", "Access Denied" }
+                };
+
                 // The user is not in any of the listed roles => 
                 // show the unauthorized view
                 filterContext.Result = new ViewResult
                 {
-                    ViewName = "~/Views/Shared/Error.cshtml"
+                    ViewName = "~/Views/Shared/Error.cshtml",
+                    TempData = temp
                 };
             }
             else
