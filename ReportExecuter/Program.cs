@@ -86,7 +86,7 @@ namespace ReportExecuter
             string url_base = "http://localhost:51141";
             string format = asuscription.Format;
            
-            ErrorCtrl.Save( () =>
+                ErrorCtrl.Save( () =>
             {
                 HttpClient client = new HttpClient();               
                 string adata = "";

@@ -122,8 +122,16 @@ namespace OctagonPlatform.Controllers.Reports
 
         public async Task<bool> RunReport(CashManagementViewModel vmodel, string format)
         {
-           
-            return await SendReport(vmodel, "CashManagement", format, "Cash Management");
+            try
+            {
+                return await SendReport(vmodel, "CashManagement", format, "Cash Management");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }
