@@ -1189,6 +1189,7 @@
     <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20180201043819 - Web Deploy.pubxml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -30,5 +30,10 @@ namespace OctagonPlatform.Helpers
                 base.HandleUnauthorizedRequest(filterContext);
             }
         }
+        public void Dispose()
+        {
+            this.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }

@@ -8,11 +8,11 @@ namespace OctagonPlatform.Helpers
 {
     public class CustomRoleProvider:RoleProvider
     {
-        private readonly ApplicationDbContext _context;
+       // private readonly ApplicationDbContext _context;
 
         public CustomRoleProvider()
         {
-            _context = new ApplicationDbContext();
+           // _context = new ApplicationDbContext();
         }
 
         public override bool IsUserInRole(string username, string roleName)
@@ -21,6 +21,7 @@ namespace OctagonPlatform.Helpers
         }
         public override string[] GetRolesForUser(string username)
         {
+            ApplicationDbContext _context = new ApplicationDbContext();
             var user = _context.Users
                 .Include(m=>m.Permissions)
                 .Single(x => x.UserName == username);
