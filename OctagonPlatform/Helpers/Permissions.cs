@@ -54,9 +54,9 @@ namespace OctagonPlatform.Helpers
             public const string SetPictures = "Edit Terminal Pictures";
             public const string PictureDelete  = "Delete Terminal Pictures";
 
-            public const string GetDocuments = "Compliance Documents";
-            public const string SetDocuments = "Set Documents Terminal";
-            public const string DocumentDelete = "Delete Documents Terminal";
+            public const string GetDocuments = "View Compliance";
+            public const string SetDocuments = "Edit Compliance";
+            public const string DocumentDelete = "Delete Compliance";
 
             public const string GetGeneralInfo = "View General Info Terminals";
 

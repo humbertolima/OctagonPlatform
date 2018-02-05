@@ -207,6 +207,8 @@ namespace OctagonPlatform.Controllers
             {
                 viewModel = _repository.GetDocuments(viewModel.Id);
             }
+            viewModel.IsAddDocuments = User.IsInRole(Helpers.Permissions.Terminals.SetDocuments);
+            viewModel.IsDeleteDocuments = User.IsInRole(Helpers.Permissions.Terminals.DocumentDelete);
 
             return PartialView("Sections/Documents", viewModel);
         }
