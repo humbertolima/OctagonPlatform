@@ -65,6 +65,7 @@ namespace OctagonPlatform.Helpers
             public const string DeleteNotes = "Delete Notes Terminal";
 
             public const string GetCassettes = "Get Cassettes Terminal";
+            public const string AddCassettes = "Add Cassettes Terminal";
             public const string SetCassettes = "Set Cassettes Terminal";
             public const string CassetteDelete  = "Delete Cassettes Terminal";
 

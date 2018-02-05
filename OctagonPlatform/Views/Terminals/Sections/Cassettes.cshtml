@@ -22,19 +22,32 @@
                             <input type="hidden" id="DenominationValues_@item.Id" name="denomination" value="@item.Denomination" />
                             @item.Denomination
                         </td>
-                        <td>
-                            <button type="button" class="CassettesEdit btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
-                        </td>
-                        <td>
-                            <button type="button" class="CassettesDelete btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteCassetteModal">Delete</button>
-                        </td>
+                        @{
+                            if (Model.IsSetCassette)
+                            {
+                                <td>
+                                    <button type="button" class="CassettesEdit btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#myModalCassettesEdit">Edit</button>
+                                </td>
+                            }
+                            if (Model.IsDeleteCassette)
+                            {
+                                <td>
+                                    <button type="button" class="CassettesDelete btn btn-sm btn-info btn-microsoft" data-toggle="modal" data-id="@item.Id" data-target="#DeleteCassetteModal">Delete</button>
+                                </td>
+                            }
+                        }
+                        
                     </tr>
-                }
+                            }
             }
         </tbody>
     </table>
-
-    <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
+    @{
+        if (Model.IsAddCassette)
+        {
+            <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModalCassettesAdd">Add</button>
+        }
+    }
 
     @*//EDITTTTTTTTTTTTTTTTTTTTTTTTTTTtttttttttttttttt*@
     <div id="myModalCassettesEdit" class="modal fade" role="dialog">
@@ -92,7 +105,7 @@
                         @Html.AntiForgeryToken()
                         @Html.Hidden("id", Model.Id)
                         @Html.HiddenFor(model => model.TerminalId)          //importante mandarlo para cuando se retorna errores,
-                        @Html.Hidden("cassetteId")                          //toma el valor por Javacripts
+                                                                            @Html.Hidden("cassetteId")                          //toma el valor por Javacripts
 
                         <div class="form-group">
                             Denomiantion
@@ -112,12 +125,12 @@
                             <input type="checkbox" id="autoRecord" name="autoRecord">
 
                         </div>
-                            <div class="form-group">
-                                <div class="col-lg-10 col-lg-offset-2">
-                                    <button type="reset" class="btn btn-default">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Save</button>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
+                        </div>
                     }
                 </div>
             </div>

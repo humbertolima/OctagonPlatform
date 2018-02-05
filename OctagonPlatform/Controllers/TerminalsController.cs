@@ -355,6 +355,10 @@ namespace OctagonPlatform.Controllers
                 {
                     viewModel = _repository.GetCassettes(Convert.ToInt32(id));
                 }
+                viewModel.IsAddCassette = User.IsInRole(Helpers.Permissions.Terminals.AddCassettes);
+                viewModel.IsSetCassette= User.IsInRole(Helpers.Permissions.Terminals.SetCassettes);
+                viewModel.IsDeleteCassette = User.IsInRole(Helpers.Permissions.Terminals.CassetteDelete);
+
                 return PartialView("Sections/Cassettes", viewModel);
             }
             catch (Exception ex)
