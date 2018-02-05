@@ -15,5 +15,6 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual ICollection<ReportFilter> ReportFilters { get; set; }
+        public string Type { get; set; }
     }
 }

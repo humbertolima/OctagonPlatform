@@ -15,14 +15,15 @@ namespace OctagonPlatform.Models
         {
         }
 
-        public SubscriptionModel(string email, string description, string emailComment, int scheduleId,  int userId)
+        public SubscriptionModel(string email, string description, string emailComment, int scheduleId, int userId, string format)
         {
             Email = email;
             Description = description;
             EmailComment = emailComment;
-            ScheduleId = scheduleId;           
+            ScheduleId = scheduleId;
             UserId = userId;
-           
+            Format = format;
+
         }
 
         public int Id { get; set; }
@@ -34,7 +35,8 @@ namespace OctagonPlatform.Models
         public virtual Schedule Schedule { get; set; }
         public int UserId { get; set; }
         public virtual User User { get; set; }
-
+        [StringLength(10)]
+        public string Format { get; set; }
         public virtual ICollection<ReportFilter> ReportFilters { get; set; }
        
     }

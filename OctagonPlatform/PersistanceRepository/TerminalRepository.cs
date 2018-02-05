@@ -1053,7 +1053,7 @@ namespace OctagonPlatform.PersistanceRepository
                 .Where(b => b.TerminalContacts.FirstOrDefault() != null && b.Make != null)
                 .Select(b => new TerminalTableVM { TerminalID = b.TerminalId, LocationName = b.LocationName, Address = b.Address1 + b.Address2, City = b.City.Name, State = b.State.Name, PostalCode = b.Zip.ToString(), ContactName = b.TerminalContacts.First().Name, ContactPhone = b.TerminalContacts.First().Phone, ATMType = b.Make.Name + " " + b.Make.Name, Connection = b.CommunicationType.ToString(), SurchargeAmount = b.SurchargeAmountFee.ToString(), CreationDate = b.DateCreated.ToString(), EMVStatus = "falta por hacer", DCCStatus = "falta por hacer" })
                 .ToList();
-
+                //la terminal debe tener obligatorio un contact y una make
                 return list;
             }
             catch (Exception e)

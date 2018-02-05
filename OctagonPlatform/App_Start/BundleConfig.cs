@@ -31,11 +31,32 @@ namespace OctagonPlatform
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-superhero.css",
+                      "~/Octagon/assets/css/bootstrap.min.css",
+                      "~/Octagon/assets/css/sb-admin.css",
+                      "~/Octagon/assets/css/sb-admin.min.css",
+                      "~/Content/datatables/css/datatables.min.css",
+                      "~/Octagon/assets/vendor/metisMenu/metisMenu.min.css",
+                      "~/Octagon/assets/vendor/dist/css/sb-admin-2.css",
+                      "~/Octagon/assets/vendor/morrisjs/morris.css",
+                      "~/Octagon/assets/fonts/font-awesome.min.css",
+                      "~/Octagon/assets/css/styles.css",
+                      "~/Content/themes/base/jquery-ui.css"
+
                       //    "~/Content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/site.css"));
-            bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(
-                     "~/Content/themes/base/jquery-ui.css"));
+                      ));
+            bundles.Add(new StyleBundle("~/Content/home/css").Include(
+                     "~/Octagon/assets/css/bootstrap.min.css",
+                     "~/Octagon/assets/css/styles.css",
+                     "~/Octagon/assets/fonts/font-awesome.min.css",
+                     "~/Octagon/assets/fonts/simple-line-icons.min.css",
+                     "~/Octagon/assets/css/bootstrap.min.css"
+                    
+                     ));
+           
+  
+
+            //bundles.Add(new StyleBundle("~/Content/cssjqueryui").Include(
+            //         "~/Content/themes/base/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/base").Include(
                       "~/Content/themes/base/*.css"));
@@ -60,6 +81,27 @@ namespace OctagonPlatform
               ));
             bundles.Add(new StyleBundle("~/bundles/selectmulticss").Include(
                      "~/Content/selectmulti/css/select-multiple.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(             
+             "~/Scripts/jquery-3.1.1.min.js",
+             "~/Scripts/datatables/datatables.min.js",
+             "~/Octagon/assets/bootstrap/dist/js/bootstrap.min.js",
+             "~/Octagon/assets/vendor/metisMenu/metisMenu.min.js",
+             "~/Octagon/assets/vendor/raphael/raphael.min.js",
+             "~/Octagon/assets/vendor/morrisjs/morris.min.js",
+             "~/Octagon/assets/data/AMS-Dashboard-data.js",
+             "~/Octagon/assets/data/AMS-data.js",
+             "~/Octagon/assets/data/demmoney-data.js",
+             "~/Octagon/assets/data/CashEverywhere-data.js",
+             "~/Octagon/assets/data/vendbot-data.js",
+             "~/Octagon/assets/vendor/dist/js/sb-admin-2.js",
+             "~/Scripts/jquery-ui-1.12.1.js",
+             "~/Content/quicksearch/dist/jquery.quicksearch.min.js",
+             "~/Scripts/jquery.unobtrusive-ajax.min.js"
+             ));
+
+            BundleTable.EnableOptimizations = true;
 
         }
     }

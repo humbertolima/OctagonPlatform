@@ -11,6 +11,7 @@ using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.PersistanceRepository;
 using OctagonPlatform.Views.Schedule;
 
 namespace OctagonPlatform.Controllers.Reports
@@ -55,6 +56,9 @@ namespace OctagonPlatform.Controllers.Reports
         // GET: ScheduleOnces/Create
         public PartialViewResult Create(string userId)
         {
+            //User user = _userRepository.FindBy(Convert.ToInt32(userId));
+            //DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
+
             ScheduleViewModel vmodel = new ScheduleViewModel();
             vmodel.UserId = userId;
             return PartialView(vmodel);
@@ -294,14 +298,14 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return true;
         }
-
+        //Add item in table reportfilter 
         private void AddReportFilters(IEnumerable<SubscriptionModel> subscriptions, Schedule model1,int UserId,int ID)
         {
             model1.UserId = UserId;
             _repo.Add(model1);
             foreach (var item in subscriptions)
             {
-                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId);
+                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId,item.Format);
 
                 _repoSub.Add(subs);
                 foreach (var filter in item.ReportFilters)

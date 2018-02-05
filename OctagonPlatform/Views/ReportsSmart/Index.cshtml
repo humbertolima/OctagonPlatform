@@ -10,7 +10,7 @@
 @foreach (var item in Model)
 {
     var name = item.Name.Replace(" ",string.Empty);
-    @Html.ActionLink(item.Name, name)
+    @Html.ActionLink(item.Name, name,name)
    <br>
    
 }

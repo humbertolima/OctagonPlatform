@@ -8,7 +8,7 @@
 
 
 
-<p>   
+<p>
 </p>
 <h1>Report Subscriptions </h1>
 <h3>Manage Schedules</h3>
@@ -22,8 +22,8 @@
                 <a href="#" id="create" style="color:white;font-size: 22px;">Add New Schedule</a>
             </div>
         </div>
-       
-      
+
+
 
     </div>
     <div class="panel-body">
@@ -36,8 +36,8 @@
             </div>
         </div>
         <p>&nbsp;</p>
-       
-        <div id="List" >
+
+        <div id="List">
             @Html.Partial("List", list)
 
         </div>
@@ -46,48 +46,25 @@
     </div>
 </div>
 
-   <div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+<div id="ScheduleForm" style="position:relative;margin:0 auto;width:50%"></div>
+
+
+@section Scripts {
+
+    <script>
         
-
-        @section Scripts {
-
-            <script>
-        var url = '@Url.Action("AutoUser", "Users")';
-    var urlcreate = '@Url.Action("Create", "Schedule")';
-                var urltable = '@Url.Action("List", "Schedule")';
+         var urlcreate = '@Url.Action("Create", "Schedule")';
+         var list = '@Url.Action("List", "Schedule")';
                 callankle();
         $(function () {
-            $('#user').autocomplete({
-                source: url,
-                select: function (event, ui) {
-
-                    $("#user").val(ui.item.label); // display the selected text
-                    $("#userid").val(ui.item.value); // save selected id to hidden input
-                    $.get(urltable, { userId: $("#userid").val() }, function (data) {
-
-                        $("#List").html(data);
-                    });
-                    return false;
-                }
-            });
-            $('#user').blur(function () {
-                if ($('#user').val() == "") {
-                    $('#user').attr("placeholder", "< ALL >");
-                    $('#userid').val('');
-                    $.get(urltable, { userId: 0 }, function (data) {
-
-                        $("#List").html(data);
-                    });
-                }
-
-            });
+         
             $("#create").click(function () {
 
                 $.get(urlcreate, { userId: $("#userid").val() }, function (data) {
 
                     $("#ScheduleForm").html(data);
                     Success();
-                    
+
                 });
             });
 
@@ -100,7 +77,7 @@
             $("#StopDate").datepicker({
                 dateFormat: "mm/dd/yy"
                 });
-                    //aqui se concatenen los dias de la semana que quiere recibir el reporte 
+                    //aqui se concatenen los dias de la semana que quiere recibir el reporte
             $("#btn").click(function () {
 
                 var str = "";
@@ -133,7 +110,7 @@
                         $("#Stop").css("display", "block");
                     } else {
                         if (val == 3) {
-                          
+
                             $("#time").css("display", "block");
                             $("#daily").css("display", "none");
                             $("#monthly").css("display", "none");
@@ -142,7 +119,7 @@
                             $("#Stop").css("display", "block");
                         } else {
                             if (val == 4) {
-                               
+
                                 $("#time").css("display", "block");
                                 $("#daily").css("display", "none");
                                 $("#monthly").css("display", "block");
@@ -164,7 +141,7 @@
                 }
             });
         }
-            </script>
+    </script>
 
-
-        }
+    @Html.Partial("../ScriptsReport")
+}

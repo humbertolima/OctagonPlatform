@@ -30,7 +30,10 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public StatusType.Status Status { get; set; }
 
+        [HiddenInput]
+        public int UserId { get; set; }
 
+        
         public CashManagementViewModel()
         {           
             PartnerId = -1;

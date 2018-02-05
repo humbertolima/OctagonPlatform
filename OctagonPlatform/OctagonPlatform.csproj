@@ -230,9 +230,16 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\CashBalanceatCloseController.cs" />
+    <Compile Include="Controllers\Reports\MonthlyTransactionSummaryController.cs" />
+    <Compile Include="Controllers\Reports\DailyTransactionSummaryController.cs" />
+    <Compile Include="Controllers\Reports\TerminalStatusController.cs" />
+    <Compile Include="Controllers\Reports\TerminalListController.cs" />
+    <Compile Include="Controllers\Reports\CashManagementController.cs" />
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Reports\CashLoadController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
     <Compile Include="Controllers\Reports\ScheduleController.cs" />
     <Compile Include="Controllers\Reports\SubscriptionController.cs" />
@@ -315,9 +322,25 @@
     <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801301558546_merge2.cs" />
-    <Compile Include="Migrations\201801301558546_merge2.Designer.cs">
-      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    <Compile Include="Migrations\201801242058527_addformarSubscription.cs" />
+    <Compile Include="Migrations\201801242058527_addformarSubscription.Designer.cs">
+      <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801252010369_format.cs" />
+    <Compile Include="Migrations\201801252010369_format.Designer.cs">
+      <DependentUpon>201801252010369_format.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801261802497_usertimezone.cs" />
+    <Compile Include="Migrations\201801261802497_usertimezone.Designer.cs">
+      <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.cs" />
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
+      <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051657495_requirednamereport.cs" />
+    <Compile Include="Migrations\201802051657495_requirednamereport.Designer.cs">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -1187,6 +1210,7 @@
     <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
+    <Content Include="Views\ReportsSmart\ScriptsReport.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1460,7 +1484,9 @@
     <Content Include="Views\Permissions\Edit.cshtml" />
     <Content Include="Views\Permissions\Index.cshtml" />
     <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1503,8 +1529,8 @@
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801301558546_merge2.resx">
-      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802051657495_requirednamereport.resx">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
