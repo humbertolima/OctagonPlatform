@@ -13,6 +13,12 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public string TerminalId { get; set; }
 
+        public bool IsAddWorkingHours { get; set; }
+        public bool IsDeleteWorkingHours { get; set; }
+        public bool IsEditWorkingHours { get; set; }
+
+        public bool IsEditConfiguration { get; set; }
+
         public Week.Day Days { get; set; }
 
         public ICollection<TerminalWorkingHours> WorkingHours { get; set; }

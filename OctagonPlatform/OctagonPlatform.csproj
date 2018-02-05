@@ -1191,7 +1191,6 @@
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180201043819 - Web Deploy.pubxml" />
-    <Content Include="Views\Account\Error.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1469,6 +1468,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Octagon\assets\css\less\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

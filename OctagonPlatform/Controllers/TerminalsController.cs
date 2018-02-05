@@ -13,7 +13,7 @@ namespace OctagonPlatform.Controllers
     public class TerminalsController : Controller
     {
         private readonly ITerminalRepository _repository;
-        
+
         public TerminalsController(ITerminalRepository repository)
         {
             _repository = repository;
@@ -61,7 +61,7 @@ namespace OctagonPlatform.Controllers
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return  PartialView("Error");
+                return PartialView("Error");
             }
         }
 
@@ -186,7 +186,7 @@ namespace OctagonPlatform.Controllers
         {
             Models.Terminal terminal;
 
-            if (FileForm !=null)
+            if (FileForm != null)
             {
                 terminal = _repository.SetPictures(viewModel.Id, FileForm, null);
                 return PartialView("Details", terminal);
@@ -196,7 +196,7 @@ namespace OctagonPlatform.Controllers
                 ViewBag.Error = "Pictures required";
                 return PartialView("Details", terminal = AutoMapper.Mapper.Map<TerminalPicturesVM, Models.Terminal>(viewModel));
             }
-            
+
         }
 
         [HttpPost]
@@ -214,7 +214,7 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetDocuments)]
-        public PartialViewResult SetDocuments( TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
+        public PartialViewResult SetDocuments(TerminalDocumentsVM viewModel, HttpPostedFileBase FileForm)
         {
             Models.Terminal terminal;
             if (FileForm != null)
@@ -310,7 +310,7 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetNotes)]
         public PartialViewResult SetNotes(int id, string notes, int? noteId)
-        { 
+        {
             Models.Terminal terminal;
 
             if (noteId != null && noteId > 0)
@@ -367,10 +367,10 @@ namespace OctagonPlatform.Controllers
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetCassettes)]
         public PartialViewResult SetCassettes(string terminalId, string autoRecord, int denomination, int id, int? cassetteId)
         {
-            bool isAutoRecord  = false;
+            bool isAutoRecord = false;
 
             if (!String.IsNullOrEmpty(autoRecord))
-                isAutoRecord = true ;
+                isAutoRecord = true;
 
             Models.Terminal terminal = new Models.Terminal();
 
@@ -426,7 +426,7 @@ namespace OctagonPlatform.Controllers
             ViewBag.isAddTerminal = User.IsInRole("Add Terminal");
             ViewBag.isEditTerminal = User.IsInRole("Edit Terminal");
             ViewBag.isDeleteTerminal = User.IsInRole("Delete Terminal");
-                       
+
             try
             {
                 return View(_repository.GetAllTerminals(int.Parse(Session["partnerId"].ToString())));
@@ -508,7 +508,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        
+
         [HttpGet]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditTerminal)]
         public ActionResult Edit(int? id)
@@ -551,7 +551,7 @@ namespace OctagonPlatform.Controllers
 
         }
 
-        
+
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteTerminal)]
         public ActionResult Delete(int? id)
         {
@@ -568,7 +568,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-         
+
         [HttpPost, ActionName("Delete")]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteTerminal)]
         [ValidateAntiForgeryToken]
@@ -594,9 +594,9 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index");
             }
         }
-        
 
-       
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -664,10 +664,16 @@ namespace OctagonPlatform.Controllers
             {
                 TerminalConfigViewModel configViewModel = new TerminalConfigViewModel();
 
+                
                 if (!string.IsNullOrEmpty(id))
                 {
                     configViewModel = _repository.GetConfigNotification(Convert.ToInt32(id));
                 }
+                configViewModel.IsEditConfiguration = User.IsInRole(Helpers.Permissions.Terminals.SetConfiguration);
+                configViewModel.IsAddWorkingHours = User.IsInRole(Helpers.Permissions.Terminals.AddWorkingHours);
+                configViewModel.IsEditWorkingHours = User.IsInRole(Helpers.Permissions.Terminals.SetWorkingHours);
+                configViewModel.IsDeleteWorkingHours = User.IsInRole(Helpers.Permissions.Terminals.DeleteWorkingHours);
+
                 return PartialView("Sections/ConfigNotification", configViewModel);
             }
             catch (Exception ex)
@@ -689,7 +695,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetWorkingHours)]
-        public ActionResult SetWorkingHours(Models.FormsViewModels.TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
+        public ActionResult SetWorkingHours(TerminalConfigViewModel terminalAlertIngnoredViewModel, string WorkingHoursEdit)
         {
             var terminal = _repository.SetWorkingHours(terminalAlertIngnoredViewModel, WorkingHoursEdit);
 
@@ -705,6 +711,7 @@ namespace OctagonPlatform.Controllers
 
             return RedirectToAction("Details/" + terminal.Id);
         }
+
 
         [HttpPost]
         [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteWorkingHours)]

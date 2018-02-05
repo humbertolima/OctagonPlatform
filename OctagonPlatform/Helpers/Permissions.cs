@@ -18,11 +18,28 @@ namespace OctagonPlatform.Helpers
             
             public const string GetKeyTerminal = "Get Key Terminal";
             public const string SetBindKey = "Set BindKey Terminal";
-            public const string GetCashManagement = "Get CashManagement Terminal";
-            public const string GetInterchanges = "Get Intershanges Terminal";
-            public const string GetSurcharges = "Get Surcharges Terminal";
-            public const string GetVaultCash = "Get VaultCash Terminal";
-            public const string GetContacts = "Get Contacts Terminal";
+
+            public const string GetCashManagement = "Cash Management";
+
+            public const string GetInterchanges = "View Interchange Split";
+            public const string AddInterchanges = "Add Interchange Split";
+            public const string EditInterchanges = "Edit Interchange Split";
+            public const string DeleteInterchanges = "Delete Interchange Split";
+
+            public const string GetSurcharges = "View Surcharge Split";
+            public const string AddSurcharges = "Add Surcharge Split";
+            public const string EditSurcharges = "Edit Surcharge Split";
+            public const string DeleteSurcharges = "Delete Surcharge Split";
+
+            public const string GetVaultCash = "View Vault Cash Info";
+            public const string EditVaultCash = "Edit Vault Cash Info";
+            public const string AddVaultCash = "Add Vault Cash Info";
+            public const string DeleteVaultCash = "Delete Vault Cash Info";
+
+            public const string GetContacts = "View Terminal Contacts";
+            public const string EditContacts = "Edit Terminal Contacts";
+            public const string AddContacts = "Add Terminal Contacts";
+            public const string DeleteContacts = "Delete Terminal Contacts";
 
             public const string GetConfiguration  = "Get Configuration Terminal";
             public const string SetConfiguration  = "Set Configuration Terminal";
@@ -33,17 +50,17 @@ namespace OctagonPlatform.Helpers
             public const string  DeleteWorkingHours   = "Delete WorkingHours Terminal";
 
             
-            public const string GetPictures = "Get Pictures Terminal";
-            public const string SetPictures = "Set Pictures Terminal";
-            public const string PictureDelete  = "Delete Pictures Terminal";
+            public const string GetPictures = "View Terminal Pictures";
+            public const string SetPictures = "Edit Terminal Pictures";
+            public const string PictureDelete  = "Delete Terminal Pictures";
 
-            public const string GetDocuments = "Get Documents Terminal";
+            public const string GetDocuments = "Compliance Documents";
             public const string SetDocuments = "Set Documents Terminal";
             public const string DocumentDelete = "Delete Documents Terminal";
 
-            public const string GetGeneralInfo = "Get GeneralInfo Terminal";
+            public const string GetGeneralInfo = "View General Info Terminals";
 
-            public const string GetNotes = "Get Notes Terminal";
+            public const string GetNotes = "View Terminal Notes";
             public const string SetNotes = "Set Notes Terminal";
             public const string DeleteNotes = "Delete Notes Terminal";
 

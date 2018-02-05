@@ -13,18 +13,33 @@
                                         <td style="padding: 7px;">@item.Day</td>
                                         <td style="padding: 7px;">@item.StartTime</td>
                                         <td style="padding: 7px;">@item.EndTime</td>
-                                        <td style="padding: 7px;">
-                                            <button type="button" class="btn btn-info btn-microsoft WorkingHoursEdit" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
-                                        </td>
-                                        <td style"padding: 7px;">
-                                            <button type="button" class="btn btn-info btn-microsoft DeleteWorkingHours" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
-                                        </td>
+                                        @{
+                                            if (Model.IsEditWorkingHours)
+                                            {
+                                                <td style="padding: 7px;">
+                                                    <button type="button" class="btn btn-info btn-microsoft WorkingHoursEdit" data-toggle="modal" data-id="@item.Id" data-target="#myModalWorkingHours">Edit</button>
+                                                </td>
+                                            }
+                                            if (Model.IsDeleteWorkingHours)
+                                            {
+                                                <td style"padding: 7px;">
+                                                    <button type="button" class="btn btn-info btn-microsoft DeleteWorkingHours" data-toggle="modal" data-id="@item.Id" data-target="#DeleteWorkingHours">Delete</button>
+                                                </td>
+                                            }
+                                        }
                                     </tr>
-                                }
+                                            }
                             }
                             <tr>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
+                                    @{
+                                        if (@Model.IsAddWorkingHours)
+                                        {
+                                            <div>
+                                                <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#ModalAddWorkingHours">Add</button>
+                                            </div>
+                                        }
+                                    }
                                 </td>
                             </tr>
                         </tbody>
@@ -66,9 +81,14 @@
         @Html.CheckBoxFor(m => m.IgnoreReceiptPaper, new { @disabled = "disabled" }) Receipt printer paper is low/out<br />
         @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon, new { @disabled = "disabled" }) Receipt printer ribbon is low/out<br />
         @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen, new { @disabled = "disabled" }) Top door is Open<br />
-        <br />
-        <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
-        <br />
+        @{
+            if (Model.IsEditConfiguration)
+            {
+                <br />
+                <button type="button" class="btn btn-info btn-microsoft" data-toggle="modal" data-target="#myModal">Edit configuration</button>
+                <br />
+            }
+        }
     </div>
 
     @*========= Modal =========*@
@@ -82,59 +102,59 @@
 
                 @using (Html.BeginForm("SetConfiguration", "Terminals"))
             {
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("id", Model.Id)
-                    @Html.Hidden("terminalId", Model.TerminalId)
+                @Html.AntiForgeryToken()
+                @Html.Hidden("id", Model.Id)
+                @Html.Hidden("terminalId", Model.TerminalId)
 
                     if (ViewBag.Error != null)
                     {
-                        <p class="alert alert-danger">
-                            @ViewBag.Error
-                        </p>
+                <p class="alert alert-danger">
+                    @ViewBag.Error
+                </p>
                     }
 
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.IgnoreHoursInactive)
-                        @Html.TextBoxFor(m => m.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "48", @type = "" })
-                        @Html.ValidationMessageFor(m => m.IgnoreHoursInactive)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LowCach1)
-                        @Html.TextBoxFor(m => m.LowCach1, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.LowCach1)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LowCash2)
-                        @Html.TextBoxFor(m => m.LowCash2, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.LowCash2)
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.LowCash3)
-                        @Html.TextBoxFor(m => m.LowCash3, new { @class = "form-control", autofocus = "autofocus" })
-                        @Html.ValidationMessageFor(m => m.LowCash3)
-                    </div>
-                    <div class="form-group">
-                        Ignored Alerts <br />
-                        @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention) Bill dispenser needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention) Card reader needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.IgnoreCassetteNotes) Cassette notes are out<br />
-                        @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen) Chest door is open<br />
-                        @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention) Comm system needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention) Journal printer needs attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.IgnoreJournalPaper) Journal printer paper is low/out<br />
-                        @Html.CheckBoxFor(m => m.IgnoreJournalRibbon) Journal printer ribbon is low/out<br />
-                        @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention) Receipt printer need attention or out of service<br />
-                        @Html.CheckBoxFor(m => m.IgnoreReceiptPaper) Receipt printer paper is low/out<br />
-                        @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon) Receipt printer ribbon is low/out<br />
-                        @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen) Top door is Open<br />
-                    </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.IgnoreHoursInactive)
+                    @Html.TextBoxFor(m => m.IgnoreHoursInactive, new { @class = "form-control", autofocus = "autofocus", placeholder = "48", @type = "" })
+                    @Html.ValidationMessageFor(m => m.IgnoreHoursInactive)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCach1)
+                    @Html.TextBoxFor(m => m.LowCach1, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCach1)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCash2)
+                    @Html.TextBoxFor(m => m.LowCash2, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCash2)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LowCash3)
+                    @Html.TextBoxFor(m => m.LowCash3, new { @class = "form-control", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.LowCash3)
+                </div>
+                <div class="form-group">
+                    Ignored Alerts <br />
+                    @Html.CheckBoxFor(m => m.IgnoreBillDispenserNeedAttention) Bill dispenser needs attention or out of service<br />
+                    @Html.CheckBoxFor(m => m.IgnoreCardReaderNeedAttention) Card reader needs attention or out of service<br />
+                    @Html.CheckBoxFor(m => m.IgnoreCassetteNotes) Cassette notes are out<br />
+                    @Html.CheckBoxFor(m => m.IgnoreChestDoorOpen) Chest door is open<br />
+                    @Html.CheckBoxFor(m => m.IgnoreCommNeedAttention) Comm system needs attention or out of service<br />
+                    @Html.CheckBoxFor(m => m.IgnoreJournalNeedAttention) Journal printer needs attention or out of service<br />
+                    @Html.CheckBoxFor(m => m.IgnoreJournalPaper) Journal printer paper is low/out<br />
+                    @Html.CheckBoxFor(m => m.IgnoreJournalRibbon) Journal printer ribbon is low/out<br />
+                    @Html.CheckBoxFor(m => m.IgnoreReceiptNeedAttention) Receipt printer need attention or out of service<br />
+                    @Html.CheckBoxFor(m => m.IgnoreReceiptPaper) Receipt printer paper is low/out<br />
+                    @Html.CheckBoxFor(m => m.IgnoreReceiptRibbon) Receipt printer ribbon is low/out<br />
+                    @Html.CheckBoxFor(m => m.IgnoreTopDoorOpen) Top door is Open<br />
+                </div>
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="reset" class="btn btn-default">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
+                </div>
                 }
             </div>
         </div>
@@ -151,14 +171,14 @@
                 <div class="panel-body">
                     @using (Html.BeginForm("SetWorkingHours", "Terminals"))
             {
-                        @Html.AntiForgeryToken()
-                        @Html.HiddenFor(m => m.Id)
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
 
-                        @Html.Hidden("TerminalId", Model.Id)
+                    @Html.Hidden("TerminalId", Model.Id)
 
-                        <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
+                    <input type="hidden" id="WorkingHoursEdit" name="WorkingHoursEdit" value="Norway">
 
-                        @Html.DropDownList("Days", new List<SelectListItem>
+                    @Html.DropDownList("Days", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="Monday", Value = "1" },
                     new SelectListItem{ Text="Tuesday", Value = "2" },
@@ -169,7 +189,7 @@
                     new SelectListItem{ Text="Sunday", Value = "7" },
                  })
 
-                        @Html.DropDownList("StartTime", new List<SelectListItem>
+                    @Html.DropDownList("StartTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
                     new SelectListItem{ Text="02:00", Value = "2" },
@@ -197,7 +217,7 @@
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
 
-                        @Html.DropDownList("EndTime", new List<SelectListItem>
+                    @Html.DropDownList("EndTime", new List<SelectListItem>
                 {
                     new SelectListItem{ Text="01:00", Value = "1" },
                     new SelectListItem{ Text="02:00", Value = "2" },
@@ -225,11 +245,11 @@
                     new SelectListItem{ Text="24:00", Value = "24" },
                  })
 
-                        <div class="form-group">
-                            <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Save</button>
                         </div>
+                    </div>
                     }
                 </div>
             </div>
@@ -344,23 +364,23 @@
 
                 @using (Html.BeginForm("DeleteWorkingHours", "Terminals"))
             {
-                    @Html.Hidden("terminalId", Model.Id)
-                    @Html.AntiForgeryToken()
-                    @Html.Hidden("WorkingHoursId")
-                    <input type="hidden" id="workingHoursId" name="workingHoursId" value="">
+                @Html.Hidden("terminalId", Model.Id)
+                @Html.AntiForgeryToken()
+                @Html.Hidden("WorkingHoursId")
+                <input type="hidden" id="workingHoursId" name="workingHoursId" value="">
 
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
+                </div>
                 }
             </div>
         </div>
     </div>
 
 
-    @Scripts.Render("~/Scripts/jquery-1.10.2.js")
+    @* @Scripts.Render("~/Scripts/jquery-1.10.2.js")*@
 
     <script>
         $(document).on("click", ".WorkingHoursEdit", function () {

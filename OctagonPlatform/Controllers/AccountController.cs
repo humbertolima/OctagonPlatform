@@ -21,9 +21,10 @@ namespace OctagonPlatform.Controllers
         }
 
         
-        public PartialViewResult Error()
+        public PartialViewResult Error( string text)
         {
-            return PartialView();
+            ViewBag.Error = text;
+            return PartialView("ErrorWithLayout");
         }
 
         [HttpGet]
