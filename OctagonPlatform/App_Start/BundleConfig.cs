@@ -97,7 +97,6 @@ namespace OctagonPlatform
              "~/Octagon/assets/data/vendbot-data.js",
              "~/Octagon/assets/vendor/dist/js/sb-admin-2.js",
              "~/Scripts/jquery-ui-1.12.1.js",
-             "~/Scripts/export.js",
              "~/Content/quicksearch/dist/jquery.quicksearch.min.js",
              "~/Scripts/jquery.unobtrusive-ajax.min.js"
              ));

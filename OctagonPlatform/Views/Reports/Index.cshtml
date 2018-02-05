@@ -31,7 +31,7 @@
     {
         <tr>
             <td>
-             
+
                 @Html.ActionLink(item.Name, "Edit", new { id = item.Id })
             </td>
             <td>
@@ -49,17 +49,17 @@
                 }
             </td>
             <td>
-               
+
 
 
                 @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-                  new AjaxOptions
-                  {
-                      HttpMethod = "POST",
-                      OnSuccess = "Success",
-                      Confirm = "Are you Sure You Want to Delete " + @item.Name
-                  },
-                  new { @class = "btn btn-danger fa fa-trash" })
+                       new AjaxOptions
+                       {
+                           HttpMethod = "POST",
+                           OnSuccess = "Success",
+                           Confirm = "Are you Sure You Want to Delete " + @item.Name
+                       },
+                       new { @class = "btn btn-danger fa fa-trash" })
             </td>
         </tr>
     }
@@ -67,12 +67,12 @@
 </table>
 @section Scripts {
 
-    @Scripts.Render("~/Scripts/jquery.validate.min.js")
-    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
 
     <script>
-        function Success(data) {                     
-                window.location = "/Reports";
+        function Success(data) {
+            window.location = "/Reports";
         }
 
     </script>

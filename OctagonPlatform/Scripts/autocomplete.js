@@ -117,14 +117,14 @@
         }
     });
     $('#user').autocomplete({
-        source: url,
+        source: urluser,
         select: function (event, ui) {
 
             $("#user").val(ui.item.label); // display the selected text
             $("#userid").val(ui.item.value); // save selected id to hidden input
             $.get(list, { userId: $("#userid").val() }, function (data) {
 
-                $("#SubscriptionList").html(data);
+                $("#List").html(data);
             });
             return false;
         }
@@ -136,7 +136,7 @@
 
             $.get(list, { userId: 0 }, function (data) {
                 // alert(data);
-                $("#SubscriptionList").html(data);
+                $("#List").html(data);
             });
         }
 
