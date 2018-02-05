@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace OctagonPlatform.Helpers
 {
@@ -25,11 +22,9 @@ namespace OctagonPlatform.Helpers
 
                 // The user is not in any of the listed roles => 
                 // show the unauthorized view
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "~/Views/Shared/Error.cshtml",
-                    TempData = temp
-                };
+
+                filterContext.Result = new RedirectResult("~/Account/Error");
+                  
             }
             else
             {

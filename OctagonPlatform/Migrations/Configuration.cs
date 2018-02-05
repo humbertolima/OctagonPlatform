@@ -82,7 +82,7 @@ namespace OctagonPlatform.Migrations
             #region despues del merge
 
            
-            List<string> Level0 = new List<string> { "prueba6", "prueba5", "prueba4", "prueba2", "Prueba", "Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
+            List<string> Level0 = new List<string> {"Alerts", "Mobile TMS", "My Profile", "Partners", "Reports", "Terminals", };
             foreach (var item in Level0)
             {
                 Permission perm = new Permission() { Name = item };

@@ -20,6 +20,12 @@ namespace OctagonPlatform.Controllers
             _accountRepository = accountRepository;
         }
 
+        
+        public PartialViewResult Error()
+        {
+            return PartialView();
+        }
+
         [HttpGet]
         public ActionResult Login()
         {
