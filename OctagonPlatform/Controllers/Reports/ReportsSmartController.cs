@@ -160,6 +160,9 @@ namespace OctagonPlatform.Controllers.Reports
             return html1;
 
         }
+
+
+
         public async Task<bool> SendReport(object aviewmodel,string filename,string format,string title)
         {
              string html = await HTML(title, aviewmodel);
@@ -184,10 +187,21 @@ namespace OctagonPlatform.Controllers.Reports
            
             //Send report by email
             EmailBusiness mail = new EmailBusiness();    
-                      
-            return await Task<bool>.Run(async () => {
-               return mail.ToClientAttachment("emileydisrodriguez@gmail.com", "prueeba", "probando", file);
-            });
+                  
+            
+            return await mail.ToClientAttachmentAsync("emileydisrodriguez@gmail.com", "prueeba", "probando", file);
+
+            //return await Task<bool>.Run(async () => {
+            //    var save_result =  await ErrorCtrl.SaveTaskString<bool>(()=>
+            //        {
+            //            return mail.ToClientAttachment("emileydisrodriguez@gmail.com", "prueeba", "probando", file); 
+            //        });
+
+
+            //    return true;
+                
+               
+            //});
         }
 
     }

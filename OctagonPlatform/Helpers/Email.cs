@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OctagonPlatform.PersistanceRepository;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace OctagonPlatform.Helpers
@@ -127,6 +129,25 @@ namespace OctagonPlatform.Helpers
             }
            
         }
+
+        public Task<bool> ToClientAttachmentAsync(string sendTo, string sub, string body, Attachment file)
+        {
+            return Task<bool>.Run(()=> {
+                try
+                {
+                    return ToClientAttachment(sendTo, sub, body, file);
+                }
+                catch (Exception ex) {
+                }
+                return false;
+                
+            });
+
+            //return Task<bool>.Run(() => {
+            //    return ToClientAttachment(sendTo, sub, body, file);
+            //});
+        }
+
         public bool ToClientAttachment(string sendTo, string sub, string body,Attachment file)
         {
 

@@ -1,20 +1,12 @@
 ﻿<!-- /#wrapper -->
 
+@Scripts.Render("~/bundles/scripts")
 
-
-@Scripts.Render("~/Octagon/assets/vendor/jquery/jquery.min.js")
-
-
+@*@Scripts.Render("~/Octagon/assets/vendor/jquery/jquery.min.js")
 @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
-
 @Scripts.Render("~/Scripts/datatables/datatables.min.js")
-
 @Scripts.Render("~/Octagon/assets/bootstrap/dist/js/bootstrap.min.js")
-
 @Scripts.Render("~/Octagon/assets/vendor/metisMenu/metisMenu.min.js")
-
-
-
 @Scripts.Render("~/Octagon/assets/vendor/raphael/raphael.min.js")
 @Scripts.Render("~/Octagon/assets/vendor/morrisjs/morris.min.js")
 @Scripts.Render("~/Octagon/assets/data/AMS-Dashboard-data.js")
@@ -25,11 +17,12 @@
 @Scripts.Render("~/Octagon/assets/vendor/dist/js/sb-admin-2.js")
 
 @Scripts.Render("~/bundles/jqueryui")
+
 @Scripts.Render("~/Scripts/export.js")
 @Scripts.Render("~/Content/quicksearch/dist/jquery.quicksearch.min.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")*@
 
 
-@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 <script>
       var urlautopartner = '@Url.Action("AutoPartner", "Reports")';
         var urlstate = '@Url.Action("AutoState", "ReportGroup")';
@@ -41,8 +34,8 @@
          var urlautoschedule = '@Url.Action("AutoScheduled", "Schedule")';
          var urluser = '@Url.Action("AutoUser", "Users")';
 
-    
-   
+
+
 
 
 

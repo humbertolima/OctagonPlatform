@@ -33,7 +33,7 @@ namespace ReportExecuter
                 foreach(SubscriptionModel asuscription in auser.Subscriptions)
                 {
                     time_run = Utils.ToTimeZoneTime(DateTime.Now, asuscription.Schedule.User.TimeZoneInfo);
-                    ErrorCtrl.save(()=> {
+                    ErrorCtrl.Save(()=> {
 
                         if(NeedToBeSend(auser, asuscription))
                         {

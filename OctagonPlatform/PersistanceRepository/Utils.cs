@@ -383,6 +383,7 @@ namespace OctagonPlatform.PersistanceRepository
                 Console.ReadLine();
             }
         }
+
         public static Task<T> SaveTaskClass<T>(Func<T> method, Action<Exception> aexception) where T : class
         {
             return Task.Run(() =>
