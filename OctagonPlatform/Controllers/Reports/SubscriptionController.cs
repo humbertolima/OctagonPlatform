@@ -178,11 +178,11 @@ namespace OctagonPlatform.Controllers.Reports
         {
             if (ModelState.IsValid)
             {
-                int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
-                int reportid = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);               
+                string scheduledId = model.GetValue("ScheduledId").AttemptedValue;
+                string reportid = model.GetValue("ReportId").AttemptedValue;               
                 string email = model.GetValue("Email").AttemptedValue;
                
-                if (scheduledId > 0 && IsValidEmail(email) && reportid > 0)
+                if (scheduledId != string.Empty && IsValidEmail(email) && reportid != string.Empty)
                 {
                    
                       return  SaveSubscriptionsByUser(model);
@@ -190,11 +190,11 @@ namespace OctagonPlatform.Controllers.Reports
                 }
                 else
                 {
-                    if (scheduledId <= 0)
+                    if (string.IsNullOrEmpty(scheduledId))
                         ModelState.AddModelError("ScheduledId", "Please Select a Schedule");
                     if (!IsValidEmail(email))
                         ModelState.AddModelError("Email", "Please Enter a Valid Email Address");
-                    if (reportid <= 0)
+                    if (string.IsNullOrEmpty(reportid))
                         ModelState.AddModelError("Report", "Please Select a Report");
                 }
             }

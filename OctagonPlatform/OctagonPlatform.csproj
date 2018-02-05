@@ -338,6 +338,10 @@
     <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
       <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802051657495_requirednamereport.cs" />
+    <Compile Include="Migrations\201802051657495_requirednamereport.Designer.cs">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -1523,6 +1527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802051657495_requirednamereport.resx">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

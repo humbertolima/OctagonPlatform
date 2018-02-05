@@ -116,23 +116,31 @@
             $('#accountid').val('');
         }
     });
-    //$('#user').autocomplete({
-    //    source: urluser,
-    //    select: function (event, ui) {
+    $('#user').autocomplete({
+        source: url,
+        select: function (event, ui) {
 
-    //        $("#user").val(ui.item.label); // display the selected text
-    //        $("#userid").val(ui.item.value); // save selected id to hidden input
-          
-    //        return false;
-    //    }
-    //});
-    //$('#user').blur(function () {
-    //    if ($('#user').val() == "") {
-    //        $('#userid').val('');
-         
-    //    }
+            $("#user").val(ui.item.label); // display the selected text
+            $("#userid").val(ui.item.value); // save selected id to hidden input
+            $.get(list, { userId: $("#userid").val() }, function (data) {
 
-    //});
+                $("#SubscriptionList").html(data);
+            });
+            return false;
+        }
+    });
+    $('#user').blur(function () {
+        if ($('#user').val() == "") {
+            $('#user').attr("placeholder", "< ALL >");
+            $('#userid').val('');
+
+            $.get(list, { userId: 0 }, function (data) {
+                // alert(data);
+                $("#SubscriptionList").html(data);
+            });
+        }
+
+    });
 
 
 });

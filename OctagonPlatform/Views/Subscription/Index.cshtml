@@ -26,9 +26,9 @@
 </figure>
 <figure class="highlight">
 
-    <div id="message"></div>
-    <div id="SubscriptionList">@Html.Partial("Table", Model) </div>
 
+    <div id="SubscriptionList">@Html.Partial("Table", Model) </div>
+    
 </figure>
 
 
@@ -37,7 +37,7 @@
 
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
     @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js")
-    @Scripts.Render("~/Scripts/Subscription.js")
+  
 
 <script>
      var url = '@Url.Action("AutoUser", "Users")';
@@ -48,11 +48,7 @@
     var list = '@Url.Action("List", "Subscription")';
     var url2 = '@Url.Action("Index", "Subscription", new RouteValueDictionary(new { a = 1 }), "http", string.Empty)';
     var url_details_schedule = '@Url.Action("Details", "Schedule")';
-    $(function () {
-        $('#error').fadeIn('slow', function () {
-            $('#error').fadeOut(5000);
-        });
-    });
+   
 </script>
 
 

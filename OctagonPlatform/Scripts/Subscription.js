@@ -1,40 +1,17 @@
 ﻿$(function () {
 
-
+    
     // callankle();
     $("#ReportId").change(function () {
         var idreport = $(this).val();
         GetPartialFilter(idreport);
     });
 
-    $('#user').autocomplete({
-        source: url,
-        select: function (event, ui) {
-
-            $("#user").val(ui.item.label); // display the selected text
-            $("#userid").val(ui.item.value); // save selected id to hidden input
-            $.get(list, { userId: $("#userid").val() }, function (data) {
-
-                $("#SubscriptionList").html(data);
-            });
-            return false;
-        }
-    });
-    $('#user').blur(function () {
-        if ($('#user').val() == "") {
-            $('#user').attr("placeholder", "< ALL >");
-            $('#userid').val('');
-
-            $.get(list, { userId: 0 }, function (data) {
-                // alert(data);
-                $("#SubscriptionList").html(data); 
-            });
-        }
-
-    });
+   
+  
     $('#FormSub').submit(function () {
         // var formData = $('#FormSub').serializeObject();
-      
+        
         $("#userId").val($("#userid").val());
         $("#message").html("<div class='loader'></div>");
         if ($("#ReportId").val() != "" && $("#ScheduledId").val() != "") {
@@ -43,7 +20,7 @@
                 type: this.method,
                 data: $(this).serialize(),
                 success: function (data) {
-                    //alert(data);
+                    
                     var isSuccessful = (data['success']);
 
                     if (isSuccessful) {
@@ -53,7 +30,9 @@
                     else {
 
                         var errors = data['errors'];
+                       
                         $("#message").html(' <div class="alert alert-danger"><strong>' + errors + '</strong> </div>');
+
                     }
 
 
@@ -72,7 +51,9 @@
                 if ($("#ScheduledId").val() == "")
                     $("#message").html(' <div class="alert alert-danger"><strong>Please Select Schedule</strong> </div>');
         }
-
+        $('#message').fadeIn('slow', function () {
+            $('#message').fadeOut(10000);
+        });
         return false;
     });
     $("#ScheduledId").change(function () {

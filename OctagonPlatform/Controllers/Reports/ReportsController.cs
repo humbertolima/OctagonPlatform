@@ -79,10 +79,11 @@ namespace OctagonPlatform.Controllers.Reports
             {
                 
                  reportModel.IsShowDashboard = false;
-                _repo.Add(reportModel);               
+                _repo.Add(reportModel);
+                TempData["Success"] = "Report inserted successful";
                 return RedirectToAction("Index");
             }
-
+            TempData["Danger"] = "Fill in the required data";
             return View(reportModel);
         }
 
@@ -112,8 +113,10 @@ namespace OctagonPlatform.Controllers.Reports
             {
                  reportModel.IsShowDashboard = false;
                 _repo.Edit(reportModel);
+                TempData["Success"] = "Edit successful";
                 return RedirectToAction("Index");
             }
+            TempData["Danger"] = "Edit error";
             return View(reportModel);
         }
 
@@ -133,15 +136,30 @@ namespace OctagonPlatform.Controllers.Reports
         }
 
         // POST: reportModels/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    ReportModel reportModel = _repo.FindBy(id);
+        //    _repo.Delete(reportModel);
+        //    return RedirectToAction("Index");
+        //}
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public string DeleteConfirmed(int id)
         {
-            ReportModel reportModel = _repo.FindBy(id);
-            _repo.Delete(reportModel);
-            return RedirectToAction("Index");
+            try
+            {             
+                _repo.Delete(id);
+                TempData["Success"] = "Delete successful";
+                return "1";
+            }
+            catch (Exception)
+            {
+                TempData["Danger"] = "Error delete";
+                return "0";
+            }           
+           
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

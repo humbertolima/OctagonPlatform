@@ -83,8 +83,7 @@ namespace OctagonPlatform
                      "~/Content/selectmulti/css/select-multiple.css"));
 
 
-            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-             "~/Octagon/assets/vendor/jquery/jquery.min.js",
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(             
              "~/Scripts/jquery-3.1.1.min.js",
              "~/Scripts/datatables/datatables.min.js",
              "~/Octagon/assets/bootstrap/dist/js/bootstrap.min.js",
