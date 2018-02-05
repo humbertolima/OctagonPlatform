@@ -160,6 +160,9 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
             }
+            viewModel.IsAddContact = User.IsInRole(Helpers.Permissions.Terminals.AddContacts);
+            viewModel.IsEditContact = User.IsInRole(Helpers.Permissions.Terminals.EditContacts);
+            viewModel.IsDeleteContact = User.IsInRole(Helpers.Permissions.Terminals.DeleteContacts);
 
             return PartialView("Sections/Contacts", viewModel);
         }

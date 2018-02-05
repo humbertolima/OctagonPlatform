@@ -14,6 +14,11 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public string TerminalId { get; set; }
 
+        public bool IsAddContact { get; set; }
+        public bool IsEditContact { get; set; }
+        public bool IsDeleteContact { get; set; }
+
+
         public List<TerminalContact> Contacts { get; set; }
     }
 }
