@@ -302,13 +302,16 @@ namespace OctagonPlatform.Controllers
             {
                 viewModel = new TerminalNotesVM();
             }
+            viewModel.IsAddNotes = User.IsInRole(Helpers.Permissions.Terminals.AddNotes);
+            viewModel.IsEditNotes = User.IsInRole(Helpers.Permissions.Terminals.SetNotes);
+            viewModel.IsDeleteNotes = User.IsInRole(Helpers.Permissions.Terminals.DeleteNotes);
 
             return PartialView("Sections/Notes", viewModel);
         }
 
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetNotes)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetNotes+", "+ Helpers.Permissions.Terminals.AddNotes)]
         public PartialViewResult SetNotes(int id, string notes, int? noteId)
         {
             Models.Terminal terminal;
@@ -356,7 +359,7 @@ namespace OctagonPlatform.Controllers
                     viewModel = _repository.GetCassettes(Convert.ToInt32(id));
                 }
                 viewModel.IsAddCassette = User.IsInRole(Helpers.Permissions.Terminals.AddCassettes);
-                viewModel.IsSetCassette= User.IsInRole(Helpers.Permissions.Terminals.SetCassettes);
+                viewModel.IsSetCassette = User.IsInRole(Helpers.Permissions.Terminals.SetCassettes);
                 viewModel.IsDeleteCassette = User.IsInRole(Helpers.Permissions.Terminals.CassetteDelete);
 
                 return PartialView("Sections/Cassettes", viewModel);
@@ -668,7 +671,7 @@ namespace OctagonPlatform.Controllers
             {
                 TerminalConfigViewModel configViewModel = new TerminalConfigViewModel();
 
-                
+
                 if (!string.IsNullOrEmpty(id))
                 {
                     configViewModel = _repository.GetConfigNotification(Convert.ToInt32(id));

@@ -61,7 +61,8 @@ namespace OctagonPlatform.Helpers
             public const string GetGeneralInfo = "View General Info Terminals";
 
             public const string GetNotes = "View Terminal Notes";
-            public const string SetNotes = "Set Notes Terminal";
+            public const string AddNotes = "Add Notes Terminal";
+            public const string SetNotes = "Edit Notes Terminal";
             public const string DeleteNotes = "Delete Notes Terminal";
 
             public const string GetCassettes = "Get Cassettes Terminal";
