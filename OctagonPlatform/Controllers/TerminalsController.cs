@@ -118,6 +118,9 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
             }
+            viewModel.IsAddSurcharge = User.IsInRole(Helpers.Permissions.Terminals.AddSurcharges);
+            viewModel.IsEditSurcharge = User.IsInRole(Helpers.Permissions.Terminals.EditSurcharges);
+            viewModel.IsDeleteSurcharge = User.IsInRole(Helpers.Permissions.Terminals.DeleteSurcharges);
 
             return PartialView("Sections/Surcharge", viewModel);
         }
@@ -134,7 +137,7 @@ namespace OctagonPlatform.Controllers
                     if (result != null)
                     {
                         viewModel = result;
-                    } 
+                    }
                     viewModel.IsAddVaultCash = User.IsInRole(Helpers.Permissions.Terminals.AddVaultCash);
                     viewModel.IsEditVaultCash = User.IsInRole(Helpers.Permissions.Terminals.EditVaultCash);
                     viewModel.IsDeleteVaulCash = User.IsInRole(Helpers.Permissions.Terminals.DeleteVaultCash);
@@ -322,7 +325,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetNotes+", "+ Helpers.Permissions.Terminals.AddNotes)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.SetNotes + ", " + Helpers.Permissions.Terminals.AddNotes)]
         public PartialViewResult SetNotes(int id, string notes, int? noteId)
         {
             Models.Terminal terminal;

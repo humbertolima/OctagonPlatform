@@ -12,6 +12,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int Id { get; set; }
 
+        public bool IsAddSurcharge { get; set; }
+        public bool IsEditSurcharge { get; set; }
+        public bool IsDeleteSurcharge { get; set; }
+
         [Required]
         public string TerminalId { get; set; }
 
