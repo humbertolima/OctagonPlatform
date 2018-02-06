@@ -15,7 +15,7 @@ namespace OctagonPlatform.Helpers
             public const string DetailTerminal = "Details Terminal";
             public const string ListAllTerminal = "List All Terminals";
             public const string Search = "Search Terminals";
-            
+
             public const string GetKeyTerminal = "Get Key Terminal";
             public const string SetBindKey = "Set BindKey Terminal";
 
@@ -41,18 +41,18 @@ namespace OctagonPlatform.Helpers
             public const string AddContacts = "Add Terminal Contacts";
             public const string DeleteContacts = "Delete Terminal Contacts";
 
-            public const string GetConfiguration  = "Get Configuration Terminal";
-            public const string SetConfiguration  = "Set Configuration Terminal";
+            public const string GetConfiguration = "Get Configuration Terminal";
+            public const string SetConfiguration = "Set Configuration Terminal";
 
-            
-            public const string  SetWorkingHours  = "Set WorkingHours Terminal";
-            public const string  AddWorkingHours  = "Add WorkingHours Terminal";
-            public const string  DeleteWorkingHours   = "Delete WorkingHours Terminal";
 
-            
+            public const string SetWorkingHours = "Set WorkingHours Terminal";
+            public const string AddWorkingHours = "Add WorkingHours Terminal";
+            public const string DeleteWorkingHours = "Delete WorkingHours Terminal";
+
+
             public const string GetPictures = "View Terminal Pictures";
             public const string SetPictures = "Edit Terminal Pictures";
-            public const string PictureDelete  = "Delete Terminal Pictures";
+            public const string PictureDelete = "Delete Terminal Pictures";
 
             public const string GetDocuments = "View Compliance";
             public const string SetDocuments = "Edit Compliance";
@@ -68,13 +68,34 @@ namespace OctagonPlatform.Helpers
             public const string GetCassettes = "Get Cassettes Terminal";
             public const string AddCassettes = "Add Cassettes Terminal";
             public const string SetCassettes = "Set Cassettes Terminal";
-            public const string CassetteDelete  = "Delete Cassettes Terminal";
+            public const string CassetteDelete = "Delete Cassettes Terminal";
 
 
 
-            
+
 
             public const string TerminalFull = AddTerminal + "," + EditTerminal + "," + DeleteTerminal + "," + DetailTerminal + "," + ListAllTerminal;
+        }
+
+        public static class Partner
+        {
+            public const string GetGeneralInfo = "";
+
+            public const string GetContacts = "View Partner Contacts";
+            public const string EditContacts = "Edit Partner Contacts";
+            public const string DeleteContacts = "Delete Partner Contacts";
+            public const string AddContacts = "Add Partner Contacts";
+            public const string SearchContacts = "Search Partner Contacts";
+            
+
+            public const string GetPatners = "";
+            public const string GetBankAccounts = "";
+            public const string GetTerminals = "";
+            public const string GetUsers = "";
+
+            //public const string  = "";
+            //public const string  = "";
+
         }
     }
 }

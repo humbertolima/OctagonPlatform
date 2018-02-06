@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
@@ -19,6 +20,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpGet]
+       // [CustomAuthorize(Roles = Helpers.Permissions.Partner)]
         public ActionResult Index()
         {
             try
@@ -177,7 +179,8 @@ namespace OctagonPlatform.Controllers
         #region PartnerPartialViews
 
         [HttpPost]
-        public PartialViewResult Contacts(int partnerId)
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetContacts)]
+        public PartialViewResult GetContacts(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
             ViewBag.PartnerId = partnerId;
@@ -187,6 +190,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetGeneralInfo)]
         public PartialViewResult GeneralInfo(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
