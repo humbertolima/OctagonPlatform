@@ -371,7 +371,7 @@
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\VaultCashVM.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />

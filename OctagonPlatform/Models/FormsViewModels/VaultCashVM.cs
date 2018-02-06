@@ -4,12 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OctagonPlatform.Models.FormsViewModels
 {
-    public class VaultCashFormViewModel
+    public class VaultCashVM
     {
-        [Key]
         [Required]
-        [Display(Name = "Terminal")]
         public int Id { get; set; }
+
 
         public Terminal Terminal { get; set; }
 

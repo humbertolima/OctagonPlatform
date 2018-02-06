@@ -131,7 +131,13 @@ namespace OctagonPlatform.Controllers
                 if (ModelState.IsValid)     //pendiente validar el model en todas los metodos del controladores.
                 {
                     TerminalVaultCashVM result = _repository.GetVaultCash(viewModel.Id);
-                    if (result != null) viewModel = result;
+                    if (result != null)
+                    {
+                        viewModel = result;
+                    } 
+                    viewModel.IsAddVaultCash = User.IsInRole(Helpers.Permissions.Terminals.AddVaultCash);
+                    viewModel.IsEditVaultCash = User.IsInRole(Helpers.Permissions.Terminals.EditVaultCash);
+                    viewModel.IsDeleteVaulCash = User.IsInRole(Helpers.Permissions.Terminals.DeleteVaultCash);
                 }
                 else
                 {

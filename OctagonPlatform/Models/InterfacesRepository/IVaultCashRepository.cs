@@ -4,18 +4,18 @@ namespace OctagonPlatform.Models.InterfacesRepository
 {
     public interface IVaultCashRepository
     {
-        VaultCash GetVaultCash(int terminalId);
+        VaultCashVM GetVaultCash(int terminalId);
 
-        VaultCashFormViewModel RenderVaultCashFormViewModel(int terminalId);
+        VaultCashVM RenderVaultCashFormViewModel(int terminalId);
 
-        VaultCashFormViewModel VaultCashToEdit(int id);
+        VaultCashVM VaultCashToEdit(int id);
 
-        void SaveVaultCash(VaultCashFormViewModel viewModel, string action);
+        void SaveVaultCash(VaultCashVM viewModel, string action);
 
         VaultCash VaultCashDetails(int id);
 
         void DeleteVaultCash(int id);
 
-        VaultCashFormViewModel InitializeNewVaultCashFormViewModel(VaultCashFormViewModel viewModel);
+        VaultCashVM InitializeNewVaultCashFormViewModel(VaultCashVM viewModel);
     }
 }
