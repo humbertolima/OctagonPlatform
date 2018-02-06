@@ -11,6 +11,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int Id { get; set; }
 
+        public bool IsAddInterchange { get; set; }
+        public bool IsEditInterchange { get; set; }
+        public bool IsDeleteInterchange { get; set; }
+
         [Required]
         public string TerminalId { get; set; }
 

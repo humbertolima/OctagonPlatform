@@ -101,6 +101,9 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = Helpers.ViewModelError.Get(ModelState);
             }
+            viewModel.IsAddInterchange = User.IsInRole(Helpers.Permissions.Terminals.AddInterchanges);
+            viewModel.IsEditInterchange = User.IsInRole(Helpers.Permissions.Terminals.EditInterchanges);
+            viewModel.IsDeleteInterchange = User.IsInRole(Helpers.Permissions.Terminals.DeleteInterchanges);
 
             return PartialView("Sections/Interchanges", viewModel);
         }
