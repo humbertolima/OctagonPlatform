@@ -4,10 +4,15 @@
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active">@Html.ActionLink(
+                @{
+                    if (ViewBag.IsAddPartner)
+                    {
+
+                        <li class="active">
+                            @Html.ActionLink(
                                        linkText: "Add Partner",
                                        actionName: "Create",
                                        controllerName: "Partners",
@@ -16,9 +21,12 @@
                                            partnerId = ViewBag.PartnerId
                                        },
                                        htmlAttributes: null
-                                       )</li>
+                                       )
+                        </li>
+                    }
+                }
             </ul>
-            
+
         </div>
     </div>
 </nav>
@@ -27,30 +35,34 @@
     <strong>@ViewBag.Error</strong>
 </p>
 <table class="table table-striped table-hover ">
-    
+
     <thead>
-    <tr>
-        <th>Business Name</th>
-        <th>Parent</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Status</th>
-    </tr>
+        <tr>
+            <th>Business Name</th>
+            <th>Parent</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
     </thead>
-    <tbody id ="listOfPartners">
-    @foreach (var item in Model)
-    {
-        if (!item.Deleted)
+    <tbody id="listOfPartners">
+        @foreach (var item in Model)
         {
-            <tr class="info">
-                <td>@item.BusinessName</td>
-                <td>@item.Parent.BusinessName</td>
-                <td>@item.Address1</td>
-                <td>@item.Mobile</td>
-                <td>@item.Email</td>
-                <td>@item.Status</td>
-                <td><i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+            if (!item.Deleted)
+            {
+                <tr class="info">
+                    <td>@item.BusinessName</td>
+                    <td>@item.Parent.BusinessName</td>
+                    <td>@item.Address1</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Email</td>
+                    <td>@item.Status</td>
+                    <td>
+                        @{
+                            if (ViewBag.IsEditPartner)
+                            {
+                                <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                                                                 linkText: "Edit",
                                                                 actionName: "Edit",
                                                                 controllerName: "Partners",
@@ -59,8 +71,12 @@
                                                                     id = item.Id
                                                                 },
                                                                 htmlAttributes: null
-                                                                )</td>
-                <td><i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                                                                )
+                            }
+                        }
+                    </td>
+                    <td>
+                        <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
                                                                  linkText: "Delete",
                                                                  actionName: "Delete",
                                                                  controllerName: "Partners",
@@ -70,8 +86,12 @@
                                                                  },
                                                                  htmlAttributes: null
                                                                  )
-                </td>
-                <td><i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+                    </td>
+                    <td>
+                        @{
+                            if (ViewBag.IsDeletePartner)
+                            {
+                                <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
                                                                     linkText: "Details",
                                                                     actionName: "Details",
                                                                     controllerName: "Partners",
@@ -80,14 +100,17 @@
                                                                         id = item.Id
                                                                     },
                                                                     htmlAttributes: null
-                                                                    )</td>
-            </tr>
+                                                                    )
+                            }
+                        }
+                    </td>
+                </tr>
 
-        }
-    }
+                                }
+                            }
     </tbody>
-</table> 
-        
+</table>
+
 @section Scripts {
     @Scripts.Render("~/bundles/search")
 }

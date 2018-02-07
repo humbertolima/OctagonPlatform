@@ -243,6 +243,10 @@ namespace OctagonPlatform.Controllers
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
             ViewBag.PartnerId = partnerId;
+            ViewBag.IsAddPartner = User.IsInRole(Helpers.Permissions.Partner.AddPartners);
+            ViewBag.IsEditPartner = User.IsInRole(Helpers.Permissions.Partner.EditPartners);
+            ViewBag.IsDeletePartner = User.IsInRole(Helpers.Permissions.Partner.DeletePartners);
+
             return PartialView("Sections/Partners", partner.Partners);
 
         }
