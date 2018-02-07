@@ -20,7 +20,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetAllPatners)]
         public ActionResult Index()
         {
             try
@@ -35,7 +35,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPartners)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -53,7 +53,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPartners)]
         public ActionResult Create(PartnerFormViewModel viewModel)
         {
             try
@@ -77,7 +77,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPartners)]
         public ActionResult Edit(int? id)
         {
             try
@@ -95,7 +95,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPartners)]
         public ActionResult Edit(PartnerFormViewModel viewModel)
         {
             try
@@ -117,7 +117,7 @@ namespace OctagonPlatform.Controllers
                 return View(_partnerRepository.PartnerToEdit(viewModel.Id));
             }
         }
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
         public ActionResult Details(int? id)
         {
             try
@@ -152,7 +152,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeletePatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeletePartners)]
         public ActionResult DeleteConfirmed(int id)
         {
             try
@@ -168,7 +168,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchPartners)]
         public ActionResult Search(string search)
         {
             try
@@ -196,7 +196,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetGeneralInfo)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPartners)]
         public PartialViewResult GeneralInfo(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
@@ -231,7 +231,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPartners)]
         public PartialViewResult Partners(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
@@ -251,7 +251,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
+       // [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public PartialViewResult Users(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);

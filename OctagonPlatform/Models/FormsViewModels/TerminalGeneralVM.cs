@@ -13,7 +13,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "Terminal Id")]
         public string TerminalId { get; set; }
 
-
+        public bool IsGetGeneralInfo { get; set; }
+        public bool IsEditGeneralInfo { get; set; }
         [Required]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }

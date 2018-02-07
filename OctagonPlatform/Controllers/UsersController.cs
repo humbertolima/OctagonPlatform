@@ -23,7 +23,7 @@ namespace OctagonPlatform.Controllers
 
         // GET: User
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Index()
         {
             try
@@ -40,7 +40,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.AddUsers)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -66,7 +66,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Create(UserFormViewModel viewModel, string permissions1)    //puse el 1 porque el controlador recibe un parametro "permissions" que es de tipo Models.Permission y trata de convertir el strin a este tipo de dato. por eso no puede
         {                                                                               //llamarse permissions/. https://stackoverflow.com/questions/7983023/the-parameter-conversion-from-type-system-string-to-type-x-failed-because-n
             if (!ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
         public ActionResult Edit(int? id)
         {
             try
@@ -128,7 +128,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
         public ActionResult Edit(UserEditFormViewModel editViewModel, string permissions1)
         {
             if (!ModelState.IsValid)
@@ -160,7 +160,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Details(int? id)
         {
             try
@@ -197,7 +197,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteUsers)]
         public ActionResult DeleteConfirmed(int? id)
         {
             try
@@ -224,7 +224,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchUsers)]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchUsers)]
         public ActionResult Search(string search)
         {
             try
@@ -237,7 +237,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        #region Get BankAccount Of User
+         #region Get BankAccount Of User
 
         [HttpPost]
         // [ValidateAntiForgeryToken]       //pendiente probar los validatetoken

@@ -280,7 +280,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpPost]
-        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.GetGeneralInfo)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DetailTerminal)]         //el generalINFo es el detail de terminals.
         public PartialViewResult GetGeneralInfo(int id)
         {
             try
@@ -294,7 +294,8 @@ namespace OctagonPlatform.Controllers
                 {
                     viewModel = new TerminalGeneralVM();
                 }
-
+                viewModel.IsEditGeneralInfo = User.IsInRole(Helpers.Permissions.Terminals.DetailTerminal);      //general info son los detalles de las terminal.
+                viewModel.IsEditGeneralInfo = User.IsInRole(Helpers.Permissions.Terminals.EditTerminal);        //general info es el edit de terminal.
                 return PartialView("Sections/GeneralInfo", viewModel);
             }
             catch (Exception ex)

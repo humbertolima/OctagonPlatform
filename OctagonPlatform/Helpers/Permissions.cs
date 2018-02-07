@@ -79,8 +79,6 @@ namespace OctagonPlatform.Helpers
 
         public static class Partner
         {
-            public const string GetGeneralInfo = "";
-
             public const string GetContacts = "View Partner Contacts";
             public const string EditContacts = "Edit Partner Contacts";
             public const string DeleteContacts = "Delete Partner Contacts";
@@ -88,11 +86,12 @@ namespace OctagonPlatform.Helpers
             public const string SearchContacts = "Search Partner Contacts";
             
 
-            public const string GetPatners = "View Partner";
-            public const string AddPatners = "Add Partner";
-            public const string EditPatners = "Edit Partner";
-            public const string DeletePatners = "Delete Partner";
-            public const string SearchPatners = "Search Partner";
+            public const string GetPartners = "View Partner";
+            public const string GetAllPartners = "List All Partner";
+            public const string AddPartners = "Add Partner";
+            public const string EditPartners = "Edit Partner";
+            public const string DeletePartners = "Delete Partner";
+            public const string SearchPartners = "Search Partner";
 
             
 

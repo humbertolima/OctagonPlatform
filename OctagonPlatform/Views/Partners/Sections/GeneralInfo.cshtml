@@ -9,7 +9,14 @@
     <tr>
 
         <th>Parent:</th>
-        <th>@Model.Parent.BusinessName</th>
+        <th>@{
+            if (Model.Parent != null)
+            {
+                <div>
+                    Model.Parent.BusinessName;
+                </div>
+            }
+        }</th>
     </tr>
     <tr >
 
