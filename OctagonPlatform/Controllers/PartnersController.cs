@@ -201,6 +201,8 @@ namespace OctagonPlatform.Controllers
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
 
+            ViewBag.IsEditPartner = User.IsInRole(Helpers.Permissions.Partner.EditPartners);
+
             return PartialView("Sections/GeneralInfo", new Partner()
             {
                 Id = partnerId,
