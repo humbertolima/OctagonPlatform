@@ -88,10 +88,33 @@ namespace OctagonPlatform.Helpers
             public const string SearchContacts = "Search Partner Contacts";
             
 
-            public const string GetPatners = "";
-            public const string GetBankAccounts = "";
-            public const string GetTerminals = "";
-            public const string GetUsers = "";
+            public const string GetPatners = "View Partner";
+            public const string AddPatners = "Add Partner";
+            public const string EditPatners = "Edit Partner";
+            public const string DeletePatners = "Delete Partner";
+            public const string SearchPatners = "Search Partner";
+
+            
+
+            public const string GetBankAccounts = "Get Bank Accounts";
+            public const string AddtBankAccounts = "Add Bank Accounts";
+            public const string EditBankAccounts = "Edit Bank Accounts";
+            public const string DeleteBankAccounts = "Delete Bank Accounts";
+            public const string SearchBankAccount = "Search Bank Accounts";
+            public const string AutoAccountBankAccount = "AutoAccount Bank Accounts";
+
+            
+            public const string GetTerminals = "Get Terminals Partners";
+            public const string AddTerminals = "Add Terminals Partners";
+            public const string EditTerminals = "Edit Terminals Partners";
+            public const string DeleteTerminals = "Delete Terminals Partners";
+
+            public const string GetUsers = "Get Users";
+            public const string AddUsers = "Add Users";
+            public const string EditUsers = "Edit Users";
+            public const string DeleteUsers = "Delete Users";
+            public const string SearchUsers = "Search Users";
+            
 
             //public const string  = "";
             //public const string  = "";

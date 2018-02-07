@@ -20,7 +20,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpGet]
-       // [CustomAuthorize(Roles = Helpers.Permissions.Partner)]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
         public ActionResult Index()
         {
             try
@@ -35,6 +35,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPatners)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -52,6 +53,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddPatners)]
         public ActionResult Create(PartnerFormViewModel viewModel)
         {
             try
@@ -75,6 +77,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPatners)]
         public ActionResult Edit(int? id)
         {
             try
@@ -92,6 +95,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditPatners)]
         public ActionResult Edit(PartnerFormViewModel viewModel)
         {
             try
@@ -113,7 +117,7 @@ namespace OctagonPlatform.Controllers
                 return View(_partnerRepository.PartnerToEdit(viewModel.Id));
             }
         }
-
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
         public ActionResult Details(int? id)
         {
             try
@@ -130,24 +134,25 @@ namespace OctagonPlatform.Controllers
         }
 
 
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id != null) return View(_partnerRepository.PartnerToEdit((int) id));
-                ViewBag.Error = "Partner not found. ";
-                return View("Error");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id != null) return View(_partnerRepository.PartnerToEdit((int) id));
+        //        ViewBag.Error = "Partner not found. ";
+        //        return View("Error");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //        return View("Error");
+        //    }
+        //}
 
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeletePatners)]
         public ActionResult DeleteConfirmed(int id)
         {
             try
@@ -163,6 +168,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchPatners)]
         public ActionResult Search(string search)
         {
             try
@@ -215,6 +221,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetBankAccounts)]
         public PartialViewResult BankAccounts(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
@@ -224,6 +231,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetPatners)]
         public PartialViewResult Partners(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
@@ -233,6 +241,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetTerminals)]
         public PartialViewResult Terminals(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
@@ -242,6 +251,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public PartialViewResult Users(int partnerId)
         {
             var partner = _partnerRepository.PartnerDetails(partnerId);
