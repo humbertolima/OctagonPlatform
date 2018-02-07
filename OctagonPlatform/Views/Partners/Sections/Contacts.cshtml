@@ -6,8 +6,11 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active">
-                    @Html.ActionLink(
+                @{
+                    if (ViewBag.IsAddPartnerContact)
+                    {
+                        <li class="active">
+                            @Html.ActionLink(
                                        linkText: "Add Contact",
                                        actionName: "Create",
                                        controllerName: "PartnerContacts",
@@ -17,11 +20,15 @@
                                        },
                                        htmlAttributes: null
                                        )
-            </li>
-        </ul>
+                        </li>
 
+                    }
+                }
+
+            </ul>
+
+        </div>
     </div>
-</div>
 </nav>
 
 <p class="alert alert-info">
@@ -49,7 +56,9 @@
                     <td>@item.Address1</td>
                     <td>@item.Phone</td>
                     <td>@item.Email</td>
-                    <td>
+                    <td>@{ 
+                        if (ViewBag.IsEditPartnerContact)
+                        {
                         <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                                                                 linkText: "Edit",
                                                                 actionName: "Edit",
@@ -60,8 +69,14 @@
                                                                 },
                                                                 htmlAttributes: null
                                                                 )
+
+
+                        }
+                    }
                     </td>
-                    <td>
+                    <td>@{ 
+                        if (ViewBag.IsDeletePartnerContact)
+                        {
                         <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
                                                                  linkText: "Delete",
                                                                  actionName: "Delete",
@@ -72,6 +87,8 @@
                                                                  },
                                                                  htmlAttributes: null
                                                                  )
+                        }
+                    }
                     </td>
                     <td>
                         <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(

@@ -191,6 +191,11 @@ namespace OctagonPlatform.Controllers
             var partner = _partnerRepository.PartnerDetails(partnerId);
             ViewBag.PartnerId = partnerId;
 
+            ViewBag.IsAddPartnerContact = User.IsInRole(Helpers.Permissions.Partner.AddContacts);
+            ViewBag.IsEditPartnerContact = User.IsInRole(Helpers.Permissions.Partner.EditContacts);
+            ViewBag.IsDeletePartnerContact = User.IsInRole(Helpers.Permissions.Partner.DeleteContacts);
+
+
             return PartialView("Sections/Contacts", partner.PartnerContacts);
 
         }
