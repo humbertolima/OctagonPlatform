@@ -378,6 +378,7 @@
     <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IPermission.cs" />
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
@@ -430,6 +431,7 @@
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\FilterRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\PermissionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />

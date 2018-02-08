@@ -7,30 +7,35 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OctagonPlatform.Models;
+using OctagonPlatform.Models.InterfacesRepository;
 
 namespace OctagonPlatform.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class PermissionsController : Controller
     {
-        //Pendiente poner interface a permissions.
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IPermission _permissionRepository;
 
-        // GET: Permissions
+        public PermissionsController(IPermission permissionRepository)
+        {
+            _permissionRepository = permissionRepository;
+        }
+
+
         public ActionResult Index()
         {
-            var permissions = db.Permissions.Include(p => p.Parent);
+            var permissions = _permissionRepository.GetAllPermissions();
             return View(permissions.ToList());
         }
 
-        // GET: Permissions/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = db.Permissions.Find(id);
+            Permission permission = _permissionRepository.FindBy(id);
             if (permission == null)
             {
                 return HttpNotFound();
@@ -41,25 +46,30 @@ namespace OctagonPlatform.Controllers
         // GET: Permissions/Create
         public ActionResult Create()
         {
-            ViewBag.ParentID = new SelectList(db.Permissions, "Id", "Name");
+            ViewBag.ParentID = new SelectList(_permissionRepository.ToSelectControlPermissions(), "Id", "Name");
             return View();
         }
 
-        // POST: Permissions/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,ParentID")] Permission permission)
         {
+
             if (ModelState.IsValid)
             {
-                db.Permissions.Add(permission);
-                db.SaveChanges();
+                bool isPermission = ValidateExist(permission.Name);
+                if (isPermission)
+                {
+                    throw new Exception("Ya existe el permiso");
+                }
+                _permissionRepository.Add(permission);
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ParentID = new SelectList(db.Permissions, "Id", "Name", permission.ParentID);
+            ViewBag.ParentID = new SelectList(_permissionRepository.ToSelectControlPermissions(), "Id", "Name", permission.ParentID);
             return View(permission);
         }
 
@@ -70,12 +80,12 @@ namespace OctagonPlatform.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = db.Permissions.Find(id);
+            Permission permission = _permissionRepository.FindBy(id);
             if (permission == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentID = new SelectList(db.Permissions, "Id", "Name", permission.ParentID);
+            ViewBag.ParentID = new SelectList(_permissionRepository.ToSelectControlPermissions(), "Id", "Name", permission.ParentID);
             return View(permission);
         }
 
@@ -88,22 +98,40 @@ namespace OctagonPlatform.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(permission).State = EntityState.Modified;
-                db.SaveChanges();
+                bool isPermission = ValidateExist(permission.Name);
+                if (isPermission)
+                {
+                    throw new Exception("Ya existe el permiso");
+                }
+
+                _permissionRepository.Edit(permission);
+                //db.Entry(permission).State = EntityState.Modified;
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ParentID = new SelectList(db.Permissions, "Id", "Name", permission.ParentID);
+            ViewBag.ParentID = new SelectList(_permissionRepository.ToSelectControlPermissions(), "Id", "Name", permission.ParentID);
             return View(permission);
         }
 
-        // GET: Permissions/Delete/5
+        private bool ValidateExist(string name)
+        {
+            var permissions = _permissionRepository.FindAllBy(p => p.Name == name);
+
+            if (permissions.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Permission permission = db.Permissions.Find(id);
+
+            Permission permission = _permissionRepository.FindBy(id);
             if (permission == null)
             {
                 return HttpNotFound();
@@ -111,14 +139,14 @@ namespace OctagonPlatform.Controllers
             return View(permission);
         }
 
-        // POST: Permissions/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Permission permission = db.Permissions.Find(id);
-            db.Permissions.Remove(permission);
-            db.SaveChanges();
+            Permission permission = _permissionRepository.FindBy(id);
+            _permissionRepository.Delete(permission);
+
             return RedirectToAction("Index");
         }
 
@@ -126,7 +154,7 @@ namespace OctagonPlatform.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _permissionRepository.Dispose();
             }
             base.Dispose(disposing);
         }

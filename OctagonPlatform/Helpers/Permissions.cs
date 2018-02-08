@@ -95,12 +95,12 @@ namespace OctagonPlatform.Helpers
 
             
 
-            public const string GetBankAccounts = "Get Bank Accounts";
-            public const string AddtBankAccounts = "Add Bank Accounts";
-            public const string EditBankAccounts = "Edit Bank Accounts";
-            public const string DeleteBankAccounts = "Delete Bank Accounts";
-            public const string SearchBankAccount = "Search Bank Accounts";
-            public const string AutoAccountBankAccount = "AutoAccount Bank Accounts";
+            public const string GetBankAccounts = "Get Partner Bank Accounts";
+            public const string AddtBankAccounts = "Add Partner Bank Accounts";
+            public const string EditBankAccounts = "Edit Partner Bank Accounts";
+            public const string DeleteBankAccounts = "Delete Partner Bank Accounts";
+            public const string SearchBankAccount = "Search Partner Bank Accounts";
+            public const string AutoAccountBankAccount = "AutoAccount Partner Bank Accounts";
 
             
             public const string GetTerminals = "Get Terminals Partners";
