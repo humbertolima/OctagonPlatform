@@ -231,10 +231,13 @@ namespace OctagonPlatform.Controllers
         [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetBankAccounts)]
         public PartialViewResult BankAccounts(int partnerId)
         {
+            ViewBag.IsAddBankAccount = User.IsInRole(Helpers.Permissions.Partner.AddtBankAccounts);
+            ViewBag.IsEditBankAccount = User.IsInRole(Helpers.Permissions.Partner.EditBankAccounts);
+            ViewBag.IsDeleteBankAccount = User.IsInRole(Helpers.Permissions.Partner.DeleteBankAccounts);
+
             var partner = _partnerRepository.PartnerDetails(partnerId);
             ViewBag.PartnerId = partnerId;
             return PartialView("Sections/BankAccounts", partner.BankAccounts);
-
         }
 
         [HttpPost]

@@ -5,6 +5,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                @{
+                    if (ViewBag.IsAddBankAccount)
+                    {
                 <li class="active">
                     @Html.ActionLink(
                         linkText: "Add BankAccount",
@@ -17,6 +20,8 @@
                         htmlAttributes: null
                         )
                 </li>
+                    }
+                }
 
 
             </ul>
@@ -31,35 +36,38 @@
 <table class="table table-striped table-hover ">
 
     <thead>
-    <tr>
-        <th>NickName</th>
-        <th>BankName</th>
-        <th>RoutingNumber</th>
-        <th>AccountNumber</th>
-        <th>Name on Check</th>
-        <th>Account Type</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Status</th>
-    </tr>
+        <tr>
+            <th>NickName</th>
+            <th>BankName</th>
+            <th>RoutingNumber</th>
+            <th>AccountNumber</th>
+            <th>Name on Check</th>
+            <th>Account Type</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
     </thead>
     <tbody id="listOfPartners">
-    @foreach (var item in Model)
-    {
-        if (!item.Deleted)
+        @foreach (var item in Model)
         {
-            <tr class="info">
-                <td>@item.NickName</td>
-                <td>@item.BankName</td>
-                <td>@item.RoutingNumber</td>
-                <td>@item.AccountNumber</td>
-                <td>@item.NameOnCheck</td>
-                <td>@item.AccountType</td>
-                <td>@item.Phone</td>
-                <td>@item.Email</td>
-                <td>@item.Status</td>
-                <td>
-                    <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
+            if (!item.Deleted)
+            {
+                <tr class="info">
+                    <td>@item.NickName</td>
+                    <td>@item.BankName</td>
+                    <td>@item.RoutingNumber</td>
+                    <td>@item.AccountNumber</td>
+                    <td>@item.NameOnCheck</td>
+                    <td>@item.AccountType</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@item.Status</td>
+                    <td>
+                        @{
+                            if (ViewBag.IsEditBankAccount)
+                            {
+                                <i class="glyphicon glyphicon-edit"></i>@Html.ActionLink(
                                                                 linkText: "Edit",
                                                                 actionName: "Edit",
                                                                 controllerName: "BankAccount",
@@ -69,9 +77,14 @@
                                                                 },
                                                                 htmlAttributes: null
                                                                 )
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
+                            }
+                        }
+                    </td>
+                    <td>
+                        @{
+                            if (ViewBag.IsDeleteBankAccount)
+                            {
+                                <i class="glyphicon glyphicon-trash"></i>@Html.ActionLink(
                                                                  linkText: "Delete",
                                                                  actionName: "Delete",
                                                                  controllerName: "BankAccount",
@@ -81,9 +94,13 @@
                                                                  },
                                                                  htmlAttributes: null
                                                                  )
-                </td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
+
+
+                            }
+                        }
+                    </td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open"></i>@Html.ActionLink(
                                                                     linkText: "Details",
                                                                     actionName: "Details",
                                                                     controllerName: "BankAccount",
@@ -93,9 +110,9 @@
                                                                     },
                                                                     htmlAttributes: null
                                                                     )
-                </td>
-            </tr>
-        }
-    }
+                    </td>
+                </tr>
+                                }
+                            }
     </tbody>
 </table>
