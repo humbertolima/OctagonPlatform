@@ -102,11 +102,11 @@ namespace OctagonPlatform.Helpers
             public const string SearchBankAccount = "Search Partner Bank Accounts";
             public const string AutoAccountBankAccount = "AutoAccount Partner Bank Accounts";
 
-            
-            public const string GetTerminals = "Get Terminals Partners";
-            public const string AddTerminals = "Add Terminals Partners";
-            public const string EditTerminals = "Edit Terminals Partners";
-            public const string DeleteTerminals = "Delete Terminals Partners";
+
+            public const string GetTerminals = Terminals.ListAllTerminal;       //"Get Terminals Partners";
+            public const string AddTerminals = Terminals.AddTerminal;           //"Add Terminals Partners";
+            public const string EditTerminals = Terminals.EditTerminal;         //"Edit Terminals Partners";
+            public const string DeleteTerminals = Terminals.DeleteTerminal;     //"Delete Terminals Partners";
 
             public const string GetUsers = "Get Users";
             public const string AddUsers = "Add Users";
