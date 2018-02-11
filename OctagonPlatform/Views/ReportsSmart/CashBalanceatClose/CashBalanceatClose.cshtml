@@ -7,6 +7,15 @@
     string culturejsontext =  System.IO.File.ReadAllText(Server.MapPath(@"~/Octagon/i18n/"+ culturefile)).Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
 
 
+    try
+    {
+        var tmpObj = Newtonsoft.Json.Linq.JToken.Parse(culturejsontext);
+    }
+    catch (FormatException fex)
+    {
+        culturejsontext = "{}";
+    }
+
 }
 <p></p>
 <div class="panel panel-primary">
