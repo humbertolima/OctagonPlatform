@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Cash Balance At Close";
 
-    string culturefile = "datepicker-es.json";
+    string culturefile = "datepicker-"+ViewBag.Culture+".json";
 
     string culturejsontext =  System.IO.File.ReadAllText(Server.MapPath(@"~/Octagon/i18n/"+ culturefile)).Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
 
