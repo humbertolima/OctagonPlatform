@@ -73,7 +73,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         TerminalFormViewModel RenderTerminalFormViewModel(int partnerId);
 
-        TerminalFormViewModel TerminalToEdit(int id);
+        TerminalFormViewModel TerminalToEdit(int id, int partnerId);
 
         void SaveTerminal(TerminalFormViewModel viewModel, string action);
 

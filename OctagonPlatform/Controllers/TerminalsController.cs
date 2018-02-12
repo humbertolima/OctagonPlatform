@@ -540,7 +540,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_repository.TerminalToEdit((int)id));
+                if (id != null) return View(_repository.TerminalToEdit((int)id, int.Parse(Session["partnerId"].ToString())));
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
             }
@@ -560,7 +560,7 @@ namespace OctagonPlatform.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Error = "Please check the entered values. ";
-                return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
+                return View(_repository.TerminalToEdit(terminalFormViewModel.Id, int.Parse(Session["partnerId"].ToString())));
             }
             try
             {
@@ -571,7 +571,7 @@ namespace OctagonPlatform.Controllers
             {
                 ViewBag.Error = "Validation error editing Terminal "
                                 + ex.Message;
-                return View(_repository.TerminalToEdit(terminalFormViewModel.Id));
+                return View(_repository.TerminalToEdit(terminalFormViewModel.Id, int.Parse(Session["partnerId"].ToString())));
             }
 
         }
@@ -582,7 +582,7 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                if (id != null) return View(_repository.TerminalToEdit((int)id));
+                if (id != null) return View(_repository.TerminalToEdit((int)id, int.Parse(Session["partnerId"].ToString())));
                 ViewBag.Error = "Terminal not found. ";
                 return View("Error");
             }
