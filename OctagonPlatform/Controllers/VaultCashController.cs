@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class VaultCashController : Controller
+    public class VaultCashController : BaseController
     {
         private readonly IVaultCashRepository _vaultCashRepository;
 

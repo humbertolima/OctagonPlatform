@@ -41,6 +41,7 @@ namespace OctagonPlatform.Controllers.Reports
             CashLoadViewModel model = new CashLoadViewModel();
             TempData["Chart"] = null;
             TempData["Sub"] = false;
+            ViewBag.Culture = CultureInfoSession.Name;
             return View("CashLoad", model);
         }
 

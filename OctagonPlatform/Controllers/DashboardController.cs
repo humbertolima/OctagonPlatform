@@ -5,7 +5,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
 
         public ActionResult Index()

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    public class TerminalAlertsController : Controller
+    public class TerminalAlertsController : BaseController
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 

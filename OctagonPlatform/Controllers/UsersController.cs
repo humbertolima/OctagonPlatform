@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly IUserRepository _userRepository;
 

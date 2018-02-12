@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class PopulateController : Controller
+    public class PopulateController : BaseController
     {
         private readonly ApplicationDbContext _context;
 

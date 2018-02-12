@@ -17,7 +17,7 @@ using OctagonPlatform.Views.Schedule;
 
 namespace OctagonPlatform.Controllers.Reports
 {
-    public class ScheduleController : Controller
+    public class ScheduleController : BaseController
     {
         private ISchedule _repo;
         private readonly IUserRepository _userRepository;
@@ -35,9 +35,7 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult Index(string userid)
         {
             int _userid = string.IsNullOrEmpty(userid) ? Convert.ToInt32(Session["UserId"]) : Convert.ToInt32(userid);
-            User user = _userRepository.GetReportsUser(_userid);
-            
-            DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
+            User user = _userRepository.GetReportsUser(_userid);            
 
             ScheduleVM vmodel = new ScheduleVM();
             vmodel.List = _repo.GetScheduleByUser(_userid);

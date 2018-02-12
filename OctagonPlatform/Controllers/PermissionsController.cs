@@ -11,7 +11,7 @@ using OctagonPlatform.Models;
 namespace OctagonPlatform.Controllers
 {
     //[Authorize]
-    public class PermissionsController : Controller
+    public class PermissionsController : BaseController
     {
         //Pendiente poner interface a permissions.
         private ApplicationDbContext db = new ApplicationDbContext();

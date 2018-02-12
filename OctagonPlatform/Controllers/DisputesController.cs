@@ -6,7 +6,7 @@ using OctagonPlatform.Models.FormsViewModels;
 
 namespace OctagonPlatform.Controllers
 {
-    public class DisputesController : Controller
+    public class DisputesController : BaseController
     {
         private readonly IDisputeRepository _DisputeRepository;
         private readonly ITerminalRepository _TerminalRepository;

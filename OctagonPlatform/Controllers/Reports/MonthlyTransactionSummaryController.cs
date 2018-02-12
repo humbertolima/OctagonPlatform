@@ -44,6 +44,7 @@ namespace OctagonPlatform.Controllers.Reports
             MonthlyTransactionSummaryViewModel model = new MonthlyTransactionSummaryViewModel();
             TempData["Chart"] = null;
             TempData["sub"] = false;
+            ViewBag.Culture = CultureInfoSession.Name;
             return View("MonthlyTransactionSummary", model);
         }
         [HttpPost]

@@ -19,7 +19,7 @@ using OctagonPlatform.PersistanceRepository;
 
 namespace OctagonPlatform.Controllers.Reports
 {
-    public class SubscriptionController : Controller
+    public class SubscriptionController : BaseController
     {
         private ISubscription _repo;
         private ISchedule _repoScheduled;

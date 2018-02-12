@@ -46,7 +46,7 @@ namespace OctagonPlatform.Controllers.Reports
             CashBalanceatCloseViewModel vmodel = new CashBalanceatCloseViewModel();
             TempData["Chart"] = null;
             TempData["sub"] = false;
-            ViewBag.Culture = "es";
+            ViewBag.Culture = CultureInfoSession.Name;
             return View("CashBalanceatClose", vmodel);
         }
         [HttpPost]

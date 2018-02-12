@@ -11,7 +11,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 
 namespace OctagonPlatform.Controllers
 {
-    public class CultureInfoController : Controller
+    public class CultureInfoController : BaseController
     {
         protected ICultureInfo _repo;
         public CultureInfoController(ICultureInfo repo)

@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize(Roles = "Terminals, Add Terminal")]
-    public class TerminalsController : Controller
+    public class TerminalsController : BaseController
     {
         private readonly ITerminalRepository _repository;
 

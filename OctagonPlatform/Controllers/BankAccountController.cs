@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [System.Web.Mvc.Authorize]
-    public class BankAccountController : Controller
+    public class BankAccountController : BaseController
     {
         private readonly IBankAccountRepository _bAccountRepository;
 

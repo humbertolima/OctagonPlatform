@@ -30,7 +30,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers.Reports
 {
     [AllowAnonymous]
-    public abstract class ReportsSmartController : Controller
+    public abstract class ReportsSmartController : BaseController
     {
         protected IReports _repo;
         protected ITerminalRepository repo_terminal;

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class SurchargeController : Controller
+    public class SurchargeController : BaseController
     {
         private readonly ISurchargeRepository _surchargeRepository;
 
