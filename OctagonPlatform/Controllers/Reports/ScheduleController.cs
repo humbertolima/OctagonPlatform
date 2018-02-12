@@ -35,8 +35,8 @@ namespace OctagonPlatform.Controllers.Reports
         public ActionResult Index(string userid)
         {
             int _userid = string.IsNullOrEmpty(userid) ? Convert.ToInt32(Session["UserId"]) : Convert.ToInt32(userid);
-            User user = _userRepository.GetReportsUser(_userid);            
-
+            User user = _userRepository.GetReportsUser(_userid);
+            //DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
             ScheduleVM vmodel = new ScheduleVM();
             vmodel.List = _repo.GetScheduleByUser(_userid);
             vmodel.User = user.UserName+" - "+ user.Name +" - "+ user.Partner.BusinessName;

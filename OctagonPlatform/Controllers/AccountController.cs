@@ -45,9 +45,12 @@ namespace OctagonPlatform.Controllers
                 var userToLogin = _accountRepository.Login(viewModel);
                 User user = _repoUser.GetUserIncludeCultureInfo(userToLogin.UserId);
                 string cultureinfo = "";
+                
                 if (user.Partner != null)
                 {
                     cultureinfo = user.Partner.Country.CultureInfo.FirstOrDefault().Name;
+                   
+
                 }
                 if (userToLogin.IsLocked)
                 {
@@ -74,7 +77,7 @@ namespace OctagonPlatform.Controllers
                 Session["Name"] = userToLogin.Name;
                 Session["UserId"] = userToLogin.UserId;
                 Session["CultureInfo"] = cultureinfo;
-
+                Session["TimeZoneInfo"] = user.TimeZoneInfo;
                 if (Session["tries"] != null) Session.Remove("tries");
 
                 return RedirectToAction("AMS", "Octagon");

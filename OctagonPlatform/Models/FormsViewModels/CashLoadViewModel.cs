@@ -28,8 +28,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         public CashLoadViewModel()
         {
             //TerminalId = "TR024019";// "NH061617";
-            StartDate = DateTime.Now.ToString("MM/dd/yyyy");
-            EndDate = DateTime.Now.ToString("MM/dd/yyyy");
+            StartDate = DateTime.Now.ToShortDateString();
+            EndDate = DateTime.Now.ToShortDateString();
             PartnerId = -1;
             GroupId = -1;
         }

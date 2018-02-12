@@ -55,7 +55,8 @@ namespace OctagonPlatform.PersistanceRepository
             Table.Add(obj);
             if (obj is IAuditEntity)
             {
-                var date = DateTime.UtcNow;
+                DateTime t = HttpContext.Current.Session["TimeZoneInfo"] != null ? Utils.ToTimeZoneTime(DateTime.Now, HttpContext.Current.Session["TimeZoneInfo"].ToString()) : DateTime.Now;
+                var date = t;
                 var userName = HttpContext.Current.User.Identity.Name;
              
                 (obj as IAuditEntity).CreatedAt = date;
@@ -71,7 +72,9 @@ namespace OctagonPlatform.PersistanceRepository
             Context.Entry(obj).State = EntityState.Modified;
             if (obj is IAuditEntity)
             {
-                var date = DateTime.UtcNow;
+                DateTime t = HttpContext.Current.Session["TimeZoneInfo"] != null ? Utils.ToTimeZoneTime(DateTime.Now, HttpContext.Current.Session["TimeZoneInfo"].ToString()) : DateTime.Now;
+
+                var date = t;
                 var user = HttpContext.Current.User;
                 var userName = user.Identity.Name;
                 (obj as IAuditEntity).UpdatedAt = date;
@@ -91,7 +94,9 @@ namespace OctagonPlatform.PersistanceRepository
                     ((ISoftDeleted)existing).Deleted = true;
                     if (existing is IAuditEntity)
                     {
-                        var date = DateTime.UtcNow;
+                        DateTime t = HttpContext.Current.Session["TimeZoneInfo"] != null ? Utils.ToTimeZoneTime(DateTime.Now, HttpContext.Current.Session["TimeZoneInfo"].ToString()) : DateTime.Now;
+
+                        var date = t;
                         var user = HttpContext.Current.User;
                         var userName = user.Identity.Name;
                         (existing as IAuditEntity).DeletedAt = date;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OctagonPlatform.Models;
+using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.PersistanceRepository;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -15,14 +18,20 @@ public abstract class BaseController : Controller
     {
         private string CultureInfoName { get; set; }
         public CultureInfo CultureInfoSession { get; set; }
+        public User UserSession { get; set; }       
+       
         protected override void Initialize(RequestContext requestContext)
         {
             if (requestContext.HttpContext.Session != null)
             {
                 CultureInfoName = "en-US";
+              
                 if (!(requestContext.HttpContext.Session["CultureInfo"] == null))
                 {
                     CultureInfoName = requestContext.HttpContext.Session["CultureInfo"].ToString();
+                    int userid = Int32.Parse( requestContext.HttpContext.Session["UserId"].ToString());
+                    UserRepository _repo = new UserRepository();
+                    UserSession = _repo.GetReportsUser(userid);
                 }
                 if (!string.IsNullOrEmpty(CultureInfoName))
                 {
