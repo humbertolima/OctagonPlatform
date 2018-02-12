@@ -180,6 +180,7 @@ namespace OctagonPlatform.PersistanceRepository
         public static DateTime ToTimeZoneTime(DateTime time, string timeZoneId = "Pacific Standard Time")
         {
             TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+            
             return ToTimeZoneTime(time,tzi);
         }
 

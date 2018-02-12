@@ -36,6 +36,9 @@ namespace OctagonPlatform.Controllers.Reports
         {
             int _userid = string.IsNullOrEmpty(userid) ? Convert.ToInt32(Session["UserId"]) : Convert.ToInt32(userid);
             User user = _userRepository.GetReportsUser(_userid);
+            
+            DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
+
             ScheduleVM vmodel = new ScheduleVM();
             vmodel.List = _repo.GetScheduleByUser(_userid);
             vmodel.User = user.UserName+" - "+ user.Name +" - "+ user.Partner.BusinessName;
@@ -58,9 +61,7 @@ namespace OctagonPlatform.Controllers.Reports
         // GET: ScheduleOnces/Create
         public PartialViewResult Create(string userId)
         {
-            //User user = _userRepository.FindBy(Convert.ToInt32(userId));
-            //DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
-
+           
             ScheduleViewModel vmodel = new ScheduleViewModel();
             vmodel.UserId = userId;
             return PartialView(vmodel);

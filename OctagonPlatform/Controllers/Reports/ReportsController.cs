@@ -19,7 +19,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers.Reports
 {
     [AllowAnonymous]
-    public class ReportsController : Controller
+    public class ReportsController : BaseController
     {
         
         private IReports _repo;
@@ -38,7 +38,9 @@ namespace OctagonPlatform.Controllers.Reports
         // GET: reportModels
         public ActionResult Index()
         {
-          
+            //DateTime n = DateTime.Now;
+           // double amount = 2652548.50;
+           // amount.ToString("C", CultureInfoSession);
             return View(_repo.All());
         }
         public ActionResult Selection()

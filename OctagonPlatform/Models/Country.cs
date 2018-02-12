@@ -15,7 +15,7 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
 
         public ICollection<State> Stateses { get; set; }
-        
+        public ICollection<CultureInfoModel> CultureInfo { get; set; }
         public Country()
         {
             Stateses = new Collection<State>();

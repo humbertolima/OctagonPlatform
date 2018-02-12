@@ -42,8 +42,8 @@ namespace OctagonPlatform.PersistanceRepository
         public virtual IEnumerable<T> FindAllBy(Expression<Func<T, bool>> predicate) 
         {
             if (predicate != null)
-            {               
-                    return Table.Where(predicate).ToList();                
+            {
+                 return Table.Where(predicate).ToList();                
             }
             else
             {
