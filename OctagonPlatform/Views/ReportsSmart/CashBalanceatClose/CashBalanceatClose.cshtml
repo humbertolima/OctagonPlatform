@@ -2,6 +2,19 @@
 @{
     ViewBag.Title = "Cash Balance At Close";
 
+    string culturefile = "datepicker-"+ViewBag.Culture+".json";
+
+    string culturejsontext =  System.IO.File.ReadAllText(Server.MapPath(@"~/Octagon/i18n/"+ culturefile)).Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+
+
+    try
+    {
+        var tmpObj = Newtonsoft.Json.Linq.JToken.Parse(culturejsontext);
+    }
+    catch (FormatException fex)
+    {
+        culturejsontext = "{}";
+    }
 
 }
 <p></p>
@@ -79,18 +92,22 @@ else
         <strong>Warning!</strong> Not Record Available.
     </div>
 }
+
+
+
 @section Scripts {
 
- 
+
     @Html.Partial("../ScriptsReport")
 
     <script>
 
 
-    $(function () {
-        $("#StartDate").datepicker({
-            dateFormat: "mm/dd/yy"
-        });
+        $(function () {
+
+            var json_culture = @Html.Raw(culturejsontext);          
+
+            $("#StartDate").datepicker(json_culture);
         callankle();
           var tempdataval = '@TempData["List"]';
           if (tempdataval != null && tempdataval != '') {
@@ -112,6 +129,8 @@ else
         });
 
     </script>
+
+
 
 }
 
