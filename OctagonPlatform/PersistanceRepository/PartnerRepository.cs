@@ -9,20 +9,31 @@ using System.Linq;
 
 namespace OctagonPlatform.PersistanceRepository
 {
-    public class PartnerRepository: GenericRepository<Partner>, IPartnerRepository
+    public class PartnerRepository : GenericRepository<Partner>, IPartnerRepository
     {
-        
-        public Partner GetAllPartners(int parentId)
+
+        public Partner GetAllPartners(int partnerId)
         {
             try
             {
-                var parent = Table.SingleOrDefault(x => x.Id == parentId && !x.Deleted);
-                if(parent == null) throw new Exception("Parent not found. ");
+                var partner = Table.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (partner == null) throw new Exception("Parent not found. ");
 
-                return Table.Where(c => c.Id == parentId && !c.Deleted)
-                    .Include(x => x.Partners)
-                    .Include(x => x.Parent)
-                    .FirstOrDefault();
+                int parentId;
+                if (partner.ParentId == null)       //si no tiene parent, entonces el parent es el mismo
+                {
+                    parentId = partner.Id;
+                }
+                else
+                {
+                    parentId = Convert.ToInt32(partner.ParentId);
+                }
+
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table on q.Id equals m.Id select m).ToList();
+
+                partner.Partners = list4;       //Asigno el listado devuelto al partner. importante porque el recursivo trae mas de lo que tiene relacionado.
+                return partner;
             }
             catch (Exception ex)
             {
@@ -66,12 +77,12 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception(ex.Message + "Partner not found. ");
             }
         }
-        
+
         public void SavePartner(PartnerFormViewModel viewModel, string action)
         {
             try
             {
-                var partnerBName = Table.SingleOrDefault(x => x.BusinessName.Replace(" ", "").ToLower().Trim().Equals(viewModel.BusinessName.Replace(" ","").ToLower().Trim()) || x.Email == viewModel.Email);
+                var partnerBName = Table.SingleOrDefault(x => x.BusinessName.Replace(" ", "").ToLower().Trim().Equals(viewModel.BusinessName.Replace(" ", "").ToLower().Trim()) || x.Email == viewModel.Email);
                 if (action == "Edit")
                 {
                     var partnerToEdit = Table.SingleOrDefault(x => x.Id == viewModel.Id && !x.Deleted);
@@ -81,7 +92,7 @@ namespace OctagonPlatform.PersistanceRepository
 
                         if (!partnerBName.Deleted && partnerToEdit.Id != partnerBName.Id)
                             throw new Exception("Partner already exists. ");
-                      
+
                     }
                     partnerToEdit.ParentId = viewModel.ParentId;
                     partnerToEdit.BusinessName = viewModel.BusinessName;
@@ -98,14 +109,14 @@ namespace OctagonPlatform.PersistanceRepository
                     partnerToEdit.WebSite = viewModel.WebSite;
                     Edit(partnerToEdit);
                 }
-                else 
+                else
                 {
 
                     if (partnerBName != null)
                     {
                         if (!partnerBName.Deleted)
                             throw new Exception("Partner already exists.");
-        
+
                     }
                     var partner = new Partner()
                     {
@@ -123,7 +134,7 @@ namespace OctagonPlatform.PersistanceRepository
                         Fax = viewModel.Fax,
                         WebSite = viewModel.WebSite,
                         Interchange = InterchangeConstants.ClientInterchangeAmount
-                        };
+                    };
                     Add(partner);
                 }
             }
@@ -195,9 +206,9 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Partners)
                     .Include(x => x.Terminals)
                     .FirstOrDefault();
-                if(partner == null) throw new Exception("Partner does not exist in our records. ");
+                if (partner == null) throw new Exception("Partner does not exist in our records. ");
 
-               
+
                 return partner;
             }
             catch (Exception ex)
@@ -212,7 +223,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 var partner = Table.SingleOrDefault(x => x.Id == id && !x.Deleted);
-                if(partner == null) throw new Exception("Partner not found. ");
+                if (partner == null) throw new Exception("Partner not found. ");
                 CascadeDelete(id);
             }
             catch (Exception ex)
@@ -277,7 +288,7 @@ namespace OctagonPlatform.PersistanceRepository
             try
             {
                 IEnumerable<Partner> listpartner = GetPartnerByParentId(partnerId);
-                var list4 = listpartner.ToList();              
+                var list4 = listpartner.ToList();
                 return list4.Where(b => b.BusinessName.ToLower().Contains(term.ToLower())).Select(b => new { label = b.BusinessName, value = b.Id }).ToList();
             }
             catch (Exception e)
