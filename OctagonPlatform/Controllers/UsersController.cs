@@ -6,6 +6,7 @@ using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Web;
 using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
@@ -22,6 +23,7 @@ namespace OctagonPlatform.Controllers
 
         // GET: User
         [HttpGet]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Index()
         {
             try
@@ -38,6 +40,7 @@ namespace OctagonPlatform.Controllers
 
 
         [HttpGet]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.AddUsers)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -63,6 +66,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Create(UserFormViewModel viewModel, string permissions1)    //puse el 1 porque el controlador recibe un parametro "permissions" que es de tipo Models.Permission y trata de convertir el strin a este tipo de dato. por eso no puede
         {                                                                               //llamarse permissions/. https://stackoverflow.com/questions/7983023/the-parameter-conversion-from-type-system-string-to-type-x-failed-because-n
             if (!ModelState.IsValid)
@@ -77,7 +81,6 @@ namespace OctagonPlatform.Controllers
 
                 //viewModel.Permissions = _userRepository.AddPermissionToUser(permissions);
                 viewModel.Permissions = _userRepository.GetPermissionsByArray(ids);
-                
                 _userRepository.SaveUser(viewModel, "Create");
                 return RedirectToAction("Details", "Partners", new { id = viewModel.PartnerId });
             }
@@ -99,6 +102,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
         public ActionResult Edit(int? id)
         {
             try
@@ -124,6 +128,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.EditUsers)]
         public ActionResult Edit(UserEditFormViewModel editViewModel, string permissions1)
         {
             if (!ModelState.IsValid)
@@ -134,6 +139,7 @@ namespace OctagonPlatform.Controllers
             }
             try
             {
+               
                 string[] ids = PermissionsSplit(permissions1);
 
                 editViewModel.Permissions = _userRepository.GetPermissionsByArray(ids); //pendiente poner en el controlador de permissions
@@ -154,6 +160,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.GetUsers)]
         public ActionResult Details(int? id)
         {
             try
@@ -172,24 +179,25 @@ namespace OctagonPlatform.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id != null) return View(_userRepository.UserToEdit((int)id));
-                ViewBag.Error = "User not found.";
-                return View("Error");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
-        }
+        //[HttpGet]
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id != null) return View(_userRepository.UserToEdit((int)id));
+        //        ViewBag.Error = "User not found.";
+        //        return View("Error");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //        return View("Error");
+        //    }
+        //}
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteUsers)]
         public ActionResult DeleteConfirmed(int? id)
         {
             try
@@ -216,6 +224,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        //[CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchUsers)]
         public ActionResult Search(string search)
         {
             try
@@ -228,7 +237,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        #region Get BankAccount Of User
+         #region Get BankAccount Of User
 
         [HttpPost]
         // [ValidateAntiForgeryToken]       //pendiente probar los validatetoken

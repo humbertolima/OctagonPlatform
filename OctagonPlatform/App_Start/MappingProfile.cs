@@ -118,11 +118,9 @@ namespace OctagonPlatform
 
             #region VaultCash Mapping
 
-            CreateMap<VaultCash, VaultCashFormViewModel>();
-
-            CreateMap<VaultCashFormViewModel, VaultCashFormViewModel>();
-            //Dto to Domain
-            CreateMap<VaultCashFormViewModel, VaultCash>();
+            CreateMap<VaultCash, VaultCashVM>();
+           
+            CreateMap<VaultCashVM, VaultCash>();
 
             #endregion
 

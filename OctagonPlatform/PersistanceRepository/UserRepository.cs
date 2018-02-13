@@ -150,7 +150,7 @@ namespace OctagonPlatform.PersistanceRepository
                 if (action == "Edit")
                 {
                     var user = Table.Include("Permissions").SingleOrDefault(c => c.Id == viewModel.Id && !c.Deleted);
-
+                   
                     if (user == null) throw new Exception("User does not exist in our records");
 
                     {

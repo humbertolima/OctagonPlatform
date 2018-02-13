@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.GetSurcharges)]
         public PartialViewResult Index(int? terminalId)
         {
             try
@@ -37,6 +39,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditSurcharges)]
         public ActionResult Edit(int? id)
         {
             try
@@ -59,6 +62,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddSurcharges)]
         public ActionResult Create(int id)
         {
             try
@@ -82,6 +86,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddSurcharges)]
         public ActionResult Save(SurchargeFormViewModel viewModel)
         {
             try
@@ -110,23 +115,24 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id != null) return View(_surchargeRepository.SurchargeToEdit((int)id));
-                ViewBag.Error = "Surcharge not found. ";
-                return View("Error");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id != null) return View(_surchargeRepository.SurchargeToEdit((int)id));
+        //        ViewBag.Error = "Surcharge not found. ";
+        //        return View("Error");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //        return View("Error");
+        //    }
+        //}
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteSurcharges)]
         public ActionResult DeleteConfirmed(int? id, int? terminalId)
         {
             try

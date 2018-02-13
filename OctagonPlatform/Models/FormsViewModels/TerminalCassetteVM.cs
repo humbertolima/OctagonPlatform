@@ -13,7 +13,11 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         public string TerminalId { get; set; }
-        
+
+        public bool IsAddCassette { get; set; }
+        public bool IsSetCassette { get; set; }
+        public bool IsDeleteCassette { get; set; }
+
         public List<Cassette> Cassettes { get; set; }
 
     }

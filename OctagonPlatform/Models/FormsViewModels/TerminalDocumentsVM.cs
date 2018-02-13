@@ -11,6 +11,9 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public string TerminalId { get; set; }
 
+        public bool IsAddDocuments { get; set; }
+        public bool IsDeleteDocuments { get; set; }
+
         public List<Document> Documents { get; set; }
     }
 }

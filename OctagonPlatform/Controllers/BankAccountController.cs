@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    [System.Web.Mvc.Authorize]
+    [Authorize]
     public class BankAccountController : Controller
     {
         private readonly IBankAccountRepository _bAccountRepository;
@@ -19,7 +20,7 @@ namespace OctagonPlatform.Controllers
 
         }
 
-
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetBankAccounts)]
         public ActionResult Index()
         {
             try
@@ -36,7 +37,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetBankAccounts)]
         public ActionResult Details(int? id)
         {
             try
@@ -61,6 +62,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: BankAccount/Create
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddtBankAccounts)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -79,6 +81,7 @@ namespace OctagonPlatform.Controllers
        
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddtBankAccounts)]
         public ActionResult Create(BAEditFVModel bankAccount)
         {
             try
@@ -101,7 +104,7 @@ namespace OctagonPlatform.Controllers
 
         }
 
-
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditBankAccounts)]
         public ActionResult Edit(int? id)
         {
             try
@@ -120,6 +123,7 @@ namespace OctagonPlatform.Controllers
        
         [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditBankAccounts)]
         public ActionResult Edit(BAEditFVModel bankAccount)
         {
             try
@@ -144,6 +148,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [System.Web.Mvc.HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteBankAccounts)]
         public ActionResult Delete(int? id)
         {
             try
@@ -159,8 +164,9 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteBankAccounts)]
         public ActionResult DeleteConfirmed(int? id)
         {
             try
@@ -185,6 +191,7 @@ namespace OctagonPlatform.Controllers
         }
         
         [System.Web.Mvc.HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchBankAccount)]
         public ActionResult Search(string search)
         {
             try
@@ -197,6 +204,8 @@ namespace OctagonPlatform.Controllers
                 return View("Error");
             }
         }
+
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AutoAccountBankAccount)]
         public ActionResult AutoAccount(string term)
         {
 

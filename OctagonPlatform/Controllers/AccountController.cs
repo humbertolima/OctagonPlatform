@@ -20,6 +20,13 @@ namespace OctagonPlatform.Controllers
             _accountRepository = accountRepository;
         }
 
+        
+        public PartialViewResult Error( string text)
+        {
+            ViewBag.Error = text;
+            return PartialView("ErrorWithLayout");
+        }
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -92,50 +99,50 @@ namespace OctagonPlatform.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult PermissionToJson(int userId)
+        {
+            List<Permission> permissions = _accountRepository.GetPermissions(userId);
+            bool isEdit = false;
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public ActionResult PermissionToJson(int userId)
-        //{
-        //    List<Permission> permissions = _accountRepository.GetPermissions(userId);
-        //    bool isEdit = false;
+            if (permissions != null)
+            {
+                List<TreeView> tree = new List<TreeView>();
 
-        //    if (permissions != null)
-        //    {
-        //        List<TreeView> tree = new List<TreeView>();
+                if ((((System.Web.HttpContext.Current.Request.UrlReferrer) != null)))       //validar de donde viene la solicitud
+                    if ((((System.Web.HttpContext.Current.Request.UrlReferrer.AbsolutePath) == "/Users/Edit/" + userId)))       //Si viene del Edit de usario, le marco select los permiso que ya tiene;
+                    {
+                        isEdit = true;
+                    }
+                User userToEdit = new Models.User() { Id = userId };
 
-        //        if ((((System.Web.HttpContext.Current.Request.UrlReferrer) != null)))       //validar de donde viene la solicitud
-        //            if ((((System.Web.HttpContext.Current.Request.UrlReferrer.AbsolutePath) == "/Users/Edit/" + userId)))       //Si viene del Edit de usario, le marco select los permiso que ya tiene;
-        //            {
-        //                isEdit = true;
-        //            }
-        //        User userToEdit = new Models.User() { Id = userId };
+                foreach (var item in permissions)
+                {
+                    string temp = "#";      //los null hay que agregarles # para que el control los vea como root
 
-        //        foreach (var item in permissions)
-        //        {
-        //            string temp = "#";      //los null hay que agregarles # para que el control los vea como root
+                    if (!String.IsNullOrEmpty(item.ParentID.ToString()))
+                        temp = item.ParentID.ToString();
 
-        //            if (!String.IsNullOrEmpty(item.ParentID.ToString()))
-        //                temp = item.ParentID.ToString();
-                        
-        //            bool isSelect = item.Users.FirstOrDefault(m => m.Id == userId) != null ;    //si el permiso tiene el usuario a editar devuelve true
+                    bool isSelect = item.Users.FirstOrDefault(m => m.Id == userId) != null;    //si el permiso tiene el usuario a editar devuelve true
 
-        //            tree.Add(new TreeView()
-        //            {
-        //                text = item.Name,
-        //                id = item.Id.ToString(),
-        //                parent = temp,
-        //                state = new Models.FormsViewModels.State { selected = isSelect },
-        //            });
+                    tree.Add(new TreeView()
+                    {
+                        text = item.Name,
+                        id = item.Id.ToString(),
+                        parent = temp,
+                        state = new Models.FormsViewModels.State { selected = isSelect },
+                    });
 
-        //            if (isEdit) { }
+                    if (isEdit) { }
 
-        //        }
+                }
 
-        //        return Json(tree, JsonRequestBehavior.AllowGet);
-        //    }
-        //    return null;
-        //}
+                return Json(tree, JsonRequestBehavior.AllowGet);
+            }
+            return null;
+        }
 
         //[HttpPost]
         //[AllowAnonymous]

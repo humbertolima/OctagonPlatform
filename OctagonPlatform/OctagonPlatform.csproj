@@ -251,9 +251,12 @@
     <Compile Include="Helpers\CheckSplitAmountsEntry.cs" />
     <Compile Include="Helpers\CommunicationType.cs" />
     <Compile Include="Helpers\ConvertTo.cs" />
+    <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\DateTimeValidationLesserThan.cs" />
     <Compile Include="Helpers\DisputeType.cs" />
     <Compile Include="Helpers\Email.cs" />
+    <Compile Include="Helpers\Errors.cs" />
+    <Compile Include="Helpers\Permissions.cs" />
     <Compile Include="Helpers\Schedule.cs" />
     <Compile Include="Helpers\ViewModelError.cs" />
     <Compile Include="Helpers\InterchangeConstants.cs" />
@@ -368,13 +371,14 @@
     <Compile Include="Models\FormsViewModels\UserBAViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserEditFormViewModel.cs" />
     <Compile Include="Models\FormsViewModels\UserLoginViewModel.cs" />
-    <Compile Include="Models\FormsViewModels\VaultCashFormViewModel.cs" />
+    <Compile Include="Models\FormsViewModels\VaultCashVM.cs" />
     <Compile Include="Models\InterChange.cs" />
     <Compile Include="Models\InterfacesRepository\IAccountRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IDisputeRepresentRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
+    <Compile Include="Models\InterfacesRepository\IPermission.cs" />
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
@@ -427,6 +431,7 @@
     <Compile Include="PersistanceRepository\DisputeRepresentRepository.cs" />
     <Compile Include="PersistanceRepository\FilterRepository.cs" />
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
+    <Compile Include="PersistanceRepository\PermissionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
@@ -1187,6 +1192,7 @@
     <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\OctagonPlatform20180201043819 - Web Deploy.pubxml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1464,6 +1470,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Octagon\assets\css\less\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>

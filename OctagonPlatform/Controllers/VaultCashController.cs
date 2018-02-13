@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Web.Mvc;
@@ -16,7 +17,7 @@ namespace OctagonPlatform.Controllers
         }
 
         // GET: VaultCash
-
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.GetVaultCash)]
         public PartialViewResult Index(int? terminalId)
         {
             try
@@ -38,11 +39,15 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.GetVaultCash)]
         public ActionResult Details(int? id)
         {
             try
             {
-                if (id != null) return View(_vaultCashRepository.GetVaultCash((int)id));
+               var viewModel = _vaultCashRepository.GetVaultCash((int)id);
+
+                if (id != null) return View(viewModel);
+
                 ViewBag.Error = "Vaultcash not found. ";
                 return PartialView("Error");
             }
@@ -53,13 +58,14 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditVaultCash)]
         public ActionResult Edit(int? id)
         {
             try
             {
                 if (id != null)
                 {
-                    VaultCashFormViewModel viewModel = _vaultCashRepository.VaultCashToEdit((int)id);
+                    VaultCashVM viewModel = _vaultCashRepository.VaultCashToEdit((int)id);
                     viewModel.Action = "Edit";      //para poder usar el mismo formulario modal de adicionar y edit, necesito hacer
                                                     //dinamico la accion que va tomar el Form cuando se le de submit.
                     return PartialView("Modal/AddVaultCash", viewModel);
@@ -76,7 +82,8 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(VaultCashFormViewModel viewModel)
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditVaultCash)]
+        public ActionResult Edit(VaultCashVM viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -96,13 +103,15 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddVaultCash)]
         public ActionResult Create(int id)
         {
             try
             {
                 if (id > 0)
                 {
-                    VaultCashFormViewModel model = _vaultCashRepository.RenderVaultCashFormViewModel(id);
+                    VaultCashVM model = _vaultCashRepository.RenderVaultCashFormViewModel(id);
                     //devuelvo el partialView siempre porque siempre se solicida desde el details y se mostrara como modal
                     //si se quiere devolver en el View("create") seria validar quien lo solicito para devolver. 
                     //se puede usar el mismo formulario si en vairas vistas.
@@ -120,7 +129,8 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(VaultCashFormViewModel viewModel)
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddVaultCash)]
+        public ActionResult Create(VaultCashVM viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -143,6 +153,7 @@ namespace OctagonPlatform.Controllers
         // POST: Terminals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteVaultCash)]
         public ActionResult DeleteConfirmed(int? id)
         {
             try

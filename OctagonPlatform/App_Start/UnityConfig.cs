@@ -46,6 +46,8 @@ namespace OctagonPlatform
 
             container.RegisterType<IInterChangeRepository, InterChangeRepository>();
 
+            container.RegisterType<IPermission, PermissionRepository>();
+
             container.RegisterType<IDisputeRepository, DisputeRepository>();
 
             container.RegisterType<IReports, ReportsRepository>();

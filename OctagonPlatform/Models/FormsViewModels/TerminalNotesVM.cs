@@ -13,8 +13,11 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         [Required]
         public string TerminalId { get; set; }
-        
 
+        public bool IsAddNotes { get; set; }
+        public bool IsEditNotes { get; set; }
+        public bool IsDeleteNotes { get; set; }
+        
         public List<Note> Notes { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace OctagonPlatform.Migrations
     {
         public override void Up()
         {
-            DropColumn("dbo.Users", "TimeZoneInfo");
-            DropColumn("dbo.Subscriptions", "Format");
+            //DropColumn("dbo.Users", "TimeZoneInfo");
+            //DropColumn("dbo.Subscriptions", "Format");
         }
         
         public override void Down()

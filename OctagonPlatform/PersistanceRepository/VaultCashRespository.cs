@@ -11,18 +11,22 @@ namespace OctagonPlatform.PersistanceRepository
 {
     public class VaultCashRespository : GenericRepository<VaultCash>, IVaultCashRepository
     {
-        public VaultCash GetVaultCash(int terminalId)
+        public VaultCashVM GetVaultCash(int terminalId)
         {
             try
             {
                 var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted);
+
                 if (terminal == null) throw new Exception("Terminal not found. ");
 
-                var vaulcash = Table.Where(x => x.Id == terminalId && !x.Deleted)
+                VaultCash vaultcash = Table.Where(x => x.Id == terminalId && !x.Deleted)
                     .Include(x => x.Terminal)
                     .Include(x => x.BankAccount)
                     .SingleOrDefault();
-                return vaulcash;
+
+                VaultCashVM viewModel = Mapper.Map<VaultCash, VaultCashVM>(vaultcash);
+
+                return viewModel;
             }
             catch (Exception ex)
             {
@@ -30,14 +34,14 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public VaultCashFormViewModel RenderVaultCashFormViewModel(int terminalId)
+        public VaultCashVM RenderVaultCashFormViewModel(int terminalId)
         {
             try
             {
                 var terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId);
                 if (terminal == null) throw new Exception("Page not found. ");
 
-                return new VaultCashFormViewModel()
+                return new VaultCashVM()
                 {
                     Id = terminalId,
                     Terminal = Context.Terminals.SingleOrDefault(x => x.Id == terminalId && !x.Deleted),
@@ -54,7 +58,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public VaultCashFormViewModel VaultCashToEdit(int id)
+        public VaultCashVM VaultCashToEdit(int id)
         {
             try
             {
@@ -63,7 +67,7 @@ namespace OctagonPlatform.PersistanceRepository
                     .Include(x => x.Terminal)
                     .SingleOrDefault();
                 if (vaultcash == null) throw new HttpException("Vault cash not found.");
-                var result = Mapper.Map<VaultCash, VaultCashFormViewModel>(vaultcash);
+                var result = Mapper.Map<VaultCash, VaultCashVM>(vaultcash);
                 result.Terminal = vaultcash.Terminal;
                 result.BankAccount = vaultcash.BankAccount;
                 result.BankAccounts = Context.BankAccounts.Where(x => !x.Deleted && x.PartnerId == vaultcash.Terminal.PartnerId).ToList();
@@ -75,7 +79,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public void SaveVaultCash(VaultCashFormViewModel viewModel, string action)
+        public void SaveVaultCash(VaultCashVM viewModel, string action)
         {
             try
             {
@@ -94,7 +98,7 @@ namespace OctagonPlatform.PersistanceRepository
                     if (vaultcash != null && !vaultcash.Deleted) throw new Exception("This Terminal already has a Vaultcash account. ");
                     if (vaultcash != null && vaultcash.Deleted)
                         Table.Remove(vaultcash);
-                    var vaultcashNew = Mapper.Map<VaultCashFormViewModel, VaultCash>(viewModel);
+                    var vaultcashNew = Mapper.Map<VaultCashVM, VaultCash>(viewModel);
                     Add(vaultcashNew);
                 }
             }
@@ -138,7 +142,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public VaultCashFormViewModel InitializeNewVaultCashFormViewModel(VaultCashFormViewModel viewModel)
+        public VaultCashVM InitializeNewVaultCashFormViewModel(VaultCashVM viewModel)
         {
             try
             {

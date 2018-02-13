@@ -11,6 +11,10 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Required]
         public int Id { get; set; }
 
+        public bool IsAddVaultCash { get; set; }
+        public bool IsEditVaultCash { get; set; }
+        public bool IsDeleteVaulCash { get; set; }
+
         [Required]
         public string TerminalId { get; set; }
 

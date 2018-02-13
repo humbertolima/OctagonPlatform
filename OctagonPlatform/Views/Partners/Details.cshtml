@@ -23,7 +23,7 @@
         <div class="panel-group" style="width: 100%;">
             <div class="panel panel-default">
                 <div id="PartnerDetailButtons" class="panel-heading">
-                    <h3 class="texth3"><i class="fa fa-list" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "Contacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
+                    <h3 class="texth3"><i class="fa fa-list" style="font-size:25px;color:#4776a1"></i> @Ajax.ActionLink("Contacts", "GetContacts", "Partners", new { partnerId = Model.Id }, new AjaxOptions { UpdateTargetId = "getContacts", LoadingElementId = "loading2", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, htmlAttributes: new { @class = "link", data_toggle = "collapse", data_target = "#getContacts" })</h3>
                     <div id="getContacts" class="panel-collapse collapse">
                         <div class="loader"></div>
                     </div>

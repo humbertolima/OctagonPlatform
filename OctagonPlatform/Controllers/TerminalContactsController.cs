@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace OctagonPlatform.Controllers
         }
 
 
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.GetContacts)]
         public ActionResult Details(int? id)
         {
             try
@@ -31,21 +33,16 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        // GET: TerminalContacts/Create
+
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddContacts)]
         public ActionResult Create(int? id)
         {
-            if (!User.IsInRole("Add Terminal Contacts"))
-            {
-                ViewBag.Error = "Access Denied";
-                return PartialView("../Shared/ErrorWithLayout");
-            }
-
             try
             {
                 if (id != null)
                 {
-                    var model = _terminalContactRepository.RenderTerminalContactFormViewModel((int)id);
+                    TerminalContactFormViewModel model = _terminalContactRepository.RenderTerminalContactFormViewModel((int)id);
                     return PartialView("Modal/AddTerminalContact", model);
                 }
 
@@ -62,6 +59,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddContacts)]
         public ActionResult Create(TerminalContactFormViewModel terminalContactFormViewModel)
         {
             if (!User.IsInRole("Add Terminal Contacts"))
@@ -89,14 +87,9 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        // GET: TerminalContacts/Edit/5
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditContacts)]
         public ActionResult Edit(int? id)
         {
-            if (!User.IsInRole("Edit Terminal Contacts"))
-            {
-                ViewBag.Error = "Access Denied";
-                return PartialView("../Shared/ErrorWithLayout");
-            }
             try
             {
                 if (id != null) return View(_terminalContactRepository.TerminalContactToEdit((int)id));
@@ -110,15 +103,12 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditContacts)]
         public ActionResult Edit(TerminalContactFormViewModel terminalContactFormViewModel)
         {
-            if (!User.IsInRole("Edit Terminal Contacts"))
-            {
-                ViewBag.Error = "Access Denied";
-                return PartialView("../Shared/ErrorWithLayout");
-            }
             try
             {
                 if (!ModelState.IsValid)
@@ -135,6 +125,8 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteContacts)]
         public ActionResult Delete(int? id)
         {
             
@@ -154,6 +146,7 @@ namespace OctagonPlatform.Controllers
         // POST: TerminalContacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteContacts)]
         public ActionResult DeleteConfirmed(int? id, int? terminalId)
         {
             if (!User.IsInRole("Delete Terminal Contacts"))

@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Web.Mvc;
@@ -38,6 +39,7 @@ namespace OctagonPlatform.Controllers
         //}
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.EditInterchanges)]
         public ActionResult Edit(int? id)
         {
             try
@@ -60,6 +62,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddInterchanges)]
         public ActionResult Create(int? id)
         {
             try
@@ -84,6 +87,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.AddInterchanges)]
         public ActionResult Save(InterChangeFormViewModel viewModel)
         {
             try
@@ -129,6 +133,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Terminals.DeleteInterchanges)]
         public ActionResult DeleteConfirmed(int? id, int? terminalId)
         {
             try

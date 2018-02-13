@@ -1,4 +1,5 @@
-﻿using OctagonPlatform.Models.FormsViewModels;
+﻿using OctagonPlatform.Helpers;
+using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
 using System;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetContacts)]
         public ActionResult Index()
         {
             try
@@ -30,6 +32,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddContacts)]
         public ActionResult Create(int? partnerId)
         {
             try
@@ -48,6 +51,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.AddContacts)]
         public ActionResult Create(PartnerContactFormViewModel viewModel)
         {
             try
@@ -71,6 +75,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpGet]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditContacts)]
         public ActionResult Edit(int? id)
         {
             try
@@ -88,6 +93,7 @@ namespace OctagonPlatform.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.EditContacts)]
         public ActionResult Edit(PartnerContactFormViewModel viewModel)
         {
             try
@@ -109,23 +115,24 @@ namespace OctagonPlatform.Controllers
             }
         }
 
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
-                ViewBag.Error = "Contact not found. ";
-                return View("Error");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = ex.Message;
-                return View("Error");
-            }
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    try
+        //    {
+        //        if (id != null) return View(_partnerContactRepository.PartnerContactToEdit((int)id));
+        //        ViewBag.Error = "Contact not found. ";
+        //        return View("Error");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Error = ex.Message;
+        //        return View("Error");
+        //    }
+        //}
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.DeleteContacts)]
         public ActionResult DeleteConfirmed(int? id, int? partnerId)
         {
             try
@@ -148,6 +155,7 @@ namespace OctagonPlatform.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.SearchContacts)]
         public ActionResult Search(string search)
         {
             try
@@ -161,6 +169,7 @@ namespace OctagonPlatform.Controllers
             }
         }
 
+        [CustomAuthorize(Roles = Helpers.Permissions.Partner.GetContacts)]
         public ActionResult Details(int? id)
         {
             try

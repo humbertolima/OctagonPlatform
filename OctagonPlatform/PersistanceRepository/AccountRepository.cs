@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.Security;
 
 namespace OctagonPlatform.PersistanceRepository
 {
@@ -88,7 +87,22 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                FormsAuthentication.SignOut();
+
+                System.Web.Security.Roles.DeleteCookie();
+                System.Web.Security.FormsAuthentication.SignOut();
+
+                var roles = System.Web.Security.Roles.GetRolesForUser("admin02");
+                string[] users = { "admin02" };
+
+                //System.Web.Security.Roles.RemoveUserFromRoles("admin02", roles);
+                    
+                //.RemoveUsersFromRoles(users, roles);
+
+                //UserManager pepe = new UserManager<UserManagerExtensions();
+                //UserManager.>
+                //    Roles.RemoveUsersFromRoles()
+                //var roles = Microsoft.AspNet.Identity.UserManager.GetRoles(userid);
+                // UserManager.RemoveFromRoles(userid, roles.ToArray());
             }
             catch (Exception ex)
             {

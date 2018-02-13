@@ -12,12 +12,12 @@ namespace OctagonPlatform.Controllers
         {
             try
             {
-                ViewBag.priceBTC = GetBitcoinPrice(1);
-                Session["BTC"] = ViewBag.priceBTC;
-                ViewBag.priceETH = GetBitcoinPrice(2);
-                Session["ETH"] = ViewBag.priceETH;
-                ViewBag.priceLTC = GetBitcoinPrice(3);
-                Session["LTC"] = ViewBag.priceLTC;
+                //ViewBag.priceBTC = GetBitcoinPrice(1);
+                //Session["BTC"] = ViewBag.priceBTC;
+                //ViewBag.priceETH = GetBitcoinPrice(2);
+                //Session["ETH"] = ViewBag.priceETH;
+                //ViewBag.priceLTC = GetBitcoinPrice(3);
+                //Session["LTC"] = ViewBag.priceLTC;
                 return View();
             }
             catch (Exception ex)

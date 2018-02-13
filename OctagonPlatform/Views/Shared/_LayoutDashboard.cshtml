@@ -2,6 +2,11 @@
 <html>
 <head>
     @Html.Partial("Sections/Header")
+
+    @Html.Partial("Sections/Scripts")
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
     <div id="wrapper">
@@ -22,7 +27,6 @@
     </div>
     <!-- /#wrapper -->
 
-    @Html.Partial("Sections/Scripts")
     @RenderSection("scripts", false)
 
 </body>

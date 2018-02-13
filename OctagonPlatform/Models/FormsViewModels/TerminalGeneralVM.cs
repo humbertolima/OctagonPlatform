@@ -8,18 +8,19 @@ namespace OctagonPlatform.Models.FormsViewModels
     {
         [Required]
         public int Id { get; set; }
-        
+
         [Required]
         [Display(Name = "Terminal Id")]
         public string TerminalId { get; set; }
 
-
+        public bool IsGetGeneralInfo { get; set; }
+        public bool IsEditGeneralInfo { get; set; }
         [Required]
         [Display(Name = "Partner")]
         public int PartnerId { get; set; }
 
         public Partner Partner { get; set; }
-        
+
         [Required(ErrorMessage = "The phone is required")]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Phone number is not valid")]
         public string Phone { get; set; }
@@ -34,7 +35,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         [Display(Name = "State")]
         public int StateId { get; set; }
 
-        public State State { get; set; }
+        public Models.State State { get; set; }
 
         [Display(Name = "City")]
         public int CityId { get; set; }

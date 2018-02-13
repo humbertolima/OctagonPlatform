@@ -94,44 +94,50 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
-                if (parent == null) throw new Exception("Parent not found. ");
+                Partner partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (partner == null) throw new Exception("Parent not found. ");
 
                 var terminals = new List<Terminal>();
 
-                var partner = Context.Partners.Where(x => x.Id == partnerId && !x.Deleted)
-                    .Include(x => x.Partners)
-                    .SingleOrDefault();
+                int parentId = partner.ParentId == null ? parentId = partnerId :Convert.ToInt32(partner.ParentId);
+                //parentId = parentId ?? (parentId = partnerId);
+
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table.Include(p=>p.Partner).Include(a=>a.LocationType).Include(a => a.State).Include(c=>c.City).Include(a=> a.Country) on q.Id equals m.PartnerId select m).ToList();
+
+                //var partner = Context.Partners.Where(x => x.Id == partnerId && !x.Deleted)
+                //    .Include(x => x.Partners)
+                //    .SingleOrDefault();
 
 
-                if (partner == null) return terminals;
-                {
-                    var partnerTerminals = Table.Where(x => x.PartnerId == partnerId && !x.Deleted)
-                        .Include(x => x.Partner)
-                        .Include(x => x.Country)
-                        .Include(x => x.State)
-                        .Include(x => x.City)
-                        .Include(x => x.LocationType)
-                        .ToList();
+                //if (partner == null) return terminals;
+                //{
+                //    var partnerTerminals = Table.Where(x => x.PartnerId == partnerId && !x.Deleted)
+                //        .Include(x => x.Partner)
+                //        .Include(x => x.Country)
+                //        .Include(x => x.State)
+                //        .Include(x => x.City)
+                //        .Include(x => x.LocationType)
+                //        .ToList();
 
-                    terminals.AddRange(partnerTerminals);
+                //    terminals.AddRange(partnerTerminals);
 
-                    foreach (var item in partner.Partners)
-                    {
-                        if (item.Id != partnerId)
-                        {
-                            terminals.AddRange(Table.Where(x => x.PartnerId == item.Id && !x.Deleted)
-                                .Include(x => x.Partner)
-                                .Include(x => x.Country)
-                                .Include(x => x.State)
-                                .Include(x => x.City)
-                                .Include(x => x.LocationType)
-                                .ToList());
-                        }
-                    }
-                }
+                //    foreach (var item in partner.Partners)
+                //    {
+                //        if (item.Id != partnerId)
+                //        {
+                //            terminals.AddRange(Table.Where(x => x.PartnerId == item.Id && !x.Deleted)
+                //                .Include(x => x.Partner)
+                //                .Include(x => x.Country)
+                //                .Include(x => x.State)
+                //                .Include(x => x.City)
+                //                .Include(x => x.LocationType)
+                //                .ToList());
+                //        }
+                //    }
+                //}
 
-                return terminals;
+                return list4;
 
             }
             catch (Exception ex)
@@ -163,8 +169,15 @@ namespace OctagonPlatform.PersistanceRepository
         {
             try
             {
-                var parent = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
-                if (parent == null) throw new Exception("Parent not found. ");
+                var partner = Context.Partners.SingleOrDefault(x => x.Id == partnerId && !x.Deleted);
+                if (partner == null) throw new Exception("Parent not found. ");
+
+
+                //recursividad para traer todos los hijos de los partner que el teng asociado.
+                int parentId = partner.ParentId == null ? parentId = partner.Id : parentId = Convert.ToInt32(partner.ParentId);
+
+                IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Context.Partners on q.Id equals m.Id select m).ToList();
 
                 return new TerminalFormViewModel()
                 {
@@ -172,9 +185,9 @@ namespace OctagonPlatform.PersistanceRepository
                     States = Context.States.Where(x => x.CountryId == 231).ToList(),
                     Status = StatusType.Status.Active,
                     Cities = Context.Cities.Where(x => x.StateId == 3930).ToList(),
-                    Partners = Context.Partners.Where(x => (x.Id == partnerId || x.ParentId == partnerId) && !x.Deleted).ToList(),
+                    Partners = list4,       //importante. devolviendo la recursividad.
                     PartnerId = partnerId,
-                    Partner = parent,
+                    Partner = partner,
                     LocationTypes = Context.LocationTypes.ToList(),
                     Makes = Context.Makes.ToList(),
                     Models = Context.Models.ToList(),
@@ -192,12 +205,10 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public TerminalFormViewModel TerminalToEdit(int id)
+        public TerminalFormViewModel TerminalToEdit(int id, int partnerId)
         {
             try
             {
-
-
                 var terminal = Table.Where(x => x.Id == id)
                     .Include(x => x.Partner)
                     .Include(x => x.Country)
@@ -209,11 +220,19 @@ namespace OctagonPlatform.PersistanceRepository
                     .SingleOrDefault();
                 if (terminal == null) throw new Exception("Terminal does not exist in our records!!!");
                 {
+                    int parentId = Convert.ToInt32(Context.Partners.FirstOrDefault(p => p.Id == partnerId).ParentId);
+
+                    parentId = parentId == 0 ? parentId = partnerId : parentId;
+                    //parentId = parentId ?? (parentId = partnerId);
+
+                    IEnumerable<Partner> listpartner = partnerId == -1 ? GetPartnerByParentId(parentId) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                    var list4 = (from q in listpartner join m in Context.Partners on q.Id equals m.Id select m).ToList();
+
                     var terminalViewModel = Mapper.Map<Terminal, TerminalFormViewModel>(terminal);
                     terminalViewModel.Countries = Context.Countries.ToList();
                     terminalViewModel.States = Context.States.Where(x => x.CountryId == terminal.CountryId).ToList();
                     terminalViewModel.Cities = Context.Cities.Where(x => x.StateId == terminal.StateId).ToList();
-                    terminalViewModel.Partners = Context.Partners.Where(x => (x.Id == terminal.PartnerId || x.ParentId == terminal.PartnerId) && !x.Deleted).ToList();
+                    terminalViewModel.Partners = list4;
                     terminalViewModel.Partner = terminal.Partner;
                     terminalViewModel.LocationTypes = Context.LocationTypes.ToList();
                     terminalViewModel.Makes = Context.Makes.ToList();
@@ -904,7 +923,7 @@ namespace OctagonPlatform.PersistanceRepository
 
         }
 
-        public IEnumerable<string> GetAllTerminalId(string value,int partnerId)
+        public IEnumerable<string> GetAllTerminalId(string value, int partnerId)
         {
             try
             {
@@ -940,7 +959,7 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        
+
 
         public IEnumerable<dynamic> GetAllState(string term)
         {

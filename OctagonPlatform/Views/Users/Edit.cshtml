@@ -96,7 +96,7 @@
             data: {
                 "userId": @Model.Id,
             }, error: function (request, status, error) {
-                alert(request.responseText);
+                alert("Error",request.responseText);
             },
             success: function (data) {
                 $("#demo1")
