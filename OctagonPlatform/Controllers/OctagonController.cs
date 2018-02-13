@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class OctagonController : Controller
+    public class OctagonController : BaseController
     {
         
         public ActionResult AMS()

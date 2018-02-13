@@ -8,14 +8,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
-    @Styles.Render("~/Octagon/assets/css/bootstrap.min.css")
-    @Styles.Render("~/Octagon/assets/css/styles.css")
-    @Styles.Render("~/Octagon/assets/fonts/font-awesome.min.css")
-    @Styles.Render("~/Octagon/assets/fonts/simple-line-icons.min.css")
-    @Styles.Render("~/Octagon/assets/css/bootstrap.min.css")
+    @*@Styles.Render("~/Octagon/assets/css/bootstrap.min.css")
+        @Styles.Render("~/Octagon/assets/css/styles.css")
+        @Styles.Render("~/Octagon/assets/fonts/font-awesome.min.css")
+        @Styles.Render("~/Octagon/assets/fonts/simple-line-icons.min.css")
+        @Styles.Render("~/Octagon/assets/css/bootstrap.min.css")*@
+
+    @Styles.Render("~/Content/home/css")
 
     <link rel="icon" type="image/png" href="~/Octagon/assets/img/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="~/Octagon/assets/img/favicon-16x16.png" sizes="16x16" />
+    @*@Scripts.Render("~/Octagon/assets/js/jquery.min.js")*@
+    @Scripts.Render("~/Scripts/jquery-3.1.1.min.js")
+    @Scripts.Render("~/Octagon/assets/bootstrap/js/bootstrap.min.js")
 </head>
 <body>
     @RenderBody()
@@ -23,8 +28,7 @@
     <div class="footer">
         @Html.Partial("Sections/Footer")
     </div>
-    @Scripts.Render("~/Octagon/assets/js/jquery.min.js")
-    @Scripts.Render("~/Octagon/assets/bootstrap/js/bootstrap.min.js")
+
     @RenderSection("scripts", required: false)
 
 </body>

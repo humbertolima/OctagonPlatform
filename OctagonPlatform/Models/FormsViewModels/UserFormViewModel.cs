@@ -10,6 +10,7 @@ namespace OctagonPlatform.Models.FormsViewModels
     {
         public UserFormViewModel()
         {
+           
         }
 
         public int Id { get; set; }
@@ -59,7 +60,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         public string Email { get; set; }
 
         public ICollection<Permission> Permissions { get; set; }
-        
+        public List<System.Web.Mvc.SelectListItem> TimeZoneList { get; set; }
+        public string TimeZoneInfo { get; set; }
         public string Error { get; set; }
     }
 }

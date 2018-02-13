@@ -146,22 +146,19 @@
 
 
 @section Scripts {
-    <script>
-        var urlcreate ='@Url.Action("Create", "ReportGroup")';
+<script>
+          var urlcreate ='@Url.Action("Create", "ReportGroup")';
         var urldelete = '@Url.Action("DeleteAjax", "ReportGroup")';
-        var urlautopartner = '@Url.Action("AutoPartner", "ReportsSmart")';
-        var urlstate = '@Url.Action("AutoState")';
-        var urlcity = '@Url.Action("AutoCity")';
-        var urlzipcode = '@Url.Action("AutoZipCode")';
         var urlselectgroup = '@Url.Action("DisplayTerminalsByGroup", "ReportGroup")';
         var urlasign = '@Url.Action("AsignTerminal")';
         var urlunasign = '@Url.Action("UnasignTerminal")';
-    </script>
+</script>
 
-    @Scripts.Render("~/bundles/jqueryval")
+    @Html.Partial("../ScriptsReport")
     @Scripts.Render("~/bundles/selectmulti")
-    @Scripts.Render("~/Scripts/autocomplete.js")
     @Scripts.Render("~/Scripts/addgroup.js")
+
+
 
 }
 

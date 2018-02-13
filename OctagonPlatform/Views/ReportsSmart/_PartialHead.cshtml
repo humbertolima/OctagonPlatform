@@ -3,55 +3,63 @@
     string valuePassedIn = this.ViewData.ContainsKey("Title") ? this.ViewData["Title"].ToString() : string.Empty;
     string from = this.ViewData.ContainsKey("from") ? this.ViewData["from"].ToString() : string.Empty;
     string to = this.ViewData.ContainsKey("to") ? this.ViewData["to"].ToString() : string.Empty;
+    string range = "";
+    if (!(from.IsEmpty() && to.IsEmpty()))
+    {
+        range = from + "-" + to;
+    }
     string imagepath = HttpContext.Current.Server.MapPath("~/Octagon/assets/img/logo.png");
 }
 
-    <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0 width=0
-           style='width:100%;border-collapse:collapse;border:none'>
-        <tr style='height:31.0pt'>
-            <td width=138 rowspan=2 valign=top style='width:103.25pt;padding:0in 5.4pt 0in 5.4pt;
-  height:31.0pt'>
-                <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'>
-                    <div id="logo">
-                    <img width=116 height=82  src="@imagepath">
-                        </div>
+
+
+
+<table class="MsoTableGrid" style="width:100%;border-collapse:collapse;border:none" width="0" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+        <tr style="height:31.0pt">
+            <td rowspan="2" style="width:103.25pt;padding:0in 5.4pt 0in 5.4pt;
+  height:31.0pt" width="138" valign="top">
+                <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal">
+                </p><div id="logo">
+                    <img src="@imagepath" width="116" height="82" />
+                </div>
+                <p></p>
+            </td>
+            <td style="width:63.0pt;padding:0in 5.4pt 0in 5.4pt;
+  height:31.0pt" width="84" valign="top">
+                <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+            </td>
+            <td colspan="2" style="width:373.75pt;background:#2E74B5;padding:
+  0in 5.4pt 0in 5.4pt;height:31.0pt" width="498">
+                <p class="MsoTitle">
+                    <strong>
+                        <span style="font-size:20.0pt;font-family:&quot;Tahoma&quot;,sans-serif;
+  color:white;position:relative;top:3.0pt;font-weight:normal">@valuePassedIn</span>
+                    </strong>
                 </p>
             </td>
-            <td width=84 valign=top style='width:63.0pt;padding:0in 5.4pt 0in 5.4pt;
-  height:31.0pt'>
-                <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'>&nbsp;</p>
+        </tr>
+        <tr>
+            <td style="width:63.0pt;padding:0in 5.4pt 0in 5.4pt" width="84" valign="top">
+                <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
             </td>
-            <td width=498 colspan=2 style='width:373.75pt;background:#2E74B5;padding:
-  0in 5.4pt 0in 5.4pt;height:31.0pt'>
-                <p class=MsoTitle>
-                    <strong>
-                        <span style='font-size:20.0pt;font-family:"Tahoma",sans-serif;
-  color:white;position:relative;top:3.0pt;font-weight:normal'>@valuePassedIn</span>
-</strong>
-</p>
-</td>
-</tr>
-<tr>
-    <td width=84 valign=top style='width:63.0pt;padding:0in 5.4pt 0in 5.4pt'>
-        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'>&nbsp;</p>
-    </td>
-    <td width=336 style='width:252.25pt;padding:0in 5.4pt 0in 5.4pt'>
-        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'>
-            <b>
-                <span style='font-family:"Tahoma",sans-serif'>
-                  @from  - @to
-                </span>
-            </b>
-        </p>
-    </td>
-    <td width=162 style='width:121.5pt;padding:0in 5.4pt 0in 5.4pt;text-align:right'>
-        <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal'>@DateTime.Now</p>
-</td>
-</tr>
+            <td style="width:252.25pt;padding:0in 5.4pt 0in 5.4pt" width="336">
+                <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal">
+                    <b>
+                        <span style="font-family:&quot;Tahoma&quot;,sans-serif">
+                            @range
+                        </span>
+                    </b>
+                </p>
+            </td>
+            <td style="width:121.5pt;padding:0in 5.4pt 0in 5.4pt;text-align:right" width="162">
+                <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal">@DateTime.Now.ToShortDateString()</p>
+            </td>
+        </tr>
+    </tbody>
 </table>
-   

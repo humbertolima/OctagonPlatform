@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 namespace OctagonPlatform.Controllers
 {
     [AllowAnonymous]
-    public class ReportGroupController : Controller
+    public class ReportGroupController : BaseController
     {
         private IReportGroup _repo;
         public ITerminalRepository _repotn;

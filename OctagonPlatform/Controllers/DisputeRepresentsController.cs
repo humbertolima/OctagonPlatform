@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    public class DisputeRepresentsController : Controller
+    public class DisputeRepresentsController : BaseController
     {
         private readonly IDisputeRepresentRepository _repository;
 

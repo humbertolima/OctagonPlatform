@@ -7,13 +7,13 @@ namespace OctagonPlatform.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class merge2 : IMigrationMetadata
+    public sealed partial class addformarSubscription : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(merge2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addformarSubscription));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801301558546_merge2"; }
+            get { return "201801242058527_addformarSubscription"; }
         }
         
         string IMigrationMetadata.Source

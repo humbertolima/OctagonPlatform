@@ -2,12 +2,18 @@
 using OctagonPlatform.Models.InterfacesRepository;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OctagonPlatform.Models.FormsViewModels
 
 {
     public class UserEditFormViewModel : IError
     {
+        public UserEditFormViewModel()
+        {
+          
+
+        }
 
         public int Id { get; set; }
 
@@ -56,5 +62,7 @@ namespace OctagonPlatform.Models.FormsViewModels
         public ICollection<Permission> Permissions { get; set; }
         
         public string Error { get; set; }
+        public List<System.Web.Mvc.SelectListItem> TimeZoneList { get; set; }
+        public string TimeZoneInfo { get; set; }
     }
 }

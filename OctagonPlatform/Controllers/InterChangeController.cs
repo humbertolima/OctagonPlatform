@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class InterChangeController : Controller
+    public class InterChangeController : BaseController
     {
 
         private readonly IInterChangeRepository _repository;

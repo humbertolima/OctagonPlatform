@@ -60,6 +60,7 @@ namespace OctagonPlatform
             container.RegisterType<ISubscription, SubscriptionRepository>();
             container.RegisterType<IReportFilter, ReportFilterRepository>();
             container.RegisterType<IFilter, FilterRepository>();
+            container.RegisterType<ICultureInfo, CultureInfoRepository>();
 
         }
     }
