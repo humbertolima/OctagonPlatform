@@ -218,6 +218,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\CultureInfoController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\OctagonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DisputeRepresentsController.cs" />
@@ -230,9 +232,16 @@
     <Compile Include="Controllers\PartnersController.cs" />
     <Compile Include="Controllers\PermissionsController.cs" />
     <Compile Include="Controllers\PopulateController.cs" />
+    <Compile Include="Controllers\Reports\CashBalanceatCloseController.cs" />
+    <Compile Include="Controllers\Reports\MonthlyTransactionSummaryController.cs" />
+    <Compile Include="Controllers\Reports\DailyTransactionSummaryController.cs" />
+    <Compile Include="Controllers\Reports\TerminalStatusController.cs" />
+    <Compile Include="Controllers\Reports\TerminalListController.cs" />
+    <Compile Include="Controllers\Reports\CashManagementController.cs" />
     <Compile Include="Controllers\Reports\ReportGroupController.cs" />
     <Compile Include="Controllers\Reports\JSON\JsonLoadCash.cs" />
     <Compile Include="Controllers\Reports\ReportsController.cs" />
+    <Compile Include="Controllers\Reports\CashLoadController.cs" />
     <Compile Include="Controllers\Reports\ReportsSmartController.cs" />
     <Compile Include="Controllers\Reports\ScheduleController.cs" />
     <Compile Include="Controllers\Reports\SubscriptionController.cs" />
@@ -318,9 +327,29 @@
     <Compile Include="Migrations\201801182242167_cascadeschedule.Designer.cs">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201801301558546_merge2.cs" />
-    <Compile Include="Migrations\201801301558546_merge2.Designer.cs">
-      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    <Compile Include="Migrations\201801242058527_addformarSubscription.cs" />
+    <Compile Include="Migrations\201801242058527_addformarSubscription.Designer.cs">
+      <DependentUpon>201801242058527_addformarSubscription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801252010369_format.cs" />
+    <Compile Include="Migrations\201801252010369_format.Designer.cs">
+      <DependentUpon>201801252010369_format.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801261802497_usertimezone.cs" />
+    <Compile Include="Migrations\201801261802497_usertimezone.Designer.cs">
+      <DependentUpon>201801261802497_usertimezone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.cs" />
+    <Compile Include="Migrations\201801290445427_AddTypeFilter.Designer.cs">
+      <DependentUpon>201801290445427_AddTypeFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802051657495_requirednamereport.cs" />
+    <Compile Include="Migrations\201802051657495_requirednamereport.Designer.cs">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802091834415_CultureInfo2.cs" />
+    <Compile Include="Migrations\201802091834415_CultureInfo2.Designer.cs">
+      <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -330,6 +359,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\CultureInfoModel.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\CryptoChargeAccount.cs" />
     <Compile Include="Models\CryptoCurrencyTransaction.cs" />
@@ -381,6 +411,7 @@
     <Compile Include="Models\InterfacesRepository\IPermission.cs" />
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
+    <Compile Include="Models\InterfacesRepository\ICultureInfo.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ISchedule.cs" />
     <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
@@ -434,6 +465,7 @@
     <Compile Include="PersistanceRepository\PermissionRepository.cs" />
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
+    <Compile Include="PersistanceRepository\CultureInfoRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
@@ -980,6 +1012,81 @@
     <Content Include="Octagon\assets\vendor\morrisjs\morris.min.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.js" />
     <Content Include="Octagon\assets\vendor\raphael\raphael.min.js" />
+    <Content Include="Octagon\i18n\datepicker-af.js" />
+    <Content Include="Octagon\i18n\datepicker-ar-DZ.js" />
+    <Content Include="Octagon\i18n\datepicker-ar.js" />
+    <Content Include="Octagon\i18n\datepicker-az.js" />
+    <Content Include="Octagon\i18n\datepicker-be.js" />
+    <Content Include="Octagon\i18n\datepicker-bg.js" />
+    <Content Include="Octagon\i18n\datepicker-bs.js" />
+    <Content Include="Octagon\i18n\datepicker-ca.js" />
+    <Content Include="Octagon\i18n\datepicker-cs.js" />
+    <Content Include="Octagon\i18n\datepicker-cy-GB.js" />
+    <Content Include="Octagon\i18n\datepicker-da.js" />
+    <Content Include="Octagon\i18n\datepicker-de.js" />
+    <Content Include="Octagon\i18n\datepicker-el.js" />
+    <Content Include="Octagon\i18n\datepicker-en-AU.js" />
+    <Content Include="Octagon\i18n\datepicker-en-GB.js" />
+    <Content Include="Octagon\i18n\datepicker-en-NZ.js" />
+    <Content Include="Octagon\i18n\datepicker-en-US.js" />
+    <Content Include="Octagon\i18n\datepicker-eo.js" />
+    <Content Include="Octagon\i18n\datepicker-es.js" />
+    <Content Include="Octagon\i18n\datepicker-et.js" />
+    <Content Include="Octagon\i18n\datepicker-eu.js" />
+    <Content Include="Octagon\i18n\datepicker-fa.js" />
+    <Content Include="Octagon\i18n\datepicker-fi.js" />
+    <Content Include="Octagon\i18n\datepicker-fo.js" />
+    <Content Include="Octagon\i18n\datepicker-fr-CA.js" />
+    <Content Include="Octagon\i18n\datepicker-fr-CH.js" />
+    <Content Include="Octagon\i18n\datepicker-fr.js" />
+    <Content Include="Octagon\i18n\datepicker-gl.js" />
+    <Content Include="Octagon\i18n\datepicker-he.js" />
+    <Content Include="Octagon\i18n\datepicker-hi.js" />
+    <Content Include="Octagon\i18n\datepicker-hr.js" />
+    <Content Include="Octagon\i18n\datepicker-hu.js" />
+    <Content Include="Octagon\i18n\datepicker-hy.js" />
+    <Content Include="Octagon\i18n\datepicker-id.js" />
+    <Content Include="Octagon\i18n\datepicker-is.js" />
+    <Content Include="Octagon\i18n\datepicker-it-CH.js" />
+    <Content Include="Octagon\i18n\datepicker-it.js" />
+    <Content Include="Octagon\i18n\datepicker-ja.js" />
+    <Content Include="Octagon\i18n\datepicker-ka.js" />
+    <Content Include="Octagon\i18n\datepicker-kk.js" />
+    <Content Include="Octagon\i18n\datepicker-km.js" />
+    <Content Include="Octagon\i18n\datepicker-ko.js" />
+    <Content Include="Octagon\i18n\datepicker-ky.js" />
+    <Content Include="Octagon\i18n\datepicker-lb.js" />
+    <Content Include="Octagon\i18n\datepicker-lt.js" />
+    <Content Include="Octagon\i18n\datepicker-lv.js" />
+    <Content Include="Octagon\i18n\datepicker-mk.js" />
+    <Content Include="Octagon\i18n\datepicker-ml.js" />
+    <Content Include="Octagon\i18n\datepicker-ms.js" />
+    <Content Include="Octagon\i18n\datepicker-nb.js" />
+    <Content Include="Octagon\i18n\datepicker-nl-BE.js" />
+    <Content Include="Octagon\i18n\datepicker-nl.js" />
+    <Content Include="Octagon\i18n\datepicker-nn.js" />
+    <Content Include="Octagon\i18n\datepicker-no.js" />
+    <Content Include="Octagon\i18n\datepicker-pl.js" />
+    <Content Include="Octagon\i18n\datepicker-pt-BR.js" />
+    <Content Include="Octagon\i18n\datepicker-pt.js" />
+    <Content Include="Octagon\i18n\datepicker-rm.js" />
+    <Content Include="Octagon\i18n\datepicker-ro.js" />
+    <Content Include="Octagon\i18n\datepicker-ru.js" />
+    <Content Include="Octagon\i18n\datepicker-sk.js" />
+    <Content Include="Octagon\i18n\datepicker-sl.js" />
+    <Content Include="Octagon\i18n\datepicker-sq.js" />
+    <Content Include="Octagon\i18n\datepicker-sr-SR.js" />
+    <Content Include="Octagon\i18n\datepicker-sr.js" />
+    <Content Include="Octagon\i18n\datepicker-sv.js" />
+    <Content Include="Octagon\i18n\datepicker-ta.js" />
+    <Content Include="Octagon\i18n\datepicker-th.js" />
+    <Content Include="Octagon\i18n\datepicker-tj.js" />
+    <Content Include="Octagon\i18n\datepicker-tr.js" />
+    <Content Include="Octagon\i18n\datepicker-uk.js" />
+    <Content Include="Octagon\i18n\datepicker-vi.js" />
+    <Content Include="Octagon\i18n\datepicker-zh-CN.js" />
+    <Content Include="Octagon\i18n\datepicker-zh-HK.js" />
+    <Content Include="Octagon\i18n\datepicker-zh-TW.js" />
     <Content Include="Scripts\addgroup.js" />
     <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1189,10 +1296,16 @@
     <Content Include="Content\quicksearch\README.md" />
     <Content Include="ClassDiagram1.cd" />
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
+    <Content Include="Octagon\i18n\datepicker-es-AR.json" />
     <None Include="Properties\PublishProfiles\OctagonPlatform2 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\OctagonPlatform20180201043819 - Web Deploy.pubxml" />
+    <Content Include="Views\ReportsSmart\ScriptsReport.cshtml" />
+    <Content Include="Views\CultureInfo\Create.cshtml" />
+    <Content Include="Views\CultureInfo\Delete.cshtml" />
+    <Content Include="Views\CultureInfo\Details.cshtml" />
+    <Content Include="Views\CultureInfo\Edit.cshtml" />
+    <Content Include="Views\CultureInfo\Index.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1466,12 +1579,15 @@
     <Content Include="Views\Permissions\Edit.cshtml" />
     <Content Include="Views\Permissions\Index.cshtml" />
     <Content Include="Views\Permissions\Sections\PermissionTree.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Octagon\assets\css\less\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1510,8 +1626,11 @@
     <EmbeddedResource Include="Migrations\201801182242167_cascadeschedule.resx">
       <DependentUpon>201801182242167_cascadeschedule.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801301558546_merge2.resx">
-      <DependentUpon>201801301558546_merge2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802051657495_requirednamereport.resx">
+      <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802091834415_CultureInfo2.resx">
+      <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

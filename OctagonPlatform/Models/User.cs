@@ -73,7 +73,7 @@ namespace OctagonPlatform.Models
         public string UpdatedByName { get; set; }
         public string CreatedByName { get; set; }
         public string DeletedByName { get; set; }
-
+        public string TimeZoneInfo { get; set; }
         public User()
         {
             Permissions = new Collection<Permission>();

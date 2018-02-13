@@ -85,11 +85,13 @@ namespace OctagonPlatform.PersistanceRepository
             return list;
 
         }
-        public async Task<List<JsonTerminalStatusReport>> TerminalStatus(string[] listtn = null)
+        public async Task<List<JsonTerminalStatusReport>> TerminalStatus(TimeSpan utcoffset,string[] listtn = null)
         {
             HttpResponseMessage response = null;
-            string listtn2 = listtn != null ? string.Join(",", listtn) : "0";            
-            response = await client.GetAsync(uri + "request/terminalstatus/" + listtn2);
+            string listtn2 = listtn != null ? string.Join(",", listtn) : "0";
+            string utc = utcoffset.ToString();
+            string utc2 = utc.Remove(utc.Length - 3).Replace(':','_');
+            response = await client.GetAsync(uri + "request/terminalstatus/" + utc2 +"/"+ listtn2);
             List<JsonTerminalStatusReport> list = new List<JsonTerminalStatusReport>();
             //Checking the response is successful or not which is sent using HttpClient  
             if (response != null && response.IsSuccessStatusCode)

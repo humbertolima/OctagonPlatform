@@ -44,7 +44,8 @@ namespace OctagonPlatform.Models
         public DbSet<ReportFilter> ReportFilters { get; set; }
         public DbSet<FilterModel> Filters { get; set; }
         public DbSet<SubscriptionModel> Subscriptions { get; set; }
-        
+        public DbSet<CultureInfoModel> CultureInfoModels { get; set; }
+
         public ApplicationDbContext()
             : base("LocalConection")
         {

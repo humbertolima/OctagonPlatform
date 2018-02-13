@@ -6,16 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Newtonsoft.Json;
 using OctagonPlatform.Helpers;
 using OctagonPlatform.Models;
 using OctagonPlatform.Models.FormsViewModels;
 using OctagonPlatform.Models.InterfacesRepository;
+using OctagonPlatform.PersistanceRepository;
 using OctagonPlatform.Views.Schedule;
 
 namespace OctagonPlatform.Controllers.Reports
 {
-    public class ScheduleController : Controller
+    public class ScheduleController : BaseController
     {
         private ISchedule _repo;
         private readonly IUserRepository _userRepository;
@@ -30,13 +32,15 @@ namespace OctagonPlatform.Controllers.Reports
         }
 
         // GET: ScheduleOnces
-        public ActionResult Index()
+        public ActionResult Index(string userid)
         {
-            
+            int _userid = string.IsNullOrEmpty(userid) ? Convert.ToInt32(Session["UserId"]) : Convert.ToInt32(userid);
+            User user = _userRepository.GetReportsUser(_userid);
+            //DateTime time = Utils.ToTimeZoneTime(DateTime.Now, user.TimeZoneInfo);
             ScheduleVM vmodel = new ScheduleVM();
-            vmodel.List = _repo.GetScheduleByUser(Convert.ToInt32(Session["UserId"]));
-            vmodel.User = Session["userName"]+" - "+ Session["Name"] +" - "+ Session["businessName"].ToString();
-            vmodel.UserId =Convert.ToInt32( Session["UserId"]);
+            vmodel.List = _repo.GetScheduleByUser(_userid);
+            vmodel.User = user.UserName+" - "+ user.Name +" - "+ user.Partner.BusinessName;
+            vmodel.UserId =Convert.ToInt32(_userid);
             return View(vmodel);
         }
         // GET: ScheduleOnces/Create
@@ -55,6 +59,7 @@ namespace OctagonPlatform.Controllers.Reports
         // GET: ScheduleOnces/Create
         public PartialViewResult Create(string userId)
         {
+           
             ScheduleViewModel vmodel = new ScheduleViewModel();
             vmodel.UserId = userId;
             return PartialView(vmodel);
@@ -108,7 +113,7 @@ namespace OctagonPlatform.Controllers.Reports
                 User user =_userRepository.FindBy(Convert.ToInt32(vmodel.UserId));
                 model.UserId = user.Id;
                 _repo.Add(model);               
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Schedule", action = "Index", userid = user.Id.ToString() }));
             }
 
             return View(vmodel);
@@ -294,14 +299,14 @@ namespace OctagonPlatform.Controllers.Reports
             }
             return true;
         }
-
+        //Add item in table reportfilter 
         private void AddReportFilters(IEnumerable<SubscriptionModel> subscriptions, Schedule model1,int UserId,int ID)
         {
             model1.UserId = UserId;
             _repo.Add(model1);
             foreach (var item in subscriptions)
             {
-                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId);
+                SubscriptionModel subs = new SubscriptionModel(item.Email, item.Description, item.EmailComment, model1.ID, item.UserId,item.Format);
 
                 _repoSub.Add(subs);
                 foreach (var filter in item.ReportFilters)

@@ -26,6 +26,8 @@ namespace OctagonPlatform.Models.FormsViewModels
         [HiddenInput]
         public int CityId { get; set; }
         public string ZipCode { get; set; }
+        [HiddenInput]
+        public int UserId { get; set; }
         public TerminalStatusViewModel()
         {            
             PartnerId = -1;

@@ -19,7 +19,7 @@ using OctagonPlatform.PersistanceRepository;
 
 namespace OctagonPlatform.Controllers.Reports
 {
-    public class SubscriptionController : Controller
+    public class SubscriptionController : BaseController
     {
         private ISubscription _repo;
         private ISchedule _repoScheduled;
@@ -82,13 +82,14 @@ namespace OctagonPlatform.Controllers.Reports
                
                 subscriptions = _repo.GetSubscriptionsParent(partnerId);
             }
-              
+           
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
                 ReportId = new SelectList(listrepost, "Id", "Name")
+               
             };
 
             IEnumerable<Schedule> listscheduled = userId > 0 ?_repoScheduled.GetScheduleByUser(userId):_repoScheduled.GetScheduleByParent(partnerId);
@@ -106,26 +107,30 @@ namespace OctagonPlatform.Controllers.Reports
     private List<SubsTableViewModel> ProcessSubscription(IEnumerable<Subreport> list)
         {
             List<SubsTableViewModel> aux = new List<SubsTableViewModel>();
+           
             foreach (var item2 in list)
             {
                 var item = item2.Model;
                 if (item.ReportFilters != null && item.Schedule !=null)
                 {
                     Schedule schedule = item.Schedule;
+                   
                     string reportname = "";
-                    if (item.ReportFilters != null)
-                     reportname = item.ReportFilters.First().Report.Name;
+                    if (item.ReportFilters != null && item.ReportFilters.Count > 0)                    
+                        reportname = item.ReportFilters.First().Report.Name;
+                   
                     SubsTableViewModel obj = new SubsTableViewModel()
-                    {
-                        ReportName = reportname,
-                        Description = item.Description,
-                        ScheduleName = item.Schedule.Name,
-                        Username = item2.Username,
-                        NextRunDate = NextRunDate(schedule),
-                        LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
-                        Id = item.Id
-                    };                   
-                    aux.Add(obj);     
+                        {
+                            ReportName = reportname,
+                            Description = item.Description,
+                            ScheduleName = item.Schedule.Name,
+                            Username = item2.Username,
+                            NextRunDate = Utils.NextRunDateSchedule(schedule) == null ? "One Execution": Utils.NextRunDateSchedule(schedule).ToString(),
+                            LastRunDate = "Tomar la ejecucion real",//LastRunDate(schedule),
+                            Id = item.Id
+                        };
+                        aux.Add(obj);
+                  
 
                 }
 
@@ -133,164 +138,13 @@ namespace OctagonPlatform.Controllers.Reports
             return aux;
         }
 
-        private string NextRunDate(Schedule schedule)
-        {
-            string datestart = schedule.StartDate.ToShortDateString();
-            string daterun = "";
-            DateTime today = DateTime.Now;
-            if (schedule is ScheduleOnce)
-            {
-                datestart += " " + ((ScheduleOnce)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                    daterun = "One execution";
-            }
-            if (schedule is ScheduleDaily)
-            {
-                datestart += " " + ((ScheduleDaily)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {                    
-                    string nextday = today.AddDays(((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
-                    daterun = nextday +" " + ((ScheduleDaily)schedule).Time; 
-                }
-            }
-            if (schedule is ScheduleWeekly)
-            {
-                datestart += " " + ((ScheduleWeekly)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleWeekly week = ((ScheduleWeekly)schedule);
-                    string[] days = week.RepeatOnDaysWeeks.Split('_');
-                    int days_week = week.RepeatOnWeeks * 7;
-                    DateTime nextweek = today.AddDays(days_week);
-                    DateTime first_date_week = Utils.GetFirstDayOfWeek(nextweek);
-                    DateTime nextrun = GetNextRun(first_date_week, days[0]);                 
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleWeekly)schedule).Time;
-                   
-                }
-            }
-            if (schedule is ScheduleMonthly)
-            {
-                datestart += " " + ((ScheduleMonthly)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleMonthly month = ((ScheduleMonthly)schedule);
-                    int day = month.RepeatOnDay;
-                    int every_month = month.RepeatOnMonth;
-
-                    DateTime next_month = today.AddMonths(every_month);
-
-                    daterun = next_month.Month + "/" + day + "/" + next_month.Year + " " + ((ScheduleMonthly)schedule).Time;
-
-                }
-            }
-            if (schedule is ScheduleMonthlyRelative)
-            {
-                datestart += " " + ((ScheduleMonthlyRelative)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                {
-                    ScheduleMonthlyRelative month_relative = ((ScheduleMonthlyRelative)schedule);
-                    int first =Convert.ToInt32( month_relative.RepeatOnFirst); // 0 is last day
-                    string name_day = month_relative.RepeatOnDay;
-                    int every_month = month_relative.RepeatOnMonth;
-                    DateTime next_month = today.AddMonths(every_month);                   
-                    var firstDayOfMonth = new DateTime(next_month.Year, next_month.Month, 1);
-                   
-                    DateTime nextrun = new DateTime();
-                    DateTime first_date_week = firstDayOfMonth;//si es first == 1 , es la primera semana 
-                    if (first > 1)
-                    {
-                        int days_week = first * 7;
-                        DateTime nextweek = firstDayOfMonth.AddDays(days_week);
-                        first_date_week = Utils.GetFirstDayOfWeek(nextweek);
-                        
-                    }
-                    if (first == 0) //Ultimo del mes
-                    {
-                        var last_week = firstDayOfMonth.AddMonths(1).AddDays(-3);  
-                        first_date_week = Utils.GetFirstDayOfWeek(last_week);                       
-                    }
-                  
-                    nextrun = GetNextRunMonth(first_date_week, name_day);
-                    daterun = nextrun.ToShortDateString() + " " + ((ScheduleMonthlyRelative)schedule).Time;
-
-                }
-            }
-            return daterun;
-        }
-
-        private DateTime GetNextRun(DateTime date_week, string dayrun)
-        {
-            if (dayrun != "Day" && dayrun != "week_day")
-            {
-                string day = date_week.DayOfWeek.ToString().Substring(0, 3);
-                dayrun = dayrun == "weekend_day" ? "Sat" : dayrun;
-                if (day == dayrun)
-                    return date_week;
-                else
-                {
-                    DateTime next = date_week.AddDays(1);
-                    return GetNextRun(next, dayrun);
-                }
-            }
-            return date_week;
-          
-
-        }
-        private DateTime GetNextRunMonth(DateTime date_week, string dayrun)
-        {
-
-            string day = date_week.DayOfWeek.ToString().Substring(0, 3);
-            if (day == dayrun)
-                return date_week;
-            else
-            {
-                DateTime next = date_week.AddDays(1);
-                return GetNextRun(next, dayrun);
-            }
-
-        }
+       
         //arreglar esta funcion para que tome el tiempo real de ejecucion de la subscription
         private string LastRunDate(Schedule schedule)
         {
             string datestart = schedule.StartDate.ToShortDateString();
             string daterun = "";
-            DateTime today = DateTime.Now;
-            if (schedule is ScheduleOnce)
-            {
-                datestart += " " + ((ScheduleOnce)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt < DateTime.Now)
-                    daterun = dt.ToString();
-                else
-                    daterun = "Not execution yet";
-            }
-            if (schedule is ScheduleDaily)
-            {
-                datestart += " " + ((ScheduleDaily)schedule).Time;
-                DateTime dt = Convert.ToDateTime(datestart);
-                if (dt > DateTime.Now)
-                    daterun = "Not execution yet";
-                else
-                {
-                    string nextday = today.AddDays(-((ScheduleDaily)schedule).RepeatOn).ToShortDateString();
-                    daterun = nextday + " " + ((ScheduleDaily)schedule).Time;
-                }
-            }
+           
             return daterun;
         }
 
@@ -324,12 +178,11 @@ namespace OctagonPlatform.Controllers.Reports
         {
             if (ModelState.IsValid)
             {
-                int scheduledId = Convert.ToInt32(model.GetValue("ScheduledId").AttemptedValue);
-                int reportid = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
-               
+                string scheduledId = model.GetValue("ScheduledId").AttemptedValue;
+                string reportid = model.GetValue("ReportId").AttemptedValue;               
                 string email = model.GetValue("Email").AttemptedValue;
                
-                if (scheduledId > 0 && IsValidEmail(email) && reportid > 0)
+                if (scheduledId != string.Empty && IsValidEmail(email) && reportid != string.Empty)
                 {
                    
                       return  SaveSubscriptionsByUser(model);
@@ -337,11 +190,11 @@ namespace OctagonPlatform.Controllers.Reports
                 }
                 else
                 {
-                    if (scheduledId <= 0)
+                    if (string.IsNullOrEmpty(scheduledId))
                         ModelState.AddModelError("ScheduledId", "Please Select a Schedule");
                     if (!IsValidEmail(email))
                         ModelState.AddModelError("Email", "Please Enter a Valid Email Address");
-                    if (reportid <= 0)
+                    if (string.IsNullOrEmpty(reportid))
                         ModelState.AddModelError("Report", "Please Select a Report");
                 }
             }
@@ -359,7 +212,7 @@ namespace OctagonPlatform.Controllers.Reports
             int userid = model.GetValue("userId").AttemptedValue == string.Empty ? 0 : Convert.ToInt32(model.GetValue("userId").AttemptedValue);
             string subId = model.GetValue("subId").AttemptedValue;
             int reportId = Convert.ToInt32(model.GetValue("ReportId").AttemptedValue);
-            
+           
             try
             {
                 if (userid > 0)
@@ -394,16 +247,16 @@ namespace OctagonPlatform.Controllers.Reports
         //crear el Subscription con los filters correspondientes
           private void FullAddModel(string email, string description, string emailComment, int scheduleId, int userId, int reportId, FormCollection model,int subId = 0)
         {
-
+            string format = model.GetValue("Format").AttemptedValue; // 0 es excel y 1 es pdf
             SubscriptionModel submodel = null;
             if (subId == 0) //Si es Add
             {
-                submodel = new SubscriptionModel(email, description, emailComment, scheduleId, userId);
+                submodel = new SubscriptionModel(email, description, emailComment, scheduleId, userId,format);
                 _repo.Add(submodel);
             }
             else
             {                
-                submodel = Edit(subId, email, description, emailComment, scheduleId);
+                submodel = Edit(subId, email, description, emailComment, scheduleId,format);
             }
             bool entro = false;
             for (int i = 0; i < model.Count; i++)
@@ -470,13 +323,14 @@ namespace OctagonPlatform.Controllers.Reports
             _repoReportfilter.Add(reportfilter);
         }
 
-        private SubscriptionModel Edit(int subId,string email,string description,string emailComment,int scheduleId)
+        private SubscriptionModel Edit(int subId,string email,string description,string emailComment,int scheduleId,string format)
         {
             SubscriptionModel model = _repo.GetSubscriptionById(subId);
             model.Email = email;
             model.Description = description;
             model.EmailComment = emailComment;
             model.ScheduleId = scheduleId;
+            model.Format = format;
             _repo.Edit(model);
             return model;
         }
@@ -519,13 +373,15 @@ namespace OctagonPlatform.Controllers.Reports
                 usern = user.UserName + " - " + user.Name + " - " + bussinesname;
             // listrepost = user.Reports.ToList();
             ReportModel report = subscriptionModel.ReportFilters.First().Report;
-
+            
             SubscriptionVM vmodel = new SubscriptionVM()
             {
                 List = ProcessSubscription(subscriptions),
                 User = usern,
                 UserId = userId,
-                ReportId = new SelectList(listrepost, "Id", "Name", report.Id)
+                ReportId = new SelectList(listrepost, "Id", "Name", report.Id) ,
+                Format = subscriptionModel.Format
+
             };
 
             IEnumerable<Schedule> listscheduled =  _repoScheduled.GetScheduleByUser(userId) ;

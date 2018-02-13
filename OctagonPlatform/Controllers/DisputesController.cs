@@ -3,10 +3,11 @@ using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.Models;
 using System;
 using OctagonPlatform.Models.FormsViewModels;
+using OctagonPlatform.PersistanceRepository;
 
 namespace OctagonPlatform.Controllers
 {
-    public class DisputesController : Controller
+    public class DisputesController : BaseController
     {
         private readonly IDisputeRepository _DisputeRepository;
         private readonly ITerminalRepository _TerminalRepository;
@@ -33,7 +34,8 @@ namespace OctagonPlatform.Controllers
             {
                 var disputeVM = _DisputeRepository.GetTerminalTransaction(terminalId);
 
-                disputeVM.LastDayToRepresent = DateTime.Now.AddDays(15);
+              
+                disputeVM.LastDayToRepresent = Utils.ToTimeZoneTime(DateTime.Now.AddDays(15), UserSession.TimeZoneInfo);
 
                 if (disputeVM != null) return View("Create", disputeVM);
                 ViewBag.Error = "Terminal not found. ";

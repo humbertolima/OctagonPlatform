@@ -8,6 +8,15 @@ namespace OctagonPlatform.Models.FormsViewModels
 {
     public class SubscriptionVM
     {
+        public SubscriptionVM()
+        {
+            FormatList = new List<SelectListItem>()
+            {
+               new SelectListItem{ Value="excel",Text="Excel"},
+               new SelectListItem{ Value="pdf",Text="PDF"}
+            };
+        }
+
         public List<SubsTableViewModel> List { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
@@ -19,7 +28,9 @@ namespace OctagonPlatform.Models.FormsViewModels
 
         public SelectList ReportId { get; set; }
         public SelectList ScheduledId { get; set; }
-    
+        public List<SelectListItem> FormatList { get; set; }
+        public string Format { get; set; }
+
     }
     public class SubsTableViewModel
     {

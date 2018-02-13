@@ -1,14 +1,30 @@
 ﻿<div id="error">
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">
-        <strong>@TempData["Success"]</strong>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>@TempData["Success"]</strong>
+        </div>
+    }
+    @if (TempData["Danger"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>@TempData["Danger"]</strong>
+        </div>
+    }
+    @if (TempData["Warning"] != null)
+    {
+        <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+            <strong>Warning!</strong> TempData["Warning"]
+        </div>
+    }
+
     </div>
-}
-@if (TempData["Danger"] != null)
-{
-    <div class="alert alert-danger">
-        <strong>@TempData["Danger"]</strong>
-    </div>
-}
-</div>
+
+<script>
+    $(function () {
+        $('#error').fadeIn('slow', function () {
+            $('#error').fadeOut(7000);
+        });
+    })
+
+</script>

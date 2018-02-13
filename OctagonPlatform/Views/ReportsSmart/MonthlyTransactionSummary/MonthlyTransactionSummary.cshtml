@@ -4,6 +4,25 @@
     ViewBag.Title = "Monthly Transaction Summary";
 
 
+    string culturefile = "datepicker-" + ViewBag.Culture + ".json";
+
+    var yeacurrent = DateTime.Now.Year;
+    var yearold = yeacurrent - 5;
+    var text = " ,\"changeMonth\": true,\"changeYear\": true, \"yearRange\": \"" + yearold + ":" + yeacurrent + "\" }";
+
+    string culturejsontext = System.IO.File.ReadAllText(Server.MapPath(@"~/Octagon/i18n/" + culturefile)).Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("\t", "").Replace("}", text);
+
+
+
+    try
+    {
+        var tmpObj = Newtonsoft.Json.Linq.JToken.Parse(culturejsontext);
+    }
+    catch (FormatException fex)
+    {
+        culturejsontext = "{}";
+    }
+
 }
 <p></p>
 <div class="panel panel-primary">
@@ -14,17 +33,17 @@
     <div class="panel-body">
 
         @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.Partial("MonthlyTransactionSummary/_PartialForm", Model)
+        {
+            @Html.AntiForgeryToken()
+            @Html.Partial("_PartialForm", Model)
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10" style="text-align: right;">
-                <input type="submit" value="Filter" class="btn btn-primary" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10" style="text-align: right;">
+                    <input type="submit" value="Filter" class="btn btn-primary" />
+                </div>
             </div>
-        </div>
-      
-}
+
+        }
 
     </div>
 </div>
@@ -37,12 +56,35 @@
         </div>
         <div class="panel-body">
             <div style="display:none" id="idhead">
-                @Html.Partial("_PartialHead", null, new ViewDataDictionary { { "Title", "Monthly Transaction Summary" }, { "from", @TempData["from"] }, { "to", @TempData["to"] } })
+                @Html.Partial("../_PartialHead", null, new ViewDataDictionary { { "Title", "Monthly Transaction Summary" }, { "from", @TempData["from"] }, { "to", @TempData["to"] } })
 
             </div>
-            @Html.Partial("_PartialTableMonthlyTransaction", null, new ViewDataDictionary { { "orientation", "Landscape" } })
+            @if (TempData["List"] != null)
+            {
+                <!-- Single button -->
 
+                <div class="row">
+                    <div class="col-sm-9"></div>
+                    <div class="col-sm-3" style="text-align: right;">
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button type="button" class="btn btn-danger" onclick="$('#pdf').click();" style="border-radius: 0px;"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i> PDF</button>
+                            <button type="button" class="btn btn-success" onclick="Export('@(TempData["filename"] + ".xls")'  ,'','grid','Landscape');" style="border-radius: 0px;"><i class="fa fa-file-excel-o fa-2x" aria-hidden="true"></i> XLS</button>
+                            <button type="button" class="btn btn-primary" onclick="Export('@(TempData["filename"] + ".doc")'  ,'idhead','grid','Landscape');" style="border-radius: 0px;"><i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i> DOC</button>
 
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            }
+            @Html.Partial("../_PartialTableMonthlyTransaction")
+            @using (Html.BeginForm("Export", "Reports", FormMethod.Post))
+            {
+                <input type="hidden" name="html" />
+                <input type="hidden" name="filename" value="@(TempData["filename"]+".pdf")" />
+                <input type="hidden" name="orientation" value="Landscape" />
+                <input type="submit" id="pdf" onclick="ExportPdf('idhead','grid');" value="" style="display:none" />
+
+            }
 
             <div>
                 @Html.ActionLink("Back to List", "Index")
@@ -58,29 +100,29 @@ else
     </div>
 }
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/autocomplete.js")
+    @Html.Partial("../ScriptsReport")
     <script>
 
-      
+
 
     $(function () {
-
-
-        var yeacurrent = (new Date()).getFullYear();
-        var yearold = yeacurrent - 5;
-        $("#EndDate").datepicker({
-            dateFormat: "mm/dd/yy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: yearold + ":" + yeacurrent
-        });
-        $("#StartDate").datepicker({
-            dateFormat: "mm/dd/yy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: yearold + ":" + yeacurrent
-        });
+        var json_culture = @Html.Raw(culturejsontext);
+     
+        $("#StartDate").datepicker(json_culture);
+        $("#EndDate").datepicker(json_culture);
+    
+        //$("#EndDate").datepicker({
+        //    dateFormat: "mm/dd/yy",
+        //    changeMonth: true,
+        //    changeYear: true,
+        //    yearRange: yearold + ":" + yeacurrent
+        //});
+        //$("#StartDate").datepicker({
+        //    dateFormat: "mm/dd/yy",
+        //    changeMonth: true,
+        //    changeYear: true,
+        //    yearRange: yearold + ":" + yeacurrent
+        //});
           callankle();
           var tempdataval = '@TempData["List"]';
           if (tempdataval != null && tempdataval != '') {

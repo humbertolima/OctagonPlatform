@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers
 {
-    public class TerminalMessagesController : Controller
+    public class TerminalMessagesController : BaseController
     {
         // GET: TerminalMessages
         public ActionResult Index(string terminalId)

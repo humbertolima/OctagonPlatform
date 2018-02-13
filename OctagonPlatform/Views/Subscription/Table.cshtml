@@ -1,80 +1,91 @@
 ﻿@model OctagonPlatform.Models.FormsViewModels.SubscriptionVM
 @using OctagonPlatform.Models;
 
-<table class="table">
-    <tr>
-        <th>
-            Report
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-
-        </th>
-        <th>
-            Schedule
-        </th>
-        <th>
-            Created By
-        </th>
-        <th>Next Run Date (CST)</th>
-        <th>Last Run Date (CST)</th>
-    </tr>
-
-    @foreach (var item in Model.List)
+@{
+    if (Model.List.Count() > 0)
     {
-        <tr>
-            <td>
-                @Ajax.ActionLink(item.ReportName, "Edit", new { id = item.Id },
-        new AjaxOptions
-        {
-            HttpMethod = "GET",
-            UpdateTargetId = "SubscriptionList",
-            InsertionMode = InsertionMode.Replace,
-            OnSuccess = "SuccessEdit(data, " + item.Id + ");"
-        })
+        <table class="table">
+            <tr>
+                <th>
+                    Report
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
 
-             
+                </th>
+                <th>
+                    Schedule
+                </th>
+                <th>
+                    Created By
+                </th>
+                <th>Next Run Date (CST)</th>
+                <th>Last Run Date (CST)</th>
+            </tr>
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
+            @foreach (var item in Model.List)
+            {
+                <tr>
+                    <td>
+                        @Ajax.ActionLink(item.ReportName, "Edit", new { id = item.Id },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                UpdateTargetId = "SubscriptionList",
+                                InsertionMode = InsertionMode.Replace,
+                                OnSuccess = "SuccessEdit(data, " + item.Id + ");"
+                            })
 
-                @Html.DisplayFor(modelItem => item.ScheduleName)
 
-            </td>
 
-            <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
 
-                @Html.DisplayFor(modelItem => item.Username)
+                        @Html.DisplayFor(modelItem => item.ScheduleName)
 
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NextRunDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastRunDate)
-            </td>
-            <td>
+                    </td>
 
-              
+                    <td>
 
-                @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
-                    new AjaxOptions
-                    {
-                        HttpMethod = "POST",
-                        UpdateTargetId = "SubscriptionList",
-                        InsertionMode = InsertionMode.Replace,
-                        Confirm = "Are you Sure You Want to Delete " + @item.ReportName
-                    },
-                    new { @class = "btn btn-danger glyphicon glyphicon-trash" })
-            </td>
-        </tr>
+                        @Html.DisplayFor(modelItem => item.Username)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NextRunDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastRunDate)
+                    </td>
+                    <td>
+
+
+
+                        @Ajax.ActionLink(" ", "Delete", new { id = item.Id },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "SubscriptionList",
+                                            InsertionMode = InsertionMode.Replace,
+                                            Confirm = "Are you Sure You Want to Delete " + @item.ReportName
+                                        },
+                                        new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                    </td>
+                </tr>
+            }
+
+        </table>
     }
-
-</table>
-
+    else
+    {
+        <div class="alert alert-warning" style="width:50%;position:relative;margin:0 auto;">
+            <strong>Warning!</strong> Not record available
+        </div>
+    }
+}
+<div id="message"></div>
 @using (Html.BeginForm("Create", "Subscription", FormMethod.Post, new { @id = "FormSub" }))
 {
     @Html.AntiForgeryToken()
@@ -90,6 +101,16 @@
                 </div>
             </div>
             <div id="PartialFilter"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Format, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+
+                    @Html.DropDownListFor(model => model.Format, Model.FormatList, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <h3>Scheduling</h3>   <hr />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OctagonPlatform.PersistanceRepository;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace OctagonPlatform.Helpers
@@ -70,5 +72,108 @@ namespace OctagonPlatform.Helpers
                 throw;
             }
         }
+    }
+    public class EmailBusiness
+    {
+       
+        public MailAddress from { get; set; }       
+        private SmtpClient smtp;
+        public EmailBusiness()
+        {
+            /* smtp = new SmtpClient()
+            {
+                EnableSsl = true,
+                //WebMail.EnableSsl = true;
+                Port = 25,
+                //WebMail.SmtpPort = 25;
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential("luisrafael.gamez@outlook.com", "Vv19477002"),
+                Host = "smtp.live.com"
+            };*/
+            smtp = new System.Net.Mail.SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Credentials = new System.Net.NetworkCredential("adiel2008@gmail.com", "83082303061")
+            };
+
+           // from = new MailAddress("luisrafael.gamez@outlook.com");
+            from = new MailAddress("adiel2008@gmail.com");
+
+        }
+        public bool ToAdmin( string sub, string body)
+        {
+            
+            var m = new MailMessage()
+            {
+
+                Subject = sub,
+                Body = body,
+                IsBodyHtml = true
+            };
+            MailAddress to = new MailAddress("21241112@dut4life.ac.za", "Administrator");
+            m.To.Add(to);
+            m.From = new MailAddress(from.ToString());
+            m.Sender = to;
+         
+            try
+            {
+                smtp.Send(m);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+           
+        }
+
+        public Task<bool> ToClientAttachmentAsync(string sendTo, string sub, string body, Attachment file)
+        {
+            return Task<bool>.Run(()=> {
+                try
+                {
+                    return ToClientAttachment(sendTo, sub, body, file);
+                }
+                catch (Exception ex) {
+                }
+                return false;
+                
+            });
+
+            //return Task<bool>.Run(() => {
+            //    return ToClientAttachment(sendTo, sub, body, file);
+            //});
+        }
+
+        public bool ToClientAttachment(string sendTo, string sub, string body,Attachment file)
+        {
+
+            var m = new MailMessage()
+            {
+
+                Subject = sub,
+                Body = body,
+                IsBodyHtml = true
+            };
+            MailAddress to = new MailAddress(sendTo);
+            m.To.Add(to);
+            m.From = from;
+            m.Sender = to;
+            m.Attachments.Add(file);
+            try
+            {
+                smtp.Send(m);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
     }
 }

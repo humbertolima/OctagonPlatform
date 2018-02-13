@@ -17,7 +17,7 @@ namespace OctagonPlatform.Models.FormsViewModels
             #region AddSelectItem Time
             list.Add(new SelectListItem { Value = "12:00:00 AM", Text = "12:00:00 AM" });
             list.Add(new SelectListItem { Value = "12:30:00 AM", Text = "12:30:00 AM" });
-            list.Add(new SelectListItem { Value = "1:00:00 AM", Text = "12:00:00 AM" });
+            list.Add(new SelectListItem { Value = "1:00:00 AM", Text = "1:00:00 AM" });
             list.Add(new SelectListItem { Value = "1:30:00 AM", Text = "1:30:00 AM" });
             list.Add(new SelectListItem { Value = "2:00:00 AM", Text = "2:00:00 AM" });
             list.Add(new SelectListItem { Value = "2:30:00 AM", Text = "2:30:00 AM" });
