@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class LogosController : Controller
+    public class LogosController : BaseController
     {
         private readonly ApplicationDbContext _context;
 

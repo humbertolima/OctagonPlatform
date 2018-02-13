@@ -50,14 +50,14 @@
 
 
 @section Scripts {
-
+    @Html.Partial("../ScriptsReport")
     <script>
-        
+
          var urlcreate = '@Url.Action("Create", "Schedule")';
          var list = '@Url.Action("List", "Schedule")';
                 callankle();
         $(function () {
-         
+
             $("#create").click(function () {
 
                 $.get(urlcreate, { userId: $("#userid").val() }, function (data) {
@@ -143,5 +143,5 @@
         }
     </script>
 
-    @Html.Partial("../ScriptsReport")
+
 }

@@ -41,6 +41,7 @@ namespace OctagonPlatform.Controllers.Reports
         {
 
             TempData["sub"] = false;
+            ViewBag.Culture = CultureInfoSession.Name;
             return View("TerminalList");
         }
         [HttpPost]

@@ -43,6 +43,7 @@ namespace OctagonPlatform.Controllers.Reports
             DailyTransactionSummaryViewModel model = new DailyTransactionSummaryViewModel();
             TempData["Chart"] = null;
             TempData["sub"] = false;
+            ViewBag.Culture = CultureInfoSession.Name;
             return View("DailyTransactionSummary", model);
         }
 

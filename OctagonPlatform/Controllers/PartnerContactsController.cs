@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class PartnerContactsController : Controller
+    public class PartnerContactsController : BaseController
     {
         private readonly IPartnerContactRepository _partnerContactRepository;
 

@@ -2,6 +2,19 @@
 @{
     ViewBag.Title = "Report Terminal List";
 
+    string culturefile = "datepicker-" + ViewBag.Culture + ".json";
+
+    string culturejsontext = System.IO.File.ReadAllText(Server.MapPath(@"~/Octagon/i18n/" + culturefile)).Replace("\r\n", "").Replace("\n", "").Replace("\r", "").Replace("\t", "");
+
+
+    try
+    {
+        var tmpObj = Newtonsoft.Json.Linq.JToken.Parse(culturejsontext);
+    }
+    catch (FormatException fex)
+    {
+        culturejsontext = "{}";
+    }
 
 }
 <p></p>
@@ -85,13 +98,11 @@ else
 
         $(function () {
 
+         var json_culture = @Html.Raw(culturejsontext);
 
-            $("#EndDate").datepicker({
-                dateFormat: "mm/dd/yy"
-            });
-            $("#StartDate").datepicker({
-                dateFormat: "mm/dd/yy"
-            });
+         $("#StartDate").datepicker(json_culture);
+         $("#EndDate").datepicker(json_culture);
+         
 
          callankle();
           var tempdataval = '@TempData["List"]';

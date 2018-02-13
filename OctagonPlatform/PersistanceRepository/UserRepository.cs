@@ -526,7 +526,13 @@ namespace OctagonPlatform.PersistanceRepository
              
                
         }
-
+        public User GetUserIncludeCultureInfo(int Id)
+        {
+            
+                return Table.Where(c => c.Id == Id).Include(c => c.Partner.Country.CultureInfo).SingleOrDefault(); 
+           
+           
+        }
 
 
         //public List<UserBAViewModel> GetBAOfUser()

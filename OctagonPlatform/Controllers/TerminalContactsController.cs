@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace OctagonPlatform.Controllers
 {
     [Authorize]
-    public class TerminalContactsController : Controller
+    public class TerminalContactsController : BaseController
     {
         private readonly ITerminalContactRepository _terminalContactRepository;
 

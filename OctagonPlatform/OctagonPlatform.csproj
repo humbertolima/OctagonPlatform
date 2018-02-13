@@ -218,6 +218,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AchBankAccountsApiController.cs" />
     <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\CultureInfoController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\OctagonController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DisputeRepresentsController.cs" />
@@ -342,6 +344,10 @@
     <Compile Include="Migrations\201802051657495_requirednamereport.Designer.cs">
       <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802091834415_CultureInfo2.cs" />
+    <Compile Include="Migrations\201802091834415_CultureInfo2.Designer.cs">
+      <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -350,6 +356,7 @@
     <Compile Include="Models\City.cs" />
     <Compile Include="Models\ContactType.cs" />
     <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\CultureInfoModel.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\CryptoChargeAccount.cs" />
     <Compile Include="Models\CryptoCurrencyTransaction.cs" />
@@ -400,6 +407,7 @@
     <Compile Include="Models\InterfacesRepository\IInterChangeRepository.cs" />
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
+    <Compile Include="Models\InterfacesRepository\ICultureInfo.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ISchedule.cs" />
     <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
@@ -452,6 +460,7 @@
     <Compile Include="PersistanceRepository\InterChangeRepository.cs" />
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
+    <Compile Include="PersistanceRepository\CultureInfoRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
@@ -1211,6 +1220,11 @@
     <None Include="Properties\PublishProfiles\OctagonPlatform20171221062019 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\OctagonPlatform20180130105037 - Web Deploy.pubxml" />
     <Content Include="Views\ReportsSmart\ScriptsReport.cshtml" />
+    <Content Include="Views\CultureInfo\Create.cshtml" />
+    <Content Include="Views\CultureInfo\Delete.cshtml" />
+    <Content Include="Views\CultureInfo\Details.cshtml" />
+    <Content Include="Views\CultureInfo\Edit.cshtml" />
+    <Content Include="Views\CultureInfo\Index.cshtml" />
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1491,6 +1505,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -1531,6 +1546,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802051657495_requirednamereport.resx">
       <DependentUpon>201802051657495_requirednamereport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802091834415_CultureInfo2.resx">
+      <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
