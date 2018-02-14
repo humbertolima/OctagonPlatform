@@ -61,6 +61,7 @@ namespace OctagonPlatform
             container.RegisterType<IReportFilter, ReportFilterRepository>();
             container.RegisterType<IFilter, FilterRepository>();
             container.RegisterType<ICultureInfo, CultureInfoRepository>();
+            //container.RegisterType<IReportGroupTerminal, ReportGroupTerminalRepository>();
 
         }
     }

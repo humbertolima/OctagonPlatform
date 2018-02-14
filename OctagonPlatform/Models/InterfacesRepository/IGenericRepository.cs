@@ -16,6 +16,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         void Delete(object id);
         void Dispose();
         void Save();
+        void Attach(T obj);
         IEnumerable<Partner> GetPartnerByParentId(int parentId);
         IEnumerable<T> FindAllBy(Expression<Func<T, bool>> predicate);
     }

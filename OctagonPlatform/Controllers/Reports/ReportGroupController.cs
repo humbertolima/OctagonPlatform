@@ -10,6 +10,7 @@ using OctagonPlatform.Models;
 using OctagonPlatform.Models.InterfacesRepository;
 using OctagonPlatform.Models.FormsViewModels;
 using Newtonsoft.Json;
+using OctagonPlatform.PersistanceRepository;
 
 namespace OctagonPlatform.Controllers
 {
@@ -18,10 +19,12 @@ namespace OctagonPlatform.Controllers
     {
         private IReportGroup _repo;
         public ITerminalRepository _repotn;
+        //public IReportGroupTerminal _repoMap;
         public ReportGroupController(IReportGroup repo, ITerminalRepository repotn)
         {
             _repo = repo;
             _repotn = repotn;
+           // _repoMap = repoMap;
         }
         // GET: ReportGroupModels
         public ActionResult Index()
@@ -92,6 +95,8 @@ namespace OctagonPlatform.Controllers
               
 
         private bool IsNameExists(string name) => _repo.FindByName(name) != null; // => este operador dice que es una funcion que va a return bool segun la expresion 
+        //private bool IsMapExists(int Terminalid,int ReportgroupId) => _repoMap.FindAllBy(p => p.ReportGroupID == ReportgroupId && p.TerminalID == Terminalid) != null; // => este operador dice que es una funcion que va a return bool segun la expresion 
+
         public ActionResult AutoState(string term)
         {
 
@@ -122,24 +127,62 @@ namespace OctagonPlatform.Controllers
         [HttpPost]
         public JsonResult AsignTerminal(string listtn,string groupSelected, string partner, string state, string city, string zipcode)
         {
-             string[] list = listtn.Split(',');
-             _repotn.EditRange(list,Int32.Parse(groupSelected));     
+            try
+            {
+                string[] list = listtn.Split(',');
 
-            return Json(ListTerminalFilter( groupSelected,  partner,  state,  city,  zipcode));
+                ReportGroupModel report_group = _repo.FindBy(Int32.Parse(groupSelected));
+
+                if (report_group != null)
+                {
+
+                    foreach (string item in list)
+                    {
+                        Terminal tn = _repo.GetTerminal(Int32.Parse(item));
+                        if (tn != null)
+                        {
+                           // tn.ReportGroups.Add(report_group);
+                            report_group.Terminals.Add(tn);
+                            
+                        }
+                       
+                    }
+                }
+                _repo.Save();
+                return Json(ListTerminalFilter(groupSelected, partner, state, city, zipcode));
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+           
         }
         [HttpPost]
         public JsonResult UnasignTerminal(string listtn, string groupSelected, string partner, string state, string city, string zipcode)
         {
             string[] list = listtn.Split(',');
-            _repotn.EditRange(list,null);
+
+            ReportGroupModel report_group = _repo.FindBy(Int32.Parse(groupSelected));
+
+            foreach (string item in list)
+            {
+                Terminal tn = _repotn.FindBy(Int32.Parse(item));
+                report_group.Terminals.Remove(tn);
+            }
+           
+            _repo.Save();
+
+           // _repotn.EditRange(list,null);
 
             return Json(ListTerminalFilter(groupSelected, partner, state, city, zipcode));
         }
         
         private string ListTerminalFilter(string groupSelected, string partner, string state, string city, string zipcode)
         {
-            List<Terminal> unassoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode); //terminals unassociated que tengan groupid null
-            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Int32.Parse(state), Int32.Parse(city), zipcode, Int32.Parse(groupSelected));
+            List<Terminal> assoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Convert.ToInt32(Session["partnerId"]), Int32.Parse(state), Int32.Parse(city), zipcode, 1, Int32.Parse(groupSelected));
+
+            List<Terminal> unassoGroup = _repotn.GetTerminalAssociatedGroup(Int32.Parse(partner), Convert.ToInt32(Session["partnerId"]), Int32.Parse(state), Int32.Parse(city), zipcode,0, Int32.Parse(groupSelected)); //terminals unassociated que tengan groupid null
             List<List<Terminal>> list = new List<List<Terminal>>();
             list.Add(new List<Terminal>(unassoGroup));
             list.Add(new List<Terminal>(assoGroup));

@@ -21,6 +21,7 @@ namespace OctagonPlatform.PersistanceRepository
         {
             Context = new ApplicationDbContext();
             Table = Context.Set<T>();
+           
         }
 
         protected GenericRepository(ApplicationDbContext context)
@@ -121,10 +122,16 @@ namespace OctagonPlatform.PersistanceRepository
 
         public void Save()
         {
-
+           
             Context.SaveChanges();
         }
-
+        public void Attach(T entity)
+        {
+           
+            Table.Attach(entity);
+            Context.Entry(entity).State = EntityState.Modified;
+           
+        }
         public void Dispose()
         {
             Context.Dispose();

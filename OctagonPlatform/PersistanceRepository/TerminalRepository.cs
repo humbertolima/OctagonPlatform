@@ -939,23 +939,30 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int stateid, int cityid, string zipcode, int? groupId = null)
+        public List<Terminal> GetTerminalAssociatedGroup(int partnerId, int partnerIdSession, int stateid, int cityid, string zipcode,int type, int? groupId = null)
         {
 
             try
             {
-                return Table.Where(b => b.ReportGroupId == groupId)
-              .Where(b => partnerId == 0 || b.PartnerId == partnerId)
-              .Where(b => stateid == 0 || b.StateId == stateid)
-              .Where(b => cityid == 0 || b.CityId == cityid)
-              .Where(b => zipcode == "" || b.Zip.ToString() == zipcode)
-              .Include(x => x.Partner).ToList();
+                IEnumerable<Partner> listpartner = partnerId == 0 ? GetPartnerByParentId(partnerIdSession) : GetPartnerByParentId(partnerId);// parentId : terminales del usuario logueado,partnerId: terminales del parnet especifico del filtro
+                var list4 = (from q in listpartner join m in Table.Include(x => x.Partner).Include(p => p.ReportGroups) on q.Id equals m.PartnerId select m).ToList();
 
+                //unassociate group is 0 associate is 1
+                var ass = list4.Where(b => b.ReportGroups.Any(p => p.Id == groupId));
+                var noass = list4.Where(p => !ass.Any(o => o.Id == p.Id));
+                IEnumerable<Terminal> list = type == 1 ? ass : noass;
+              
+                return list.Where(b => partnerId == 0 || b.PartnerId == partnerId)
+                    .Where(b => stateid == 0 || b.StateId == stateid)
+                    .Where(b => cityid == 0 || b.CityId == cityid)
+                    .Where(b => zipcode == "" || b.Zip.ToString() == zipcode)
+                    .ToList();
+                
             }
             catch (Exception e)
             {
 
-                throw new Exception(e.Message);
+                return new List<Terminal>();
             }
         }
 
@@ -1000,24 +1007,24 @@ namespace OctagonPlatform.PersistanceRepository
             }
         }
 
-        public void EditRange(string[] list, int? groupId)
-        {
-            try
-            {
+        //public void EditRange(string[] list, int? groupId)
+        //{
+        //    try
+        //    {
 
-                foreach (string item in list)
-                {
-                    Terminal tn = FindBy(Int32.Parse(item));
-                    tn.ReportGroupId = groupId;
-                    Edit(tn);
-                }
-            }
-            catch (Exception e)
-            {
+        //        foreach (string item in list)
+        //        {
+        //            Terminal tn = FindBy(Int32.Parse(item));
+        //            tn.ReportGroupId = groupId;
+        //            Edit(tn);
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
 
-                throw new NullReferenceException(e.Message);
-            }
-        }
+        //        throw new NullReferenceException(e.Message);
+        //    }
+        //}
 
         public IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId)
         {

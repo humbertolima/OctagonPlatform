@@ -45,6 +45,7 @@ namespace OctagonPlatform.Models
         public DbSet<FilterModel> Filters { get; set; }
         public DbSet<SubscriptionModel> Subscriptions { get; set; }
         public DbSet<CultureInfoModel> CultureInfoModels { get; set; }
+        //public DbSet<ReportGroupsTerminal> ReportGroupsTerminals { get; set; }
 
         public ApplicationDbContext()
             : base("LocalConection")
@@ -79,7 +80,17 @@ namespace OctagonPlatform.Models
           .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Permission>().Property(p => p.ParentID).IsOptional();   //haciendo opcional parent de permission para que pueda ser null.
-            //modelBuilder.Entity<>
+                                                                                        //modelBuilder.Entity<>
+
+
+           // modelBuilder.Entity<Terminal>()
+           //.HasMany(p => p.ReportGroups)
+           //.WithMany(r => r.Terminals)
+           //.Map(m =>
+           //{
+           //    m.ToTable("ReportGroupModelTerminals");
+             
+           //});
         }
 
 

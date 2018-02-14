@@ -86,7 +86,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashList(List<JsonLoadCash> list, StatusType.Status status, int partnerid,int parentId);
        
 
-        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int state, int city, string zipcode, int? groupId = null);
+        List<Terminal> GetTerminalAssociatedGroup(int partnerId, int partnerIdSession, int state, int city, string zipcode,int type, int? groupId = null);
 
         IEnumerable<dynamic> GetAllState(string term);
 
@@ -94,7 +94,7 @@ namespace OctagonPlatform.Models.InterfacesRepository
 
         List<string> GetAllZipCode(string term);
 
-        void EditRange(string[] list, int? groupId);
+        //void EditRange(string[] list, int? groupId);
 
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId);
         IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn, int parentId);

@@ -12,5 +12,6 @@ namespace OctagonPlatform.Models.InterfacesRepository
         object FindByName(string name);
         IEnumerable<dynamic> GetAllGroup(string term,int partnerId);
         ReportGroupModel GetGroupById(int id);
+        Terminal GetTerminal(int v);
     }
 }

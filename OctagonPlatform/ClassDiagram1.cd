@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="OctagonPlatform.Controllers.TerminalsController" Collapsed="true">
-    <Position X="4.75" Y="0.75" Width="2" />
+    <Position X="11.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>BIoAECAAiABBIADAAICAAgYAIAEAAEgKgAkAAABohQA=</HashCode>
       <FileName>Controllers\TerminalsController.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_repository" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="OctagonPlatform.Models.Terminal" Collapsed="true">
-    <Position X="1" Y="0.75" Width="1.5" />
+    <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AGR2MSAFYAEEDMCcAConHIAANgYQQwACFAgMNAIoAgk=</HashCode>
       <FileName>Models\Terminal.cs</FileName>
@@ -16,7 +19,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OctagonPlatform.Helpers.AuditEntity" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.75" Y="2" Width="1.5" />
+    <Position X="0.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAEQAAAAEACAAAACAAAAAAAAAAAgAABAAAAAAAAAE=</HashCode>
       <FileName>Helpers\IAuditEntity.cs</FileName>
@@ -24,32 +27,111 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OctagonPlatform.PersistanceRepository.TerminalRepository" Collapsed="true">
-    <Position X="7" Y="2.25" Width="2" />
+    <Position X="4.25" Y="2" Width="2" />
     <TypeIdentifier>
       <HashCode>AAoCEGCCiAACoAFADACAIgYAIgwAAAhIBEigAAnopAg=</HashCode>
       <FileName>PersistanceRepository\TerminalRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="OctagonPlatform.PersistanceRepository.GenericRepository&lt;T&gt;" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAiBABAgAAAAAQAAAAAEAAAACAIAAAAAAAAA=</HashCode>
+      <FileName>PersistanceRepository\GenericRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OctagonPlatform.PersistanceRepository.Utils" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAIIIAAAAAAAAAAAAAAAAAAgAAAAAEAAAAAAQIAAAAA=</HashCode>
+      <FileName>PersistanceRepository\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctagonPlatform.PersistanceRepository.ErrorCtrl" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAEAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>PersistanceRepository\Utils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctagonPlatform.PersistanceRepository.ApiATM" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAgAAAAAAAIAAAAAAAABAGJAAA=</HashCode>
+      <FileName>PersistanceRepository\ApiATM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OctagonPlatform.Controllers.BaseController" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAUABAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Web.Mvc.Controller">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OctagonPlatform.Controllers.BankAccountController" Collapsed="true">
+    <Position X="11.5" Y="2" Width="1.5" />
+    <InheritanceLine Type="System.Web.Mvc.Controller" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="15" Y="2.5" />
+        <Point X="15" Y="2.125" />
+        <Point X="13.375" Y="2.125" />
+        <Point X="13.375" Y="2.188" />
+        <Point X="13" Y="2.188" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAABAQCAAAAAAAAAAAEAAEACAAEAAAAgAAA=</HashCode>
+      <FileName>Controllers\BankAccountController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_bAccountRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OctagonPlatform.Models.BankAccount" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGACEaAFQCEEDAAIECAEGAAAABoQBgEABBAAJAAAAA0=</HashCode>
+      <FileName>Models\BankAccount.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
   <Interface Name="OctagonPlatform.Models.InterfacesRepository.ITerminalRepository" Collapsed="true">
-    <Position X="5" Y="2.25" Width="1.5" />
+    <Position X="8.25" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAoCEGCCiAACoAFADACAIgYAIgwAAAhIBEigAAnopAg=</HashCode>
       <FileName>Models\InterfacesRepository\ITerminalRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OctagonPlatform.Helpers.IAuditEntity" Collapsed="true">
-    <Position X="0.75" Y="3.25" Width="1.5" />
+    <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAEQAAAAEACAAAACAAAAAAAAAAAgAABAAAAAAAAAE=</HashCode>
       <FileName>Helpers\IAuditEntity.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="OctagonPlatform.Helpers.ISoftDeleted" Collapsed="true">
-    <Position X="2.5" Y="3.25" Width="1.5" />
+    <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Helpers\ISoftDeleted.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="OctagonPlatform.Models.InterfacesRepository.IBankAccountRepository" Collapsed="true">
+    <Position X="8.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAgAAAAAAAAAAAIAAAACAQEAAAAAABgAAA=</HashCode>
+      <FileName>Models\InterfacesRepository\IBankAccountRepository.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

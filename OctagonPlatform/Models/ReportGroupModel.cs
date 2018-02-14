@@ -17,7 +17,27 @@ namespace OctagonPlatform.Models
         public string Name { get; set; }
         public int PartnerId { get; set; }
         public virtual Partner Partner { get; set; }
-        public ICollection<Terminal> Terminals { get; set; }
-       
+        public virtual ICollection<Terminal> Terminals { get; set; }
+        public ReportGroupModel()
+        {
+            Terminals = new List<Terminal>();
+        }
     }
+    //[Table("ReportGroupsTerminal")]
+    //public class ReportGroupsTerminal
+    //{
+    //    public ReportGroupsTerminal(int reportGroupID, int terminalID)
+    //    {
+    //        ReportGroupID = reportGroupID;
+    //        TerminalID = terminalID;
+    //    }
+
+    //    public virtual ReportGroupModel ReportGroup { get; set; }
+    //    [Key, Column(Order = 0)]
+    //    public int ReportGroupID { get; set; }
+
+    //    public virtual Terminal Terminal { get; set; }
+    //    [Key, Column(Order = 1)]
+    //    public int TerminalID { get; set; }
+    //}
 }

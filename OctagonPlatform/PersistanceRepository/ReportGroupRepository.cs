@@ -41,5 +41,10 @@ namespace OctagonPlatform.PersistanceRepository
         {             
             return Table.Where(c => c.Id == id).Include(c => c.Terminals).FirstOrDefault();
         }
+
+        public Terminal GetTerminal(int v)
+        {
+            return Context.Terminals.Where(p => p.Id == v).SingleOrDefault();
+        }
     }
 }

@@ -351,6 +351,10 @@
     <Compile Include="Migrations\201802091834415_CultureInfo2.Designer.cs">
       <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802142203207_relationmanytoman5567ppoopouy.cs" />
+    <Compile Include="Migrations\201802142203207_relationmanytoman5567ppoopouy.Designer.cs">
+      <DependentUpon>201802142203207_relationmanytoman5567ppoopouy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -412,6 +416,7 @@
     <Compile Include="Models\InterfacesRepository\IReportFilter.cs" />
     <Compile Include="Models\InterfacesRepository\IReportGroup.cs" />
     <Compile Include="Models\InterfacesRepository\ICultureInfo.cs" />
+    <Compile Include="Models\InterfacesRepository\IReportGroupTerminal.cs" />
     <Compile Include="Models\InterfacesRepository\IReports.cs" />
     <Compile Include="Models\InterfacesRepository\ISchedule.cs" />
     <Compile Include="Models\InterfacesRepository\ISubscription.cs" />
@@ -466,6 +471,7 @@
     <Compile Include="PersistanceRepository\ReportFilterRepository.cs" />
     <Compile Include="PersistanceRepository\ReportGroupRepository.cs" />
     <Compile Include="PersistanceRepository\CultureInfoRepository.cs" />
+    <Compile Include="PersistanceRepository\ReportGroupTerminalRepository.cs" />
     <Compile Include="PersistanceRepository\ReportsRepository.cs" />
     <Compile Include="PersistanceRepository\ScheduleRepository.cs" />
     <Compile Include="PersistanceRepository\SubscriptionRepository.cs" />
@@ -1631,6 +1637,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802091834415_CultureInfo2.resx">
       <DependentUpon>201802091834415_CultureInfo2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802142203207_relationmanytoman5567ppoopouy.resx">
+      <DependentUpon>201802142203207_relationmanytoman5567ppoopouy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

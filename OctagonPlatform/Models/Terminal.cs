@@ -176,8 +176,8 @@ namespace OctagonPlatform.Models
         [Required]
         public string LocationName { get; set; }
 
-        public int? ReportGroupId { get; set; }
-        public ReportGroupModel ReportGroup { get; set; }
+       
+        public virtual ICollection<ReportGroupModel> ReportGroups { get; set; }
         public DateTime? DateCreated { get; set; }
         public Terminal()
         {
@@ -200,6 +200,7 @@ namespace OctagonPlatform.Models
             TerminalMessages = new Collection<TerminalMessage>();
             WorkingHours = new Collection<TerminalWorkingHours>();
             Pictures = new Collection<Picture>();
+            ReportGroups = new List<ReportGroupModel>();
         }
     }
 }
