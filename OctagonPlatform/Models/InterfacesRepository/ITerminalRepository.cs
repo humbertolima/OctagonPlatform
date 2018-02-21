@@ -99,6 +99,14 @@ namespace OctagonPlatform.Models.InterfacesRepository
         IEnumerable<dynamic> LoadCashMngList(List<JsonCashManagement> list, StatusType.Status status, int partnerId, int parentId);
         IEnumerable<TerminalTableVM> GetTerminalsReport(TerminalListViewModel vmodel, string[] listtn, int parentId);
         IEnumerable<dynamic> TerminalStatus(List<JsonTerminalStatusReport> list, StatusType.Status status, int partnerId, int parentId, int city,int state, string zipcode);
+        /// <summary>
+        /// This funcion retun IEnumerable of the transaction daily for partner
+        /// <para>Select the specified partner's terminals that is present in list</para>
+        /// </summary>
+        /// <param name="list">JsonDailyTransactionSummary obtain of the api ATM</param>
+        /// <param name="partnerid">partnerId:terminals for partner of the filter</param>
+        /// <param name="parentId">parentId : terminals for user loged</param>
+        /// <returns></returns>
         IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerid, int parentId);
         IEnumerable<dynamic> TransMonthlyList(List<JsonMonthlyTransactionSummary> list, int partnerid, int parentId);
         IEnumerable<dynamic> CashBalanceClose(List<JsonCashBalanceClose> list, int partnerId, int parentId);

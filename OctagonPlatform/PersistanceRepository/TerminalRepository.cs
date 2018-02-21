@@ -1114,7 +1114,7 @@ namespace OctagonPlatform.PersistanceRepository
                 throw new Exception("Error database " + e.Message);
             }
         }
-
+       
         public IEnumerable<dynamic> TransDailyList(List<JsonDailyTransactionSummary> list, int partnerId, int parentId)
         {
             try

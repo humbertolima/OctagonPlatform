@@ -25,19 +25,27 @@ using System.Web.Mvc;
 
 namespace OctagonPlatform.Controllers.Reports
 {
+    /// <summary>
+    /// Daily Transaction Summary Report
+    /// </summary>
     [AllowAnonymous]
     public class DailyTransactionSummaryController : ReportsSmartController
     {
         private DateTime? start = null;
         private DateTime? end = null;
-
+        
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public DailyTransactionSummaryController(IReports repo, ITerminalRepository repoterminal, IPartnerRepository repopartner, IReportGroup repogroup, IUserRepository userrepo)
             :base(repo, repoterminal, repopartner, repogroup,userrepo)
-        {           
-          
+        {
+
           
         }
-
+        /// <summary>
+        /// View Daily Transaction Summary
+        /// </summary>
         public ActionResult DailyTransactionSummary()
         {
             DailyTransactionSummaryViewModel model = new DailyTransactionSummaryViewModel();
@@ -82,8 +90,8 @@ namespace OctagonPlatform.Controllers.Reports
 
         public override async Task<Tuple<IEnumerable, Type>> GetList(object aviewmodel)
         {
-
-            return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
+           
+           return await Task<Tuple<IEnumerable, Type>>.Run(async () => {
 
 
                 DailyTransactionSummaryViewModel vmodel = aviewmodel as DailyTransactionSummaryViewModel;
